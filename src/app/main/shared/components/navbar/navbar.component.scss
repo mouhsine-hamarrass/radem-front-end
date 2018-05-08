@@ -1,0 +1,104 @@
+#navbar {
+  margin-bottom: 0;
+  background: #6f8ba7 !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  .navbar-brand {
+    img {
+      max-width: 150px;
+    }
+  }
+  .navbar-nav {
+    li {
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+  .ml-auto {
+    img {
+      max-width: 40px;
+      margin-right: 20px;
+    }
+    .dropdown-menu {
+      left: auto !important;
+      right: 0 !important;
+    }
+  }
+  .authorities-section {
+    div {
+      clear: both;
+      margin: 0 20px;
+      min-height: 32px;
+    }
+    .authname {
+      display: inherit;
+      width: 200px;
+      cursor: pointer;
+      float: left;
+      position: relative;
+      top: 20px;
+    }
+    label {
+      width: 35px;
+      margin-bottom: 0;
+    }
+    /* hide input */
+    input.radio:empty {
+      display: none;
+    }
+    /* style label */
+    input.radio:empty ~ label {
+      position: relative;
+      float: right;
+      line-height: 2.3em;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    input.radio:empty ~ label:before {
+      position: absolute;
+      display: block;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      content: '';
+      width: 2.5em;
+      background: #D1D3D4;
+      border-radius: 0 3px 3px 0;
+    }
+    /* toggle hover */
+
+    input.radio:hover:not(:checked) ~ label:before {
+      content: '\2714';
+      text-indent: .9em;
+      color: #C2C2C2;
+    }
+    input.radio:hover:not(:checked) ~ label {
+      color: #888;
+    }
+    /* toggle on */
+    input.radio:checked ~ label:before {
+      content: '\2714';
+      text-indent: .9em;
+      color: #9CE2AE;
+      background-color: #4DCB6D;
+    }
+    input.radio:checked ~ label {
+      color: #777;
+    }
+    .authname:hover {
+      color: #777;
+    }
+    .authname:hover label:before {
+      content: '\2714';
+      text-indent: .9em;
+      color: #9CE2AE;
+      background-color: #4DCB6D;
+    }
+  }
+}
+
+

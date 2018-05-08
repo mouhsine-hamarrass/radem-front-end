@@ -1,0 +1,22 @@
+{
+  "appTitle": "PROJECT_NAME",
+  "loading": "Loading ...",
+  "logout": "Logout",
+  "menu": {
+    "contributeur": "Contributeur",
+    "moderateur": "Moderateur",
+    "lecteur": "Lecteur",
+    "admin": "Admin"
+  },
+  "login": {
+    "label-username": "Identifiant",
+    "label-password": "Mot de passe",
+    "button-login": "Se connecter",
+    "placeholders": {
+      "username": "identifiant ...",
+      "password": "mot de passe ..."
+    },
+    "error-no-token-sent": "Token non envoyé depuis le service lors de l'authentification",
+    "error-user-unauthorized": "L'utilisateur n'est pas autorisé"
+  }
+}

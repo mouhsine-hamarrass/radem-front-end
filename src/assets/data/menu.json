@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Admin",
+    "action": "/admin",
+    "icon": "fa-user",
+    "i18n": "menu.admin"
+  }
+]

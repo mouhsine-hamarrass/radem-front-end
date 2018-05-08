@@ -1,0 +1,38 @@
+<section class="login-section">
+   <div class="container">
+      <div class="wrap">
+         <div class="row">
+            <div class="col-xs-6 text-left">
+            </div>
+            <div class="col-xs-6 text-right">
+               <!--<img src="../../assets/images/logo2.png" alt="">-->
+            </div>
+         </div>
+
+         <form (ngSubmit)="onLogin()" class="login" [formGroup]="userForm" novalidate>
+            <input type="text"
+                   formControlName="username"
+                   [(ngModel)]="username"
+                   placeholder="{{'login.placeholders.username' | translate }}"
+                   autocomplete="off"
+                   required/>
+            <div *ngIf="userForm.get('username').touched && userForm.get('username').hasError('required')"
+                 translate="validations.required.username" class="text-danger font-weight-bold">
+            </div>
+            <input type="password"
+                   formControlName="password"
+                   [(ngModel)]="password"
+                   placeholder="{{'login.placeholders.password' | translate }}"
+                   autocomplete="off"
+                   required/>
+            <div *ngIf="userForm.get('password').touched && userForm.get('password').hasError('required')"
+                 translate="validations.required.password" class="text-danger font-weight-bold">
+            </div>
+            <input type="submit" [disabled]="!userForm.valid || loading" value="{{ 'login.button-login' | translate }}"
+                   class="btn btn-sm"/>
+         </form>
+      </div>
+
+   </div>
+
+</section>

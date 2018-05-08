@@ -1,0 +1,407 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "~variables.scss";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+@media print {
+  .doNotPrint {
+    display: none !important;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+.ng2-tag-input.bootstrap3-info {
+  background-color: #fff;
+  display: inline-block;
+  color: #555;
+  vertical-align: middle;
+  max-width: 100%;
+
+  height: fit-content !important;
+  line-height: 44px;
+}
+
+.text-orange {
+  color: #de7326;
+}
+
+.bg-orange {
+  background-color: #de7326 !important;
+}
+
+.bg-green {
+  background-color: rgb(39, 138, 14) !important;
+}
+
+.text-green {
+  color: rgb(39, 138, 14);
+}
+
+.text-orange {
+  color: rgb(198, 57, 24);
+}
+
+.text-violet {
+  color: rgb(105, 39, 74);
+}
+
+.text-green-dark {
+  color: rgb(103, 186, 181);
+}
+
+.text-green-clear {
+  color: rgb(115, 207, 204);
+}
+
+.text-blue {
+  color: rgb(22, 135, 200);
+}
+
+.text-blue-royal {
+  color: rgb(134, 169, 218);
+}
+
+.text-red-clear {
+  color: rgb(237, 58, 73);
+}
+
+.text-red {
+  color: #C00 !important;
+}
+
+.bg-red {
+  background-color: #C00 !important;
+}
+
+.text-pink {
+  color: rgb(238, 104, 147);
+}
+
+.bg-pink {
+  background-color: rgb(238, 104, 147);
+}
+
+.text-marron {
+  color: rgb(157, 130, 127);
+}
+
+.bg-marron {
+  background-color: rgb(157, 130, 127);
+}
+
+.text-gris {
+  color: #e6e6e6;
+}
+
+.text-gray {
+  color: rgb(105, 106, 111);
+}
+
+.bg-gray {
+  background-color: rgb(105, 106, 111) !important;
+  color: #fff;
+}
+
+.bg-gris {
+  background-color: #e6e6e6;
+}
+
+.text-white {
+  color: #FFFFFF !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.date-readonly {
+  background-color: #ffffff !important;
+  cursor: pointer;
+}
+
+body, html {
+  height: 100%;
+  background-color: #FFFFFF;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.message-content {
+  white-space: pre-wrap;
+}
+
+.table {
+  tr {
+    vertical-align: top;
+  }
+  td {
+    padding: .4rem;
+  }
+}
+
+.wrapword {
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /*Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* css-3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: break-all;
+  white-space: normal;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.nomargin {
+  margin: 0 !important;
+}
+
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+.no-margin-right {
+  margin-right: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-box-shadow {
+  box-shadow: none !important;
+}
+
+a, a:visited, a:focus, a:active, a:hover {
+  outline: 0 none !important;
+}
+
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+aside.sidebar {
+  border-right: 5px solid #EEE;
+}
+
+.breadcrumb {
+  border-radius: 0;
+}
+
+.block {
+  display: block;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.flex-6 {
+  flex: 6;
+}
+
+[class*="flex-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+formly-form.full-field-form {
+  formly-field {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  formly-field:nth-child(2) {
+    max-height: 356px;
+    overflow-y: scroll;
+  }
+}
+
+#add-message {
+  section {
+    .btn.active {
+      .icon {
+        .fa {
+          color: #fff !important;
+        }
+      }
+    }
+    .icon {
+      font-size: 1.2em;
+    }
+  }
+}
+
+[class*="flex-"]:first-child {
+  padding-left: 0;
+}
+
+[class*="flex-"]:nth-last-child(2) {
+  padding-right: 0;
+}
+
+.media-middle {
+  vertical-align: middle !important;
+}
+
+.media-left, .media-right, .media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.media-left, .media > .pull-left {
+  padding-right: 10px;
+}
+
+.scheduler-border {
+  font-size: 1.1em !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  width: auto;
+  padding: 10px 10px 10px 0;
+  border-bottom: none;
+  position: relative;
+}
+
+.scheduler-border:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #d3d3d3;
+  width: 96%;
+  top: 20px;
+  margin-left: 12px;
+}
+
+angular2-multiselect {
+  .c-btn {
+    box-shadow: none !important;
+    padding: 0.375rem 0.75rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+.btn.disabled, .btn:disabled {
+  cursor: not-allowed !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.badge {
+  padding: 4px;
+  font-size: 81%;
+}
+
+.same_width_buttons {
+  min-width: 80px;
+  max-width: 80px;
+}
+
+.cdk-overlay-container {
+  z-index: 1051;
+}
+
+//Todo to remove
+.modal-dialog {
+  .modal-body {
+    .jumbotron {
+      padding: 2rem 1rem !important;
+    }
+    .categories {
+      position: relative;
+    }
+    .categories {
+      position: relative;
+      label > input {
+        visibility: hidden;
+        position: absolute;
+      }
+      label > input + strong {
+        cursor: pointer;
+        border: 2px solid transparent;
+        padding: 3px 5px;
+        display: block;
+      }
+      label > input:checked + strong {
+        border: 2px solid #ff7600;
+        color: #ff7600;
+        box-shadow: 1px 3px 5px rgba(165, 165, 165, 0.5);
+        border-radius: 5px;
+      }
+    }
+  }
+}
