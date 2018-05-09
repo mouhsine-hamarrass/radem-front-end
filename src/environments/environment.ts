@@ -5,7 +5,7 @@ import {LoggerTypes} from '../app/core/factories/logger.type';
 
 const server = 'http://localhost:8080/';
 export const environment = {
-   appName: 'PROJECT_NAME',
+   appName: 'RADEMAGENCY',
    appLogo: './assets/images/logo.png',
    production: true,
    envName: 'prod',
