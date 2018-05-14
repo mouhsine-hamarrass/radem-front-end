@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       AppComponent,
       MaintenanceComponent,
       ErrorComponent,
-      PageNotFoundComponent,
+      PageNotFoundComponent
    ],
    imports: [
       BrowserModule,

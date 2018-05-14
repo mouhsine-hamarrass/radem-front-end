@@ -20,7 +20,7 @@ import {
   TooltipModule,
   CollapseModule
 } from 'ngx-bootstrap';
-
+import { ChartsModule } from 'ng2-charts';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyBootstrapModule} from '@ngx-formly/bootstrap';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
@@ -83,7 +83,8 @@ import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
     ToastrModule.forRoot(),
     ChecklistModule,
     TagInputModule,
-    NgxToggleModule
+    NgxToggleModule,
+    ChartsModule
   ],
   declarations: [
     LoginComponent,
@@ -142,7 +143,8 @@ import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
     ChecklistModule,
     TagInputModule,
     NgxToggleModule,
-    BytesToSizePipe
+    BytesToSizePipe,
+    ChartsModule
   ]
 })
 export class GlobalSharedModule {

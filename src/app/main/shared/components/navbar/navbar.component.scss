@@ -1,6 +1,6 @@
 #navbar {
   margin-bottom: 0;
-  background: #6f8ba7 !important;
+  background: #fff !important;
   padding-top: 0;
   padding-bottom: 0;
   .navbar-brand {
@@ -97,6 +97,46 @@
       text-indent: .9em;
       color: #9CE2AE;
       background-color: #4DCB6D;
+    }
+  }
+}
+
+.sub-header {
+  border-bottom: 4px solid rgb(226, 224, 225);
+  width: 100%;
+  background-color: rgb(0, 82, 162);
+  ul {
+    margin-bottom: 0;
+    width: 100%;
+    li {
+      display: inline-block;
+      vertical-align: -webkit-baseline-middle;
+      //border-right: 1px solid #d3d3d3;
+      a {
+        padding: 12px 15px;
+        display: block;
+        position: relative;
+        color: #ffff;
+        text-decoration: none !important
+      }
+      &:first-child {
+        min-width: 120px;
+        // Last line added to fix view
+        height: 63px;
+        line-height: 43px;
+      }
+      &:not(:first-child) {
+        height: 64px;
+        line-height: 43px;
+      }
+      //&.serach-li {
+      //  border: none;
+      //  float: right;
+      //  margin-top: 16px;
+      //  margin-right: 15px;
+      //  height: inherit;
+      //  line-height: inherit;
+      //}
     }
   }
 }
