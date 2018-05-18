@@ -116,7 +116,7 @@
         padding: 12px 15px;
         display: block;
         position: relative;
-        color: #ffff;
+        color: #000000;
         text-decoration: none !important
       }
       &:first-child {
@@ -140,5 +140,9 @@
     }
   }
 }
+#main-nav > li > b > a{
+  color: #FFFFFF;
+}
+
 
 

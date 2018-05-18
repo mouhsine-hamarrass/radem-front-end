@@ -1,7 +1,10 @@
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  transition: all 0.3s;
+  //min-width: 250px;
+  //max-width: 250px;
+  //transition: all 0.3s;
+  border: 3px solid #0052a2;
+  margin: 15px;
+  padding: 20px;
   .sidebar-header {
     padding-bottom: 0;
     .content {
@@ -94,4 +97,7 @@
   #sidebarCollapse span {
     display: none;
   }
+}
+.side-bar{
+
 }

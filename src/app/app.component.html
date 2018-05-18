@@ -1,7 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
-  <app-spinner></app-spinner>
-  <main class="full-height">
-    <router-outlet></router-outlet>
-  </main>
+<app-navbar></app-navbar>
+<div class="row">
+  <div class="col-md-2">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-md-10">
+    <app-spinner></app-spinner>
+    <main class="full-height">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>
