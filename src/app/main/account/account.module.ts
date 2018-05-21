@@ -7,12 +7,14 @@ import {SettlementComponent} from './settlement/settlement.component';
 import {UnpaidComponent} from './unpaid/unpaid.component';
 import {AccountRoutingModule} from './account-routing/account-routing.module';
 import {BsDatepickerModule} from 'ngx-bootstrap';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     AccountRoutingModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    ChartsModule
   ],
   declarations: [
     AccountComponent,
