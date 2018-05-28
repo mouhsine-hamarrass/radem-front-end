@@ -25,35 +25,45 @@
   <div class="sub-header">
     <ul class="text-center" id="main-nav">
       <!-- New navbar for all menu link-->
-      <li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="home">Acceuil</a></b></li>
-      <li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="dashboard">Tableau de bord</a></b></li>
-      <!--<li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="account">Mon compte</a></b></li>-->
-      <!-- Dropdown with link-->
-      <!--<li class="dropdown">-->
-      <!--<span dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">-->
-      <!--<a href id="basic-link" dropdownToggle (click)="false"-->
-      <!--aria-controls="basic-link-dropdown">Click me for a dropdown, yo!</a>-->
-      <!--<ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"-->
-      <!--role="menu" aria-labelledby="basic-link">-->
-      <!--<li *ngFor="let choice of items">-->
-      <!--<a class="dropdown-item">{{choice}}</a>-->
-      <!--</li>-->
-      <!--</ul>-->
-      <!--</span>-->
-      <!--</li>-->
-      <li class="dropdown" dropdown>
-        <b><a href dropdownToggle (click)="false" class="dropdown-toggle cursor-pointer nav-link" data-toggle="dropdown"
-              role="button"
-              aria-haspopup="true" aria-expanded="false">Mon compte<span class="caret"></span></a></b>
-        <ul *dropdownMenu class="dropdown-menu">
-          <li role="menuitem"><a class="text-primary" href="#">Mon profile</a></li>
-          <li role="menuitem"><a routerLink="/account/contracts">Mes contrats</a></li>
-          <li role="menuitem"><a routerLink="/account/settlement">Mes réglements</a></li>
-          <li role="menuitem"><a routerLink="/account/unpaid">Mes impayés</a></li>
-        </ul>
+      <li class="text-center">
+        <span dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()" container="body">
+          <a href id="basic-link" dropdownToggle (click)="false"
+             aria-controls="basic-link-dropdown" class="cursor-pointer nav-link nav-title">Click me i'll drop</a>
+          <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="basic-link">
+            <li *ngFor="let choice of items">
+              <a class="dropdown-item" href="#">{{choice}}</a>
+            </li>
+          </ul>
+        </span>
       </li>
-      <li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="my-services">Mes services</a></b></li>
-      <li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="consumption">Ma consomtaion</a></b></li>
+      <li class="text-center"><a class="cursor-pointer nav-link nav-title" routerLink="home">Inscription</a></li>
+      <li class="text-center"><a class="cursor-pointer nav-link nav-title" routerLink="dashboard">Tableau de bord</a></li>
+      <li class="text-center">
+        <span dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()" container="body">
+          <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"
+             class="cursor-pointer nav-link nav-title">Mon compte</a>
+          <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+            <li role="menuitem"><a class="dropdown-item">Mon profile</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/contracts">Mes contrats</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/settlement">Mes réglements</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/unpaid">Mes impayés</a></li>
+          </ul>
+        </span>
+      </li>
+      <li class="dropdown" dropdown>
+        <span dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()" container="body">
+        <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"
+           class="cursor-pointer nav-link nav-title">Mes services</a>
+        <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+          <li role="menuitem"><a class="dropdown-item" routerLink="/my-services/claim-request">Demandes et réclamations</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/my-services/subscribe-request">Demandes d'abonnements</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/my-services/online-payment">Paiement en ligne</a></li>
+        </ul>
+        </span>
+      </li>
+      <!--<li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="my-services">Mes services</a></b></li>-->
+      <li class="text-center"><b><a class="cursor-pointer nav-link nav-title" routerLink="consumption">Ma consomtaion</a></b></li>
     </ul>
   </div>
 </div>

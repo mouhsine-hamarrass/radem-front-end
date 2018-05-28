@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {GlobalSharedModule} from '../../shared/global-shared.module';
 import {AccountModule} from '../account/account.module';
 import {MyServicesModule} from '../my-services/my-services.module';
+import {BsDropdownModule} from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {MyServicesModule} from '../my-services/my-services.module';
       GlobalSharedModule,
       RouterModule,
      AccountModule,
-     MyServicesModule
+     MyServicesModule,
+     BsDropdownModule.forRoot()
    ],
    declarations: [
       SidebarComponent,
@@ -23,7 +25,8 @@ import {MyServicesModule} from '../my-services/my-services.module';
    exports: [
       GlobalSharedModule,
       SidebarComponent,
-      NavbarComponent
+      NavbarComponent,
+      BsDropdownModule
    ]
 })
 export class SharedModule {

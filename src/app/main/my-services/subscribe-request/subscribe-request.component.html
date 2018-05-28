@@ -1,3 +1,52 @@
-<p>
-  subscribe-request works!
-</p>
+
+<!--<aw-wizard>-->
+  <!--<aw-wizard-step stepTitle="Title of step 1">-->
+    <!--Content of Step 1-->
+    <!--<button type="button" awNextStep>Next Step</button>-->
+    <!--<button type="button" [awGoToStep]="{stepIndex: 2}">Go directly to third Step</button>-->
+  <!--</aw-wizard-step>-->
+  <!--<aw-wizard-step stepTitle="Title of step 2" awOptionalStep>-->
+    <!--Content of Step 2-->
+    <!--<button type="button" awPreviousStep>Go to previous step</button>-->
+    <!--<button type="button" awNextStep>Go to next step</button>-->
+  <!--</aw-wizard-step>-->
+  <!--<aw-wizard-step stepTitle="Title of step 3">-->
+    <!--Content of Step 3-->
+    <!--<button type="button" awPreviousStep>Previous Step</button>-->
+    <!--<button type="button" (click)="finishFunction()">Finish</button>-->
+  <!--</aw-wizard-step>-->
+<!--</aw-wizard>-->
+
+
+
+<aw-wizard #wizard class="custom-css" [navBarLayout]="'large-filled-symbols'" [navigationMode]="'strict'">
+  <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+    <div class="alert alert-success col-md-3" role="alert">
+      Votre demande d'abonnement a ete crée
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+    <div class="alert alert-warning offset-3 col-md-3" role="alert">
+      Votre demande et en attente
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
+    <div>
+      Content of Step 3
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-completion-step [navigationSymbol]="{ symbol: '4' }">
+    Content of Step 4
+    <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
+  </aw-wizard-completion-step>
+</aw-wizard>

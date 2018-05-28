@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MyServicesComponent} from '../my-services.component';
 import {ClaimRequestComponent} from '../claim-request/claim-request.component';
 import {SubscribeRequestComponent} from '../subscribe-request/subscribe-request.component';
+import {OnlinePaymentComponent} from '../online-payment/online-payment.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'subscribe-request',
         component: SubscribeRequestComponent
+      },
+      {
+        path: 'online-payment',
+        component: OnlinePaymentComponent
       }
     ]
   }

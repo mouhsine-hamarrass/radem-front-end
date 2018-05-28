@@ -44,6 +44,7 @@ import {ChecklistModule} from 'angular-checklist';
 import {TagInputModule} from 'ngx-chips';
 import {NgxToggleModule} from 'ngx-toggle';
 import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
+import {ArchwizardModule} from 'angular-archwizard';
 
 @NgModule({
   imports: [
@@ -84,7 +85,8 @@ import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
     ChecklistModule,
     TagInputModule,
     NgxToggleModule,
-    ChartsModule
+    ChartsModule,
+    ArchwizardModule
   ],
   declarations: [
     LoginComponent,
@@ -144,7 +146,8 @@ import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
     TagInputModule,
     NgxToggleModule,
     BytesToSizePipe,
-    ChartsModule
+    ChartsModule,
+    ArchwizardModule
   ]
 })
 export class GlobalSharedModule {

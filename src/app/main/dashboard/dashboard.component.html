@@ -90,9 +90,9 @@
             </h5>
             <div class="card-body">
               <div class="row form-group">
-                <label class="col-form-label col-sm-3">Contrat</label>
-                <div class="col-auto">
-                  <select class="custom-select col-auto">
+                <label class="col-form-label col-md-3">Contrat</label>
+                <div class="col-md">
+                  <select class="custom-select col-md">
                     <option selected>Type de contrat</option>
                     <option value="1">Eau</option>
                     <option value="2">Electricite</option>
@@ -100,22 +100,20 @@
                 </div>
               </div>
               <div class="row form-group">
-                <label class="col-form-label col-sm-3">Periode du</label>
-                <div class="col-auto">
+                <label class="col-form-label col-md-3">Periode du</label>
+                <div class="col-md-3">
                   <input type="text"
                          placeholder="01/01/2018"
                          class="form-control" [maxDate]="maxDate"
-                         bsDatepicker placement="bottom" [outsideClick]="true" [bsConfig]="bsConfig">
+                         bsDatepicker placement="bottom" [outsideClick]="true" placement="left" [bsConfig]="{containerClass: 'theme-dark-blue'}">
                 </div>
-                <label class="col-form-label col">Au</label>
-                <div class="col-auto">
-                  <div class="col">
+                <label class="col-form-label col-md-2">Au</label>
+                  <div class="col-md-4">
                     <input type="text"
-                           placeholder="Datepicker"
+                           placeholder="01/01/2018"
                            class="form-control" [maxDate]="maxDate"
-                           bsDatepicker placement="bottom" [outsideClick]="true" [bsConfig]="bsConfig">
+                           bsDatepicker placement="bottom" [outsideClick]="true" placement="left" [bsConfig]="{containerClass: 'theme-dark-blue'}">
                   </div>
-                </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-6">

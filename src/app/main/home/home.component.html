@@ -1,1 +1,105 @@
-<h5>Under Construction</h5>
+<aw-wizard #wizard [navBarLayout]="'large-filled-symbols'" [navigationMode]="'strict'">
+  <aw-wizard-step [stepTitle]="'Steptitle 1'" [navigationSymbol]="{ symbol: '1' }" [canExit]="canExitStep1">
+    <div >
+      <form #contratForm="ngForm" class="editForm ng-pristine ng-valid ng-touched" novalidate>
+        <div align="tab-pane container">
+          <div class="row justify-content-center">
+            <div class="form-check form-check-inline">
+              <input class="form-control-input" type="radio" name="radioOption" id="factRadio" [(ngModel)]="selectedvalue"
+                     value="fact" (change)="onSelect(selectedvalue)">
+              <label class="form-check-label" for="factRadio">Facture</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="radioOption" id="contRadio" [(ngModel)]="selectedvalue"
+                     value="cont" (change)="onSelect(selectedvalue)">
+              <label class="form-check-label" for="contRadio">Contrat</label>
+            </div>
+            <!--[(checked)]="!radioOption"-->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="radioOption" id="refRadio" [(ngModel)]="selectedvalue"
+                     value="ref" (change)="onSelect(selectedvalue)" [(ngModel)]="personal.reference">
+              <label class="form-check-label" for="refRadio">Reference</label>
+            </div>
+          </div>
+          <div class="container">
+            <!-- div Facture-->
+            <div *ngIf="selectedvalue === 'fact'" class="form-group form-inline my-5 justify-content-center" id="factInput">
+              Facture
+              <div class="">
+                <input type="text" #facture="ngModel" required id="facture" name="facture" [(ngModel)]="personal.facture" class="form-control form-control-sm mx-3" placeholder="Facture">
+              </div>
+              <div class="alert alert-danger " [hidden]="facture.valid">Facture is required and must be valid</div>
+            </div>
+
+            <!-- div Contrat-->
+            <div *ngIf="selectedvalue === 'cont'" class="form-group form-inline my-5 justify-content-center" id="contInput">
+              <div class="my-3">Service
+                <select class="form-control mx-3" id="">
+                  <option>Eau</option>
+                  <option>Electricité</option>
+                </select>
+              </div>
+              <div class="my-3">Contrat
+                <input type="text" required #contrat="ngModel" id="contrat" name="contrat" [(ngModel)]="personal.contrat" class="form-control form-control-sm mx-3" placeholder="Contrat">
+              </div>
+            </div>
+
+            <!-- div Reference-->
+            <div *ngIf="selectedvalue === 'ref'" class="form-group form-inline my-5 justify-content-center" id="refInput">
+              <!--<label for="colFormLabelSm" class="">Reference</label>-->
+              Reference
+              <input type="text" required #reference="ngModel" id="reference" name="reference" [(ngModel)]="personal.reference" class="form-control ref-form ml-3 col-md-3">
+              -
+              <input type="text" class="form-control ref-form col-3">
+              -
+              <input type="text" class="form-control ref-form col-3">
+            </div>
+          </div>
+
+          <div class="form-inline justify-content-center">
+            <input type="checkbox" class="form-check-input">
+            <a class="form-check-label mx-3" href="#">Conditions générales d'utilisation</a>
+          </div>
+          <div class="mt-5" align="center">
+            <button class="btn btn-outline-primary" (click)="goToNext(contratForm)" [disabled]="!contratForm.valid">Suivant</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="checkbox">
+      <input id="canExitStep1" type="checkbox" [(ngModel)]="canExitStep1"/>
+      <label for="canExitStep1">Allow exiting step 1</label>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-step [stepTitle]="'Steptitle 2'" [navigationSymbol]="{ symbol: '2' }" [canExit]="canExitStep2">
+    <div>
+      Content of Step 2
+    </div>
+    <div class="checkbox">
+      <input id="canExitStep2" type="checkbox" [(ngModel)]="canExitStep2"/>
+      <label for="canExitStep2">Allow exiting step 2</label>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-step [stepTitle]="'Steptitle 3'" [navigationSymbol]="{ symbol: '3' }" [canExit]="canExitStep3">
+    <div>
+      Content of Step 3
+    </div>
+    <div class="checkbox">
+      <input id="canExitStep3" type="checkbox" [(ngModel)]="canExitStep3"/>
+      <label for="canExitStep3">Allow exiting step 3</label>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+    </div>
+  </aw-wizard-step>
+  <aw-wizard-completion-step [stepTitle]="'Steptitle 4'" [navigationSymbol]="{ symbol: '4' }">
+    Content of Step 4
+    <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
+  </aw-wizard-completion-step>
+</aw-wizard>

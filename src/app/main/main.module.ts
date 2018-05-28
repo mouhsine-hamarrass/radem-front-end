@@ -6,15 +6,18 @@ import {HomeComponent} from './home/home.component';
 import {SharedModule} from './shared/shared.module';
 import {UtilsService} from './core/services/utils.service';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import { MyServicesComponent } from './my-services/my-services.component';
 import { ConsumptionComponent } from './consumption/consumption.component';
 import {BsDropdownModule, ModalModule} from 'ngx-bootstrap';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 @NgModule({
   imports: [
     CommonModule,
     GlobalSharedModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
   ],
@@ -22,7 +25,6 @@ import {BsDropdownModule, ModalModule} from 'ngx-bootstrap';
   declarations: [
     HomeComponent,
     DashboardComponent,
-    MyServicesComponent,
     ConsumptionComponent
   ],
   providers: [
