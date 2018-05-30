@@ -9,6 +9,8 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import { ConsumptionComponent } from './consumption/consumption.component';
 import {BsDropdownModule, ModalModule} from 'ngx-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AccountModule} from './account/account.module';
+import {MyServicesModule} from './my-services/my-services.module';
 
 
 @NgModule({
@@ -18,10 +20,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    AccountModule,
+    MyServicesModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
   ],
-  exports: [],
+  exports: [
+    AccountModule,
+    MyServicesModule
+  ],
   declarations: [
     HomeComponent,
     DashboardComponent,

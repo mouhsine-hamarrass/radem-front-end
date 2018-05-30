@@ -17,10 +17,14 @@
   <!--</aw-wizard-step>-->
 <!--</aw-wizard>-->
 
+<div class="row">
+  <div class="" style="height: 250px;"></div>
+</div>
+<div class="row">
+<div class="col">
+<aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
 
-
-<aw-wizard #wizard class="custom-css" [navBarLayout]="'large-filled-symbols'" [navigationMode]="'strict'">
-  <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+  <aw-wizard-step [stepTitle]="'Creer'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
     <div class="alert alert-success col-md-3" role="alert">
       Votre demande d'abonnement a ete crée
     </div>
@@ -28,7 +32,14 @@
       <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
     </div>
   </aw-wizard-step>
-  <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+
+  <aw-wizard-step [stepTitle]="'En attente'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+    <div class="alert alert-warning offset-3 col-md-3" role="alert">
+      Votre demande et en attente
+    </div>
+    <div class="alert alert-success offset-3 col-md-3" role="alert">
+      Votre demande et en attente
+    </div>
     <div class="alert alert-warning offset-3 col-md-3" role="alert">
       Votre demande et en attente
     </div>
@@ -36,7 +47,7 @@
       <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
     </div>
   </aw-wizard-step>
-  <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
+  <aw-wizard-step [stepTitle]="'Depose'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
     <div>
       Content of Step 3
     </div>
@@ -45,8 +56,10 @@
       <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
     </div>
   </aw-wizard-step>
-  <aw-wizard-completion-step [navigationSymbol]="{ symbol: '4' }">
+  <aw-wizard-completion-step [stepTitle]="'Valide'" [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
     Content of Step 4
     <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
   </aw-wizard-completion-step>
 </aw-wizard>
+  </div>
+</div>

@@ -60,24 +60,6 @@ export class DashboardComponent implements OnInit {
     this.WaterBar2
   ];
   private ElecBar1: Color = {
-    backgroundColor: 'rgba(102,205,170, 1)',
-    borderWidth: 1,
-    borderColor: 'rgba(102,205,170, 1)',
-    pointBackgroundColor: 'rgba(231, 76, 60,1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(231, 76, 60, 1)'
-  };
-  private ElecBar2: Color = {
-    backgroundColor: 'rgba(163,225,204, 1)',
-    borderWidth: 1,
-    borderColor: 'rgba(163,225,204, 1)',
-    pointBackgroundColor: 'rgba(151,187,205,1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(151,187,205,1)'
-  };
-  private FactBar1: Color = {
     backgroundColor: 'rgba(231, 76, 60, 1)',
     borderWidth: 1,
     borderColor: 'rgba(231, 76, 60, 1)',
@@ -86,11 +68,29 @@ export class DashboardComponent implements OnInit {
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgba(151,187,205,1)'
   };
-  private FactBar2: Color = {
+  private ElecBar2: Color = {
     backgroundColor: 'rgba(255, 140, 124, 1)',
     borderWidth: 1,
     borderColor: 'rgba(255, 140, 124, 1)',
     pointBackgroundColor: 'rgba(229,103,84,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(151,187,205,1)'
+  };
+  private FactBar1: Color = {
+    backgroundColor: 'rgba(102,205,170, 1)',
+    borderWidth: 1,
+    borderColor: 'rgba(102,205,170, 1)',
+    pointBackgroundColor: 'rgba(231, 76, 60,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(231, 76, 60, 1)'
+  };
+  private FactBar2: Color = {
+    backgroundColor: 'rgba(163,225,204, 1)',
+    borderWidth: 1,
+    borderColor: 'rgba(163,225,204, 1)',
+    pointBackgroundColor: 'rgba(151,187,205,1)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgba(151,187,205,1)'
