@@ -1,10 +1,10 @@
 <div class="col-md py-3">
-  <div class="card">
+  <div class="panel">
     <div class="card-body">
       <h3 class="card-title">Réglement</h3>
       <div class="row form-group">
         <label class="col-form-label col-md-2">Contrat</label>
-        <div class="col-auto">
+        <div class="col-md-3">
           <select class="custom-select col-auto">
             <option selected>Type de contrat</option>
             <option value="1">Eau</option>
@@ -14,28 +14,26 @@
       </div>
       <div class="row form-group">
         <label class="col-form-label col-md-2">Periode du</label>
-        <div class="col-auto">
+        <div class="col-md-3">
           <input type="text"
                  placeholder="01/01/2018"
                  class="form-control" [maxDate]="maxDate"
-                 bsDatepicker placement="bottom" [outsideClick]="true" [bsConfig]="bsConfig">
+                 bsDatepicker placement="bottom" [outsideClick]="true" [bsConfig]="{containerClass: 'theme-dark-blue'}">
         </div>
         <label class="col-form-label">Au</label>
-        <div class="col-auto">
-          <div class="col">
+        <div class="col-md-3">
             <input type="text"
-                   placeholder="Datepicker"
+                   placeholder="01/05/2018"
                    class="form-control" [maxDate]="maxDate"
-                   bsDatepicker placement="bottom" [outsideClick]="true" [bsConfig]="bsConfig">
-          </div>
+                   bsDatepicker placement="bottom" [outsideClick]="true" [bsConfig]="{containerClass: 'theme-dark-blue'}">
         </div>
         <div class="col-auto float-right">
           <button type="button" class="btn btn-primary">Rechercher</button>
         </div>
       </div>
-      <div class="mx-5 my-5">
-        <table class="table table-bordered table-striped">
-          <thead class="table-secondary">
+      <div class="table-responsive mx-auto my-5">
+        <table class="table table-bordered ">
+          <thead class="table-light">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nº contrat</th>

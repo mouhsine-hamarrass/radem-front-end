@@ -10,7 +10,7 @@ import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild(BsDatepickerDirective) datepicker: BsDatepickerDirective;
-  colorTheme = 'theme-red';
+  colorTheme = 'theme-blue';
   bsConfig: Partial<BsDatepickerConfig>;
   maxDate: Date;
   public chartType = 'bar';

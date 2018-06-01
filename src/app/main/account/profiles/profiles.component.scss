@@ -1,0 +1,33 @@
+//#profile-form{
+//  display: table;
+//  .form-group{
+//    display: table-row;
+//    width: 100%;
+//  }
+//  label{
+//    display: inline-block;
+//    width: 100px;
+//    text-align: left;
+//  }
+//  select{
+//    display: table-column;
+//  }
+//  input{
+//    display: table-column;
+//    //width: 100%;
+//  }
+//}
+#profile-form {
+  select {
+    display: table-cell;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+  }
+  input {
+    display: table-cell;
+    //width: 400px;
+  }
+}

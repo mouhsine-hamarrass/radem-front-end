@@ -13,12 +13,12 @@ const routes: Routes = [
     component: AccountComponent,
     children: [
       {
-        path: 'contracts',
-        component: ContractsComponent
-      },
-      {
         path: 'profiles',
         component: ProfilesComponent
+      },
+      {
+        path: 'contracts',
+        component: ContractsComponent
       },
       {
         path: 'settlement',

@@ -32,7 +32,7 @@
           <a href dropdownToggle (click)="false" aria-controls="basic-link-dropdown"
              class="cursor-pointer nav-link nav-title">Mon compte</a>
           <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
-            <li role="menuitem"><a class="dropdown-item">Mon profile</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/profiles">Mon profile</a></li>
             <li role="menuitem"><a class="dropdown-item" routerLink="/account/contracts">Mes contrats</a></li>
             <li role="menuitem"><a class="dropdown-item" routerLink="/account/settlement">Mes réglements</a></li>
             <li role="menuitem"><a class="dropdown-item" routerLink="/account/unpaid">Mes impayés</a></li>
