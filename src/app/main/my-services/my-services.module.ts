@@ -7,6 +7,7 @@ import { OnlinePaymentComponent } from './online-payment/online-payment.componen
 import {MyServicesComponent} from './my-services.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TerminationComponent } from './termination/termination.component';
 
 
 @NgModule({
@@ -17,6 +18,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [MyServicesComponent, SubscribeRequestComponent, ClaimRequestComponent, OnlinePaymentComponent]
+  declarations: [MyServicesComponent, SubscribeRequestComponent, ClaimRequestComponent, OnlinePaymentComponent, TerminationComponent]
 })
 export class MyServicesModule { }
