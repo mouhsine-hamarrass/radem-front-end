@@ -1,0 +1,95 @@
+<div class="col-md-12 py-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Demande : </h4>
+        <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
+
+            <aw-wizard-step [stepTitle]="'Créér'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+            </aw-wizard-step>
+
+            <aw-wizard-step [stepTitle]="'En attente'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+            </aw-wizard-step>
+
+            <aw-wizard-step [stepTitle]="'Déposé'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
+            </aw-wizard-step>
+
+            <aw-wizard-completion-step [stepTitle]="'Valide'" [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
+              <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
+            </aw-wizard-completion-step>
+
+        </aw-wizard>
+          <div class="" id="buttons">
+              <button type="button" class="btn btn-primary">Modifier</button>
+              <button type="button" class="btn btn-primary">Commentaire</button>
+              <button type="button" class="btn btn-success" style="margin-left : 10px;">Étape suivante <i class="fa fa-angle-double-right"></i></button>
+          </div>
+
+          <div class="row" id="cards">
+              <div class="col-5 card" style="padding : 0px;">
+                <div class="card-header">
+                  <h5>Informations :</h5>
+                </div>
+                <div style="padding-left: 20px">
+                  <table>
+                    <tr>
+                      <td>N° demande :</td>
+                      <td>2354252</td>
+                    </tr>
+                    <tr>
+                      <td>Client :</td>
+                      <td>Adnane Alaoui</td>
+                    </tr>
+                    <tr>
+                      <td>Date de création :</td>
+                      <td>01/01/2000</td>
+                    </tr>
+                </table>
+                </div>
+              </div>
+              <div class="col-5 card" style="padding : 0px;margin-left : 40px;">
+                  <div class="card-header">
+                    <h5>Intervenants :</h5>
+                  </div>
+                  <div style="padding-left: 20px;">
+                    <table>
+                      <tr>
+                        <td>Agent :</td>
+                        <td>Mohammed Ben Chekroun</td>
+                      </tr>
+                      <tr>
+                        <td>Service concerné :</td>
+                        <td>Service A</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+            </div>
+            <div class="row" id="cards2">
+                <div class="col-5 card" style="padding : 0px;">
+                  <div class="card-header">
+                    <h5>Commentaires :</h5>
+                  </div>
+                  <div style="padding-left: 20px">
+                    <table>
+                    <tr>
+                      Commentaire 1<br>
+                    </tr>
+                    <tr>
+                      Commentaire 2
+                    </tr>
+                  </table>
+                  </div>
+                </div>
+                <div class="col-5 card" style="padding : 0px;margin-left : 40px;">
+                    <div class="card-header">
+                      <h5>########### :</h5>
+                    </div>
+                    <div style="padding-left: 20px;">
+                      ######## : ##########<br>
+                      ######## ######## : #########"<br>
+                    </div>
+                  </div>
+              </div>
+      </div>
+    </div>
+</div>

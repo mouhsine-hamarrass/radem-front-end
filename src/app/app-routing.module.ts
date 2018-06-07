@@ -9,6 +9,10 @@ import {DashboardComponent} from './main/dashboard/dashboard.component';
 import {AccountComponent} from './main/account/account.component';
 import {ConsumptionComponent} from './main/consumption/consumption.component';
 import {MyServicesComponent} from './main/my-services/my-services.component';
+import {AdminComponent} from './main/admin/admin.component';
+import { ListRequestsComponent } from './main/admin/list-requests/list-requests.component';
+import { ListComplaintsComponent } from './main/admin/list-complaints/list-complaints.component';
+import { RequestComponent } from './main/admin/request/request.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
@@ -19,6 +23,10 @@ const routes: Routes = [
   {path: 'my-services', component: MyServicesComponent},
   {path: 'consumption', component: ConsumptionComponent},
   {path: 'maintenance', component: MaintenanceComponent},
+  {path: 'admin', component: AdminComponent},
+  {path: 'list-requests', component: ListRequestsComponent},
+  {path: 'list-complaints', component: ListComplaintsComponent},
+  {path: 'request', component: RequestComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 
