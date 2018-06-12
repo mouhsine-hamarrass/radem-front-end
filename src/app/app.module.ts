@@ -15,6 +15,7 @@ import {GlobalSharedModule} from './shared/global-shared.module';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from './main/shared/shared.module';
+import { RequestService } from './main/core/services/request.service';
 
 @NgModule({
    declarations: [
@@ -31,7 +32,7 @@ import {SharedModule} from './main/shared/shared.module';
       AppRoutingModule,
       TagInputModule,
       BrowserAnimationsModule,
-     SharedModule,
+      SharedModule,
       TranslateModule.forRoot({
          loader: {
             provide: TranslateLoader,
@@ -43,6 +44,7 @@ import {SharedModule} from './main/shared/shared.module';
    providers: [
       {provide: 'api.config', useValue: environment.apiConfig},
       {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
+      RequestService
    ],
    bootstrap: [AppComponent]
 })

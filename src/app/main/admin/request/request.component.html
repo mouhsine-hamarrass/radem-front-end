@@ -2,34 +2,43 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Demande : </h4>
-        <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
+        <aw-wizard #wizard class="custom-css" [defaultStepIndex]="0" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
 
-            <aw-wizard-step [stepTitle]="'Créér'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+            <aw-wizard-step [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
             </aw-wizard-step>
 
-            <aw-wizard-step [stepTitle]="'En attente'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+            <aw-wizard-step [stepTitle]="'Reçue'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
             </aw-wizard-step>
 
-            <aw-wizard-step [stepTitle]="'Déposé'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
+            <aw-wizard-step [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
             </aw-wizard-step>
 
-            <aw-wizard-completion-step [stepTitle]="'Valide'" [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
+            <aw-wizard-step [stepTitle]="'Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }" >
+              </aw-wizard-step>
+
+            <aw-wizard-step [stepTitle]="'Vérification'" [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }" >
+              </aw-wizard-step>
+
+            <aw-wizard-step [stepTitle]="'Réglement'" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }" >
+              </aw-wizard-step>
+
+            <aw-wizard-completion-step [stepTitle]="'Cloture'" [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
               <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
             </aw-wizard-completion-step>
-
+            <div class="col-md-12" id="buttons">
+                <button type="button" class="btn btn-primary">Modifier</button>
+                <button type="button" class="btn btn-primary">Commentaire</button>
+                <button type="button" class="btn btn-success" style="margin-left : 10px;" awNextStep>Étape suivante <i class="fa fa-angle-double-right"></i></button>
+            </div>
         </aw-wizard>
-          <div class="" id="buttons">
-              <button type="button" class="btn btn-primary">Modifier</button>
-              <button type="button" class="btn btn-primary">Commentaire</button>
-              <button type="button" class="btn btn-success" style="margin-left : 10px;">Étape suivante <i class="fa fa-angle-double-right"></i></button>
-          </div>
+
 
           <div class="row" id="cards">
-              <div class="col-5 card" style="padding : 0px;">
+              <div class="col-7 card" style="padding : 0px;">
                 <div class="card-header">
-                  <h5>Informations :</h5>
+                  <b>Informations :</b>
                 </div>
-                <div style="padding-left: 20px">
+                <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                   <table>
                     <tr>
                       <td>N° demande :</td>
@@ -46,15 +55,15 @@
                 </table>
                 </div>
               </div>
-              <div class="col-5 card" style="padding : 0px;margin-left : 40px;">
+              <div class="col-4 card" style="padding : 0px;margin-left : 40px;">
                   <div class="card-header">
-                    <h5>Intervenants :</h5>
+                    <b>Intervenants :</b>
                   </div>
-                  <div style="padding-left: 20px;">
+                  <div style="padding-left: 20px;padding-top: 10px;">
                     <table>
                       <tr>
                         <td>Agent :</td>
-                        <td>Mohammed Ben Chekroun</td>
+                        <td>Mohammed</td>
                       </tr>
                       <tr>
                         <td>Service concerné :</td>
@@ -63,33 +72,44 @@
                     </table>
                   </div>
                 </div>
-            </div>
-            <div class="row" id="cards2">
-                <div class="col-5 card" style="padding : 0px;">
+          </div>
+          <div class="row" id="cards2">
+                <div class="col-7 card" style="padding : 0px;">
                   <div class="card-header">
-                    <h5>Commentaires :</h5>
+                    <b>Commentaires</b>
                   </div>
-                  <div style="padding-left: 20px">
-                    <table>
-                    <tr>
-                      Commentaire 1<br>
-                    </tr>
-                    <tr>
-                      Commentaire 2
-                    </tr>
-                  </table>
+                  <div style="padding: 20px">
+                    <div class="row">
+                      <input type="text" class="col-10 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
+                      <button class="btn btn-dark">Envoyer</button>
+                    </div><br>
+                      <div class="row" style="margin-bottom: 10px;">
+                          <img src="assets/images/profile.png" alt="" height="40" width="40">
+                          <div class="card col-10" id="comm">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                              Nulla nisi lectus, molestie nec ex sed, convallis fermentum tortor.
+                              Morbi feugiat sem eu ex scelerisque suscipit. Nullam dignissim vel eros ac maximus.
+                          </div>
+                      </div>
+                      <div class="row">
+                          <img src="assets/images/profile.png" alt="" height="40" width="40">
+                          <div class="card col-10" id="comm">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                              Nulla nisi lectus, molestie nec ex sed, convallis fermentum tortor.
+                          </div>
+                      </div>
                   </div>
                 </div>
-                <div class="col-5 card" style="padding : 0px;margin-left : 40px;">
+                <div class="col-4 card" style="padding: 0px;margin-left : 40px;height: 100px;">
                     <div class="card-header">
-                      <h5>########### :</h5>
+                      <b>Dates :</b>
                     </div>
-                    <div style="padding-left: 20px;">
-                      ######## : ##########<br>
-                      ######## ######## : #########"<br>
+                    <div style="padding-left: 20px;padding-top: 10px;">
+                      Date création : 11/11/1111<br>
+                      Dernière modification : 11/11/1111<br>
                     </div>
                   </div>
-              </div>
+          </div>
       </div>
     </div>
 </div>

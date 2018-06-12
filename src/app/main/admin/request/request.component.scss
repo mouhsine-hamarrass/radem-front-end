@@ -4,17 +4,38 @@
 }
 
 #buttons {
-  padding-left : 10%;
+  padding-left : 35px;
   margin-bottom: 20px;
 }
 
+img {
+  margin: 20px;
+}
+
+table {
+  text-align: center;
+}
+
+#comm {
+  padding: 20px ;
+}
+
+.card-header {
+  padding :5px;
+  padding-left: 13px;
+}
+
 #cards {
-  padding-left : 116px;
+  padding-left : 50px;
 }
 
 #cards2 {
-  padding-left : 116px;
-  margin-top : 25px;
+  padding-left : 50px;
+  margin-top : 15px;
+}
+
+aw-wizard {
+  width: 100% !important;
 }
 //.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current div a {
 //  color: #4BB3FD;
@@ -27,6 +48,10 @@
   border-color: #4BB3FD !important;
   text-decoration-color: #4BB3FD !important;
   //background-color: #4BB3FD !important;
+}
+.custom-css aw-wizard-navigation-bar.horizontal .state-circle {
+  width: 10px !important;
+  height: 10px !important;
 }
 .custom-css aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li.current:after{
   color: #3BB3FD !important;
