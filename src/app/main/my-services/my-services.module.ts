@@ -8,6 +8,7 @@ import {MyServicesComponent} from './my-services.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TerminationComponent } from './termination/termination.component';
+import { NewTerminationComponent } from './new-termination/new-termination.component';
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import { TerminationComponent } from './termination/termination.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [MyServicesComponent, SubscribeRequestComponent, ClaimRequestComponent, OnlinePaymentComponent, TerminationComponent]
+  declarations: [MyServicesComponent, SubscribeRequestComponent, ClaimRequestComponent, OnlinePaymentComponent, TerminationComponent, NewTerminationComponent]
 })
 export class MyServicesModule { }
