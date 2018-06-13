@@ -1,7 +1,7 @@
 <div class="col-md-12 py-3">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Demande : </h4>
+        <h4 class="card-title">Demande N°: </h4>
         <aw-wizard #wizard class="custom-css" [defaultStepIndex]="0" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
 
             <aw-wizard-step [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
@@ -81,7 +81,7 @@
                   <div style="padding: 20px">
                     <div class="row">
                       <input type="text" class="col-10 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
-                      <button class="btn btn-dark">Envoyer</button>
+                      <button class="btn btn-primary">Envoyer</button>
                     </div><br>
                       <div class="row" style="margin-bottom: 10px;">
                           <img src="assets/images/profile.png" alt="" height="40" width="40">
