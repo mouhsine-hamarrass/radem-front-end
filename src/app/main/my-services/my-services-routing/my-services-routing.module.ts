@@ -7,6 +7,7 @@ import {SubscribeRequestComponent} from '../subscribe-request/subscribe-request.
 import {OnlinePaymentComponent} from '../online-payment/online-payment.component';
 import { TerminationComponent } from '../termination/termination.component';
 import { NewTerminationComponent } from '../new-termination/new-termination.component';
+import { TerminationRequestsComponent } from '../termination-requests/termination-requests.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'termination',
         component: TerminationComponent
+      },
+      {
+        path: 'termination-requests',
+        component: TerminationRequestsComponent
       },
       {
         path: 'new-termination',

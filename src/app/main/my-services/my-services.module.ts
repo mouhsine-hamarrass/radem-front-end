@@ -9,6 +9,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TerminationComponent } from './termination/termination.component';
 import { NewTerminationComponent } from './new-termination/new-termination.component';
+import { TerminationRequestsComponent } from './termination-requests/termination-requests.component';
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import { NewTerminationComponent } from './new-termination/new-termination.compo
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [MyServicesComponent, SubscribeRequestComponent, ClaimRequestComponent, OnlinePaymentComponent, TerminationComponent, NewTerminationComponent]
+  declarations: [MyServicesComponent, SubscribeRequestComponent, ClaimRequestComponent, OnlinePaymentComponent, TerminationComponent, NewTerminationComponent, TerminationRequestsComponent]
 })
 export class MyServicesModule { }
