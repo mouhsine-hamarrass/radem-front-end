@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'list-requests', component: ListRequestsComponent},
   {path: 'list-complaints', component: ListComplaintsComponent},
-  {path: 'request', component: RequestComponent},
+  {path: 'request/:id', component: RequestComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 

@@ -5,7 +5,7 @@
         <h4 class="card-title">Liste des demandes</h4>
         <div class="table-responsive my-5">
           <div>
-                <button type="button" class="btn btn-outline-primary">Résiliations</button>
+                <button type="button" class="btn btn-outline-primary" (onclick)="LoadTerminationRequest()" >Résiliations</button>
                 <button type="button" class="btn btn-outline-primary">Abonnements</button>
                 <button type="button" class="btn btn-outline-primary">Remboursements</button>
                 <input type="text" class="col-3 form-control pull-right" placeholder="Rechercher"/>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let request of requests">
-              <td>{{request.nb_request}}</td>
+              <td><a [routerLink] = "['/request', request.nb_request]">{{request.nb_request}}</a></td>
               <td>{{request.client}}</td>
               <td>{{request.type}}</td>
               <td>{{request.creation_date}}</td>

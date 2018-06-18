@@ -2,18 +2,18 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Demande N°: </h4>
-        <aw-wizard #wizard class="custom-css" [defaultStepIndex]="0" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
+        <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'semi-strict'">
 
-            <aw-wizard-step [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+            <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
             </aw-wizard-step>
 
-            <aw-wizard-step [stepTitle]="'Reçue'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+            <aw-wizard-step [stepId]="1" [stepTitle]="'Reçue'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
             </aw-wizard-step>
 
-            <aw-wizard-step [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
+            <aw-wizard-step [stepId]="2" [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }" >
             </aw-wizard-step>
 
-            <aw-wizard-step [stepTitle]="'Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }" >
+            <aw-wizard-step [stepId]="3" [stepTitle]="'Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }" >
               </aw-wizard-step>
 
             <aw-wizard-step [stepTitle]="'Vérification'" [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }" >

@@ -14,7 +14,12 @@ export class RequestService {
     this.urlApi = environment.apiConfig.apiUrl;
    }
 
+   // Termination-request
    getRequest(idRequest: string): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/unit/${idRequest}`, {headers: headers});
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/${idRequest}/find`, {headers: headers});
+  }
+
+  getTerminationRequests(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination-requests`, {headers: headers});
   }
 }

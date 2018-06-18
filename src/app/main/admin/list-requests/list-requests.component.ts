@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from '../../core/services/request.service';
 
 @Component({
   selector: 'app-list-requests',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListRequestsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private requestService: RequestService) { }
+  public terminationRequests: any;
   public requests = [
     {
       nb_request : 6448920,
@@ -35,7 +37,21 @@ export class ListRequestsComponent implements OnInit {
       status : 'Finished',
     }
   ];
+
   ngOnInit() {
+   /* this.requestService.getTerminationRequests().subscribe(response => {
+      this.requests = response.data;
+    }, (err) => {
+
+    });*/
+  }
+
+  LoadTerminationRequest() {
+    /* this.requestService.getTerminationRequests().subscribe(response => {
+      this.terminationRequests = response.data;
+    }, (err) => {
+
+    });*/
   }
 
 }

@@ -6,6 +6,7 @@ import { ListRequestsComponent } from './list-requests/list-requests.component';
 import { ListComplaintsComponent } from './list-complaints/list-complaints.component';
 import { RequestService } from '../core/services/request.service';
 import { ArchwizardModule } from 'angular-archwizard';
+import {RouterModule, Routes} from '@angular/router';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ArchwizardModule } from 'angular-archwizard';
     CommonModule,
     RequestComponent,
     ArchwizardModule,
+    RouterModule,
   ],
   declarations: [
     AdminComponent,
