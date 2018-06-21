@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {MyServicesComponent} from '../my-services.component';
-import {ClaimRequestComponent} from '../claim-request/claim-request.component';
 import {SubscribeRequestComponent} from '../subscribe-request/subscribe-request.component';
 import {OnlinePaymentComponent} from '../online-payment/online-payment.component';
 import { TerminationComponent } from '../termination/termination.component';
 import { NewTerminationComponent } from '../new-termination/new-termination.component';
 import { TerminationRequestsComponent } from '../termination-requests/termination-requests.component';
+import { ComplaintComponent } from '../complaint/complaint.component';
 
 const routes: Routes = [
   {
@@ -15,8 +15,8 @@ const routes: Routes = [
     component: MyServicesComponent,
     children: [
       {
-        path: 'claim-request',
-        component: ClaimRequestComponent
+        path: 'complaint',
+        component: ComplaintComponent
       },
       {
         path: 'subscribe-request',

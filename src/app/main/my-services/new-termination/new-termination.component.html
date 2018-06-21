@@ -65,12 +65,71 @@
               </div>
             </div>
             <div class="form-group">
-                <label for="feedback">Adresse de correspondance: </label>
-                <input class="form-control" id="feedback">
-              </div>
+              <label for="feedback">Adresse de correspondance: </label>
+              <input class="form-control" id="feedback">
+            </div>
           </div>
         </div>
+        <button class="btn btn-primary" (click)="print('printSection')">print</button>
       </form>
+    </div>
+  </div>
+  // printable
+  <div id="printSection" class="col col-md-12">
+    <h2 class="text-center">RÉGIE AUTONOME DE DISTRIBUTION D'EAU ET D'ELECTRICITÉ MEKNÈS</h2>
+    <h2 class="text-center">DIVISION CLIENTELE</h2>
+    <h2 class="text-center">SERVICE COMMERCIAL</h2>
+    <br>
+    <h1 class="text-center font-weight-bold">DEMANDE DE RÉSILIATION</h1>
+    <br>
+    <div class="row col-md-10">
+      <p>DR N° 11111</p>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <p class="font-weight-bold">DEMANDEUR</p>
+        <div class="row">
+          <div class="col col-md-12">
+            Nom et Prénom:
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-4">
+            CIN N°:
+          </div>
+
+          <div class="col col-md-4">
+            Délivrée le:
+          </div>
+
+          <div class="col col-md-4">
+            à:
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <p class="font-weight-bold">Polices d'abonnement</p>
+        <div class="row">
+          <div class="col col-md-12">
+            Nom et Prénom:
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-4">
+            CIN N°:
+          </div>
+
+          <div class="col col-md-4">
+            Délivrée le:
+          </div>
+
+          <div class="col col-md-4">
+            à:
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
