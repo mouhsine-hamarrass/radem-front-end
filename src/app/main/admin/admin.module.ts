@@ -6,7 +6,8 @@ import { ListRequestsComponent } from './list-requests/list-requests.component';
 import { ListComplaintsComponent } from './list-complaints/list-complaints.component';
 import { RequestService } from '../core/services/request.service';
 import { ArchwizardModule } from 'angular-archwizard';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { PopupModule } from 'ng2-opd-popup';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {RouterModule, Routes} from '@angular/router';
     RequestComponent,
     ArchwizardModule,
     RouterModule,
+    PopupModule.forRoot(),
   ],
   declarations: [
     AdminComponent,

@@ -27,7 +27,7 @@ import { ListComplaintsComponent } from './admin/list-complaints/list-complaints
     AccountModule,
     MyServicesModule,
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     AccountModule,
