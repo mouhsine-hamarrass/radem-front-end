@@ -1,0 +1,164 @@
+<div class="col-md-12 py-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Demande N°: {{request.requestNumber}}</h4>
+        <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
+
+            <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+            </aw-wizard-step>
+
+            <aw-wizard-step [stepId]="1" [stepTitle]="'Reçue'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+            </aw-wizard-step>
+
+            <aw-wizard-step [stepId]="2" [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+            </aw-wizard-step>
+
+            <aw-wizard-step [stepId]="3" [stepTitle]="'Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }" >
+              </aw-wizard-step>
+
+            <aw-wizard-step [stepId]="4" [stepTitle]="'Vérification'" [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }" >
+              </aw-wizard-step>
+
+            <aw-wizard-step [stepId]="5" [stepTitle]="'Réglement'" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }" >
+              </aw-wizard-step>
+
+            <aw-wizard-completion-step [stepId]="6" [stepTitle]="'Cloture'" [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
+              <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
+            </aw-wizard-completion-step>
+            <div class="col-md-12" id="buttons">
+                <button type="button" class="btn btn-primary" (click)="openUpdateForm(updateForm)">Modifier</button>
+                <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
+                <button type="button" class="btn btn-success" style="margin-left : 10px;" #button awNextStep>Étape suivante <i class="fa fa-angle-double-right"></i></button>
+            </div>
+        </aw-wizard>
+
+
+          <div class="row" id="cards">
+              <div class="col-7 card" style="padding : 0px;">
+                <div class="card-header">
+                  <b>Informations :</b>
+                </div>
+                <div style="padding-left: 20px;padding-bottom: 10px;">
+                  <div class="row">
+                    <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                    <table>
+                      <tr>
+                        <td>N° demande :</td>
+                        <td>{{request.requestNumber}}</td>
+                      </tr>
+                      <tr>
+                        <td>Client :</td>
+                        <td>{{request.client.fullName}}</td>
+                      </tr>
+                      <tr>
+                        <td>Date de création :</td>
+                        <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+                      </tr>
+                      </table>
+                    </div>
+                    <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                      <table>
+                      <tr>
+                        <td>Agent d'intervention : </td>
+                        <td>{{request.intervenant.firstname}} {{request.intervenant.lastname}}</td>
+                      </tr>
+                      <tr>
+                        <td>Date d'intervention : </td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Tel agent :</td>
+                        <td>{{request.intervenant.phone}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 card" style="padding : 0px;margin-left : 40px;">
+                  <div class="card-header">
+                    <b>Intervenants :</b>
+                  </div>
+                  <div style="padding-left: 20px;padding-top: 10px;">
+                    <table>
+                      <tr>
+                        <td>Agent :</td>
+                        <td>{{request.agent.firstname}} {{request.agent.lastname}}</td>
+                      </tr>
+                      <tr>
+                        <td>Service concerné :</td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+          </div>
+          <div class="row" id="cards2">
+                <div class="col-7 card" style="padding : 0px;">
+                  <div class="card-header">
+                    <b>Commentaires</b>
+                  </div>
+                  <div style="padding: 20px">
+                    <div class="row">
+                      <input #commentaire type="text" class="col-10 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
+                      <button class="btn btn-primary">Envoyer</button>
+                    </div><br>
+                      <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request.feedbacks">
+                          <img src="assets/images/profile.png" alt="" height="40" width="40">
+                          <div class="card col-10" id="comm" >
+                              {{feedback.message}}
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-4 card" style="padding: 0px;margin-left : 40px;height: 100px;">
+                    <div class="card-header">
+                      <b>Dates :</b>
+                    </div>
+                    <div style="padding-left: 20px;padding-top: 10px;">
+                        <table>
+                            <tr>
+                              <td>Date création :</td>
+                              <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+                            </tr>
+                            <tr>
+                              <td>Dernière modification :</td>
+                              <td>{{request.lastUpdate| date: 'dd/MM/yyyy' }}</td>
+                            </tr>
+                          </table>
+                    </div>
+                  </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+<ng-template #updateForm>
+    <div class="modal-header bg-radem">
+      <h4 class="modal-title pull-left">Modification :</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <label>Agent d'intervention :</label>
+              <input type="text" class="col-12 form-control" >
+              <label>Date d'intervention :</label>
+              <input type="date" class="col-12 form-control" >
+              <label>Tel d'agent :</label>
+              <input type="text" class="col-12 form-control" >
+              <div class="col-md-12"  style="margin-left : 34%">
+                <button class="btn btn-primary center" id="buttons-update">Valider</button>
+                <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>

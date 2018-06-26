@@ -11,6 +11,10 @@ import {BsDropdownModule, ModalModule} from 'ngx-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountModule} from './account/account.module';
 import {MyServicesModule} from './my-services/my-services.module';
+import { AdminComponent } from './admin/admin.component';
+import { RequestComponent } from './admin/request/request.component';
+import { ListRequestsComponent } from './admin/list-requests/list-requests.component';
+import { ListComplaintsComponent } from './admin/list-complaints/list-complaints.component';
 
 
 @NgModule({
@@ -32,7 +36,11 @@ import {MyServicesModule} from './my-services/my-services.module';
   declarations: [
     HomeComponent,
     DashboardComponent,
-    ConsumptionComponent
+    ConsumptionComponent,
+    AdminComponent,
+    RequestComponent,
+    ListRequestsComponent,
+    ListComplaintsComponent
   ],
   providers: [
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS},
