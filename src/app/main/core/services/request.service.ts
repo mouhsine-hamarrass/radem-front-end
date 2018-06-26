@@ -20,6 +20,11 @@ export class RequestService {
   }
 
   getTerminationRequests(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination-requests`, {headers: headers});
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`, {headers: headers});
+  }
+
+  // Complaint
+  getComplaints(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/complaints`, {headers: headers});
   }
 }

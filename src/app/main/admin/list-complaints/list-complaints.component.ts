@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from '../../core/services/request.service';
 
 @Component({
   selector: 'app-list-complaints',
@@ -7,35 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComplaintsComponent implements OnInit {
 
-  constructor() { }
-  public complaints = [
-    {
-      nb_complaint : 6448926,
-      client : 'Adnane',
-      type : 'abonnement',
-      creation_date : '01/01/2018',
-      agent : 'Mohammed',
-      service : 'Service A',
-      status : 'In progress',
-    }, {
-      nb_complaint : 8567309,
-      client : 'Younes',
-      type : 'Résiliation',
-      creation_date : '01/01/2018',
-      agent : 'Mohammed',
-      service : 'Service A',
-      status : 'Finished',
-    }, {
-      nb_complaint : 8567309,
-      client : 'Amine',
-      type : 'Réclamation',
-      creation_date : '01/01/2018',
-      agent : 'Mohammed',
-      service : 'Service A',
-      status : 'Finished',
-    }
-  ];
+  constructor(private requestService: RequestService) { }
+  public complaints: any;
+
   ngOnInit() {
+    this.requestService.getComplaints().subscribe(response => {
+      this.complaints = response.data;
+      console.log(this.complaints);
+    }, (err) => {
+
+    });
   }
 
 }

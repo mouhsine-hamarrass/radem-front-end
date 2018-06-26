@@ -3,7 +3,7 @@ import { RequestService } from '../../core/services/request.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { WizardComponent } from 'angular-archwizard';
+import { WizardComponent, WizardState } from 'angular-archwizard';
 
 @Component({
   selector: 'app-request',
@@ -14,7 +14,8 @@ import { WizardComponent } from 'angular-archwizard';
 export class RequestComponent implements OnInit {
   @ViewChild('wizard') wizard: WizardComponent;
   @ViewChild('button') button: ElementRef;
-  private request: any;
+  @ViewChild('commentaire') commentaire: ElementRef;
+  public request: any;
   public modalRef: BsModalRef;
   public config = {
     backdrop: true,
@@ -28,10 +29,11 @@ export class RequestComponent implements OnInit {
     private modalService: BsModalService) { }
 
   ngOnInit() {
-    for (let stepIndex = 0; stepIndex < 4; stepIndex++) {
+    // const wizardState: WizardState = this.wizard.model;
+    /*for (let stepIndex = 0; stepIndex < 4; stepIndex++) {
+      console.log(this.wizard.model.navigationMode.goToNextStep);
     }
-    console.log(this.wizard.model.navigationMode);
-    /*const b: HTMLElement = this.button.nativeElement as HTMLElement;
+    const b: HTMLElement = this.button.nativeElement as HTMLElement;
     for (let stepIndex = 0; stepIndex < 2; stepIndex++) {
       b.click();
     }*/
@@ -41,7 +43,6 @@ export class RequestComponent implements OnInit {
        this.request = response.data;
        console.log(this.request);
     }, (err) => {
-
     });
    }
   }
@@ -49,5 +50,10 @@ export class RequestComponent implements OnInit {
   openUpdateForm(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
   }
+
+  focus() {
+    console.log(this.commentaire);
+    this.commentaire.nativeElement.focus();
+}
 
 }
