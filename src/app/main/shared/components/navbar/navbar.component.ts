@@ -5,32 +5,52 @@ import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {User} from '../../../core/models/main-user.model';
 import {environment} from '../../../../../environments/environment';
 import {UtilsService} from '../../../core/services/utils.service';
+import {BsDropdownConfig} from 'ngx-bootstrap/dropdown';
 
 @Component({
-   selector: 'app-navbar',
-   templateUrl: 'navbar.component.html',
-   styleUrls: ['navbar.component.scss']
+  selector: 'app-navbar',
+  templateUrl: 'navbar.component.html',
+  styleUrls: ['navbar.component.scss'],
+  providers: [{ provide: BsDropdownConfig, useValue: { autoClose: true } }]
 })
 export class NavbarComponent implements OnInit {
-   public user: User;
-   public applogo: string;
+  public user: User;
+  public applogo: string;
+  items: string[] = [
+    'The first choice!',
+    'And another choice for you.',
+    'but wait! A third!'
+  ];
+  onHidden(): void {
+    console.log('Dropdown is hidden');
+  }
 
-   constructor(private oauthService: OAuthService,
-               private utilsService: UtilsService,
-               private router: Router) {
-   }
+  onShown(): void {
+    console.log('Dropdown is shown');
+  }
 
-   ngOnInit() {
-      this.applogo = environment.appLogo;
-      if (localStorage.getItem(AuthHelper.USER_ID)) {
-         this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-         this.user.avatar = this.user.avatar || environment.defaultAvatar;
-      }
-   }
+  isOpenChange(): void {
+    console.log('Dropdown state is changed');
+  }
 
-   public logout() {
-      this.oauthService.logout();
-      this.router.navigate(['/login']);
-   }
+  constructor(private oauthService: OAuthService,
+              private utilsService: UtilsService,
+              private router: Router) {
+  }
+
+
+
+  ngOnInit() {
+    this.applogo = environment.appLogo;
+    if (localStorage.getItem(AuthHelper.USER_ID)) {
+      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+      // this.user.avatar = this.user.avatar || environment.defaultAvatar;
+    }
+  }
+
+  public logout() {
+    this.oauthService.logout();
+    this.router.navigate(['/login']);
+  }
 
 }

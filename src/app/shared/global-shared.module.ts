@@ -20,7 +20,7 @@ import {
   TooltipModule,
   CollapseModule
 } from 'ngx-bootstrap';
-
+import { ChartsModule } from 'ng2-charts';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyBootstrapModule} from '@ngx-formly/bootstrap';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
@@ -44,6 +44,7 @@ import {ChecklistModule} from 'angular-checklist';
 import {TagInputModule} from 'ngx-chips';
 import {NgxToggleModule} from 'ngx-toggle';
 import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
+import {ArchwizardModule} from 'angular-archwizard';
 
 @NgModule({
   imports: [
@@ -83,7 +84,9 @@ import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
     ToastrModule.forRoot(),
     ChecklistModule,
     TagInputModule,
-    NgxToggleModule
+    NgxToggleModule,
+    ChartsModule,
+    ArchwizardModule
   ],
   declarations: [
     LoginComponent,
@@ -142,7 +145,9 @@ import { BytesToSizePipe } from './pipes/bytes-to-size.pipe';
     ChecklistModule,
     TagInputModule,
     NgxToggleModule,
-    BytesToSizePipe
+    BytesToSizePipe,
+    ChartsModule,
+    ArchwizardModule
   ]
 })
 export class GlobalSharedModule {

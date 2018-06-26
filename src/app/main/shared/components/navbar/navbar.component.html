@@ -1,23 +1,57 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-   <a class="navbar-brand" routerLink="/home"> <img [src]="applogo" alt=""/></a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-   </button>
-   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <div class="navbar-nav ml-auto">
-         <div class="relative" dropdown [autoClose]="false">
-            <img [src]="user.avatar" class="rounded-circle" dropdownToggle/>
-            <ul *dropdownMenu class="dropdown-menu" role="menu">
-               <li role="menuitem" class="text-muted"><a class="dropdown-item">{{user.firstname + ' '+ user.lastname}}</a>
-               </li>
-               <div class="clearfix"></div>
-               <li class="divider dropdown-divider"></li>
-               <li role="menuitem">
-                  <a class="dropdown-item" (click)="logout()"><i class="fa fa-power-off"></i> Déconnexion</a>
-               </li>
-            </ul>
-         </div>
+  <a class="navbar-brand" routerLink="/home"> <img [src]="applogo" alt=""/></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="navbar-nav ml-auto">
+      <div class="relative" dropdown [autoClose]="false">
+        <!--<img [src]="user.avatar" class="rounded-circle" dropdownToggle/>-->
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem" class="text-muted"><a class="dropdown-item">{{user.firstname + ' '+ user.lastname}}</a>
+          </li>
+          <div class="clearfix"></div>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="logout()"><i class="fa fa-power-off"></i> Déconnexion</a>
+          </li>
+        </ul>
       </div>
-   </div>
+    </div>
+  </div>
 </nav>
+<div class="content">
+  <div class="sub-header">
+    <ul class="text-center" id="main-nav">
+      <!-- New navbar for all menu link-->
+      <li class="text-center"><a class="cursor-pointer nav-link nav-title" routerLink="home">Inscription</a></li>
+      <li class="text-center"><a class="cursor-pointer nav-link nav-title" routerLink="dashboard">Tableau de bord</a></li>
+      <li class="text-center">
+        <span dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()" container="body">
+          <a href dropdownToggle (click)="false" aria-controls="basic-link-dropdown"
+             class="cursor-pointer nav-link nav-title">Mon compte</a>
+          <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/profiles">Mon profile</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/contracts">Mes contrats</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/settlement">Mes réglements</a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/account/unpaid">Mes impayés</a></li>
+          </ul>
+        </span>
+      </li>
+      <li class="dropdown" dropdown>
+        <span dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()" container="body">
+        <a href dropdownToggle (click)="false" aria-controls="basic-link-dropdown"
+           class="cursor-pointer nav-link nav-title">Mes services</a>
+        <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+          <li role="menuitem"><a class="dropdown-item" routerLink="/my-services/claim-request">Demandes et réclamations</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/my-services/subscribe-request">Demandes d'abonnements</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/my-services/online-payment">Paiement en ligne</a></li>
+        </ul>
+        </span>
+      </li>
+      <!--<li class="text-center"><b><a class="cursor-pointer nav-link" routerLink="my-services">Mes services</a></b></li>-->
+      <li class="text-center"><b><a class="cursor-pointer nav-link nav-title" routerLink="consumption">Ma consomtaion</a></b></li>
+    </ul>
+  </div>
+</div>

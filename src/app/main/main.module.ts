@@ -5,19 +5,39 @@ import {OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
 import {HomeComponent} from './home/home.component';
 import {SharedModule} from './shared/shared.module';
 import {UtilsService} from './core/services/utils.service';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import { ConsumptionComponent } from './consumption/consumption.component';
+import {BsDropdownModule, ModalModule} from 'ngx-bootstrap';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AccountModule} from './account/account.module';
+import {MyServicesModule} from './my-services/my-services.module';
+
 
 @NgModule({
-   imports: [
-      CommonModule,
-      GlobalSharedModule,
-      SharedModule
-   ],
-   exports: [],
-   declarations: [HomeComponent],
-   providers: [
-      {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS},
-      UtilsService
-   ]
+  imports: [
+    CommonModule,
+    GlobalSharedModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AccountModule,
+    MyServicesModule,
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
+  ],
+  exports: [
+    AccountModule,
+    MyServicesModule
+  ],
+  declarations: [
+    HomeComponent,
+    DashboardComponent,
+    ConsumptionComponent
+  ],
+  providers: [
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS},
+    UtilsService
+  ]
 })
 export class MainModule {
 }

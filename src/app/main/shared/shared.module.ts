@@ -4,12 +4,15 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {GlobalSharedModule} from '../../shared/global-shared.module';
+import {BsDropdownModule} from 'ngx-bootstrap';
+
 
 @NgModule({
    imports: [
       CommonModule,
       GlobalSharedModule,
-      RouterModule
+      RouterModule,
+     BsDropdownModule.forRoot()
    ],
    declarations: [
       SidebarComponent,
@@ -18,7 +21,8 @@ import {GlobalSharedModule} from '../../shared/global-shared.module';
    exports: [
       GlobalSharedModule,
       SidebarComponent,
-      NavbarComponent
+      NavbarComponent,
+      BsDropdownModule
    ]
 })
 export class SharedModule {

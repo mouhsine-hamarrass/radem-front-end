@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: 'sidebar.component.html',

@@ -14,13 +14,14 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {GlobalSharedModule} from './shared/global-shared.module';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SharedModule} from './main/shared/shared.module';
 
 @NgModule({
    declarations: [
       AppComponent,
       MaintenanceComponent,
       ErrorComponent,
-      PageNotFoundComponent,
+      PageNotFoundComponent
    ],
    imports: [
       BrowserModule,
@@ -30,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       AppRoutingModule,
       TagInputModule,
       BrowserAnimationsModule,
+     SharedModule,
       TranslateModule.forRoot({
          loader: {
             provide: TranslateLoader,
