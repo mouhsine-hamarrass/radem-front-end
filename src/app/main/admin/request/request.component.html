@@ -146,11 +146,14 @@
           <div class="card">
             <div class="card-body">
               <label>Agent d'intervention :</label>
-              <input type="text" class="col-12 form-control" >
+              <select formControlName="agent" type="text" class="col-12 form-control">
+                <option value="agent 1">Agent 1</option>
+                <option value="agent 2">Agent 2</option>
+              </select>
               <label>Date d'intervention :</label>
-              <input type="date" class="col-12 form-control" >
+              <input formControlName="dateIntervention" type="date" class="col-12 form-control" >
               <label>Tel d'agent :</label>
-              <input type="text" class="col-12 form-control" >
+              <input formControlName="phone" type="tel" class="col-12 form-control" value="{{request.agent.phone}}">
               <div class="col-md-12"  style="margin-left : 34%">
                 <button class="btn btn-primary center" id="buttons-update">Valider</button>
                 <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
@@ -158,7 +161,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </ng-template>
