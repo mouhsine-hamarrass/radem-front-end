@@ -3,7 +3,8 @@ import { RequestService } from '../../core/services/request.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { WizardComponent, WizardState } from 'angular-archwizard';
+import { WizardComponent} from 'angular-archwizard';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-request',
@@ -15,7 +16,9 @@ export class RequestComponent implements OnInit {
   @ViewChild('wizard') wizard: WizardComponent;
   @ViewChild('button') button: ElementRef;
   @ViewChild('commentaire') commentaire: ElementRef;
+  public requestForm: FormGroup;
   public request: any;
+  public requestUpdate: any;
   public modalRef: BsModalRef;
   public config = {
     backdrop: true,
@@ -26,7 +29,24 @@ export class RequestComponent implements OnInit {
   constructor(private requestService: RequestService,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: BsModalService) { }
+    private formBuilder: FormBuilder,
+    private modalService: BsModalService) {
+      this.requestForm = this.formBuilder.group({
+        agent: ['', Validators.required],
+        dateIntervention: ['', Validators.required],
+        phone: ['', Validators.required]
+      });
+    }
+
+    get agent() {
+      return this.requestForm.get('agent');
+    }
+    get dateIntervention() {
+      return this.requestForm.get('dateIntervention');
+    }
+    get phone() {
+      return this.requestForm.get('phone');
+    }
 
   ngOnInit() {
     // const wizardState: WizardState = this.wizard.model;
@@ -36,7 +56,8 @@ export class RequestComponent implements OnInit {
     const b: HTMLElement = this.button.nativeElement as HTMLElement;
     for (let stepIndex = 0; stepIndex < 2; stepIndex++) {
       b.click();
-    }*/
+    }
+    console.log(localStorage.getItem('user'));*/
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
      this.requestService.getRequest(id).subscribe(response => {
@@ -54,6 +75,19 @@ export class RequestComponent implements OnInit {
   focus() {
     console.log(this.commentaire);
     this.commentaire.nativeElement.focus();
-}
+ }
+
+ add() {
+   this.requestUpdate = {
+     id: this.request.id,
+     agent: this.agent.value,
+     date: this.dateIntervention.value,
+     phone: this.phone.value
+   };
+   /*this.requestService.saveRequest().subscribe(response => {
+     console.log(response);
+     this.ngOnInit();
+   });*/
+ }
 
 }
