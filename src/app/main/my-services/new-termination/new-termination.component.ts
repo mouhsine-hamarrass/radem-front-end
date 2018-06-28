@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { MyServicesService } from '../../core/services/my-services.service';
 
 @Component({
   selector: 'app-new-termination',
@@ -8,10 +9,14 @@ import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 })
 export class NewTerminationComponent implements OnInit {
 
-  constructor() { }
+  protected terminationRequest: any;
+
+  constructor(private myServicesService: MyServicesService) {
+  }
 
   ngOnInit() {
   }
+
   public print(printSection?: string) {
     console.log(document.getElementById(printSection));
     if (!printSection) {

@@ -10,6 +10,7 @@ import { TerminationComponent } from './termination/termination.component';
 import { NewTerminationComponent } from './new-termination/new-termination.component';
 import { TerminationRequestsComponent } from './termination-requests/termination-requests.component';
 import { ComplaintComponent } from './complaint/complaint.component';
+import { MyServicesService } from '../core/services/my-services.service';
 
 
 @NgModule({
@@ -27,6 +28,9 @@ import { ComplaintComponent } from './complaint/complaint.component';
     TerminationComponent,
     NewTerminationComponent,
     TerminationRequestsComponent,
-    ComplaintComponent]
+    ComplaintComponent],
+    providers: [
+      MyServicesService
+    ]
 })
 export class MyServicesModule { }

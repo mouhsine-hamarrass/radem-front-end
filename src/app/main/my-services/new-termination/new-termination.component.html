@@ -70,7 +70,9 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="print('printSection')">print</button>
+        &nbsp;
+        <button class="btn btn-primary pull-right" (click)="print('printSection')">print</button> &nbsp; &nbsp;
+        <button class="btn btn-primary pull-right" (click)="print('printSection')">Enregistrer</button>
       </form>
     </div>
   </div>
@@ -85,9 +87,9 @@
     <div class="row col-md-10">
       <p>DR N° 11111</p>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <p class="font-weight-bold">DEMANDEUR</p>
+    <form>
+      <fieldset class="col col-md-12">
+        <legend>DEMANDEUR</legend>
         <div class="row">
           <div class="col col-md-12">
             Nom et Prénom:
@@ -106,8 +108,8 @@
             à:
           </div>
         </div>
-      </div>
-    </div>
+      </fieldset>
+    </form>
     <div class="card">
       <div class="card-body">
         <p class="font-weight-bold">Polices d'abonnement</p>
@@ -132,4 +134,8 @@
       </div>
     </div>
   </div>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">Inline Form</legend>
+    kkkk
+  </fieldset>
 </div>
