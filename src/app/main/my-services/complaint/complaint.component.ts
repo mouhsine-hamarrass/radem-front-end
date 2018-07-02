@@ -17,17 +17,17 @@ export class ComplaintComponent implements OnInit {
               private formBuilder: FormBuilder,
               private toastrService: ToastrService) {
     this.complaintForm = this.formBuilder.group({
-      numero: [],
-      objet: [],
+      number: [],
+      object: [],
       description: []
     });
   }
 
-  get numero() {
+  get number() {
     return this.complaintForm.controls.numero.value;
   }
 
-  get objet() {
+  get object() {
     return this.complaintForm.controls.objet.value;
   }
 
@@ -40,8 +40,8 @@ export class ComplaintComponent implements OnInit {
 
   save(): void {
     const complaint = {
-      claimNumber: this.numero,
-      object: this.objet,
+      claimNumber: this.number,
+      object: this.object,
       description: this.description
     };
     console.log(complaint);
