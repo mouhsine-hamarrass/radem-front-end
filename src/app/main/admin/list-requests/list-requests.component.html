@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let request of requests">
-              <td><a [routerLink] = "['/request', request.nb_request]">{{request.requestNumber}}</a></td>
+              <td><a [routerLink] = "['/request', request.id]">{{request.requestNumber}}</a></td>
               <td *ngIf="request.applicant != null">{{request.applicant.firstname}} {{request.applicant.lastname}}</td>
               <td *ngIf="request.applicant == null">{{request.client.fullName}}</td>
               <td>{{request.type}}</td>

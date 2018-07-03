@@ -4,7 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { WizardComponent} from 'angular-archwizard';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-request',
@@ -17,6 +17,7 @@ export class RequestComponent implements OnInit {
   @ViewChild('button') button: ElementRef;
   @ViewChild('commentaire') commentaire: ElementRef;
   public requestForm: FormGroup;
+  public commentForm: FormGroup;
   public request: any;
   public requestUpdate: any;
   public modalRef: BsModalRef;
@@ -36,6 +37,9 @@ export class RequestComponent implements OnInit {
         dateIntervention: ['', Validators.required],
         phone: ['', Validators.required]
       });
+      this.commentForm = this.formBuilder.group({
+        comment: ['', Validators.required]
+      });
     }
 
     get agent() {
@@ -46,6 +50,10 @@ export class RequestComponent implements OnInit {
     }
     get phone() {
       return this.requestForm.get('phone');
+    }
+
+    get comment() {
+      return this.commentForm.get('comment');
     }
 
   ngOnInit() {
@@ -75,6 +83,16 @@ export class RequestComponent implements OnInit {
   focus() {
     console.log(this.commentaire);
     this.commentaire.nativeElement.focus();
+ }
+
+ addComment() {
+   this.request.feedback.push({message: this.comment.value, sendingDate: new Date()});
+   this.requestService.addTerminationRequest(this.request).subscribe(response => {
+    this.commentForm.reset();
+    console.log(this.request);
+   },
+   (err) => {
+    });
  }
 
  add() {
