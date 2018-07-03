@@ -9,7 +9,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./termination.component.scss']
 })
 export class TerminationComponent implements OnInit {
-  private feedback = new FormControl('');
+  protected feedback = new FormControl('');
 
   protected terminationRequest: any;
 

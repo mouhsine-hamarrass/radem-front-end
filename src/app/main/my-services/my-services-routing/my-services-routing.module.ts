@@ -8,6 +8,8 @@ import { TerminationComponent } from '../termination/termination.component';
 import { NewTerminationComponent } from '../new-termination/new-termination.component';
 import { TerminationRequestsComponent } from '../termination-requests/termination-requests.component';
 import { ComplaintComponent } from '../complaint/complaint.component';
+import { ComplaintsComponent } from '../complaints/complaints.component';
+import { DetailComplaintComponent } from '../detail-complaint/detail-complaint.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,14 @@ const routes: Routes = [
       {
         path: 'complaint',
         component: ComplaintComponent
+      },
+      {
+        path: 'detail-complaint',
+        component: DetailComplaintComponent
+      },
+      {
+        path: 'complaints',
+        component: ComplaintsComponent
       },
       {
         path: 'subscribe-request',
