@@ -27,6 +27,10 @@ export class RequestService {
     return this.httpClient.post(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
   }
 
+  nextStep(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/${idRequest}/nextstep`, {headers: headers});
+  }
+
   // Complaint
   getComplaints(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/all-complaints`, {headers: headers});

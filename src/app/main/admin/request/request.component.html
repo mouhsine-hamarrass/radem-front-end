@@ -28,7 +28,7 @@
             <div class="col-md-12" id="buttons">
                 <button type="button" class="btn btn-primary" (click)="openUpdateForm(updateForm)">Modifier</button>
                 <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
-                <button type="button" class="btn btn-success" style="margin-left : 10px;" #button awNextStep>Étape suivante <i class="fa fa-angle-double-right"></i></button>
+                <button *ngIf="request.status !== 'CLOSED'" type="button" class="btn btn-success" style="margin-left : 10px;" #button  (click)="nextStep(request.id)" awNextStep>Étape suivante <i class="fa fa-angle-double-right"></i></button>
             </div>
         </aw-wizard>
 

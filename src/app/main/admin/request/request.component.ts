@@ -5,6 +5,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { WizardComponent} from 'angular-archwizard';
 import {FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import _ = require('underscore');
 
 @Component({
   selector: 'app-request',
@@ -70,7 +71,7 @@ export class RequestComponent implements OnInit {
     if (id !== null) {
      this.requestService.getRequest(id).subscribe(response => {
        this.request = response.data;
-       console.log(this.request);
+       this.request.feedback.reverse();
     }, (err) => {
     });
    }
@@ -85,11 +86,22 @@ export class RequestComponent implements OnInit {
     this.commentaire.nativeElement.focus();
  }
 
+ nextStep(id) {
+   this.requestService.nextStep(id).subscribe(response => {
+     this.request = response.data;
+     if (this.request.status === 'CLOSED') {
+      this.button.nativeElement.disabled = true;
+   }
+   }, (err) => {
+
+   });
+ }
+
  addComment() {
    this.request.feedback.push({message: this.comment.value, sendingDate: new Date()});
    this.requestService.addTerminationRequest(this.request).subscribe(response => {
     this.commentForm.reset();
-    console.log(this.request);
+    this.ngOnInit();
    },
    (err) => {
     });
@@ -102,10 +114,6 @@ export class RequestComponent implements OnInit {
      date: this.dateIntervention.value,
      phone: this.phone.value
    };
-   /*this.requestService.saveRequest().subscribe(response => {
-     console.log(response);
-     this.ngOnInit();
-   });*/
  }
 
 }
