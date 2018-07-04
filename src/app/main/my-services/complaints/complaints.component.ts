@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyServicesService } from '../../core/services/my-services.service';
 
 @Component({
   selector: 'app-complaints',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./complaints.component.scss']
 })
 export class ComplaintsComponent implements OnInit {
+  protected complaints: any;
 
-  constructor() { }
+  constructor(private myServicesService: MyServicesService) { }
 
   ngOnInit() {
+    this.myServicesService.getComplaints().subscribe(response => {
+      this.complaints = response.data;
+      console.log(this.complaints);
+    });
   }
 
 }

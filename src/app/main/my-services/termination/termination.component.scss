@@ -3,22 +3,28 @@
   padding: 0;
   overflow: hidden;
 }
+
 .steps p {
   color: white;
   text-decoration: none;
 }
+
 .steps em {
   display: block;
   font-size: 1.1em;
   margin-bottom: 4px;
 }
+
 .steps li {
   float: left;
   margin-left: 0;
-  height: 40px; /* total height */
+  height: 40px;
+  /* total height */
   list-style-type: none;
-  padding: 8px 5px 5px 30px; /* padding around text, last should include arrow width */
-  border-right: 3px solid white; /* width: gap between arrows, color: background of document */
+  padding: 8px 5px 5px 30px;
+  /* padding around text, last should include arrow width */
+  border-right: 3px solid white;
+  /* width: gap between arrows, color: background of document */
   position: relative;
 }
 /* remove extra padding on the first object since it doesn't have an arrow to the left */
@@ -31,23 +37,31 @@
   top: 0;
   left: 0;
   display: block;
-  border-left: 25px solid white; /* width: arrow width, color: background of document */
-  border-top: 20px solid transparent; /* width: half height */
-  border-bottom: 20px solid transparent; /* width: half height */
+  border-left: 25px solid white;
+  /* width: arrow width, color: background of document */
+  border-top: 20px solid transparent;
+  /* width: half height */
+  border-bottom: 20px solid transparent;
+  /* width: half height */
   width: 0;
   height: 0;
   content: " ";
 }
 /* colored arrow to the right */
 .steps li::after {
-  z-index: 1; /* need to bring this above the next item */
+  z-index: 1;
+  /* need to bring this above the next item */
   position: absolute;
   top: 0;
-  right: -25px; /* arrow width (negated) */
+  right: -25px;
+  /* arrow width (negated) */
   display: block;
-  border-left: 25px solid #7c8437; /* width: arrow width */
-  border-top: 20px solid transparent; /* width: half height */
-  border-bottom: 20px solid transparent; /* width: half height */
+  border-left: 25px solid #7c8437;
+  /* width: arrow width */
+  border-top: 20px solid transparent;
+  /* width: half height */
+  border-bottom: 20px solid transparent;
+  /* width: half height */
   width: 0;
   height: 0;
   content: " ";
@@ -55,14 +69,19 @@
 
 /* colored arrow to the right */
 .steps li:nth-child(7)::after {
-  z-index: 1; /* need to bring this above the next item */
+  z-index: 1;
+  /* need to bring this above the next item */
   position: absolute;
   top: 0;
-  right: -25px; /* arrow width (negated) */
+  right: -25px;
+  /* arrow width (negated) */
   display: block;
-  border-left: 0px solid #7c8437; /* width: arrow width */
-  border-top: 20px solid transparent; /* width: half height */
-  border-bottom: 20px solid transparent; /* width: half height */
+  border-left: 0 solid #7c8437;
+  /* width: arrow width */
+  border-top: 20px solid transparent;
+  /* width: half height */
+  border-bottom: 20px solid transparent;
+  /* width: half height */
   width: 0;
   height: 0;
   content: " ";
@@ -74,6 +93,7 @@
 .steps li {
   background-color: #2e5797;
 }
+
 .steps li::after {
   border-left-color: #2e5797;
 }
@@ -82,20 +102,22 @@
 .steps li.current {
   background-color: #2e5797;
 }
+
 .steps li.current::after {
   border-left-color: #2e5797;
 }
-
 
 /* Following */
 .steps li.current ~ li {
   background-color: #ebebeb;
   cursor: default;
 }
+
 .steps li.current ~ li::after {
   border-left-color: #ebebeb;
   cursor: default;
 }
+
 .steps li.current ~ li::before {
   cursor: default;
 }
@@ -108,103 +130,72 @@
   width: 550px;
   float: left;
 }
+
 .btn {
   width: 70px;
   float: left;
   margin: 15px 10px;
 }
+
 #feedback {
   margin: 15px 10px;
 }
+
 .col-md-11 {
   margin: 15px 45px !important;
 }
-.timeline {
+
+.bubble {
   position: relative;
-  margin: 0 0 30px 0;
-  padding: 0;
-  list-style: none;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: #ddd;
-    left: 31px;
-    margin: 0;
-    border-radius: 2px;
-  }
-  > {
-    .time-label > span {
-      font-weight: 600;
-      padding: 5px;
-      display: inline-block;
-      background-color: #fff;
-      border-radius: 4px;
-    }
-    li {
-      position: relative;
-      margin-right: 10px;
-      padding: 0 0 15px 0;
-      > {
-        .fa, .ion {
-          width: 30px;
-          height: 30px;
-          font-size: 15px;
-          line-height: 30px;
-          position: absolute;
-          color: #fff;
-          background: #d2d6de;
-          border-radius: 50%;
-          text-align: center;
-          left: 18px;
-          top: 0;
-        }
-      }
-    }
-  }
-}
-.timeline-inverse > li > .timeline-item {
-  background: #f0f0f0;
-  border: 1px solid #ddd;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.timeline > li > .timeline-item {
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  margin-top: 0;
-  background: #fff;
-  color: #444;
-  margin-left: 60px;
-  margin-right: 15px;
-  padding: 0;
-  position: relative;
-  > {
-    .time {
-      color: #999;
-      float: right;
-      padding: 10px;
-      font-size: 12px;
-    }
-    .timeline-header {
-      margin: 0;
-      color: #555;
-      border-bottom: 1px solid #f4f4f4;
-      padding: 10px;
-      font-size: 16px;
-      line-height: 1.1;
-    }
-  }
-}
-.timeline-inverse > li > .timeline-item > .timeline-header {
-  border-bottom-color: #ddd;
-}
-.timeline > li > .timeline-item > {
-  .timeline-body, .timeline-footer {
-    padding: 10px;
-  }
+  background: #C0C0C0;
+  width: 30%;
+  height: 40px;
+  border-radius: .4em;
+  padding: 10px;
+  color: white;
+  margin-bottom: 15px;
 }
 
+.bubble:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: #C0C0C0;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-left: -20px;
+}
+
+.speech-bubble {
+  position: relative;
+  background: #4682B4;
+  width: 30%;
+  height: 40px;
+  border-radius: .4em;
+  padding: 15px;
+  color: white;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-left-color: #4682B4;
+  border-right: 0;
+  border-bottom: 0;
+  margin-top: -7.5px;
+  margin-right: -15px;
+}
+
+.bubbles {
+  margin: 0 15%;
+}
