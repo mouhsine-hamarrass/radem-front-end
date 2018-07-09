@@ -75,64 +75,11 @@
 
             <button class="btn btn-dark" (click)="saveFeedback()">Envoyer</button>
           </form>
-          <section class="content">
-            <div class="row">
-              <div class="col-md-10">
-                <ul class="timeline timeline-inverse">
-                  <li class="time-label">
-                    <span class="bg-secondary text-white">
-                      11/11/2019
-                    </span>
-                  </li>
-                  <li>
-                    <i class="fa fa-user bg-secondary"></i>
-                    <div class="timeline-item">
-                      <span class="time text-white">
-                        <i class="fa fa-clock-o text-white"></i>&nbsp;11h28</span>
-                      <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">Intervention en cours</h3>
-                      <div class="timeline-body">
-                        Information supplémentaire
-                      </div>
-                      <!-- <div class="timeline-footer"></div> -->
-                    </div>
-                  </li>
-                  <li>
-                    <i class="fa fa-user bg-secondary"></i>
-                    <div class="timeline-item">
-                      <span class="time text-white">
-                        <i class="fa fa-clock-o text-white"></i>&nbsp;09h13</span>
-                      <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">Intervention en cours</h3>
-                      <div class="timeline-body">
-                        Information supplémentaire
-                      </div>
-                      <!-- <div class="timeline-footer"></div> -->
-                    </div>
-                  </li>
-                  <li class="time-label">
-                  <span class="bg-secondary text-white">
-                    03/10/2019
-                  </span>
-                  </li>
-                  <li>
-                    <i class="fa fa-user bg-secondary"></i>
-                    <div class="timeline-item">
-                      <span class="time text-white">
-                        <i class="fa fa-clock-o text-white"></i>&nbsp;14h07</span>
-                      <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">Reçue</h3>
-                      <div class="timeline-body">
-                        Information supplémentaire
-                      </div>
-                      <!-- <div class="timeline-footer"></div> -->
-                    </div>
-                  </li>
-                  <li>
-                    <i class="fa fa-clock-o bg-secondary"></i>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.tab-pane -->
+          <div class="bubbles">
+            <div class="bubble" *ngFor="let feedback of terminationRequest.feedback">
+              {{feedback.message}}
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>

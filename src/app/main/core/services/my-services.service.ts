@@ -38,4 +38,12 @@ export class MyServicesService {
   saveComplaint(complaint: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save`, complaint, {headers: headers});
   }
+
+  getComplaints(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints`);
+  }
+
+  getComplaint(id: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/${id}/find`);
+  }
 }

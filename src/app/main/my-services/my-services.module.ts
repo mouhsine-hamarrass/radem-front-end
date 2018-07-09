@@ -11,6 +11,8 @@ import { NewTerminationComponent } from './new-termination/new-termination.compo
 import { TerminationRequestsComponent } from './termination-requests/termination-requests.component';
 import { ComplaintComponent } from './complaint/complaint.component';
 import { MyServicesService } from '../core/services/my-services.service';
+import { ComplaintsComponent } from './complaints/complaints.component';
+import { DetailComplaintComponent } from './detail-complaint/detail-complaint.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MyServicesService } from '../core/services/my-services.service';
     TerminationComponent,
     NewTerminationComponent,
     TerminationRequestsComponent,
-    ComplaintComponent],
+    ComplaintComponent,
+    ComplaintsComponent,
+    DetailComplaintComponent],
     providers: [
       MyServicesService
     ]

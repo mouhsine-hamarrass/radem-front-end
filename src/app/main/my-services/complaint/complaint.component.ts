@@ -24,11 +24,11 @@ export class ComplaintComponent implements OnInit {
   }
 
   get number() {
-    return this.complaintForm.controls.numero.value;
+    return this.complaintForm.controls.number.value;
   }
 
   get object() {
-    return this.complaintForm.controls.objet.value;
+    return this.complaintForm.controls.object.value;
   }
 
   get description() {

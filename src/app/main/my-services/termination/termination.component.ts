@@ -9,7 +9,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./termination.component.scss']
 })
 export class TerminationComponent implements OnInit {
-  private feedback = new FormControl('');
+  protected feedback = new FormControl('');
 
   protected terminationRequest: any;
 
@@ -18,18 +18,21 @@ export class TerminationComponent implements OnInit {
   ngOnInit() {
     this.myServicesService.getTerminationRequest(1).subscribe(response => {
       this.terminationRequest = response.data;
+      this.terminationRequest.feedback.reverse();
       console.log(this.terminationRequest);
     });
   }
 
   saveFeedback() {
     console.log(new Date());
-    this.terminationRequest.feedback = [{message: this.feedback.value, sendingDate: new Date()}];
+    if (!this.terminationRequest.feedback) {
+      this.terminationRequest.feedback = [];
+    }
+    this.terminationRequest.feedback.push({message: this.feedback.value, sendingDate: new Date()});
     this.myServicesService.getSubscriptions().subscribe(response => {
       this.terminationRequest.subscriptions = response.data;
       this.myServicesService.saveTerminationRequest(this.terminationRequest).subscribe(response2 => {
-        console.log(this.terminationRequest);
-        this.feedback.reset();
+        this.ngOnInit();
       });
     });
   }
