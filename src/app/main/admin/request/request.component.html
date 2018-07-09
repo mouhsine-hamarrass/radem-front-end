@@ -28,7 +28,7 @@
             <div class="col-md-12" id="buttons">
                 <button type="button" class="btn btn-primary" (click)="openUpdateForm(updateForm)">Modifier</button>
                 <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
-                <button type="button" class="btn btn-success" style="margin-left : 10px;" #button awNextStep>Étape suivante <i class="fa fa-angle-double-right"></i></button>
+                <button *ngIf="request.status !== 'CLOSED'" type="button" class="btn btn-success" style="margin-left : 10px;" #button  (click)="nextStep(request.id)" awNextStep>Étape suivante <i class="fa fa-angle-double-right"></i></button>
             </div>
         </aw-wizard>
 
@@ -99,15 +99,22 @@
                     <b>Commentaires</b>
                   </div>
                   <div style="padding: 20px">
+                      <form class="" [formGroup]="commentForm">
                     <div class="row">
-                      <input #commentaire type="text" class="col-10 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
-                      <button class="btn btn-primary">Envoyer</button>
-                    </div><br>
-                      <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request.feedbacks">
+
+                      <input #commentaire formControlName="comment" type="text" class="col-10 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
+
+                      <button class="btn btn-primary" (click)="addComment()">Envoyer</button>
+                    </div>
+                  </form><br>
+                      <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request.feedback">
                           <img src="assets/images/profile.png" alt="" height="40" width="40">
                           <div class="card col-10" id="comm" >
                               {{feedback.message}}
                           </div>
+                          <div class="col-md-4 pull-right" style="margin-left:420px; color: gray">
+                              <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                            </div>
                       </div>
                   </div>
                 </div>
@@ -145,6 +152,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
+              <form class="" [formGroup]="requestForm">
               <label>Agent d'intervention :</label>
               <select formControlName="agent" type="text" class="col-12 form-control">
                 <option value="agent 1">Agent 1</option>
@@ -158,6 +166,7 @@
                 <button class="btn btn-primary center" id="buttons-update">Valider</button>
                 <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
               </div>
+              </form>
             </div>
           </div>
         </div>

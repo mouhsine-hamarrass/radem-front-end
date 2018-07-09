@@ -15,7 +15,7 @@ export class RequestService {
    }
 
    // Termination-request
-   getRequest(idRequest: string): Observable<Response<any>> {
+  getRequest(idRequest: string): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/${idRequest}/find`, {headers: headers});
   }
 
@@ -23,8 +23,16 @@ export class RequestService {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`, {headers: headers});
   }
 
+  addTerminationRequest(request: any) {
+    return this.httpClient.post(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
+  }
+
+  nextStep(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/${idRequest}/nextstep`, {headers: headers});
+  }
+
   // Complaint
   getComplaints(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/complaints`, {headers: headers});
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/all-complaints`, {headers: headers});
   }
 }

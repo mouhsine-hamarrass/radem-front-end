@@ -7,6 +7,7 @@ import { ListComplaintsComponent } from './list-complaints/list-complaints.compo
 import { RequestService } from '../core/services/request.service';
 import { ArchwizardModule } from 'angular-archwizard';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,8 @@ import { RouterModule } from '@angular/router';
     RequestComponent,
     ArchwizardModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AdminComponent,
