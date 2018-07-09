@@ -1,52 +1,54 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {SharedModule} from './shared/shared.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import {AppComponent} from './app.component';
+import {BoxedLayoutComponent} from './layouts/boxed-layout/boxed-layout.component';
+
+import {MaintenanceComponent} from './maintenance/maintenance.component';
+import {PageNotFoundComponent} from './main/pages/page-not-found/page-not-found.component';
+import {createTranslateLoader} from './app.translate.factory';
 import {CoreModule} from './core/core.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {AppRoutingModule} from './app-routing.module';
-import {createTranslateLoader} from './app.translate.factory';
-import {MainModule} from './main/main.module';
-import {MaintenanceComponent} from './maintenance/maintenance.component';
-import {ErrorComponent} from './error/error.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {GlobalSharedModule} from './shared/global-shared.module';
-import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {SharedModule} from './main/shared/shared.module';
-import { RequestService } from './main/core/services/request.service';
+import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
+import {BoxedWithSidebarLayoutComponent} from './layouts/boxed-with-sidebar-layout/boxed-with-sidebar-layout.component';
+import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
+import {ServicesService} from './main/services/services.service';
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      MaintenanceComponent,
-      ErrorComponent,
-      PageNotFoundComponent
-   ],
-   imports: [
-      BrowserModule,
-      CoreModule,
-      MainModule,
-      GlobalSharedModule,
-      AppRoutingModule,
-      TagInputModule,
-      BrowserAnimationsModule,
-      SharedModule,
-      TranslateModule.forRoot({
-         loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient]
-         }
-      })
-   ],
-   providers: [
-      {provide: 'api.config', useValue: environment.apiConfig},
-      {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
-      RequestService
-   ],
-   bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    BoxedLayoutComponent,
+    TwoColumnsLayoutComponent,
+    MaintenanceComponent,
+    PageNotFoundComponent,
+    DashboardLayoutComponent,
+    BoxedWithSidebarLayoutComponent,
+  ],
+  imports: [
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    CoreModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
+  ],
+  providers: [
+    {provide: 'api.config', useValue: environment.apiConfig},
+    {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
+    ServicesService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

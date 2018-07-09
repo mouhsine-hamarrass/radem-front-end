@@ -1,38 +1,34 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginGuard} from './core/guards/login.guard';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {LoginComponent} from './login/login.component';
-import {MaintenanceComponent} from './maintenance/maintenance.component';
-import {HomeComponent} from './main/home/home.component';
-import {DashboardComponent} from './main/dashboard/dashboard.component';
-import {AccountComponent} from './main/account/account.component';
-import {ConsumptionComponent} from './main/consumption/consumption.component';
-import {MyServicesComponent} from './main/my-services/my-services.component';
-import {AdminComponent} from './main/admin/admin.component';
-import { ListRequestsComponent } from './main/admin/list-requests/list-requests.component';
-import { ListComplaintsComponent } from './main/admin/list-complaints/list-complaints.component';
-import { RequestComponent } from './main/admin/request/request.component';
 
-const routes: Routes = [
-  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
-  {path: '', component: HomeComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'account', component: AccountComponent},
-  {path: 'my-services', component: MyServicesComponent},
-  {path: 'consumption', component: ConsumptionComponent},
-  {path: 'maintenance', component: MaintenanceComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'list-requests', component: ListRequestsComponent},
-  {path: 'list-complaints', component: ListComplaintsComponent},
-  {path: 'request/:id', component: RequestComponent},
-  {path: '**', component: PageNotFoundComponent},
+import {BoxedLayoutComponent} from './layouts/boxed-layout/boxed-layout.component';
+import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
+import {REGISTER_ROUTES} from './shared/routes/register-page.routes';
+import {HOME_ROUTES} from './shared/routes/home-page.routes';
+import {ACCOUNT_PAGES_ROUTES} from './shared/routes/account-pages.routes';
+import {SERVICES_PAGES_ROUTES} from './shared/routes/services-pages.routes';
+import {CONSUMPTION_ROUTES} from './shared/routes/consumption-page.routes';
+import {ADMIN_PAGES_ROUTES} from './shared/routes/admin-pages.routes';
+import {LoginGuard} from './core/guards/login.guard';
+import {LoginComponent} from './login/login.component';
+
+const appRoutes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: '', component: LoginComponent},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: REGISTER_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICES_PAGES_ROUTES},
+  {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
+
 }

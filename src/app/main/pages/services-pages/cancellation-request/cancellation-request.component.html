@@ -1,0 +1,170 @@
+<!--Tooltip Starts-->
+<div class="content-header row">
+   <div class="content-header-left col-md-6 col-12 mb-1">
+      <h3 class="content-header-title">Réclamations</h3>
+   </div>
+   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+      <div class="breadcrumb-wrapper col-12">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a routerLink="/home">Accueil</a>
+            </li>
+            <li class="breadcrumb-item">
+               <a>Services</a>
+            </li>
+            <li class="breadcrumb-item active">Demande de résiliation
+            </li>
+         </ol>
+      </div>
+   </div>
+</div>
+<div class="content-body">
+   <section class="row">
+      <div class="col-sm-12">
+         <!-- What is-->
+         <div id="what-is" class="card">
+            <div class="card-header">
+               <h4 class="card-title">Consulter vos demandes</h4>
+               <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+               <div class="heading-elements">
+               </div>
+            </div>
+            <div class="card-content collapse show">
+               <div class="card-body">
+                  <ul class="steps steps-7">
+                     <li class="{current: terminationRequest.status === 'CREATED'}">
+                        <p class="mx-auto">
+                           <em>Créée</em>
+                        </p>
+                     </li>
+                     <li class="{current: terminationRequest.status === 'RECEIVED'}">
+                        <p>
+                           <em>Reçue</em>
+                        </p>
+                     </li>
+                     <li class="{current: terminationRequest.status === 'OK'}">
+                        <p>
+                           <em>Intervention en cours</em>
+                        </p>
+                     </li>
+                     <li>
+                        <p>
+                           <em>Compteur deposé</em>
+                           <span></span>
+                        </p>
+                     </li>
+                     <li>
+                        <p>
+                           <em>Verification impayés</em>
+                           <span></span>
+                        </p>
+                     </li>
+                     <li>
+                        <p>
+                           <em>Reglement/Remboursement</em>
+                           <span></span>
+                        </p>
+                     </li>
+                     <li>
+                        <p>
+                           <em>Cloture</em>
+                           <span></span>
+                        </p>
+                     </li>
+                  </ul>
+
+                  <div class="row col col-md-12">
+                     <div class="col col-md-6">
+                        <div class="">
+                           <div class="">
+                              <strong>Informations : </strong>
+                           </div>
+                           <div class="">
+                              <p>Demande de résiliation N°: {{terminationRequest?.requestNumber}}</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col col-md-6">
+                        <div class="">
+                           <div class="">
+                              <strong>Intervenant : </strong>
+                           </div>
+                           <div class="">
+                              <p *ngIf="!terminationRequest?.intervenant" class="text-center">Aucun intervenant n'est affecté pour
+                                 le moment</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <div class="container">
+                        <form class="form-inline">
+                           <div class="form-group">
+                              <label for="feedback">Votre feedBack </label>
+                              <input [formControl]="feedback" class="form-control" id="feedback">
+                           </div>
+
+                           <button class="btn btn-dark" (click)="saveFeedback()">Envoyer</button>
+                        </form>
+                        <section class="content">
+                           <div class="row">
+                              <div class="col-md-10">
+                                 <ul class="timeline timeline-inverse">
+                                    <li class="time-label">
+                                       <span class="bg-secondary text-white"> 11/11/2019 </span>
+                                    </li>
+                                    <li>
+                                       <i class="fa fa-user bg-secondary"></i>
+                                       <div class="timeline-item">
+                                          <span class="time text-white"><i class="fa fa-clock-o text-white"></i>&nbsp;11h28</span>
+                                          <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;"> Intervention en cours</h3>
+                                          <div class="timeline-body">
+                                             Information supplémentaire
+                                          </div>
+                                          <!-- <div class="timeline-footer"></div> -->
+                                       </div>
+                                    </li>
+                                    <li>
+                                       <i class="fa fa-user bg-secondary"></i>
+                                       <div class="timeline-item">
+                                          <span class="time text-white"><i class="fa fa-clock-o text-white"></i>&nbsp;09h13</span>
+                                          <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">
+                                             Intervention en cours</h3>
+                                          <div class="timeline-body">
+                                             Information supplémentaire
+                                          </div>
+                                          <!-- <div class="timeline-footer"></div> -->
+                                       </div>
+                                    </li>
+                                    <li class="time-label">
+                                       <span class="bg-secondary text-white"> 03/10/2019 </span>
+                                    </li>
+                                    <li>
+                                       <i class="fa fa-user bg-secondary"></i>
+                                       <div class="timeline-item">
+                                          <span class="time text-white"><i class="fa fa-clock-o text-white"></i>&nbsp;14h07</span>
+                                          <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">Reçue</h3>
+                                          <div class="timeline-body">
+                                             Information supplémentaire
+                                          </div>
+                                          <!-- <div class="timeline-footer"></div> -->
+                                       </div>
+                                    </li>
+                                    <li>
+                                       <i class="fa fa-clock-o bg-secondary"></i>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <!-- /.tab-pane -->
+                           </div>
+                        </section>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--/ What is-->
+         </div>
+      </div>
+   </section>
+</div>

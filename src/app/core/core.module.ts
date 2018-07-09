@@ -13,12 +13,12 @@ import {throwIfAlreadyLoaded} from './guards/module-import.guard';
 import {TokenInterceptor} from './interceptors/token.interceptor';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
-import {GlobalSharedModule} from '../shared/global-shared.module';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule(<NgModule>{
   imports: [
-    GlobalSharedModule
+    SharedModule
   ],
   declarations: [],
   providers: [
