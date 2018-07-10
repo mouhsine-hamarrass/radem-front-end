@@ -28,7 +28,7 @@
     "@types/jquery": "^3.3.1",
     "angular-archwizard": "^3.0.0",
     "bourbon": "^5.0.0",
-    "faker": "^0.7.2",
+    "Faker": "^0.7.2",
     "chart.js": "^2.7.2",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.3",

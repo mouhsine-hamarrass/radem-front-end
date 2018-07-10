@@ -9,7 +9,7 @@ import {ServicesService} from '../../../services/services.service';
 })
 export class CancellationRequestComponent implements OnInit {
 
-  private feedback = new FormControl('');
+  public feedback = new FormControl('');
 
   protected terminationRequest: any;
 
