@@ -17,7 +17,8 @@ import * as moment from 'moment';
 export class CancellationRequestComponent implements OnInit {
 
   @ViewChild('wizard') wizard: WizardComponent;
-  @ViewChild('button') button: ElementRef;
+  @ViewChild('StepButton') StepButton: ElementRef;
+  @ViewChild('UpdateButton') UpdateButton: ElementRef;
   @ViewChild('commentaire') commentaire: ElementRef;
   public requestForm: FormGroup;
   public commentForm: FormGroup;
@@ -100,23 +101,31 @@ export class CancellationRequestComponent implements OnInit {
     /*for (let stepIndex = 0; stepIndex < 4; stepIndex++) {
       console.log(this.wizard.model.navigationMode.goToNextStep);
     }
+
     const b: HTMLElement = this.button.nativeElement as HTMLElement;
     for (let stepIndex = 0; stepIndex < 2; stepIndex++) {
       b.click();
     }
-    console.log(localStorage.getItem('user'));*/
+    console.log(localStorage.getItem('user'));
+
+    this.requestService.getAgents().subscribe( response => {
+      this.agents = response.data;
+      console.log(this.agents);
+    })*/
+
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
      this.requestService.getRequest(id).subscribe(response => {
        this.request = response.data;
        console.log(this.request);
        this.request.feedback.reverse();
+       if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
+         this.UpdateButton.nativeElement.disabled = true;
+       } else {
+        this.UpdateButton.nativeElement.disabled = false;
+       }
     });
   }
-    /*this.requestService.getAgents().subscribe( response => {
-      this.agents = response.data;
-      console.log(this.agents);
-    })*/
   }
 
   // Choice of step + show Add Intervenant Popup
@@ -138,9 +147,9 @@ export class CancellationRequestComponent implements OnInit {
      this.request = response.data;
      this.request.feedback.reverse();
      if (this.request.status === 'CLOSED') {
-      this.button.nativeElement.disabled = true;
+      this.StepButton.nativeElement.disabled = true;
         }
-     }, (err) => {});
+     });
       this.ngOnInit();
   }
 
@@ -165,6 +174,7 @@ export class CancellationRequestComponent implements OnInit {
    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
      console.log(response);
      this.nextStep(this.request.id);
+     this.ngOnInit();
    })
  }
 
