@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { RequestsComponent } from './requests/requests.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { CancellationRequestComponent } from './cancellation-request/cancellation-request.component';
+import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,13 @@ const routes: Routes = [
         component: CancellationRequestComponent,
         data: {
           title: 'Demande de résiliation'
+        }
+      },
+      {
+        path: 'claim/:id',
+        component: ClaimDetailComponent,
+        data: {
+          title: 'Réclamation'
         }
       }
     ]

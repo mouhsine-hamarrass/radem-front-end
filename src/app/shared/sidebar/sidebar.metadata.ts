@@ -7,5 +7,5 @@ export interface RouteInfo {
     badgeClass: string;
     isExternalLink: boolean;
     isNavHeader: boolean;
-    submenu : RouteInfo[];
+    submenu: RouteInfo[];
 }

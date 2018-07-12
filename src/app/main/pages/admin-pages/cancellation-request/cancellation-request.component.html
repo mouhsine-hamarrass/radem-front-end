@@ -34,13 +34,11 @@
 
 
         <div class="row" id="cards">
-            <div class="col-7 border rounded" style="padding : 0px;">
-              <div class="card-header">
-                <b>Informations :</b>
-              </div>
-              <div style="padding-left: 20px;padding-bottom: 10px;">
+            <fieldset class="col-7 scheduler-border">
+                <legend class="scheduler-border"><b>Informations :</b></legend>
+              <div style="padding-left: 10px;padding-bottom: 10px;">
                 <div class="row">
-                  <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
+                  <div style="padding-left: 10px;padding-top: 10px;">
                   <table>
                     <tr>
                       <td>N° demande :</td>
@@ -74,11 +72,11 @@
                 </div>
                 </div>
               </div>
-            </div>
-            <div class="col-4 border rounded" style="padding : 0px;margin-left : 40px;">
-                <div class="card-header">
+            </fieldset>
+            <fieldset class="col-4 scheduler-border">
+                <legend class="scheduler-border">
                   <b>Intervenants :</b>
-                </div>
+                </legend>
                 <div  *ngIf="request.agent" style="padding-left: 20px;padding-top: 10px;">
                   <table>
                     <tr>
@@ -91,14 +89,14 @@
                     </tr>
                   </table>
                 </div>
-              </div>
+            </fieldset>
         </div>
         <div class="row" id="cards2">
-              <div class="col-7 border rounded card" style="padding : 0px;max-height: 350px;">
-                <div class="card-header">
+              <fieldset class="col-7 scheduler-border" >
+                <legend class="scheduler-border">
                   <b>Commentaires</b>
-                </div>
-                <div style="padding: 20px;overflow: scroll">
+                </legend>
+                <div id="commDiv">
                     <form class="" [formGroup]="commentForm">
                   <div class="row">
 
@@ -112,16 +110,16 @@
                         <div class="border-comm col-10" id="comm" >
                             {{feedback.message}}
                         </div>
-                        <div class="col-md-4 pull-right" style="margin-left:400px; color: gray">
+                        <div class="col-md-4 pull-right" id="divDateComm">
                             <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
                           </div>
                     </div>
                 </div>
-              </div>
-              <div class="col-4 border rounded" style="padding: 0px;margin-left : 40px;height: 100px;">
-                  <div class="card-header">
+              </fieldset>
+              <fieldset class="col-4 scheduler-border" id="divDate">
+                  <legend class="scheduler-border">
                     <b>Dates :</b>
-                  </div>
+                  </legend>
                   <div style="padding-left: 20px;padding-top: 10px;">
                       <table>
                           <tr>
@@ -134,7 +132,7 @@
                           </tr>
                         </table>
                   </div>
-                </div>
+              </fieldset>
         </div>
     </div>
   </div>

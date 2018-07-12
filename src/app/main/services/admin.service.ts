@@ -43,6 +43,14 @@ export class AdminService {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/all-complaints`, {headers: headers});
   }
 
+  getClaim(idClaim: string): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/${idClaim}/find`, {headers: headers});
+  }
+
+  saveComplaint(claim: any): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save`, claim, {headers: headers});
+  }
+
   // JSon server
   getSolde(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/factures`, {headers: headers});

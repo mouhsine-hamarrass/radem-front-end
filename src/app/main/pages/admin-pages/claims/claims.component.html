@@ -6,7 +6,7 @@
         <div>
           <input type="text" class="col-3 form-control pull-right" placeholder="Rechercher" id="recherche"/>
         </div>
-        <table class="table table-striped table-bordered table-hover">
+        <table class="table table-striped table-bordered table-hover zero-configuration">
           <thead class="table-light">
           <tr>
             <th scope="col">Nº réclamation</th>
@@ -20,7 +20,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let complaint of complaints">
-            <td>{{complaint.claimNumber}}</td>
+            <td><a [routerLink] = "['/admin/claim', complaint.id]">{{complaint.claimNumber}}</a></td>
             <td>{{complaint.complainer.fullName}}</td>
             <td>{{complaint.object}}</td>
             <td>{{complaint.createdAt | date:'dd/MM/yyyy'}}</td>

@@ -8,6 +8,7 @@ import { AdminService } from '../../services/admin.service';
 import { ClaimsComponent } from './claims/claims.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminDashboardComponent,
     CancellationRequestComponent,
     RequestsComponent,
-    ClaimsComponent
+    ClaimsComponent,
+    ClaimDetailComponent
   ],
   providers: [AdminService]
 })
