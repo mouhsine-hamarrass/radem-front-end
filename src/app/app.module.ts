@@ -13,11 +13,13 @@ import {createTranslateLoader} from './app.translate.factory';
 import {CoreModule} from './core/core.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {environment} from '../environments/environment';
+import {environment} from 'environments/environment';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
 import {BoxedWithSidebarLayoutComponent} from './layouts/boxed-with-sidebar-layout/boxed-with-sidebar-layout.component';
 import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
 import {ServicesService} from './main/services/services.service';
+import { ContractsService } from './main/services/contracts.service';
+import { ProfilePageComponent } from './main/pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {ServicesService} from './main/services/services.service';
     PageNotFoundComponent,
     DashboardLayoutComponent,
     BoxedWithSidebarLayoutComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +49,8 @@ import {ServicesService} from './main/services/services.service';
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
-    ServicesService
+    ServicesService,
+    ContractsService
   ],
   bootstrap: [AppComponent]
 })

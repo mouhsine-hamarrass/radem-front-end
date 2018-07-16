@@ -6,10 +6,11 @@ import {ValidationService} from '../core/services/validation/validation.service'
 
 import {TranslateService} from '@ngx-translate/core';
 import {UIFormComponent} from '../shared/components/ui-elements/ui-form';
-import {environment} from '../../environments/environment';
+import {environment} from 'environments/environment';
 
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import 'rxjs/Rx';
 
 @Component({
    selector: 'app-login',

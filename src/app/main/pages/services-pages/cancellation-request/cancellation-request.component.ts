@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ServicesService} from '../../../services/services.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cancellation-request',
@@ -9,23 +10,27 @@ import {ServicesService} from '../../../services/services.service';
 })
 export class CancellationRequestComponent implements OnInit {
 
-  private feedback = new FormControl('');
+  protected feedback = new FormControl('');
 
   protected terminationRequest: any;
 
-  constructor(private myServices: ServicesService) {
+  constructor(private myServices: ServicesService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.myServices.getTerminationRequest(1).subscribe(response => {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.myServices.getTerminationRequest(id).subscribe(response => {
       this.terminationRequest = response.data;
       console.log(this.terminationRequest);
     });
   }
 
   saveFeedback() {
-    console.log(new Date());
-    this.terminationRequest.feedback = [{message: this.feedback.value, sendingDate: new Date()}];
+    if (!this.terminationRequest.feedback) {
+      this.terminationRequest.feedback = [];
+    }
+    this.terminationRequest.feedback.push({message: this.feedback.value, sendingDate: new Date()});
     this.myServices.getSubscriptions().subscribe(response => {
       this.terminationRequest.subscriptions = response.data;
       this.myServices.saveTerminationRequest(this.terminationRequest).subscribe(response2 => {

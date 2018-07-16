@@ -1,5 +1,5 @@
 import {AuthTypes} from './auth.type';
-import {environment} from '../../../environments/environment';
+import {environment} from 'environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../services/security/auth.service';
 import {AuthHelper} from '../services/security/auth.helper';

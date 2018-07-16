@@ -9,29 +9,15 @@ import {ServicesService} from '../../../services/services.service';
 })
 export class CancellationRequestsComponent implements OnInit {
 
-  private feedback = new FormControl('');
-
-  protected terminationRequest: any;
+  protected terminationRequests: any;
 
   constructor(private myServices: ServicesService) {
   }
 
   ngOnInit() {
-    this.myServices.getTerminationRequest(1).subscribe(response => {
-      this.terminationRequest = response.data;
-      console.log(this.terminationRequest);
-    });
-  }
-
-  saveFeedback() {
-    console.log(new Date());
-    this.terminationRequest.feedback = [{message: this.feedback.value, sendingDate: new Date()}];
-    this.myServices.getSubscriptions().subscribe(response => {
-      this.terminationRequest.subscriptions = response.data;
-      this.myServices.saveTerminationRequest(this.terminationRequest).subscribe(response2 => {
-        console.log(this.terminationRequest);
-        this.feedback.reset();
-      });
-    });
+    this.myServices.getTerminationRequests().subscribe(response => {
+      this.terminationRequests = response.data;
+      console.log(this.terminationRequests);
+    }, err => {});
   }
 }

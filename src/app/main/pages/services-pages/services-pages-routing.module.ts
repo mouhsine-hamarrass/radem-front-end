@@ -6,14 +6,31 @@ import {OnlinePaymentComponent} from './online-payment/online-payment.component'
 import {SubscriptionRequestComponent} from './subscription-request/subscription-request.component';
 import {CancellationRequestsComponent} from './cancellation-requests/cancellation-requests.component';
 import {NewCancellationRequestComponent} from './new-cancellation-request/new-cancellation-request.component';
+import { ClaimRequestsComponent } from './claim-requests/claim-requests.component';
+import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
+import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'claim-request',
+        path: 'new-claim-request',
         component: ClaimRequestComponent,
+        data: {
+          title: 'Nouvelle demande de réclamation'
+        }
+      },
+      {
+        path: 'claim-requests',
+        component: ClaimRequestsComponent,
+        data: {
+          title: 'Demandes de réclamation'
+        }
+      },
+      {
+        path: 'claim-request/:id',
+        component: ClaimDetailComponent,
         data: {
           title: 'Demandes de réclamation'
         }
@@ -40,7 +57,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'cancellation-request',
+        path: 'cancellation-request/:id',
         component: CancellationRequestComponent,
         data: {
           title: 'Demande de résiliation'
@@ -51,6 +68,13 @@ const routes: Routes = [
         component: OnlinePaymentComponent,
         data: {
           title: 'Paiement en ligne'
+        }
+      },
+      {
+        path: 'print',
+        component: PrintableCancellationComponent,
+        data: {
+          title: 'document'
         }
       },
     ]

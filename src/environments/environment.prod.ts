@@ -1,7 +1,7 @@
-import {AuthTypes} from '../app/core/factories/auth.type';
-import {AuthScheme} from '../app/core/models/auth-scheme.enum';
-import {ErrorHandlerTypes} from '../app/core/factories/error-handler.type';
-import {LoggerTypes} from '../app/core/factories/logger.type';
+import {AuthTypes} from 'app/core/factories/auth.type';
+import {AuthScheme} from 'app/core/models/auth-scheme.enum';
+import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
+import {LoggerTypes} from 'app/core/factories/logger.type';
 
 const server = 'http://localhost:8080/';
 export const environment = {

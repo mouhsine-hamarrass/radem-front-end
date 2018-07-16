@@ -6,7 +6,7 @@ import {AuthHelper} from './auth.helper';
 import {CommonUtil} from '../../helpers/common.util';
 import {OauthResponse} from '../../models/oauth-response';
 import {OauthToken} from '../../models/oauth-token';
-import {environment} from '../../../../environments/environment';
+import {environment} from 'environments/environment';
 
 @Injectable()
 export class OAuthService implements AuthService {

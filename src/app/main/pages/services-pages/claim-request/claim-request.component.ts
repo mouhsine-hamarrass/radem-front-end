@@ -11,6 +11,8 @@ import {ServicesService} from '../../../services/services.service';
 export class ClaimRequestComponent implements OnInit {
 
   protected complaintForm: FormGroup;
+  protected reqNumber: number;
+  protected objects: any;
 
   constructor(private myServices: ServicesService,
               private formBuilder: FormBuilder,
@@ -35,11 +37,13 @@ export class ClaimRequestComponent implements OnInit {
   }
 
   ngOnInit() {
+   this.reqNumber =  Math.floor(Math.random() * 100000);
+   this.myServices.getObjects().subscribe(response => this.objects = response.data, err => {});
   }
 
   save(): void {
     const complaint = {
-      claimNumber: this.numero,
+      claimNumber: this.reqNumber,
       object: this.objet,
       description: this.description
     };

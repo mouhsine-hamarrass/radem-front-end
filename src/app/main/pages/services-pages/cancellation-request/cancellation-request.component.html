@@ -1,170 +1,187 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
-   <div class="content-header-left col-md-6 col-12 mb-1">
-      <h3 class="content-header-title">Réclamations</h3>
-   </div>
-   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-      <div class="breadcrumb-wrapper col-12">
-         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-               <a routerLink="/home">Accueil</a>
-            </li>
-            <li class="breadcrumb-item">
-               <a>Services</a>
-            </li>
-            <li class="breadcrumb-item active">Demande de résiliation
-            </li>
-         </ol>
-      </div>
-   </div>
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Résiliation</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Services</a>
+        </li>
+        <li class="breadcrumb-item active">Demande de résiliation
+        </li>
+      </ol>
+    </div>
+  </div>
 </div>
 <div class="content-body">
-   <section class="row">
-      <div class="col-sm-12">
-         <!-- What is-->
-         <div id="what-is" class="card">
-            <div class="card-header">
-               <h4 class="card-title">Consulter vos demandes</h4>
-               <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-               </div>
-            </div>
-            <div class="card-content collapse show">
-               <div class="card-body">
-                  <ul class="steps steps-7">
-                     <li class="{current: terminationRequest.status === 'CREATED'}">
-                        <p class="mx-auto">
-                           <em>Créée</em>
-                        </p>
-                     </li>
-                     <li class="{current: terminationRequest.status === 'RECEIVED'}">
-                        <p>
-                           <em>Reçue</em>
-                        </p>
-                     </li>
-                     <li class="{current: terminationRequest.status === 'OK'}">
-                        <p>
-                           <em>Intervention en cours</em>
-                        </p>
-                     </li>
-                     <li>
-                        <p>
-                           <em>Compteur deposé</em>
-                           <span></span>
-                        </p>
-                     </li>
-                     <li>
-                        <p>
-                           <em>Verification impayés</em>
-                           <span></span>
-                        </p>
-                     </li>
-                     <li>
-                        <p>
-                           <em>Reglement/Remboursement</em>
-                           <span></span>
-                        </p>
-                     </li>
-                     <li>
-                        <p>
-                           <em>Cloture</em>
-                           <span></span>
-                        </p>
-                     </li>
-                  </ul>
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Consulter votre demande</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <ul class="steps steps-7">
+              <li [ngClass]="{current: terminationRequest.status === 'CREATED'}">
+                <p class="mx-auto">
+                  <em>Créée</em>
+                </p>
+              </li>
+              <li [ngClass]="{current: terminationRequest.status === 'RECEIVED'}">
+                <p>
+                  <em>Reçue</em>
+                </p>
+              </li>
+              <li [ngClass]="{current: terminationRequest.status === 'OK'}">
+                <p>
+                  <em>Intervention en cours</em>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <em>Compteur deposé</em>
+                  <span></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <em>Verification impayés</em>
+                  <span></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <em>Reglement/Remboursement</em>
+                  <span></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <em>Cloture</em>
+                  <span></span>
+                </p>
+              </li>
+            </ul>
 
-                  <div class="row col col-md-12">
-                     <div class="col col-md-6">
-                        <div class="">
-                           <div class="">
-                              <strong>Informations : </strong>
-                           </div>
-                           <div class="">
-                              <p>Demande de résiliation N°: {{terminationRequest?.requestNumber}}</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col col-md-6">
-                        <div class="">
-                           <div class="">
-                              <strong>Intervenant : </strong>
-                           </div>
-                           <div class="">
-                              <p *ngIf="!terminationRequest?.intervenant" class="text-center">Aucun intervenant n'est affecté pour
-                                 le moment</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
+            <div class="row" id="cards">
+              <fieldset class="scheduler-border col-7">
+                <legend class="scheduler-border">Informations</legend>
+                <div style="padding-left: 20px;padding-bottom: 10px;">
                   <div class="row">
-                     <div class="container">
-                        <form class="form-inline">
-                           <div class="form-group">
-                              <label for="feedback">Votre feedBack </label>
-                              <input [formControl]="feedback" class="form-control" id="feedback">
-                           </div>
-
-                           <button class="btn btn-dark" (click)="saveFeedback()">Envoyer</button>
-                        </form>
-                        <section class="content">
-                           <div class="row">
-                              <div class="col-md-10">
-                                 <ul class="timeline timeline-inverse">
-                                    <li class="time-label">
-                                       <span class="bg-secondary text-white"> 11/11/2019 </span>
-                                    </li>
-                                    <li>
-                                       <i class="fa fa-user bg-secondary"></i>
-                                       <div class="timeline-item">
-                                          <span class="time text-white"><i class="fa fa-clock-o text-white"></i>&nbsp;11h28</span>
-                                          <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;"> Intervention en cours</h3>
-                                          <div class="timeline-body">
-                                             Information supplémentaire
-                                          </div>
-                                          <!-- <div class="timeline-footer"></div> -->
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <i class="fa fa-user bg-secondary"></i>
-                                       <div class="timeline-item">
-                                          <span class="time text-white"><i class="fa fa-clock-o text-white"></i>&nbsp;09h13</span>
-                                          <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">
-                                             Intervention en cours</h3>
-                                          <div class="timeline-body">
-                                             Information supplémentaire
-                                          </div>
-                                          <!-- <div class="timeline-footer"></div> -->
-                                       </div>
-                                    </li>
-                                    <li class="time-label">
-                                       <span class="bg-secondary text-white"> 03/10/2019 </span>
-                                    </li>
-                                    <li>
-                                       <i class="fa fa-user bg-secondary"></i>
-                                       <div class="timeline-item">
-                                          <span class="time text-white"><i class="fa fa-clock-o text-white"></i>&nbsp;14h07</span>
-                                          <h3 class="timeline-header bg-secondary text-white" style="cursor: pointer;">Reçue</h3>
-                                          <div class="timeline-body">
-                                             Information supplémentaire
-                                          </div>
-                                          <!-- <div class="timeline-footer"></div> -->
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <i class="fa fa-clock-o bg-secondary"></i>
-                                    </li>
-                                 </ul>
-                              </div>
-                              <!-- /.tab-pane -->
-                           </div>
-                        </section>
-                     </div>
+                    <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                      <table>
+                        <tr>
+                          <td>N° demande :</td>
+                          <td>{{terminationRequest.requestNumber}}</td>
+                        </tr>
+                        <tr>
+                          <td>Client :</td>
+                          <td>{{terminationRequest.client.fullName}}</td>
+                        </tr>
+                        <tr>
+                          <td>Police :</td>
+                          <td>{{terminationRequest.subscriptions[0]?.subscription}}, {{terminationRequest.subscriptions[1]?.subscription}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div *ngIf="terminationRequest.intervenant" style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                      <table>
+                        <tr>
+                          <td>Agent d'intervention : </td>
+                          <td>{{terminationRequest.intervenant.firstname}} {{terminationRequest.intervenant.lastname}}</td>
+                        </tr>
+                        <tr>
+                          <td>Date d'intervention : </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Tel agent :</td>
+                          <td>{{terminationRequest.intervenant.phone}}</td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
-               </div>
+                </div>
+              </fieldset>
+              <fieldset class="scheduler-border col-4">
+                <legend class="scheduler-border">Intervenants</legend>
+                <div *ngIf="terminationRequest.intervenant" style="padding-left: 20px;padding-top: 10px;">
+                  <table>
+                    <tr>
+                      <td>Agent :</td>
+                      <td>{{terminationRequest.agent.firstname}} {{terminationRequest.agent.lastname}}</td>
+                    </tr>
+                    <tr>
+                      <td>Service concerné :</td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+                <p *ngIf="!terminationRequest.intervenant">Aucun intervenant n'est affecté pour le moment</p>
+              </fieldset>
             </div>
-            <!--/ What is-->
-         </div>
+            <div class="row" id="cards2">
+
+              <fieldset class="scheduler-border col-7">
+                <legend class="scheduler-border">Commentaires</legend>
+                <div style="padding: 20px;overflow: scroll; max-height: 500px;">
+                  <form class="">
+                    <div class="row">
+
+                      <input id="commentaire" [formControl]="feedback" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
+                      />
+
+                      <button class="btn btn-primary" (click)="saveFeedback()">Envoyer</button>
+                    </div>
+                  </form>
+                  <br>
+                  <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of terminationRequest.feedback">
+                    <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
+                    <div class="border-comm col-10" id="comm">
+                      {{feedback.message}}
+                    </div>
+                    <div class="col-md-4 pull-right" style="margin-left:400px; color: gray">
+                      <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="scheduler-border col-4 max-width">
+                <legend class="scheduler-border">Dates</legend>
+                <div>
+                  <table>
+                    <tr>
+                      <td>Date création :</td>
+                      <td>{{terminationRequest.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    </tr>
+                    <tr>
+                      <td>Dernière modification :</td>
+                      <td>{{terminationRequest.lastUpdate| date: 'dd/MM/yyyy' }}</td>
+                    </tr>
+                    <tr>
+                      <td>Date de depose du compteur :</td>
+                      <td>{{terminationRequest.counterDropDate | date: 'dd/MM/yyyy' }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <!--/ What is-->
       </div>
-   </section>
+    </div>
+  </section>
 </div>

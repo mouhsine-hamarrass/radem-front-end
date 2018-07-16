@@ -24,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
     isNavHeader: false,
     submenu: [
       {
-        path: '/services/claim-request',
+        path: '/services/claim-requests',
         title: 'Demandes de réclamations',
         icon: '',
         class: 'menu-item',
@@ -80,4 +80,27 @@ export const ROUTES: RouteInfo[] = [
     isNavHeader: false,
     submenu: []
   },
+  {
+    path: '',
+    title: 'Mes contrats',
+    icon: '',
+    class: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: [
+      {
+        path: '/contracts/all-contracts',
+        title: 'Liste des contrats',
+        icon: '',
+        class: 'menu-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: []
+      },
+    ]
+  }
 ];

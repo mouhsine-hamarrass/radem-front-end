@@ -8,6 +8,9 @@ import {ServicesPagesRoutingModule} from './services-pages-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CancellationRequestsComponent} from './cancellation-requests/cancellation-requests.component';
 import { NewCancellationRequestComponent } from './new-cancellation-request/new-cancellation-request.component';
+import { ClaimRequestsComponent } from './claim-requests/claim-requests.component';
+import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
+import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
 
 @NgModule({
   imports: [
@@ -23,6 +26,9 @@ import { NewCancellationRequestComponent } from './new-cancellation-request/new-
     CancellationRequestsComponent,
     NewCancellationRequestComponent,
     OnlinePaymentComponent,
+    ClaimRequestsComponent,
+    ClaimDetailComponent,
+    PrintableCancellationComponent,
   ]
 })
 export class ServicesPagesModule {

@@ -2,7 +2,7 @@
 import {ConsoleLoggerService} from '../services/logging/console-logger.service';
 // configurations
 import {LoggerTypes} from './logger.type';
-import {environment} from '../../../environments/environment';
+import {environment} from 'environments/environment';
 
 export let loggerFactory = () => {
    switch (environment.apiConfig.loggerService) {

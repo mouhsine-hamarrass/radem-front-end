@@ -1,0 +1,354 @@
+<!--Tooltip Starts-->
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Liste des contrats</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Contrats</a>
+        </li>
+        <li class="breadcrumb-item active">Liste des contrats
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Mes contrats</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            Cliquez sur la liste ci-dessous pour avoir le detail de chacun de vos contrat
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Nº contrat</th>
+                    <th scope="col">Etat contrat</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Derniere cons</th>
+                    <th scope="col">Derniere facture</th>
+                    <th scope="col">Facture à payer</th>
+                    <th scope="col">Historique cons</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let subscription of subscriptions" class="text-center" [ngClass]="subscription.type === 'eau' ? 'water text-white' : 'electricity'">
+                    <td (click)="openDetailSubscription(detailSubscription, subscription.id)">
+                      <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;{{subscription.police}}</td>
+                    <td>{{subscription.state}}</td>
+                    <td>{{subscription.address}}</td>
+                    <td>{{subscription.lastConsumption}}</td>
+                    <td (click)="showBills(subscription.police)">{{subscription.toBePayed}}</td>
+                    <td>{{subscription.nextBill}}</td>
+                    <td>
+                      <i class="fa fa-history"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="offset-6">
+              <table class="table table-bordered ">
+                <tbody>
+                  <tr>
+                    <th class="table-active" scope="row" colspan="2">Solde crediteur hors participation</th>
+                    <td>30.00</td>
+                  </tr>
+                  <tr>
+                    <th class="table-active" scope="row" colspan="2">Solde crediteur participation</th>
+                    <td>180.00</td>
+                  </tr>
+                  <tr>
+                    <th class="table-active" scope="row" colspan="2">Solde provision</th>
+                    <td>0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="bills">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Nº facture</th>
+                    <th scope="col">N° échéances</th>
+                    <th scope="col">N° police</th>
+                    <th scope="col">Date d'échéance</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">
+                      <input type="checkbox" class="form-control">
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bill of bills">
+                    <td (click)="openBillDetail(billDetails, bill.numBill)">{{bill.numBill}}</td>
+                    <td>{{bill.dueNumber}}</td>
+                    <td>{{bill.police}}</td>
+                    <td>{{bill.dueDate}}</td>
+                    <td>{{bill.type}}</td>
+                    <td>{{bill.amount}}</td>
+                    <td>
+                      <input type="checkbox" class="form-control">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
+</div>
+
+<ng-template #detailSubscription>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">Détails contrat</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="table table-responsive offset-1 col-10">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Type du contrat</th>
+              <td>{{subscription[0]?.type}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">N°</th>
+              <td>{{subscription[0]?.police}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Adresse du contrat</th>
+              <td>{{subscription[0]?.address}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Etat</th>
+              <td>{{subscription[0]?.state}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Date d'abonnement</th>
+              <td>{{subscription[0]?.subscriptionDate}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Dpôt de garantie</th>
+              <td>{{subscription[0]?.deposit}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Tarif</th>
+              <td>{{subscription[0]?.cost}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Calibre de compteur</th>
+              <td>{{subscription[0]?.calibre}}</td>
+            </tr>
+            <tr>
+              <th class="table-active" scope="row" colspan="2">Mode de paiement</th>
+              <td>{{subscription[0]?.paimentMethod}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row col-10 offset-1">
+      <div class="col-5 bg-light">
+        <h4 class="text-center">
+          <i class="fa fa-tachometer-alt">&nbsp;</i>Dernier Index</h4>
+        <table>
+          <tr>
+            <th>N° compteur</th>
+            <td>{{subscription[0]?.lastIndex.meterNumber}}</td>
+          </tr>
+          <tr>
+            <th>Date de relève</th>
+            <td>{{subscription[0]?.lastIndex.date}}</td>
+          </tr>
+          <tr>
+            <th>Index</th>
+            <td>{{subscription[0]?.lastIndex.index}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-5 offset-2 bg-light">
+        <h4 class="text-center">
+          <i class="fa fa-file-contract"></i>&nbsp;Derniere Facture</h4>
+        <table>
+          <tr>
+            <th>Date</th>
+            <td>{{subscription[0]?.lastBill.date}}</td>
+          </tr>
+          <tr>
+            <th>Montant</th>
+            <td>{{subscription[0]?.lastBill.amount}}</td>
+          </tr>
+          <tr>
+            <th>Consommation</th>
+            <td>{{subscription[0]?.lastIndex.consumption}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #billDetails>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">Détails de la facture</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="offset-6 col-md-6">
+      <div class="card">
+        <h5 class="card-title text-center">Dernier index</h5>
+        <div class="card-body">
+          <div class="text-table">
+            <p class="font-weight-bold">Numero de contrat</p>
+            <p>{{bill.police}}</p>
+          </div>
+          <div class="text-table">
+            <p class="font-weight-bold">Numero de facture</p>
+            <p>{{bill.numBill}}</p>
+          </div>
+          <div class="text-table">
+            <p class="font-weight-bold">Montant facture</p>
+            <p>{{bill.amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table table-responsive">
+        <thead class="table-secondary">
+          <tr>
+            <th scope="row">Libelle</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">Montant HT</th>
+            <th scope="col">Taux TVA</th>
+            <th scope="col">Montant TVA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--<tr>-->
+          <!--<th scope="row">Redevences fixes</th>-->
+          <!--</tr>-->
+          <p>Redevances fixes</p>
+          <tr>
+            <th scope="row">Entretien
+              <br>branchement</th>
+            <td class=""></td>
+            <td class=""></td>
+            <td class="">{{bill.embranchementMaintenance}}</td>
+            <td class="">20.00</td>
+            <td class="">{{bill.embranchementMaintenance*20/100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Location
+              <br>compteur</th>
+            <td class=""></td>
+            <td class=""></td>
+            <td class="">{{bill.meterLeasing}}</td>
+            <td class="">07.00</td>
+            <td class="">{{bill.meterLeasing*7/100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Entretirn
+              <br>compteur</th>
+            <td class=""></td>
+            <td class=""></td>
+            <td class="">{{bill.meterMaintenance}}</td>
+            <td class="">20.00</td>
+            <td class="">{{bill.meterMaintenance*20/100}}</td>
+          </tr>
+          <h6 class="my-3">Consomation electricite</h6>
+          <!--<tr>-->
+          <!--<th scope="row">Consomation electricite</th>-->
+          <!--</tr>-->
+          <tr>
+            <th scope="row">Tranche 5</th>
+            <td class="">{{bill.tranches.tranche5.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche5.quantity}}</td>
+            <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <h6 class="my-3">Tppan</h6>
+          <!--<tr>-->
+          <!--<th scope="row my-2">Tppan</th>-->
+          <!--</tr>-->
+          <tr>
+            <th scope="row">Tranche 1</th>
+            <td class="">{{bill.tranches.tranche1.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche1.quantity}}</td>
+            <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 2</th>
+            <td class="">{{bill.tranches.tranche2.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche2.quantity}}</td>
+            <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 3</th>
+            <td class="">{{bill.tranches.tranche3.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche3.quantity}}</td>
+            <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+    </div>
+    <div class="container-fluid">
+
+
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <div class="row">
+            <!--<div class="col-md-4"></div>-->
+            <div class="offset-4 col-md-4">
+              <p class="card-text font-weight-bold">Total HT:
+                <span class="font-weight-normal mx-2">700.00(DHs)</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <p class="card-text font-weight-bold">Total TVA:
+                <span class="font-weight-normal mx-2">39.21(DHs)</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
