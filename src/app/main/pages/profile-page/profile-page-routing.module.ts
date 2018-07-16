@@ -6,10 +6,10 @@ const routes: Routes = [{
   path: '',
   children: [
     {
-      path: 'profile',
+      path: '',
       component: ProfilePageComponent,
       data: {
-        title: 'Liste des contrats'
+        title: 'Mon profil'
       }
     }
   ]

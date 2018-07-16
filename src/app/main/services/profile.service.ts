@@ -19,4 +19,8 @@ export class ProfileService {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/users/${id}/find`);
   }
 
+  saveProfile(profile: any): Observable<Response<any>>  {
+    return this.httpClient.post<Response<Array<any>>>(`${this.urlApi}/users/save-client-profile`, profile, {headers: headers});
+  }
+
 }

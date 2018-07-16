@@ -20,6 +20,8 @@ import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-la
 import {ServicesService} from './main/services/services.service';
 import { ContractsService } from './main/services/contracts.service';
 import { ProfilePageComponent } from './main/pages/profile-page/profile-page.component';
+import { ProfileService } from './main/services/profile.service';
+import { RecoverPasswordComponent } from './main/pages/recover-password/recover-password.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { ProfilePageComponent } from './main/pages/profile-page/profile-page.com
     PageNotFoundComponent,
     DashboardLayoutComponent,
     BoxedWithSidebarLayoutComponent,
-    ProfilePageComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -50,7 +52,8 @@ import { ProfilePageComponent } from './main/pages/profile-page/profile-page.com
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
     ServicesService,
-    ContractsService
+    ContractsService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,10 +13,12 @@ import {CONTRACT_PAGES_ROUTES} from './shared/routes/contracts-pages.routes';
 import {PROFILE_PAGE_ROUTES} from './shared/routes/profile-page.routes';
 import {LoginGuard} from './core/guards/login.guard';
 import {LoginComponent} from './login/login.component';
+import { RecoverPasswordComponent } from './main/pages/recover-password/recover-password.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'recover-password', component: RecoverPasswordComponent},
   {path: '', component: LoginComponent},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: REGISTER_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES},
