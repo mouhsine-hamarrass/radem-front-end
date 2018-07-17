@@ -25,7 +25,7 @@
           <tr *ngFor="let request of requests">
             <td><a [routerLink] = "['/admin/request', request.id]">{{request.requestNumber}}</a></td>
             <td *ngIf="request.applicant != null">{{request.applicant.firstname}} {{request.applicant.lastname}}</td>
-            <td *ngIf="request.applicant == null">{{request.client.fullName}}</td>
+            <td *ngIf="request.applicant == null">{{request.client?.fullName}}</td>
             <td>{{request.type}}</td>
             <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
             <td>{{request.agent.firstname}} {{request.agent.lastname}}</td>

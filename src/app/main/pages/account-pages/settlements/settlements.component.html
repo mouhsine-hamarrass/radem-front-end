@@ -15,7 +15,7 @@
       </div>
    </div>
 </div>
-<div class="content-body">
+<div class="content-body" id="table">
    <section class="row">
       <div class="col-sm-12">
          <!-- What is-->
@@ -27,77 +27,57 @@
                </div>
             </div>
             <div class="card-content collapse show">
+                <form class="" [formGroup]="contractForm">
                <div class="card-body">
-                  <div class="row col-md-4 col-sm-6 pull-right form-group">
-                     <label class="col-md-4"> <strong>Contrat :</strong> </label>
-                     <div class="col-md-8">
-                        <select class="custom-select" (change)="changeContract($event)">
-                           <option value="1" [selected]="true">N 4900 (Eau)</option>
-                           <option value="2">E 7856 (Electricite)</option>
-                        </select>
+                  <div class="row col-md-8 col-sm-6 form-group">
+                     <label class="col-form-label col-md-3">Contrat :</label>
+                     <div class="col-md-6">
+                        <select formControlName="contract" type="text" class="custom-select" #t (change)="setContract(t.value)">
+                            <option value="" disabled selected>Choisissez un contrat..</option>
+                            <option *ngFor="let contract of contracts" value="{{contract.id}}" >{{contract.contractNumber}} ({{contract.contractType}})</option>
+                          </select>
                      </div>
                   </div>
                   <div class="clearfix"></div>
                   <div class="row form-group">
-                     <label class="col-form-label col-md-2">Periode du</label>
+                     <label class="col-form-label col-md-2">Periode du :</label>
                      <div class="col-md-3">
-                        <input type="text"
-                               placeholder="01/01/2018"
-                               class="form-control" [maxDate]="maxDate"
-                               bsDatepicker placement="bottom" [outsideClick]="true"
-                               [bsConfig]="{containerClass: 'theme-dark-blue'}">
+                        <input formControlName="startDate" type="date" class="form-control">
                      </div>
                      <label class="col-form-label">Au</label>
                      <div class="col-md-3">
-                        <input type="text"
-                               placeholder="01/05/2018"
-                               class="form-control" [maxDate]="maxDate"
-                               bsDatepicker placement="bottom" [outsideClick]="true"
-                               [bsConfig]="{containerClass: 'theme-dark-blue'}">
+                        <input formControlName="endDate" type="date" class="form-control">
                      </div>
                      <div class="col-auto float-right">
-                        <button type="button" class="btn btn-primary">Rechercher</button>
+                        <button type="button" class="btn btn-primary" (click)="recherche();">Rechercher</button>
                      </div>
                   </div>
                   <div class="table-responsive mx-auto my-5">
-                     <table class="table table-bordered ">
+                     <table *ngIf="settlements" class="table table-bordered ">
                         <thead class="table-light">
                         <tr>
-                           <th scope="col">#</th>
-                           <th scope="col">Nº contrat</th>
-                           <th scope="col">Etat contrat</th>
-                           <th scope="col">Adresse facturation</th>
-                           <th scope="col">Derniere consomation</th>
-                           <th scope="col">Derniere facture</th>
-                           <th scope="col">Derniere a payer</th>
-                           <th scope="col">Historique de consomation</th>
+                           <th scope="col">Période de facturation</th>
+                           <th scope="col">Nº Facture</th>
+                           <th scope="col">Type de facture</th>
+                           <th scope="col">Date de réglement</th>
+                           <th scope="col">Montant en DH TTC</th>
+                           <th scope="col">Mode de réglement</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                           <th scope="row">1</th>
-                           <td>Eau</td>
-                           <td>Test</td>
-                           <td>Test Test Test</td>
-                           <td>Test</td>
-                           <td>Test</td>
-                           <td>Test</td>
-                           <td>Test</td>
-                        </tr>
-                        <tr>
-                           <th scope="row">2</th>
-                           <td>Electricité</td>
-                           <td>Test</td>
-                           <td>Test Test Test</td>
-                           <td>Test</td>
-                           <td>Test</td>
-                           <td>Test</td>
-                           <td>Test</td>
+                        <tr *ngFor="let settlement of settlements">
+                           <td>{{settlement.billingPeriod}}</td>
+                           <td>{{settlement.billNumber}}</td>
+                           <td>{{settlement.billType}}</td>
+                           <td>{{settlement.settlementDate}}</td>
+                           <td>{{settlement.amount}}</td>
+                           <td>{{settlement.SettlementMode}}</td>
                         </tr>
                         </tbody>
                      </table>
                   </div>
                </div>
+               </form>
             </div>
          </div>
          <!--/ What is-->

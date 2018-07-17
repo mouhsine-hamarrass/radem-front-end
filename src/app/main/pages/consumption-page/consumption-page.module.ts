@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsumptionPageComponent } from './consumption-page.component';
 import {ConsumptionPageRoutingModule} from './consumption-page-routing.module';
+import { AdminService } from '../../services/admin.service';
 
 @NgModule({
   imports: [
     CommonModule,
     ConsumptionPageRoutingModule
   ],
-  declarations: [ConsumptionPageComponent]
+  declarations: [ConsumptionPageComponent],
+  providers: [AdminService]
 })
 export class ConsumptionPageModule { }

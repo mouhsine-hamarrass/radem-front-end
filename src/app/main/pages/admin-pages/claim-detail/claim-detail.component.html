@@ -27,7 +27,10 @@
             </aw-wizard-completion-step>
             <div class="col-md-12" id="buttons">
                 <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
-                <button *ngIf="claim.status !== 'CLOSED'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="AddIntervention(addIntervention)" awNextStep>Étape suivante <i class="fa fa-chevron-circle-right"></i></button>
+                <button *ngIf="claim.status === 'TRANSMISSION_OF_INFORMATION'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim.id,false)" awNextStep><i class="fa fa-chevron-circle-left"></i> Étape précédante</button>
+                <button *ngIf="claim.status === 'ANALYSIS'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim.id,false)" awNextStep>Demande de complément<i class="fa fa-chevron-circle-right"></i></button>
+                <button *ngIf="claim.status === 'ANALYSIS'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim.id,true)" awNextStep>Réponse fournie <i class="fa fa-chevron-circle-right"></i></button>
+                <button *ngIf="claim.status !== 'CLOSED' && claim.status !== 'ANALYSIS'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim.id,true)" awNextStep>Étape suivante <i class="fa fa-chevron-circle-right"></i></button>
             </div>
         </aw-wizard>
 
@@ -133,7 +136,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <form class="" [formGroup]="addInterventionForm">
+              <form class="" [formGroup]="">
               <label>Agent d'intervention :</label>
               <select formControlName="agent" type="text" #t class="col-12 form-control">
                 <option value="" disabled selected>Choisissez un agent..</option>
@@ -144,7 +147,7 @@
               <label>Tel d'agent :</label>
               <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
               <div class="col-md-12"  style="margin-left : 34%">
-                <button class="btn btn-primary center" id="buttons-update" (click)="addIntervenant();modalRef.hide();">Valider</button>
+                <button class="btn btn-primary center" id="buttons-update" (click)="modalRef.hide();">Valider</button>
               </div>
               </form>
             </div>

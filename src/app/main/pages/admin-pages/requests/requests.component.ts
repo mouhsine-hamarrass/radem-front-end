@@ -21,6 +21,7 @@ export class RequestsComponent implements OnInit {
    LoadCancellationRequest() {
      this.requestService.getTerminationRequests().subscribe(response => {
        this.requests = response.data;
+       console.log(this.requests);
        _.each(this.requests, (element: any) => {
          _.extend(element, {type: 'Résiliation'});
        });

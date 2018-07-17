@@ -51,9 +51,44 @@ export class AdminService {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save`, claim, {headers: headers});
   }
 
+  nextStepClaim(idRequest: number, choice: boolean): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/${idRequest}/nextstep?choice=${choice}`, {headers: headers});
+  }
+
   // JSon server
   getSolde(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/factures`, {headers: headers});
+  }
+
+  getSettlementsByContract(contractId?: number): Observable<Response<Array<any>>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/settlements?id=${contractId}`, {headers: headers});
+  }
+
+  getSettlements(contractNumber?: number): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/settlements`, {headers: headers});
+  }
+
+  getContracts(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/contracts`, {headers: headers});
+  }
+
+  getReleves(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/releves`, {headers: headers});
+  }
+
+  getNextReleve(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/nextReleve`, {headers: headers});
+  }
+
+  getConsumptions(contractNumber: number): Observable<Response<Array<any>>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Consumptions?contract=${contractNumber}`, {headers: headers});
+  }
+
+  getMinMaxConsumption(contractNumber: number): Observable<Response<any>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/MinMaxConsumption?contract=${contractNumber}`, {headers: headers});
   }
 
   // Agents

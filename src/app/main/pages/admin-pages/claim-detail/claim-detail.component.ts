@@ -20,9 +20,7 @@ export class ClaimDetailComponent implements OnInit {
   @ViewChild('StepButton') StepButton: ElementRef;
   @ViewChild('UpdateButton') UpdateButton: ElementRef;
   @ViewChild('commentaire') commentaire: ElementRef;
-  public requestForm: FormGroup;
   public commentForm: FormGroup;
-  public addInterventionForm: FormGroup;
   public claim: any;
   public impaye = 0;
   public requestUpdate: any;
@@ -32,7 +30,7 @@ export class ClaimDetailComponent implements OnInit {
     ignoreBackdropClick: false,
     class: 'modal-lg'
   };
-constructor(private requestService: AdminService,
+constructor(private adminService: AdminService,
   private router: Router,
   private route: ActivatedRoute,
   private formBuilder: FormBuilder,
@@ -67,7 +65,7 @@ ngOnInit() {
 
   const id: string = this.route.snapshot.paramMap.get('id');
   if (id !== null) {
-   this.requestService.getClaim(id).subscribe(response => {
+   this.adminService.getClaim(id).subscribe(response => {
      this.claim = response.data;
      console.log(this.claim);
      this.claim.feedback.reverse();
@@ -75,67 +73,27 @@ ngOnInit() {
 }
 }
 
-// Choice of step + show Add Intervenant Popup
-AddIntervention(template: TemplateRef<any>) {
-  if (this.claim.status === 'UNPAID_VERIFICATION') {
-    this.requestService.getSolde().subscribe(response => {
-      this.impaye = response[0].impaye;
-      this.nextStep(this.claim.id);
-    })
-  } else if (this.claim.status === 'RECEIVED') {
-    this.modalRef = this.modalService.show(template, this.config);
-  } else {
-    this.nextStep(this.claim.id);
-  }
-}
 // Stepper
-nextStep(id) {
- this.requestService.nextStep(id, this.impaye).subscribe(response => {
+nextStep(id, choice?) {
+ this.adminService.nextStepClaim(id, choice).subscribe(response => {
    this.claim = response.data;
    this.claim.feedback.reverse();
    if (this.claim.status === 'CLOSED') {
     this.StepButton.nativeElement.disabled = true;
       }
-   });
+ }, err => console.log(err));
     this.ngOnInit();
 }
 
 // Add Comment
 addComment() {
  this.claim.feedback.push({message: this.comment.value, sendingDate: new Date()});
- this.requestService.saveComplaint(this.claim).subscribe(response => {
+ this.adminService.saveComplaint(this.claim).subscribe(response => {
   this.commentForm.reset();
   this.ngOnInit();
  },
  (err) => {
   });
-}
-
-// Add Intervenant Popup impl
-addIntervenant() {
- this.claim.interventionDate = this.addInterventionForm.controls.dateIntervention.value;
- this.claim.intervenant = {
-   id:  Number.parseInt(this.addInterventionForm.controls.agent.value)
- }
- console.log(this.claim);
- this.requestService.saveTerminationRequest(this.claim).subscribe(response => {
-   console.log(response);
-   this.nextStep(this.claim.id);
-   this.ngOnInit();
- })
-}
-
-// Update Intervenant Popup impl
-updateIntervenant() {
-this.claim.interventionDate = this.requestForm.controls.dateIntervention.value;
-this.claim.intervenant = {
-  id:  Number.parseInt(this.requestForm.controls.agent.value)
-}
-console.log(this.claim);
-this.requestService.saveTerminationRequest(this.claim).subscribe(response => {
-  console.log(response);
-  this.ngOnInit();
-})
 }
 
 focus() {
