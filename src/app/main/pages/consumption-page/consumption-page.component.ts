@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
-import { FormBuilder, FormGroup; Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-consumption-page',
@@ -8,14 +8,15 @@ import { FormBuilder, FormGroup; Validators } from '@angular/forms';
   styleUrls: ['./consumption-page.component.scss']
 })
 export class ConsumptionPageComponent implements OnInit {
-  public contracts: any;
-  public minMaxForm: FormGroup;
-  public historyForm: FormGroup;
-  public releves: any;
-  public nextReleve: any;
-  public contractNumber: any;
-  public Consumptions: any;
-  public minMax: any;
+  protected contracts: any;
+  protected minMaxForm: FormGroup;
+  protected historyForm: FormGroup;
+  protected releves: any;
+  protected nextReleve: any;
+  protected contractNumber: any;
+  protected Consumptions: any;
+  protected minMax: any;
+  protected meters: any;
 
   constructor(private adminService: AdminService,
     private formBuilder: FormBuilder) {
@@ -42,6 +43,10 @@ export class ConsumptionPageComponent implements OnInit {
 
     this.adminService.getNextReleve().subscribe(response => {
       this.nextReleve = response;
+    })
+
+    this.adminService.getCompteur().subscribe(response => {
+      this.meters = response;
     })
   }
 

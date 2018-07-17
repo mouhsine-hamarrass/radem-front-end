@@ -15,6 +15,15 @@
     </div>
   </div>
 </div>
+<div id="what-is" class="card bgcolor">
+    <div class="card-content collapse show">
+       <div class="card-body" style="padding: 0px;padding-top: 6px;">
+          <div class="card-text centered"  style="margin-bottom: 0rem !important;">
+             <h3><i class="fa fa-clock"></i>Prochaine relève le : {{nextReleve[0]?.date}}</h3>
+          </div>
+       </div>
+    </div>
+ </div>
 <div class="content-body">
   <section class="row">
     <div class="col-sm-12">
@@ -87,11 +96,11 @@
                               <td>{{releve.index}}</td>
                            </tr>
                            </tbody>
-                        </table>
+                        </table><!--
                         <div class="col-xl-12 row" id="releve">
-                            <h3><i class="fa fa-clock"></i>&nbsp;Prochaine relève le :&nbsp;</h3>
+                            <h3><i class="fa fa-info-circle"></i>&nbsp;Prochaine relève le :&nbsp;</h3>
                             <h3>{{nextReleve[0]?.date}}</h3>
-                        </div>
+                        </div>-->
                      </div>
                   </div>
                </div>
@@ -136,7 +145,7 @@
                                   <table   *ngIf="Consumptions" class="table table-bordered ">
                                      <thead class="table-light">
                                      <tr>
-                                        <th scope="col">Période de consommation</th>
+                                        <th scope="col">Période</th>
                                         <th scope="col">Date de relève</th>
                                         <th scope="col">Index</th>
                                         <th scope="col">Consommation</th>
@@ -146,10 +155,10 @@
                                      <tbody>
                                      <tr *ngFor="let consumption of Consumptions">
                                         <td>{{consumption.month}}</td>
-                                        <td>{{consumption.newVolume}}</td>
-                                        <td>{{consumption.newAmount}}</td>
-                                        <td>{{consumption.oldVolume}}</td>
-                                        <td>{{consumption.oldAmount}}</td>
+                                        <td>{{consumption.date}}</td>
+                                        <td>{{consumption.index}}</td>
+                                        <td>{{consumption.volume}} m3</td>
+                                        <td>{{consumption.amount}} DH</td>
                                      </tr>
                                      </tbody>
                                   </table>
@@ -160,7 +169,7 @@
                       </div>
                       <!--/ What is-->
                    </div>
-                   <div class="col-sm-12">
+                   <div class="col-xl-6 col-lg-12">
                       <!-- What is-->
                       <div id="what-is" class="card">
                          <div class="card-header">
@@ -173,37 +182,66 @@
                             <div class="card-body" id="img">
                               <div class="row">
                               <div class="img">
-                                <img src="/assets/images/compteur.jpg">
+                                <img src="/assets/images/compteur.png">
                               </div>
-                              <div class="col-md-8">
-                                <table>
+                              <div class="col-md-6 counter-info">
+                                <table *ngFor="let meter of meters">
                                   <tr>
                                     <td><strong>Ampérage :</strong></td>
-                                    <td>12 A</td>
+                                    <td>{{meter.amperage}} A</td>
                                   </tr>
                                   <tr>
                                       <td><strong>Voltage :</strong></td>
-                                      <td>220 V</td>
+                                      <td>{{meter.voltage}} V</td>
                                   </tr>
                                   <tr>
                                       <td><strong>Calibre :</strong></td>
-                                      <td>2.5 Wh/tour</td>
+                                      <td>{{meter.calibre}} Wh/tour</td>
                                   </tr>
                                   <tr>
                                       <td><strong>Coefficient :</strong></td>
-                                      <td>3.45</td>
+                                      <td>{{meter.coefficient}}</td>
                                   </tr>
                                   <tr>
                                       <td><strong>Marque compteur :</strong></td>
-                                      <td>Aquarius</td>
+                                      <td>{{meter.marque}}</td>
                                   </tr>
                                   <tr>
                                       <td><strong>Nombre de roues :</strong></td>
-                                      <td>2</td>
+                                      <td>{{meter.roues}}</td>
                                   </tr>
                                 </table>
                               </div>
                             </div>
+                            </div>
+                         </div>
+                      </div>
+                      <!--/ What is-->
+                   </div>
+                   <div class="col-xl-6 col-lg-12">
+                      <!-- What is-->
+                      <div id="what-is" class="card">
+                         <div class="card-header">
+                            <h4 class="card-title">Conseil et économie d'énergie</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                            </div>
+                         </div>
+                         <div class="card-content collapse show">
+                            <div class="card-body" id="img">
+                                <div class="card-text">
+                                    <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
+                                    <ul>
+                                       <li>Vous pouvez également réguler la température de vos radiateurs (à eau chaude) en les
+                                          équipant d’un robinet thermostatique.
+                                          Celui-ci vous permet de choisir la température qui vous convient selon les pièces et de
+                                          réaliser des économies d’énergie.
+                                       </li>
+                                       <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos
+                                          radiateurs à eau chaude avant de les remettre en marche.
+                                       </li>
+                                    </ul>
+                                 </div>
                             </div>
                          </div>
                       </div>

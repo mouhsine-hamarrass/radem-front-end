@@ -30,7 +30,7 @@
             <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
             <td>{{request.agent.firstname}} {{request.agent.lastname}}</td>
             <td>{{request.service}}</td>
-            <td>{{request.status}}</td>
+            <td><span class="badge badge-primary">{{request.status}}</span></td>
           </tr>
           </tbody>
         </table>

@@ -24,7 +24,8 @@
         "assets/scss/app.scss",
         "assets/scss/core/menu/menu-types/vertical-menu.scss",
         "assets/scss/style.scss",
-        "assets/app-assets/css/components.css"
+        "assets/app-assets/css/components.css",
+        "../node_modules/font-awesome/css/font-awesome.css"
       ],
       "scripts": [
         "assets/app/vendors/js/vendors.min.js",

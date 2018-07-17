@@ -18,6 +18,7 @@ import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-lay
 import {BoxedWithSidebarLayoutComponent} from './layouts/boxed-with-sidebar-layout/boxed-with-sidebar-layout.component';
 import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
 import {ServicesService} from './main/services/services.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ServicesService} from './main/services/services.service';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    AngularFontAwesomeModule,
     SharedModule,
     CoreModule,
     TranslateModule.forRoot({
