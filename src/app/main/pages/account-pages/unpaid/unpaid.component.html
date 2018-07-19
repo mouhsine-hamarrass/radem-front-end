@@ -1,91 +1,131 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
-   <div class="content-header-left col-md-6 col-12 mb-1">
-      <h3 class="content-header-title">Mes impayés</h3>
-   </div>
-   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-      <div class="breadcrumb-wrapper col-12">
-         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-               <a routerLink="/home">Accueil</a>
-            </li>
-            <li class="breadcrumb-item active">Mes impayés
-            </li>
-         </ol>
-      </div>
-   </div>
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Mes impayés</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item active">Mes impayés
+        </li>
+      </ol>
+    </div>
+  </div>
 </div>
 <div class="content-body">
-   <section class="row">
-      <div class="col-sm-12">
-         <!-- What is-->
-         <div id="what-is" class="card">
-            <div class="card-header">
-               <h4 class="card-title">Consulter vos impayés</h4>
-               <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-               </div>
-            </div>
-            <div class="card-content collapse show">
-               <div class="card-body">
-                  <form class="form-inline">
-                     <div class="table-responsive">
-                        <table class="table table-bordered">
-                           <thead class="table-light">
-                           <tr>
-                              <th>
-                                 <input type="checkbox" class="form-control">
-                              </th>
-                              <th scope="col">Nº de facture</th>
-                              <th scope="col">Nº d'echeance</th>
-                              <th scope="col">Nº de Police</th>
-                              <th scope="col">Date d'écheance</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Montant (Dhs)</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           <tr>
-                              <td scope="row"><input type="checkbox" class="form-control"></td>
-                              <td>8364</td>
-                              <td>1</td>
-                              <td>142389353</td>
-                              <td>10-09-2018</td>
-                              <td>Eau</td>
-                              <td>1200.00 DH</td>
-                           </tr>
-                           <tr>
-                              <td scope="row"><input type="checkbox" class="form-control"></td>
-                              <td>9374</td>
-                              <td>2</td>
-                              <td>142389353</td>
-                              <td>25-09-2018</td>
-                              <td>Électricité</td>
-                              <td>1230.00 DH</td>
-                           </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                     <div class="row col-md-12 text-right">
-                        <div class="form-group form-inline">
-                           <label><strong>Total des impayés : </strong></label>
-                           &nbsp;&nbsp;&nbsp;<input class="form-control-plaintext" type="text" id="staticEmail2"
-                                                    value="1470.89 DH" readonly>
-                        </div>
-                        <div class="form-group form-inline">
-                           <label><strong>Montant a régler : </strong></label>
-                           &nbsp;&nbsp;&nbsp;<input class="form-control-plaintext text-danger" type="text"
-                                                    value="1470.89 DH" readonly>
-                        </div>
-                     </div>
-                     <div class="row col-md-12 text-right">
-                        <button type="submit" class="btn btn-primary mb-2">Régler vos factures</button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-         <!--/ What is-->
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title" *ngIf="!confirmation">Consulter vos impayés</h4>
+          <h4 class="card-title" *ngIf="confirmation">Confirmation de paiement</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <form class="form-inline" *ngIf="!confirmation">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="table-light">
+                    <tr>
+                      <th>
+                        <input type="checkbox" class="form-control" (change)="selectAll($event)">
+                      </th>
+                      <th scope="col">Nº de facture</th>
+                      <th scope="col">Nº d'echeance</th>
+                      <th scope="col">Nº de Police</th>
+                      <th scope="col">Date d'écheance</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Montant (Dhs)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let bill of bills">
+                      <td scope="row">
+                        <input type="checkbox" class="form-control" (change)="addBill($event, bill)">
+                      </td>
+                      <td>{{bill.numBill}}</td>
+                      <td>{{bill.dueNumber}}</td>
+                      <td>{{bill.police}}</td>
+                      <td>{{bill.dueDate}}</td>
+                      <td>{{bill.type}}</td>
+                      <td>{{bill.amount}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row col-md-12 text-right">
+                <div class="form-group form-inline">
+                  <label>
+                    <strong>Total des impayés : </strong>
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  <input class="form-control-plaintext" type="text" id="staticEmail2" value="{{totalUnpaid}}"
+                    readonly>
+                </div>
+                <div class="form-group form-inline">
+                  <label>
+                    <strong>Montant a régler : </strong>
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  <input class="form-control-plaintext text-danger" type="text" value="{{total}}" readonly>
+                </div>
+              </div>
+              <div class="row col-md-12 text-right">
+                <input class="btn btn-primary mb-2" type="button" value="Régler vos factures" (click)="submit()">
+              </div>
+            </form>
+            <form class="form-inline" *ngIf="confirmation">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col">Nº de facture</th>
+                      <th scope="col">Nº d'echeance</th>
+                      <th scope="col">Nº de Police</th>
+                      <th scope="col">Date d'écheance</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Montant (Dhs)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-light">
+                    <tr *ngFor="let bill of selectedBills">
+                      <td>{{bill.numBill}}</td>
+                      <td>{{bill.dueNumber}}</td>
+                      <td>{{bill.police}}</td>
+                      <td>{{bill.dueDate}}</td>
+                      <td>{{bill.type}}</td>
+                      <td>{{bill.amount}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row col-md-12 text-right">
+                <div class="form-group form-inline">
+                  <label>
+                    <strong>Montant à payer : </strong>
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  <input class="form-control-plaintext text-danger" type="text" value="{{total}}" readonly>
+                </div>
+              </div>
+              <div class="row col-md-12 text-right">
+                <input class="btn btn-primary mb-2" type="button" value="Payer">&nbsp;
+                <input class="btn btn-secondary mb-2" type="button" value="Annuler" (click)="cancel()">
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-   </section>
+      <!--/ What is-->
+    </div>
+  </section>
 </div>

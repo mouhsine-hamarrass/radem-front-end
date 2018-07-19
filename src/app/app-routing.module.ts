@@ -14,17 +14,21 @@ import {PROFILE_PAGE_ROUTES} from './shared/routes/profile-page.routes';
 import {LoginGuard} from './core/guards/login.guard';
 import {LoginComponent} from './login/login.component';
 import { RecoverPasswordComponent } from './main/pages/recover-password/recover-password.component';
+import { ResetPasswordComponent } from './main/pages/reset-password/reset-password.component';
+import { UNPAID_PAGES_ROUTES } from './shared/routes/unpaid-pages.routes';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'recover-password', component: RecoverPasswordComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
   {path: '', component: LoginComponent},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: REGISTER_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICES_PAGES_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGES_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACT_PAGES_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: PROFILE_PAGE_ROUTES},
   {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES},

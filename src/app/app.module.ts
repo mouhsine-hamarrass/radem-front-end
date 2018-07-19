@@ -22,6 +22,8 @@ import { ContractsService } from './main/services/contracts.service';
 import { ProfilePageComponent } from './main/pages/profile-page/profile-page.component';
 import { ProfileService } from './main/services/profile.service';
 import { RecoverPasswordComponent } from './main/pages/recover-password/recover-password.component';
+import { RecoverPasswordService } from './main/services/recover-password.service';
+import { ResetPasswordComponent } from './main/pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { RecoverPasswordComponent } from './main/pages/recover-password/recover-
     PageNotFoundComponent,
     DashboardLayoutComponent,
     BoxedWithSidebarLayoutComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -53,7 +56,8 @@ import { RecoverPasswordComponent } from './main/pages/recover-password/recover-
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
     ServicesService,
     ContractsService,
-    ProfileService
+    ProfileService,
+    RecoverPasswordService
   ],
   bootstrap: [AppComponent]
 })

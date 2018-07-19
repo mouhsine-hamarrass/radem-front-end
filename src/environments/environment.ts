@@ -14,7 +14,7 @@ export const environment = {
   defaultLanguage: 'fr',
   defaultDateFormat: 'DD-MM-YYYY HH:mm',
   defaultDateFormatNoTime: 'DD-MM-YYYY',
-  defaultAvatar: './assets/images/profile.png',
+  defaultAvatar: './assets/images/img.jpg',
   apiConfig: {
     apiEnv: 'prod',
     timeExpired: 1200,

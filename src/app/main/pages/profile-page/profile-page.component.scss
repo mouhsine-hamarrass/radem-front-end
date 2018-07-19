@@ -1,0 +1,22 @@
+.overlay {
+  position: absolute;
+  top: 70%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  width: 100%;
+  opacity: 0.7;
+  background-color: black;
+}
+
+#img {
+  max-width: 80px;
+  max-height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+#photo {
+  display: none;
+}
