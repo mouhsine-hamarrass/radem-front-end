@@ -95,6 +95,30 @@ export class AdminService {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/MinMaxConsumption?contract=${contractNumber}`, {headers: headers});
   }
 
+  getUserWithBill(billNumber: number): Observable<Response<any>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?bill=${billNumber}`, {headers: headers});
+  }
+
+  getUserWithContract(contractNumber: number): Observable<Response<any>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?contract=${contractNumber}`, {headers: headers});
+  }
+
+  getUserWithRef(ref: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?ref=${ref}`, {headers: headers});
+  }
+
+  getQuestions(): Observable<Response<Array<any>>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Questions`, {headers: headers});
+  }
+
+  getAnswer(question: String): Observable<Response<any>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Questions?question=${question}`, {headers: headers});
+  }
+
   // Agents
   getAgents(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/users?page=5&size=5`, {headers: headers});

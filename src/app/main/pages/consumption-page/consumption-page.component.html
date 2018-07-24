@@ -29,7 +29,7 @@
     <div class="col-sm-12">
         <div class="row match-height">
             <div class="col-xl-6 col-lg-12">
-               <div class="card">
+               <div class="card min-height">
                   <div class="card-header border-0">
                      <h4 class="card-title">Min/Max Consommations</h4>
                      <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
@@ -58,11 +58,11 @@
                            </div>
                         </div>
                         <div class="row col-md-12 form-group">
-                           <div *ngIf="minMax" class="col-md-5 min">
-                              <span><i class="fa fa-arrow-circle-down"></i>&nbsp;<strong>Minimum:</strong> {{minMax[0].min}} m3</span>
+                           <div *ngIf="minMax" class="col-md-5 min mb-1">
+                              <span><i class="ft-trending-down"></i>&nbsp;<strong>Minimum:</strong> {{minMax[0].min}} m3</span>
                            </div>
-                           <div *ngIf="minMax" class="col-md-5 max">
-                              <span><i class="fa fa-arrow-circle-up"></i>&nbsp;<strong>Maximum:</strong> {{minMax[0].max}} m3</span>
+                           <div *ngIf="minMax" class="col-md-5 max mb-1">
+                              <span><i class="ft-trending-up"></i>&nbsp;<strong>Maximum:</strong> {{minMax[0].max}} m3</span>
                            </div>
                         </div>
                      </form>
@@ -157,7 +157,7 @@
                                         <td>{{consumption.month}}</td>
                                         <td>{{consumption.date}}</td>
                                         <td>{{consumption.index}}</td>
-                                        <td>{{consumption.volume}} m3</td>
+                                        <td>{{consumption.volume}}</td>
                                         <td>{{consumption.amount}} DH</td>
                                      </tr>
                                      </tbody>

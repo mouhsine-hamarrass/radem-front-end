@@ -1,0 +1,84 @@
+.centered-card {
+  margin-left: 13rem;
+}
+
+.ml-17 {
+  margin-left: 17rem;
+}
+
+.ml-13 {
+  margin-left: 12rem;
+}
+
+#baseVerticalRight2-tab1 {
+  color: #0052a2 !important;
+}
+
+#baseVerticalRight2-tab2 {
+  color: #0052a2 !important;
+}
+
+#baseVerticalRight2-tab3 {
+  color: #0052a2 !important;
+}
+
+.nav-link.active {
+  border-left-color: #0052a2 !important;
+}
+
+.btn {
+  background-color: #0052a2 !important;
+}
+
+#passwordCheck {
+  color : red;
+}
+
+aw-wizard {
+  width: 100% !important;
+}
+//.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current div a {
+//  color: #4BB3FD;
+//}
+//.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.done div a {
+//  color: #0052a2;
+//}
+
+.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current:after {
+  border-color: #4BB3FD !important;
+  text-decoration-color: #4BB3FD !important;
+  //background-color: #4BB3FD !important;
+}
+.custom-css aw-wizard-navigation-bar.horizontal .state-circle {
+  width: 10px !important;
+  height: 10px !important;
+}
+.custom-css aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li.current:after{
+  color: #3BB3FD !important;
+}
+.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a{
+  color: #000000;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.done:after {
+  border-color: #0052a2 !important;
+  text-decoration-color: #0052a2 !important;
+  //background-color: #0052a2 !important;
+}
+.custom-css aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li.done:after{
+  color: #0052A2 !important;
+}
+
+.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
+  text-transform: none;
+}
+
+.custom-css aw-wizard-step .centered-content {
+  background-color: #eeeeee;
+  color: #4BB3FD;
+}
+
+.custom-css aw-wizard-step h3 {
+  text-decoration: underline;
+  color: #4BB3FD;
+}
