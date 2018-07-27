@@ -123,4 +123,9 @@ export class AdminService {
   getAgents(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/users?page=5&size=5`, {headers: headers});
   }
+
+  // User
+  saveUser(client: any): Observable<Response<any>> {
+    return this.httpClient.post<Response<any>>(`${this.urlApi}/users/save`, client, {headers: headers});
+  }
 }

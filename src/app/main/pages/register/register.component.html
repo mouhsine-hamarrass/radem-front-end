@@ -101,7 +101,7 @@
                       <fieldset class="form-group position-relative">
                           <input type="text" formControlName="answer" class="form-control" placeholder="Votre réponse ..">
                           <div class="form-control-position">
-                            <a><i title="Cliquez pour vérifier votre réponse" [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'" class="fa fa-refresh" (click)="Verification()" ></i></a>
+                            <a><i title="Cliquez pour vérifier votre réponse" [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'" class="" (click)="Verification()" ></i></a>
                           </div>
                         </fieldset>
                     </div>
@@ -157,7 +157,7 @@
 
               <aw-wizard-completion-step [stepTitle]="'Étape 4'" [navigationSymbol]="{ symbol: '4' }">
                 <div class="offset-2 col-md-8 my-5">
-                  <h6> Détails de vos informations personnelles fournies :</h6>
+                  <h6>Vous allez recevoir un mail sur votre adresse électronique pour activer votre compte.</h6>
                   <form [formGroup]="detailsForm">
                     <label>Nom et prénom :</label>
                     <fieldset class="form-group position-relative has-icon-left">
@@ -195,7 +195,7 @@
                       </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button type="button" class="btn btn-primary" awNextStep>Suivant</button>
+                    <button type="button" class="btn btn-primary" awNextStep>Se connecter</button>
                   </div>
                 </div>
               </aw-wizard-completion-step>

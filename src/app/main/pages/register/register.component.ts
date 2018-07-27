@@ -143,6 +143,8 @@ export class RegisterComponent implements OnInit {
       password : this.registerForm.controls.password.value,
     }
     // TO DO service to save the user
+    this.adminService.saveUser(this.client).subscribe(response => {
+    })
     this.detailsForm.controls.fullname.setValue(this.client.fullname);
     this.detailsForm.controls.email.setValue(this.client.email);
     this.detailsForm.controls.phone.setValue(this.client.phone);
