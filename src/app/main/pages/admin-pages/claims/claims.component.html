@@ -26,7 +26,7 @@
             <td>{{complaint.createdAt | date:'dd/MM/yyyy'}}</td>
             <td>{{complaint.agent.firstname}} {{complaint.agent.lastname}}</td>
             <td>{{complaint.service}}</td>
-            <td>{{complaint.status}}</td>
+            <td><span class="badge badge-primary">{{complaint.status}}</span></td>
           </tr>
           </tbody>
         </table>
