@@ -1,0 +1,36 @@
+.table-responsive {
+  margin-top: 15px;
+}
+table th, table td {
+  padding: 0.5rem 1.5rem !important;
+}
+.water {
+  background-color: #1ca3ec;
+}
+.electricity {
+  background-color: #f9ca24;
+}
+
+.callout-bordered.bg-info {
+  border-color: #00b5b8 !important;
+  border-radius: 0.25rem !important;
+  color: black;
+}
+
+.callout-bordered.bg-yellow {
+  border-color: #ffa87d !important;
+  border-radius: 0.25rem !important;
+  color: #7d2900;
+}
+
+.mt-1 {
+  margin-top: 1.3rem !important;
+}
+
+.border-electricity {
+  border-bottom: 1px solid #f9ca24;
+}
+
+.border-water {
+  border-bottom: 1px solid #1ca3ec;
+}

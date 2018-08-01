@@ -1,0 +1,135 @@
+<!-- fixed-top-->
+<nav id="stackNav" #stackNav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-light navbar-border">
+  <div class="navbar-wrapper">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav flex-row">
+        <li class="nav-item mobile-menu d-md-none mr-auto">
+          <a class="nav-link nav-menu-main menu-toggle hidden-xs">
+            <i class="ft-menu font-large-1"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" routerLink="/home" style=" padding-top: 7px;">
+            <img alt="stack admin logo" src="assets/app/images/logo/radem-logo-ico.png" class="brand-logo" id="stackLogo" style="height: 40px;">
+
+            <img alt="stack admin logo" src="assets/app/images/logo/radem-logo.png" class="brand-logo" id="stackLogo-text" style="height:  30px; padding-left: 0;">
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-container content">
+      <div id="navbar-mobile" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav mr-auto float-left">
+          <li class="nav-item d-none d-md-block">
+            <a routerLink="/changelog" class="nav-link nav-menu-main hidden-xs font-small-3 d-none" id="stackNavBack" #stackNavBack>
+              <i class="ft-arrow-left"></i>Back
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav float-right">
+          <li class="dropdown dropdown-notification nav-item">
+            <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
+              <span class="badge badge-pill badge-default badge-danger badge-default badge-up">5</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+              <li class="dropdown-menu-header">
+                <h6 class="dropdown-header m-0">
+                  <span class="grey darken-2">Notifications</span>
+                  <span class="notification-tag badge badge-default badge-danger float-right m-0">5 nouvelles</span>
+                </h6>
+              </li>
+              <li class="scrollable-container media-list">
+                <a href="javascript:void(0)">
+                  <div class="media">
+                    <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+                    <div class="media-body">
+                      <h6 class="media-heading">Exemple de notification</h6>
+                      <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                      <small>
+                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time>
+                      </small>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:void(0)">
+                  <div class="media">
+                    <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
+                    <div class="media-body">
+                      <h6 class="media-heading red darken-1">99% Server load</h6>
+                      <p class="notification-text font-small-3 text-muted">Aliquam tincidunt mauris eu risus.</p>
+                      <small>
+                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago</time>
+                      </small>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:void(0)">
+                  <div class="media">
+                    <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i></div>
+                    <div class="media-body">
+                      <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
+                      <p class="notification-text font-small-3 text-muted">Vestibulum auctor dapibus neque.</p>
+                      <small>
+                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today</time>
+                      </small>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:void(0)">
+                  <div class="media">
+                    <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
+                    <div class="media-body">
+                      <h6 class="media-heading">Complete the task</h6>
+                      <small>
+                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week</time>
+                      </small>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:void(0)">
+                  <div class="media">
+                    <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal"></i></div>
+                    <div class="media-body">
+                      <h6 class="media-heading">Generate monthly report</h6>
+                      <small>
+                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month</time>
+                      </small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
+            </ul>
+          </li>
+          <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right">
+            <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link" id="dropdownUser" ngbDropdownToggle>
+              <span class="avatar avatar-online">
+                <img src="assets/app/images/portrait/small/avatar-s-1.png" alt="avatar">
+                <i></i>
+              </span>
+              <span class="user-name">Nom Prénom</span>
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownUser">
+              <a class="dropdown-item" routerLink="/account/settings" >
+                <i class="ft-user"></i> Mon compte
+              </a>
+              <a class="dropdown-item" routerLink="/account/contracts">
+                <i class="ft-mail"></i> Mes contrats
+              </a>
+              <a class="dropdown-item" routerLink="/account/settlements">
+                <i class="ft-check-square"></i> Mes réglements
+              </a>
+              <a class="dropdown-item" routerLink="/account/unpaid">
+                <i class="ft-message-square"></i> Mes impayés
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/account/logout">
+                <i class="ft-power"></i> Déconnexion
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

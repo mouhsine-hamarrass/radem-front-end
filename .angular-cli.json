@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "lvportail"
+    "name": "stack"
   },
   "apps": [
     {
@@ -19,15 +19,17 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-        "../node_modules/angular-calendar/css/angular-calendar.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/font-awesome/css/font-awesome.css",
-        "../node_modules/ngx-toastr/toastr.css",
-        "variables.scss",
-        "styles.scss"
+        "assets/app/vendors/css/ui/prism.min.css",
+        "assets/app/css/vendors.css",
+        "assets/scss/app.scss",
+        "assets/scss/core/menu/menu-types/vertical-menu.scss",
+        "assets/scss/style.scss",
+        "assets/app-assets/css/components.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/app/vendors/js/vendors.min.js",
+        "assets/app/vendors/js/ui/prism.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -43,15 +45,15 @@
   "lint": [
     {
       "project": "src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
+      "exclude": "**/node_modules/**/*"
     },
     {
       "project": "src/tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
+      "exclude": "**/node_modules/**/*"
     },
     {
       "project": "e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
+      "exclude": "**/node_modules/**/*"
     }
   ],
   "test": {

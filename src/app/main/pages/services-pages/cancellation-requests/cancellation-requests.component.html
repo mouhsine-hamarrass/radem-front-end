@@ -1,0 +1,72 @@
+<!--Tooltip Starts-->
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Demandes de résiliation</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Services</a>
+        </li>
+        <li class="breadcrumb-item active">Demandes de résiliation
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Consulter vos demandes</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline">
+              <li>
+                <a routerLink="/services/new-cancellation-request">
+                  <i class="fa fa-plus"></i> Nouvelle demande de résiliation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Nº de demande</th>
+                    <th scope="col">Fait le</th>
+                    <th scope="col">Polices d'abonnement</th>
+                    <th scope="col">Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let terminationReq of terminationRequests">
+                    <td>
+                      <a [routerLink]="['/services/cancellation-request/', terminationReq.id]">{{terminationReq.requestNumber}}</a>
+                    </td>
+                    <td>{{terminationReq.createdAt | date: 'shortDate'}}</td>
+                    <td>{{terminationReq.subscriptions[0]?.subscription}}, {{terminationReq.subscriptions[1]?.subscription}}</td>
+                    <td>
+                      <span class="label bg-primary">{{terminationReq.status}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
+</div>

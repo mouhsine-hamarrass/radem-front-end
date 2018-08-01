@@ -1,0 +1,168 @@
+<!--Tooltip Starts-->
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Nouvelle demande de résiliation</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Services</a>
+        </li>
+        <li class="breadcrumb-item active">Nouvelle demande de résiliation
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Nouvelle demande de résiliation</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <form class="form" [formGroup]="cancellationForm">
+              <fieldset>
+                <legend>Demandeur</legend>
+                <div class="form-group">
+                  <label for="fullname">Nom et Prenom: </label>
+                  <input class="form-control" formControlName="firstAndLastName" id="fullname">
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="card-id">CIN: </label>
+                    <input class="form-control" formControlName="cin" id="card-id">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="fabrication-date">Délivrée le: </label>
+                    <input class="form-control" formControlName="delivered" id="fabrication-date">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="fabrication-date">À: </label>
+                    <input class="form-control" formControlName="at" id="fabrication-date">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input class="" id="feedback" type="radio">
+                  <label class="noMargin"> Client</label>
+                </div>
+                <div class="form-group">
+                  <input class="" id="feedback" type="radio">
+                  <label class="noMargin"> Procuration</label>
+                </div>
+                <div class="form-group">
+                  <input class="" id="feedback" type="radio">
+                  <label class="noMargin"> Lettre N°</label>
+                </div>
+                <div class="form-group">
+                  <input class="" id="feedback" type="radio">
+                  <label class="noMargin"> Succession</label>
+                </div>
+              </fieldset>
+              <br>
+              <fieldset>
+                <legend>Polices d'abonnement</legend>
+                <div class="row">
+                  <div class="form-group">
+                    <input class="" formControlName="water" type="checkbox">
+                    <label class="noMargin"> EAU</label>
+                  </div>
+                </div>
+                <div class="row" *ngIf="this.cancellationForm.controls.water.value">
+                  <div class="form-group col-md-6">
+                    <label class="noMargin">Police: </label>
+                    <select class="form-control" formControlName="waterPolice">
+                      <option value="-1">Sélectionner une valeur </option>
+                      <option *ngFor="let subscription of waterSubscriptions">{{subscription.police}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="noMargin">Tournée: </label>
+                    <input class="form-control" formControlName="waterTourne" id="fullname">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <input class="" type="checkbox" formControlName="electricity">
+                    <label class="noMargin"> ELECTRICITE</label>
+                  </div>
+                </div>
+                <div class="row" *ngIf="this.cancellationForm.controls.electricity.value">
+                  <div class="form-group col-md-6">
+                    <label class="noMargin">Police: </label>
+                    <select class="form-control" formControlName="electricityPolice">
+                      <option value="-1">Sélectionner une valeur </option>
+                      <option *ngFor="let subscription of electricitySubscriptions">{{subscription.police}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="noMargin">Tournée: </label>
+                    <input class="form-control" formControlName="electricityTourne" id="fullname">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label>Date de depose du compteur</label>
+                    <input formControlName="counterDropDate" type="date" class="form-control">
+                  </div>
+                </div>
+              </fieldset>
+              <br>
+              <fieldset>
+                <legend>Client</legend>
+                <div class="form-group">
+                  <label for="customer-name">Nom du client: </label>
+                  <input class="form-control" formControlName="clientName" id="customer-name">
+                </div>
+                <div class="form-group">
+                  <label for="consumption-address">Adresse de consommation: </label>
+                  <input class="form-control" formControlName="consumptionAdresse" id="consumption-address">
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="gsm">Num telephone fixe: </label>
+                    <input class="form-control" formControlName="landline" id="gsm">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="mobile">Portable: </label>
+                    <input class="form-control" formControlName="cellphone" id="mobile">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="function">Fonction: </label>
+                    <input class="form-control" formControlName="function" id="function">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="location">Lieu de travail: </label>
+                    <input class="form-control" formControlName="placeOfWork" id="location">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="address">Adresse de correspondance: </label>
+                  <input class="form-control" formControlName="correspondenceAdresse" id="address">
+                </div>
+              </fieldset>
+              <div class="form-actions bottom right">
+                <button class="btn btn-outline-primary" (click)="save()">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
+</div>
