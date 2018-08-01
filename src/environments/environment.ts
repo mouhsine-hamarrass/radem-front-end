@@ -4,6 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 
 const server = 'http://localhost:8080/';
+// const server = 'http://192.168.100.13:8080/';
 export const environment = {
   appName: 'RADEMAGENCY',
   appLogo: './assets/images/logo.png',

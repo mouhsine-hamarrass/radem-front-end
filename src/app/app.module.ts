@@ -13,11 +13,12 @@ import {createTranslateLoader} from './app.translate.factory';
 import {CoreModule} from './core/core.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {environment} from 'environments/environment';
+import {environment} from '../environments/environment';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
 import {BoxedWithSidebarLayoutComponent} from './layouts/boxed-with-sidebar-layout/boxed-with-sidebar-layout.component';
 import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
 import {ServicesService} from './main/services/services.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ContractsService } from './main/services/contracts.service';
 import { ProfilePageComponent } from './main/pages/profile-page/profile-page.component';
 import { ProfileService } from './main/services/profile.service';
@@ -41,6 +42,7 @@ import { ResetPasswordComponent } from './main/pages/reset-password/reset-passwo
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    AngularFontAwesomeModule,
     SharedModule,
     CoreModule,
     TranslateModule.forRoot({

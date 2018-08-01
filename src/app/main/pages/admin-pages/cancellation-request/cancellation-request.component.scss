@@ -1,37 +1,103 @@
-.centered-card {
-  margin-left: 13rem;
+.centered-content {
+  margin: auto;
+  text-align: center;
 }
 
-.ml-17 {
-  margin-left: 17rem;
+fieldset.scheduler-border {
+  border: 1px solid #0052a2 !important;
+  padding: 0 0.8em 0 0.8em !important;
+  margin: 0 0 1.5em 0 !important;
+  -webkit-box-shadow:  0px 0px 0px 0px #000;
+          box-shadow:  0px 0px 0px 0px #000;
+  font-weight: normal !important;
 }
 
-.ml-13 {
-  margin-left: 12rem;
+legend.scheduler-border {
+  font-size: 1em !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  padding: 6px;
 }
 
-#baseVerticalRight2-tab1 {
-  color: #0052a2 !important;
+fieldset.col-7 {
+  padding : 0px;
 }
 
-#baseVerticalRight2-tab2 {
-  color: #0052a2 !important;
+#commDiv {
+  padding: 20px;
+  overflow: scroll;
+  max-height: 300px;
 }
 
-#baseVerticalRight2-tab3 {
-  color: #0052a2 !important;
+#divDateComm {
+  margin-left:380px;
+  color: gray;
 }
 
-.nav-link.active {
-  border-left-color: #0052a2 !important;
+fieldset.col-4 {
+  padding : 0px;
+  margin-left : 40px !important;
 }
 
-.btn {
+#divDate {
+  max-height: 100px;
+}
+
+.scheduler-border::after {
+  border: 0;
+}
+
+#buttons {
+  padding-left : 35px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#buttons-update {
+  margin: 3px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  width: 100px;
+  text-align: center;
+}
+
+.rounded {
+  border: 1px solid #ccc !important;
+}
+
+.bg-radem{
   background-color: #0052a2 !important;
+  color: white;
 }
 
-#passwordCheck {
-  color : red;
+#img {
+  margin: 20px;
+}
+
+.btn-primary {
+  background-color: #0052A2 !important;
+}
+
+#comm {
+  padding: 10px ;
+}
+
+.card-header {
+  padding :5px;
+  padding-left: 13px;
+}
+
+.border-comm {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+#cards {
+  padding-left : 50px;
+}
+
+#cards2 {
+  padding-left : 50px;
 }
 
 aw-wizard {

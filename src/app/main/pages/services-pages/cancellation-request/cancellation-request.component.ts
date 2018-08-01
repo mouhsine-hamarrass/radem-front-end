@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CancellationRequestComponent implements OnInit {
 
-  protected feedback = new FormControl('');
+  public feedback = new FormControl('');
 
   protected terminationRequest: any;
 
