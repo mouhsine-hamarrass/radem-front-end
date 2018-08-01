@@ -9,6 +9,7 @@ import {NewCancellationRequestComponent} from './new-cancellation-request/new-ca
 import { ClaimRequestsComponent } from './claim-requests/claim-requests.component';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
+import { NewSubscriptionRequestComponent } from './new-subscription-request/new-subscription-request.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,13 @@ const routes: Routes = [
         component: NewCancellationRequestComponent,
         data: {
           title: 'Nouvelle demande de résiliation'
+        }
+      },
+      {
+        path: 'new-subscription-request',
+        component: NewSubscriptionRequestComponent,
+        data: {
+          title: 'Nouvelle demande d\'abonnement'
         }
       },
       {

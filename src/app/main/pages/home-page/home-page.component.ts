@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
 import {Color} from 'ng2-charts';
+import { ContractsService } from '../../services/contracts.service';
 
 @Component({
   selector: 'app-home-page',
@@ -101,7 +102,13 @@ export class HomePageComponent implements OnInit {
     this.FactBar2
   ];
 
-  constructor() {
+  protected alerts;
+  protected releves;
+  protected contracts;
+  protected minMaxConsumption;
+  protected bills;
+
+  constructor(private contractServices: ContractsService) {
     this.maxDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate());
   }
@@ -117,11 +124,11 @@ export class HomePageComponent implements OnInit {
 
   changeContract(val) {
     switch (val.currentTarget.value) {
-      case '1':
+      case '0':
         this.chartConsoTitle = 'Volume en m3';
         this.chartColorsEau = [this.WaterBar1, this.WaterBar2];
         break;
-      case '2':
+      case '1':
         this.chartConsoTitle = 'Volume en kWh';
         this.chartColorsEau = [this.ElecBar1, this.ElecBar2];
         break;
@@ -143,5 +150,16 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.contractServices.getAlerts().subscribe(response => {
+      this.alerts = response;
+    }, err => {console.log(err); });
+    this.contractServices.getReleves().subscribe(response => this.releves = response, err => {});
+    this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {});
+    this.contractServices.getAllBills().subscribe(Response => this.bills = Response, err => {});
+  }
+
+  changeMinMaxContract(event) {
+    console.log(event);
+    this.contractServices.getMinMaxConsumption(event).subscribe(response => this.minMaxConsumption = response[0], err => {});
   }
 }

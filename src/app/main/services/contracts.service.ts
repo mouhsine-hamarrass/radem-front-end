@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import {environment} from 'environments/environment';
 import { Response } from '../../core/models/response.model';
@@ -33,6 +33,19 @@ export class ContractsService {
   }
   getBill(numBill: string): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/younesMck/jsonServer/bills?numBill=${numBill}`);
+  }
+  getAlerts(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/younesMck/jsonServer/alerts`);
+  }
+  getReleves(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`http://my-json-server.typicode.com/adnanebaiz/data/releves`);
+  }
+  getMinMaxConsumption(id: String): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>
+    (`http://my-json-server.typicode.com/adnanebaiz/data2/MinMaxConsumption?id=${id}`);
+  }
+  getContracts(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`http://my-json-server.typicode.com/adnanebaiz/data/contracts`);
   }
 
 }

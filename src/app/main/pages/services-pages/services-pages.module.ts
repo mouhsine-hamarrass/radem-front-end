@@ -11,6 +11,7 @@ import { NewCancellationRequestComponent } from './new-cancellation-request/new-
 import { ClaimRequestsComponent } from './claim-requests/claim-requests.component';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
+import { NewSubscriptionRequestComponent } from './new-subscription-request/new-subscription-request.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { PrintableCancellationComponent } from './printable-cancellation/printab
     ClaimRequestsComponent,
     ClaimDetailComponent,
     PrintableCancellationComponent,
+    NewSubscriptionRequestComponent,
   ]
 })
 export class ServicesPagesModule {

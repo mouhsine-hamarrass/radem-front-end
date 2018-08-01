@@ -1,304 +1,301 @@
 <div class="content-body">
-   <section class="row">
-      <div class="col-sm-12">
-         <!-- What is-->
-         <div id="what-is" class="card alert-warning">
-            <div class="card-header">
-               <h4 class="card-title">Alerts</h4>
-               <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-                  <ul class="list-inline mb-0">
-                     <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                  </ul>
-               </div>
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card alert-warning">
+        <div class="card-header">
+          <h4 class="card-title">Alerts</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li>
+                <a data-action="collapse">
+                  <i class="ft-minus"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="card-text">
+              <div *ngFor="let alert of alerts">
+                <p>{{alert.title}}</p>
+                <ul>
+                  <li>
+                    {{alert.content}}
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="card-content collapse show">
-               <div class="card-body">
-                  <div class="card-text">
-                     <p>Alerte aux fuites !</p>
-                     <ul>
-                        <li>
-                           Peut-être êtes vous victime d’une fuite d’eau. Pour détecter une fuite d’eau, il existe une
-                           méthode : avant le coucher et après avoir fermé tous les robinets ou appareils consommant de
-                           l’eau, relevez l’index de votre compteur. Le lendemain matin, avant toute consommation d’eau,
-                           relevez à nouveau votre compteur. S’il indique un chiffre supérieur à celui de la veille, il
-                           y a une fuite sur votre réseau (du compteur aux différents points d’eau de votre habitation).
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!--/ What is-->
-         <!-- Kick start -->
-         <div id="kick-start" class="card">
-            <div class="card-header">
-               <h4 class="card-title">Evolution de consomation</h4>
-               <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-                  <ul class="list-inline mb-0">
-                     <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                  </ul>
-               </div>
-            </div>
-            <div class="card-content collapse show">
-               <div class="card-body">
-                  <div class="row col-md-4 col-sm-6 pull-right form-group">
-                     <label class="col-md-4"> <strong>Contrat :</strong> </label>
-                     <div class="col-md-8">
-                        <select class="custom-select" (change)="changeContract($event)">
-                           <option value="1" [selected]="true">N 4900 (Eau)</option>
-                           <option value="2">E 7856 (Électricité)</option>
-                        </select>
-                     </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="row">
-                     <div class="col-md-6 col-sm-6">
-                        <canvas baseChart
-                                [chartType]="chartType"
-                                [datasets]="chartDatasetsEau"
-                                [labels]="chartLabels"
-                                [colors]="chartColorsEau"
-                                [options]="chartOptionsEau"
-                                [legend]="true"
-                                (chartHover)="chartHovered($event)"
-                                (chartClick)="chartClicked($event)">
-                        </canvas>
-                     </div>
-                     <div class="col-md-6 col-sm-6">
-                        <canvas baseChart
-                                [chartType]="chartType"
-                                [datasets]="chartDatasetsFact"
-                                [labels]="chartLabels"
-                                [colors]="chartColorsFact"
-                                [options]="chartOptionsFact"
-                                [legend]="true"
-                                (chartHover)="chartHovered($event)"
-                                (chartClick)="chartClicked($event)">
-                        </canvas>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!--/ Kick start -->
-
-         <!-- Audience by country & users visit-->
-         <div class="row match-height">
-            <div class="col-xl-6 col-lg-12">
-               <div class="card">
-                  <div class="card-header border-0">
-                     <h4 class="card-title">Derniers paiements</h4>
-                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                     <div class="heading-elements">
-                     </div>
-                  </div>
-                  <div class="card-content">
-                     <div class="table-responsive position-relative">
-                        <table class="table mb-0">
-                           <thead>
-                           <tr>
-                              <th scope="col"># REF</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Montant</th>
-                              <th scope="col">Volume</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           <tr>
-                              <td>ELC123456</td>
-                              <td>Électricité</td>
-                              <td>500.00 DH</td>
-                              <td>390(kWh)</td>
-                           </tr>
-                           <tr>
-                              <td>EAU764892</td>
-                              <td>Eau</td>
-                              <td>140.50 DH</td>
-                              <td>15(m3)</td>
-                           </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-6 col-lg-12">
-               <div class="card">
-                  <div class="card-header border-0">
-                     <h4 class="card-title">Prochaines factures</h4>
-                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                     <div class="heading-elements">
-                     </div>
-                  </div>
-                  <div class="card-content">
-                     <div class="table-responsive position-relative">
-                        <table class="table mb-0">
-                           <thead>
-                           <tr>
-                              <th scope="col"># REF</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Montant</th>
-                              <th scope="col">Volume</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           <tr>
-                              <td>ELC123456</td>
-                              <td>Électricité</td>
-                              <td>600.00 DH</td>
-                              <td>493(kWh)</td>
-                           </tr>
-                           <tr>
-                              <td>EAU764892</td>
-                              <td>Eau</td>
-                              <td>600.00 DH</td>
-                              <td>493(kWh)</td>
-                           </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!--/ Audience by country  & users visit -->
-         <!-- Audience by country & users visit-->
-         <div class="row match-height">
-            <div class="col-xl-6 col-lg-12">
-               <div class="card">
-                  <div class="card-header border-0">
-                     <h4 class="card-title">Min/Max Consomations</h4>
-                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                     <div class="heading-elements">
-                     </div>
-                  </div>
-                  <div class="card-content">
-                     <form>
-                        <div class="row col-md-12 form-group">
-                           <label class="col-form-label col-md-4">Contrat</label>
-                           <div class="col-md-8">
-                              <select class="custom-select">
-                                 <option selected>Faites votre choix</option>
-                                 <option value="1">ELC123456</option>
-                                 <option value="2">EAU796434</option>
-                              </select>
-                           </div>
-                        </div>
-                        <div class="row col-md-12 form-group">
-                           <label class="col-form-label col-md-3">Periode du</label>
-                           <div class="col-md-3">
-                              <input type="text"
-                                     placeholder="01/01/2018"
-                                     class="form-control" [maxDate]="maxDate"
-                                     bsDatepicker placement="bottom" [outsideClick]="true" placement="left"
-                                     [bsConfig]="{containerClass: 'theme-dark-blue'}">
-                           </div>
-                           <label class="col-form-label col-md-2">Au</label>
-                           <div class="col-md-4">
-                              <input type="text"
-                                     placeholder="01/01/2018"
-                                     class="form-control" [maxDate]="maxDate"
-                                     bsDatepicker placement="bottom" [outsideClick]="true" placement="left"
-                                     [bsConfig]="{containerClass: 'theme-dark-blue'}">
-                           </div>
-                        </div>
-                        <div class="row col-md-12 form-group">
-                           <div class="col-md-6">
-                              <span class="card-title"><strong>Min:</strong> 80 m3</span>
-                           </div>
-                           <div class="col-md-6">
-                              <span class="card-title"><strong>Max:</strong> 200 m3</span>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-6 col-lg-12">
-               <div class="card">
-                  <div class="card-header border-0">
-                     <h4 class="card-title">Dernieres relèves</h4>
-                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                     <div class="heading-elements">
-                     </div>
-                  </div>
-                  <div class="card-content">
-                     <div class="table-responsive position-relative">
-                        <table class="table mb-0">
-                           <thead>
-                           <tr>
-                              <th scope="col"># REF</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Date</th>
-                              <th scope="col">index</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           <tr>
-                              <td>ELC123456</td>
-                              <td>Électricité</td>
-                              <td>06-10-18 10:30</td>
-                              <td>1879465</td>
-                           </tr>
-                           <tr>
-                              <td>EAU764892</td>
-                              <td>Eau</td>
-                              <td>06-10-18 10:30</td>
-                              <td>1879465</td>
-                           </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!--/ Audience by country  & users visit -->
-         <!-- What is-->
-         <div id="what-is" class="card">
-            <div class="card-header">
-               <h4 class="card-title">Conseil et économie d'énergie</h4>
-               <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-                  <ul class="list-inline mb-0">
-                     <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                  </ul>
-               </div>
-            </div>
-            <div class="card-content collapse show">
-               <div class="card-body">
-                  <div class="card-text">
-                     <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
-                     <ul>
-                        <li>Attention, augmenter de 1 °C la température dans une pièce, c’est consommer environ 7%
-                           d’énergie en plus…
-                           Notre solution? Installer un gestionnaire d’énergie. Il vous permettra de régler
-                           automatiquement la température de chaque pièce
-                           et de la baisser de 2 °C à 3 °C en cas d’absence durant plusieurs heures.**
-                        </li>
-                        <li>Vous pouvez également réguler la température de vos radiateurs (à eau chaude) en les
-                           équipant d’un robinet thermostatique.
-                           Celui-ci vous permet de choisir la température qui vous convient selon les pièces et de
-                           réaliser des économies d’énergie.
-                        </li>
-                        <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos
-                           radiateurs à eau chaude avant de les remettre en marche.
-                        </li>
-                        <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos
-                           radiateurs à eau chaude avant de les remettre en marche.
-                        </li>
-                        <li>Nous vous recommandons également de dépoussiérer deux fois par an vos radiateurs électriques
-                           et de ne surtout jamais les couvrir :
-                           vous risqueriez non seulement de les isoler mais aussi de créer un court-circuit
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!--/ What is-->
+          </div>
+        </div>
       </div>
-   </section>
+      <!--/ What is-->
+      <!-- Kick start -->
+      <div id="kick-start" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Evolution de consomation</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li>
+                <a data-action="collapse">
+                  <i class="ft-minus"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="row col-md-4 col-sm-6 pull-right form-group">
+              <label class="col-md-4">
+                <strong>Contrat :</strong>
+              </label>
+              <div class="col-md-8">
+                <select class="custom-select" (change)="changeContract($event)">
+                  <option *ngFor="let contract of contracts" value="{{contract.id}}">{{contract.contractNumber}} ({{contract.contractType}})</option>
+                </select>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <canvas baseChart [chartType]="chartType" [datasets]="chartDatasetsEau" [labels]="chartLabels" [colors]="chartColorsEau"
+                  [options]="chartOptionsEau" [legend]="true" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                </canvas>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <canvas baseChart [chartType]="chartType" [datasets]="chartDatasetsFact" [labels]="chartLabels" [colors]="chartColorsFact"
+                  [options]="chartOptionsFact" [legend]="true" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Kick start -->
+
+      <!-- Audience by country & users visit-->
+      <div class="row match-height">
+        <div class="col-xl-6 col-lg-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <h4 class="card-title">Derniers paiements</h4>
+              <a class="heading-elements-toggle">
+                <i class="fa fa-ellipsis-v font-medium-3"></i>
+              </a>
+              <div class="heading-elements">
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="table-responsive position-relative">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col"># REF</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Montant</th>
+                      <th scope="col">Volume</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="bills">
+                    <tr>
+                      <td>{{bills[0]?.numBill}}</td>
+                      <td>{{bills[0]?.subscriptionType}}</td>
+                      <td>{{bills[0]?.amount}} DH</td>
+                      <td>{{bills[0]?.consumption}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{bills[1]?.numBill}}</td>
+                        <td>{{bills[1]?.subscriptionType}}</td>
+                        <td>{{bills[1]?.amount}} DH</td>
+                        <td>{{bills[1]?.consumption}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <h4 class="card-title">Prochaines factures</h4>
+              <a class="heading-elements-toggle">
+                <i class="fa fa-ellipsis-v font-medium-3"></i>
+              </a>
+              <div class="heading-elements">
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="table-responsive position-relative">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col"># REF</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Montant</th>
+                      <th scope="col">Volume</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="bills">
+                    <tr>
+                        <tr>
+                          <td>{{bills[2]?.numBill}}</td>
+                          <td>{{bills[2]?.subscriptionType}}</td>
+                          <td>{{bills[2]?.amount}} DH</td>
+                          <td>{{bills[2]?.consumption}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{bills[3]?.numBill}}</td>
+                            <td>{{bills[3]?.subscriptionType}}</td>
+                            <td>{{bills[3]?.amount}} DH</td>
+                            <td>{{bills[3]?.consumption}}</td>
+                        </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Audience by country  & users visit -->
+      <!-- Audience by country & users visit-->
+      <div class="row match-height">
+        <div class="col-xl-6 col-lg-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <h4 class="card-title">Min/Max Consomations</h4>
+              <a class="heading-elements-toggle">
+                <i class="fa fa-ellipsis-v font-medium-3"></i>
+              </a>
+              <div class="heading-elements">
+              </div>
+            </div>
+            <div class="card-content">
+              <form>
+                <div class="row col-md-12 form-group">
+                  <label class="col-form-label col-md-4">Contrat</label>
+                  <div class="col-md-8">
+                    <select #minMax class="custom-select" (change)="changeMinMaxContract(minMax.value)">
+                      <option selected>Faites votre choix</option>
+                      <option *ngFor="let contract of contracts" value="{{contract.id}}">{{contract.contractNumber}} ({{contract.contractType}})</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row col-md-12 form-group">
+                  <label class="col-form-label col-md-3">Periode du</label>
+                  <div class="col-md-3">
+                    <input type="text" placeholder="01/01/2018" class="form-control" [maxDate]="maxDate" bsDatepicker placement="bottom" [outsideClick]="true"
+                      placement="left" [bsConfig]="{containerClass: 'theme-dark-blue'}">
+                  </div>
+                  <label class="col-form-label col-md-2">Au</label>
+                  <div class="col-md-4">
+                    <input type="text" placeholder="01/01/2018" class="form-control" [maxDate]="maxDate" bsDatepicker placement="bottom" [outsideClick]="true"
+                      placement="left" [bsConfig]="{containerClass: 'theme-dark-blue'}">
+                  </div>
+                </div>
+                <div class="row col-md-12 form-group">
+                  <div class="col-md-6">
+                    <span class="card-title">
+                      <strong>Min:</strong> {{minMaxConsumption?.min}}</span>
+                  </div>
+                  <div class="col-md-6">
+                    <span class="card-title">
+                      <strong>Max:</strong> {{minMaxConsumption?.max}}</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <h4 class="card-title">Dernieres relèves</h4>
+              <a class="heading-elements-toggle">
+                <i class="fa fa-ellipsis-v font-medium-3"></i>
+              </a>
+              <div class="heading-elements">
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="table-responsive position-relative">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col"># REF</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">index</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let releve of releves">
+                      <td>{{releve.ref}}</td>
+                      <td>{{releve.type}}</td>
+                      <td>{{releve.dateReleve}}</td>
+                      <td>{{releve.index}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Audience by country  & users visit -->
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Conseil et économie d'énergie</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li>
+                <a data-action="collapse">
+                  <i class="ft-minus"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="card-text">
+              <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
+              <ul>
+                <li>Attention, augmenter de 1 °C la température dans une pièce, c’est consommer environ 7% d’énergie en plus…
+                  Notre solution? Installer un gestionnaire d’énergie. Il vous permettra de régler automatiquement la température
+                  de chaque pièce et de la baisser de 2 °C à 3 °C en cas d’absence durant plusieurs heures.**
+                </li>
+                <li>Vous pouvez également réguler la température de vos radiateurs (à eau chaude) en les équipant d’un robinet
+                  thermostatique. Celui-ci vous permet de choisir la température qui vous convient selon les pièces et de
+                  réaliser des économies d’énergie.
+                </li>
+                <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos radiateurs à eau chaude
+                  avant de les remettre en marche.
+                </li>
+                <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos radiateurs à eau chaude
+                  avant de les remettre en marche.
+                </li>
+                <li>Nous vous recommandons également de dépoussiérer deux fois par an vos radiateurs électriques et de ne surtout
+                  jamais les couvrir : vous risqueriez non seulement de les isoler mais aussi de créer un court-circuit
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ What is-->
+    </div>
+  </section>
 </div>
