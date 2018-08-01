@@ -46,5 +46,28 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       }
     ]
+  },
+  {
+    path: '',
+    title: 'Alertes',
+    icon: 'fa fa-exclamation-triangle',
+    class: '',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: [
+      {
+        path: '/admin/alert',
+        title: 'Ajouter une alerte',
+        icon: 'fa fa-plus',
+        class: 'nav-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: []
+      }
+    ]
   }
 ];

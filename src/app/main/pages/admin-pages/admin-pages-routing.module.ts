@@ -5,6 +5,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { CancellationRequestComponent } from './cancellation-request/cancellation-request.component';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
+import { AlertComponent } from './alert/alert.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,13 @@ const routes: Routes = [
         component: ClaimDetailComponent,
         data: {
           title: 'Réclamation'
+        }
+      },
+      {
+        path: 'alert',
+        component: AlertComponent,
+        data: {
+          title: 'Alerte'
         }
       }
     ]

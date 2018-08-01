@@ -144,6 +144,7 @@ export class RegisterComponent implements OnInit {
     }
     // TO DO service to save the user
     this.adminService.saveUser(this.client).subscribe(response => {
+      console.log(response);
     })
     this.detailsForm.controls.fullname.setValue(this.client.fullname);
     this.detailsForm.controls.email.setValue(this.client.email);

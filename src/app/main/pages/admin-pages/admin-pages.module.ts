@@ -9,6 +9,7 @@ import { ClaimsComponent } from './claims/claims.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
     CancellationRequestComponent,
     RequestsComponent,
     ClaimsComponent,
-    ClaimDetailComponent
+    ClaimDetailComponent,
+    AlertComponent
   ],
   providers: [AdminService]
 })
