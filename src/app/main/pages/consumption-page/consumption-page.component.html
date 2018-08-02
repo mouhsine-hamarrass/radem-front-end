@@ -59,10 +59,10 @@
                         </div>
                         <div class="row col-md-12 form-group">
                            <div *ngIf="minMax" class="col-md-5 min mb-1">
-                              <span><i class="ft-trending-down"></i>&nbsp;<strong>Minimum:</strong> {{minMax[0].min}} m3</span>
+                              <span><i class="ft-trending-down"></i>&nbsp;<strong>Minimum:</strong> {{minMax[0]?.min}} m3</span>
                            </div>
                            <div *ngIf="minMax" class="col-md-5 max mb-1">
-                              <span><i class="ft-trending-up"></i>&nbsp;<strong>Maximum:</strong> {{minMax[0].max}} m3</span>
+                              <span><i class="ft-trending-up"></i>&nbsp;<strong>Maximum:</strong> {{minMax[0]?.max}} m3</span>
                            </div>
                         </div>
                      </form>

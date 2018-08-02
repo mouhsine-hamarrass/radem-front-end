@@ -22,12 +22,14 @@ export class SimpleErrorHandler implements ErrorHandler {
          location.href = location.pathname + '#/login';
          return;
       }
+
       // handle 4xx Client errors
       if (error.status >= 400 && error.status < 500) {
          location.href = location.pathname + '#/error';
          console.log('... the request is incorrect!');
          return;
       }
+
       // handle 5xx Server error
       if (error.status >= 500) {
          console.log('... the server is not responding. Contact the administrator!');

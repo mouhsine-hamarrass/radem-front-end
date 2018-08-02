@@ -1,0 +1,12 @@
+.navbar-container {
+  .navbar-nav {
+    display: inline-block;
+  }
+}
+.navbar-horizontal .dropdown-toggle::after{
+  top: inherit !important;
+}
+
+.menu-item{
+  white-space: nowrap;
+}
