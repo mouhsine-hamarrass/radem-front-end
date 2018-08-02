@@ -15,7 +15,7 @@ export class ConsumptionPageComponent implements OnInit {
   protected nextReleve: any;
   protected contractNumber: any;
   protected Consumptions: any;
-  protected minMax: any;
+  protected minMax;
   protected meters: any;
 
   constructor(private adminService: AdminService,
@@ -33,6 +33,7 @@ export class ConsumptionPageComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.minMax = [{'min' : '0', 'max' : '0'}]
     this.adminService.getContracts().subscribe(response => {
       this.contracts = response;
     })

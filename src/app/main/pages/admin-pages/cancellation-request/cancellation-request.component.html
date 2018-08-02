@@ -49,8 +49,8 @@
                       <td>{{request.client.fullName}}</td>
                     </tr>
                     <tr>
-                      <td>Date de création :</td>
-                      <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+                      <td>Police :</td>
+                      <td>{{request.subscriptions[0]?.subscription}}, {{request.subscriptions[1]?.subscription}}</td>
                     </tr>
                     </table>
                   </div>

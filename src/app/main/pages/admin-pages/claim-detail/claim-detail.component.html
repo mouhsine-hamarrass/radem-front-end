@@ -51,9 +51,17 @@
                         <td>{{claim.complainer.fullName}}</td>
                       </tr>
                       <tr>
-                        <td>Date de création :</td>
-                        <td>{{claim.createdDate | date: 'dd/MM/yyyy' }}</td>
+                        <td>Objet :</td>
+                        <td>{{claim.object}}</td>
                       </tr>
+                      </table>
+                    </div>
+                    <div style="padding-left: 10px;padding-bottom: 10px;max-width: 300px;">
+                        <table>
+                        <tr>
+                          <td>Description: </td>
+                          <td>{{claim.description}}</td>
+                        </tr>
                       </table>
                     </div>
                   </div>
@@ -104,17 +112,17 @@
                 </fieldset>
                 <fieldset class="col-4 scheduler-border" id="divDate">
                     <legend class="scheduler-border">
-                      <b>Description :</b>
+                      <b>Dates :</b>
                     </legend>
                     <div style="padding-left: 20px;">
                         <table>
                             <tr>
-                              <td>Objet :</td>
-                              <td>{{claim.object}}</td>
+                              <td>Date de création :</td>
+                              <td>{{claim.createdDate | date: 'dd/MM/yyyy'}}</td>
                             </tr>
                             <tr>
-                              <td>Description :</td>
-                              <td>{{claim.description}}</td>
+                              <td>Dernière modification :</td>
+                              <td>{{claim.updatedDate | date: 'dd/MM/yyyy'}}</td>
                             </tr>
                           </table>
                     </div>
