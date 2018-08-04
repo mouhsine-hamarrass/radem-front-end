@@ -109,6 +109,10 @@ export class AdminService {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?ref=${ref}`, {headers: headers});
   }
 
+  getUsers(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users`, {headers: headers});
+  }
+
   getQuestions(): Observable<Response<Array<any>>> {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Questions`, {headers: headers});
@@ -127,5 +131,18 @@ export class AdminService {
   // User
   saveUser(client: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.urlApi}/users/save`, client, {headers: headers});
+  }
+
+  // Alerts
+  getAlertTypes(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/alerts/alertTypes`, {headers: headers});
+  }
+
+  getAlert(idAlert: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/${idAlert}/find`, {headers: headers});
+  }
+
+  saveAlertNotification(alertNotification: any): Observable<Response<any>> {
+    return this.httpClient.post<Response<any>>(`${this.urlApi}/alerts/save`, alertNotification, {headers: headers});
   }
 }

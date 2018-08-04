@@ -15,7 +15,6 @@ import * as moment from 'moment';
   encapsulation: ViewEncapsulation.None
 })
 export class CancellationRequestComponent implements OnInit {
-
   @ViewChild('wizard') wizard: WizardComponent;
   @ViewChild('StepButton') StepButton: ElementRef;
   @ViewChild('UpdateButton') UpdateButton: ElementRef;
