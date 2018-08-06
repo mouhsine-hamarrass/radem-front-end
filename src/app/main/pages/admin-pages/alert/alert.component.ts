@@ -62,7 +62,7 @@ export class AlertComponent implements OnInit {
   saveNotificationAlert() {
     this.alertNotification = {
       subscription : {
-        subscription : this.user[0].contractNumber,
+        subscription : this.user[0].contract,
         tournee : 'tournee',
         type : 'eau'
       },

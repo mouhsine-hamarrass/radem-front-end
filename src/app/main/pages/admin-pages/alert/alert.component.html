@@ -8,7 +8,7 @@
             <label class="col-form-label col-md-3">Type d'alerte :</label>
             <div class="col-md-6">
               <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
-                <option selected>Choisissez un type</option>
+                <option value="" selected disabled>Choisissez un type</option>
                 <option *ngFor="let alertType of alertTypes" value="{{alertType.id}}">{{alertType.alertType}}</option>
               </select>
             </div>
@@ -23,8 +23,8 @@
             <label class="col-form-label col-md-3">Le contrat concerné :</label>
             <div class="col-md-4">
               <select formControlName="contract" class="custom-select" type="text" #t2 (change)="setClient(t2.value)">
-                <option selected>Choisissez un contrat</option>
-                <option *ngFor="let contract of contracts" value="{{contract.contractNumber}}">{{contract.contractNumber}}</option>
+                <option value="" selected disabled>Choisissez un contrat</option>
+                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}</option>
               </select>
             </div>
             <div class="col-md-5">
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="row col-md-12">
-            <button class="btn btn-primary" (click)="saveNotificationAlert()" >Valider</button>
+            <button [routerLink]="['/admin']" class="btn btn-primary ml" (click)="saveNotificationAlert()" >Valider</button>
           </div>
         </form>
       </div>
