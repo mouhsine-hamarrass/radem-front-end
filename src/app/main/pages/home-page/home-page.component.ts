@@ -2,7 +2,7 @@ import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
 import {Color} from 'ng2-charts';
-import { ContractsService } from '../../services/contracts.service';
+import {ContractsService} from '../../services/contracts.service';
 
 @Component({
   selector: 'app-home-page',
@@ -152,14 +152,20 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.contractServices.getAlerts().subscribe(response => {
       this.alerts = response;
-    }, err => {console.log(err); });
-    this.contractServices.getReleves().subscribe(response => this.releves = response, err => {});
-    this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {});
-    this.contractServices.getAllBills().subscribe(Response => this.bills = Response, err => {});
+    }, err => {
+      console.log(err);
+    });
+    this.contractServices.getReleves().subscribe(response => this.releves = response, err => {
+    });
+    this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {
+    });
+    this.contractServices.getAllBills().subscribe(Response => this.bills = Response, err => {
+    });
   }
 
   changeMinMaxContract(event) {
     console.log(event);
-    this.contractServices.getMinMaxConsumption(event).subscribe(response => this.minMaxConsumption = response[0], err => {});
+    this.contractServices.getMinMaxConsumption(event).subscribe(response => this.minMaxConsumption = response[0], err => {
+    });
   }
 }

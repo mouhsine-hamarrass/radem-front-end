@@ -8,7 +8,7 @@ export const ROUTES: RouteInfo[] = [
     icon: '',
     class: 'nav-item',
     badge: '',
-    badgeClass: 'badge badge badge-primary badge-pill float-right mr-2',
+    badgeClass: '',
     isExternalLink: false,
     isNavHeader: false,
     submenu: []
@@ -84,7 +84,7 @@ export const ROUTES: RouteInfo[] = [
     path: '',
     title: 'Mes contrats',
     icon: '',
-    class: 'nav-item',
+    class: 'nav-item has-sub',
     badge: '',
     badgeClass: '',
     isExternalLink: false,

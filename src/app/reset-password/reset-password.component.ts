@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { RecoverPasswordService } from '../../services/recover-password.service';
+import { RecoverPasswordService } from '../main/services/recover-password.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

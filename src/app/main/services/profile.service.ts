@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {environment} from 'environments/environment';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Response } from '../../core/models/response.model';
 
 let headers = new HttpHeaders();

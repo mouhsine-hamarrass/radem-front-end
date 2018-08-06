@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {AuthHelper} from './core/services/security/auth.helper';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from 'environments/environment';
+// @ts-ignore
 import moment = require('moment');
 
 @Component({
