@@ -13,7 +13,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class ProfileComponent implements OnInit {
 
-  protected authoritiesByCategory: any;
+  protected authorities: any;
   protected selectedAuthorities: any = [];
   protected profile: Profile = {};
   protected formProfile;
@@ -63,8 +63,8 @@ export class ProfileComponent implements OnInit {
 
 
   getAllAuthoritiesByCategory() {
-    this.utilsService.getAllAuthoritiesByCategory().subscribe(response => {
-      this.authoritiesByCategory = response.data;
+    this.utilsService.getAuthorities().subscribe(response => {
+      this.authorities = response.data;
     });
   }
 
@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
           timeOut: 2000,
         });
       }
-      this.router.navigate(['/admin/list_profils']);
+      this.router.navigate(['/admin/profiles']);
     }, err => {
     });
   }

@@ -1,65 +1,67 @@
 <div id="add-modele">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="#">Admin</a>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">Nouveau Profile</li>
-    </ol>
-  </nav>
-  <div class="container-fluid">
-    <div class="spacer"> </div>
-    <div class="card">
-      <div class="card-body">
-        <section>
-          <form role="form" novalidate [formGroup]="formProfile">
-            <h4 class="card-title text-muted" *ngIf="!profile.id">Ajouter un nouveau profil</h4>
-            <h4 class="card-title text-muted" *ngIf="profile.id">Modifier le profil</h4>
-            <div class="mx-2 my-3 text-right">
-              <div class="row form-group required">
-                <label for="titre" class="col-sm-3 control-label">Nom du profil</label>
-                <div class="col-sm-9">
-                  <input formControlName="title" id="name" name="name" type="text" placeholder="Nom du profil" class="form-control required"
-                         id="titre">
-                  <div *ngIf="title.invalid && (title.dirty || isSubmitted)" class="text-danger text-left">
-                    <div *ngIf="title.errors.required">
-                      Le nom de profil est obligatoire
-                    </div>
+   <nav aria-label="breadcrumb">
+      <ul class="breadcrumb">
+         <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
+         <li class="breadcrumb-item active" aria-current="page">Nouveau Profile</li>
+      </ul>
+   </nav>
+   <div class="container-fluid">
+      <div class="spacer"></div>
+      <div class="card">
+         <div class="card-body">
+            <section>
+               <form role="form" novalidate [formGroup]="formProfile">
+                  <h4 class="card-title text-muted" *ngIf="!profile.id">Ajouter un nouveau profil</h4>
+                  <h4 class="card-title text-muted" *ngIf="profile.id">Modifier le profil</h4>
+                  <div class="mx-2 my-3 text-right">
+                     <div class="row form-group required">
+                        <label for="titre" class="col-sm-3 control-label">Nom du profil</label>
+                        <div class="col-sm-9">
+                           <input formControlName="title" id="name" name="name" type="text" placeholder="Nom du profil"
+                                  class="form-control required"
+                                  id="titre">
+                           <div *ngIf="title.invalid && (title.dirty || isSubmitted)" class="text-danger text-left">
+                              <div *ngIf="title.errors.required">
+                                 Le nom de profil est obligatoire
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row form-group">
+                        <label for="type" class="col-sm-3 control-label">Description</label>
+                        <div class="col-sm-9">
+                           <textarea formControlName="description" name="description" class="form-control"
+                                     id="type"></textarea>
+                        </div>
+                     </div>
+                     <!-- Droits d'accès-->
+                     <div class="card">
+                        <div class="card-body">
+                           <h5 class="card-title text-muted text-left">Droits d'accès</h5>
+                           <div class="row">
+                              <div *ngFor="let authority of authorities" class="col-md-6 float-left text-left">
+                                 <label class="noMargin">
+                                    <input class="noMargin" type="checkbox" name="{{authority.id}}" class="form-group"
+                                           [(checklist)]="selectedAuthorities" [checklistValue]="authority.id">
+                                    {{authority.name}}
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <br>
+                     <button type="button" class="btn btn-secondary" [routerLink]="['/admin/profiles']"> Annuler
+                     </button>
+                     <button class="btn btn-primary" (click)="addProfile()" *ngIf="!profile.id"
+                             [disabled]="formProfile.invalid || selectedAuthorities.length == 0">Enregistrer
+                     </button>
+                     <button class="btn btn-primary" (click)="addProfile()" *ngIf="profile.id"
+                             [disabled]="formProfile.invalid || selectedAuthorities.length == 0">Modifier
+                     </button>
                   </div>
-                </div>
-              </div>
-              <div class="row form-group">
-                <label for="type" class="col-sm-3 control-label">Description</label>
-                <div class="col-sm-9">
-                  <textarea formControlName="description" name="description" class="form-control" id="type"></textarea>
-                </div>
-              </div>
-              <!-- Droits d'accès-->
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title text-muted text-left">Droits d'accès</h5>
-                  <div class="row">
-                    <div *ngFor="let cat of authoritiesByCategory" class="col-md-6 float-left text-left">
-                      <div class="paddingBottom">
-                        <b>{{cat.category}}</b>
-                      </div>
-                      <div *ngFor="let authority of cat.authorities">
-                        <label class="noMargin">
-                          <input class="noMargin" type="checkbox" name="{{authority.id}}" class="form-group" [(checklist)]="selectedAuthorities" [checklistValue]="authority.id"> {{authority.name}}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <button type="button" class="btn btn-secondary" [routerLink]="['/admin/list_profils']" > Annuler </button>
-              <button class="btn btn-primary" (click)="addProfile()" *ngIf="!profile.id" [disabled]="formProfile.invalid || selectedAuthorities.length == 0">Enregistrer</button>
-              <button class="btn btn-primary" (click)="addProfile()" *ngIf="profile.id" [disabled]="formProfile.invalid || selectedAuthorities.length == 0">Modifier</button>
-            </div>
-          </form>
-        </section>
+               </form>
+            </section>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>

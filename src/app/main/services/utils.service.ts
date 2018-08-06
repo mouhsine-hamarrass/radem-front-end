@@ -13,7 +13,7 @@ export class UtilsService {
     this.urlApi = environment.apiConfig.apiUrl;
   }
 
-  getAllAuthoritiesByCategory(): Observable<Response<any>> {
+  getAuthorities(): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/authorities`);
   }
 }

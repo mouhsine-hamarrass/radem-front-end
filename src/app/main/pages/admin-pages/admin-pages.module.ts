@@ -14,9 +14,10 @@ import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfilesComponent } from './profiles/profiles.component';
-import {SharedModule} from '../../../shared/shared.module';
-import {UnpaidPagesModule} from '../unpaid-pages/unpaid-pages.module';
 import {ChecklistModule} from 'angular-checklist';
+import {NgxToggleModule} from 'ngx-toggle';
+import {TabsModule} from 'ngx-bootstrap';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -25,7 +26,10 @@ import {ChecklistModule} from 'angular-checklist';
     ArchwizardModule,
     FormsModule,
     ReactiveFormsModule,
-    ChecklistModule
+    ChecklistModule,
+    NgxToggleModule,
+    TabsModule.forRoot(),
+    TranslateModule
   ],
   declarations: [
     AdminDashboardComponent,

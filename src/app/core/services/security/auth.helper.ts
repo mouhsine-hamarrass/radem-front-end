@@ -7,6 +7,7 @@ import {User} from '../../models/user.model';
 import {AuthScheme} from '../../models/auth-scheme.enum';
 import {AuthTypes} from '../../factories/auth.type';
 import {Md5} from 'ts-md5';
+import {noAnnotationError} from '@angular/core/src/di/reflective_errors';
 
 export class AuthHelper {
 
@@ -89,7 +90,8 @@ export class AuthHelper {
   needAuthBefore(url: string) {
     if (AuthHelper.isHttpService(url)) {
       const apiUrl = CommonUtil.getApiByUrl(url, this.apiConfig);
-      return apiUrl.requireAuthBefore;
+
+      return  apiUrl !== undefined && apiUrl.requireAuthBefore;
     }
     return false;
   }

@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   listFonctions = [];
   listProfiles = [];
   listAccounts = [];
-  authoritiesByCategory: any = [];
+  authorities: any = [];
   modalForm: FormGroup;
   emailPattern: string;
 
@@ -40,7 +40,6 @@ export class UserComponent implements OnInit {
               private utilsService: UtilsService,
               private adminService: AdminService,
               private frmBuilder: FormBuilder,
-              private commonService: CommonService,
               private router: Router,
               private route: ActivatedRoute,
               private toastrService: ToastrService) {
@@ -59,7 +58,6 @@ export class UserComponent implements OnInit {
     }, {
       validator: PasswordValidation.MatchPassword
     });
-    this.dropdownSettings = commonService.setSettings();
     this.defaultAvatar = environment.defaultAvatar;
   }
 
@@ -113,17 +111,15 @@ export class UserComponent implements OnInit {
   }
 
   getAuthorities(id, excludedAuthoritiesIds?): void {
-    this.adminService.getAuthorities(id).subscribe((response) => {
+    this.adminService.getProfileAuthorities(id).subscribe((response) => {
       if (response && response.data) {
-        this.authoritiesByCategory = response.data;
+        this.authorities = response.data;
         this.selectedAuthorities = [];
         let arr = [];
-        _.each(this.authoritiesByCategory, (authorities: any) => {
-          _.each(authorities, (authority: any) => {
-            if (typeof authority === 'object' && authority.length) {
-              arr = arr.concat(_.pluck(authority, 'id'));
-            }
-          });
+        _.each(this.authorities, (authority: any) => {
+          if (typeof authority === 'object' && authority.length) {
+            arr = arr.concat(_.pluck(authority, 'id'));
+          }
         });
         this.selectedAuthorities = arr;
         if (excludedAuthoritiesIds && excludedAuthoritiesIds.length) {
@@ -202,7 +198,7 @@ export class UserComponent implements OnInit {
       const user = _.omit(this.modalForm.value, ['confirmPassword']);
       user.avatar = this.result64;
       let arr = [];
-      _.each(this.authoritiesByCategory, (authorities: any) => {
+      _.each(this.authorities, (authorities: any) => {
         _.each(authorities, (authority: any) => {
           if (typeof authority === 'object' && authority.length) {
             arr = arr.concat(_.pluck(authority, 'id'));

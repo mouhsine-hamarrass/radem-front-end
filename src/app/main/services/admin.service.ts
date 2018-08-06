@@ -187,11 +187,7 @@ export class AdminService {
     return this.httpClient.get<Response<User>>(`${this.urlApi}/users/${idUser}/find`, {headers: headers});
   }
 
-  getAuthorities(id: number): Observable<Response<any>> {
+  getProfileAuthorities(id: number): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/profiles/${id}/authorities`, {headers: headers});
-  }
-
-  getAccountType(id: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/profiles/${id}/account-types`, {headers: headers});
   }
 }

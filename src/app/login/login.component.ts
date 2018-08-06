@@ -62,7 +62,7 @@ export class LoginComponent extends UIFormComponent implements OnInit {
             if (userData.accessToken) {
                this.toastrService.success('Bienvenue', '');
                setTimeout(() => {
-                  this.router.navigate(['/']);
+                  this.router.navigate(['/home']);
                }, 1000);
             } else {
                this.translate.get('login.error-no-token-sent').subscribe(msg => {

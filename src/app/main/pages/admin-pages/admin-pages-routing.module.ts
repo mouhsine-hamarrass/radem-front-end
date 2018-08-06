@@ -72,7 +72,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'profile/:id',
+        path: 'profiles/:id',
         component: ProfileComponent,
         data: {
           title: 'Editer profil'
@@ -93,7 +93,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'user/:id',
+        path: 'users/:id',
         component: UserComponent,
         data: {
           title: 'Editer utilisateur'
