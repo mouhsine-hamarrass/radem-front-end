@@ -44,7 +44,7 @@
                 <thead>
                   <tr>
                     <th scope="col">Nº de demande</th>
-                    <th scope="col">Fait le</th>
+                    <th scope="col">Créée le</th>
                     <th scope="col">Polices d'abonnement</th>
                     <th scope="col">Statut</th>
                   </tr>
@@ -54,7 +54,7 @@
                     <td>
                       <a [routerLink]="['/services/cancellation-request/', terminationReq.id]">{{terminationReq.requestNumber}}</a>
                     </td>
-                    <td>{{terminationReq.createdAt | date: 'shortDate'}}</td>
+                    <td>{{terminationReq.createdAt | date: 'dd/MM/yyyy'}}</td>
                     <td>{{terminationReq.subscriptions[0]?.subscription}}, {{terminationReq.subscriptions[1]?.subscription}}</td>
                     <td>
                       <span class="label bg-primary">{{terminationReq.status}}</span>

@@ -95,9 +95,9 @@ export class AdminService {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/MinMaxConsumption?contract=${contractNumber}`, {headers: headers});
   }
 
-  getUserWithBill(billNumber: number): Observable<Response<any>> {
+  getUserWithBill(billNumber: number): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?bill=${billNumber}`, {headers: headers});
+    return this.httpClient.get<any>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?bill=${billNumber}`, {headers: headers});
   }
 
   getUserWithContract(contractNumber: number): Observable<Response<any>> {
@@ -105,13 +105,16 @@ export class AdminService {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?contract=${contractNumber}`, {headers: headers});
   }
 
-  getUserWithRef(ref: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?ref=${ref}`, {headers: headers});
+  getUserWithRef(ref: number): Observable<any> {
+    return this.httpClient.get<any>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Users?ref=${ref}`, {headers: headers});
   }
 
   getQuestions(): Observable<Response<Array<any>>> {
+    let h = new HttpHeaders();
+    h = h.set('Content-Type', 'application/json; charset=utf-8');
+    h.append('Authorization', 'Basic VXNlcm5hbWU6UGFzc3dvcmQ=');
     // tslint:disable-next-line:max-line-length
-    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Questions`, {headers: headers});
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Questions`, {headers: h});
   }
 
   getAnswer(question: String): Observable<Response<any>> {

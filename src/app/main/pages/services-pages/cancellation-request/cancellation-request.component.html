@@ -44,30 +44,30 @@
                   <em>Reçue</em>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'OK'}">
+              <li [ngClass]="{current: terminationRequest.status === 'IN_PROGRESS'}">
                 <p>
                   <em>Intervention en cours</em>
                 </p>
               </li>
-              <li>
+              <li [ngClass]="{current: terminationRequest.status === 'DEPOSITED_COUNTER'}">
                 <p>
                   <em>Compteur deposé</em>
                   <span></span>
                 </p>
               </li>
-              <li>
+              <li [ngClass]="{current: terminationRequest.status === 'UNPAID_VERIFICATION'}">
                 <p>
                   <em>Verification impayés</em>
                   <span></span>
                 </p>
               </li>
-              <li>
+              <li [ngClass]="{current: terminationRequest.status === 'SETTLEMENT'}">
                 <p>
                   <em>Reglement/Remboursement</em>
                   <span></span>
                 </p>
               </li>
-              <li>
+              <li [ngClass]="{current: terminationRequest.status === 'CLOSED'}">
                 <p>
                   <em>Cloture</em>
                   <span></span>
@@ -99,12 +99,12 @@
                     <div *ngIf="terminationRequest.intervenant" style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                       <table>
                         <tr>
-                          <td>Agent d'intervention : </td>
-                          <td>{{terminationRequest.intervenant.firstname}} {{terminationRequest.intervenant.lastname}}</td>
+                          <td>Intervenant : </td>
+                          <td>{{terminationRequest.intervenant?.firstname}} {{terminationRequest.intervenant?.lastname}}</td>
                         </tr>
                         <tr>
                           <td>Date d'intervention : </td>
-                          <td></td>
+                          <td>{{terminationRequest.interventionDate | date: 'dd/MM/yyyy'}}</td>
                         </tr>
                         <tr>
                           <td>Tel agent :</td>
@@ -116,12 +116,12 @@
                 </div>
               </fieldset>
               <fieldset class="scheduler-border col-4">
-                <legend class="scheduler-border">Intervenants</legend>
-                <div *ngIf="terminationRequest.intervenant" style="padding-left: 20px;padding-top: 10px;">
+                <legend class="scheduler-border">Agent</legend>
+                <div *ngIf="terminationRequest.agent" style="padding-left: 20px;padding-top: 10px;">
                   <table>
                     <tr>
                       <td>Agent :</td>
-                      <td>{{terminationRequest.agent.firstname}} {{terminationRequest.agent.lastname}}</td>
+                      <td>{{terminationRequest.agent?.firstname}} {{terminationRequest.agent?.lastname}}</td>
                     </tr>
                     <tr>
                       <td>Service concerné :</td>
@@ -129,7 +129,7 @@
                     </tr>
                   </table>
                 </div>
-                <p *ngIf="!terminationRequest.intervenant">Aucun intervenant n'est affecté pour le moment</p>
+                <p *ngIf="!terminationRequest.agent">Aucun agent n'est affecté pour le moment</p>
               </fieldset>
             </div>
             <div class="row" id="cards2">

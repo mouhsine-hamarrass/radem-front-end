@@ -20,7 +20,7 @@ export class RecoverPasswordService {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/auth/reset?email=${email}`);
   }
   resetPassword(token: string, password: string): Observable<Response<Array<any>>> {
-    return this.httpClient.post<Response<Array<any>>>(`${this.urlApi}/auth/reset?token=${token}`, password, {headers: headers});
+    return this.httpClient.post<Response<Array<any>>>(`${this.urlApi}/auth/reset-password?token=${token}`, password, {headers: headers});
   }
 
 }

@@ -21,10 +21,10 @@
           <tbody>
           <tr *ngFor="let complaint of complaints">
             <td><a [routerLink] = "['/admin/claim', complaint.id]">{{complaint.claimNumber}}</a></td>
-            <td>{{complaint.complainer.fullName}}</td>
+            <td>{{complaint.complainer?.fullName}}</td>
             <td>{{complaint.object}}</td>
             <td>{{complaint.createdAt | date:'dd/MM/yyyy'}}</td>
-            <td>{{complaint.agent.firstname}} {{complaint.agent.lastname}}</td>
+            <td>{{complaint.agent?.firstname}} {{complaint.agent?.lastname}}</td>
             <td>{{complaint.service}}</td>
             <td><span class="badge badge-primary">{{complaint.status}}</span></td>
           </tr>
