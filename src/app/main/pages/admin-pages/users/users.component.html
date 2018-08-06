@@ -1,0 +1,100 @@
+<div id="list-users">
+  <nav aria-label="breadcrumb" class="doNotPrint">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Administrateur</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Liste des utilisateurs</li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="spacer"> </div>
+    <div class="card">
+      <div class="card-body">
+        <section>
+          <div class="doNotPrint">
+            <h4 class="card-title text-muted">Liste des utilisateurs</h4>
+            <div class="row ">
+              <div class="col-12 my-3">
+                <div class="float-left m-2">
+                  <form class="form-inline">
+                    <!--app-filter (onfilterChanged)="filterMessages($event)"></app-filter-->
+                  </form>
+                </div>
+                <div class="col-3 float-right">
+                  <!--app-search (onblur)="searchMessages($event)"></app-search-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mx-2 my-3">
+            <table class="table table-bordered" id="print-section">
+              <thead>
+              <tr>
+                <th scope="col" width="100"> Prénom</th>
+                <th scope="col" width="100"> Nom</th>
+                <th scope="col" width="100"> Username</th>
+                <th scope="col" width="140"> E-mail</th>
+                <th scope="col" width="130"> Profil</th>
+                <th scope="col" width="130"> Créé le</th>
+                <th scope="col" width="20"> Actions</th>
+                <th scope="col" width="10"> Active</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of users; let i = index"
+                  [ngClass]="{'table-secondary': !user.enabled}">
+                <td scope="row">{{user.firstname}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.username}}</td>
+                <td><p>{{user.email}}</p></td>
+                <td>{{user.profile}}</td>
+                <td>{{user.createdDate}}</td>
+                <td>
+                  <ul class="list-inline list-unstyled text-center">
+                    <li class="list-inline-item">
+                      <i class="fa fa fa-fw fa-times text-danger actions_icon cursor-pointer"
+                         tooltip="Supprimer"
+                         (click)="dropUser(user.id)"></i>
+                    </li>
+                    <li class="list-inline-item">
+                      <i class="fa fa-fw fa-pencil text-info actions_icon cursor-pointer"
+                         tooltip="Editer"
+                         [routerLink]="['/admin/edit_user', user.id]"></i>
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <!--
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="enabled" [(ngModel)]="user.enabled"
+                           (change)="changeEnabled($event, user)">
+                    <label class="form-check-label" for="enabled"></label>
+                  </div>
+                  -->
+                  <!--ngx-toggle
+                          onColor="primary"
+                          onText="Activé"
+                          offColor="secondary"
+                          offText="Désactivé"
+                          [size]="'sm'"
+                          [(value)]="user.enabled"
+                          (click)="changeEnabled($event, user)">
+                  </ngx-toggle-->
+                </td>
+              </tr>
+              <tr *ngIf="!users || !users.length">
+                <td class="text-muted text-center" colspan="8"><strong>Vous n'avez aucun utilisateur pour le
+                  moment</strong></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--app-pagination [numberOfItems]="numberOfItems"
+                          [itemsPerPage]="itemsPerPage"
+                          [totalPages]="totalPages"
+                          [totalItems]="totalItems"
+                          (onpageChanged)="pageChanged($event)"></app-pagination-->
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

@@ -53,4 +53,8 @@ export class ServicesService {
   getUser(id: number): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/users/${id}/find`);
   }
+
+  getAllAuthoritiesByCategory(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/authorities`);
+  }
 }

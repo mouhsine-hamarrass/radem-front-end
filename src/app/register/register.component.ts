@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { AdminService } from '../../services/admin.service';
+import { AdminService } from '../main/services/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

@@ -10,6 +10,13 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { AlertComponent } from './alert/alert.component';
+import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfilesComponent } from './profiles/profiles.component';
+import {SharedModule} from '../../../shared/shared.module';
+import {UnpaidPagesModule} from '../unpaid-pages/unpaid-pages.module';
+import {ChecklistModule} from 'angular-checklist';
 
 @NgModule({
   imports: [
@@ -17,7 +24,8 @@ import { AlertComponent } from './alert/alert.component';
     AdminPagesRoutingModule,
     ArchwizardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChecklistModule
   ],
   declarations: [
     AdminDashboardComponent,
@@ -25,7 +33,11 @@ import { AlertComponent } from './alert/alert.component';
     RequestsComponent,
     ClaimsComponent,
     ClaimDetailComponent,
-    AlertComponent
+    AlertComponent,
+    UserComponent,
+    UsersComponent,
+    ProfileComponent,
+    ProfilesComponent
   ],
   providers: [AdminService]
 })

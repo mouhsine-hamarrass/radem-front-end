@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 
-import {NgbDropdown, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {FooterComponent} from './footer/footer.component';
 import {NavbarComponent} from './navbar/navbar.component';
@@ -23,6 +23,16 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MomentModule} from 'ngx-moment';
 import {ToastrModule} from 'ngx-toastr';
 import {ChartsModule} from 'ng2-charts';
+import {HttpClientModule} from '@angular/common/http';
+import {ArchwizardModule} from 'angular-archwizard';
+import {NgxToggleModule} from 'ngx-toggle';
+import {FilterComponent} from './components/tables/filter/filter.component';
+import {PaginationComponent} from './components/tables/pagination/pagination.component';
+import {SearchComponent} from './components/tables/search/search.component';
+import {AlertComponent} from './components/alert/alert.component';
+import {AlertService} from './components/alert/alert.service';
+import {ChecklistModule} from 'angular-checklist';
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {
   AccordionModule,
   AlertModule,
@@ -38,17 +48,31 @@ import {
   TabsModule,
   TooltipModule
 } from 'ngx-bootstrap';
-import {HttpClientModule} from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ArchwizardModule} from 'angular-archwizard';
 
 
 @NgModule({
+  declarations: [
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent,
+    ToggleFullscreenDirective,
+    SecondNavbarComponent,
+    LoginComponent,
+    SpinnerComponent,
+    TruncatePipe,
+    HighlightPipe,
+    SortPipe,
+    BytesToSizePipe,
+    FilterComponent,
+    PaginationComponent,
+    SearchComponent,
+    AlertComponent,
+    PageNotFoundComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
@@ -69,7 +93,9 @@ import {ArchwizardModule} from 'angular-archwizard';
     TooltipModule.forRoot(),
     PopoverModule.forRoot(),
     CollapseModule.forRoot(),
-    ArchwizardModule
+    ArchwizardModule,
+    NgxToggleModule,
+    ChecklistModule
   ],
   exports: [
     CommonModule,
@@ -92,25 +118,19 @@ import {ArchwizardModule} from 'angular-archwizard';
     HighlightPipe,
     SortPipe,
     BytesToSizePipe,
-    ArchwizardModule
+    ArchwizardModule,
+    NgxToggleModule,
+    FilterComponent,
+    PaginationComponent,
+    SearchComponent,
+    AlertComponent,
+    ChecklistModule,
   ],
   providers: [
     SpinnerService,
     PrintService,
-    DataService
-  ],
-  declarations: [
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    ToggleFullscreenDirective,
-    SecondNavbarComponent,
-    LoginComponent,
-    SpinnerComponent,
-    TruncatePipe,
-    HighlightPipe,
-    SortPipe,
-    BytesToSizePipe
+    DataService,
+    AlertService
   ]
 })
 export class SharedModule {

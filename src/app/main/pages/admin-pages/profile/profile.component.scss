@@ -1,0 +1,11 @@
+.paddingBottom {
+  padding-bottom: 10px;
+}
+.noMargin {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.form-group.required .control-label:after {
+  content:" *";
+  color:red;
+}

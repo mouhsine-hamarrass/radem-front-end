@@ -1,0 +1,66 @@
+<div id="list-modeles">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Admin</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Liste des profils</li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="spacer"> </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-muted">Liste des profils</h4>
+        <section>
+          <div class="row">
+            <div class="col-12 my-3">
+              <div class="float-left m-2">
+                <!--app-filter (onfilterChanged)="filterprofiles($event)"></app-filter-->
+              </div>
+              <div class="float-right m-2">
+                <!--app-search (onblur)="searchprofiles($event)"></app-search-->
+              </div>
+            </div>
+
+          </div>
+          <div class="mx-2 my-3">
+            <table class="table table-bordered" id="print-section">
+              <thead>
+              <tr>
+                <th scope="col" width="200">Nom de profil</th>
+                <th scope="col">Description</th>
+                <th scope="col" width="110">Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let profil of profils">
+                <td>{{profil.title}}</td>
+                <td>{{profil.description}}</td>
+                <td>
+                  <ul class="list-unstyled list-inline text-center nomargin">
+                    <li class="list-inline-item">
+                      <i class="fa fa-pencil text-info" [routerLink]="['/admin/edit_profile',profil.id]">
+                      </i>
+                    </li>
+                    <li class="list-inline-item">
+                      <i class="fa fa-times text-danger" (click)="dropProfile(profil.id)">
+                      </i>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--app-pagination [disabled]="false"
+                          [numberOfItems]="numberOfItems"
+                          [itemsPerPage]="itemsPerPage"
+                          [totalItems]="totalElements"
+                          [totalPages]="totalPages"
+                          (onpageChanged)="pageChanged($event)"></app-pagination-->
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
