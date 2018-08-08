@@ -25,7 +25,7 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetPasswordForm.controls.newPassword === this.resetPasswordForm.controls.confirmedPassword) {
       return;
     }
-    const token = this.route.snapshot.paramMap.get('token');
+    const token = this.route.snapshot.queryParams.token;
     this.recoverPasswordServices.resetPassword(token, this.resetPasswordForm.controls.newPassword.value).subscribe(Response => {
 
     }, err => {});

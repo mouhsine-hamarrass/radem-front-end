@@ -49,13 +49,13 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let subscription of subscriptions" class="text-center" [ngClass]="subscription.type === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
-                    <td (click)="openDetailSubscription(detailSubscription, subscription.id)">
+                    <td style="cursor: pointer;" (click)="openDetailSubscription(detailSubscription, subscription.id)">
                       <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;{{subscription.police}}</td>
                     <td>{{subscription.state}}</td>
                     <td>{{subscription.address}}</td>
                     <td>{{subscription.lastConsumption}}</td>
-                    <td (click)="showBills(subscription.police)">{{subscription.toBePayed}}</td>
-                    <td>{{subscription.nextBill}}</td>
+                    <td>{{subscription.toBePayed}}</td>
+                    <td style="cursor: pointer;" (click)="showBills(subscription.police)">{{subscription.nextBill}}</td>
                     <td>
                       <i class="fa fa-history"></i>
                     </td>
@@ -98,8 +98,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let bill of bills">
-                    <td *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)">{{bill.numBill}}</td>
-                    <td *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)">{{bill.numBill}}</td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)">{{bill.numBill}}</td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)">{{bill.numBill}}</td>
                     <td>{{bill.dueNumber}}</td>
                     <td>{{bill.police}}</td>
                     <td>{{bill.dueDate}}</td>
@@ -111,6 +111,7 @@
                   </tr>
                 </tbody>
               </table>
+              <a class="btn btn-primary pull-right" href="/account/unpaid">Payer</a>
             </div>
           </div>
         </div>

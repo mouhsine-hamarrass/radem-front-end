@@ -18,6 +18,7 @@ import {ChecklistModule} from 'angular-checklist';
 import {NgxToggleModule} from 'ngx-toggle';
 import {TabsModule} from 'ngx-bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import {TranslateModule} from '@ngx-translate/core';
     UserComponent,
     UsersComponent,
     ProfileComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    SubscriptionDetailComponent
   ],
   providers: [AdminService]
 })

@@ -10,6 +10,7 @@ import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {ProfileComponent} from './profile/profile.component';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,13 @@ const routes: Routes = [
         component: ClaimDetailComponent,
         data: {
           title: 'Réclamation'
+        }
+      },
+      {
+        path: 'subscription/:id',
+        component: SubscriptionDetailComponent,
+        data: {
+          title: 'Abonnement'
         }
       },
       {

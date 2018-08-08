@@ -34,7 +34,7 @@
             <form class="form-inline" *ngIf="!confirmation">
               <div class="table-responsive">
                 <table class="table table-bordered">
-                  <thead class="table-light">
+                  <thead class="table-primary">
                     <tr>
                       <th>
                         <input type="checkbox" class="form-control" (change)="selectAll($event)">
@@ -86,7 +86,7 @@
             <form class="form-inline" *ngIf="confirmation">
               <div class="table-responsive">
                 <table class="table table-bordered">
-                  <thead class="table-dark">
+                  <thead class="table-light">
                     <tr>
                       <th scope="col">Nº de facture</th>
                       <th scope="col">Nº d'echeance</th>
@@ -96,7 +96,7 @@
                       <th scope="col">Montant (Dhs)</th>
                     </tr>
                   </thead>
-                  <tbody class="table-light">
+                  <tbody>
                     <tr *ngFor="let bill of selectedBills">
                       <td>{{bill.numBill}}</td>
                       <td>{{bill.dueNumber}}</td>
