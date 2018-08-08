@@ -8,7 +8,6 @@ import {DemoPagesModule} from './pages/demo-pages/demo-pages.module';
 import {HomePageModule} from './pages/home-page/home-page.module';
 import {ProfilePageModule} from './pages/profile-page/profile-page.module';
 import {ServicesPagesModule} from './pages/services-pages/services-pages.module';
-import {UnpaidPagesModule} from './pages/unpaid-pages/unpaid-pages.module';
 import {UtilsService} from './services/utils.service';
 
 @NgModule({
@@ -20,8 +19,7 @@ import {UtilsService} from './services/utils.service';
     DemoPagesModule,
     HomePageModule,
     ProfilePageModule,
-    ServicesPagesModule,
-    UnpaidPagesModule
+    ServicesPagesModule
   ],
   providers: [
     ServicesService,
@@ -36,8 +34,7 @@ import {UtilsService} from './services/utils.service';
     DemoPagesModule,
     HomePageModule,
     ProfilePageModule,
-    ServicesPagesModule,
-    UnpaidPagesModule
+    ServicesPagesModule
   ]
 })
 export class MainModule {
