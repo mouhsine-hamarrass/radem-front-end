@@ -10,6 +10,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { AlertComponent } from './alert/alert.component';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { AlertComponent } from './alert/alert.component';
     RequestsComponent,
     ClaimsComponent,
     ClaimDetailComponent,
-    AlertComponent
+    AlertComponent,
+    SubscriptionDetailComponent
   ],
   providers: [AdminService]
 })
