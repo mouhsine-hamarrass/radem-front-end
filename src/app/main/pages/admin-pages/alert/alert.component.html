@@ -1,9 +1,41 @@
 <div class="col-md-12 py-3">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Ajouter une alerte</h4>
-        <div>
-        </div>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ajouter une alerte</h4>
+      <div class="col-md-10">
+        <form class="" [formGroup]="alertForm">
+          <div class="row col-md-12 form-group">
+            <label class="col-form-label col-md-3">Type d'alerte :</label>
+            <div class="col-md-6">
+              <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
+                <option value="" selected disabled>Choisissez un type</option>
+                <option *ngFor="let alertType of alertTypes" value="{{alertType.id}}">{{alertType.alertType}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row col-md-12 form-group">
+            <label class="col-form-label col-md-3">Aperçu de l'alerte :</label>
+            <div class="col-md-9">
+              <textarea formControlName="description" class="form-control" disabled></textarea>
+            </div>
+          </div>
+          <div class="row col-md-12 form-group">
+            <label class="col-form-label col-md-3">Le contrat concerné :</label>
+            <div class="col-md-4">
+              <select formControlName="contract" class="custom-select" type="text" #t2 (change)="setClient(t2.value)">
+                <option value="" selected disabled>Choisissez un contrat</option>
+                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}</option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <input formControlName="client" type="text" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="row col-md-12">
+            <button [routerLink]="['/admin']" class="btn btn-primary ml" (click)="saveNotificationAlert()" >Valider</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
