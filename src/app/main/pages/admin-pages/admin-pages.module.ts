@@ -10,6 +10,14 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { AlertComponent } from './alert/alert.component';
+import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfilesComponent } from './profiles/profiles.component';
+import {ChecklistModule} from 'angular-checklist';
+import {NgxToggleModule} from 'ngx-toggle';
+import {TabsModule} from 'ngx-bootstrap';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -17,7 +25,11 @@ import { AlertComponent } from './alert/alert.component';
     AdminPagesRoutingModule,
     ArchwizardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChecklistModule,
+    NgxToggleModule,
+    TabsModule.forRoot(),
+    TranslateModule
   ],
   declarations: [
     AdminDashboardComponent,
@@ -25,7 +37,11 @@ import { AlertComponent } from './alert/alert.component';
     RequestsComponent,
     ClaimsComponent,
     ClaimDetailComponent,
-    AlertComponent
+    AlertComponent,
+    UserComponent,
+    UsersComponent,
+    ProfileComponent,
+    ProfilesComponent
   ],
   providers: [AdminService]
 })

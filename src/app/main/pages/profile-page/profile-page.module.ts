@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProfilePageRoutingModule } from './profile-page-routing.module';
 import { ProfilePageComponent } from './profile-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ProfileService} from '../../services/profile.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [ProfilePageComponent]
+  declarations: [ProfilePageComponent],
+  providers: [
+    ProfileService
+  ]
 })
 export class ProfilePageModule { }

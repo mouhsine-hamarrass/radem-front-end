@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {SharedModule} from './shared/shared.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +7,7 @@ import {AppComponent} from './app.component';
 import {BoxedLayoutComponent} from './layouts/boxed-layout/boxed-layout.component';
 
 import {MaintenanceComponent} from './maintenance/maintenance.component';
-import {PageNotFoundComponent} from './main/pages/page-not-found/page-not-found.component';
+import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import {createTranslateLoader} from './app.translate.factory';
 import {CoreModule} from './core/core.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -17,14 +16,12 @@ import {environment} from '../environments/environment';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
 import {BoxedWithSidebarLayoutComponent} from './layouts/boxed-with-sidebar-layout/boxed-with-sidebar-layout.component';
 import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
-import {ServicesService} from './main/services/services.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { ContractsService } from './main/services/contracts.service';
-import { ProfilePageComponent } from './main/pages/profile-page/profile-page.component';
-import { ProfileService } from './main/services/profile.service';
-import { RecoverPasswordComponent } from './main/pages/recover-password/recover-password.component';
-import { RecoverPasswordService } from './main/services/recover-password.service';
-import { ResetPasswordComponent } from './main/pages/reset-password/reset-password.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {RegisterComponent} from './register/register.component';
+import {MainModule} from './main/main.module';
 
 @NgModule({
   declarations: [
@@ -32,34 +29,31 @@ import { ResetPasswordComponent } from './main/pages/reset-password/reset-passwo
     BoxedLayoutComponent,
     TwoColumnsLayoutComponent,
     MaintenanceComponent,
-    PageNotFoundComponent,
     DashboardLayoutComponent,
     BoxedWithSidebarLayoutComponent,
     RecoverPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    RegisterComponent
   ],
   imports: [
-    BrowserAnimationsModule,
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    SharedModule,
-    CoreModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    CoreModule,
+    SharedModule,
+    MainModule,
   ],
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
-    ServicesService,
-    ContractsService,
-    ProfileService,
-    RecoverPasswordService
   ],
   bootstrap: [AppComponent]
 })

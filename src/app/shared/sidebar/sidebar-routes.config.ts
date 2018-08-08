@@ -1,10 +1,91 @@
 import {RouteInfo} from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
+
+  {
+    path: '',
+    title: 'Administration',
+    icon: 'icon-settings',
+    class: '',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: [
+      {
+        path: '',
+        title: 'Utilisateurs',
+        icon: 'icon-users',
+        class: 'nav-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: [
+          {
+            path: '/admin/users',
+            title: 'Liste des utilisateurs',
+            icon: 'icon-list',
+            class: 'nav-item',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            isNavHeader: false,
+            submenu: []
+          },
+          {
+            path: '/admin/user',
+            title: 'Nouveau utilisateur',
+            icon: 'icon-user-follow',
+            class: 'nav-item',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            isNavHeader: false,
+            submenu: []
+          }
+        ]
+      },
+      {
+        path: '',
+        title: 'Profils',
+        icon: 'icon-graduation',
+        class: 'nav-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: [
+          {
+            path: '/admin/profiles',
+            title: 'Liste de profils',
+            icon: 'icon-list',
+            class: 'nav-item',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            isNavHeader: false,
+            submenu: []
+          },
+          {
+            path: '/admin/profile',
+            title: 'Nouveau profil',
+            icon: 'icon-ghost',
+            class: 'nav-item',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            isNavHeader: false,
+            submenu: []
+          }
+        ]
+      }
+    ]
+  },
   {
     path: '',
     title: 'Demandes',
-    icon: 'fa fa-book',
+    icon: 'icon-envelope-letter',
     class: '',
     badge: '',
     badgeClass: '',
@@ -14,7 +95,7 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/admin/requests',
         title: 'Liste des demandes',
-        icon: 'fa fa-list',
+        icon: 'icon-list',
         class: 'nav-item',
         badge: '',
         badgeClass: '',
@@ -27,7 +108,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '',
     title: 'Réclamations',
-    icon: 'fa fa-comment',
+    icon: 'icon-speech',
     class: '',
     badge: '',
     badgeClass: '',
@@ -37,7 +118,7 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/admin/claims',
         title: 'Liste des réclamations',
-        icon: 'fa fa-list',
+        icon: 'icon-list',
         class: 'nav-item',
         badge: '',
         badgeClass: '',
@@ -50,7 +131,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '',
     title: 'Alertes',
-    icon: 'fa fa-exclamation-triangle',
+    icon: 'icon-bell',
     class: '',
     badge: '',
     badgeClass: '',
@@ -60,7 +141,7 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/admin/alert',
         title: 'Ajouter une alerte',
-        icon: 'fa fa-plus',
+        icon: 'icon-plus',
         class: 'nav-item',
         badge: '',
         badgeClass: '',

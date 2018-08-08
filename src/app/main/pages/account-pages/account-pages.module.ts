@@ -9,6 +9,7 @@ import {ChartsModule} from 'ng2-charts';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import { AdminService } from '../../services/admin.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {SharedModule} from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ChartsModule,
     FormsModule,
     BsDatepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     ContractsComponent,
