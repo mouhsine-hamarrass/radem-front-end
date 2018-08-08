@@ -84,7 +84,7 @@
 
               <aw-wizard-step [stepTitle]="'Étape 2'" [navigationSymbol]="{ symbol: '2' }">
                 <div class="offset-2 col-md-8 my-5">
-                  <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en ligne :</h6>
+                  <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en ligne:</h6>
                   <form [formGroup]="registerForm">
                     <div class="form-group">
                       <label>Nom et prenom :</label>
@@ -195,7 +195,7 @@
                       </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button type="button" class="btn btn-primary" awNextStep>Se connecter</button>
+                    <button [routerLink] = "['/login']" type="button" class="btn btn-primary" awNextStep>Se connecter</button>
                   </div>
                 </div>
               </aw-wizard-completion-step>
