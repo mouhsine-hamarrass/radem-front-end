@@ -137,7 +137,7 @@ export class AdminService {
   saveUser(client: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.urlApi}/users/save`, client, {headers: headers});
   }
-  
+
   // Alerts
   getAlertTypes(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/alerts/alertTypes`, {headers: headers});
@@ -149,7 +149,7 @@ export class AdminService {
 
   saveAlertNotification(alertNotification: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.urlApi}/alerts/save`, alertNotification, {headers: headers});
-
+  }
   // Profiles
   getListProfiles(): Observable<Response<Array<Profile>>> {
     return this.httpClient.get<Response<Array<Profile>>>(`${this.urlApi}/profiles`);
