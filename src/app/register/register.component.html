@@ -15,7 +15,7 @@
         <div class="card-content collapse show">
           <div class="card-body">
             <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'strict'">
-              <aw-wizard-step [stepTitle]="'Étape 1'" [navigationSymbol]="{ symbol: '1' }" class="offset-1 col-md-10">
+              <aw-wizard-step [stepTitle]="'Identification'" [navigationSymbol]="{ symbol: '&#xe090;', fontFamily:'Simple-line-icons' }" class="offset-1 col-md-10">
                 <div class="mx-auto my-5">
                   <h6> Veuillez choisir une seule méthode pour vous identifiez :</h6>
                   <form [formGroup]="registerForm" class="mx-auto ng-pristine ng-valid ng-touched" novalidate>
@@ -82,7 +82,7 @@
 
 
 
-              <aw-wizard-step [stepTitle]="'Étape 2'" [navigationSymbol]="{ symbol: '2' }">
+              <aw-wizard-step [stepTitle]="'Confirmation'" [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
                   <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en ligne:</h6>
                   <form [formGroup]="registerForm">
@@ -107,7 +107,7 @@
                     </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button [disabled]="toStep3" type="button" id="toStep3" class="btn btn-primary" (click)="goToStep3()" awNextStep>Suivant</button>
+                    <button [disabled]="toStep3" type="button" id="toStep3" class="btn btn-primary next" (click)="goToStep3()" awNextStep>Suivant</button>
                   </div>
                 </div>
               </aw-wizard-step>
@@ -116,7 +116,7 @@
 
 
 
-              <aw-wizard-step [stepTitle]="'Étape 3'" [navigationSymbol]="{ symbol: '3' }">
+              <aw-wizard-step [stepTitle]="'Saisie des infos'" [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
                   <h6> Veuillez renseigner vos coordonées dans les champs ci-dessous pour confirmer votre inscription :</h6>
                   <form [formGroup]="registerForm">
@@ -147,7 +147,7 @@
                     </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button [disabled]="!buttonCheck" type="button" class="btn btn-primary" (click)="goToStep4()" awNextStep>Suivant</button>
+                    <button [disabled]="!buttonCheck" type="button" class="btn btn-primary next" (click)="goToStep4()" awNextStep>Suivant</button>
                   </div>
                 </div>
               </aw-wizard-step>
@@ -155,7 +155,7 @@
 
 
 
-              <aw-wizard-completion-step [stepTitle]="'Étape 4'" [navigationSymbol]="{ symbol: '4' }">
+              <aw-wizard-completion-step [stepTitle]="'Validation'" [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
                   <h6>Vous allez recevoir un mail sur votre adresse électronique pour activer votre compte.</h6>
                   <form [formGroup]="detailsForm">
@@ -195,7 +195,7 @@
                       </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button [routerLink] = "['/login']" type="button" class="btn btn-primary" awNextStep>Se connecter</button>
+                    <button [routerLink] = "['/login']" type="button" class="btn btn-primary next" awNextStep>Se connecter</button>
                   </div>
                 </div>
               </aw-wizard-completion-step>
