@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-consumption-page',
@@ -18,7 +19,7 @@ export class ConsumptionPageComponent implements OnInit {
   protected minMax;
   protected meters: any;
 
-  constructor(private adminService: AdminService,
+  constructor(private adminService: AdminService, private utilsService: UtilsService,
     private formBuilder: FormBuilder) {
       this.minMaxForm = this.formBuilder.group({
         contract: ['', Validators.required],
@@ -54,6 +55,12 @@ export class ConsumptionPageComponent implements OnInit {
   getConsumptionHistory() {
     this.adminService.getConsumptions(this.contractNumber).subscribe(response => {
       this.Consumptions = response;
+    })
+  }
+
+  getConsumptionReport() {
+    this.utilsService.getConsumptionReport().subscribe(response => {
+      console.log(response);
     })
   }
 

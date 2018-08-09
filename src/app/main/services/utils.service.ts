@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient,} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '../../core/models/response.model';
@@ -15,5 +15,13 @@ export class UtilsService {
 
   getAuthorities(): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/authorities`);
+  }
+
+  getConsumptionReport(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/download/consumptions`);
+  }
+
+  getSettlementsReport(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/download/settlements`);
   }
 }
