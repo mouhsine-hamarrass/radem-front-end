@@ -5,17 +5,18 @@
       <!-- What is-->
       <div id="what-is" class="card">
         <div class="card-header">
-          <h4 class="card-title">Inscription</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
+          <div class="row card-title">
+            <h4 class="ml-h4" >Inscription</h4>
+            <img class="ml-60p" src="/assets/app/images/logo/rademLogo.png">
+          </div>
           <div class="heading-elements">
           </div>
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
             <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'strict'">
-              <aw-wizard-step [stepTitle]="'Étape 1'" [navigationSymbol]="{ symbol: '1' }" class="offset-1 col-md-10">
+              <aw-wizard-step [stepTitle]="'Identification'" [navigationSymbol]="{ symbol: '&#xe090;', fontFamily:'Simple-line-icons' }"
+                class="offset-1 col-md-10">
                 <div class="mx-auto my-5">
                   <h6> Veuillez choisir une seule méthode pour vous identifiez :</h6>
                   <form [formGroup]="registerForm" class="mx-auto ng-pristine ng-valid ng-touched" novalidate>
@@ -69,20 +70,23 @@
                     </div>
                   </form>
                   <div class="mt-1" style="margin-left: 9rem;">
-                    <div class="content col-md-12">
+
+                  </div>
+                  <div class="row">
+                    <div class="content col-md-6 condit">
                       <input id="conditions" type="checkbox" (change)="setCheckbox()" />
                       <label for="conditions">J'accepte les conditions générales d'utilisation.</label>
                     </div>
-                  </div>
-                  <div class="btn-group ml-17">
-                    <button [disabled]="!checkbox" type="button" (click)="goToStep2()" class="btn btn-primary" awNextStep>Suivant</button>
+                    <div class="btn-group">
+                      <button [disabled]="!checkbox" type="button" (click)="goToStep2()" class="btn btn-primary" awNextStep>Suivant</button>
+                    </div>
                   </div>
                 </div>
               </aw-wizard-step>
 
 
 
-              <aw-wizard-step [stepTitle]="'Étape 2'" [navigationSymbol]="{ symbol: '2' }">
+              <aw-wizard-step [stepTitle]="'Confirmation'" [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
                   <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en ligne:</h6>
                   <form [formGroup]="registerForm">
@@ -93,21 +97,23 @@
                     <div class="form-group">
                       <label>Séléctionnez une question :</label>
                       <select formControlName="questions" class="form-control">
-                        <option  *ngFor="let question of questions" value="{{question.question}}">{{question.question}}</option>
+                        <option *ngFor="let question of questions" value="{{question.question}}">{{question.question}}</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Votre réponse :</label>
                       <fieldset class="form-group position-relative">
-                          <input type="text" formControlName="answer" class="form-control" placeholder="Votre réponse ..">
-                          <div class="form-control-position">
-                            <a><i title="Cliquez pour vérifier votre réponse" [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'" class="" (click)="Verification()" ></i></a>
-                          </div>
-                        </fieldset>
+                        <input type="text" formControlName="answer" class="form-control" placeholder="Votre réponse ..">
+                        <div class="form-control-position">
+                          <a>
+                            <i title="Cliquez pour vérifier votre réponse" [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'" class="" (click)="Verification()"></i>
+                          </a>
+                        </div>
+                      </fieldset>
                     </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button [disabled]="toStep3" type="button" id="toStep3" class="btn btn-primary" (click)="goToStep3()" awNextStep>Suivant</button>
+                    <button [disabled]="toStep3" type="button" id="toStep3" class="btn btn-primary next" (click)="goToStep3()" awNextStep>Suivant</button>
                   </div>
                 </div>
               </aw-wizard-step>
@@ -116,7 +122,7 @@
 
 
 
-              <aw-wizard-step [stepTitle]="'Étape 3'" [navigationSymbol]="{ symbol: '3' }">
+              <aw-wizard-step [stepTitle]="'Infos du compte'" [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
                   <h6> Veuillez renseigner vos coordonées dans les champs ci-dessous pour confirmer votre inscription :</h6>
                   <form [formGroup]="registerForm">
@@ -147,7 +153,7 @@
                     </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button [disabled]="!buttonCheck" type="button" class="btn btn-primary" (click)="goToStep4()" awNextStep>Suivant</button>
+                    <button [disabled]="!buttonCheck" type="button" class="btn btn-primary next" (click)="goToStep4()" awNextStep>Suivant</button>
                   </div>
                 </div>
               </aw-wizard-step>
@@ -155,7 +161,7 @@
 
 
 
-              <aw-wizard-completion-step [stepTitle]="'Étape 4'" [navigationSymbol]="{ symbol: '4' }">
+              <aw-wizard-completion-step [stepTitle]="'Validation'" [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
                   <h6>Vous allez recevoir un mail sur votre adresse électronique pour activer votre compte.</h6>
                   <form [formGroup]="detailsForm">
@@ -185,17 +191,17 @@
                       </fieldset>
                     </div>
                     <div class="form-group">
-                        <label>Nom d'utilisateur :</label>
-                        <fieldset class="form-group position-relative has-icon-left">
-                          <input type="text" formControlName="username" class="form-control" disabled>
-                          <div class="form-control-position">
-                            <i class="ft-user primary font-4"></i>
-                          </div>
-                        </fieldset>
-                      </div>
+                      <label>Nom d'utilisateur :</label>
+                      <fieldset class="form-group position-relative has-icon-left">
+                        <input type="text" formControlName="username" class="form-control" disabled>
+                        <div class="form-control-position">
+                          <i class="ft-user primary font-4"></i>
+                        </div>
+                      </fieldset>
+                    </div>
                   </form>
                   <div class="btn-group ml-13">
-                    <button [routerLink] = "['/login']" type="button" class="btn btn-primary" awNextStep>Se connecter</button>
+                    <button [routerLink]="['/login']" type="button" class="btn btn-primary" awNextStep>Se connecter</button>
                   </div>
                 </div>
               </aw-wizard-completion-step>
