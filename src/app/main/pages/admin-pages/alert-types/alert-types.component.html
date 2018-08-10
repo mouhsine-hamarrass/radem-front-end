@@ -24,14 +24,12 @@
             <thead class="table-light">
             <tr>
               <th scope="col">Désignation</th>
-              <th scope="col">Message</th>
               <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let alertType of alertTypes">
               <td>{{alertType.title}}</td>
-              <td>{{alertType.message}}</td>
               <td>
                 <ul class="list-unstyled list-inline text-center nomargin">
                   <li class="list-inline-item">

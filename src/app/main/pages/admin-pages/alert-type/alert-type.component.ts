@@ -25,16 +25,11 @@ export class AlertTypeComponent implements OnInit {
               private toastrService: ToastrService) {
     this.formAlertType = this.formBuilder.group({
       title: ['', Validators.required],
-      message: []
     });
   }
 
   get title() {
     return this.formAlertType.get('title');
-  }
-
-  get message() {
-    return this.formAlertType.get('message');
   }
 
   ngOnInit() {
@@ -53,13 +48,11 @@ export class AlertTypeComponent implements OnInit {
 
   loadAlertType() {
     this.title.setValue(this.alertType.title);
-    this.message.setValue(this.alertType.message);
   }
 
   createAlertType() {
     this.isSubmitted = true;
     this.alertType.title = this.formAlertType.controls.title.value;
-    this.alertType.message = this.formAlertType.controls.message.value;
 
     this.adminService.createAlertType(this.alertType).subscribe(response => {
       this.toastrService.success('Type d\'alerte ajouté', '', {
@@ -72,7 +65,6 @@ export class AlertTypeComponent implements OnInit {
   saveAlertType() {
     this.isSubmitted = true;
     this.alertType.title = this.formAlertType.controls.title.value;
-    this.alertType.message = this.formAlertType.controls.message.value;
 
     this.adminService.saveAlertType(this.alertType.id, this.alertType).subscribe(response => {
       this.toastrService.success('Type d\'alerte modifié', '', {
