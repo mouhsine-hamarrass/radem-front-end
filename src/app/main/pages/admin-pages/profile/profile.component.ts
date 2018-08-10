@@ -3,7 +3,7 @@ import {Profile} from '../../../models/profile.model';
 import {UtilsService} from '../../../services/utils.service';
 import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -76,11 +76,11 @@ export class ProfileComponent implements OnInit {
     this.profile.authoritiesIds = this.selectedAuthorities;
     this.adminService.saveProfile(this.profile).subscribe(response => {
       if (this.profile.id == null) {
-        this.toastrService.success('Profile ajouté', '', {
+        this.toastrService.success('Profil ajouté', '', {
           timeOut: 2000,
         });
       } else {
-        this.toastrService.success('Profile modifié', '', {
+        this.toastrService.success('Profil modifié', '', {
           timeOut: 2000,
         });
       }
