@@ -1,0 +1,56 @@
+<div id="add-modele">
+   <nav aria-label="breadcrumb">
+      <ul class="breadcrumb">
+         <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
+         <li class="breadcrumb-item active" aria-current="page">Nouveau type d'alerte</li>
+      </ul>
+   </nav>
+   <div class="container-fluid">
+      <div class="spacer"></div>
+      <div class="card">
+         <div class="card-body">
+            <section>
+               <form role="form" novalidate [formGroup]="formAlertType">
+                  <h4 class="card-title text-muted" *ngIf="!alertType.id">Ajouter un type d'alerte</h4>
+                  <h4 class="card-title text-muted" *ngIf="alertType.id">Modifier le type d'alerte</h4>
+                  <div class="mx-2 my-3 text-right">
+                     <div class="row form-group required">
+                        <label for="titre" class="col-sm-3 control-label">Désignation</label>
+                        <div class="col-sm-9">
+                           <input formControlName="title" id="name" name="name" type="text" placeholder="Désignation"
+                                  class="form-control required"
+                                  id="titre">
+                           <div *ngIf="title.invalid && (title.dirty || isSubmitted)" class="text-danger text-left">
+                              <div *ngIf="title.errors.required">
+                                 La désignation de type d'alerte est obligatoire
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row form-group">
+                        <label for="type" class="col-sm-3 control-label">Message</label>
+                        <div class="col-sm-9">
+                           <textarea formControlName="message" name="message" class="form-control" id="type"></textarea>
+                           <div *ngIf="message.invalid && (message.dirty || isSubmitted)" class="text-danger text-left">
+                              <div *ngIf="message.errors.required">
+                                 Le message de type d'alerte est obligatoire
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <br>
+                     <button type="button" class="btn btn-secondary" [routerLink]="['/admin/types-alerts']"> Annuler
+                     </button>
+                     <button class="btn btn-primary" (click)="createAlertType()" *ngIf="!alertType.id"
+                             [disabled]="formAlertType.invalid">Enregistrer
+                     </button>
+                     <button class="btn btn-primary" (click)="saveAlertType()" *ngIf="alertType.id"
+                             [disabled]="formAlertType.invalid">Modifier
+                     </button>
+                  </div>
+               </form>
+            </section>
+         </div>
+      </div>
+   </div>
+</div>

@@ -9,11 +9,13 @@ import {HomePageModule} from './pages/home-page/home-page.module';
 import {ProfilePageModule} from './pages/profile-page/profile-page.module';
 import {ServicesPagesModule} from './pages/services-pages/services-pages.module';
 import {UtilsService} from './services/utils.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminPagesModule,
+    BrowserAnimationsModule,
     ConsumptionPageModule,
     ContractPagesModule,
     DemoPagesModule,
@@ -34,7 +36,7 @@ import {UtilsService} from './services/utils.service';
     DemoPagesModule,
     HomePageModule,
     ProfilePageModule,
-    ServicesPagesModule
+    ServicesPagesModule,
   ]
 })
 export class MainModule {

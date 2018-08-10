@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
 import {Profile} from '../models/profile.model';
 import {User} from '../models/user.model';
+import {AlertTypeModel} from '../models/alert-type.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -207,5 +208,32 @@ export class AdminService {
 
   getProfileAuthorities(id: number): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/profiles/${id}/authorities`, {headers: headers});
+  }
+
+  /**
+   * Alerts Types
+   */
+  createAlertType(alertType: AlertTypeModel) {
+    return this.httpClient.post(`${this.urlApi}/alerts-types`, alertType, {headers: headers});
+  }
+
+  saveAlertType(alertTypeId: number, alertType: AlertTypeModel) {
+    return this.httpClient.put(`${this.urlApi}/alerts-types/${alertTypeId}`, alertType, {headers: headers});
+  }
+
+  getAlertType(alertTypeId: string): Observable<Response<AlertTypeModel>> {
+    return this.httpClient.get<Response<AlertTypeModel>>(`${this.urlApi}/alerts-types/${alertTypeId}`, {headers: headers});
+  }
+
+  getPageableAlertTypes(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
+    if (keyword) {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts-types?page=${page}&size=${pageSize}&keyword=${keyword}`);
+    } else {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts-types?page=${page}&size=${pageSize}`);
+    }
+  }
+
+  dropAlertType(alertTypeId: number) {
+    return this.httpClient.delete(`${this.urlApi}/alerts-types/${alertTypeId}`,  {headers: headers});
   }
 }

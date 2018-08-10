@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import {BrowserModule} from '@angular/platform-browser';
 import {RegisterComponent} from './register/register.component';
 import {MainModule} from './main/main.module';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MainModule} from './main/main.module';
       }
     }),
     CoreModule,
+    ToastrModule.forRoot(),
     SharedModule,
     MainModule,
   ],

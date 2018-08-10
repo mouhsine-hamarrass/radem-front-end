@@ -14,7 +14,6 @@ import {LoginGuard} from './core/guards/login.guard';
 import {LoginComponent} from './login/login.component';
 import {RecoverPasswordComponent} from './recover-password/recover-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
-import {UNPAID_PAGES_ROUTES} from './routes/unpaid-pages.routes';
 import {RegisterComponent} from './register/register.component';
 
 const appRoutes: Routes = [
