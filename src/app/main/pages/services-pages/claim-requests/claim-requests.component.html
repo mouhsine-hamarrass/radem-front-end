@@ -53,7 +53,7 @@
                   <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a></td>
                   <td>{{complaint.object}}</td>
                   <td>{{complaint.createdDate | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{complaint.status}}</td>
+                  <td><span  class="badge badge-primary">{{complaint.status}}</span></td>
                 </tr>
               </tbody>
             </table>

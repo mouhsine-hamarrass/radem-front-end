@@ -34,40 +34,40 @@
         <div class="card-content collapse show">
           <div class="card-body">
             <ul class="steps steps-7">
-              <li [ngClass]="{current: terminationRequest.status === 'CREATED'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'CREATED'}">
                 <p class="mx-auto">
                   <em>Créée</em>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'RECEIVED'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'RECEIVED'}">
                 <p>
                   <em>Reçue</em>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'IN_PROGRESS'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'IN_PROGRESS'}">
                 <p>
                   <em>Intervention en cours</em>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'DEPOSITED_COUNTER'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'DEPOSITED_COUNTER'}">
                 <p>
                   <em>Compteur deposé</em>
                   <span></span>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'UNPAID_VERIFICATION'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'UNPAID_VERIFICATION'}">
                 <p>
                   <em>Verification impayés</em>
                   <span></span>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'SETTLEMENT'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'SETTLEMENT'}">
                 <p>
                   <em>Reglement/Remboursement</em>
                   <span></span>
                 </p>
               </li>
-              <li [ngClass]="{current: terminationRequest.status === 'CLOSED'}">
+              <li [ngClass]="{current: terminationRequest?.status === 'CLOSED'}">
                 <p>
                   <em>Cloture</em>
                   <span></span>
@@ -84,31 +84,31 @@
                       <table>
                         <tr>
                           <td>N° demande :</td>
-                          <td>{{terminationRequest.requestNumber}}</td>
+                          <td>{{terminationRequest?.requestNumber}}</td>
                         </tr>
                         <tr>
                           <td>Client :</td>
-                          <td>{{terminationRequest.client?.fullName}}</td>
+                          <td>{{terminationRequest?.client?.lastname}} {{terminationRequest?.client?.firstname}}</td>
                         </tr>
                         <tr>
                           <td>Police :</td>
-                          <td>{{terminationRequest.subscriptions[0]?.subscription}}, {{terminationRequest.subscriptions[1]?.subscription}}</td>
+                          <td>{{terminationRequest?.subscriptions[0]?.subscription}} {{!terminationRequest?.subscriptions[1] ? '' : ','}} {{terminationRequest?.subscriptions[1]?.subscription}}</td>
                         </tr>
                       </table>
                     </div>
-                    <div *ngIf="terminationRequest.intervenant" style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                    <div *ngIf="terminationRequest?.intervenant" style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                       <table>
                         <tr>
                           <td>Intervenant : </td>
-                          <td>{{terminationRequest.intervenant?.firstname}} {{terminationRequest.intervenant?.lastname}}</td>
+                          <td>{{terminationRequest?.intervenant?.firstname}} {{terminationRequest?.intervenant?.lastname}}</td>
                         </tr>
                         <tr>
                           <td>Date d'intervention : </td>
-                          <td>{{terminationRequest.interventionDate | date: 'dd/MM/yyyy'}}</td>
+                          <td>{{terminationRequest?.interventionDate | date: 'dd/MM/yyyy'}}</td>
                         </tr>
                         <tr>
                           <td>Tel agent :</td>
-                          <td>{{terminationRequest.intervenant.phone}}</td>
+                          <td>{{terminationRequest?.intervenant.phone}}</td>
                         </tr>
                       </table>
                     </div>
@@ -117,11 +117,11 @@
               </fieldset>
               <fieldset class="scheduler-border col-4">
                 <legend class="scheduler-border">Agent</legend>
-                <div *ngIf="terminationRequest.agent" style="padding-left: 20px;padding-top: 10px;">
+                <div *ngIf="terminationRequest?.agent" style="padding-left: 20px;padding-top: 10px;">
                   <table>
                     <tr>
                       <td>Agent :</td>
-                      <td>{{terminationRequest.agent?.firstname}} {{terminationRequest.agent?.lastname}}</td>
+                      <td>{{terminationRequest?.agent?.firstname}} {{terminationRequest?.agent?.lastname}}</td>
                     </tr>
                     <tr>
                       <td>Service concerné :</td>
@@ -129,7 +129,7 @@
                     </tr>
                   </table>
                 </div>
-                <p *ngIf="!terminationRequest.agent">Aucun agent n'est affecté pour le moment</p>
+                <p *ngIf="!terminationRequest?.agent">Aucun agent n'est affecté pour le moment</p>
               </fieldset>
             </div>
             <div class="row" id="cards2">
@@ -147,7 +147,7 @@
                     </div>
                   </form>
                   <br>
-                  <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of terminationRequest.feedback">
+                  <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of terminationRequest?.feedback">
                     <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
                     <div class="border-comm col-10" id="comm">
                       {{feedback.message}}
@@ -164,15 +164,15 @@
                   <table>
                     <tr>
                       <td>Date création :</td>
-                      <td>{{terminationRequest.createdAt | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{terminationRequest?.createdAt | date: 'dd/MM/yyyy' }}</td>
                     </tr>
                     <tr>
                       <td>Dernière modification :</td>
-                      <td>{{terminationRequest.lastUpdate| date: 'dd/MM/yyyy' }}</td>
+                      <td>{{terminationRequest?.lastUpdate| date: 'dd/MM/yyyy' }}</td>
                     </tr>
                     <tr>
                       <td>Date de depose du compteur :</td>
-                      <td>{{terminationRequest.counterDropDate | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{terminationRequest?.counterDropDate | date: 'dd/MM/yyyy' }}</td>
                     </tr>
                   </table>
                 </div>
