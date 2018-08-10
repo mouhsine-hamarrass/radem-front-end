@@ -50,12 +50,12 @@
                 <tbody>
                   <tr *ngFor="let subscription of subscriptions" class="text-center" [ngClass]="subscription.type === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
                     <td style="cursor: pointer;" (click)="openDetailSubscription(detailSubscription, subscription.id)">
-                      <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;{{subscription.police}}</td>
+                      <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;<b>{{subscription.police}}</b></td>
                     <td>{{subscription.state}}</td>
                     <td>{{subscription.address}}</td>
                     <td>{{subscription.lastConsumption}}</td>
                     <td>{{subscription.toBePayed}}</td>
-                    <td style="cursor: pointer;" (click)="showBills(subscription.police)">{{subscription.nextBill}}</td>
+                    <td style="cursor: pointer;" (click)="showBills(subscription.police)"><b>{{subscription.nextBill}}</b></td>
                     <td>
                       <i class="fa fa-history"></i>
                     </td>
@@ -91,23 +91,17 @@
                     <th scope="col">Date d'échéance</th>
                     <th scope="col">Type</th>
                     <th scope="col">Montant</th>
-                    <th scope="col">
-                      <input type="checkbox" class="form-control">
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let bill of bills">
-                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)">{{bill.numBill}}</td>
-                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)">{{bill.numBill}}</td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)"><b>{{bill.numBill}}</b></td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)"><b>{{bill.numBill}}</b></td>
                     <td>{{bill.dueNumber}}</td>
                     <td>{{bill.police}}</td>
                     <td>{{bill.dueDate}}</td>
                     <td>{{bill.type}}</td>
                     <td>{{bill.amount}}</td>
-                    <td>
-                      <input type="checkbox" class="form-control">
-                    </td>
                   </tr>
                 </tbody>
               </table>

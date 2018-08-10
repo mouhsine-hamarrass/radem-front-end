@@ -17,6 +17,14 @@
       "password": "mot de passe ..."
     },
     "error-no-token-sent": "Token non envoyé depuis le service lors de l'authentification",
-    "error-user-unauthorized": "L'utilisateur n'est pas autorisé"
+    "error-user-unauthorized": "L'utilisateur n'est pas autorisé",
+    "QUALITY_OF_ALIMENTATION": "Qualité d'alimentation",
+    "INTERVENTION_NOT_CARRIED_OUT": "Intervention non réalisée",
+    "METER_NOT_POSED": "Compteur non posé",
+    "CONNECTION": "Branchement",
+    "WATER_LEAK": "Fuite d'eau",
+    "INVOICE": "Facture",
+    "CUT": "Coupure",
+    "OTHER": "Autre"
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { RecoverPasswordService } from '../main/services/recover-password.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,7 +16,8 @@ export class ResetPasswordComponent implements OnInit {
   });
 
   constructor(private recoverPasswordServices: RecoverPasswordService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+            private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
     }
     const token = this.route.snapshot.queryParams.token;
     this.recoverPasswordServices.resetPassword(token, this.resetPasswordForm.controls.newPassword.value).subscribe(Response => {
-
+      this.router.navigate(['/login']);
     }, err => {});
   }
 

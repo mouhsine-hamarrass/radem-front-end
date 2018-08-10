@@ -43,16 +43,16 @@
               <thead>
                 <tr>
                   <th scope="col">Nº de demande</th>
-                  <th scope="col">Créée le </th>
                   <th scope="col">Objet</th>
+                  <th scope="col">Créée le </th>
                   <th scope="col">Statut</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let complaint of complaints">
-                  <td><a [routerLink]="['/services/claim-request/', complaint.id]">{{complaint.claimNumber}}</a></td>
-                  <td>{{complaint.createdDate | date: 'dd/MM/yyyy'}}</td>
+                  <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a></td>
                   <td>{{complaint.object}}</td>
+                  <td>{{complaint.createdDate | date: 'dd/MM/yyyy'}}</td>
                   <td>{{complaint.status}}</td>
                 </tr>
               </tbody>
