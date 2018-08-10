@@ -34,17 +34,17 @@
         <div class="card-body">
           <h4 class="card-title">Ma réclamation</h4>
           <ul class="steps steps-7">
-            <li [ngClass]="{current: complaint.status === 'CREATED'}">
+            <li [ngClass]="{current: complaint?.status === 'CREATED'}">
               <p class="mx-auto">
                 <em>Créée</em>
               </p>
             </li>
-            <li [ngClass]="{current: complaint.status === 'RECEIVED'}">
+            <li [ngClass]="{current: complaint?.status === 'RECEIVED'}">
               <p>
                 <em>Prise en charge</em>
               </p>
             </li>
-            <li [ngClass]="{current: complaint.status === 'OK'}">
+            <li [ngClass]="{current: complaint?.status === 'OK'}">
               <p>
                 <em>Analyse</em>
               </p>
@@ -83,11 +83,11 @@
                     <table>
                       <tr>
                         <td>N° demande :</td>
-                        <td>{{complaint.claimNumber}}</td>
+                        <td>{{complaint?.claimNumber}}</td>
                       </tr>
                       <tr>
                         <td>Objet :</td>
-                        <td>{{complaint.object}}</td>
+                        <td>{{complaint?.object}}</td>
                       </tr>
                     </table>
                   </div>
@@ -102,11 +102,11 @@
                     <table>
                       <tr>
                         <td>Date de creation :</td>
-                        <td>{{complaint.createdDate | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{complaint?.createdDate | date: 'dd-MM-yyyy'}}</td>
                       </tr>
                       <tr>
                         <td>Date de modification :</td>
-                        <td>{{complaint.updatedDate | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{complaint?.updatedDate | date: 'dd-MM-yyyy'}}</td>
                       </tr>
                     </table>
                   </div>
@@ -128,7 +128,7 @@
                       </div>
                     </form>
                     <br>
-                    <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of complaint.feedback">
+                    <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of complaint?.feedback">
                       <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
                       <div class="border-comm col-10" id="comm">
                         {{feedback?.message}}
@@ -144,7 +144,7 @@
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                    {{complaint.description}}
+                    {{complaint?.description}}
                   </div>
                 </div>
               </div>
