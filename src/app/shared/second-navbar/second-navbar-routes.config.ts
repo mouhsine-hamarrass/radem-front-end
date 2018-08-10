@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/services/claim-requests',
-        title: 'Demandes de réclamations',
+        title: 'Réclamations',
         icon: '',
         class: 'menu-item',
         badge: '',
@@ -70,8 +70,8 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/consumption',
-    title: 'Ma consomtaion',
+    path: '/contracts/all-contracts',
+    title: 'Mes contrats',
     icon: '',
     class: 'nav-item',
     badge: '',
@@ -81,26 +81,36 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '',
-    title: 'Mes contrats',
+    path: '/account/unpaid',
+    title: 'Mes impayés',
     icon: '',
-    class: 'nav-item has-sub',
+    class: 'nav-item',
     badge: '',
     badgeClass: '',
     isExternalLink: false,
     isNavHeader: false,
-    submenu: [
-      {
-        path: '/contracts/all-contracts',
-        title: 'Liste des contrats',
-        icon: '',
-        class: 'menu-item',
-        badge: '',
-        badgeClass: '',
-        isExternalLink: false,
-        isNavHeader: false,
-        submenu: []
-      },
-    ]
+    submenu: []
+  },
+  {
+    path: '/account/settlements',
+    title: 'Mes réglements',
+    icon: '',
+    class: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: []
+  },
+  {
+    path: '/consumption',
+    title: 'Ma consomtaion',
+    icon: '',
+    class: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: []
   }
 ];

@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import {BrowserModule} from '@angular/platform-browser';
 import {RegisterComponent} from './register/register.component';
 import {MainModule} from './main/main.module';
+import { RecoverPasswordService } from './main/services/recover-password.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {MainModule} from './main/main.module';
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
+    RecoverPasswordService
   ],
   bootstrap: [AppComponent]
 })

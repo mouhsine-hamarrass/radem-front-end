@@ -44,19 +44,18 @@
                 <thead>
                   <tr>
                     <th scope="col">Nº de demande</th>
-                    <th scope="col">Créée le</th>
                     <th scope="col">Polices d'abonnement</th>
+                    <th scope="col">Créée le</th>
                     <th scope="col">Statut</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let terminationReq of terminationRequests">
                     <td>
-                      <a [routerLink]="['/services/cancellation-request/', terminationReq.id]">{{terminationReq.requestNumber}}</a>
+                      <a [routerLink]="['/services/cancellation-request/', terminationReq.id]"><b>{{terminationReq.requestNumber}}</b></a>
                     </td>
-                    <td>{{terminationReq.createdAt | date: 'dd/MM/yyyy'}}</td>
                     <td>{{terminationReq.subscriptions[0]?.subscription}}, {{terminationReq.subscriptions[1]?.subscription}}</td>
-                    <td>
+                    <td>{{terminationReq.createdAt | date: 'dd/MM/yyyy'}}</td><td>
                       <span class="label bg-primary">{{terminationReq.status}}</span>
                     </td>
                   </tr>

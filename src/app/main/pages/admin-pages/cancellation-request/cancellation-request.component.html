@@ -1,7 +1,7 @@
 <div class="col-md-12 py-3">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Demande N°: {{request.requestNumber}}</h4>
+      <h4 class="card-title">Demande N°: {{request?.requestNumber}}</h4>
       <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
           <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
@@ -28,7 +28,7 @@
           <div class="col-md-12" id="buttons">
               <button type="button" class="btn btn-primary" (click)="openUpdateForm(updateForm)" #UpdateButton>Modifier</button>
               <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
-              <button *ngIf="request.status !== 'CLOSED'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="AddIntervention(addIntervention)" awNextStep>Étape suivante <i class="fa fa-chevron-circle-right"></i></button>
+              <button *ngIf="request?.status !== 'CLOSED'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="AddIntervention(addIntervention)" awNextStep>Étape suivante <i class="fa fa-chevron-circle-right"></i></button>
           </div>
       </aw-wizard>
 
@@ -42,31 +42,31 @@
                   <table>
                     <tr>
                       <td>N° demande :</td>
-                      <td>{{request.requestNumber}}</td>
+                      <td>{{request?.requestNumber}}</td>
                     </tr>
                     <tr>
                       <td>Client :</td>
-                      <td>{{request.client.fullName}}</td>
+                      <td>{{request?.client?.firstname}} {{request?.client?.lastname}}</td>
                     </tr>
                     <tr>
                       <td>Police :</td>
-                      <td>{{request.subscriptions[0]?.subscription}}, {{request.subscriptions[1]?.subscription}}</td>
+                      <td>{{request?.subscriptions[0]?.subscription}}, {{request?.subscriptions[1]?.subscription}}</td>
                     </tr>
                     </table>
                   </div>
-                  <div  *ngIf="request.intervenant" style="padding-left: 20px;padding-bottom: 10px;">
+                  <div  *ngIf="request?.intervenant" style="padding-left: 20px;padding-bottom: 10px;">
                     <table>
                     <tr>
                       <td>Agent d'intervention : </td>
-                      <td>{{request.intervenant.firstname}} {{request.intervenant.lastname}}</td>
+                      <td>{{request?.intervenant?.firstname}} {{request?.intervenant?.lastname}}</td>
                     </tr>
                     <tr>
                       <td>Date d'intervention : </td>
-                      <td>{{request.interventionDate | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{request?.interventionDate | date: 'dd/MM/yyyy' }}</td>
                     </tr>
                     <tr>
                       <td>Tel agent :</td>
-                      <td>{{request.intervenant.phone}}</td>
+                      <td>{{request?.intervenant?.phone}}</td>
                     </tr>
                   </table>
                 </div>
@@ -77,11 +77,11 @@
                 <legend class="scheduler-border">
                   <b>Intervenants :</b>
                 </legend>
-                <div  *ngIf="request.agent" style="padding-left: 20px;padding-top: 10px;">
+                <div  *ngIf="request?.agent" style="padding-left: 20px;padding-top: 10px;">
                   <table>
                     <tr>
                       <td>Agent :</td>
-                      <td>{{request.agent.firstname}} {{request.agent.lastname}}</td>
+                      <td>{{request?.agent?.firstname}} {{request?.agent?.lastname}}</td>
                     </tr>
                     <tr>
                       <td>Service concerné :</td>
@@ -105,7 +105,7 @@
                     <button class="btn btn-primary" (click)="addComment()">Envoyer</button>
                   </div>
                 </form><br>
-                    <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request.feedback">
+                    <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request?.feedback">
                         <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
                         <div class="border-comm col-10" id="comm" >
                             {{feedback.message}}
@@ -124,11 +124,11 @@
                       <table>
                           <tr>
                             <td>Date création :</td>
-                            <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{request?.createdAt | date: 'dd/MM/yyyy' }}</td>
                           </tr>
                           <tr>
                             <td>Dernière modification :</td>
-                            <td>{{request.lastUpdate| date: 'dd/MM/yyyy' }}</td>
+                            <td>{{request?.lastUpdate| date: 'dd/MM/yyyy' }}</td>
                           </tr>
                         </table>
                   </div>
