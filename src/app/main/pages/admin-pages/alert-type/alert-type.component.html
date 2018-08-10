@@ -27,17 +27,6 @@
                            </div>
                         </div>
                      </div>
-                     <div class="row form-group">
-                        <label for="type" class="col-sm-3 control-label">Message</label>
-                        <div class="col-sm-9">
-                           <textarea formControlName="message" name="message" class="form-control" id="type"></textarea>
-                           <div *ngIf="message.invalid && (message.dirty || isSubmitted)" class="text-danger text-left">
-                              <div *ngIf="message.errors.required">
-                                 Le message de type d'alerte est obligatoire
-                              </div>
-                           </div>
-                        </div>
-                     </div>
                      <br>
                      <button type="button" class="btn btn-secondary" [routerLink]="['/admin/types-alerts']"> Annuler
                      </button>
