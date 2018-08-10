@@ -1,16 +1,19 @@
 import {NgModule} from '@angular/core';
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
-import { RequestsComponent } from './requests/requests.component';
-import { ClaimsComponent } from './claims/claims.component';
-import { CancellationRequestComponent } from './cancellation-request/cancellation-request.component';
-import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
-import { AlertComponent } from './alert/alert.component';
+import {RequestsComponent} from './requests/requests.component';
+import {ClaimsComponent} from './claims/claims.component';
+import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
+import {ClaimDetailComponent} from './claim-detail/claim-detail.component';
+import {AlertComponent} from './alert/alert.component';
 import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {ProfileComponent} from './profile/profile.component';
-import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
+import {AlertTypeComponent} from './alert-type/alert-type.component';
+import {AlertTypesComponent} from './alert-types/alert-types.component';
+import {SettingsComponent} from './settings/settings.component';
+import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 
 const routes: Routes = [
   {
@@ -105,6 +108,34 @@ const routes: Routes = [
         component: UserComponent,
         data: {
           title: 'Editer utilisateur'
+        }
+      },
+      {
+        path: 'alert-types',
+        component: AlertTypesComponent,
+        data: {
+          title: 'Liste de types d\'alertes'
+        }
+      },
+      {
+        path: 'alert-type',
+        component: AlertTypeComponent,
+        data: {
+          title: 'Nouveau type d\'alerte'
+        }
+      },
+      {
+        path: 'alert-types/:id',
+        component: AlertTypeComponent,
+        data: {
+          title: 'Editer type d\'alerte'
+        }
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        data: {
+          title: 'Parametrage'
         }
       }
     ]

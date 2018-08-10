@@ -12,11 +12,13 @@ import {UtilsService} from './services/utils.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {createTranslateLoader} from '../app.translate.factory';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminPagesModule,
+    BrowserAnimationsModule,
     ConsumptionPageModule,
     ContractPagesModule,
     DemoPagesModule,
@@ -44,7 +46,7 @@ import {createTranslateLoader} from '../app.translate.factory';
     DemoPagesModule,
     HomePageModule,
     ProfilePageModule,
-    ServicesPagesModule
+    ServicesPagesModule,
   ]
 })
 export class MainModule {
