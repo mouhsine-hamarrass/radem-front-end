@@ -4,9 +4,11 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { WizardComponent} from 'angular-archwizard';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import _ = require('underscore');
 import { AdminService } from '../../../services/admin.service';
 import * as moment from 'moment';
+
+// @ts-ignore
+import _ = require('underscore');
 
 @Component({
   selector: 'app-cancellation-request',

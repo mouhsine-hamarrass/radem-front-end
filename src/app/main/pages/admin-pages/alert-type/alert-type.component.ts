@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AlertTypeModel} from '../../../models/alert-type.model';
 import {UtilsService} from '../../../services/utils.service';
 import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-alert-type',
@@ -12,10 +13,16 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./alert-type.component.scss']
 })
 export class AlertTypeComponent implements OnInit {
-  protected alertType: AlertTypeModel = {};
-  protected formAlertType;
-  protected FormGroup;
-  protected isSubmitted = false;
+  alertType: AlertTypeModel = {};
+  formAlertType;
+  FormGroup;
+  isSubmitted = false;
+
+  @Input() modalRef: BsModalRef;
+
+  @Input() alertTypeId: number;
+
+  @Output() refreshAlertTypes = new EventEmitter<boolean>();
 
   constructor(private utilsService: UtilsService,
               private adminService: AdminService,
@@ -37,9 +44,8 @@ export class AlertTypeComponent implements OnInit {
   }
 
   getAlertType() {
-    const alertTypeId: string = this.route.snapshot.paramMap.get('id');
-    if (alertTypeId !== null) {
-      this.adminService.getAlertType(alertTypeId).subscribe(response => {
+    if (this.alertTypeId !== null) {
+      this.adminService.getAlertType(this.alertTypeId).subscribe(response => {
         this.alertType = response.data;
         this.loadAlertType();
       });
@@ -58,7 +64,9 @@ export class AlertTypeComponent implements OnInit {
       this.toastrService.success('Type d\'alerte ajouté', '', {
         timeOut: 2000,
       });
+      this.refreshAlertTypes.emit(true);
     }, err => {
+      this.refreshAlertTypes.emit(false);
     });
   }
 
@@ -70,7 +78,9 @@ export class AlertTypeComponent implements OnInit {
       this.toastrService.success('Type d\'alerte modifié', '', {
         timeOut: 2000,
       });
+      this.refreshAlertTypes.emit(true);
     }, err => {
+      this.refreshAlertTypes.emit(false);
     });
   }
 }

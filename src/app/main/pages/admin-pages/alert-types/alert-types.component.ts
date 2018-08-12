@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
 import {AlertTypeModel} from '../../../models/alert-type.model';
 import {ToastrService} from 'ngx-toastr';
 import swal from 'sweetalert2';
+import {BsModalRef, ModalOptions} from 'ngx-bootstrap';
+import {BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-alert-types',
@@ -21,15 +23,22 @@ export class AlertTypesComponent implements OnInit {
   protected totalPages: number;
   protected keyword: string;
 
+  alertTypeId: number;
+
+  modalRef: BsModalRef;
+
+  private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-md'};
+
   constructor(private adminService: AdminService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
-    this.getProfiles();
+    this.getAlertTypes();
   }
 
-  getProfiles() {
+  getAlertTypes() {
     this.adminService.getPageableAlertTypes(this.page, this.pageSize, this.keyword).subscribe(response => {
       this.alertTypes = response.data.content;
       this.totalElements = response.data.totalElements;
@@ -90,15 +99,25 @@ export class AlertTypesComponent implements OnInit {
       confirmButtonText: 'Oui, supprimer!'
     }).then((result) => {
       if (result.value) {
-        if (this.alertTypes.find(alertType => alertType.id === alertTypeId).users === 0) {
-          this.adminService.dropAlertType(alertTypeId).subscribe(response => {
-            this.alertTypes.splice(this.alertTypes.indexOf(this.alertTypes.find(alertType => alertType.id === alertTypeId)), 1);
-            this.toastrService.success('Le type d\'alerte a été supprimé.', 'Supprimé !');
-          });
-        } else {
+        this.adminService.dropAlertType(alertTypeId).subscribe(response => {
+          this.alertTypes.splice(this.alertTypes.indexOf(this.alertTypes.find(alertType => alertType.id === alertTypeId)), 1);
+          this.toastrService.success('Le type d\'alerte a été supprimé.', 'Supprimé !');
+        }, err => {
           this.toastrService.error('le type d\'alerte ne peut pas être supprimé!', 'Ce type d\'alerte est déjà utilisé');
-        }
+        });
       }
     });
+  }
+
+  showAlertTypeForm(template: TemplateRef<any>, alertTypeId: number) {
+    this.alertTypeId = alertTypeId;
+
+    this.modalRef = this.modalService.show(template, this.modalOptions);
+  }
+
+  refreshAlertTypes(doRefresh: boolean) {
+    if (doRefresh) {
+      this.getAlertTypes();
+    }
   }
 }

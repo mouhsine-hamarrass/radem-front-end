@@ -118,20 +118,6 @@ const routes: Routes = [
         }
       },
       {
-        path: 'alert-type',
-        component: AlertTypeComponent,
-        data: {
-          title: 'Nouveau type d\'alerte'
-        }
-      },
-      {
-        path: 'alert-types/:id',
-        component: AlertTypeComponent,
-        data: {
-          title: 'Editer type d\'alerte'
-        }
-      },
-      {
         path: 'settings',
         component: SettingsComponent,
         data: {
