@@ -1,53 +1,46 @@
 <div id="add-modele">
-  <nav aria-label="breadcrumb">
-    <ul class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Parmétrage</li>
-    </ul>
-  </nav>
-  <div class="container-fluid">
-    <div class="card">
-      <div class="card-body">
-        <section>
-          <form role="form" novalidate [formGroup]="settingsForm">
-            <h4 class="card-title text-muted">Parmétrage</h4>
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                <tr>
-                  <th scope="col">Paramètre</th>
-                  <th scope="col">Valeur</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let param of settings">
-                  <td>
-                    <input formControlName="code" id="code" name="name" type="text" placeholder="code" disabled class="form-control required">
-                    <div *ngIf="code.invalid && (code.dirty || isSubmitted)" class="text-danger text-left">
-                      <div *ngIf="code.errors.required">
-                        Le code du paramètre est obligatoire
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <input formControlName="value" id="value" name="name" type="text" placeholder="Valeur"
-                           class="form-control required">
-                    <div *ngIf="value.invalid && (value.dirty || isSubmitted)" class="text-danger text-left">
-                      <div *ngIf="value.errors.required">
-                        La valeur du paramètre est obligatoire
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="form-control pull-right">
-                <button class="btn btn-primary" (click)="saveSettings()" [disabled]="settingsForm.invalid">Enregistrer</button>
-              </div>
+   <nav aria-label="breadcrumb">
+      <ul class="breadcrumb">
+         <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
+         <li class="breadcrumb-item active" aria-current="page">Parmétrage</li>
+      </ul>
+   </nav>
+   <div class="container-fluid">
+      <div class="card">
+         <div class="card-body">
+            <div class=" table-responsive">
+               <form role="form" novalidate>
+                  <h4 class="card-title text-muted"> </h4>
+                  <table class="table table-bordered">
+                     <thead>
+                     <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Paramètre</th>
+                        <th scope="col">Valeur</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr *ngFor="let param of settings">
+                        <td>
+                           {{param.id}}
+                        </td>
+                        <td>
+                           {{param.key}}
+                        </td>
+                        <td>
+                           <input id="value_{{param.id}}" name="value_{{param.id}}" [(ngModel)]="param.value" type="text" placeholder="Valeur" class="form-control required">
+                        </td>
+                     </tr>
+                     </tbody>
+                  </table>
+                  <div class="pull-right">
+                     <button class="btn btn-primary" (click)="saveSettings()">
+                        Enregistrer
+                     </button>
+                  </div>
+               </form>
             </div>
-          </form>
-        </section>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>

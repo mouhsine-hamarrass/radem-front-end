@@ -4,6 +4,8 @@ import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {Settings} from 'http2';
+import {Setting} from '../../../models/setting.model';
 
 @Component({
   selector: 'app-settings',
@@ -11,22 +13,25 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  public settingsForm;
-  public settings: any;
+  public settings: Array<Setting>;
 
-  constructor(private utilsService: UtilsService,
-              private adminService: AdminService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private formBuilder: FormBuilder,
+  constructor(private adminService: AdminService,
               private toastrService: ToastrService) {
-    this.settingsForm = this.formBuilder.group({
-      code: ['', Validators.required],
-      value: ['', Validators.required]
-    });
   }
 
   ngOnInit() {
+    this.adminService.getSettings().subscribe(response => {
+      this.settings = response.data;
+    }, (err) => {
+    });
   }
 
+  saveSettings() {
+    this.adminService.saveSettings(this.settings).subscribe(response => {
+      this.settings = response.data;
+      this.toastrService.success('La modification effectuée avec succès', '');
+    }, (err) => {
+      this.toastrService.success('Oups! Erreur de modification.', '');
+    });
+  }
 }

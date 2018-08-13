@@ -61,9 +61,7 @@ export class AlertTypeComponent implements OnInit {
     this.alertType.title = this.formAlertType.controls.title.value;
 
     this.adminService.createAlertType(this.alertType).subscribe(response => {
-      this.toastrService.success('Type d\'alerte ajouté', '', {
-        timeOut: 2000,
-      });
+      this.toastrService.success('Type d\'alerte ajouté', '');
       this.refreshAlertTypes.emit(true);
     }, err => {
       this.refreshAlertTypes.emit(false);
@@ -75,9 +73,7 @@ export class AlertTypeComponent implements OnInit {
     this.alertType.title = this.formAlertType.controls.title.value;
 
     this.adminService.saveAlertType(this.alertType.id, this.alertType).subscribe(response => {
-      this.toastrService.success('Type d\'alerte modifié', '', {
-        timeOut: 2000,
-      });
+      this.toastrService.success('Type d\'alerte modifié', '');
       this.refreshAlertTypes.emit(true);
     }, err => {
       this.refreshAlertTypes.emit(false);
