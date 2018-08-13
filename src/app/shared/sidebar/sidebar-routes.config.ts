@@ -81,7 +81,7 @@ export const ROUTES: RouteInfo[] = [
         ]
       },
       {
-        path: '',
+        path: '/admin/alert-types',
         title: 'Types d\'alerts',
         icon: 'icon-bell',
         clazz: 'nav-item',
@@ -89,30 +89,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
-        submenu: [
-          {
-            path: '/admin/alert-types',
-            title: 'Types d\'alerts',
-            icon: 'icon-list',
-            clazz: 'nav-item',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            isNavHeader: false,
-            submenu: []
-          },
-          {
-            path: '/admin/alert-type',
-            title: 'Nouveau type',
-            icon: 'icon-bell',
-            clazz: 'nav-item',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            isNavHeader: false,
-            submenu: []
-          }
-        ]
+        submenu: []
       },
       {
         path: '/admin/settings',

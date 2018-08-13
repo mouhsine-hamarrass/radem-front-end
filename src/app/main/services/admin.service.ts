@@ -151,6 +151,7 @@ export class AdminService {
   saveAlertNotification(alertNotification: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.urlApi}/alerts/save`, alertNotification, {headers: headers});
   }
+
   // Profiles
   getListProfiles(): Observable<Response<Array<Profile>>> {
     return this.httpClient.get<Response<Array<Profile>>>(`${this.urlApi}/profiles`);
@@ -213,6 +214,19 @@ export class AdminService {
   /**
    * Alerts Types
    */
+
+  getPageableAlertTypes(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
+    if (keyword) {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/types-list?page=${page - 1}&size=${pageSize}&keyword=${keyword}`);
+    } else {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/types-list?page=${page - 1}&size=${pageSize}`);
+    }
+  }
+
+  getAlertType(alertTypeId: number): Observable<Response<AlertTypeModel>> {
+    return this.httpClient.get<Response<AlertTypeModel>>(`${this.urlApi}/alerts/types/${alertTypeId}`, {headers: headers});
+  }
+
   createAlertType(alertType: AlertTypeModel) {
     return this.httpClient.post(`${this.urlApi}/alerts/types`, alertType, {headers: headers});
   }
@@ -221,19 +235,7 @@ export class AdminService {
     return this.httpClient.put(`${this.urlApi}/alerts/types/${alertTypeId}`, alertType, {headers: headers});
   }
 
-  getAlertType(alertTypeId: string): Observable<Response<AlertTypeModel>> {
-    return this.httpClient.get<Response<AlertTypeModel>>(`${this.urlApi}/alerts/types/${alertTypeId}`, {headers: headers});
-  }
-
-  getPageableAlertTypes(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
-    if (keyword) {
-      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/types-list?page=${page}&size=${pageSize}&keyword=${keyword}`);
-    } else {
-      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/types-list?page=${page}&size=${pageSize}`);
-    }
-  }
-
   dropAlertType(alertTypeId: number) {
-    return this.httpClient.delete(`${this.urlApi}/alerts-types/${alertTypeId}`,  {headers: headers});
+    return this.httpClient.delete(`${this.urlApi}/alerts/types/${alertTypeId}`, {headers: headers});
   }
 }
