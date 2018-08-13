@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, TemplateRef, EventEmitter, AfterViewInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { WizardComponent} from 'angular-archwizard';
+import { WizardComponent, WizardState} from 'angular-archwizard';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
 import * as moment from 'moment';
@@ -16,11 +16,12 @@ import _ = require('underscore');
   styleUrls: ['./cancellation-request.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CancellationRequestComponent implements OnInit {
+export class CancellationRequestComponent implements OnInit, AfterViewInit {
   @ViewChild('wizard') wizard: WizardComponent;
   @ViewChild('StepButton') StepButton: ElementRef;
   @ViewChild('UpdateButton') UpdateButton: ElementRef;
   @ViewChild('commentaire') commentaire: ElementRef;
+  public selectedStep: number;
   public requestForm: FormGroup;
   public commentForm: FormGroup;
   public addInterventionForm: FormGroup;
@@ -28,6 +29,7 @@ export class CancellationRequestComponent implements OnInit {
   public impaye = 0;
   public requestUpdate: any;
   public modalRef: BsModalRef;
+  private wizardState: WizardState;
   public config = {
     backdrop: true,
     ignoreBackdropClick: false,
@@ -97,23 +99,34 @@ export class CancellationRequestComponent implements OnInit {
       return this.addInterventionForm.get('phone');
     }
 
+    ngAfterViewInit() {
+      switch (this.request.status) {
+        case 'CREATED':
+        this.selectedStep = 0;
+          break;
+        case 'RECEIVED':
+        this.selectedStep = 1;
+          break;
+        case 'IN_PROGRESS':
+        this.selectedStep = 2;
+          break;
+          case 'DEPOSITED_COUNTER':
+          this.selectedStep = 3;
+          break;
+          case 'UNPAID_VERIFICATION':
+          this.selectedStep = 4;
+          break;
+          case 'SETTLEMENT':
+          this.selectedStep = 5;
+          break;
+          case 'CLOSED':
+          this.selectedStep = 6;
+          break;
+      }
+      this.wizardState = this.wizard.model;
+      this.wizardState.navigationMode.goToStep(this.selectedStep, new EventEmitter(), new EventEmitter());
+    }
   ngOnInit() {
-    // const wizardState: WizardState = this.wizard.model;
-    /*for (let stepIndex = 0; stepIndex < 4; stepIndex++) {
-      console.log(this.wizard.model.navigationMode.goToNextStep);
-    }
-
-    const b: HTMLElement = this.button.nativeElement as HTMLElement;
-    for (let stepIndex = 0; stepIndex < 2; stepIndex++) {
-      b.click();
-    }
-    console.log(localStorage.getItem('user'));
-
-    this.requestService.getAgents().subscribe( response => {
-      this.agents = response.data;
-      console.log(this.agents);
-    })*/
-
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
      this.requestService.getRequest(id).subscribe(response => {
@@ -152,6 +165,7 @@ export class CancellationRequestComponent implements OnInit {
       this.StepButton.nativeElement.disabled = true;
         }
      });
+     this.selectedStep = 5;
       this.ngOnInit();
   }
 

@@ -2,29 +2,69 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Réclamation N°: {{claim.claimNumber}}</h4>
-        <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
+        <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
-            <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+            <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
             </aw-wizard-step>
 
-            <aw-wizard-step [stepId]="1" [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
-            </aw-wizard-step>
+            <ng-template #step0>
+              <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+              </aw-wizard-step>
+            </ng-template>
 
-            <aw-wizard-step [stepId]="2" [stepTitle]="'Analyse'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
-            </aw-wizard-step>
-
-            <aw-wizard-step [stepId]="3" [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+            <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
               </aw-wizard-step>
 
-            <aw-wizard-step [stepId]="4" [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+
+              <ng-template #step1>
+                <aw-wizard-step [stepId]="1" [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+              </ng-template>
+
+              <aw-wizard-step *ngIf="selectedStep >= 2; else step2" [stepId]="2" awOptionalStep [stepTitle]="'Analyse'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
               </aw-wizard-step>
 
-            <aw-wizard-step [stepId]="5" [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
-              </aw-wizard-step>
 
-            <aw-wizard-completion-step [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
-              <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
-            </aw-wizard-completion-step>
+              <ng-template #step2>
+                <aw-wizard-step [stepId]="2" [stepTitle]="'Analyse'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+              </ng-template>
+
+              <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+                </aw-wizard-step>
+
+              <ng-template #step3>
+                <aw-wizard-step [stepId]="3" [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+                </aw-wizard-step>
+              </ng-template>
+
+              <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+                </aw-wizard-step>
+
+              <ng-template #step4>
+                <aw-wizard-step [stepId]="4" [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+                </aw-wizard-step>
+              </ng-template>
+
+              <aw-wizard-step *ngIf="selectedStep >= 5; else step5" [stepId]="5" awOptionalStep [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
+                </aw-wizard-step>
+
+
+              <ng-template #step5>
+                <aw-wizard-step [stepId]="5" [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
+                </aw-wizard-step>
+              </ng-template>
+
+              <aw-wizard-completion-step *ngIf="selectedStep >= 6;else step6" awOptionalStep [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
+                <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
+              </aw-wizard-completion-step>
+
+              <ng-template #step6>
+                  <aw-wizard-completion-step  [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
+                      <!--<button type="button" class="btn btn-primary" (click)="finishFunction()">Finish</button>-->
+                    </aw-wizard-completion-step>
+              </ng-template>
+
             <div class="col-md-12" id="buttons">
                 <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
                 <button *ngIf="claim?.status === 'TRANSMISSION_OF_INFORMATION'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim.id,false)" awNextStep><i class="fa fa-chevron-circle-left"></i> Étape précédante</button>
