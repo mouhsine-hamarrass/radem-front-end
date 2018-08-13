@@ -149,6 +149,10 @@ export class AdminService {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/${idAlert}/find`, {headers: headers});
   }
 
+  getAlertsNotifications(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/alerts/alertNotifications`, {headers: headers});
+  }
+
   saveAlertNotification(alertNotification: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.urlApi}/alerts/save`, alertNotification, {headers: headers});
   }

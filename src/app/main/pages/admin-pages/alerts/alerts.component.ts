@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
   selector: 'app-alerts',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./alerts.component.scss']
 })
 export class AlertsComponent implements OnInit {
+  protected alerts: any;
 
-  constructor() { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
+    this.adminService.getAlertsNotifications().subscribe(response => {
+      this.alerts = response.data;
+    })
   }
 
 }
