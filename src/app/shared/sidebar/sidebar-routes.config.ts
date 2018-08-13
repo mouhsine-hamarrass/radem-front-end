@@ -175,7 +175,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/admin/alerts',
         title: 'Liste des alertes',
         icon: 'icon-list',
-        class: 'nav-item',
+        clazz: 'nav-item',
         badge: '',
         badgeClass: '',
         isExternalLink: false,
