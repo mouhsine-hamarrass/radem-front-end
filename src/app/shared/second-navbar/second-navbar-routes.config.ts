@@ -104,7 +104,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/consumption',
-    title: 'Ma consomtaion',
+    title: 'Ma consommation',
     icon: '',
     clazz: 'nav-item',
     badge: '',
