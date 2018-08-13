@@ -8,20 +8,30 @@ import {DemoPagesModule} from './pages/demo-pages/demo-pages.module';
 import {HomePageModule} from './pages/home-page/home-page.module';
 import {ProfilePageModule} from './pages/profile-page/profile-page.module';
 import {ServicesPagesModule} from './pages/services-pages/services-pages.module';
-import {UnpaidPagesModule} from './pages/unpaid-pages/unpaid-pages.module';
 import {UtilsService} from './services/utils.service';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {createTranslateLoader} from '../app.translate.factory';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminPagesModule,
+    BrowserAnimationsModule,
     ConsumptionPageModule,
     ContractPagesModule,
     DemoPagesModule,
     HomePageModule,
     ProfilePageModule,
     ServicesPagesModule,
-    UnpaidPagesModule
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
     ServicesService,
@@ -37,7 +47,6 @@ import {UtilsService} from './services/utils.service';
     HomePageModule,
     ProfilePageModule,
     ServicesPagesModule,
-    UnpaidPagesModule
   ]
 })
 export class MainModule {

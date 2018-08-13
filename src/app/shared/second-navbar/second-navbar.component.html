@@ -7,11 +7,11 @@
     <ul class="navbar-nav">
 
       <!-- First level menu -->
-      <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.class]"
+      <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.clazz]"
           [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
           [routerLinkActiveOptions]="{exact: true}" >
 
-        <a [routerLink]="menuItem.class === 'nav-item' ? [menuItem.path] : null"
+        <a [routerLink]="menuItem.clazz === 'nav-item' ? [menuItem.path] : null"
            *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader && menuItem.submenu.length == 0; else externalSubLinkBlock" class="nav-link">
           <i [ngClass]="[menuItem.icon]"></i>
           <span class="menu-title">{{menuItem.title}}</span>
@@ -32,7 +32,7 @@
             </a>
             <div class="dropdown-menu" ngbDropdownMenu>
               <a *ngFor="let menuSubItem of menuItem.submenu"
-                 [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.class]"
+                 [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.clazz]"
                  [routerLink]="menuSubItem.submenu.length > 0 ? null : [menuSubItem.path]" class="nav-link">
                 <i [ngClass]="[menuSubItem.icon]"></i>
                 <span class="menu-title">{{menuSubItem.title}}</span>

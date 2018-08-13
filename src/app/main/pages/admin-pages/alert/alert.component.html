@@ -9,7 +9,7 @@
             <div class="col-md-6">
               <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
                 <option value="" selected disabled>Choisissez un type</option>
-                <option *ngFor="let alertType of alertTypes" value="{{alertType.id}}">{{alertType.alertType}}</option>
+                <option *ngFor="let alertType of alertTypes" value="{{alertType.id}}">{{alertType.title}}</option>
               </select>
             </div>
           </div>

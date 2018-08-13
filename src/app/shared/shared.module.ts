@@ -21,7 +21,6 @@ import {BytesToSizePipe} from './pipes/bytes-to-size.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MomentModule} from 'ngx-moment';
-import {ToastrModule} from 'ngx-toastr';
 import {ChartsModule} from 'ng2-charts';
 import {HttpClientModule} from '@angular/common/http';
 import {ArchwizardModule} from 'angular-archwizard';
@@ -78,7 +77,6 @@ import {
     TranslateModule,
     NgbModule.forRoot(),
     MomentModule,
-    ToastrModule.forRoot(),
     ChartsModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
@@ -105,7 +103,6 @@ import {
     TranslateModule,
     NgbModule,
     MomentModule,
-    ToastrModule,
     ChartsModule,
     BsDatepickerModule,
     NavbarComponent,
