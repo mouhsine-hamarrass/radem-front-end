@@ -75,10 +75,11 @@
             </fieldset>
             <fieldset class="col-4 scheduler-border">
                 <legend class="scheduler-border">
-                  <b>Intervenants :</b>
+                  <b>Agent :</b>
                 </legend>
-                <div  *ngIf="request?.agent" style="padding-left: 20px;padding-top: 10px;">
-                  <table>
+                <div style="padding-left: 20px;padding-top: 10px;">
+                  <p *ngIf="!request?.agent">Aucun agent n'est affecté pour le moment</p>
+                  <table *ngIf="request?.agent">
                     <tr>
                       <td>Agent :</td>
                       <td>{{request?.agent?.firstname}} {{request?.agent?.lastname}}</td>
