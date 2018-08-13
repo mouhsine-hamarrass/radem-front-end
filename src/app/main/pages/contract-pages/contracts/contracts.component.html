@@ -117,7 +117,7 @@
 
 <ng-template #detailSubscription>
   <div class="modal-header modal-radem">
-    <h4 class="modal-title pull-left">Détails contrat d'{{subscription[0]?.type}}</h4>
+    <h4 class="modal-title pull-left">Détails contrat d'{{subscription[0]?.type}} N°: {{subscription[0]?.police}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -132,15 +132,7 @@
       <div class="card-content">
         <div class="card-body">
           <div class="row">
-            <div class="col-4">
-              <p>
-                <b>Type du contrat: </b>{{subscription[0]?.type}}</p>
-            </div>
-            <div class="col-4">
-              <p>
-                <b>N°: </b>{{subscription[0]?.police}}</p>
-            </div>
-            <div class="col-4">
+            <div class="col-12">
               <p>
                 <b>Adresse du contrat: </b>{{subscription[0]?.address}}</p>
             </div>

@@ -24,7 +24,7 @@
       <!-- What is-->
       <div id="what-is" class="card">
         <div class="card-header">
-          <h4 class="card-title">Consulter votre réclamation</h4>
+          <h4 class="card-title">Ma réclamation N°: {{complaint?.claimNumber}} - {{complaint?.object}}</h4>
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
@@ -32,7 +32,6 @@
           </div>
         </div>
         <div class="card-body">
-          <h4 class="card-title">Ma réclamation</h4>
           <ul class="steps steps-7">
             <li [ngClass]="{current: complaint?.status === 'CREATED'}">
               <p class="mx-auto">
@@ -76,26 +75,17 @@
           </ul>
           <div class="row" id="cards">
             <fieldset class="scheduler-border col-7">
-              <legend class="scheduler-border">Informations</legend>
+              <legend class="scheduler-border">Description</legend>
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                    <table>
-                      <tr>
-                        <td>N° demande :</td>
-                        <td>{{complaint?.claimNumber}}</td>
-                      </tr>
-                      <tr>
-                        <td>Objet :</td>
-                        <td>{{complaint?.object}}</td>
-                      </tr>
-                    </table>
+                    {{complaint?.description}}
                   </div>
                 </div>
               </div>
             </fieldset>
             <fieldset class="scheduler-border col-4">
-              <legend class="scheduler-border">Dates</legend>
+              <legend class="scheduler-border">Agent</legend>
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
@@ -115,36 +105,45 @@
             </fieldset>
           </div>
           <div class="row" id="cards">
-              <fieldset class="scheduler-border col-7">
-                  <legend class="scheduler-border">Commentaires</legend>
-                  <div style="padding: 20px;overflow: scroll; max-height: 500px;">
-                    <form class="">
-                      <div class="row">
+            <fieldset class="scheduler-border col-7">
+              <legend class="scheduler-border">Commentaires</legend>
+              <div style="padding: 20px;overflow: scroll; max-height: 500px;">
+                <form class="">
+                  <div class="row">
 
-                        <input id="commentaire" [formControl]="feedback" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
-                        />
+                    <input id="commentaire" [formControl]="feedback" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
+                    />
 
-                        <button class="btn btn-primary" (click)="saveFeedback()">Envoyer</button>
-                      </div>
-                    </form>
-                    <br>
-                    <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of complaint?.feedback">
-                      <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
-                      <div class="border-comm col-10" id="comm">
-                        {{feedback?.message}}
-                      </div>
-                      <div class="col-md-4 pull-right" style="margin-left:400px; color: gray">
-                        <i>le {{feedback?.sendingDate | date: 'dd/MM/yyyy'}}.</i>
-                      </div>
-                    </div>
+                    <button class="btn btn-primary" (click)="saveFeedback()">Envoyer</button>
                   </div>
-                </fieldset>
+                </form>
+                <br>
+                <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of complaint?.feedback">
+                  <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
+                  <div class="border-comm col-10" id="comm">
+                    {{feedback?.message}}
+                  </div>
+                  <div class="col-md-4 pull-right" style="margin-left:400px; color: gray">
+                    <i>le {{feedback?.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
             <fieldset class="scheduler-border col-4">
-              <legend class="scheduler-border">Description</legend>
+              <legend class="scheduler-border">Dates</legend>
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                    {{complaint?.description}}
+                    <table>
+                      <tr>
+                        <td>Date de creation :</td>
+                        <td>{{complaint?.createdDate | date: 'dd-MM-yyyy'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Date de modification :</td>
+                        <td>{{complaint?.updatedDate | date: 'dd-MM-yyyy'}}</td>
+                      </tr>
+                    </table>
                   </div>
                 </div>
               </div>
