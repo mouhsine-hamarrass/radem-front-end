@@ -5,9 +5,9 @@
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
             <!-- First level menu -->
 
-            <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.class]" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
+            <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.clazz]" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
                 [routerLinkActiveOptions]="{exact: true}">
-                <a [routerLink]="menuItem.class === 'nav-item' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader">
+                <a [routerLink]="menuItem.clazz === 'nav-item' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader">
                     <i [ngClass]="[menuItem.icon]"></i>
                     <span class="menu-title">{{menuItem.title}}</span>
                     <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
@@ -23,7 +23,7 @@
 
                 <!-- Second level menu -->
                 <ul class="menu-content" *ngIf="menuItem.submenu.length > 0">
-                    <li *ngFor="let menuSubItem of menuItem.submenu" [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.class]">
+                    <li *ngFor="let menuSubItem of menuItem.submenu" [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.clazz]">
                         <a [routerLink]="menuSubItem.submenu.length > 0 ? null : [menuSubItem.path]" *ngIf="!menuSubItem.isExternalLink && !menuItem.isNavHeader; else externalSubLinkBlock">
                             <i [ngClass]="[menuSubItem.icon]"></i>
                             <span class="menu-title">{{menuSubItem.title}}</span>
@@ -39,7 +39,7 @@
                         <!-- Third level menu -->
                         <ul class="menu-content" *ngIf="menuSubItem.submenu.length > 0">
                             <li *ngFor="let menuSubsubItem of menuSubItem.submenu" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                                [ngClass]="[menuSubsubItem.class]">
+                                [ngClass]="[menuSubsubItem.clazz]">
                                 <a [routerLink]="[menuSubsubItem.path]" *ngIf="!menuSubsubItem.isExternalLink && !menuItem.isNavHeader; else externalSubSubLinkBlock">
                                     <i [ngClass]="[menuSubsubItem.icon]"></i>
                                     <span class="menu-title">{{menuSubsubItem.title}}</span>

@@ -3,6 +3,7 @@ import { ServicesService } from '../../../services/services.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { ContractsService } from '../../../services/contracts.service';
+import { Router } from '../../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-new-cancellation-request',
@@ -31,24 +32,20 @@ export class NewCancellationRequestComponent implements OnInit {
     waterTourne: new FormControl(''),
     electricityTourne: new FormControl('')
   });
-  protected waterSubscriptions: any;
-  protected electricitySubscriptions: any;
+  protected subscriptions = [];
 
   constructor(private myServices: ServicesService,
-              private contracts: ContractsService) { }
+              private contracts: ContractsService,
+              private router: Router) { }
 
   ngOnInit() {
     this.myServices.getUser(1).subscribe(response => {
       this.cancellationForm.controls.clientName.setValue(response.data.lastname + ' ' + response.data.firstname);
       this.cancellationForm.controls.consumptionAdresse.setValue(response.data.address);
       this.cancellationForm.controls.cellphone.setValue(response.data.phone);
-    })
-    this.contracts.getWaterSubscriptions().subscribe(response => {
-      this.waterSubscriptions = response;
     });
-    this.contracts.getElectricitySubscriptions().subscribe(response => {
-      this.electricitySubscriptions = response;
-    });
+    this.subscriptions = (JSON.parse(localStorage.getItem('user'))).subscriptions;
+    console.log(this.subscriptions);
   }
 
   print() {
@@ -251,32 +248,27 @@ export class NewCancellationRequestComponent implements OnInit {
       counterDropDate: this.cancellationForm.controls.counterDropDate.value,
       subscriptions: [],
       applicantType: 'CLIENT',
-      client: {
-        id: 1,
-        fullName: this.cancellationForm.controls.clientName.value,
-        contact: {
-          id: 1,
-          landlinePhoneNumber: this.cancellationForm.controls.landline.value,
-          cellphone: this.cancellationForm.controls.cellphone.value,
-          consumptionAddress: this.cancellationForm.controls.consumptionAdresse.value,
-          correspondenceAddress: this.cancellationForm.controls.correspondenceAdresse.value
-        }
-      }
+      client: JSON.parse(localStorage.getItem('user'))
     };
     if (this.cancellationForm.controls.water.value) {
-      this.req.subscriptions.push({
-        subscription: this.cancellationForm.controls.waterPolice.value
-      });
+      this.req.subscriptions.push(this.cancellationForm.controls.waterPolice.value);
     }
     if (this.cancellationForm.controls.electricity.value) {
-      this.req.subscriptions.push({
-        subscription: this.cancellationForm.controls.electricityPolice.value
-      });
+      this.req.subscriptions.push(this.cancellationForm.controls.electricityPolice.value);
     }
     this.myServices.saveTerminationRequest(this.req).subscribe(response => {
       console.log(response);
       this.print();
+      this.router.navigate(['/services/cancellation-requests'])
     }, err => {});
     console.log(this.req);
+  }
+
+  waterSubscriptions(): any[] {
+    return this.subscriptions.filter(subscription => subscription.type === 'Eau');
+  }
+
+  electricitySubscriptions(): any[] {
+    return this.subscriptions.filter(subscription => subscription.type === 'Electricite');
   }
 }

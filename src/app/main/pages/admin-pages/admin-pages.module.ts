@@ -20,6 +20,9 @@ import {TabsModule} from 'ngx-bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { AlertTypeComponent } from './alert-type/alert-type.component';
+import { AlertTypesComponent } from './alert-types/alert-types.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -45,7 +48,10 @@ import { AlertsComponent } from './alerts/alerts.component';
     ProfileComponent,
     ProfilesComponent,
     SubscriptionDetailComponent,
-    AlertsComponent
+    AlertsComponent,
+    AlertTypeComponent,
+    AlertTypesComponent,
+    SettingsComponent
   ],
   providers: [AdminService]
 })

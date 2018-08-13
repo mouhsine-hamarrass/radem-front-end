@@ -14,7 +14,6 @@ import {LoginGuard} from './core/guards/login.guard';
 import {LoginComponent} from './login/login.component';
 import {RecoverPasswordComponent} from './recover-password/recover-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
-import {UNPAID_PAGES_ROUTES} from './routes/unpaid-pages.routes';
 import {RegisterComponent} from './register/register.component';
 import { EnableAccountComponent } from './enable-account/enable-account.component';
 import { RegisterSuccesComponent } from './register-succes/register-succes.component';
@@ -32,7 +31,6 @@ const appRoutes: Routes = [
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICES_PAGES_ROUTES, canActivate: [LoginGuard]},
-  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGES_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACT_PAGES_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: PROFILE_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},

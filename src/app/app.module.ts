@@ -25,6 +25,8 @@ import {MainModule} from './main/main.module';
 import { EnableAccountComponent } from './enable-account/enable-account.component';
 import { EnableAccountService } from './main/services/enable-account.service';
 import { RegisterSuccesComponent } from './register-succes/register-succes.component';
+import { RecoverPasswordService } from './main/services/recover-password.service';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -53,13 +55,15 @@ import { RegisterSuccesComponent } from './register-succes/register-succes.compo
       }
     }),
     CoreModule,
+    ToastrModule.forRoot(),
     SharedModule,
     MainModule,
   ],
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
-    EnableAccountService
+    EnableAccountService,
+    RecoverPasswordService
   ],
   bootstrap: [AppComponent]
 })

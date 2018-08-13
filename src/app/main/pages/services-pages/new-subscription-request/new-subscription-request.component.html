@@ -32,25 +32,25 @@
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
-            <form>
+            <form [formGroup]="subscriptionRequestForm">
               <div class="row">
                 <div class="form-group col-6">
                   <label for="card-id">Nom et Prénom / Raison sociale : </label>
-                  <input class="form-control" formControlName="cin" id="card-id">
+                  <input class="form-control" id="card-id">
                 </div>
                 <div class="form-group col-6">
                   <label for="card-id">Profession / Activité : </label>
-                  <input class="form-control" formControlName="cin" id="card-id">
+                  <input class="form-control" id="card-id">
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-6">
                   <label for="card-id">Lieu du travail : </label>
-                  <input class="form-control" formControlName="cin" id="card-id">
+                  <input class="form-control" id="card-id">
                 </div>
                 <div class="form-group col-6">
                   <label for="card-id">Adresse du lieu du travail : </label>
-                  <input class="form-control" formControlName="cin" id="card-id">
+                  <input class="form-control" id="card-id">
                 </div>
               </div>
               <div class="row">
@@ -59,15 +59,15 @@
                   <div class="row">
                     <div class="form-group col-4">
                       <label for="card-id">Portable : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                     <div class="form-group col-4">
                       <label for="card-id">Fixe domicile : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                     <div class="form-group col-4">
                       <label for="card-id">Fixe bureau : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                   </div>
                 </fieldset>
@@ -78,32 +78,51 @@
                   <div class="row">
                     <div class="form-group col-4">
                       <label for="card-id">N° : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                     <div class="form-group col-8">
                       <label for="card-id">Rue/Bd/Av : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-4">
                       <label for="card-id">Immeuble : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                     <div class="form-group col-4">
                       <label for="card-id">Appartement : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                     <div class="form-group col-4">
                       <label for="card-id">Etage : </label>
-                      <input class="form-control" formControlName="cin" id="card-id">
+                      <input class="form-control" id="card-id">
                     </div>
                   </div>
                   <div class="row">
-                      <div class="form-group col-12">
-                        <label for="card-id">Complément d'adresse : </label>
-                        <input class="form-control" formControlName="cin" id="card-id">
-                      </div>
+                    <div class="form-group col-12">
+                      <label for="card-id">Complément d'adresse : </label>
+                      <input class="form-control" id="card-id">
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="row">
+                <fieldset class="scheduler-border col-12">
+                  <legend class="scheduler-border"><input class="" name="subscriptionType" id="subscriptionType" type="checkbox" formControlName="subscriptionType"> Predecesseur</legend>
+                  <div *ngIf="subscriptionRequestForm.controls.subscriptionType.value" class="row">
+                    <div class="form-group col-4">
+                      <label for="card-id">Successeur de : </label>
+                      <input class="form-control" id="card-id">
+                    </div>
+                    <div class="form-group col-4">
+                      <label for="card-id">Police, ou contrat eau : </label>
+                      <input class="form-control" id="card-id">
+                    </div>
+                    <div class="form-group col-4">
+                      <label for="card-id">Police, ou contrat electricite : </label>
+                      <input class="form-control" id="card-id">
+                    </div>
                   </div>
                 </fieldset>
               </div>

@@ -169,6 +169,9 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
  // Add Comment
  addComment() {
    this.request.feedback.push({message: this.comment.value, sendingDate: new Date()});
+   this.request.agent = JSON.parse(localStorage.getItem('user'));
+   this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
+   console.log(this.request);
    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
     this.commentForm.reset();
     this.ngOnInit();

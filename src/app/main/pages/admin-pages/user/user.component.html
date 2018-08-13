@@ -15,8 +15,8 @@
                   <h4 class="card-title text-muted" *ngIf="user?.id">Editer l'utilisateur : {{user.username}}</h4>
                </div>
                <form [formGroup]="modalForm" (ngSubmit)='saveUser(modalForm)' novalidate>
-                  <tabset [justified]="true" class="nav nav-tabs nav-top-border no-hover-bg col-12" style="margin-bottom: 20px;">
-                     <tab heading="Profile" class="active col-12">
+                  <tabset [justified]="true">
+                     <tab heading="Profile" class="active">
                         <div class="container-fluid">
                            <div class="form-group row required">
                               <label for="firstname" class="col-sm-3 col-form-label">Prénom</label>
@@ -27,7 +27,8 @@
                                         placeholder="Prénom"
                                         formControlName="firstname"
                                  >
-                                 <div *ngIf="firstname.invalid && (firstname.dirty || isSubmitted)" class="text-danger">
+                                 <div *ngIf="firstname.invalid && (firstname.dirty || isSubmitted)"
+                                      class="text-danger">
                                     <div *ngIf="firstname.errors.required">
                                        Le prénom est obligatoire
                                     </div>
@@ -43,7 +44,8 @@
                                         placeholder="Nom"
                                         formControlName="lastname"
                                         required>
-                                 <div *ngIf="lastname.invalid && (lastname.dirty || isSubmitted)" class="text-danger">
+                                 <div *ngIf="lastname.invalid && (lastname.dirty || isSubmitted)"
+                                      class="text-danger">
                                     <div *ngIf="lastname.errors.required">
                                        Le nom est obligatoire
                                     </div>
@@ -59,7 +61,8 @@
                                         placeholder="Nom de l'utilisateur"
                                         formControlName="username"
                                         required>
-                                 <div *ngIf="username.invalid && (username.dirty || isSubmitted)" class="text-danger">
+                                 <div *ngIf="username.invalid && (username.dirty || isSubmitted)"
+                                      class="text-danger">
                                     <div *ngIf="username.errors.required">
                                        Le nom de l'utilisateur est obligatoire
                                     </div>
@@ -204,7 +207,7 @@
                      </tab>
                   </tabset>
                   <div class="text-right">
-                     <button type="button" class="btn btn-secondary" [routerLink]="['/admin/list_users']"> Annuler
+                     <button type="button" class="btn btn-secondary" [routerLink]="['/admin/users']"> Annuler
                      </button>
                      <button class="btn btn-success" [disabled]="modalForm.invalid">Enregistrer</button>
                   </div>

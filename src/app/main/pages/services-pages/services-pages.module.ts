@@ -12,6 +12,9 @@ import { ClaimRequestsComponent } from './claim-requests/claim-requests.componen
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
 import { NewSubscriptionRequestComponent } from './new-subscription-request/new-subscription-request.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {createTranslateLoader} from '../../../app.translate.factory';
 
 @NgModule({
   imports: [
@@ -19,6 +22,13 @@ import { NewSubscriptionRequestComponent } from './new-subscription-request/new-
     ServicesPagesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
   ],
   declarations: [
     ClaimRequestComponent,
