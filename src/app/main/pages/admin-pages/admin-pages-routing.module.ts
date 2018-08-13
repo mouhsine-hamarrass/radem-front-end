@@ -14,6 +14,7 @@ import {AlertTypeComponent} from './alert-type/alert-type.component';
 import {AlertTypesComponent} from './alert-types/alert-types.component';
 import {SettingsComponent} from './settings/settings.component';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 const routes: Routes = [
   {
@@ -122,6 +123,13 @@ const routes: Routes = [
         component: SettingsComponent,
         data: {
           title: 'Parametrage'
+        }
+      },
+      {
+        path: 'alerts',
+        component: AlertsComponent,
+        data: {
+          title: 'Liste des alertes'
         }
       }
     ]

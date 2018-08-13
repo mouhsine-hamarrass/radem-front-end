@@ -1,3 +1,29 @@
-<p>
-  alerts works!
-</p>
+<div class="col-md-12 py-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Liste des alertes</h4>
+        <div class="table-responsive my-5">
+          <div>
+            <input type="text" class="col-3 form-control pull-right" placeholder="Rechercher" id="recherche"/>
+          </div>
+          <table class="table table-striped table-bordered table-hover zero-configuration">
+            <thead class="table-light">
+            <tr>
+              <th scope="col">Client</th>
+              <th scope="col">Agent</th>
+              <th scope="col">Type d'alerte</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let alert of alerts">
+              <td>{{alert?.firstname}} {{alert?.lastname}}</td>
+              <td>{{alert.agent}}</td>
+              <td>{{alert.alert.alertType.alertType}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+         <!--Card body end-->
+      </div>
+    </div>
+  </div>
