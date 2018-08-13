@@ -165,7 +165,7 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
       this.StepButton.nativeElement.disabled = true;
         }
      });
-     this.selectedStep = 5;
+     this.selectedStep = this.selectedStep + 1;
       this.ngOnInit();
   }
 
