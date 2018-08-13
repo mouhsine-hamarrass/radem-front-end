@@ -70,13 +70,14 @@ export class AlertComponent implements OnInit {
         id : this.alert.id
       },
       client : {
-        fullName : this.user[0].fullName,
-        contact : {
-          id : 1
+          firstname : this.user[0].firstName,
+          lastname : this.user[0].lastName,
+          email : this.user[0].email,
+          username : this.user[0].fullName,
         }
-      }
     }
     this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
+      console.log(response);
     })
   }
 }
