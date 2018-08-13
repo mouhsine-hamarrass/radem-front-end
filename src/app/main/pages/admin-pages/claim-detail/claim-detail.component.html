@@ -66,10 +66,13 @@
                     <b>Intervenants :</b>
                   </legend>
                   <div style="padding-left: 20px;">
-                    <table>
+                    <p *ngIf="!claim?.agent" >
+                      Aucun Intervenant n'est affecté pour le moment
+                    </p>
+                    <table *ngIf="claim?.agent">
                       <tr>
                         <td>Agent :</td>
-                        <td>{{claim.agent.firstname}} {{claim.agent.lastname}}</td>
+                        <td>{{claim?.agent?.firstname}} {{claim?.agent?.lastname}}</td>
                       </tr>
                       <tr>
                         <td>Service concerné :</td>
@@ -112,11 +115,11 @@
                         <table>
                             <tr>
                               <td>Date de création :</td>
-                              <td>{{claim.createdDate | date: 'dd/MM/yyyy'}}</td>
+                              <td>{{claim?.createdDate | date: 'dd/MM/yyyy'}}</td>
                             </tr>
                             <tr>
                               <td>Dernière modification :</td>
-                              <td>{{claim.updatedDate | date: 'dd/MM/yyyy'}}</td>
+                              <td>{{claim?.updatedDate | date: 'dd/MM/yyyy'}}</td>
                             </tr>
                           </table>
                     </div>
