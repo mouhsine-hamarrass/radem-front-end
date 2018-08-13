@@ -74,7 +74,7 @@ import {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule,
+    TranslateModule.forRoot(),
     NgbModule.forRoot(),
     MomentModule,
     ChartsModule,

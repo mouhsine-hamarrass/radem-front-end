@@ -36,8 +36,9 @@ export class AdminService {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
   }
 
-  nextStep(idRequest: number, impaye: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/${idRequest}/nextstep?impaye=${impaye}`,
+  nextStep(idRequest: number, impaye: number, agentId: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.urlApi}/termination_requests/${idRequest}/nextstep?impaye=${impaye}&agent=${agentId}`,
       {headers: headers});
   }
 

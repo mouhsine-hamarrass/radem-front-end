@@ -142,7 +142,8 @@ export class CancellationRequestComponent implements OnInit {
   }
   // Stepper
   nextStep(id) {
-   this.requestService.nextStep(id, this.impaye).subscribe(response => {
+    const agentId: number = JSON.parse(localStorage.getItem('user')).id;
+   this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
      this.request = response.data;
      this.request.feedback.reverse();
      if (this.request.status === 'CLOSED') {
@@ -172,6 +173,7 @@ export class CancellationRequestComponent implements OnInit {
    this.request.intervenant = {
      id:  Number.parseInt(this.addInterventionForm.controls.agent.value)
    }
+   this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
    console.log(this.request);
    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
      console.log(response);

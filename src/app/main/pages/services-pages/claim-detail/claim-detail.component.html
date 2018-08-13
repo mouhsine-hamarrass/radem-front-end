@@ -10,9 +10,9 @@
           <a routerLink="/home">Accueil</a>
         </li>
         <li class="breadcrumb-item">
-          <a>Services</a>
+          <a routerLink="/services/claim-requests">Réclamations</a>
         </li>
-        <li class="breadcrumb-item active">Réclamations
+        <li class="breadcrumb-item active">Réclamation {{complaint?.claimNumber}}
         </li>
       </ol>
     </div>
@@ -89,7 +89,8 @@
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                    <table>
+                    <p *ngIf="!complaint?.agent">Aucun agent n'est affecté pour le moment</p>
+                    <table *ngIf="complaint?.agent">
                       <tr>
                         <td>Date de creation :</td>
                         <td>{{complaint?.createdDate | date: 'dd-MM-yyyy'}}</td>
