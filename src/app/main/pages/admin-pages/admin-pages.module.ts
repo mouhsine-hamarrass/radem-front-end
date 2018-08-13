@@ -18,10 +18,11 @@ import {ChecklistModule} from 'angular-checklist';
 import {NgxToggleModule} from 'ngx-toggle';
 import {TabsModule} from 'ngx-bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
+import { AlertsComponent } from './alerts/alerts.component';
 import { AlertTypeComponent } from './alert-type/alert-type.component';
 import { AlertTypesComponent } from './alert-types/alert-types.component';
 import { SettingsComponent } from './settings/settings.component';
-import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 
 @NgModule({
   imports: [
@@ -46,10 +47,11 @@ import {SubscriptionDetailComponent} from './subscription-detail/subscription-de
     UsersComponent,
     ProfileComponent,
     ProfilesComponent,
+    SubscriptionDetailComponent,
+    AlertsComponent,
     AlertTypeComponent,
     AlertTypesComponent,
-    SettingsComponent,
-    SubscriptionDetailComponent
+    SettingsComponent
   ],
   providers: [AdminService]
 })

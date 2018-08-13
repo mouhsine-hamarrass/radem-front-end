@@ -22,6 +22,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import {BrowserModule} from '@angular/platform-browser';
 import {RegisterComponent} from './register/register.component';
 import {MainModule} from './main/main.module';
+import { EnableAccountComponent } from './enable-account/enable-account.component';
+import { EnableAccountService } from './main/services/enable-account.service';
+import { RegisterSuccesComponent } from './register-succes/register-succes.component';
 import { RecoverPasswordService } from './main/services/recover-password.service';
 import {ToastrModule} from 'ngx-toastr';
 
@@ -35,7 +38,9 @@ import {ToastrModule} from 'ngx-toastr';
     BoxedWithSidebarLayoutComponent,
     RecoverPasswordComponent,
     ResetPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    EnableAccountComponent,
+    RegisterSuccesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +62,7 @@ import {ToastrModule} from 'ngx-toastr';
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
+    EnableAccountService,
     RecoverPasswordService
   ],
   bootstrap: [AppComponent]

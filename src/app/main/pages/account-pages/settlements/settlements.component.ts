@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-settlements',
@@ -14,7 +15,7 @@ export class SettlementsComponent implements OnInit {
   public date: Date;
   public contractForm: FormGroup;
 
-  constructor(private adminService: AdminService,
+  constructor(private adminService: AdminService, private utilsService: UtilsService,
     private formBuilder: FormBuilder) {
     this.contractForm = this.formBuilder.group({
     contract: ['', Validators.required],
@@ -48,6 +49,12 @@ export class SettlementsComponent implements OnInit {
 
   setContract(id: any) {
     this.contractId = id;
+  }
+
+  getConsumptionReport() {
+    this.utilsService.getSettlementsReport().subscribe(response => {
+      console.log(response);
+    })
   }
 
 }

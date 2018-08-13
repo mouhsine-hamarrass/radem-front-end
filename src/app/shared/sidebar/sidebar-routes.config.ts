@@ -193,6 +193,17 @@ export const ROUTES: RouteInfo[] = [
         isExternalLink: false,
         isNavHeader: false,
         submenu: []
+      },
+      {
+        path: '/admin/alerts',
+        title: 'Liste des alertes',
+        icon: 'icon-list',
+        class: 'nav-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: []
       }
     ]
   }
