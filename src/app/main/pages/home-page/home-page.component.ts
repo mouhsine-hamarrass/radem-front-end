@@ -127,10 +127,18 @@ export class HomePageComponent implements OnInit {
       case '0':
         this.chartConsoTitle = 'Volume en m3';
         this.chartColorsEau = [this.WaterBar1, this.WaterBar2];
+        this.chartDatasetsFact = [
+          {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
+          {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
+        ];
         break;
       case '1':
         this.chartConsoTitle = 'Volume en kWh';
         this.chartColorsEau = [this.ElecBar1, this.ElecBar2];
+        this.chartDatasetsFact = [
+          {data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017'},
+          {data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018'}
+        ];
         break;
     }
   }

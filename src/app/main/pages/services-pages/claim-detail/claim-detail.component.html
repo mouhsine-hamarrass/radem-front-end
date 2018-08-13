@@ -91,15 +91,15 @@
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                     <p *ngIf="!complaint?.agent">Aucun agent n'est affecté pour le moment</p>
                     <table *ngIf="complaint?.agent">
-                      <tr>
-                        <td>Date de creation :</td>
-                        <td>{{complaint?.createdDate | date: 'dd-MM-yyyy'}}</td>
-                      </tr>
-                      <tr>
-                        <td>Date de modification :</td>
-                        <td>{{complaint?.updatedDate | date: 'dd-MM-yyyy'}}</td>
-                      </tr>
-                    </table>
+                        <tr>
+                          <td>Agent :</td>
+                          <td>{{complaint?.agent?.firstname}} {{complaint?.agent?.lastname}}</td>
+                        </tr>
+                        <tr>
+                          <td>Service concerné :</td>
+                          <td></td>
+                        </tr>
+                      </table>
                   </div>
                 </div>
               </div>
