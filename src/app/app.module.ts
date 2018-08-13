@@ -22,6 +22,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import {BrowserModule} from '@angular/platform-browser';
 import {RegisterComponent} from './register/register.component';
 import {MainModule} from './main/main.module';
+import { EnableAccountComponent } from './enable-account/enable-account.component';
+import { EnableAccountService } from './main/services/enable-account.service';
+import { RegisterSuccesComponent } from './register-succes/register-succes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import {MainModule} from './main/main.module';
     BoxedWithSidebarLayoutComponent,
     RecoverPasswordComponent,
     ResetPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    EnableAccountComponent,
+    RegisterSuccesComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import {MainModule} from './main/main.module';
   providers: [
     {provide: 'api.config', useValue: environment.apiConfig},
     {provide: 'defaultLanguage', useValue: environment.defaultLanguage},
+    EnableAccountService
   ],
   bootstrap: [AppComponent]
 })

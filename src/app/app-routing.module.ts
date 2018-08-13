@@ -16,6 +16,8 @@ import {RecoverPasswordComponent} from './recover-password/recover-password.comp
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {UNPAID_PAGES_ROUTES} from './routes/unpaid-pages.routes';
 import {RegisterComponent} from './register/register.component';
+import { EnableAccountComponent } from './enable-account/enable-account.component';
+import { RegisterSuccesComponent } from './register-succes/register-succes.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -23,6 +25,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'recover-password', component: RecoverPasswordComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'enable-account', component: EnableAccountComponent},
+  {path: 'register-succes', component: RegisterSuccesComponent},
   {path: '', component: LoginComponent, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},

@@ -135,7 +135,7 @@ export class AdminService {
 
   // User
   saveUser(client: any): Observable<Response<any>> {
-    return this.httpClient.post<Response<any>>(`${this.urlApi}/users/save`, client, {headers: headers});
+    return this.httpClient.post<Response<any>>(`${this.urlApi}/auth/register`, client, {headers: headers});
   }
 
   // Alerts

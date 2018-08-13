@@ -6,7 +6,7 @@
       <div id="what-is" class="card">
         <div class="card-header">
           <div class="row card-title">
-            <h4 class="ml-h4" >Inscription</h4>
+            <h4 class="ml-h4">Inscription</h4>
             <img class="ml-60p" src="/assets/app/images/logo/rademLogo.png">
           </div>
           <div class="heading-elements">
@@ -77,10 +77,10 @@
                       <input id="conditions" type="checkbox" (change)="setCheckbox()" />
                       <label for="conditions">J'accepte les conditions générales d'utilisation.</label>
                     </div>
-                    <div class="btn-group">
-                      <button [disabled]="!checkbox" type="button" (click)="goToStep2()" class="btn btn-primary" awNextStep>Suivant</button>
-                    </div>
                   </div>
+                </div>
+                <div class="btn-group ml-44">
+                  <button [disabled]="!checkbox" type="button" (click)="goToStep2()" class="btn btn-primary" awNextStep>Suivant</button>
                 </div>
               </aw-wizard-step>
 
@@ -91,8 +91,12 @@
                   <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en ligne:</h6>
                   <form [formGroup]="registerForm">
                     <div class="form-group">
-                      <label>Nom et prenom :</label>
-                      <input formControlName="fullname" type="text" class="form-control" disabled>
+                      <label>Nom :</label>
+                      <input formControlName="lastname" type="text" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Prénom :</label>
+                      <input formControlName="firstname" type="text" class="form-control" disabled>
                     </div>
                     <div class="form-group">
                       <label>Séléctionnez une question :</label>
@@ -112,9 +116,10 @@
                       </fieldset>
                     </div>
                   </form>
-                  <div class="btn-group ml-13">
-                    <button [disabled]="toStep3" type="button" id="toStep3" class="btn btn-primary next" (click)="goToStep3()" awNextStep>Suivant</button>
-                  </div>
+
+                </div>
+                <div class="btn-group ml-33">
+                  <button [disabled]="toStep3" type="button" id="toStep3" class="btn btn-primary next" (click)="goToStep3()" awNextStep>Suivant</button>
                 </div>
               </aw-wizard-step>
 
@@ -127,12 +132,16 @@
                   <h6> Veuillez renseigner vos coordonées dans les champs ci-dessous pour confirmer votre inscription :</h6>
                   <form [formGroup]="registerForm">
                     <div class="form-group">
-                      <label>Nom et prénom :</label>
-                      <input formControlName="fullname2" type="text" class="form-control" disabled>
+                      <label>Nom :</label>
+                      <input formControlName="lastname2" type="text" class="form-control" disabled>
                     </div>
                     <div class="form-group">
+                        <label>Prénom :</label>
+                        <input formControlName="firstname2" type="text" class="form-control" disabled>
+                      </div>
+                    <div class="form-group">
                       <label>Adresse e-mail :</label>
-                      <input formControlName="email" type="text" class="form-control" disabled>
+                      <input formControlName="email" type="text" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>Numero de téléphone :</label>
@@ -152,9 +161,10 @@
                       <label *ngIf="!passCheck" id="passwordCheck">Les mots de passe ne sont pas identiques !</label>
                     </div>
                   </form>
-                  <div class="btn-group ml-13">
-                    <button [disabled]="!buttonCheck" type="button" class="btn btn-primary next" (click)="goToStep4()" awNextStep>Suivant</button>
-                  </div>
+
+                </div>
+                <div class="btn-group ml-33">
+                  <button [disabled]="!buttonCheck" type="button" class="btn btn-primary next" (click)="goToStep4()" awNextStep>Suivant</button>
                 </div>
               </aw-wizard-step>
 
@@ -163,15 +173,24 @@
 
               <aw-wizard-completion-step [stepTitle]="'Validation'" [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
                 <div class="offset-2 col-md-8 my-5">
-                  <h6>Vous allez recevoir un mail sur votre adresse électronique pour activer votre compte.</h6>
+                  <h6>Voici un récapitulatif de vos informations.</h6>
                   <form [formGroup]="detailsForm">
-                    <label>Nom et prénom :</label>
+                    <label>Nom :</label>
                     <fieldset class="form-group position-relative has-icon-left">
-                      <input type="text" formControlName="fullname" class="form-control" disabled>
+                      <input type="text" formControlName="lastname" class="form-control" disabled>
                       <div class="form-control-position">
                         <i class="ft-user primary font-4"></i>
                       </div>
                     </fieldset>
+                    <div class="form-group">
+                        <label>Prénom :</label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                          <input type="text" formControlName="firstname" class="form-control" disabled>
+                          <div class="form-control-position">
+                            <i class="ft-user primary font-4"></i>
+                          </div>
+                        </fieldset>
+                      </div>
                     <div class="form-group">
                       <label>Téléphone :</label>
                       <fieldset class="form-group position-relative has-icon-left">
@@ -200,10 +219,10 @@
                       </fieldset>
                     </div>
                   </form>
-                  <div class="btn-group ml-13">
-                    <button [routerLink]="['/login']" type="button" class="btn btn-primary" awNextStep>Se connecter</button>
-                  </div>
                 </div>
+                <div class="btn-group ml-36">
+                    <button type="button" class="btn btn-primary" (click)="addUser()" awNextStep>S'inscrire</button>
+                  </div>
               </aw-wizard-completion-step>
             </aw-wizard>
           </div>

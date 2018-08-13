@@ -117,18 +117,15 @@
                          <div class="card-content collapse show">
                              <form class="">
                             <div class="card-body">
-                               <div class="row col-md-8 col-sm-6 form-group">
-                                  <label class="col-form-label col-md-3">Contrat :</label>
-                                  <div class="col-md-6">
+                               <div class="row col-md-12 form-group">
+                                  <label class="col-form-label">Contrat :</label>
+                                  <div class="col-md-3">
                                      <select formControlName="contract" type="text" class="custom-select" #t (change)="setContract(t.value)">
                                          <option value="" disabled selected>Choisissez un contrat</option>
                                          <option *ngFor="let contract of contracts" value="{{contract.contractNumber}}" >{{contract.contractNumber}} ({{contract.contractType}})</option>
                                        </select>
                                   </div>
-                               </div>
-                               <div class="clearfix"></div>
-                               <div class="row form-group">
-                                  <label class="col-form-label col-md-2">Periode du :</label>
+                                  <label class="col-form-label">Periode du :</label>
                                   <div class="col-md-3">
                                      <input formControlName="startDate" type="date" class="form-control">
                                   </div>
@@ -137,12 +134,12 @@
                                      <input formControlName="endDate" type="date" class="form-control">
                                   </div>
                                   <div class="col-auto float-right row">
-                                     <button type="button" class="btn btn-primary" (click)="getConsumptionHistory();">Rechercher</button>
-                                     <button type="button" class="btn btn-primary download" (click)="getConsumptionReport()" >Télécharger</button>
+                                     <button type="button" class="btn btn-primary" (click)="getConsumptionHistory();"><i class="fa fa-search"></i></button>
+                                     <button type="button" class="btn btn-primary download" (click)="getConsumptionReport()" ><i class="fa fa-download"></i></button>
                                   </div>
                                </div>
-                               <div class="table-responsive mx-auto my-5">
-                                  <table   *ngIf="Consumptions" class="table table-bordered ">
+                               <div class="table-responsive mx-auto">
+                                  <table *ngIf="Consumptions" class="table table-bordered ">
                                      <thead class="table-light">
                                      <tr>
                                         <th scope="col">Période</th>

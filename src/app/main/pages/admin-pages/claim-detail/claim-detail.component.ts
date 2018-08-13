@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, TemplateRef, AfterViewInit, EventEmitter } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -14,9 +14,13 @@ import * as moment from 'moment';
   styleUrls: ['./claim-detail.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClaimDetailComponent implements OnInit {
+export class ClaimDetailComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('wizard') wizard: WizardComponent;
+  wizard: WizardComponent;
+  @ViewChild('wizard')
+  set setWizard(wizard: WizardComponent) {
+    this.wizard = wizard;
+  }
   @ViewChild('StepButton') StepButton: ElementRef;
   @ViewChild('UpdateButton') UpdateButton: ElementRef;
   @ViewChild('commentaire') commentaire: ElementRef;
@@ -30,6 +34,9 @@ export class ClaimDetailComponent implements OnInit {
     ignoreBackdropClick: false,
     class: 'modal-lg'
   };
+  ngAfterViewInit() {
+    this.wizard.model.navigationMode.goToStep(2, new EventEmitter(), new EventEmitter());
+  }
 constructor(private adminService: AdminService,
   private router: Router,
   private route: ActivatedRoute,

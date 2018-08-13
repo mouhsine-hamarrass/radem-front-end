@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { AdminService } from '../main/services/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EnableAccountService } from '../main/services/enable-account.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -27,16 +29,20 @@ export class RegisterComponent implements OnInit {
   protected buttonCheck = false;
 
   constructor(private adminService: AdminService,
-    private formBuilder: FormBuilder) {
+    private enableAccountService: EnableAccountService,
+    private formBuilder: FormBuilder,
+    private router: Router) {
       this.registerForm = this.formBuilder.group({
         facture: [''],
         service: [''],
         contrat: [''],
         reference: [''],
-        fullname: [''],
+        firstname: [''],
+        lastname: [''],
         questions: [''],
         answer: [''],
-        fullname2: [''],
+        firstname2: [''],
+        lastname2: [''],
         email: [''],
         phone: [''],
         username: [''],
@@ -44,7 +50,8 @@ export class RegisterComponent implements OnInit {
         password2: [''],
       });
       this.detailsForm = this.formBuilder.group({
-        fullname: [''],
+        firstname: [''],
+        lastname: [''],
         email: [''],
         phone: [''],
         username: ['']
@@ -67,16 +74,24 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('reference');
   }
 
-  get fullname() {
-    return this.registerForm.get('facture');
-   }
+  get firstname() {
+    return this.registerForm.get('firstname');
+  }
+
+  get lastname() {
+    return this.registerForm.get('lastname');
+  }
 
   get answer() {
     return this.registerForm.get('facture');
   }
 
-  get fullname2() {
-    return this.registerForm.get('fullname2');
+  get firstname2() {
+    return this.registerForm.get('firstname2');
+  }
+
+  get lastname2() {
+    return this.registerForm.get('lastname2');
   }
 
   get email() {
@@ -107,21 +122,23 @@ export class RegisterComponent implements OnInit {
       this.bill = this.registerForm.controls.facture.value;
       this.adminService.getUserWithBill(this.bill).subscribe(response => {
         this.user = response;
-        this.registerForm.controls.fullname.setValue(this.user[0].fullName);
-        console.log(this.user[0].fullName);
+        this.registerForm.controls.firstname.setValue(this.user[0].lastName);
+        this.registerForm.controls.lastname.setValue(this.user[0].firstName);
       });
     } else if (this.method === 'CONTR') {
       this.serv = this.registerForm.controls.service.value;
       this.contrat = this.registerForm.controls.contrat.value;
       this.adminService.getUserWithContract(this.contrat).subscribe(response => {
         this.user = response;
-        this.registerForm.controls.fullname.setValue(this.user[0].fullName);
+        this.registerForm.controls.firstname.setValue(this.user[0].lastName);
+        this.registerForm.controls.lastname.setValue(this.user[0].firstName);
       })
     } else if (this.method === 'REF') {
       this.ref = this.registerForm.controls.reference.value;
       this.adminService.getUserWithRef(this.ref).subscribe(response => {
         this.user = response;
-        this.registerForm.controls.fullname.setValue(this.user[0].fullName);
+        this.registerForm.controls.firstname.setValue(this.user[0].lastName);
+        this.registerForm.controls.lastname.setValue(this.user[0].firstName);
       })
     }
     this.adminService.getQuestions().subscribe(response => {
@@ -130,26 +147,34 @@ export class RegisterComponent implements OnInit {
   }
 
   goToStep3() {
-    this.registerForm.controls.fullname2.setValue(this.user[0].fullName);
+    this.registerForm.controls.firstname2.setValue(this.user[0].firstName);
+    this.registerForm.controls.lastname2.setValue(this.user[0].lastName);
     this.registerForm.controls.email.setValue(this.user[0].email);
   }
 
   goToStep4() {
     this.client = {
-      fullname : this.user[0].fullName,
-      email : this.user[0].email,
+      lastname : this.user[0].lastName,
+      firstname : this.user[0].firstName,
+      email : this.registerForm.controls.email.value,
       username : this.registerForm.controls.username.value,
       phone : this.registerForm.controls.phone.value,
       password : this.registerForm.controls.password.value,
     }
-    // TO DO service to save the user
-    this.adminService.saveUser(this.client).subscribe(response => {
-      console.log(response);
-    })
-    this.detailsForm.controls.fullname.setValue(this.client.fullname);
+    this.detailsForm.controls.firstname.setValue(this.client.firstname);
+    this.detailsForm.controls.lastname.setValue(this.client.lastname);
     this.detailsForm.controls.email.setValue(this.client.email);
     this.detailsForm.controls.phone.setValue(this.client.phone);
     this.detailsForm.controls.username.setValue(this.client.username);
+  }
+
+  addUser() {
+    this.adminService.saveUser(this.client).subscribe(response => {
+      console.log(response);
+      this.enableAccountService.sendToken(this.client.email).subscribe(response => {
+        this.router.navigate(['/register-succes']);
+      })
+    })
   }
 
   checkPassword() {

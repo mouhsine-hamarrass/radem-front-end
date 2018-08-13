@@ -19,6 +19,7 @@ import {NgxToggleModule} from 'ngx-toggle';
 import {TabsModule} from 'ngx-bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { SubscriptionDetailComponent } from './subscription-detail/subscription-
     UsersComponent,
     ProfileComponent,
     ProfilesComponent,
-    SubscriptionDetailComponent
+    SubscriptionDetailComponent,
+    AlertsComponent
   ],
   providers: [AdminService]
 })
