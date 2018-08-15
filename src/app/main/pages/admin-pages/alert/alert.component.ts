@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alert',
@@ -15,7 +16,8 @@ export class AlertComponent implements OnInit {
   protected user: any;
   protected alertNotification: any;
 
-  constructor(private adminService: AdminService, private formBuilder: FormBuilder) {
+  constructor(private adminService: AdminService, private formBuilder: FormBuilder,
+    private router: Router) {
     this.alertForm = this.formBuilder.group({
     type: ['', Validators.required],
     description: ['', Validators.required],
@@ -77,7 +79,7 @@ export class AlertComponent implements OnInit {
         }
     }
     this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
-      console.log(response);
-    })
+    });
+    this.router.navigate(['/admin/alerts']);
   }
 }

@@ -16,9 +16,9 @@
             </thead>
             <tbody>
             <tr *ngFor="let alert of alerts">
-              <td>{{alert?.firstname}} {{alert?.lastname}}</td>
+              <td>{{alert?.client.firstname}} {{alert?.client.lastname}}</td>
               <td>{{alert.agent}}</td>
-              <td>{{alert.alert.alertType.alertType}}</td>
+              <td>{{alert.alert.alertType.title}}</td>
             </tr>
             </tbody>
           </table>
