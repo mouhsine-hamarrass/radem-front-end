@@ -186,8 +186,6 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
             <form class="" [formGroup]="requestForm">
             <label>Agent d'intervention :</label>
             <select formControlName="agent" type="text" #t class="col-12 form-control" (change)="getPhone(t.value)">
@@ -198,15 +196,13 @@
             <input formControlName="dateIntervention" type="date" class="col-12 form-control" >
             <label>Tel d'agent :</label>
             <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
-            <div class="col-md-12"  style="margin-left : 34%">
-              <button class="btn btn-primary center" id="buttons-update" (click)="updateIntervenant();modalRef.hide()">Valider</button>
-              <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
-            </div>
             </form>
-          </div>
-        </div>
       </div>
     </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary center" id="buttons-update" (click)="updateIntervenant();modalRef.hide()">Valider</button>
+      <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
   </div>
 </ng-template>
 
