@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ContractsService } from '../../../services/contracts.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
   selector: 'app-contracts',
@@ -8,6 +9,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
   styleUrls: ['./contracts.component.scss']
 })
 export class ContractsComponent implements OnInit {
+  protected solde: any;
   protected subscriptions;
   protected subscription;
   protected bills;
@@ -20,11 +22,15 @@ export class ContractsComponent implements OnInit {
   };
 
   constructor(private modalService: BsModalService,
-    private contractsServices: ContractsService) {
+    private contractsServices: ContractsService, private soldeService: AdminService) {
   }
 
   ngOnInit() {
     this.contractsServices.getSubscriptions().subscribe(response => this.subscriptions = response, err => { });
+    this.soldeService.getSoldeCrediteur().subscribe(response => {
+      this.solde = response;
+      console.log(response);
+    })
   }
 
   openDetailSubscription(template: TemplateRef<any>, subscriptionId: number) {

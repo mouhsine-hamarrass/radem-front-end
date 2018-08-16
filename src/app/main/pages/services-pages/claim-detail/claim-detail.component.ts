@@ -18,6 +18,7 @@ export class ClaimDetailComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.myServices.getComplaint(id).subscribe(response => this.complaint = response.data, err => { });
+    console.log(this.complaint);
   }
 
   saveFeedback() {
@@ -28,6 +29,7 @@ export class ClaimDetailComponent implements OnInit {
     this.myServices.saveComplaint(this.complaint).subscribe(response => {
       console.log(this.complaint);
       this.feedback.reset();
+      this.ngOnInit();
     });
   }
 }

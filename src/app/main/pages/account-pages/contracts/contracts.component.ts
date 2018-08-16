@@ -1,6 +1,7 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {BsModalRef, BsModalService, ModalOptions} from 'ngx-bootstrap';
 import {Color} from 'ng2-charts';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
   selector: 'app-contracts',
@@ -8,6 +9,7 @@ import {Color} from 'ng2-charts';
   styleUrls: ['./contracts.component.scss']
 })
 export class ContractsComponent implements OnInit {
+  public solde: any;
   public chartType = 'bar';
   // public chartConsoTitle = 'Moyenne des 12 dernier mois';
   public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
@@ -48,7 +50,7 @@ export class ContractsComponent implements OnInit {
 
   private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
 
-  constructor(private modalService: BsModalService) {
+  constructor(private modalService: BsModalService, private soldeService: AdminService) {
   }
 
   openContractDetail(template: TemplateRef<any>) {
@@ -72,5 +74,8 @@ export class ContractsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.soldeService.getSoldeCrediteur().subscribe(response => {
+      this.solde = response.data;
+    })
   }
 }

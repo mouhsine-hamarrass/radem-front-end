@@ -130,6 +130,10 @@ export class AdminService {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data2/Questions?question=${question}`, {headers: headers});
   }
 
+  getSoldeCrediteur(): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/AdnaneBaiz/data3/soldes`, {headers: headers});
+  }
+
   // Agents
   getAgents(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/users?page=5&size=5`, {headers: headers});
