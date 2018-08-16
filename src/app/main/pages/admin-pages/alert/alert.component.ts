@@ -15,6 +15,7 @@ export class AlertComponent implements OnInit {
   protected contracts: any;
   protected user: any;
   protected alertNotification: any;
+  protected listContract: any;
 
   constructor(private adminService: AdminService, private formBuilder: FormBuilder,
     private router: Router) {
@@ -44,6 +45,7 @@ export class AlertComponent implements OnInit {
     })
     this.adminService.getUsers().subscribe(response => {
       this.contracts = response;
+      console.log(this.contracts);
     })
   }
 

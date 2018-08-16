@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                       <td>Police :</td>
-                      <td>{{request.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? '' : ','}} {{request.subscriptions[1]?.subscription}}</td>
+                      <td>{{request?.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? '' : ','}} {{request?.subscriptions[1]?.subscription}}</td>
                     </tr>
                     </table>
                   </div>
@@ -138,9 +138,9 @@
                     <form class="" [formGroup]="commentForm">
                   <div class="row">
 
-                    <input #commentaire formControlName="comment" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
+                    <input #commentaire formControlName="comment" type="text" (keyup)="validate(commentaire.value)" class="col-9 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
 
-                    <button class="btn btn-primary" (click)="addComment()">Envoyer</button>
+                    <button [disabled]="isEmpty" class="btn btn-primary" (click)="addComment()">Envoyer</button>
                   </div>
                 </form><br>
                     <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request?.feedback">
@@ -220,8 +220,6 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
             <form class="" [formGroup]="addInterventionForm">
             <label>Agent d'intervention :</label>
             <select formControlName="agent" type="text" #t class="col-12 form-control" (change)="getPhone(t.value)">
@@ -232,13 +230,11 @@
             <input formControlName="dateIntervention" type="date" class="col-12 form-control" >
             <label>Tel d'agent :</label>
             <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
-            <div class="col-md-12"  style="margin-left : 34%">
-              <button class="btn btn-primary center" id="buttons-update" (click)="addIntervenant();modalRef.hide();">Valider</button>
-            </div>
             </form>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary center" id="buttons-update" (click)="addIntervenant();modalRef.hide();">Valider</button>
+    </div>
 </ng-template>

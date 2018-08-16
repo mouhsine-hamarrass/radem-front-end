@@ -9,3 +9,13 @@
 table {
   text-align: center;
 }
+
+.btn-primary {
+  background-color: #0052a2 !important;
+  border-color: #0052a2 !important;
+}
+
+.btn-primary:focus {
+  background-color: #009DA0 !important;
+  border-color: #009DA0 !important;
+}

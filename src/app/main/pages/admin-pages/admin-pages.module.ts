@@ -34,7 +34,7 @@ import { SettingsComponent } from './settings/settings.component';
     ChecklistModule,
     NgxToggleModule,
     TabsModule.forRoot(),
-    TranslateModule
+    TranslateModule,
   ],
   declarations: [
     AdminDashboardComponent,

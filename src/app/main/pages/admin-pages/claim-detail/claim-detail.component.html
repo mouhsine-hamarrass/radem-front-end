@@ -131,18 +131,18 @@
                       <form class="" [formGroup]="commentForm">
                     <div class="row">
 
-                      <input #commentaire formControlName="comment" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
+                      <input #commentaire formControlName="comment" type="text" (keyup)="validate(commentaire.value)" class="col-9 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
 
-                      <button class="btn btn-primary" (click)="addComment()">Envoyer</button>
+                      <button [disabled]="isEmpty" class="btn btn-primary" (click)="addComment()">Envoyer</button>
                     </div>
                   </form><br>
-                      <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim.feedback">
+                      <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim?.feedback">
                           <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
                           <div class="border-comm col-10" id="comm" >
-                              {{feedback.message}}
+                              {{feedback?.message}}
                           </div>
                           <div class="col-md-4 pull-right" id="divDateComm">
-                              <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                              <i>le {{feedback?.sendingDate | date: 'dd/MM/yyyy'}}.</i>
                             </div>
                       </div>
                   </div>

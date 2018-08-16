@@ -27,6 +27,7 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
   public addInterventionForm: FormGroup;
   public request: any;
   public impaye = 0;
+  public isEmpty = true;
   public requestUpdate: any;
   public modalRef: BsModalRef;
   private wizardState: WizardState;
@@ -132,7 +133,6 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
      this.requestService.getRequest(id).subscribe(response => {
        this.request = response.data;
        console.log(this.request);
-       this.request.feedback.reverse();
        if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
          this.UpdateButton.nativeElement.disabled = true;
        } else {
@@ -160,7 +160,6 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     const agentId: number = JSON.parse(localStorage.getItem('user')).id;
    this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
      this.request = response.data;
-     this.request.feedback.reverse();
      if (this.request.status === 'CLOSED') {
       this.StepButton.nativeElement.disabled = true;
         }
@@ -228,6 +227,14 @@ getPhone(value: number) {
   console.log(value);
   this.addInterventionForm.controls.phone.setValue(this.agents[value].phone);
   this.requestForm.controls.phone.setValue(this.agents[value].phone);
+}
+
+validate(value: String) {
+  if (value !== '') {
+    this.isEmpty = false;
+  } else {
+    this.isEmpty = true;
+  }
 }
 
 }

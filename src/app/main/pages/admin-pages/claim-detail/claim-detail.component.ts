@@ -31,6 +31,7 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
   public commentForm: FormGroup;
   public claim: any;
   public impaye = 0;
+  public isEmpty = true;
   public selectedStep: number;
   public requestUpdate: any;
   public modalRef: BsModalRef;
@@ -95,7 +96,6 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
       this.adminService.getClaim(id).subscribe(response => {
         this.claim = response.data;
         console.log(this.claim);
-        this.claim.feedback.reverse();
       });
     }
   }
@@ -105,7 +105,6 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
     this.adminService.nextStepClaim(id, choice).subscribe(
       response => {
         this.claim = response.data;
-        this.claim.feedback.reverse();
         if (this.claim.status === 'CLOSED') {
           this.StepButton.nativeElement.disabled = true;
         }
@@ -132,5 +131,13 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
 
   focus() {
     this.commentaire.nativeElement.focus();
+  }
+
+  validate(value: String) {
+    if (value !== '') {
+      this.isEmpty = false;
+    } else {
+      this.isEmpty = true;
+    }
   }
 }
