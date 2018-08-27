@@ -3,6 +3,7 @@ import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
 import {Color} from 'ng2-charts';
 import {ContractsService} from '../../services/contracts.service';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home-page',
@@ -108,7 +109,7 @@ export class HomePageComponent implements OnInit {
   protected minMaxConsumption;
   protected bills;
 
-  constructor(private contractServices: ContractsService) {
+  constructor(private contractServices: ContractsService, private homeService: HomeService) {
     this.maxDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate());
   }
@@ -150,11 +151,15 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contractServices.getAlerts().subscribe(response => {
+    this.homeService.getAlertNotificationByUserId(JSON.parse(localStorage.getItem('user')).id).subscribe(response => {
+      this.alerts = response.data;
+      console.log(this.alerts);
+    })
+    /* this.contractServices.getAlerts().subscribe(response => {
       this.alerts = response;
     }, err => {
       console.log(err);
-    });
+    }); */
     this.contractServices.getReleves().subscribe(response => this.releves = response, err => {
     });
     this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {

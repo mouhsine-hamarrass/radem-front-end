@@ -32,6 +32,7 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
   public claim: any;
   public impaye = 0;
   public isEmpty = true;
+  public isPublic: Boolean = false;
   public selectedStep: number;
   public requestUpdate: any;
   public modalRef: BsModalRef;
@@ -50,13 +51,18 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService
   ) {
     this.commentForm = this.formBuilder.group({
-      comment: ['', Validators.required]
+      comment: ['', Validators.required],
+      checkbox: ['']
     });
   }
 
   // CommentForm
   get comment() {
     return this.commentForm.get('comment');
+  }
+
+  get checkbox() {
+    return this.commentForm.get('checkbox');
   }
 
   ngAfterViewInit() {
@@ -116,9 +122,15 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
 
   // Add Comment
   addComment() {
+    if (this.checkbox.value === null || this.checkbox.value === '') {
+      this.isPublic = false;
+   } else {
+      this.isPublic = true;
+   }
     this.claim.feedback.push({
       message: this.comment.value,
-      sendingDate: new Date()
+      sendingDate: new Date(),
+      ispublic: this.isPublic
     });
     this.adminService.saveComplaint(this.claim).subscribe(
       response => {
@@ -127,6 +139,7 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
       },
       err => {}
     );
+    this.isEmpty = true;
   }
 
   focus() {

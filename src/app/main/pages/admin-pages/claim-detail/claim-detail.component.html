@@ -135,6 +135,8 @@
 
                       <button [disabled]="isEmpty" class="btn btn-primary" (click)="addComment()">Envoyer</button>
                     </div>
+
+                  <input formControlName="checkbox" type="checkbox" title="">&nbsp;Message public
                   </form><br>
                       <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim?.feedback">
                           <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">

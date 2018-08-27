@@ -28,6 +28,7 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
   public request: any;
   public impaye = 0;
   public isEmpty = true;
+  public isPublic: Boolean = false;
   public requestUpdate: any;
   public modalRef: BsModalRef;
   private wizardState: WizardState;
@@ -66,7 +67,8 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
         phone: ['', Validators.required]
       });
       this.commentForm = this.formBuilder.group({
-        comment: ['', Validators.required]
+        comment: ['', Validators.required],
+        checkbox: ['']
       });
       this.addInterventionForm = this.formBuilder.group({
         agent: ['', Validators.required],
@@ -87,6 +89,9 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     // CommentForm
     get comment() {
       return this.commentForm.get('comment');
+    }
+    get checkbox() {
+      return this.commentForm.get('checkbox');
     }
 
     // InterventionForm
@@ -170,12 +175,18 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
 
  // Add Comment
  addComment() {
-   this.request.feedback.push({message: this.comment.value, sendingDate: new Date()});
+   if (this.checkbox.value === null || this.checkbox.value === '') {
+      this.isPublic = false;
+   } else {
+      this.isPublic = true;
+   }
+   this.request.feedback.push({message: this.comment.value, sendingDate: new Date(), ispublic: this.isPublic});
    this.request.agent = JSON.parse(localStorage.getItem('user'));
    this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
-   console.log(this.request);
+   console.log(this.isPublic);
    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
     this.commentForm.reset();
+    this.isEmpty = true;
     this.ngOnInit();
    },
    (err) => {

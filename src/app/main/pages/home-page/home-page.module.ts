@@ -4,6 +4,7 @@ import { HomePageComponent } from './home-page.component';
 import {HomePageRoutingModule} from './home-page-routing.module';
 import {ChartsModule} from 'ng2-charts';
 import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
+import { HomeService } from '../../services/home.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
     BsDatepickerModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePageComponent]
+  declarations: [HomePageComponent],
+  providers: [HomeService]
 })
 export class HomePageModule { }
