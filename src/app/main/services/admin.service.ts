@@ -64,6 +64,11 @@ export class AdminService {
     return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/factures`, {headers: headers});
   }
 
+  getConsumptionHistory(): Observable<Response<Array<any>>> {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data3/consommations`, {headers: headers});
+  }
+
   getSettlementsByContract(contractId?: number): Observable<Response<Array<any>>> {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.get<Response<Array<any>>>(`https://my-json-server.typicode.com/AdnaneBaiz/data/settlements?id=${contractId}`, {headers: headers});

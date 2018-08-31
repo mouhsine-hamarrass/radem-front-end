@@ -6,6 +6,8 @@ import { WizardComponent, WizardState} from 'angular-archwizard';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
 import * as moment from 'moment';
+import {ToastrService} from 'ngx-toastr';
+import swal from 'sweetalert2';
 
 // @ts-ignore
 import _ = require('underscore');
@@ -60,7 +62,8 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private modalService: BsModalService) {
+    private modalService: BsModalService,
+    private toastrService: ToastrService) {
       this.requestForm = this.formBuilder.group({
         agent: ['', Validators.required],
         dateIntervention: ['', Validators.required],
@@ -162,15 +165,28 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
   }
   // Stepper
   nextStep(id) {
-    const agentId: number = JSON.parse(localStorage.getItem('user')).id;
-   this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
-     this.request = response.data;
-     if (this.request.status === 'CLOSED') {
-      this.StepButton.nativeElement.disabled = true;
+    swal({
+      title: 'êtes vous sûr?',
+      text: 'Cette action est irréversible!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+        const agentId: number = JSON.parse(localStorage.getItem('user')).id;
+        this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
+          this.request = response.data;
+          if (this.request.status === 'CLOSED') {
+           this.StepButton.nativeElement.disabled = true;
+             }
+          });
+          this.selectedStep = this.selectedStep + 1;
+           this.ngOnInit();
         }
-     });
-     this.selectedStep = this.selectedStep + 1;
-      this.ngOnInit();
+    });
   }
 
  // Add Comment

@@ -50,14 +50,18 @@
                 <tbody>
                   <tr *ngFor="let subscription of subscriptions" class="text-center" [ngClass]="subscription.type === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
                     <td style="cursor: pointer;" (click)="openDetailSubscription(detailSubscription, subscription.id)">
-                      <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;<b>{{subscription.police}}</b></td>
+                      <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;
+                      <b>{{subscription.police}}</b>
+                    </td>
                     <td>{{subscription.state}}</td>
                     <td>{{subscription.address}}</td>
                     <td>{{subscription.lastConsumption}}</td>
                     <td>{{subscription.toBePayed}}</td>
-                    <td style="cursor: pointer;" (click)="showBills(subscription.police)"><b>{{subscription.nextBill}}</b></td>
+                    <td style="cursor: pointer;" (click)="showBills(subscription.police)">
+                      <b>{{subscription.nextBill}}</b>
+                    </td>
                     <td>
-                      <i class="fa fa-history"></i>
+                      <i class="fa fa-history" (click)="openHistory(historyDetail)"></i>
                     </td>
                   </tr>
                 </tbody>
@@ -95,8 +99,12 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let bill of bills">
-                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)"><b>{{bill.numBill}}</b></td>
-                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)"><b>{{bill.numBill}}</b></td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)">
+                      <b>{{bill.numBill}}</b>
+                    </td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)">
+                      <b>{{bill.numBill}}</b>
+                    </td>
                     <td>{{bill.dueNumber}}</td>
                     <td>{{bill.police}}</td>
                     <td>{{bill.dueDate}}</td>
@@ -179,20 +187,20 @@
           <div class="card-content">
             <div class="card-body">
 
-        <table>
-            <tr>
-              <th>N° compteur:</th>
-              <td>{{subscription[0]?.lastIndex.meterNumber}}</td>
-            </tr>
-            <tr>
-              <th>Date de relève:</th>
-              <td>{{subscription[0]?.lastIndex.date}}</td>
-            </tr>
-            <tr>
-              <th>Index:</th>
-              <td>{{subscription[0]?.lastIndex.index}}</td>
-            </tr>
-          </table>
+              <table>
+                <tr>
+                  <th>N° compteur:</th>
+                  <td>{{subscription[0]?.lastIndex.meterNumber}}</td>
+                </tr>
+                <tr>
+                  <th>Date de relève:</th>
+                  <td>{{subscription[0]?.lastIndex.date}}</td>
+                </tr>
+                <tr>
+                  <th>Index:</th>
+                  <td>{{subscription[0]?.lastIndex.index}}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -206,20 +214,20 @@
           </div>
           <div class="card-content">
             <div class="card-body">
-                <table>
-                  <tr>
-                    <th>Date:</th>
-                    <td>{{subscription[0]?.lastBill.date}}</td>
-                  </tr>
-                  <tr>
-                    <th>Montant:</th>
-                    <td>{{subscription[0]?.lastBill.amount}}</td>
-                  </tr>
-                  <tr>
-                    <th>Consommation:</th>
-                    <td>{{subscription[0]?.lastBill.consumption}}</td>
-                  </tr>
-                </table>
+              <table>
+                <tr>
+                  <th>Date:</th>
+                  <td>{{subscription[0]?.lastBill.date}}</td>
+                </tr>
+                <tr>
+                  <th>Montant:</th>
+                  <td>{{subscription[0]?.lastBill.amount}}</td>
+                </tr>
+                <tr>
+                  <th>Consommation:</th>
+                  <td>{{subscription[0]?.lastBill.consumption}}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -489,6 +497,54 @@
         <p class="card-text font-weight-bold">Total TVA:
           <span class="font-weight-normal mx-2">39.21(DHs)</span>
         </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #historyDetail>
+  <div class="modal-header bg-radem">
+    <h4 class="modal-title pull-left">Historique de consomation</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4">
+        <table class="table table-responsive">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="row">Periode</th>
+              <th scope="col">Montant HT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let month of history; let i=index">
+              <td>{{history[i].month}}</td>
+              <td>{{history[i].value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <h5 class="card-title text-center">Evolution de votre consomation en (m3)</h5>
+          <div class="card-body">
+            <div style="display: block">
+                      <canvas baseChart
+                              [chartType]="chartType"
+                              [datasets]="chartDatasets"
+                              [labels]="chartLabels"
+                              [colors]="chartColors"
+                              [options]="chartOptions"
+                              [legend]="true"
+                              (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)">
+                      </canvas>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
