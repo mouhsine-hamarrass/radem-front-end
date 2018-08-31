@@ -23,9 +23,11 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { AlertTypeComponent } from './alert-type/alert-type.component';
 import { AlertTypesComponent } from './alert-types/alert-types.component';
 import { SettingsComponent } from './settings/settings.component';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 @NgModule({
   imports: [
+    NguiAutoCompleteModule,
     CommonModule,
     AdminPagesRoutingModule,
     ArchwizardModule,

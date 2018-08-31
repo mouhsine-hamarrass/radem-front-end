@@ -22,17 +22,15 @@
           <div class="row col-md-12 form-group">
             <label class="col-form-label col-md-3">Le contrat concerné :</label>
             <div class="col-md-4">
-              <select formControlName="contract" class="custom-select" type="text" #t2 (change)="setClient(t2.value)">
-                <option value="" selected disabled>Choisissez un contrat</option>
-                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}</option>
-              </select>
+              <input auto-complete class="form-control" [max-num-list]="6" formControlName="contract" (valueChanged)="setClient($event)"
+                [open-on-focus]="false" no-match-found-text="Aucun résultat trouvé." loading-text="Chargement.." [auto-select-first-item]="true" [source]="mySource" />
             </div>
             <div class="col-md-5">
               <input formControlName="client" type="text" class="form-control" disabled>
             </div>
           </div>
           <div class="row col-md-12">
-            <button class="btn btn-primary ml" (click)="saveNotificationAlert()" >Valider</button>
+            <button class="btn btn-primary ml" (click)="saveNotificationAlert()">Valider</button>
           </div>
         </form>
       </div>
