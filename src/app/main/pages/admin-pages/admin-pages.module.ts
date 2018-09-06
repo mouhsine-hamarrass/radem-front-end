@@ -22,6 +22,11 @@ import { AlertTypeComponent } from './alert-type/alert-type.component';
 import { AlertTypesComponent } from './alert-types/alert-types.component';
 import { SettingsComponent } from './settings/settings.component';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
+import { AdvicesComponent } from './advices/advices.component';
+import {QuillModule} from 'ngx-quill';
+import { ServicesComponent } from './services/services.component';
+import { ServiceComponent } from './service/service.component';
+import { ServiceFormComponent } from './service-form/service-form.component';
 
 @NgModule({
   imports: [
@@ -33,7 +38,8 @@ import {SubscriptionDetailComponent} from './subscription-detail/subscription-de
     ChecklistModule,
     NgxToggleModule,
     TabsModule.forRoot(),
-    TranslateModule
+    TranslateModule,
+    QuillModule
   ],
   declarations: [
     AdminDashboardComponent,
@@ -49,7 +55,11 @@ import {SubscriptionDetailComponent} from './subscription-detail/subscription-de
     AlertTypeComponent,
     AlertTypesComponent,
     SettingsComponent,
-    SubscriptionDetailComponent
+    SubscriptionDetailComponent,
+    AdvicesComponent,
+    ServicesComponent,
+    ServiceComponent,
+    ServiceFormComponent
   ],
   providers: [AdminService]
 })

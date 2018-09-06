@@ -3,6 +3,8 @@ import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
 import {Color} from 'ng2-charts';
 import {ContractsService} from '../../services/contracts.service';
+import {AdminService} from '../../services/admin.service';
+import {Setting} from '../../models/setting.model';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +12,7 @@ import {ContractsService} from '../../services/contracts.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  advices: Setting;
   @ViewChild(BsDatepickerDirective) datepicker: BsDatepickerDirective;
   colorTheme = 'theme-blue';
   bsConfig: Partial<BsDatepickerConfig>;
@@ -108,7 +111,7 @@ export class HomePageComponent implements OnInit {
   protected minMaxConsumption;
   protected bills;
 
-  constructor(private contractServices: ContractsService) {
+  constructor(private contractServices: ContractsService, private adminServices: AdminService) {
     this.maxDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate());
   }
@@ -150,6 +153,12 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.adminServices.getAdvices().subscribe(response => {
+      this.advices = response.data;
+    }, err => {
+      console.log(err);
+    });
+
     this.contractServices.getAlerts().subscribe(response => {
       this.alerts = response;
     }, err => {

@@ -20,12 +20,12 @@
       "prefix": "app",
       "styles": [
         "assets/app/vendors/css/ui/prism.min.css",
+        "assets/app/vendors/css/quill-editor/quill.snow.css",
+        "assets/app/vendors/css/quill-editor/quill.bubble.css",
         "assets/app/css/vendors.css",
-        "assets/scss/app.scss",
-        "assets/scss/core/menu/menu-types/vertical-menu.scss",
-        "assets/scss/style.scss",
-        "assets/app-assets/css/components.css",
-        "assets/app-assets/fonts/simple-line-icons/style.min.css",
+        "assets/app/css/core/menu/menu-types/vertical-menu.css",
+        "assets/app/css/app.css",
+        "assets/app/fonts/simple-line-icons/style.min.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/ngx-toastr/toastr.css"
       ],

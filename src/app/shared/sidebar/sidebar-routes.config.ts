@@ -101,6 +101,17 @@ export const ROUTES: RouteInfo[] = [
         isExternalLink: false,
         isNavHeader: false,
         submenu: []
+      },
+      {
+        path: '/admin/advices',
+        title: 'Conseils',
+        icon: 'icon-user-follow',
+        clazz: 'nav-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: []
       }
     ]
   },

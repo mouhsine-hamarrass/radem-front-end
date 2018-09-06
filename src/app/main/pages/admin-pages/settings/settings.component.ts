@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UtilsService} from '../../../services/utils.service';
 import {AdminService} from '../../../services/admin.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {Settings} from 'http2';
 import {Setting} from '../../../models/setting.model';
 
 @Component({
