@@ -41,6 +41,9 @@ import { ServiceFormComponent } from './service-form/service-form.component';
     TranslateModule,
     QuillModule
   ],
+  exports: [
+    TranslateModule
+  ],
   declarations: [
     AdminDashboardComponent,
     CancellationRequestComponent,
@@ -59,7 +62,7 @@ import { ServiceFormComponent } from './service-form/service-form.component';
     AdvicesComponent,
     ServicesComponent,
     ServiceComponent,
-    ServiceFormComponent
+    ServiceFormComponent,
   ],
   providers: [AdminService]
 })

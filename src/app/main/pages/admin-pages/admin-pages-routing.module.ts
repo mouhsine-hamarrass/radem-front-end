@@ -15,6 +15,7 @@ import {AlertTypesComponent} from './alert-types/alert-types.component';
 import {SettingsComponent} from './settings/settings.component';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 import {AdvicesComponent} from './advices/advices.component';
+import {ServicesComponent} from './services/services.component';
 
 const routes: Routes = [
   {
@@ -130,6 +131,13 @@ const routes: Routes = [
         component: AdvicesComponent,
         data: {
           title: 'Conseil et économie d\'énergie'
+        }
+      },
+      {
+        path: 'services',
+        component: ServicesComponent,
+        data: {
+          title: 'Services'
         }
       }
     ]

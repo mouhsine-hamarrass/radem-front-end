@@ -7,6 +7,7 @@ import {Profile} from '../models/profile.model';
 import {User} from '../models/user.model';
 import {AlertTypeModel} from '../models/alert-type.model';
 import {Setting} from '../models/setting.model';
+import {ServiceModel} from '../models/service.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -257,5 +258,33 @@ export class AdminService {
 
   saveAdvices(advices: Setting): Observable<Response<Setting>> {
     return this.httpClient.put<Response<Setting>>(`${this.urlApi}/settings/ADVICES`, advices, {headers: headers});
+  }
+
+  /**
+   * Services
+   */
+
+  getService(serviceId: number): Observable<Response<ServiceModel>> {
+    return this.httpClient.get<Response<ServiceModel>>(`${this.urlApi}/services/${serviceId}`);
+  }
+
+  createService(service: ServiceModel): Observable<Response<ServiceModel>> {
+    return this.httpClient.post<Response<ServiceModel>>(`${this.urlApi}/services`, service, {headers: headers});
+  }
+
+  saveService(serviceId: number, service: ServiceModel): Observable<Response<ServiceModel>> {
+    return this.httpClient.put<Response<ServiceModel>>(`${this.urlApi}/services/${serviceId}`, service, {headers: headers});
+  }
+
+  removeService(serviceId: number) {
+    return this.httpClient.delete(`${this.urlApi}/services/${serviceId}`, {headers: headers});
+  }
+
+  getPageableServices(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
+    if (keyword) {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/services/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`);
+    } else {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/services/paged-list?page=${page}&size=${pageSize}`);
+    }
   }
 }
