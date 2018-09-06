@@ -105,7 +105,18 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/admin/advices',
         title: 'Conseils',
-        icon: 'icon-user-follow',
+        icon: 'icon-support',
+        clazz: 'nav-item',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        isNavHeader: false,
+        submenu: []
+      },
+      {
+        path: '/admin/services',
+        title: 'Services',
+        icon: 'icon-directions',
         clazz: 'nav-item',
         badge: '',
         badgeClass: '',

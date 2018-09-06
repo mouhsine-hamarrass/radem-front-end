@@ -25,7 +25,6 @@ import {SubscriptionDetailComponent} from './subscription-detail/subscription-de
 import { AdvicesComponent } from './advices/advices.component';
 import {QuillModule} from 'ngx-quill';
 import { ServicesComponent } from './services/services.component';
-import { ServiceComponent } from './service/service.component';
 import { ServiceFormComponent } from './service-form/service-form.component';
 
 @NgModule({
@@ -61,7 +60,6 @@ import { ServiceFormComponent } from './service-form/service-form.component';
     SubscriptionDetailComponent,
     AdvicesComponent,
     ServicesComponent,
-    ServiceComponent,
     ServiceFormComponent,
   ],
   providers: [AdminService]
