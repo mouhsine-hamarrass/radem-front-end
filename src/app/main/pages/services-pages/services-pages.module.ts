@@ -15,11 +15,14 @@ import { NewSubscriptionRequestComponent } from './new-subscription-request/new-
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {createTranslateLoader} from '../../../app.translate.factory';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
+import { ArchwizardModule } from 'angular-archwizard';
 
 @NgModule({
   imports: [
     CommonModule,
     ServicesPagesRoutingModule,
+    ArchwizardModule,
     FormsModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
@@ -41,6 +44,7 @@ import {createTranslateLoader} from '../../../app.translate.factory';
     ClaimDetailComponent,
     PrintableCancellationComponent,
     NewSubscriptionRequestComponent,
+    SubscriptionDetailComponent,
   ]
 })
 export class ServicesPagesModule {

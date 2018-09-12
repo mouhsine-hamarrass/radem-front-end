@@ -10,6 +10,7 @@ import { ClaimRequestsComponent } from './claim-requests/claim-requests.componen
 import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
 import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
 import { NewSubscriptionRequestComponent } from './new-subscription-request/new-subscription-request.component';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 
 const routes: Routes = [
   {
@@ -79,10 +80,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'print',
-        component: PrintableCancellationComponent,
+        path: 'subscription-detail/:id',
+        component: SubscriptionDetailComponent,
         data: {
-          title: 'document'
+          title: 'Demande d\'abonnement'
         }
       },
     ]

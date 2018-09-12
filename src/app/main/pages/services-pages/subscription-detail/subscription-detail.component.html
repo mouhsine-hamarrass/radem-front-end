@@ -1,0 +1,158 @@
+<!--Tooltip Starts-->
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Abonnement</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Services</a>
+        </li>
+        <li class="breadcrumb-item active">Demande 1
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Demande d'abonnement N°</h4>
+          <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+          <div class="heading-elements">
+            <ul class="list-inline">
+              <li>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="card-text">
+              <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
+
+                <aw-wizard-step [stepId]="0" [stepTitle]="'Depôt de dossier'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <aw-wizard-step [stepId]="1" [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <aw-wizard-step [stepId]="2" [stepTitle]="'Pose Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <aw-wizard-step [stepId]="3" [stepTitle]="'Facture'" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <aw-wizard-step [stepId]="4" [stepTitle]="'Abonné'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <div class="col-md-12" id="buttons">
+                </div>
+              </aw-wizard>
+
+              <div class="row" id="cards">
+                <fieldset class="col-7 scheduler-border">
+                  <legend class="scheduler-border"><b>Informations :</b></legend>
+                  <div style="padding-left: 20px;padding-bottom: 10px;">
+                    <div class="row">
+                      <div style="padding-left: 10px;">
+                        <table>
+                          <tr>
+                            <td>N° demande :</td>
+                            <td>{{claim?.claimNumber}}</td>
+                          </tr>
+                          <tr>
+                            <td>Client :</td>
+                            <td>{{claim?.complainer?.lastname}} {{claim?.complainer?.firstname}}</td>
+                          </tr>
+                          <tr>
+                            <td>Objet :</td>
+                            <td>{{claim?.object}}</td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div id="descDiv">Description :{{claim?.description}}
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="col-4 scheduler-border">
+                  <legend class="scheduler-border">
+                    <b>Intervenants :</b>
+                  </legend>
+                  <div style="padding-left: 20px;">
+                    <p *ngIf="!claim?.agent">
+                      Aucun Intervenant n'est affecté pour le moment
+                    </p>
+                    <table *ngIf="claim?.agent">
+                      <tr>
+                        <td>Agent :</td>
+                        <td>{{claim?.agent?.firstname}} {{claim?.agent?.lastname}}</td>
+                      </tr>
+                      <tr>
+                        <td>Service concerné :</td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="row" id="cards2">
+                <fieldset class="col-7 scheduler-border">
+                  <legend class="scheduler-border">
+                    <b>Commentaires</b>
+                  </legend>
+                  <div id="commDiv">
+                    <form class="">
+                      <div class="row">
+
+                        <input #commentaire type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
+                          style="margin-right: 8px;margin-left: 10px;" />
+
+                        <button class="btn btn-primary">Envoyer</button>
+                      </div>
+                    </form><br>
+                    <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim?.feedback">
+                      <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
+                      <div class="border-comm col-10" id="comm">
+                        {{feedback.message}}
+                      </div>
+                      <div class="col-md-4 pull-right" id="divDateComm">
+                        <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="col-4 scheduler-border" id="divDate">
+                  <legend class="scheduler-border">
+                    <b>Dates :</b>
+                  </legend>
+                  <div style="padding-left: 20px;">
+                    <table>
+                      <tr>
+                        <td>Date de création :</td>
+                        <td>{{claim?.createdDate | date: 'dd/MM/yyyy'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Dernière modification :</td>
+                        <td>{{claim?.updatedDate | date: 'dd/MM/yyyy'}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
+</div>
