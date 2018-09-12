@@ -7,17 +7,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FooterComponent} from './footer/footer.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {ToggleFullscreenDirective} from './directives/toggle-fullscreen.directive';
 import {SecondNavbarComponent} from './second-navbar/second-navbar.component';
 import {SpinnerService} from './components/spinner/spinner.service';
 import {PrintService} from './services/print.service';
 import {DataService} from './services/data.service';
 import {LoginComponent} from '../login/login.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
-import {TruncatePipe} from './pipes/truncate.pipe';
-import {HighlightPipe} from './pipes/highlight.pipe';
-import {SortPipe} from './pipes/sort.pipe';
-import {BytesToSizePipe} from './pipes/bytes-to-size.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MomentModule} from 'ngx-moment';
@@ -47,6 +42,9 @@ import {
   TabsModule,
   TooltipModule
 } from 'ngx-bootstrap';
+import {QuillModule} from 'ngx-quill';
+import {PipesModule} from './pipes/pipes.module';
+import {DirectivesModule} from './directives/directives.module';
 
 
 @NgModule({
@@ -54,14 +52,9 @@ import {
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    ToggleFullscreenDirective,
     SecondNavbarComponent,
     LoginComponent,
     SpinnerComponent,
-    TruncatePipe,
-    HighlightPipe,
-    SortPipe,
-    BytesToSizePipe,
     FilterComponent,
     PaginationComponent,
     SearchComponent,
@@ -93,7 +86,10 @@ import {
     CollapseModule.forRoot(),
     ArchwizardModule,
     NgxToggleModule,
-    ChecklistModule
+    ChecklistModule,
+    QuillModule,
+    PipesModule,
+    DirectivesModule
   ],
   exports: [
     CommonModule,
@@ -107,14 +103,9 @@ import {
     BsDatepickerModule,
     NavbarComponent,
     SidebarComponent,
-    ToggleFullscreenDirective,
     SecondNavbarComponent,
     LoginComponent,
     SpinnerComponent,
-    TruncatePipe,
-    HighlightPipe,
-    SortPipe,
-    BytesToSizePipe,
     ArchwizardModule,
     NgxToggleModule,
     FilterComponent,
@@ -122,6 +113,9 @@ import {
     SearchComponent,
     AlertComponent,
     ChecklistModule,
+    QuillModule,
+    PipesModule,
+    DirectivesModule
   ],
   providers: [
     SpinnerService,

@@ -1,11 +1,8 @@
 {
   "appTitle": "PROJECT_NAME",
-  "loading": "Loading ...",
-  "logout": "Logout",
+  "loading": "Chargement ...",
+  "logout": "Deconexion",
   "menu": {
-    "contributeur": "Contributeur",
-    "moderateur": "Moderateur",
-    "lecteur": "Lecteur",
     "admin": "Admin"
   },
   "login": {

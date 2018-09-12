@@ -24,6 +24,14 @@ import { AlertTypeComponent } from './alert-type/alert-type.component';
 import { AlertTypesComponent } from './alert-types/alert-types.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
+import { AdvicesComponent } from './advices/advices.component';
+import {QuillModule} from 'ngx-quill';
+import { ServicesComponent } from './services/services.component';
+import { ServiceFormComponent } from './service-form/service-form.component';
+import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
+import { AlertComponent } from './alert/alert.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 @NgModule({
   imports: [
@@ -37,6 +45,10 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
     NgxToggleModule,
     TabsModule.forRoot(),
     TranslateModule,
+    QuillModule
+  ],
+  exports: [
+    TranslateModule
   ],
   declarations: [
     AdminDashboardComponent,
@@ -44,16 +56,19 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
     RequestsComponent,
     ClaimsComponent,
     ClaimDetailComponent,
-    AlertComponent,
     UserComponent,
     UsersComponent,
     ProfileComponent,
     ProfilesComponent,
     SubscriptionDetailComponent,
     AlertsComponent,
-    AlertTypeComponent,
-    AlertTypesComponent,
-    SettingsComponent
+    SettingsComponent,
+    AdvicesComponent,
+    ServicesComponent,
+    ServiceFormComponent,
+    AlertNotificationComponent,
+    AlertComponent,
+    AlertsComponent,
   ],
   providers: [AdminService]
 })

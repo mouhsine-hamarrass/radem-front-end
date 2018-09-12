@@ -272,59 +272,30 @@
          </div>
          <!--/ Dernieres relèves -->
 
-         <!-- Conseil et économie d'énergie-->
-         <div class="card">
-            <div class="card-header">
-               <h4 class="card-title">Conseil et économie d'énergie</h4>
-               <a class="heading-elements-toggle">
-                  <i class="fa fa-ellipsis-v font-medium-3"></i>
-               </a>
-               <div class="heading-elements">
-                  <ul class="list-inline mb-0">
-                     <li>
-                        <a data-action="collapse">
-                           <i class="ft-minus"></i>
-                        </a>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <div class="card-content collapse show">
-               <div class="card-body">
-                  <div class="card-text">
-                     <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
-                     <ul>
-                        <li>Attention, augmenter de 1 °C la température dans une pièce, c’est consommer environ 7%
-                           d’énergie en plus…
-                           Notre solution? Installer un gestionnaire d’énergie. Il vous permettra de régler
-                           automatiquement la température
-                           de chaque pièce et de la baisser de 2 °C à 3 °C en cas d’absence durant plusieurs heures.**
-                        </li>
-                        <li>Vous pouvez également réguler la température de vos radiateurs (à eau chaude) en les
-                           équipant d’un robinet
-                           thermostatique. Celui-ci vous permet de choisir la température qui vous convient selon les
-                           pièces et de
-                           réaliser des économies d’énergie.
-                        </li>
-                        <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos
-                           radiateurs à eau chaude
-                           avant de les remettre en marche.
-                        </li>
-                        <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos
-                           radiateurs à eau chaude
-                           avant de les remettre en marche.
-                        </li>
-                        <li>Nous vous recommandons également de dépoussiérer deux fois par an vos radiateurs électriques
-                           et de ne surtout
-                           jamais les couvrir : vous risqueriez non seulement de les isoler mais aussi de créer un
-                           court-circuit
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!--/ Conseil et économie d'énergie-->
+      <!-- Conseil et économie d'énergie-->
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Conseil et économie d'énergie</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li>
+                <a data-action="collapse">
+                  <i class="ft-minus"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div [innerHTML]="advices?.value | safeHtml"></div>
+          </div>
+        </div>
       </div>
-   </section>
+      <!--/ Conseil et économie d'énergie-->
+    </div>
+  </section>
 </div>

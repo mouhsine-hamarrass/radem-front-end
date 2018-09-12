@@ -307,3 +307,10 @@ fieldset.col-4 {
 .max-width {
   max-height: 120px !important;
 }
+
+#coments{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 250px;
+  padding-left: 19px;
+}

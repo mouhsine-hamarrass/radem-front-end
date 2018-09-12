@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AdminService } from '../../../services/admin.service';
-import { Router } from '@angular/router';
-import * as _ from 'underscore';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {UtilsService} from '../../../services/utils.service';
+import {AdminService} from '../../../services/admin.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {AlertModel} from '../../../models/alert.model';
 
 @Component({
   selector: 'app-alert',
@@ -10,83 +13,87 @@ import * as _ from 'underscore';
   styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
-  protected alertForm: FormGroup;
-  protected alertTypes: any;
-  protected alert: any;
-  protected contracts: any;
-  protected user: any;
-  protected alertNotification: any;
-  protected listContract: any;
-  protected myData: any;
-  protected mySource = [];
 
-  constructor(private adminService: AdminService, private formBuilder: FormBuilder,
-    private router: Router) {
-    this.alertForm = this.formBuilder.group({
-    type: ['', Validators.required],
-    description: ['', Validators.required],
-    contract: ['', Validators.required],
-    client: ['']
-  })}
+  alert: AlertModel;
+  formAlert;
+  FormGroup;
+  isSubmitted = false;
 
-  get type() {
-    return this.alertForm.get('type');
+  @Input() modalRef: BsModalRef;
+
+  @Input() alertId: number;
+
+  @Output() refreshAlerts = new EventEmitter<boolean>();
+
+  constructor(private utilsService: UtilsService,
+              private adminService: AdminService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private formBuilder: FormBuilder,
+              private toastrService: ToastrService) {
+    this.formAlert = this.formBuilder.group({
+      title: ['', Validators.required],
+      instructions: ['', Validators.required],
+    });
   }
-  get description() {
-    return this.alertForm.get('description');
+
+  get title() {
+    return this.formAlert.get('title');
   }
-  get contract() {
-    return this.alertForm.get('contract');
-  }
-  get client() {
-    return this.alertForm.get('client');
+
+  get instructions() {
+    return this.formAlert.get('instructions');
   }
 
   ngOnInit() {
-    this.adminService.getAlertTypes().subscribe(response => {
-      this.alertTypes = response.data;
-    })
-    this.adminService.getUsers().subscribe(response => {
-      this.contracts = response;
-    })
-    this.adminService.getAllContracts().subscribe(response => {
-      _.each(response, rep => this.mySource.push(rep.contrat));
-    })
+    this.getAlert();
   }
 
-  setAlert(id: any) {
-    this.adminService.getAlert(id).subscribe(response => {
-      this.alert = response.data;
-      this.alertForm.controls.description.setValue(this.alert.description);
-    })
-  }
-
-  setClient(contractNumber: any) {
-    this.adminService.getUserWithContract(contractNumber).subscribe(response => {
-      this.user = response;
-      this.alertForm.controls.client.setValue(this.user[0].fullName);
-    })
-  }
-
-  saveNotificationAlert() {
-    this.alertNotification = {
-      subscription : {
-        subscription : this.user[0].contract,
-        tournee : 'tournee',
-        type : 'eau'
-      },
-      alert : {
-        id : this.alert.id
-      },
-      client : {
-          firstname : this.user[0].firstName,
-          lastname : this.user[0].lastName,
-          email : this.user[0].email,
-          username : this.user[0].fullName,
-        }
+  getAlert() {
+    if (this.alertId !== null) {
+      this.adminService.getAlert(this.alertId).subscribe(response => {
+        this.alert = response.data;
+        this.loadAlert();
+      });
     }
-    this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
+  }
+
+  loadAlert() {
+    this.title.setValue(this.alert.title);
+    this.instructions.setValue(this.alert.instructions);
+  }
+
+  createAlert() {
+    this.isSubmitted = true;
+    this.alert = new AlertModel(
+      null,
+      this.formAlert.controls.title.value,
+      this.formAlert.controls.instructions.value
+    );
+
+    this.adminService.createAlert(this.alert).subscribe(response => {
+      this.toastrService.success('L\'alerte ajoutée', '');
+      this.modalRef.hide();
+      this.refreshAlerts.emit(true);
+    }, err => {
+      this.refreshAlerts.emit(false);
     });
-    this.router.navigate(['/admin/alerts']);
+  }
+
+  saveAlert() {
+    this.isSubmitted = true;
+    this.alert = new AlertModel(
+      this.alertId,
+      this.formAlert.controls.title.value,
+      this.formAlert.controls.instructions.value
+    );
+
+    this.adminService.saveAlert(this.alert.id, this.alert).subscribe(response => {
+      this.toastrService.success('L\'alerte modifiée', '');
+      this.modalRef.hide();
+      this.refreshAlerts.emit(true);
+    }, err => {
+      this.refreshAlerts.emit(false);
+    });
   }
 }

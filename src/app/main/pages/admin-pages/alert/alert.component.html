@@ -1,39 +1,39 @@
-<div class="col-md-12 py-3">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Ajouter une alerte</h4>
-      <div class="col-md-10">
-        <form class="" [formGroup]="alertForm">
-          <div class="row col-md-12 form-group">
-            <label class="col-form-label col-md-3">Type d'alerte :</label>
-            <div class="col-md-6">
-              <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
-                <option value="" selected disabled>Choisissez un type</option>
-                <option *ngFor="let alertType of alertTypes" value="{{alertType.id}}">{{alertType.title}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="row col-md-12 form-group">
-            <label class="col-form-label col-md-3">Aperçu de l'alerte :</label>
-            <div class="col-md-9">
-              <textarea formControlName="description" class="form-control" disabled></textarea>
-            </div>
-          </div>
-          <div class="row col-md-12 form-group">
-            <label class="col-form-label col-md-3">Le contrat concerné :</label>
-            <div class="col-md-4">
-              <input auto-complete class="form-control" [max-num-list]="6" formControlName="contract" (valueChanged)="setClient($event)"
-                [open-on-focus]="false" no-match-found-text="Aucun résultat trouvé." loading-text="Chargement.." [auto-select-first-item]="true" [source]="mySource" />
-            </div>
-            <div class="col-md-5">
-              <input formControlName="client" type="text" class="form-control" disabled>
-            </div>
-          </div>
-          <div class="row col-md-12">
-            <button class="btn btn-primary ml" (click)="saveNotificationAlert()">Valider</button>
-          </div>
-        </form>
+<div class="modal-header bg-radem">
+  <h4 class="modal-title pull-left" *ngIf="!alertId">Ajouter une nouvelle alerte</h4>
+  <h4 class="modal-title pull-left" *ngIf="alertId">Modifier l'alerte</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+    <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+  </button>
+</div>
+<div class="modal-body">
+  <form role="form" novalidate [formGroup]="formAlert">
+    <div class="row form-group">
+      <label for="title" class="col-sm-3 control-label">Désignation <span class="danger">*</span> </label>
+      <div class="col-sm-9">
+        <input formControlName="title" id="title" name="name" type="text" placeholder="Désignation" class="form-control required">
+        <div *ngIf="title.invalid && (title.dirty || isSubmitted) && title.errors.required" class="text-danger text-left">
+          La désignation d'alerte est obligatoire
+        </div>
       </div>
     </div>
-  </div>
+    <div class="row form-group">
+      <label for="instructions" class="col-3 control-label">Instructions <span class="danger">*</span></label>
+      <div class="col-12">
+        <textarea rows="3" formControlName="instructions" id="instructions" name="name" class="form-control required"></textarea>
+        <div *ngIf="instructions.invalid && (instructions.dirty || isSubmitted) && instructions.errors.required" class="text-danger text-left">
+          Les Instructions d'alerte est obligatoire
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="modalRef.hide();"> Annuler
+  </button>
+  <button type="submit" class="btn btn-primary" (click)="createAlert();" *ngIf="!alertId"
+          [disabled]="formAlert.invalid">Enregistrer
+  </button>
+  <button type="submit" class="btn btn-primary" (click)="saveAlert();" *ngIf="alertId"
+          [disabled]="formAlert.invalid">Modifier
+  </button>
 </div>

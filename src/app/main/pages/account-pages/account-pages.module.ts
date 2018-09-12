@@ -6,7 +6,7 @@ import {SettlementsComponent} from './settlements/settlements.component';
 import {UnpaidComponent} from './unpaid/unpaid.component';
 import {AccountPagesRoutingModule} from './account-pages-routing.module';
 import {ChartsModule} from 'ng2-charts';
-import {BsDatepickerModule} from 'ngx-bootstrap';
+import {BsDatepickerModule, BsDropdownModule} from 'ngx-bootstrap';
 import { AdminService } from '../../services/admin.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ChartsModule,
     FormsModule,
     BsDatepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDropdownModule
   ],
   declarations: [
     ContractsComponent,

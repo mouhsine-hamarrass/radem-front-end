@@ -34,9 +34,6 @@ export class ContractsService {
   getBill(numBill: string): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/younesMck/jsonServer/bills?numBill=${numBill}`);
   }
-  getAlerts(): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`https://my-json-server.typicode.com/younesMck/jsonServer/alerts`);
-  }
   getReleves(): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`http://my-json-server.typicode.com/adnanebaiz/data/releves`);
   }

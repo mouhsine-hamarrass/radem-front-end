@@ -14,14 +14,17 @@ import {AlertTypeComponent} from './alert-type/alert-type.component';
 import {AlertTypesComponent} from './alert-types/alert-types.component';
 import {SettingsComponent} from './settings/settings.component';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
-import { AlertsComponent } from './alerts/alerts.component';
+import {AdvicesComponent} from './advices/advices.component';
+import {ServicesComponent} from './services/services.component';
+import {AlertNotificationComponent} from './alert-notification/alert-notification.component';
+import {AlertsComponent} from './alerts/alerts.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: AdminDashboardComponent,
         data: {
           title: 'Tableau de bord'
@@ -63,8 +66,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'alert',
-        component: AlertComponent,
+        path: 'alert-notification',
+        component: AlertNotificationComponent,
         data: {
           title: 'Alerte'
         }
@@ -112,10 +115,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'alert-types',
-        component: AlertTypesComponent,
+        path: 'alerts',
+        component: AlertsComponent,
         data: {
-          title: 'Liste de types d\'alertes'
+          title: 'Liste des alertes'
         }
       },
       {
@@ -126,10 +129,17 @@ const routes: Routes = [
         }
       },
       {
-        path: 'alerts',
-        component: AlertsComponent,
+        path: 'advices',
+        component: AdvicesComponent,
         data: {
-          title: 'Liste des alertes'
+          title: 'Conseil et économie d\'énergie'
+        }
+      },
+      {
+        path: 'services',
+        component: ServicesComponent,
+        data: {
+          title: 'Services'
         }
       }
     ]

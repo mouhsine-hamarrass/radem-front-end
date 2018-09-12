@@ -50,7 +50,20 @@
                      </div>
                      <div class="col-auto float-right">
                         <button type="button" class="btn btn-primary" (click)="recherche();">Rechercher</button>
-                        <button type="button" class="btn btn-primary download" (click)="getSettlementsReport()" >Télécharger</button>
+                       &nbsp;
+                       <div class="btn-group" dropdown>
+                         <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                 aria-controls="dropdown-basic"> Télécharger <span class="caret"></span>
+                         </button>
+                         <div aria-labelledby="dropdownUser" *dropdownMenu="" class="dropdown-menu">
+                           <a class="dropdown-item" (click)="downloadPdfSettlements()">
+                             <i class="fa fa-file-pdf-o"></i> Format Pdf
+                           </a>
+                           <a class="dropdown-item" (click)="downloadXlsSettlements()">
+                             <i class="fa fa-file-excel-o"></i> Format Excel
+                           </a>
+                         </div>
+                       </div>
                      </div>
                   </div>
                   <div class="table-responsive mx-auto my-5">

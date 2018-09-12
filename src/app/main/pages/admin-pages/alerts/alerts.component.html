@@ -1,31 +1,72 @@
-<div class="col-md-12 py-3">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Liste des alertes</h4>
-        <div class="table-responsive my-5">
-          <div>
-            <input type="text" class="col-3 form-control pull-right" placeholder="Rechercher" id="recherche"/>
+<nav aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Liste des alertes</li>
+  </ul>
+</nav>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title text-muted pull-left">Liste des alertes</h4>
+      <a class="pull-right">
+        <i class="icon-plus" (click)="showAlertForm(alertForm, null)"> Ajouter une nouvelle alerte</i>
+      </a>
+    </div>
+    <div class="card-body">
+      <div class=" table-responsive">
+        <!--div class="row">
+          <div class="col-12 my-3">
+            <div class="float-left m-2">
+              <app-filter (onfilterChanged)="filterprofiles($event)"></app-filter>
+            </div>
+            <div class="float-right m-2">
+              <app-search (onblur)="searchprofiles($event)"></app-search>
+            </div>
           </div>
-          <table class="table table-striped table-bordered table-hover zero-configuration">
-            <thead class="table-light">
-            <tr>
-              <th scope="col">N° Contrat</th>
-              <th scope="col">Client</th>
-              <th scope="col">Type d'alerte</th>
-              <th scope="col">Agent</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let alert of alerts">
-              <td>{{alert.subscription.subscription}}</td>
-              <td>{{alert?.client.firstname}} {{alert?.client.lastname}}</td>
-              <td>{{alert.alert.alertType.title}}</td>
-              <td>{{alert.agent}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-         <!--Card body end-->
+        </div-->
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="table-light">
+          <tr>
+            <th scope="col">Désignation</th>
+            <th scope="col">Instructions</th>
+            <th scope="col">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let alert of alerts">
+            <td>{{alert.title}}</td>
+            <td>{{alert.instructions}}</td>
+            <td>
+              <ul class="list-unstyled list-inline text-center nomargin">
+                <li class="list-inline-item">
+                  <a>
+                    <i class="fa fa-pencil text-info" (click)="showAlertForm(alertForm, alert.id)">
+                    </i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a>
+                    <i class="fa fa-times text-danger" (click)="dropAlert(alert.id)">
+                    </i>
+                  </a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!--app-pagination [disabled]="false"
+                        [numberOfItems]="numberOfItems"
+                        [itemsPerPage]="itemsPerPage"
+                        [totalItems]="totalElements"
+                        [totalPages]="totalPages"
+                        (onpageChanged)="pageChanged($event)"></app-pagination-->
       </div>
     </div>
   </div>
+</div>
+
+<ng-template #alertForm>
+  <app-alert [alertId]="alertId" [modalRef]="modalRef"
+             (refreshAlerts)="refreshAlerts($event)"></app-alert>
+</ng-template>
