@@ -27,18 +27,29 @@
           <h4 class="card-title">Consulter vos demandes</h4>
           <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
           <div class="heading-elements">
-              <ul class="list-inline">
-                <li>
-                  <a routerLink="/services/new-subscription-request">
-                    <i class="fa fa-plus"></i> Nouvelle demande d'abonnement</a>
-                </li>
-              </ul>
+            <ul class="list-inline">
+              <li>
+                <a routerLink="/services/new-subscription-request">
+                  <i class="fa fa-plus"></i> Nouvelle demande d'abonnement</a>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
             <div class="card-text">
-
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Nº demande</th>
+                    <th scope="col">Créée le </th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

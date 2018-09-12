@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ServicesService } from '../../../services/services.service';
 
 @Component({
   selector: 'app-new-subscription-request',
@@ -23,13 +24,30 @@ export class NewSubscriptionRequestComponent implements OnInit {
     oldElectricitySubscription: new FormControl('')
   });
 
-  constructor() { }
+  constructor(private servicesService: ServicesService) { }
 
   ngOnInit() {
   }
 
   saveRequest(): void {
-
+    let subscriptionReq: any = {
+      requestNumber : 1111,
+      client : JSON.parse(localStorage.getItem('user')),
+      subscriptionType : 'NEW'
+    };
+    if (this.subscriptionRequestForm.controls.subscriptionType.value) {
+      subscriptionReq.predecessor = this.subscriptionRequestForm.controls.predecessor.value;
+      subscriptionReq.oldWaterSubscription = this.subscriptionRequestForm.controls.oldWaterSubscription.value;
+      subscriptionReq.oldElectricitySubscription = this.subscriptionRequestForm.controls.oldElectricitySubscription.value;
+      subscriptionReq.subscriptionType = 'MUTATION';
+    }
+    subscriptionReq = {
+      requestNumber : 1122
+    }
+    this.servicesService.saveSubscriptionRequest(subscriptionReq).subscribe(response => {
+      console.log(response);
+    }, err => {});
+    console.log(subscriptionReq);
   }
 
 }

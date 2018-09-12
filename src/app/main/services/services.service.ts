@@ -32,6 +32,11 @@ export class ServicesService {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
   }
 
+  // subscription request
+  saveSubscriptionRequest(request: any): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
+  }
+
   // complaint
   saveComplaint(complaint: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save`, complaint, {headers: headers});
