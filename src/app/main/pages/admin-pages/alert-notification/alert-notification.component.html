@@ -1,0 +1,47 @@
+<nav aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Notification d'alerte</li>
+  </ul>
+</nav>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ajouter une alerte</h4>
+      <div class="col-md-10">
+        <form class="" [formGroup]="alertForm">
+          <div class="row col-md-12 form-group">
+            <label class="col-form-label col-md-3">Alerte :</label>
+            <div class="col-md-6">
+              <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
+                <option value="" selected disabled>Faite votre choix</option>
+                <option *ngFor="let alert of alerts" value="{{alert.id}}">{{alert.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row col-md-12 form-group">
+            <label class="col-form-label col-md-3">Aperçu de l'alerte :</label>
+            <div class="col-md-9">
+              <textarea formControlName="description" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="row col-md-12 form-group">
+            <label class="col-form-label col-md-3">Le contrat concerné :</label>
+            <div class="col-md-4">
+              <select formControlName="contract" class="custom-select" type="text" #t2 (change)="setClient(t2.value)">
+                <option value="" selected disabled>Choisissez un contrat</option>
+                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}</option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <input formControlName="client" type="text" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="row col-md-12">
+            <button class="btn btn-primary ml" (click)="saveNotificationAlert()">Valider</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

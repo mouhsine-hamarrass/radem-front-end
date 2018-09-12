@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {environment} from 'environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '../../core/models/response.model';
+import {AlertModel} from '../models/alert.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -21,6 +22,10 @@ export class ProfileService {
 
   saveProfile(profile: any): Observable<Response<any>>  {
     return this.httpClient.post<Response<Array<any>>>(`${this.urlApi}/users/save-client-profile`, profile, {headers: headers});
+  }
+
+  getAlertNotifications(): Observable<Response<Array<AlertModel>>> {
+    return this.httpClient.get<Response<Array<AlertModel>>>(`${this.urlApi}/alerts/notifications`);
   }
 
 }

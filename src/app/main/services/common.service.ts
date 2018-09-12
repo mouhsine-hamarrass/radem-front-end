@@ -12,16 +12,23 @@ import {AuthHelper} from '../../core/services/security/auth.helper';
 import {NgxPermissionsService, NgxRolesService} from 'ngx-permissions';
 import {DataService} from '../../shared/services/data.service';
 import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs/Rx';
+import {Response} from '../../core/models/response.model';
+import {AlertModel} from '../models/alert.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class CommonService {
+  private urlApi: string;
   onDestroy$ = new Subject<void>();
   contributionDeadline: any;
 
   constructor(private translate: TranslateService,
               private permissionsService: NgxPermissionsService,
               private dataService: DataService,
-              private rolesService: NgxRolesService) {
+              private rolesService: NgxRolesService,
+              private httpClient: HttpClient) {
+    this.urlApi = environment.apiConfig.apiUrl;
   }
 
   public getFiled(fields, key): FormlyFieldConfig {

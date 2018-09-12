@@ -1,6 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {CommonUtil} from '../../../../core/helpers/common.util';
+import {ServicesService} from '../../../services/services.service';
+import {FileModel} from '../../../../core/models/file.model';
 
 @Component({
   selector: 'app-settlements',
@@ -15,7 +18,8 @@ export class SettlementsComponent implements OnInit {
   public contractForm: FormGroup;
 
   constructor(private adminService: AdminService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+              private servicesService: ServicesService) {
     this.contractForm = this.formBuilder.group({
     contract: ['', Validators.required],
     startDate: ['', Validators.required],
@@ -50,4 +54,24 @@ export class SettlementsComponent implements OnInit {
     this.contractId = id;
   }
 
+
+  downloadXlsSettlements() {
+    this.servicesService.downloadXlsSettlements().subscribe((response) => {
+      if (response && response['body']) {
+        const file = new FileModel('mes-reglements.xls', CommonUtil._arrayBufferToBase64(response['body']));
+
+        CommonUtil.downloadFile(file);
+      }
+    });
+  }
+
+  downloadPdfSettlements() {
+    this.servicesService.downloadPdfSettlements().subscribe((response) => {
+      if (response && response['body']) {
+        const file = new FileModel('mes-reglements.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+
+        CommonUtil.downloadFile(file);
+      }
+    });
+  }
 }

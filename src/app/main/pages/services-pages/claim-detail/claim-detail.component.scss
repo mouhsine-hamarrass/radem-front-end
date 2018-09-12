@@ -136,3 +136,10 @@ fieldset.col-4 {
   border: 1px solid #ccc;
   border-radius: 15px;
 }
+
+#coments{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 250px;
+  padding-left: 19px;
+}

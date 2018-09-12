@@ -155,3 +155,11 @@ aw-wizard {
   text-decoration: underline;
   color: #4BB3FD;
 }
+
+
+#coments{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 250px;
+  padding-left: 19px;
+}

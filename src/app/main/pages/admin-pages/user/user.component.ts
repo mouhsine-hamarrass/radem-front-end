@@ -11,6 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 import {UtilsService} from '../../../services/utils.service';
 import {User} from '../../../models/user.model';
 import {environment} from '../../../../../environments/environment';
+import {ServiceModel} from '../../../models/service.model';
 
 @Component({
   selector: 'app-user',
@@ -24,14 +25,9 @@ export class UserComponent implements OnInit {
   isSubmitted = false;
   defaultAvatar: any;
   result64: any;
-  dropdownSettings: any;
-  selectedDomaines = [];
   selectedAuthorities: any = [];
-  listDomaines = [];
-  listUnits = [];
-  listFonctions = [];
   listProfiles = [];
-  listAccounts = [];
+  listServices: Array<ServiceModel>;
   authorities: any = [];
   modalForm: FormGroup;
   emailPattern: string;
@@ -48,6 +44,7 @@ export class UserComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       username: ['', Validators.required],
+      serviceId: [''],
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
@@ -89,6 +86,10 @@ export class UserComponent implements OnInit {
     return this.modalForm.get('profileId');
   }
 
+  get serviceId() {
+    return this.modalForm.get('serviceId');
+  }
+
   get avatar() {
     return this.modalForm.get('avatar');
   }
@@ -106,6 +107,13 @@ export class UserComponent implements OnInit {
       if (response && response.data) {
         this.listProfiles = response.data;
       }
+    }, (err) => {
+    });
+  }
+
+  getServices(): void {
+    this.adminService.getServices().subscribe((response) => {
+      this.listServices = response.data;
     }, (err) => {
     });
   }
@@ -149,6 +157,7 @@ export class UserComponent implements OnInit {
     this.modalForm.controls.username.setValue(data.username);
     this.modalForm.controls.email.setValue(data.email);
     this.modalForm.controls.profileId.setValue(data.profileId);
+    this.modalForm.controls.serviceId.setValue(data.serviceId);
     this.getAuthorities(data.profileId, data.excludedAuthoritiesIds);
     this.result64 = data.avatar;
     this.modalForm.controls.address.setValue(data.address);
@@ -161,6 +170,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.modalForm.controls.enabled.setValue(true);
     this.getProfiles();
+    this.getServices();
     this.getUser();
   }
 
@@ -186,7 +196,6 @@ export class UserComponent implements OnInit {
   }
 
   onProfileChange(profile) {
-    this.modalForm.controls.accountType.setValue('');
     if (profile && profile.value) {
       this.getAuthorities(profile.value);
     }
@@ -198,12 +207,10 @@ export class UserComponent implements OnInit {
       const user = _.omit(this.modalForm.value, ['confirmPassword']);
       user.avatar = this.result64;
       let arr = [];
-      _.each(this.authorities, (authorities: any) => {
-        _.each(authorities, (authority: any) => {
-          if (typeof authority === 'object' && authority.length) {
-            arr = arr.concat(_.pluck(authority, 'id'));
-          }
-        });
+      _.each(this.authorities, (authority: any) => {
+        if (typeof authority === 'object' && authority !== null) {
+          arr.push(authority.id);
+        }
       });
       user.excludedAuthoritiesIds = _.difference(arr, this.selectedAuthorities);
       if (this.user && this.user.id) {

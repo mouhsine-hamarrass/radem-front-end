@@ -8,6 +8,9 @@ import {User} from '../models/user.model';
 import {AlertTypeModel} from '../models/alert-type.model';
 import {Setting} from '../models/setting.model';
 import {ServiceModel} from '../models/service.model';
+import {ClaimModel} from '../models/claim.model';
+import {AlertModel} from '../models/alert.model';
+import {AlertNotificationModel} from '../models/alert-notification.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -48,8 +51,8 @@ export class AdminService {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/all-complaints`, {headers: headers});
   }
 
-  getClaim(idClaim: string): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/${idClaim}/find`, {headers: headers});
+  getClaim(idClaim: string): Observable<Response<ClaimModel>> {
+    return this.httpClient.get<Response<ClaimModel>>(`${this.urlApi}/complaints/${idClaim}/find`, {headers: headers});
   }
 
   saveComplaint(claim: any): Observable<Response<number>> {
@@ -142,16 +145,40 @@ export class AdminService {
   }
 
   // Alerts
-  getAlertTypes(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/alerts/types`, {headers: headers});
+  getAlerts(): Observable<Response<Array<AlertModel>>> {
+    return this.httpClient.get<Response<Array<AlertModel>>>(`${this.urlApi}/alerts`, {headers: headers});
   }
 
-  getAlert(idAlert: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/${idAlert}/find`, {headers: headers});
+  getPageableAlerts(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
+    if (keyword) {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/paged-list?page=${page - 1}&size=${pageSize}&keyword=${keyword}`);
+    } else {
+      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/paged-list?page=${page - 1}&size=${pageSize}`);
+    }
   }
 
-  saveAlertNotification(alertNotification: any): Observable<Response<any>> {
-    return this.httpClient.post<Response<any>>(`${this.urlApi}/alerts/save`, alertNotification, {headers: headers});
+  getAlert(idAlert: number): Observable<Response<AlertModel>> {
+    return this.httpClient.get<Response<AlertModel>>(`${this.urlApi}/alerts/${idAlert}`, {headers: headers});
+  }
+
+  saveAlertNotification(alertNotification: AlertNotificationModel): Observable<Response<AlertNotificationModel>> {
+    return this.httpClient.post<Response<AlertNotificationModel>>(`${this.urlApi}/alerts/notifications`, alertNotification, {headers: headers});
+  }
+
+  hideAlertNotification(id: number): Observable<Response<any>> {
+    return this.httpClient.put<Response<any>>(`${this.urlApi}/alerts/notifications/${id}/hide"`, {headers: headers});
+  }
+
+  createAlert(alert: AlertModel): Observable<Response<AlertModel>> {
+    return this.httpClient.post<Response<AlertModel>>(`${this.urlApi}/alerts`, alert, {headers: headers});
+  }
+
+  saveAlert(alertId: number, alert: AlertModel): Observable<Response<AlertModel>> {
+    return this.httpClient.put<Response<AlertModel>>(`${this.urlApi}/alerts/${alertId}`, alert, {headers: headers});
+  }
+
+  dropAlert(alertId: number): Observable<Response<any>> {
+    return this.httpClient.delete<Response<any>>(`${this.urlApi}/alerts/${alertId}`, {headers: headers});
   }
 
   // Profiles
@@ -214,34 +241,6 @@ export class AdminService {
   }
 
   /**
-   * Alerts Types
-   */
-
-  getPageableAlertTypes(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
-    if (keyword) {
-      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/types-list?page=${page - 1}&size=${pageSize}&keyword=${keyword}`);
-    } else {
-      return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/types-list?page=${page - 1}&size=${pageSize}`);
-    }
-  }
-
-  getAlertType(alertTypeId: number): Observable<Response<AlertTypeModel>> {
-    return this.httpClient.get<Response<AlertTypeModel>>(`${this.urlApi}/alerts/types/${alertTypeId}`, {headers: headers});
-  }
-
-  createAlertType(alertType: AlertTypeModel) {
-    return this.httpClient.post(`${this.urlApi}/alerts/types`, alertType, {headers: headers});
-  }
-
-  saveAlertType(alertTypeId: number, alertType: AlertTypeModel) {
-    return this.httpClient.put(`${this.urlApi}/alerts/types/${alertTypeId}`, alertType, {headers: headers});
-  }
-
-  dropAlertType(alertTypeId: number) {
-    return this.httpClient.delete(`${this.urlApi}/alerts/types/${alertTypeId}`, {headers: headers});
-  }
-
-  /**
    * Settings
    */
   getSettings(): Observable<Response<Array<Setting>>> {
@@ -263,6 +262,10 @@ export class AdminService {
   /**
    * Services
    */
+
+  getServices(): Observable<Response<Array<ServiceModel>>> {
+    return this.httpClient.get<Response<Array<ServiceModel>>>(`${this.urlApi}/services`);
+  }
 
   getService(serviceId: number): Observable<Response<ServiceModel>> {
     return this.httpClient.get<Response<ServiceModel>>(`${this.urlApi}/services/${serviceId}`);
@@ -286,5 +289,21 @@ export class AdminService {
     } else {
       return this.httpClient.get<Response<any>>(`${this.urlApi}/services/paged-list?page=${page}&size=${pageSize}`);
     }
+  }
+
+  /**
+   * Dashboard
+   */
+
+  getAlertsCount(): Observable<Response<number>> {
+    return this.httpClient.get<Response<number>>(`${this.urlApi}/alerts/count`);
+  }
+
+  getRequestsCount(): Observable<Response<number>> {
+    return this.httpClient.get<Response<number>>(`${this.urlApi}/requests/count`);
+  }
+
+  getComplaintsCount(): Observable<Response<number>> {
+    return this.httpClient.get<Response<number>>(`${this.urlApi}/complaints/count`);
   }
 }

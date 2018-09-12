@@ -5,24 +5,23 @@ import {RequestsComponent} from './requests/requests.component';
 import {ClaimsComponent} from './claims/claims.component';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
 import {ClaimDetailComponent} from './claim-detail/claim-detail.component';
-import {AlertComponent} from './alert/alert.component';
 import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {ProfileComponent} from './profile/profile.component';
-import {AlertTypeComponent} from './alert-type/alert-type.component';
-import {AlertTypesComponent} from './alert-types/alert-types.component';
 import {SettingsComponent} from './settings/settings.component';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 import {AdvicesComponent} from './advices/advices.component';
 import {ServicesComponent} from './services/services.component';
+import {AlertNotificationComponent} from './alert-notification/alert-notification.component';
+import {AlertsComponent} from './alerts/alerts.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: AdminDashboardComponent,
         data: {
           title: 'Tableau de bord'
@@ -64,8 +63,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'alert',
-        component: AlertComponent,
+        path: 'alert-notification',
+        component: AlertNotificationComponent,
         data: {
           title: 'Alerte'
         }
@@ -113,10 +112,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'alert-types',
-        component: AlertTypesComponent,
+        path: 'alerts',
+        component: AlertsComponent,
         data: {
-          title: 'Liste de types d\'alertes'
+          title: 'Liste des alertes'
         }
       },
       {

@@ -5,6 +5,8 @@ import {Color} from 'ng2-charts';
 import {ContractsService} from '../../services/contracts.service';
 import {AdminService} from '../../services/admin.service';
 import {Setting} from '../../models/setting.model';
+import {ProfileService} from '../../services/profile.service';
+import {AlertModel} from '../../models/alert.model';
 
 @Component({
   selector: 'app-home-page',
@@ -105,13 +107,15 @@ export class HomePageComponent implements OnInit {
     this.FactBar2
   ];
 
-  protected alerts;
+  protected alertNotifications: Array<AlertModel>;
   protected releves;
   protected contracts;
   protected minMaxConsumption;
   protected bills;
 
-  constructor(private contractServices: ContractsService, private adminServices: AdminService) {
+  constructor(private contractServices: ContractsService,
+              private adminServices: AdminService,
+              private profileService: ProfileService) {
     this.maxDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate());
   }
@@ -159,8 +163,8 @@ export class HomePageComponent implements OnInit {
       console.log(err);
     });
 
-    this.contractServices.getAlerts().subscribe(response => {
-      this.alerts = response;
+    this.profileService.getAlertNotifications().subscribe(response => {
+      this.alertNotifications = response.data;
     }, err => {
       console.log(err);
     });

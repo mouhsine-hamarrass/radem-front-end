@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Response} from '../../core/models/response.model';
 import {Observable} from 'rxjs/Observable';
 import {environment} from 'environments/environment';
@@ -56,5 +56,40 @@ export class ServicesService {
 
   getAllAuthoritiesByCategory(): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/authorities`);
+  }
+
+  /**
+   * Reporting
+   */
+  downloadPdfConsumptions() {
+    const url = `${this.urlApi}/download/consumptions?ext=pdf`;
+    const req = new HttpRequest('GET', url, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
+  }
+
+  downloadXlsConsumptions() {
+    const url = `${this.urlApi}/download/consumptions?ext=xls`;
+    const req = new HttpRequest('GET', url, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
+  }
+
+  downloadPdfSettlements() {
+    const url = `${this.urlApi}/download/settlements?ext=pdf`;
+    const req = new HttpRequest('GET', url, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
+  }
+
+  downloadXlsSettlements() {
+    const url = `${this.urlApi}/download/settlements?ext=xls`;
+    const req = new HttpRequest('GET', url, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
   }
 }
