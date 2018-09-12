@@ -6,6 +6,8 @@ import { WizardComponent, WizardState} from 'angular-archwizard';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
 import * as moment from 'moment';
+import {ToastrService} from 'ngx-toastr';
+import swal from 'sweetalert2';
 
 // @ts-ignore
 import _ = require('underscore');
@@ -27,6 +29,8 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
   public addInterventionForm: FormGroup;
   public request: any;
   public impaye = 0;
+  public isEmpty = true;
+  public isPublic: Boolean = false;
   public requestUpdate: any;
   public modalRef: BsModalRef;
   private wizardState: WizardState;
@@ -58,14 +62,16 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private modalService: BsModalService) {
+    private modalService: BsModalService,
+    private toastrService: ToastrService) {
       this.requestForm = this.formBuilder.group({
         agent: ['', Validators.required],
         dateIntervention: ['', Validators.required],
         phone: ['', Validators.required]
       });
       this.commentForm = this.formBuilder.group({
-        comment: ['', Validators.required]
+        comment: ['', Validators.required],
+        checkbox: ['']
       });
       this.addInterventionForm = this.formBuilder.group({
         agent: ['', Validators.required],
@@ -86,6 +92,9 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     // CommentForm
     get comment() {
       return this.commentForm.get('comment');
+    }
+    get checkbox() {
+      return this.commentForm.get('checkbox');
     }
 
     // InterventionForm
@@ -132,7 +141,6 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
      this.requestService.getRequest(id).subscribe(response => {
        this.request = response.data;
        console.log(this.request);
-       this.request.feedback.reverse();
        if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
          this.UpdateButton.nativeElement.disabled = true;
        } else {
@@ -157,26 +165,44 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
   }
   // Stepper
   nextStep(id) {
-    const agentId: number = JSON.parse(localStorage.getItem('user')).id;
-   this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
-     this.request = response.data;
-     this.request.feedback.reverse();
-     if (this.request.status === 'CLOSED') {
-      this.StepButton.nativeElement.disabled = true;
+    swal({
+      title: 'êtes vous sûr?',
+      text: 'Cette action est irréversible!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+        const agentId: number = JSON.parse(localStorage.getItem('user')).id;
+        this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
+          this.request = response.data;
+          if (this.request.status === 'CLOSED') {
+           this.StepButton.nativeElement.disabled = true;
+             }
+          });
+          this.selectedStep = this.selectedStep + 1;
+           this.ngOnInit();
         }
-     });
-     this.selectedStep = this.selectedStep + 1;
-      this.ngOnInit();
+    });
   }
 
  // Add Comment
  addComment() {
-   this.request.feedback.push({message: this.comment.value, sendingDate: new Date()});
+   if (this.checkbox.value === null || this.checkbox.value === '') {
+      this.isPublic = false;
+   } else {
+      this.isPublic = true;
+   }
+   this.request.feedback.push({message: this.comment.value, sendingDate: new Date(), ispublic: this.isPublic});
    this.request.agent = JSON.parse(localStorage.getItem('user'));
    this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
-   console.log(this.request);
+   console.log(this.isPublic);
    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
     this.commentForm.reset();
+    this.isEmpty = true;
     this.ngOnInit();
    },
    (err) => {
@@ -228,6 +254,14 @@ getPhone(value: number) {
   console.log(value);
   this.addInterventionForm.controls.phone.setValue(this.agents[value].phone);
   this.requestForm.controls.phone.setValue(this.agents[value].phone);
+}
+
+validate(value: String) {
+  if (value !== '') {
+    this.isEmpty = false;
+  } else {
+    this.isEmpty = true;
+  }
 }
 
 }

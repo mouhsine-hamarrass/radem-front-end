@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
+import { Router } from '@angular/router';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-alert',
@@ -14,8 +16,12 @@ export class AlertComponent implements OnInit {
   protected contracts: any;
   protected user: any;
   protected alertNotification: any;
+  protected listContract: any;
+  protected myData: any;
+  protected mySource = [];
 
-  constructor(private adminService: AdminService, private formBuilder: FormBuilder) {
+  constructor(private adminService: AdminService, private formBuilder: FormBuilder,
+    private router: Router) {
     this.alertForm = this.formBuilder.group({
     type: ['', Validators.required],
     description: ['', Validators.required],
@@ -42,6 +48,9 @@ export class AlertComponent implements OnInit {
     })
     this.adminService.getUsers().subscribe(response => {
       this.contracts = response;
+    })
+    this.adminService.getAllContracts().subscribe(response => {
+      _.each(response, rep => this.mySource.push(rep.contrat));
     })
   }
 
@@ -77,7 +86,7 @@ export class AlertComponent implements OnInit {
         }
     }
     this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
-      console.log(response);
-    })
+    });
+    this.router.navigate(['/admin/alerts']);
   }
 }

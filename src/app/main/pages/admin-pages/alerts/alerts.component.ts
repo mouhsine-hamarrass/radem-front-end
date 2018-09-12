@@ -14,6 +14,7 @@ export class AlertsComponent implements OnInit {
   ngOnInit() {
     this.adminService.getAlertsNotifications().subscribe(response => {
       this.alerts = response.data;
+      console.log(this.alerts);
     })
   }
 

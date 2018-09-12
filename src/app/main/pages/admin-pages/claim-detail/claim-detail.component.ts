@@ -15,6 +15,8 @@ import { WizardComponent, WizardState } from 'angular-archwizard';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import _ = require('underscore');
 import { AdminService } from '../../../services/admin.service';
+import {ToastrService} from 'ngx-toastr';
+import swal from 'sweetalert2';
 import * as moment from 'moment';
 
 @Component({
@@ -31,6 +33,8 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
   public commentForm: FormGroup;
   public claim: any;
   public impaye = 0;
+  public isEmpty = true;
+  public isPublic: Boolean = false;
   public selectedStep: number;
   public requestUpdate: any;
   public modalRef: BsModalRef;
@@ -49,13 +53,18 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService
   ) {
     this.commentForm = this.formBuilder.group({
-      comment: ['', Validators.required]
+      comment: ['', Validators.required],
+      checkbox: ['']
     });
   }
 
   // CommentForm
   get comment() {
     return this.commentForm.get('comment');
+  }
+
+  get checkbox() {
+    return this.commentForm.get('checkbox');
   }
 
   ngAfterViewInit() {
@@ -95,31 +104,48 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
       this.adminService.getClaim(id).subscribe(response => {
         this.claim = response.data;
         console.log(this.claim);
-        this.claim.feedback.reverse();
       });
     }
   }
 
   // Stepper
   nextStep(id, choice?) {
-    this.adminService.nextStepClaim(id, choice).subscribe(
-      response => {
-        this.claim = response.data;
-        this.claim.feedback.reverse();
-        if (this.claim.status === 'CLOSED') {
-          this.StepButton.nativeElement.disabled = true;
+    swal({
+      title: 'êtes vous sûr?',
+      text: 'Cette action est irréversible!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+        this.adminService.nextStepClaim(id, choice).subscribe(
+          response => {
+            this.claim = response.data;
+            if (this.claim.status === 'CLOSED') {
+              this.StepButton.nativeElement.disabled = true;
+            }
+          },
+          err => console.log(err)
+        );
+        this.ngOnInit();
         }
-      },
-      err => console.log(err)
-    );
-    this.ngOnInit();
+    });
   }
 
   // Add Comment
   addComment() {
+    if (this.checkbox.value === null || this.checkbox.value === '') {
+      this.isPublic = false;
+   } else {
+      this.isPublic = true;
+   }
     this.claim.feedback.push({
       message: this.comment.value,
-      sendingDate: new Date()
+      sendingDate: new Date(),
+      ispublic: this.isPublic
     });
     this.adminService.saveComplaint(this.claim).subscribe(
       response => {
@@ -128,9 +154,18 @@ export class ClaimDetailComponent implements OnInit, AfterViewInit {
       },
       err => {}
     );
+    this.isEmpty = true;
   }
 
   focus() {
     this.commentaire.nativeElement.focus();
+  }
+
+  validate(value: String) {
+    if (value !== '') {
+      this.isEmpty = false;
+    } else {
+      this.isEmpty = true;
+    }
   }
 }

@@ -22,11 +22,17 @@
                <div class="card-body">
                   <div class="card-text">
                      <div *ngFor="let alert of alerts">
-                        <p>{{alert.title}}</p>
+                        <p>Alerte de {{alert.alert.alertType.title}}</p>
                         <ul>
                            <li>
-                              {{alert.content}}
+                              {{alert.alert.description}}
                            </li>
+                           - Consignes :
+                           <ul>
+                            <li>
+                                {{alert.alert.instructions.content}}
+                            </li>
+                           </ul>
                         </ul>
                      </div>
                   </div>

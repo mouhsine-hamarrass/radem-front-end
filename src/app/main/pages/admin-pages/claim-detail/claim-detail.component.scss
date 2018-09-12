@@ -11,12 +11,13 @@
 }
 
 fieldset.scheduler-border {
-  border: 1px solid #0052a2 !important;
+  border: 1px solid #ccc !important;
   padding: 0 0.8em 0 0.8em !important;
   margin: 0 0 1.5em 0 !important;
   -webkit-box-shadow:  0px 0px 0px 0px #000;
           box-shadow:  0px 0px 0px 0px #000;
   font-weight: normal !important;
+  border-radius: 5px;
 }
 
 legend.scheduler-border {
@@ -28,6 +29,35 @@ legend.scheduler-border {
 
 fieldset.col-7 {
   padding : 0px;
+}
+
+#commDiv {
+  padding: 20px;
+  overflow: scroll;
+  max-height: 300px;
+}
+
+#commDiv::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+#commDiv::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+#commDiv::-webkit-scrollbar:horizontal {
+  height: 0px;
+}
+
+#commDiv::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+#commDiv::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 8px;
 }
 
 #commDiv {
@@ -78,7 +108,7 @@ fieldset.col-4 {
 }
 
 #img {
-  margin: 20px;
+  margin: 8px;
 }
 
 .btn-primary {
