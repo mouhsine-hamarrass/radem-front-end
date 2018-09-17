@@ -52,6 +52,7 @@ export class ServiceFormComponent implements OnInit {
     this.adminService.saveService(this.serviceId, this.service).subscribe(response => {
       this.toastrService.success('L\'opération d\'ajout réussite', '');
       this.refreshData.emit(true);
+      this.modalRef.hide();
     }, err => {
       this.refreshData.emit(false);
     });
@@ -63,6 +64,7 @@ export class ServiceFormComponent implements OnInit {
     this.adminService.createService(this.service).subscribe(response => {
       this.toastrService.success('L\'opération de modification réussite', '');
       this.refreshData.emit(true);
+      this.modalRef.hide();
     }, err => {
       this.refreshData.emit(false);
     });

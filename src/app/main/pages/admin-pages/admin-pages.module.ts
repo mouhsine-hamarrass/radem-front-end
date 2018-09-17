@@ -5,23 +5,16 @@ import {AdminPagesRoutingModule} from './admin-pages-routing.module';
 import { CancellationRequestComponent } from './cancellation-request/cancellation-request.component';
 import { RequestsComponent } from './requests/requests.component';
 import { AdminService } from '../../services/admin.service';
-import { ClaimsComponent } from './claims/claims.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
-import { AlertComponent } from './alert/alert.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfilesComponent } from './profiles/profiles.component';
 import {ChecklistModule} from 'angular-checklist';
 import {NgxToggleModule} from 'ngx-toggle';
-import {TabsModule} from 'ngx-bootstrap';
+import {BsDropdownModule, TabsModule} from 'ngx-bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
-import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
-import { AlertsComponent } from './alerts/alerts.component';
-import { AlertTypeComponent } from './alert-type/alert-type.component';
-import { AlertTypesComponent } from './alert-types/alert-types.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
@@ -32,6 +25,10 @@ import { ServiceFormComponent } from './service-form/service-form.component';
 import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
 import { AlertComponent } from './alert/alert.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import {ComponentsModule} from '../../../shared/components/components.module';
+import { AlertNotificationsComponent } from './alert-notifications/alert-notifications.component';
+import { ComplaintComponent } from './complaint/complaint.component';
+import { ComplaintsComponent } from './complaints/complaints.component';
 
 @NgModule({
   imports: [
@@ -45,7 +42,9 @@ import { AlertsComponent } from './alerts/alerts.component';
     NgxToggleModule,
     TabsModule.forRoot(),
     TranslateModule,
-    QuillModule
+    QuillModule,
+    ComponentsModule,
+    BsDropdownModule
   ],
   exports: [
     TranslateModule
@@ -54,8 +53,6 @@ import { AlertsComponent } from './alerts/alerts.component';
     AdminDashboardComponent,
     CancellationRequestComponent,
     RequestsComponent,
-    ClaimsComponent,
-    ClaimDetailComponent,
     UserComponent,
     UsersComponent,
     ProfileComponent,
@@ -69,8 +66,13 @@ import { AlertsComponent } from './alerts/alerts.component';
     AlertNotificationComponent,
     AlertComponent,
     AlertsComponent,
+    AlertNotificationsComponent,
+    ComplaintComponent,
+    ComplaintsComponent,
   ],
-  providers: [AdminService]
+  providers: [
+    AdminService
+  ]
 })
 export class AdminPagesModule {
 }

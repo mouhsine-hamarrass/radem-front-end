@@ -37,9 +37,12 @@ export class SimpleErrorHandler implements ErrorHandler {
          return;
       }
 
-      // In a real world app, you might use a remote logging infrastructure
+      /* In a real world app, you might use a remote logging infrastructure
       const errMsg = error.message ? error.message : error.toString();
       console.error(errMsg);
+      */
+
+     throw error;
    }
 }
 

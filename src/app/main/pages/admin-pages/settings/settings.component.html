@@ -20,6 +20,9 @@
                      </tr>
                      </thead>
                      <tbody>
+                     <app-data-not-available *ngIf="!settings || settings.length == 0; else dataAvailable" [colSpan]="3"></app-data-not-available>
+
+                     <ng-template #dataAvailable>
                      <tr *ngFor="let param of settings">
                         <td>
                            {{param.id}}
@@ -31,10 +34,11 @@
                            <input id="value_{{param.id}}" name="value_{{param.id}}" [(ngModel)]="param.value" type="text" placeholder="Valeur" class="form-control required">
                         </td>
                      </tr>
+                     </ng-template>
                      </tbody>
                   </table>
                   <div class="pull-right">
-                     <button class="btn btn-primary" (click)="saveSettings()">
+                     <button class="btn btn btn-outline-primary" (click)="saveSettings()">
                         Enregistrer
                      </button>
                   </div>

@@ -33,6 +33,9 @@
           </tr>
           </thead>
           <tbody>
+          <app-data-not-available *ngIf="!alerts || alerts.length == 0; else dataAvailable" [colSpan]="3"></app-data-not-available>
+
+          <ng-template #dataAvailable>
           <tr *ngFor="let alert of alerts">
             <td>{{alert.title}}</td>
             <td>{{alert.instructions}}</td>
@@ -53,6 +56,7 @@
               </ul>
             </td>
           </tr>
+          </ng-template>
           </tbody>
         </table>
         <!--app-pagination [disabled]="false"
@@ -67,6 +71,5 @@
 </div>
 
 <ng-template #alertForm>
-  <app-alert [alertId]="alertId" [modalRef]="modalRef"
-             (refreshAlerts)="refreshAlerts($event)"></app-alert>
+  <app-alert [alertId]="alertId" [modalRef]="modalRef" (refreshAlerts)="refreshAlerts($event)"></app-alert>
 </ng-template>

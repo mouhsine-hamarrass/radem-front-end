@@ -16,10 +16,7 @@ import {AlertModel} from '../../models/alert.model';
 })
 export class HomePageComponent implements OnInit {
   advices: Setting;
-  @ViewChild(BsDatepickerDirective) datepicker: BsDatepickerDirective;
-  colorTheme = 'theme-blue';
-  bsConfig: Partial<BsDatepickerConfig>;
-  maxDate: Date;
+  maxDate: Date = new Date();
   public chartType = 'bar';
   public chartConsoTitle = 'Volume en m3';
   public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
@@ -116,112 +113,73 @@ export class HomePageComponent implements OnInit {
 
   constructor(private contractServices: ContractsService,
               private adminServices: AdminService,
-              private profileService: ProfileService
-
-  private homeService: HomeService
-) {
-  this
-.
-  maxDate = new Date();
-  this
-.
-  maxDate
-.
-
-  setDate(this
-
-.
-  maxDate
-.
-
-  getDate()
-
-);
-}
-
-@HostListener('window:scroll')
-onScrollEvent()
-{
-  this.datepicker.hide();
-}
-
-public
-chartOptions(title)
-{
-  this.chartOptionsFact.title = title;
-}
-
-changeContract(val)
-{
-  switch (val.currentTarget.value) {
-    case '0':
-      this.chartConsoTitle = 'Volume en m3';
-      this.chartColorsEau = [this.WaterBar1, this.WaterBar2];
-      this.chartDatasetsFact = [
-        {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
-        {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
-      ];
-      break;
-    case '1':
-      this.chartConsoTitle = 'Volume en kWh';
-      this.chartColorsEau = [this.ElecBar1, this.ElecBar2];
-      this.chartDatasetsFact = [
-        {data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017'},
-        {data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018'}
-      ];
-      break;
+              private profileService: ProfileService,
+              private homeService: HomeService
+  ) {
   }
-}
+
+  public chartOptions(title) {
+    this.chartOptionsFact.title = title;
+  }
+
+  changeContract(val) {
+    switch (val.currentTarget.value) {
+      case '0':
+        this.chartConsoTitle = 'Volume en m3';
+        this.chartColorsEau = [this.WaterBar1, this.WaterBar2];
+        this.chartDatasetsFact = [
+          {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
+          {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
+        ];
+        break;
+      case '1':
+        this.chartConsoTitle = 'Volume en kWh';
+        this.chartColorsEau = [this.ElecBar1, this.ElecBar2];
+        this.chartDatasetsFact = [
+          {data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017'},
+          {data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018'}
+        ];
+        break;
+    }
+  }
 
 
-public
-chartClicked(e
-:
-any
-):
-void {
-  console.log(e);
-}
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
 
-public
-chartHovered(e
-:
-any
-):
-void {}
+  public chartHovered(e: any): void {
+  }
 
-applyTheme()
-{
-  // create new object on each property change
-  // so Angular can catch object reference change
-}
+  applyTheme() {
+    // create new object on each property change
+    // so Angular can catch object reference change
+  }
 
-ngOnInit()
-{
+  ngOnInit() {
 
-  this.profileService.getAlertNotifications().subscribe(response => {
-    this.alertNotifications = response.data;
-  }, err => {
-    console.log(err);
-  });
+    this.profileService.getAlertNotifications().subscribe(response => {
+      this.alertNotifications = response.data;
+    }, err => {
+      console.log(err);
+    });
 
-  this.adminServices.getAdvices().subscribe(response => {
-    this.advices = response.data;
-  }, err => {
-    console.log(err);
-  });
-  this.contractServices.getReleves().subscribe(response => this.releves = response, err => {
-  });
-  this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {
-  });
-  this.contractServices.getAllBills().subscribe(Response => this.bills = Response, err => {
-  });
-}
+    this.adminServices.getAdvices().subscribe(response => {
+      this.advices = response.data;
+    }, err => {
+      console.log(err);
+    });
+    this.contractServices.getReleves().subscribe(response => this.releves = response, err => {
+    });
+    this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {
+    });
+    this.contractServices.getAllBills().subscribe(Response => this.bills = Response, err => {
+    });
+  }
 
-changeMinMaxContract(event)
-{
-  console.log(event);
-  this.contractServices.getMinMaxConsumption(event).subscribe(response => this.minMaxConsumption = response[0], err => {
-  });
-}
+  changeMinMaxContract(event) {
+    console.log(event);
+    this.contractServices.getMinMaxConsumption(event).subscribe(response => this.minMaxConsumption = response[0], err => {
+    });
+  }
 }

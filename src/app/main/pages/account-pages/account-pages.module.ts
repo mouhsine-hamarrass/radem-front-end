@@ -1,14 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ContractsComponent} from './contracts/contracts.component';
-import {SettingsComponent} from './settings/settings.component';
-import {SettlementsComponent} from './settlements/settlements.component';
-import {UnpaidComponent} from './unpaid/unpaid.component';
 import {AccountPagesRoutingModule} from './account-pages-routing.module';
 import {ChartsModule} from 'ng2-charts';
 import {BsDatepickerModule, BsDropdownModule} from 'ngx-bootstrap';
-import { AdminService } from '../../services/admin.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {AdminService} from '../../services/admin.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ComponentsModule} from '../../../shared/components/components.module';
+import {ProfileService} from '../../services/profile.service';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   imports: [
@@ -18,15 +17,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     BsDatepickerModule,
     ReactiveFormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    ComponentsModule
   ],
   declarations: [
-    ContractsComponent,
-    SettingsComponent,
-    SettlementsComponent,
-    UnpaidComponent
+    AccountComponent,
   ],
-  providers: [AdminService]
+  providers: [
+    AdminService,
+    ProfileService
+  ]
 })
 export class AccountPagesModule {
 }

@@ -35,12 +35,14 @@
                 <th scope="col"> E-mail</th>
                 <th scope="col"> Profil</th>
                 <th scope="col"> Créé le</th>
-                <th scope="col"> Statut</th>
                 <th scope="col"> Actions</th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let user of users; let i = index"
+              <app-data-not-available *ngIf="!users || users.length == 0; else dataAvailable" [colSpan]="8"></app-data-not-available>
+
+              <ng-template #dataAvailable>
+                <tr *ngFor="let user of users; let i = index"
                   [ngClass]="{'table-secondary': !user.enabled}">
                 <td scope="row">{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
@@ -66,8 +68,6 @@
                           [(value)]="user.enabled"
                           (click)="changeEnabled($event, user)">
                   </ngx-toggle>
-                </td>
-                <td>
                   <ul class="list-inline list-unstyled text-center">
                     <li class="list-inline-item">
                       <i class="fa fa fa-fw fa-times text-danger actions_icon cursor-pointer"
@@ -82,10 +82,7 @@
                   </ul>
                 </td>
               </tr>
-              <tr *ngIf="!users || !users.length">
-                <td class="text-muted text-center" colspan="8"><strong>Vous n'avez aucun utilisateur pour le
-                  moment</strong></td>
-              </tr>
+              </ng-template>
               </tbody>
             </table>
           </div>

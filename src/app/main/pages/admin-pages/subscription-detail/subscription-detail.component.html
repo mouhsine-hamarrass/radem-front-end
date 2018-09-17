@@ -20,7 +20,7 @@
         </aw-wizard-step>
 
         <div class="col-md-12" id="buttons">
-          <button type="button" class="btn btn-primary" (click)="focus()">Commentaire</button>
+          <button type="button" class="btn btn btn-outline-primary" (click)="focus()">Commentaire</button>
         </div>
       </aw-wizard>
 
@@ -81,7 +81,7 @@
                 <input #commentaire formControlName="comment" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
                   style="margin-right: 8px;margin-left: 10px;" />
 
-                <button class="btn btn-primary" (click)="addComment()">Envoyer</button>
+                <button class="btn btn btn-outline-primary" (click)="addComment()">Envoyer</button>
               </div>
             </form>
             <br>
@@ -134,7 +134,7 @@
               <label>Tel d'agent :</label>
               <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
               <div class="col-md-12" style="margin-left : 34%">
-                <button class="btn btn-primary center" id="buttons-update" (click)="modalRef.hide();">Valider</button>
+                <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="modalRef.hide();">Valider</button>
               </div>
             </form>
           </div>

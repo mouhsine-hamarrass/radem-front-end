@@ -2,9 +2,16 @@ import {AuthTypes} from 'app/core/factories/auth.type';
 import {AuthScheme} from 'app/core/models/auth-scheme.enum';
 import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
+import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://localhost:8080/';
-// const server = 'http://192.168.100.13:8080/';
+const server = 'http://212.83.140.195:8085/';
+// const server = 'http://localhost:8085/';
+const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
+
+
+let headers = new HttpHeaders();
+headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+
 export const environment = {
   appName: 'RADEMAGENCY',
   appLogo: './assets/images/logo.png',
@@ -29,6 +36,8 @@ export const environment = {
       {id: 'OAUTH_SERVICE_URL', url: server + 'api/auth', requireAuthBefore: false},
     ],
     apiUrl: server + 'api',
+    jsonApiUrl: jsonServer,
+    headers: headers,
     authService: AuthTypes.OAUTH,
     authScheme: AuthScheme.BEARER,
     errorHandler: ErrorHandlerTypes.SIMPLE,

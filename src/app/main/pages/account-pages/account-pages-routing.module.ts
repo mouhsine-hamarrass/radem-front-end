@@ -1,43 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {UnpaidComponent} from './unpaid/unpaid.component';
-import {ContractsComponent} from './contracts/contracts.component';
-import {SettingsComponent} from './settings/settings.component';
-import {SettlementsComponent} from './settlements/settlements.component';
+import {AccountComponent} from './account/account.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'contracts',
-        component: ContractsComponent,
+        path: 'profile',
+        component: AccountComponent,
         data: {
-          title: 'Contracts'
+          title: 'Mon profil'
         }
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-        data: {
-          title: 'Settings'
-        }
-      },
-      {
-        path: 'settlements',
-        component: SettlementsComponent,
-        data: {
-          title: 'Settlements'
-        }
-      },
-      {
-        path: 'unpaid',
-        component: UnpaidComponent,
-        data: {
-          title: 'Unpaid'
-        }
-      },
+      }
     ]
   }
 ];

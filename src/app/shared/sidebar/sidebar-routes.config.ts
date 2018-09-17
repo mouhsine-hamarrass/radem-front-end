@@ -160,7 +160,7 @@ export const ROUTES: RouteInfo[] = [
     isNavHeader: false,
     submenu: [
       {
-        path: '/admin/claims',
+        path: '/admin/complaints',
         title: 'Liste des réclamations',
         icon: 'icon-list',
         clazz: 'nav-item',
@@ -194,7 +194,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/admin/alerts',
+        path: '/admin/alert-notifications',
         title: 'Liste des alertes',
         icon: 'icon-list',
         clazz: 'nav-item',

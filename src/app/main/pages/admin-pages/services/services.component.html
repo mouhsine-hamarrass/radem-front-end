@@ -34,6 +34,9 @@
             </tr>
             </thead>
             <tbody>
+            <app-data-not-available *ngIf="!services || services.length == 0; else dataAvailable" [colSpan]="3"></app-data-not-available>
+
+            <ng-template #dataAvailable>
             <tr *ngFor="let service of services">
               <td>{{service.name}}</td>
               <td>{{service.description}}</td>
@@ -54,6 +57,7 @@
                 </ul>
               </td>
             </tr>
+            </ng-template>
             </tbody>
           </table>
           <!--app-pagination [disabled]="false"

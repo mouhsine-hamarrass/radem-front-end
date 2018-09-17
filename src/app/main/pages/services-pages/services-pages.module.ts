@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ClaimRequestComponent} from './claim-request/claim-request.component';
-import {SubscriptionRequestComponent} from './subscription-request/subscription-request.component';
+import {SubscriptionRequestsComponent} from './subscription-requests/subscription-requests.component';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
 import {OnlinePaymentComponent} from './online-payment/online-payment.component';
 import {ServicesPagesRoutingModule} from './services-pages-routing.module';
@@ -17,6 +17,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { ArchwizardModule } from 'angular-archwizard';
+import {ComponentsModule} from '../../../shared/components/components.module';
 
 @NgModule({
   imports: [
@@ -32,10 +33,11 @@ import { ArchwizardModule } from 'angular-archwizard';
         deps: [HttpClient]
       }
     }),
+    ComponentsModule
   ],
   declarations: [
     ClaimRequestComponent,
-    SubscriptionRequestComponent,
+    SubscriptionRequestsComponent,
     CancellationRequestComponent,
     CancellationRequestsComponent,
     NewCancellationRequestComponent,

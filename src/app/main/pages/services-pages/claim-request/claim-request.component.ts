@@ -53,7 +53,6 @@ export class ClaimRequestComponent implements OnInit {
       description: this.description,
       complainer: JSON.parse(localStorage.getItem('user'))
     };
-    console.log(complaint);
     this.myServices.saveComplaint(complaint).subscribe(response => {
       this.toastrService.show('Reclamation ajoutée avec succes');
       this.router.navigate(['/services/claim-requests'])

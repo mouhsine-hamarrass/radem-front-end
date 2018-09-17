@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import _ = require('underscore');
-import { AdminService } from '../../../services/admin.service';
+import {Component, OnInit} from '@angular/core';
+import * as _ from 'underscore';
+import {AdminService} from '../../../services/admin.service';
 
 @Component({
   selector: 'app-requests',
@@ -9,28 +9,28 @@ import { AdminService } from '../../../services/admin.service';
 })
 export class RequestsComponent implements OnInit {
   public terminationRequests: any;
-  public requests: any;
+  public requests: Array<any> = [];
 
-  constructor(private requestService: AdminService) { }
+  constructor(private requestService: AdminService) {
+  }
 
 
   ngOnInit() {
     this.LoadCancellationRequest();
-   }
+  }
 
-   LoadCancellationRequest() {
-     this.requestService.getTerminationRequests().subscribe(response => {
-       this.requests = response.data;
-       console.log(this.requests);
-       _.each(this.requests, (element: any) => {
-         _.extend(element, {type: 'Résiliation'});
-       });
-     }, (err) => {
+  LoadCancellationRequest() {
+    this.requestService.getTerminationRequests().subscribe(response => {
+      this.requests = response.data;
+      _.each(this.requests, (element: any) => {
+        _.extend(element, {type: 'Résiliation'});
+      });
+    }, (err) => {
 
-     });
-   }
+    });
+  }
 
-   LoadSubscriptionRequest() {
+  LoadSubscriptionRequest() {
     this.requests = [];
   }
 

@@ -11,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class ProfilesComponent implements OnInit {
 
-  protected profils: any = [];
+  protected profiles: any = [];
   protected disabled = false;
   protected page = 1;
   protected pageSize = 5;
@@ -31,7 +31,7 @@ export class ProfilesComponent implements OnInit {
 
   getProfiles() {
     this.adminService.getPageableListProfiles(this.page, this.pageSize, this.keyword).subscribe(response => {
-      this.profils = response.data.content;
+      this.profiles = response.data.content;
       this.totalElements = response.data.totalElements;
       this.totalPages = response.data.totalPages;
       this.itemsPerPage = response.data.size;
@@ -43,7 +43,7 @@ export class ProfilesComponent implements OnInit {
   pageChanged(page: number): void {
     this.page = page;
     this.adminService.getPageableListProfiles(this.page, this.pageSize, this.keyword).subscribe(response => {
-      this.profils = response.data.content;
+      this.profiles = response.data.content;
       this.totalElements = response.data.totalElements;
       this.totalPages = response.data.totalPages;
       this.itemsPerPage = response.data.size;
@@ -56,7 +56,7 @@ export class ProfilesComponent implements OnInit {
     this.page = 1;
     this.keyword = keyword;
     this.adminService.getPageableListProfiles(this.page, this.pageSize, this.keyword).subscribe(response => {
-      this.profils = response.data.content;
+      this.profiles = response.data.content;
       this.totalElements = response.data.totalElements;
       this.totalPages = response.data.totalPages;
       this.itemsPerPage = response.data.size;
@@ -69,7 +69,7 @@ export class ProfilesComponent implements OnInit {
     this.pageSize = pageSize;
     this.page = 1;
     this.adminService.getPageableListProfiles(this.page, this.pageSize, this.keyword).subscribe(response => {
-      this.profils = response.data.content;
+      this.profiles = response.data.content;
       this.totalElements = response.data.totalElements;
       this.totalPages = response.data.totalPages;
       this.itemsPerPage = response.data.size;
@@ -90,9 +90,9 @@ export class ProfilesComponent implements OnInit {
       confirmButtonText: 'Oui, supprimer!'
     }).then((result) => {
       if (result.value) {
-        if (this.profils.find(profil => profil.id === idProfile).users === 0) {
+        if (this.profiles.find(profil => profil.id === idProfile).users === 0) {
           this.adminService.dropProfile(idProfile).subscribe(response => {
-            this.profils.splice(this.profils.indexOf(this.profils.find(profil => profil.id === idProfile)), 1);
+            this.profiles.splice(this.profiles.indexOf(this.profiles.find(profil => profil.id === idProfile)), 1);
             this.toastrService.success('Le profil a été supprimé.', 'Supprimé !');
           });
         } else {

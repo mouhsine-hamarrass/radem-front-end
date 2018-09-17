@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Response} from '../../core/models/response.model';
 import {Observable} from 'rxjs/Observable';
 import {environment} from 'environments/environment';
+import {ComplaintModel} from '../models/complaint.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -39,15 +40,15 @@ export class ServicesService {
 
   // complaint
   saveComplaint(complaint: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save`, complaint, {headers: headers});
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints`, complaint, {headers: headers});
   }
 
   getComplaints(): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints`);
   }
 
-  getComplaint(id: string): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/${id}/find`);
+  getComplaint(id: string): Observable<Response<ComplaintModel>> {
+    return this.httpClient.get<Response<ComplaintModel>>(`${this.urlApi}/complaints/${id}`);
   }
 
   getObjects(): Observable<Response<any>> {

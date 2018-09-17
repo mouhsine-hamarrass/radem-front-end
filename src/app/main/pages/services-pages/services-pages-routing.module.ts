@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
 import {ClaimRequestComponent} from './claim-request/claim-request.component';
 import {OnlinePaymentComponent} from './online-payment/online-payment.component';
-import {SubscriptionRequestComponent} from './subscription-request/subscription-request.component';
+import {SubscriptionRequestsComponent} from './subscription-requests/subscription-requests.component';
 import {CancellationRequestsComponent} from './cancellation-requests/cancellation-requests.component';
 import {NewCancellationRequestComponent} from './new-cancellation-request/new-cancellation-request.component';
 import { ClaimRequestsComponent } from './claim-requests/claim-requests.component';
@@ -38,8 +38,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'subscription-request',
-        component: SubscriptionRequestComponent,
+        path: 'subscription-requests',
+        component: SubscriptionRequestsComponent,
         data: {
           title: 'Demandes d\'abonnements'
         }

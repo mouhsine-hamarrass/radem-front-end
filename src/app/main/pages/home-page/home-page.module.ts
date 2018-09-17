@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomePageComponent } from './home-page.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomePageComponent} from './home-page.component';
 import {HomePageRoutingModule} from './home-page-routing.module';
 import {ChartsModule} from 'ng2-charts';
 import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
 import {PipesModule} from '../../../shared/pipes/pipes.module';
-import {HomeService } from '../../services/home.service';
+import {HomeService} from '../../services/home.service';
+import {ProfileService} from '../../services/profile.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,10 @@ import {HomeService } from '../../services/home.service';
     PipesModule
   ],
   declarations: [HomePageComponent],
-  providers: [HomeService]
+  providers: [
+    HomeService,
+    ProfileService
+  ]
 })
-export class HomePageModule { }
+export class HomePageModule {
+}

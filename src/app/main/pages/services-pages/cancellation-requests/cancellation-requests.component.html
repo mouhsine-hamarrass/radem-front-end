@@ -36,9 +36,9 @@
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
+            <div class="table-responsive mx-auto">
+              <table class="table table-bordered ">
+                <thead class="table-light">
                   <tr>
                     <th scope="col">Nº de demande</th>
                     <th scope="col">Polices d'abonnement</th>
@@ -47,15 +47,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let terminationReq of terminationRequests">
+                <app-data-not-available *ngIf="!cancellationRequests || cancellationRequests.length == 0; else dataAvailable" [colSpan]="4"></app-data-not-available>
+
+                <ng-template #dataAvailable>
+                  <tr *ngFor="let request of cancellationRequests">
                     <td>
-                      <a [routerLink]="['/services/cancellation-request/', terminationReq.id]"><b>{{terminationReq.requestNumber}}</b></a>
+                      <a [routerLink]="['/services/cancellation-request/', request.id]"><b>{{request.requestNumber}}</b></a>
                     </td>
-                    <td>{{terminationReq.subscriptions[0]?.subscription}} {{!terminationReq.subscriptions[1] ? '' : ','}} {{terminationReq.subscriptions[1]?.subscription}}</td>
-                    <td>{{terminationReq.createdAt | date: 'dd/MM/yyyy'}}</td><td>
-                      <span class="badge badge-primary">{{terminationReq.status}}</span>
+                    <td>{{request.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? '' : ','}}
+                      {{request.subscriptions[1]?.subscription}}</td>
+                    <td>{{request.createdAt | date:'dd-M-yyyy'}}</td><td>
+                      <span class="badge badge-primary">{{request.status}}</span>
                     </td>
                   </tr>
+                </ng-template>
                 </tbody>
               </table>
             </div>

@@ -6,42 +6,51 @@
 </nav>
 <div class="container-fluid">
   <div class="card">
-    <div class="card-body">
+    <div class="card-header">
       <h4 class="card-title">Ajouter une alerte</h4>
-      <div class="col-md-10">
-        <form class="" [formGroup]="alertForm">
-          <div class="row col-md-12 form-group">
-            <label class="col-form-label col-md-3">Alerte :</label>
-            <div class="col-md-6">
+    </div>
+    <div class="card-body">
+      <form [formGroup]="alertForm">
+        <div class="col-12 form-group">
+          <div class="row">
+            <label class="col-form-label col-2">Alerte :</label>
+            <div class="col-4">
               <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
                 <option value="" selected disabled>Faite votre choix</option>
                 <option *ngFor="let alert of alerts" value="{{alert.id}}">{{alert.title}}</option>
               </select>
             </div>
           </div>
-          <div class="row col-md-12 form-group">
-            <label class="col-form-label col-md-3">Aperçu de l'alerte :</label>
-            <div class="col-md-9">
+        </div>
+        <div class="col-12 form-group">
+          <div class="row">
+            <label class="col-form-label col-2">Aperçu de l'alerte :</label>
+            <div class="col-8">
               <textarea formControlName="description" class="form-control"></textarea>
             </div>
           </div>
-          <div class="row col-md-12 form-group">
-            <label class="col-form-label col-md-3">Le contrat concerné :</label>
-            <div class="col-md-4">
+        </div>
+        <div class="col-12 form-group">
+          <div class="row">
+            <label class="col-form-label col-2">Le contrat concerné :</label>
+            <div class="col-3">
               <select formControlName="contract" class="custom-select" type="text" #t2 (change)="setClient(t2.value)">
                 <option value="" selected disabled>Choisissez un contrat</option>
-                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}</option>
+                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}
+                </option>
               </select>
             </div>
-            <div class="col-md-5">
+            <div class="col-3">
               <input formControlName="client" type="text" class="form-control" disabled>
             </div>
           </div>
-          <div class="row col-md-12">
-            <button class="btn btn-primary ml" (click)="saveNotificationAlert()">Valider</button>
+        </div>
+        <div class="row">
+          <div class="col-12 text-right">
+            <button class="btn btn btn-outline-primary pull-right" (click)="saveNotificationAlert()">Valider</button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

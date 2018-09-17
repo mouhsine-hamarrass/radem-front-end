@@ -2,29 +2,30 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ServicesService} from './services/services.service';
 import {AdminPagesModule} from './pages/admin-pages/admin-pages.module';
-import {ConsumptionPageModule} from './pages/consumption-page/consumption-page.module';
-import {ContractPagesModule} from './pages/contract-pages/contract-pages.module';
-import {DemoPagesModule} from './pages/demo-pages/demo-pages.module';
+import {ConsumptionsPageModule} from './pages/consumptions-page/consumptions-page.module';
+import {ContractsPageModule} from './pages/contracts-page/contracts-page.module';
 import {HomePageModule} from './pages/home-page/home-page.module';
-import {ProfilePageModule} from './pages/profile-page/profile-page.module';
 import {ServicesPagesModule} from './pages/services-pages/services-pages.module';
 import {UtilsService} from './services/utils.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {createTranslateLoader} from '../app.translate.factory';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SettlementsPageModule} from './pages/settlements-page/settlements-page.module';
+import {UnpaidPageModule} from './pages/unpaid-page/unpaid-page.module';
+import {ComplaintService} from './services/complaint.service';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminPagesModule,
     BrowserAnimationsModule,
-    ConsumptionPageModule,
-    ContractPagesModule,
-    DemoPagesModule,
+    ConsumptionsPageModule,
+    ContractsPageModule,
     HomePageModule,
-    ProfilePageModule,
     ServicesPagesModule,
+    SettlementsPageModule,
+    UnpaidPageModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -35,18 +36,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   providers: [
     ServicesService,
-    UtilsService
+    UtilsService,
+    ComplaintService
   ],
   declarations: [],
   exports: [
-    CommonModule,
     AdminPagesModule,
-    ConsumptionPageModule,
-    ContractPagesModule,
-    DemoPagesModule,
+    ConsumptionsPageModule,
+    ContractsPageModule,
     HomePageModule,
-    ProfilePageModule,
     ServicesPagesModule,
+    SettlementsPageModule,
+    UnpaidPageModule,
   ]
 })
 export class MainModule {

@@ -35,7 +35,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/services/subscription-request',
+        path: '/services/subscription-requests',
         title: 'Demandes d\'abonnements',
         icon: '',
         clazz: 'menu-item',
@@ -70,7 +70,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/contracts/all-contracts',
+    path: '/contracts',
     title: 'Mes contrats',
     icon: '',
     clazz: 'nav-item',
@@ -81,7 +81,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/account/unpaid',
+    path: '/unpaid',
     title: 'Mes impayés',
     icon: '',
     clazz: 'nav-item',
@@ -92,7 +92,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/account/settlements',
+    path: '/settlements',
     title: 'Mes réglements',
     icon: '',
     clazz: 'nav-item',
@@ -103,7 +103,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/consumption',
+    path: '/consumptions',
     title: 'Ma consommation',
     icon: '',
     clazz: 'nav-item',

@@ -1,0 +1,205 @@
+<div class="col-md-12 py-3">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Réclamation N°: {{claim?.claimNumber}}</h4>
+      <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
+
+        <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+        </aw-wizard-step>
+
+        <ng-template #step0>
+          <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+          </aw-wizard-step>
+        </ng-template>
+
+        <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
+        </aw-wizard-step>
+
+
+        <ng-template #step1>
+          <aw-wizard-step [stepId]="1" [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
+          </aw-wizard-step>
+        </ng-template>
+
+        <aw-wizard-step *ngIf="selectedStep >= 2; else step2" [stepId]="2" awOptionalStep [stepTitle]="'Analyse'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+        </aw-wizard-step>
+
+
+        <ng-template #step2>
+          <aw-wizard-step [stepId]="2" [stepTitle]="'Analyse'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+          </aw-wizard-step>
+        </ng-template>
+
+        <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+        </aw-wizard-step>
+
+        <ng-template #step3>
+          <aw-wizard-step [stepId]="3" [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+          </aw-wizard-step>
+        </ng-template>
+
+        <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+        </aw-wizard-step>
+
+        <ng-template #step4>
+          <aw-wizard-step [stepId]="4" [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+          </aw-wizard-step>
+        </ng-template>
+
+        <aw-wizard-step *ngIf="selectedStep >= 5; else step5" [stepId]="5" awOptionalStep [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
+        </aw-wizard-step>
+
+
+        <ng-template #step5>
+          <aw-wizard-step [stepId]="5" [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
+          </aw-wizard-step>
+        </ng-template>
+
+        <aw-wizard-completion-step *ngIf="selectedStep >= 6;else step6" awOptionalStep [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
+          <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
+        </aw-wizard-completion-step>
+
+        <ng-template #step6>
+          <aw-wizard-completion-step  [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
+            <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
+          </aw-wizard-completion-step>
+        </ng-template>
+
+        <div class="col-md-12" id="buttons">
+          <button type="button" class="btn btn btn-outline-primary" (click)="focus()">Commentaire</button>
+          <button *ngIf="claim?.status === 'TRANSMISSION_OF_INFORMATION'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim?.id,false)" awNextStep><i class="fa fa-chevron-circle-left"></i> Étape précédante</button>
+          <button *ngIf="claim?.status === 'ANALYSIS'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim?.id,false)" awNextStep>Demande de complément<i class="fa fa-chevron-circle-right"></i></button>
+          <button *ngIf="claim?.status === 'ANALYSIS'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim?.id,true)" awNextStep>Réponse fournie <i class="fa fa-chevron-circle-right"></i></button>
+          <button *ngIf="claim?.status !== 'CLOSED' && claim?.status !== 'ANALYSIS'" type="button" class="btn btn-success" style="margin-left : 10px;" #StepButton (click)="nextStep(claim?.id,true)" awNextStep>Étape suivante <i class="fa fa-chevron-circle-right"></i></button>
+        </div>
+      </aw-wizard>
+
+
+      <div class="row" id="cards">
+        <fieldset class="col-7 scheduler-border">
+          <legend class="scheduler-border"><b>Informations :</b></legend>
+          <div style="padding-left: 20px;padding-bottom: 10px;">
+            <div class="row">
+              <div style="padding-left: 10px;">
+                <table>
+                  <tr>
+                    <td>N° demande :</td>
+                    <td>{{claim?.claimNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td>Client :</td>
+                    <td>{{claim?.complainer.lastname}} {{claim?.complainer.firstname}}</td>
+                  </tr>
+                  <tr>
+                    <td>Objet :</td>
+                    <td>{{claim?.object}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div id="descDiv">Description :{{claim?.description}}
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="col-4 scheduler-border">
+          <legend class="scheduler-border">
+            <b>Intervenants :</b>
+          </legend>
+          <div style="padding-left: 20px;">
+            <p *ngIf="!claim?.agent" >
+              Aucun Intervenant n'est affecté pour le moment
+            </p>
+            <table *ngIf="claim?.agent">
+              <tr>
+                <td>Agent :</td>
+                <td>{{claim?.agent?.firstname}} {{claim?.agent?.lastname}}</td>
+              </tr>
+              <tr>
+                <td>Service concerné :</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+      <div class="row" id="cards2">
+        <fieldset class="col-7 scheduler-border" >
+          <legend class="scheduler-border">
+            <b>Commentaires</b>
+          </legend>
+          <div id="commDiv">
+            <form class="" [formGroup]="commentForm">
+              <div class="row">
+
+                <input #commentaire formControlName="comment" type="text" (keyup)="validate(commentaire.value)" class="col-9 form-control" placeholder="Laisser un commentaire.." style="margin-right: 8px;margin-left: 10px;"/>
+
+                <button [disabled]="isEmpty" class="btn btn btn-outline-primary" (click)="addComment()">Envoyer</button>
+              </div>
+
+              <input formControlName="checkbox" type="checkbox" title="">&nbsp;Message public
+            </form><br>
+            <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim?.feedbacks">
+              <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
+              <div class="border-comm col-10" id="comm" >
+                {{feedback?.message}}
+              </div>
+              <div class="col-md-4 pull-right" id="divDateComm">
+                <i>le {{feedback?.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="col-4 scheduler-border" id="divDate">
+          <legend class="scheduler-border">
+            <b>Dates :</b>
+          </legend>
+          <div style="padding-left: 20px;">
+            <table>
+              <tr>
+                <td>Date de création :</td>
+                <td>{{claim?.createdDate | date: 'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td>Dernière modification :</td>
+                <td>{{claim?.updatedDate | date: 'dd/MM/yyyy'}}</td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addIntervention>
+  <div class="modal-header bg-radem">
+    <h4 class="modal-title pull-left">Veuillez remplir les champs suivants pour passer à l'étape suivante :</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <form class="" [formGroup]="">
+              <label>Agent d'intervention :</label>
+              <select formControlName="agent" type="text" #t class="col-12 form-control">
+                <option value="" disabled selected>Choisissez un agent..</option>
+                <option *ngFor="" value="" ></option>
+              </select>
+              <label>Date d'intervention :</label>
+              <input formControlName="dateIntervention" type="date" class="col-12 form-control" >
+              <label>Tel d'agent :</label>
+              <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
+              <div class="col-md-12"  style="margin-left : 34%">
+                <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="modalRef.hide();">Valider</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

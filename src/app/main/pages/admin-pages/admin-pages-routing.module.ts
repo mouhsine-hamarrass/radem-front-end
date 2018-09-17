@@ -2,22 +2,20 @@ import {NgModule} from '@angular/core';
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {RequestsComponent} from './requests/requests.component';
-import {ClaimsComponent} from './claims/claims.component';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
-import {ClaimDetailComponent} from './claim-detail/claim-detail.component';
-import {AlertComponent} from './alert/alert.component';
 import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {ProfileComponent} from './profile/profile.component';
-import {AlertTypeComponent} from './alert-type/alert-type.component';
-import {AlertTypesComponent} from './alert-types/alert-types.component';
 import {SettingsComponent} from './settings/settings.component';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 import {AdvicesComponent} from './advices/advices.component';
 import {ServicesComponent} from './services/services.component';
 import {AlertNotificationComponent} from './alert-notification/alert-notification.component';
 import {AlertsComponent} from './alerts/alerts.component';
+import {AlertNotificationsComponent} from './alert-notifications/alert-notifications.component';
+import {ComplaintsComponent} from './complaints/complaints.component';
+import {ComplaintComponent} from './complaint/complaint.component';
 
 const routes: Routes = [
   {
@@ -38,31 +36,38 @@ const routes: Routes = [
         }
       },
       {
-        path: 'claims',
-        component: ClaimsComponent,
+        path: 'complaints',
+        component: ComplaintsComponent,
         data: {
           title: 'Liste des réclamations'
         }
       },
       {
-        path: 'request/:id',
+        path: 'complaints/:id',
+        component: ComplaintComponent,
+        data: {
+          title: 'Réclamation'
+        }
+      },
+      {
+        path: 'requests/:id',
         component: CancellationRequestComponent,
         data: {
           title: 'Demande de résiliation'
         }
       },
       {
-        path: 'claim/:id',
-        component: ClaimDetailComponent,
-        data: {
-          title: 'Réclamation'
-        }
-      },
-      {
-        path: 'subscription/:id',
+        path: 'subscriptions/:id',
         component: SubscriptionDetailComponent,
         data: {
           title: 'Abonnement'
+        }
+      },
+      {
+        path: 'alert-notifications/:id',
+        component: AlertNotificationComponent,
+        data: {
+          title: 'Alerte'
         }
       },
       {
@@ -140,6 +145,13 @@ const routes: Routes = [
         component: ServicesComponent,
         data: {
           title: 'Services'
+        }
+      },
+      {
+        path: 'alert-notifications',
+        component: AlertNotificationsComponent,
+        data: {
+          title: 'Liste des alertes'
         }
       }
     ]

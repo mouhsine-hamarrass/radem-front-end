@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 
-export const CONTRACT_PAGES_ROUTES: Routes = [
+export const CONTRACTS_PAGE_ROUTES: Routes = [
   {
     path: 'contracts',
-    loadChildren: './main/pages/contract-pages/contract-pages.module#ContractPagesModule'
+    loadChildren: './main/pages/contracts-page/contracts-page.module#ContractsPageModule'
   }
 ];

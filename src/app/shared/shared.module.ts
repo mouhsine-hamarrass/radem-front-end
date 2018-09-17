@@ -8,11 +8,9 @@ import {FooterComponent} from './footer/footer.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {SecondNavbarComponent} from './second-navbar/second-navbar.component';
-import {SpinnerService} from './components/spinner/spinner.service';
 import {PrintService} from './services/print.service';
 import {DataService} from './services/data.service';
 import {LoginComponent} from '../login/login.component';
-import {SpinnerComponent} from './components/spinner/spinner.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MomentModule} from 'ngx-moment';
@@ -20,13 +18,7 @@ import {ChartsModule} from 'ng2-charts';
 import {HttpClientModule} from '@angular/common/http';
 import {ArchwizardModule} from 'angular-archwizard';
 import {NgxToggleModule} from 'ngx-toggle';
-import {FilterComponent} from './components/tables/filter/filter.component';
-import {PaginationComponent} from './components/tables/pagination/pagination.component';
-import {SearchComponent} from './components/tables/search/search.component';
-import {AlertComponent} from './components/alert/alert.component';
-import {AlertService} from './components/alert/alert.service';
 import {ChecklistModule} from 'angular-checklist';
-import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {
   AccordionModule,
   AlertModule,
@@ -45,6 +37,7 @@ import {
 import {QuillModule} from 'ngx-quill';
 import {PipesModule} from './pipes/pipes.module';
 import {DirectivesModule} from './directives/directives.module';
+import {ComponentsModule} from './components/components.module';
 
 
 @NgModule({
@@ -53,13 +46,7 @@ import {DirectivesModule} from './directives/directives.module';
     NavbarComponent,
     SidebarComponent,
     SecondNavbarComponent,
-    LoginComponent,
-    SpinnerComponent,
-    FilterComponent,
-    PaginationComponent,
-    SearchComponent,
-    AlertComponent,
-    PageNotFoundComponent
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -89,7 +76,8 @@ import {DirectivesModule} from './directives/directives.module';
     ChecklistModule,
     QuillModule,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    ComponentsModule
   ],
   exports: [
     CommonModule,
@@ -105,23 +93,17 @@ import {DirectivesModule} from './directives/directives.module';
     SidebarComponent,
     SecondNavbarComponent,
     LoginComponent,
-    SpinnerComponent,
     ArchwizardModule,
     NgxToggleModule,
-    FilterComponent,
-    PaginationComponent,
-    SearchComponent,
-    AlertComponent,
     ChecklistModule,
     QuillModule,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    ComponentsModule
   ],
   providers: [
-    SpinnerService,
     PrintService,
     DataService,
-    AlertService
   ]
 })
 export class SharedModule {

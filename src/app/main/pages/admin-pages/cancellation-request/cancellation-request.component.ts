@@ -1,10 +1,19 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, TemplateRef, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ViewChild,
+  ElementRef,
+  TemplateRef,
+  EventEmitter,
+  AfterViewInit
+} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { WizardComponent, WizardState} from 'angular-archwizard';
+import {WizardComponent, WizardState} from 'angular-archwizard';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import { AdminService } from '../../../services/admin.service';
+import {AdminService} from '../../../services/admin.service';
 import * as moment from 'moment';
 import {ToastrService} from 'ngx-toastr';
 import swal from 'sweetalert2';
@@ -50,104 +59,112 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     lastname: 'AL ADMIN',
     phone: '0633334444'
   },
-  {
-    id: 3,
-    firstname: 'Taha',
-    lastname: 'Zahir',
-    phone: '0612121212'
-  }
-];
+    {
+      id: 3,
+      firstname: 'Taha',
+      lastname: 'Zahir',
+      phone: '0612121212'
+    }
+  ];
 
   constructor(private requestService: AdminService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private modalService: BsModalService,
-    private toastrService: ToastrService) {
-      this.requestForm = this.formBuilder.group({
-        agent: ['', Validators.required],
-        dateIntervention: ['', Validators.required],
-        phone: ['', Validators.required]
-      });
-      this.commentForm = this.formBuilder.group({
-        comment: ['', Validators.required],
-        checkbox: ['']
-      });
-      this.addInterventionForm = this.formBuilder.group({
-        agent: ['', Validators.required],
-        dateIntervention: ['', Validators.required],
-        phone: ['', Validators.required]
-      });
-    }
-    // RequestForm
-    get agent() {
-      return this.requestForm.get('agent');
-    }
-    get dateIntervention() {
-      return this.requestForm.get('dateIntervention');
-    }
-    get phone() {
-      return this.requestForm.get('phone');
-    }
-    // CommentForm
-    get comment() {
-      return this.commentForm.get('comment');
-    }
-    get checkbox() {
-      return this.commentForm.get('checkbox');
-    }
+              private router: Router,
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private modalService: BsModalService,
+              private toastrService: ToastrService) {
+    this.requestForm = this.formBuilder.group({
+      agent: ['', Validators.required],
+      dateIntervention: ['', Validators.required],
+      phone: ['', Validators.required]
+    });
+    this.commentForm = this.formBuilder.group({
+      comment: ['', Validators.required],
+      checkbox: ['']
+    });
+    this.addInterventionForm = this.formBuilder.group({
+      agent: ['', Validators.required],
+      dateIntervention: ['', Validators.required],
+      phone: ['', Validators.required]
+    });
+  }
 
-    // InterventionForm
-    get agentIntervention() {
-      return this.addInterventionForm.get('agent');
-    }
-    get interventionDate() {
-      return this.addInterventionForm.get('dateIntervention');
-    }
-    get phoneIntervenant() {
-      return this.addInterventionForm.get('phone');
-    }
+  // RequestForm
+  get agent() {
+    return this.requestForm.get('agent');
+  }
 
-    ngAfterViewInit() {
-      switch (this.request.status) {
-        case 'CREATED':
+  get dateIntervention() {
+    return this.requestForm.get('dateIntervention');
+  }
+
+  get phone() {
+    return this.requestForm.get('phone');
+  }
+
+  // CommentForm
+  get comment() {
+    return this.commentForm.get('comment');
+  }
+
+  get checkbox() {
+    return this.commentForm.get('checkbox');
+  }
+
+  // InterventionForm
+  get agentIntervention() {
+    return this.addInterventionForm.get('agent');
+  }
+
+  get interventionDate() {
+    return this.addInterventionForm.get('dateIntervention');
+  }
+
+  get phoneIntervenant() {
+    return this.addInterventionForm.get('phone');
+  }
+
+  ngAfterViewInit() {
+    switch (this.request.status) {
+      case 'CREATED':
         this.selectedStep = 0;
-          break;
-        case 'RECEIVED':
+        break;
+      case 'RECEIVED':
         this.selectedStep = 1;
-          break;
-        case 'IN_PROGRESS':
+        break;
+      case 'IN_PROGRESS':
         this.selectedStep = 2;
-          break;
-          case 'DEPOSITED_COUNTER':
-          this.selectedStep = 3;
-          break;
-          case 'UNPAID_VERIFICATION':
-          this.selectedStep = 4;
-          break;
-          case 'SETTLEMENT':
-          this.selectedStep = 5;
-          break;
-          case 'CLOSED':
-          this.selectedStep = 6;
-          break;
-      }
-      this.wizardState = this.wizard.model;
-      this.wizardState.navigationMode.goToStep(this.selectedStep, new EventEmitter(), new EventEmitter());
+        break;
+      case 'DEPOSITED_COUNTER':
+        this.selectedStep = 3;
+        break;
+      case 'UNPAID_VERIFICATION':
+        this.selectedStep = 4;
+        break;
+      case 'SETTLEMENT':
+        this.selectedStep = 5;
+        break;
+      case 'CLOSED':
+        this.selectedStep = 6;
+        break;
     }
+    this.wizardState = this.wizard.model;
+    this.wizardState.navigationMode.goToStep(this.selectedStep, new EventEmitter(), new EventEmitter());
+  }
+
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
-     this.requestService.getRequest(id).subscribe(response => {
-       this.request = response.data;
-       console.log(this.request);
-       if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
-         this.UpdateButton.nativeElement.disabled = true;
-       } else {
-        this.UpdateButton.nativeElement.disabled = false;
-       }
-    });
-  }
+      this.requestService.getRequest(id).subscribe(response => {
+        this.request = response.data;
+        console.log(this.request);
+        if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
+          this.UpdateButton.nativeElement.disabled = true;
+        } else {
+          this.UpdateButton.nativeElement.disabled = false;
+        }
+      });
+    }
   }
 
   // Choice of step + show Add Intervenant Popup
@@ -163,6 +180,7 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
       this.nextStep(this.request.id);
     }
   }
+
   // Stepper
   nextStep(id) {
     swal({
@@ -180,88 +198,91 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
         this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
           this.request = response.data;
           if (this.request.status === 'CLOSED') {
-           this.StepButton.nativeElement.disabled = true;
-             }
-          });
-          this.selectedStep = this.selectedStep + 1;
-           this.ngOnInit();
-        }
+            this.StepButton.nativeElement.disabled = true;
+          }
+        });
+        this.selectedStep = this.selectedStep + 1;
+        this.ngOnInit();
+      }
     });
   }
 
- // Add Comment
- addComment() {
-   if (this.checkbox.value === null || this.checkbox.value === '') {
+  // Add Comment
+  addComment() {
+    if (this.checkbox.value === null || this.checkbox.value === '') {
       this.isPublic = false;
-   } else {
+    } else {
       this.isPublic = true;
-   }
-   this.request.feedback.push({message: this.comment.value, sendingDate: new Date(), ispublic: this.isPublic});
-   this.request.agent = JSON.parse(localStorage.getItem('user'));
-   this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
-   console.log(this.isPublic);
-   this.requestService.saveTerminationRequest(this.request).subscribe(response => {
-    this.commentForm.reset();
-    this.isEmpty = true;
-    this.ngOnInit();
-   },
-   (err) => {
-    });
- }
+    }
 
- // Add Intervenant Popup impl
- addIntervenant() {
-   this.request.interventionDate = this.addInterventionForm.controls.dateIntervention.value;
-   this.request.intervenant = {
-     id:  Number.parseInt(this.addInterventionForm.controls.agent.value)
-   }
-   this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
-   console.log(this.request);
-   this.requestService.saveTerminationRequest(this.request).subscribe(response => {
-     console.log(response);
-     this.nextStep(this.request.id);
-     this.ngOnInit();
-   })
- }
+    this.request.feedback.push({message: this.comment.value, sendingDate: new Date(), ispublic: this.isPublic});
 
- // Update Intervenant Popup impl
- updateIntervenant() {
-  this.request.interventionDate = this.requestForm.controls.dateIntervention.value;
-  this.request.intervenant = {
-    id:  Number.parseInt(this.requestForm.controls.agent.value)
+    this.request.agent = JSON.parse(localStorage.getItem('user'));
+
+    this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
+
+    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
+        this.commentForm.reset();
+        this.isEmpty = true;
+        this.ngOnInit();
+      },
+      (err) => {
+      });
   }
-  console.log(this.request);
-  this.requestService.saveTerminationRequest(this.request).subscribe(response => {
-    console.log(response);
-    this.ngOnInit();
-  })
-}
 
-openUpdateForm(template: TemplateRef<any>) {
-  this.modalRef = this.modalService.show(template, this.config);
-  this.requestForm.controls.agent.setValue(this.request.intervenant.id);
-  this.requestForm.controls.dateIntervention.setValue(moment(this.request.interventionDate).format('YYYY-MM-DD'));
-  this.requestForm.controls.phone.setValue(this.agents[this.request.intervenant.id - 1].phone);
-}
-
- focus() {
-   this.commentaire.nativeElement.focus();
-}
-
-getPhone(value: number) {
-  console.log(value);
-  value = value - 1;
-  console.log(value);
-  this.addInterventionForm.controls.phone.setValue(this.agents[value].phone);
-  this.requestForm.controls.phone.setValue(this.agents[value].phone);
-}
-
-validate(value: String) {
-  if (value !== '') {
-    this.isEmpty = false;
-  } else {
-    this.isEmpty = true;
+  // Add Intervenant Popup impl
+  addIntervenant() {
+    this.request.interventionDate = this.addInterventionForm.controls.dateIntervention.value;
+    this.request.intervenant = {
+      id: Number.parseInt(this.addInterventionForm.controls.agent.value)
+    };
+    this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
+    console.log(this.request);
+    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
+      this.modalRef.hide();
+      this.nextStep(this.request.id);
+      this.ngOnInit();
+    })
   }
-}
+
+  // Update Intervenant Popup impl
+  updateIntervenant() {
+    this.request.interventionDate = this.requestForm.controls.dateIntervention.value;
+    this.request.intervenant = {
+      id: Number.parseInt(this.requestForm.controls.agent.value)
+    }
+    console.log(this.request);
+    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
+      console.log(response);
+      this.ngOnInit();
+    })
+  }
+
+  openUpdateForm(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.config);
+    this.requestForm.controls.agent.setValue(this.request.intervenant.id);
+    this.requestForm.controls.dateIntervention.setValue(moment(this.request.interventionDate).format('YYYY-MM-DD'));
+    this.requestForm.controls.phone.setValue(this.agents[this.request.intervenant.id - 1].phone);
+  }
+
+  focus() {
+    this.commentaire.nativeElement.focus();
+  }
+
+  getPhone(value: number) {
+    console.log(value);
+    value = value - 1;
+    console.log(value);
+    this.addInterventionForm.controls.phone.setValue(this.agents[value].phone);
+    this.requestForm.controls.phone.setValue(this.agents[value].phone);
+  }
+
+  validate(value: String) {
+    if (value !== '') {
+      this.isEmpty = false;
+    } else {
+      this.isEmpty = true;
+    }
+  }
 
 }

@@ -1,0 +1,559 @@
+{
+  "subscriptions": [
+    {
+      "id": 1,
+      "police": "POL001",
+      "type": "eau",
+      "state": "actif",
+      "address": "add1",
+      "toBePayed": "1043",
+      "nextBill": "978",
+      "lastConsumption": "432",
+      "subscriptionDate": "2011-03-09",
+      "deposit": "3000",
+      "cost": "Usage domestique",
+      "calibre": "15",
+      "paimentMethod": "Encaisseur",
+      "lastIndex": {
+        "meterNumber": "111111",
+        "date": "2018-07-01",
+        "index": "3425"
+      },
+      "lastBill": {
+        "amount": "1043",
+        "date": "2018-07-01",
+        "consumption": "432"
+      }
+    },
+    {
+      "id": 2,
+      "police": "POL002",
+      "type": "eau",
+      "state": "actif",
+      "address": "add1",
+      "toBePayed": "471",
+      "nextBill": "683",
+      "lastConsumption": "109",
+      "subscriptionDate": "2007-12-23",
+      "deposit": "0",
+      "cost": "Usage domestique",
+      "calibre": "15",
+      "paimentMethod": "Encaisseur",
+      "lastIndex": {
+        "meterNumber": "222222",
+        "date": "2018-07-01",
+        "index": "4123"
+      },
+      "lastBill": {
+        "amount": "471",
+        "date": "2018-07-01",
+        "consumption": "109"
+      }
+    },
+    {
+      "id": 3,
+      "police": "POL003",
+      "type": "electricite",
+      "state": "actif",
+      "address": "add1",
+      "toBePayed": "2541",
+      "nextBill": "2213",
+      "lastConsumption": "1632",
+      "subscriptionDate": "2017-01-05",
+      "deposit": "250",
+      "cost": "Usage domestique",
+      "calibre": "15",
+      "paimentMethod": "Encaisseur",
+      "lastIndex": {
+        "meterNumber": "333333",
+        "date": "2018-07-01",
+        "index": "2431"
+      },
+      "lastBill": {
+        "amount": "2541",
+        "date": "2018-07-01",
+        "consumption": "1632"
+      }
+    }
+  ],
+  "bills": [
+    {
+      "numBill": "111432",
+      "subscriptionType": "eau",
+      "police": "POL001",
+      "dueNumber": "111432",
+      "dueDate": "2018-07-02",
+      "type": "consommation",
+      "amount": 421,
+      "consumption": "783",
+      "embranchementMaintenance": "0.70",
+      "meterLeasing": "2.63",
+      "meterMaintenance": "8.91",
+      "tranches": {
+        "tranche1": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche2": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche3": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche5": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        }
+      }
+    },
+    {
+      "numBill": "111433",
+      "subscriptionType": "eau",
+      "police": "POL001",
+      "dueNumber": "111432",
+      "dueDate": "2018-06-02",
+      "type": "consommation",
+      "amount": "399",
+      "consumption": "783",
+      "embranchementMaintenance": "0.70",
+      "meterLeasing": "2.63",
+      "meterMaintenance": "8.91",
+      "tranches": {
+        "tranche1": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche2": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche3": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche5": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        }
+      }
+    },
+    {
+      "numBill": "111434",
+      "subscriptionType": "eau",
+      "police": "POL001",
+      "dueNumber": "111432",
+      "dueDate": "2018-05-02",
+      "type": "consommation",
+      "amount": "453",
+      "consumption": "783",
+      "embranchementMaintenance": "0.70",
+      "meterLeasing": "2.63",
+      "meterMaintenance": "8.91",
+      "tranches": {
+        "tranche1": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche2": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche3": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche5": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        }
+      }
+    },
+    {
+      "numBill": "222546",
+      "subscriptionType": "eau",
+      "police": "POL002",
+      "dueNumber": "222546",
+      "dueDate": "2018-07-02",
+      "type": "consommation",
+      "amount": "672",
+      "consumption": "783",
+      "embranchementMaintenance": "0.70",
+      "meterLeasing": "2.63",
+      "meterMaintenance": "8.91",
+      "tranches": {
+        "tranche1": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche2": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche3": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche5": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        }
+      }
+    },
+    {
+      "numBill": "333654",
+      "subscriptionType": "electricite",
+      "police": "POL003",
+      "dueNumber": "333654",
+      "dueDate": "2018-07-02",
+      "type": "consommation",
+      "amount": "953",
+      "consumption": "783",
+      "embranchementMaintenance": "0.70",
+      "meterLeasing": "2.63",
+      "meterMaintenance": "8.91",
+      "tranches": {
+        "tranche1": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche2": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche3": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche5": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        }
+      }
+    },
+    {
+      "numBill": "333655",
+      "subscriptionType": "electricite",
+      "police": "POL003",
+      "dueNumber": "333654",
+      "dueDate": "2018-06-02",
+      "type": "consommation",
+      "amount": "731",
+      "consumption": "783",
+      "embranchementMaintenance": "0.70",
+      "meterLeasing": "2.63",
+      "meterMaintenance": "8.91",
+      "tranches": {
+        "tranche1": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche2": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche3": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        },
+        "tranche5": {
+          "unitPrice": "0.09",
+          "quantity": "100",
+          "cost": "9"
+        }
+      }
+    }
+  ],
+  "alerts": [
+    {
+      "title": "Alerte aux fuites !",
+      "content": "Peut-être êtes vous victime d’une fuite d’eau. Pour détecter une fuite d’eau, il existe une méthode : avant le coucher et après avoir fermé tous les robinets ou appareils consommant de l’eau, relevez l’index de votre compteur. Le lendemain matin, avant toute consommation d’eau, relevez à nouveau votre compteur. S’il indique un chiffre supérieur à celui de la veille, il y a une fuite sur votre réseau (du compteur aux différents points d’eau de votre habitation)."
+    },
+    {
+      "title": "Surconsommation !",
+      "content": "Peut-être êtes vous victime d’une fuite d’eau. Pour détecter une fuite d’eau, il existe une méthode : avant le coucher et après avoir fermé tous les robinets ou appareils consommant de l’eau, relevez l’index de votre compteur. Le lendemain matin, avant toute consommation d’eau, relevez à nouveau votre compteur. S’il indique un chiffre supérieur à celui de la veille, il y a une fuite sur votre réseau (du compteur aux différents points d’eau de votre habitation)."
+    }
+  ],
+  "factures": [
+    {
+      "id": "0",
+      "impaye": "0"
+    }
+  ],
+  "settlements": [
+    {
+      "id": "0",
+      "billingPeriod": "Juin 2018",
+      "billNumber": "234887",
+      "billType": "Consomation",
+      "settlementDate": "2018-06-12",
+      "amount": "144.35",
+      "SettlementMode": "Guichet",
+      "contractNumber": "9877"
+    },
+    {
+      "id": "1",
+      "billingPeriod": "Mai 2018",
+      "billNumber": "234887",
+      "billType": "Consomation",
+      "settlementDate": "2018-05-12",
+      "amount": "234.35",
+      "SettlementMode": "Mobile",
+      "contractNumber": "9845"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "1",
+      "contractNumber": "E12345",
+      "contractType": "Eau",
+      "client": "Younes Hassani"
+    },
+    {
+      "id": "2",
+      "contractNumber": "E57486",
+      "contractType": "Electricité",
+      "client": "Mohamed Hariri"
+    },
+    {
+      "id": "3",
+      "contractNumber": "E37488",
+      "contractType": "Eau",
+      "client": "Mohamed Hariri"
+    }
+  ],
+  "releves": [
+    {
+      "id": "0",
+      "type": "Electricité",
+      "dateReleve": "2018-06-12",
+      "index": "183949",
+      "ref": "46578"
+    },
+    {
+      "id": "1",
+      "type": "Eau",
+      "dateReleve": "2018-06-12",
+      "index": "538644",
+      "ref": "65309"
+    }
+  ],
+  "nextReleve": [
+    {
+      "date": "10-08-2018"
+    }
+  ],
+  "Consumptions": [
+    {
+      "id": "0",
+      "contract": "9845",
+      "volume": "220",
+      "amount": "299.00",
+      "month": "Juin 2018",
+      "index": "345677",
+      "date": "29-06-2018"
+    },
+    {
+      "id": "1",
+      "contract": "9845",
+      "volume": "199",
+      "amount": "237.50",
+      "month": "Mai 2018",
+      "index": "345660",
+      "date": "29-05-2018"
+    },
+    {
+      "id": "2",
+      "contract": "9845",
+      "volume": "231",
+      "amount": "304.00",
+      "month": "Avril 2018",
+      "index": "345643",
+      "date": "29-04-2018"
+    },
+    {
+      "id": "3",
+      "contract": "9877",
+      "volume": "120",
+      "amount": "99.00",
+      "month": "Juin 2018",
+      "index": "345677",
+      "date": "29-06-2018"
+    },
+    {
+      "id": "4",
+      "contract": "9877",
+      "volume": "109",
+      "amount": "87.50",
+      "month": "Mai 2018",
+      "index": "345660",
+      "date": "29-05-2018"
+    },
+    {
+      "id": "5",
+      "contract": "9877",
+      "volume": "131",
+      "amount": "104.00",
+      "month": "Avril 2018",
+      "index": "345643",
+      "date": "29-04-2018"
+    }
+  ],
+  "MinMaxConsumption": [
+    {
+      "id": "0",
+      "contract": "9845",
+      "min": "105",
+      "max": "236"
+    },
+    {
+      "id": "1",
+      "contract": "9877",
+      "min": "66",
+      "max": "139"
+    }
+  ],
+  "Meter": [
+    {
+      "id": "0",
+      "voltage": "220",
+      "amperage": "12",
+      "calibre": "2.5",
+      "coefficient": "3.45",
+      "marque": "Aquarius",
+      "roues": "2"
+    }
+  ],
+  "Users": [
+    {
+      "id": "0",
+      "firstName": "Younes",
+      "lastName": "Hassani",
+      "fullName": "Younes Hassani",
+      "email": "younes.h@hotmail.com",
+      "bill": "E12345",
+      "contract": "E12345",
+      "ref": "12345"
+    },
+    {
+      "id": "1",
+      "firstName": "Moncef",
+      "lastName": "Fikri",
+      "fullName": "Moncef Fikri",
+      "email": "moncef.f@hotmail.com",
+      "bill": "E37488",
+      "contract": "E37488",
+      "ref": "12345"
+    },
+    {
+      "id": "2",
+      "firstName": "Oussama",
+      "lastName": "Nafid",
+      "fullName": "Oussama Nafid",
+      "email": "oussame.n@hotmail.com",
+      "bill": "E57486",
+      "contract": "E57486",
+      "ref": "12345"
+    }
+  ],
+  "Questions": [
+    {
+      "id": "0",
+      "question": "L'index de la dernière facture ?",
+      "answer": "12345"
+    },
+    {
+      "id": "1",
+      "question": "La référence de la dernière facture ?",
+      "answer": "12345"
+    }
+  ],
+  "soldes": [
+    {
+      "id": "0",
+      "crediteurH": "600.00",
+      "crediteurP": "320.00",
+      "provision": "128.00"
+    },
+    {
+      "id": "1",
+      "crediteurH": "679.00",
+      "crediteurP": "540.00",
+      "provision": "122.00"
+    }
+  ],
+  "consommations": [
+    {
+      "month": "Janvier",
+      "value": "320.00"
+    },
+    {
+      "month": "Février",
+      "value": "320.00"
+    },
+    {
+      "month": "Mars",
+      "value": "320.00"
+    },
+    {
+      "month": "Avril",
+      "value": "320.00"
+    },
+    {
+      "month": "Mai",
+      "value": "320.00"
+    },
+    {
+      "month": "Juin",
+      "value": "320.00"
+    },
+    {
+      "month": "Juillet",
+      "value": "320.00"
+    },
+    {
+      "month": "Août",
+      "value": "320.00"
+    },
+    {
+      "month": "Septembre",
+      "value": "320.00"
+    },
+    {
+      "month": "Octobre",
+      "value": "320.00"
+    },
+    {
+      "month": "Novembre",
+      "value": "320.00"
+    },
+    {
+      "month": "Décembre",
+      "value": "320.00"
+    }
+  ]
+}

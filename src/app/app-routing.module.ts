@@ -8,8 +8,9 @@ import {ACCOUNT_PAGES_ROUTES} from './routes/account-pages.routes';
 import {SERVICES_PAGES_ROUTES} from './routes/services-pages.routes';
 import {CONSUMPTION_ROUTES} from './routes/consumption-page.routes';
 import {ADMIN_PAGES_ROUTES} from './routes/admin-pages.routes';
-import {CONTRACT_PAGES_ROUTES} from './routes/contracts-pages.routes';
-import {PROFILE_PAGE_ROUTES} from './routes/profile-page.routes';
+import {CONTRACTS_PAGE_ROUTES} from './routes/contracts-pages.routes';
+import {SETTLEMENTS_PAGES_ROUTES} from './routes/settlements-page.routes';
+import {UNPAID_PAGE_ROUTES} from './routes/unpaid-page.routes';
 import {LoginGuard} from './core/guards/login.guard';
 import {LoginComponent} from './login/login.component';
 import {RecoverPasswordComponent} from './recover-password/recover-password.component';
@@ -31,8 +32,9 @@ const appRoutes: Routes = [
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICES_PAGES_ROUTES, canActivate: [LoginGuard]},
-  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACT_PAGES_ROUTES, canActivate: [LoginGuard]},
-  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: PROFILE_PAGE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACTS_PAGE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SETTLEMENTS_PAGES_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
 ];
 

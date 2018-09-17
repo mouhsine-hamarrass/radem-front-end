@@ -38,23 +38,28 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Nº de réclamation</th>
-                  <th scope="col">Objet</th>
-                  <th scope="col">Créée le </th>
-                  <th scope="col">Statut</th>
-                </tr>
+          <div class="table-responsive mx-auto">
+            <table class="table table-bordered ">
+              <thead class="table-light">
+              <tr>
+                <th scope="col">Nº de réclamation</th>
+                <th scope="col">Objet</th>
+                <th scope="col">Créée le</th>
+                <th scope="col">Statut</th>
+              </tr>
               </thead>
               <tbody>
+              <app-data-not-available *ngIf="!complaints || complaints.length == 0; else dataAvailable" [colSpan]="4"></app-data-not-available>
+
+              <ng-template #dataAvailable>
                 <tr *ngFor="let complaint of complaints">
-                  <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a></td>
+                  <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a>
+                  </td>
                   <td>{{complaint.object}}</td>
-                  <td>{{complaint.createdDate | date: 'dd/MM/yyyy'}}</td>
-                  <td><span  class="badge badge-primary">{{complaint.status}}</span></td>
+                  <td>{{complaint.createdDate | date:'dd-M-yyyy'}}</td>
+                  <td><span class="badge badge-primary">{{complaint.status}}</span></td>
                 </tr>
+              </ng-template>
               </tbody>
             </table>
           </div>

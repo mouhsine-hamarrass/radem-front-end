@@ -6,6 +6,8 @@ import {AlertNotificationModel} from '../../../models/alert-notification.model';
 import {ClientModel} from '../../../models/client.model';
 import {ContactModel} from '../../../models/contact.model';
 import {SubscriptionModel} from '../../../models/subscription.model';
+import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-alert-notification',
@@ -21,7 +23,11 @@ export class AlertNotificationComponent implements OnInit {
   user: any;
   alertNotification: AlertNotificationModel;
 
-  constructor(private adminService: AdminService, private formBuilder: FormBuilder) {
+  constructor(private adminService: AdminService,
+              private formBuilder: FormBuilder,
+              private activeRoute: ActivatedRoute,
+              private router: Router,
+              private toastrService: ToastrService) {
     this.alertForm = this.formBuilder.group({
       type: ['', Validators.required],
       description: ['', Validators.required],
@@ -47,6 +53,12 @@ export class AlertNotificationComponent implements OnInit {
   }
 
   ngOnInit() {
+    const id: string = this.activeRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      this.adminService.getAlertNotificationById(id).subscribe(response => {
+        this.alertNotification = response.data;
+      });
+    }
     this.adminService.getAlerts().subscribe(response => {
       this.alerts = response.data;
     });
@@ -81,6 +93,10 @@ export class AlertNotificationComponent implements OnInit {
 
     this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
       this.alertNotification = response.data;
-    })
+      this.toastrService.success('Opération réussite', '');
+      this.router.navigate(['/admin/alert-notifications']);
+    }, err => {
+
+    });
   }
 }

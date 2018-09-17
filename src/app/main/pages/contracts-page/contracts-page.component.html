@@ -1,0 +1,557 @@
+<!--Tooltip Starts-->
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-1">
+    <h3 class="content-header-title">Liste des contrats</h3>
+  </div>
+  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Contrats</a>
+        </li>
+        <li class="breadcrumb-item active">Liste des contrats
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Mes contrats</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            Cliquez sur la liste ci-dessous pour avoir le detail de chacun de vos contrat
+            <div class="table-responsive mx-auto">
+              <table class="table table-bordered ">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Nº contrat</th>
+                    <th scope="col">Etat contrat</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Derniere cons</th>
+                    <th scope="col">Derniere facture</th>
+                    <th scope="col">Facture à payer</th>
+                    <th scope="col">Historique cons</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <app-data-not-available *ngIf="!subscriptions || subscriptions.length == 0; else dataAvailable" [colSpan]="7"></app-data-not-available>
+                <ng-template #dataAvailable>
+                  <tr *ngFor="let subscription of subscriptions" class="text-center" [ngClass]="subscription.type === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
+                    <td style="cursor: pointer;" (click)="openDetailSubscription(detailSubscription, subscription.id)">
+                      <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i> &nbsp;
+                      <b>{{subscription.police}}</b>
+                    </td>
+                    <td>{{subscription.state}}</td>
+                    <td>{{subscription.address}}</td>
+                    <td>{{subscription.lastConsumption}}</td>
+                    <td>{{subscription.toBePayed}}</td>
+                    <td style="cursor: pointer;" (click)="showBills(subscription.police)">
+                      <b>{{subscription.nextBill}}</b>
+                    </td>
+                    <td>
+                      <i class="fa fa-history" (click)="openHistory(historyDetail)"></i>
+                    </td>
+                  </tr>
+                </ng-template>
+                </tbody>
+              </table>
+            </div>
+            <div class="offset-6">
+              <ng-template #emptyTD>
+                <td>0.00</td>
+              </ng-template>
+              <table class="table table-bordered ">
+                <tbody>
+                  <tr>
+                    <th class="table-active" scope="row" colspan="2">Solde crediteur hors participation</th>
+                    <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurH}}</td>
+                  </tr>
+                  <tr>
+                    <th class="table-active" scope="row" colspan="2">Solde crediteur participation</th>
+                    <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurP}}</td>
+                  </tr>
+                  <tr>
+                    <th class="table-active" scope="row" colspan="2">Solde provision</th>
+                    <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.provision}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="bills">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Nº facture</th>
+                    <th scope="col">N° échéances</th>
+                    <th scope="col">N° police</th>
+                    <th scope="col">Date d'échéance</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Montant</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bill of bills">
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'" (click)="openBillDetail(waterBillDetails, bill.numBill)">
+                      <b>{{bill.numBill}}</b>
+                    </td>
+                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'" (click)="openBillDetail(electricityBillDetails, bill.numBill)">
+                      <b>{{bill.numBill}}</b>
+                    </td>
+                    <td>{{bill.dueNumber}}</td>
+                    <td>{{bill.police}}</td>
+                    <td>{{bill.dueDate}}</td>
+                    <td>{{bill.type}}</td>
+                    <td>{{bill.amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <a class="btn btn btn-outline-primary pull-right" href="/account/unpaid">Payer</a>
+            </div>
+          </div>
+        </div>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
+</div>
+
+<ng-template #detailSubscription>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">Détails contrat d'{{subscription[0]?.type}} N°: {{subscription[0]?.police}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-header" [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
+        <h4>
+          <i class="fa fa-info-circle"></i> Informations
+        </h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <p>
+                <b>Adresse du contrat: </b>{{subscription[0]?.address}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <p>
+                <b>Etat: </b>{{subscription[0]?.state}}</p>
+            </div>
+            <div class="col-4">
+              <p>
+                <b>Date d'abonnement: </b>{{subscription[0]?.subscriptionDate}}</p>
+            </div>
+            <div class="col-4">
+              <p>
+                <b>Dpôt de garantie: </b>{{subscription[0]?.deposit}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <p>
+                <b>Tarif: </b>{{subscription[0]?.cost}}</p>
+            </div>
+            <div class="col-4">
+              <p>
+                <b>Calibre de compteur: </b>{{subscription[0]?.calibre}}</p>
+            </div>
+            <div class="col-4">
+              <p>
+                <b>Mode de paiement: </b>{{subscription[0]?.paimentMethod}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
+            <h4>
+              <i class="fa fa-tachometer"></i> Dernier index
+            </h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+
+              <table>
+                <tr>
+                  <th>N° compteur:</th>
+                  <td>{{subscription[0]?.lastIndex.meterNumber}}</td>
+                </tr>
+                <tr>
+                  <th>Date de relève:</th>
+                  <td>{{subscription[0]?.lastIndex.date}}</td>
+                </tr>
+                <tr>
+                  <th>Index:</th>
+                  <td>{{subscription[0]?.lastIndex.index}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
+            <h4>
+              <i class="fa fa-file-text"></i> Dernière facture
+            </h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <table>
+                <tr>
+                  <th>Date:</th>
+                  <td>{{subscription[0]?.lastBill.date}}</td>
+                </tr>
+                <tr>
+                  <th>Montant:</th>
+                  <td>{{subscription[0]?.lastBill.amount}}</td>
+                </tr>
+                <tr>
+                  <th>Consommation:</th>
+                  <td>{{subscription[0]?.lastBill.consumption}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #waterBillDetails>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">Détails de la facture</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="bs-callout callout-bordered bg-info bg-lighten-3">
+      <div class="media align-items-stretch">
+        <div class="d-flex align-items-center bg-primary p-2">
+          <i class="fa fa-tint fa-lg white"></i>
+        </div>
+        <div class="media-body row  mt-1 ml-1">
+          <div class="col-4">
+            <p>
+              <b>Numero de contrat:</b> {{bill.police}}</p>
+          </div>
+          <div class="col-4">
+            <p>
+              <b>Numero de facture:</b> {{bill.numBill}}</p>
+          </div>
+          <div class="col-4">
+            <p>
+              <b>Montant facture:</b> {{bill.amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table table-responsive">
+        <thead class="table-dark">
+          <tr>
+            <th scope="row">Libelle</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">Montant HT</th>
+            <th scope="col">Taux TVA</th>
+            <th scope="col">Montant TVA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-blue-grey bg-lighten-4 black text-center">
+            <td colspan="6" class="">Redevences fixes</td>
+          </tr>
+          <tr>
+            <th scope="row">Entretien
+              <br>branchement</th>
+            <td class="text-center">-</td>
+            <td class="text-center">-</td>
+            <td class="">{{bill.embranchementMaintenance}}</td>
+            <td class="">20.00</td>
+            <td class="">{{bill.embranchementMaintenance*20/100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Location
+              <br>compteur</th>
+            <td class="text-center">-</td>
+            <td class="text-center">-</td>
+            <td class="">{{bill.meterLeasing}}</td>
+            <td class="">07.00</td>
+            <td class="">{{bill.meterLeasing*7/100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Entretien
+              <br>compteur</th>
+            <td class="text-center">-</td>
+            <td class="text-center">-</td>
+            <td class="">{{bill.meterMaintenance}}</td>
+            <td class="">20.00</td>
+            <td class="">{{bill.meterMaintenance*20/100}}</td>
+          </tr>
+          <tr class="bg-blue-grey bg-lighten-4 black text-center">
+            <td colspan="6" class="">Consommation d'eau</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 5</th>
+            <td class="">{{bill.tranches.tranche5.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche5.quantity}}</td>
+            <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr class="bg-blue-grey bg-lighten-4 black text-center">
+            <td colspan="6" class="">Tppan</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 1</th>
+            <td class="">{{bill.tranches.tranche1.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche1.quantity}}</td>
+            <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 2</th>
+            <td class="">{{bill.tranches.tranche2.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche2.quantity}}</td>
+            <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 3</th>
+            <td class="">{{bill.tranches.tranche3.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche3.quantity}}</td>
+            <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        <!--<div class="col-md-4"></div>-->
+        <div class="offset-4 col-md-4">
+          <p class="card-text font-weight-bold">Total HT:
+            <span class="font-weight-normal mx-2">700.00(DHs)</span>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="card-text font-weight-bold">Total TVA:
+            <span class="font-weight-normal mx-2">39.21(DHs)</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #electricityBillDetails>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">Détails de la facture</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="bs-callout callout-bordered bg-yellow bg-lighten-3">
+      <div class="media align-items-stretch">
+        <div class="d-flex align-items-center bg-warning p-2">
+          <i class="fa fa-bolt fa-lg white"></i>
+        </div>
+        <div class="media-body row  mt-1 ml-1">
+          <div class="col-4">
+            <p>
+              <b>Numero de contrat:</b> {{bill.police}}</p>
+          </div>
+          <div class="col-4">
+            <p>
+              <b>Numero de facture:</b> {{bill.numBill}}</p>
+          </div>
+          <div class="col-4">
+            <p>
+              <b>Montant facture:</b> {{bill.amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table table-responsive">
+        <thead class="table-dark">
+          <tr>
+            <th scope="row">Libelle</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">Montant HT</th>
+            <th scope="col">Taux TVA</th>
+            <th scope="col">Montant TVA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-blue-grey bg-lighten-4 black text-center">
+            <td colspan="6" class="">Redevences fixes</td>
+          </tr>
+          <tr>
+            <th scope="row">Entretien
+              <br>branchement</th>
+            <td class=""></td>
+            <td class=""></td>
+            <td class="">{{bill.embranchementMaintenance}}</td>
+            <td class="">20.00</td>
+            <td class="">{{bill.embranchementMaintenance*20/100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Location
+              <br>compteur</th>
+            <td class=""></td>
+            <td class=""></td>
+            <td class="">{{bill.meterLeasing}}</td>
+            <td class="">07.00</td>
+            <td class="">{{bill.meterLeasing*7/100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Entretien
+              <br>compteur</th>
+            <td class=""></td>
+            <td class=""></td>
+            <td class="">{{bill.meterMaintenance}}</td>
+            <td class="">20.00</td>
+            <td class="">{{bill.meterMaintenance*20/100}}</td>
+          </tr>
+          <tr class="bg-blue-grey bg-lighten-4 black text-center">
+            <td colspan="6">Consomation electricite</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 5</th>
+            <td class="">{{bill.tranches.tranche5.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche5.quantity}}</td>
+            <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr class="bg-blue-grey bg-lighten-4 black text-center">
+            <td colspan="6">Tppan</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 1</th>
+            <td class="">{{bill.tranches.tranche1.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche1.quantity}}</td>
+            <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 2</th>
+            <td class="">{{bill.tranches.tranche2.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche2.quantity}}</td>
+            <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tranche 3</th>
+            <td class="">{{bill.tranches.tranche3.unitPrice}}</td>
+            <td class="">{{bill.tranches.tranche3.quantity}}</td>
+            <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity}}</td>
+            <td class="">14.00</td>
+            <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <!--<div class="col-md-4"></div>-->
+      <div class="offset-4 col-md-4">
+        <p class="card-text font-weight-bold">Total HT:
+          <span class="font-weight-normal mx-2">700.00(DHs)</span>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p class="card-text font-weight-bold">Total TVA:
+          <span class="font-weight-normal mx-2">39.21(DHs)</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #historyDetail>
+  <div class="modal-header bg-radem">
+    <h4 class="modal-title pull-left">Historique de consomation</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4">
+        <table class="table table-responsive">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="row">Periode</th>
+              <th scope="col">Montant HT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let month of history; let i=index">
+              <td>{{history[i].month}}</td>
+              <td>{{history[i].value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <h5 class="card-title text-center">Evolution de votre consomation en (m3)</h5>
+          <div class="card-body">
+            <div style="display: block">
+                      <canvas baseChart
+                              [chartType]="chartType"
+                              [datasets]="chartDatasets"
+                              [labels]="chartLabels"
+                              [colors]="chartColors"
+                              [options]="chartOptions"
+                              [legend]="true"
+                              (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)">
+                      </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -52,10 +52,10 @@
                      <br>
                      <button type="button" class="btn btn-secondary" [routerLink]="['/admin/profiles']"> Annuler
                      </button>
-                     <button class="btn btn-primary" (click)="addProfile()" *ngIf="!profile.id"
+                     <button class="btn btn btn-outline-primary" (click)="addProfile()" *ngIf="!profile.id"
                              [disabled]="formProfile.invalid || selectedAuthorities.length == 0">Enregistrer
                      </button>
-                     <button class="btn btn-primary" (click)="addProfile()" *ngIf="profile.id"
+                     <button class="btn btn btn-outline-primary" (click)="addProfile()" *ngIf="profile.id"
                              [disabled]="formProfile.invalid || selectedAuthorities.length == 0">Modifier
                      </button>
                   </div>

@@ -30,10 +30,10 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="modalRef.hide();"> Annuler
   </button>
-  <button type="submit" class="btn btn-primary" (click)="createAlert();" *ngIf="!alertId"
+  <button type="submit" class="btn btn btn-outline-primary" (click)="createAlert();" *ngIf="!alertId"
           [disabled]="formAlert.invalid">Enregistrer
   </button>
-  <button type="submit" class="btn btn-primary" (click)="saveAlert();" *ngIf="alertId"
+  <button type="submit" class="btn btn btn-outline-primary" (click)="saveAlert();" *ngIf="alertId"
           [disabled]="formAlert.invalid">Modifier
   </button>
 </div>

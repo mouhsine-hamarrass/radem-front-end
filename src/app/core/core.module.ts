@@ -27,7 +27,7 @@ import {SharedModule} from '../shared/shared.module';
     AuthGuard,
     LoginGuard,
     AuthHelper,
-   // {provide: ErrorHandler, useFactory: errorHandlerFactory},
+    {provide: ErrorHandler, useFactory: errorHandlerFactory},
     {provide: 'AuthService', useFactory: authFactory, deps: [HttpClient, AuthHelper]},
     {provide: 'LoggerService', useFactory: loggerFactory},
     ValidationService,

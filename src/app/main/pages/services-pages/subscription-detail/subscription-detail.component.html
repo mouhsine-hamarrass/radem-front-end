@@ -116,7 +116,7 @@
                         <input #commentaire type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
                           style="margin-right: 8px;margin-left: 10px;" />
 
-                        <button class="btn btn-primary">Envoyer</button>
+                        <button class="btn btn btn-outline-primary">Envoyer</button>
                       </div>
                     </form><br>
                     <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim?.feedback">
@@ -125,7 +125,7 @@
                         {{feedback.message}}
                       </div>
                       <div class="col-md-4 pull-right" id="divDateComm">
-                        <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                        <i>le {{feedback.sendingDate | date:'dd-M-yyyy'}}.</i>
                       </div>
                     </div>
                   </div>
@@ -138,11 +138,11 @@
                     <table>
                       <tr>
                         <td>Date de création :</td>
-                        <td>{{claim?.createdDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{claim?.createdDate | date:'dd-M-yyyy'}}</td>
                       </tr>
                       <tr>
                         <td>Dernière modification :</td>
-                        <td>{{claim?.updatedDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{claim?.updatedDate | date:'dd-M-yyyy'}}</td>
                       </tr>
                     </table>
                   </div>

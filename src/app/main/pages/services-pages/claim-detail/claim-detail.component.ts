@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {ClaimModel} from '../../../models/claim.model';
 import {FeedbackModel} from '../../../models/feedback.model';
+import {ComplaintModel} from '../../../models/complaint.model';
 
 @Component({
   selector: 'app-claim-detail',
@@ -13,7 +13,7 @@ import {FeedbackModel} from '../../../models/feedback.model';
 export class ClaimDetailComponent implements OnInit {
 
   protected feedback = new FormControl('');
-  protected claim: ClaimModel;
+  protected complaint: ComplaintModel;
 
   constructor(private myServices: ServicesService,
               private route: ActivatedRoute) {
@@ -22,22 +22,22 @@ export class ClaimDetailComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.myServices.getComplaint(id).subscribe(response => {
-      this.claim = response.data
-      if (this.claim.feedbacks == null) {
-        this.claim.feedbacks = [];
+      this.complaint = response.data
+      if (this.complaint.feedbacks == null) {
+        this.complaint.feedbacks = [];
       }
 
-      this.claim.feedbacks.reverse();
+      this.complaint.feedbacks.reverse();
     }, err => {
     });
   }
 
   saveFeedback() {
-    if (!this.claim.feedbacks) {
-      this.claim.feedbacks = [];
+    if (!this.complaint.feedbacks) {
+      this.complaint.feedbacks = [];
     }
-    this.claim.feedbacks.push(new FeedbackModel(this.feedback.value, new Date(), false, true));
-    this.myServices.saveComplaint(this.claim).subscribe(response => {
+    this.complaint.feedbacks.push(new FeedbackModel(this.feedback.value, new Date(), false, true));
+    this.myServices.saveComplaint(this.complaint).subscribe(response => {
       this.feedback.reset();
       this.ngOnInit();
     });
