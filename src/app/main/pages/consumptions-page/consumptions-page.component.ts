@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../services/admin.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CommonUtil} from '../../../core/helpers/common.util';
+import { ContractsService } from '../../services/contracts.service';
 
 import {UtilsService} from '../../services/utils.service';
 import {FileModel} from '../../../core/models/file.model';
@@ -23,7 +24,9 @@ export class ConsumptionsPageComponent implements OnInit {
   minMax;
   meters: any;
 
-  constructor(private adminService: AdminService,
+  constructor(
+              private contractServices: ContractsService,
+              private adminService: AdminService,
               private utilsService: UtilsService,
               private formBuilder: FormBuilder,
               private servicesService: ServicesService) {
@@ -66,16 +69,13 @@ export class ConsumptionsPageComponent implements OnInit {
 
   getConsumptionReport() {
     this.utilsService.getConsumptionReport().subscribe(response => {
-      console.log(response);
     })
   }
 
-  getMinMax(contractNumber: any) {
-    console.log(contractNumber);
-    this.adminService.getMinMaxConsumption(contractNumber).subscribe(response => {
-      this.minMax = response;
-      console.log(this.minMax);
-    })
+  getMinMax(contractId: any) {
+    this.contractServices
+      .getMinMaxConsumption(contractId)
+      .subscribe(response => {this.minMax[0].min = response[0].min; this.minMax[0].max = response[0].max; }, err => {});
   }
 
   setContract(contractNumber: any) {

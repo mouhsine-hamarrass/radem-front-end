@@ -27,7 +27,7 @@ import _ = require('underscore');
   styleUrls: ['./cancellation-request.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CancellationRequestComponent implements OnInit, AfterViewInit {
+export class CancellationRequestComponent implements OnInit {
   @ViewChild('wizard') wizard: WizardComponent;
   @ViewChild('StepButton') StepButton: ElementRef;
   @ViewChild('UpdateButton') UpdateButton: ElementRef;
@@ -124,7 +124,8 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
     return this.addInterventionForm.get('phone');
   }
 
-  ngAfterViewInit() {
+  checkStatus() {
+    console.log('%%%%%' + this.request);
     switch (this.request.status) {
       case 'CREATED':
         this.selectedStep = 0;
@@ -158,6 +159,7 @@ export class CancellationRequestComponent implements OnInit, AfterViewInit {
       this.requestService.getRequest(id).subscribe(response => {
         this.request = response.data;
         console.log(this.request);
+        this.checkStatus();
         if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
           this.UpdateButton.nativeElement.disabled = true;
         } else {

@@ -1,13 +1,14 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {BsDatepickerConfig} from 'ngx-bootstrap';
-import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
-import {Color} from 'ng2-charts';
-import {ContractsService} from '../../services/contracts.service';
-import {HomeService} from '../../services/home.service';
-import {AdminService} from '../../services/admin.service';
-import {Setting} from '../../models/setting.model';
-import {ProfileService} from '../../services/profile.service';
-import {AlertModel} from '../../models/alert.model';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+import { Color } from 'ng2-charts';
+import { ContractsService } from '../../services/contracts.service';
+import { HomeService } from '../../services/home.service';
+import { AdminService } from '../../services/admin.service';
+import { Setting } from '../../models/setting.model';
+import { ProfileService } from '../../services/profile.service';
+import { AlertModel } from '../../models/alert.model';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'app-home-page',
@@ -15,18 +16,32 @@ import {AlertModel} from '../../models/alert.model';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  @ViewChild('barchart')
+  barchart: BaseChartDirective;
   advices: Setting;
   maxDate: Date = new Date();
   public chartType = 'bar';
   public chartConsoTitle = 'Volume en m3';
-  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  public chartLabels: Array<any> = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Dec'
+  ];
   public chartDatasetsEau: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
-    {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
+    { data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19], label: '2017' },
+    { data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68], label: '2018' }
   ];
   public chartDatasetsFact: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
-    {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
+    { data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017' },
+    { data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018' }
   ];
   public chartOptionsEau: any = {
     title: {
@@ -60,10 +75,7 @@ export class HomePageComponent implements OnInit {
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgba(151,187,205,1)'
   };
-  public chartColorsEau: Array<any> = [
-    this.WaterBar1,
-    this.WaterBar2
-  ];
+  public chartColorsEau: Array<any> = [this.WaterBar1, this.WaterBar2];
   private ElecBar1: Color = {
     backgroundColor: 'rgba(231, 76, 60, 1)',
     borderWidth: 1,
@@ -100,10 +112,7 @@ export class HomePageComponent implements OnInit {
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgba(151,187,205,1)'
   };
-  public chartColorsFact: Array<any> = [
-    this.FactBar1,
-    this.FactBar2
-  ];
+  public chartColorsFact: Array<any> = [this.FactBar1, this.FactBar2];
 
   protected alertNotifications: Array<AlertModel>;
   protected releves;
@@ -111,45 +120,89 @@ export class HomePageComponent implements OnInit {
   protected minMaxConsumption;
   protected bills;
 
-  constructor(private contractServices: ContractsService,
-              private adminServices: AdminService,
-              private profileService: ProfileService,
-              private homeService: HomeService
-  ) {
-  }
+  constructor(
+    private contractServices: ContractsService,
+    private adminServices: AdminService,
+    private profileService: ProfileService,
+    private homeService: HomeService
+  ) {}
 
   public chartOptions(title) {
     this.chartOptionsFact.title = title;
   }
 
   changeContract(val) {
+    this.chartColorsEau = [];
+    console.log(this.chartColorsEau);
     switch (val.currentTarget.value) {
-      case '0':
-        this.chartConsoTitle = 'Volume en m3';
-        this.chartColorsEau = [this.WaterBar1, this.WaterBar2];
-        this.chartDatasetsFact = [
-          {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
-          {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
-        ];
-        break;
       case '1':
-        this.chartConsoTitle = 'Volume en kWh';
-        this.chartColorsEau = [this.ElecBar1, this.ElecBar2];
+        this.chartConsoTitle = 'Volume en m3';
         this.chartDatasetsFact = [
-          {data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017'},
-          {data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018'}
+          { data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017' },
+          { data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018' }
         ];
+        this.chartDatasetsEau = [
+          {
+            data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19],
+            label: '2017',
+            backgroundColor: this.WaterBar1.backgroundColor
+          },
+          {
+            data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68],
+            label: '2018',
+            backgroundColor: this.WaterBar2.backgroundColor
+          }
+        ];
+        this.barchart.chart.update();
+        break;
+      case '2':
+        this.chartConsoTitle = 'Volume en kWh';
+        this.chartDatasetsFact = [
+          { data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017' },
+          { data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018' }
+        ];
+        this.chartDatasetsEau = [
+          {
+            data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68],
+            label: '2017',
+            backgroundColor: this.ElecBar1.backgroundColor
+          },
+          {
+            data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80],
+            label: '2018',
+            backgroundColor: this.ElecBar2.backgroundColor
+          }
+        ];
+        this.barchart.chart.update();
+        break;
+      case '3':
+        this.chartConsoTitle = 'Volume en m3';
+        this.chartDatasetsFact = [
+          { data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19], label: '2017' },
+          { data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68], label: '2018' }
+        ];
+        this.chartDatasetsEau = [
+          {
+            data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68],
+            label: '2017',
+            backgroundColor: this.WaterBar1.backgroundColor
+          },
+          {
+            data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80],
+            label: '2018',
+            backgroundColor: this.WaterBar2.backgroundColor
+          }
+        ];
+        this.barchart.chart.update();
         break;
     }
   }
-
 
   public chartClicked(e: any): void {
     console.log(e);
   }
 
-  public chartHovered(e: any): void {
-  }
+  public chartHovered(e: any): void {}
 
   applyTheme() {
     // create new object on each property change
@@ -157,29 +210,41 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profileService.getAlertNotifications().subscribe(
+      response => {
+        this.alertNotifications = response.data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
-    this.profileService.getAlertNotifications().subscribe(response => {
-      this.alertNotifications = response.data;
-    }, err => {
-      console.log(err);
-    });
-
-    this.adminServices.getAdvices().subscribe(response => {
-      this.advices = response.data;
-    }, err => {
-      console.log(err);
-    });
-    this.contractServices.getReleves().subscribe(response => this.releves = response, err => {
-    });
-    this.contractServices.getContracts().subscribe(response => this.contracts = response, err => {
-    });
-    this.contractServices.getAllBills().subscribe(Response => this.bills = Response, err => {
-    });
+    this.adminServices.getAdvices().subscribe(
+      response => {
+        this.advices = response.data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    this.contractServices
+      .getReleves()
+      .subscribe(response => (this.releves = response), err => {});
+    this.contractServices.getContracts().subscribe(
+      response => {
+        this.contracts = response;
+      },
+      err => {}
+    );
+    this.contractServices
+      .getAllBills()
+      .subscribe(Response => (this.bills = Response), err => {});
   }
 
   changeMinMaxContract(event) {
     console.log(event);
-    this.contractServices.getMinMaxConsumption(event).subscribe(response => this.minMaxConsumption = response[0], err => {
-    });
+    this.contractServices
+      .getMinMaxConsumption(event)
+      .subscribe(response => (this.minMaxConsumption = response[0]), err => {});
   }
 }
