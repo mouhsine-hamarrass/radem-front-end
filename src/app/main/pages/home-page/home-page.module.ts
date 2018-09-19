@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HomePageComponent} from './home-page.component';
 import {HomePageRoutingModule} from './home-page-routing.module';
 import {ChartsModule} from 'ng2-charts';
-import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
+import {BsDatepickerConfig, BsDatepickerModule, BsDropdownModule} from 'ngx-bootstrap';
 import {PipesModule} from '../../../shared/pipes/pipes.module';
 import {HomeService} from '../../services/home.service';
 import {ProfileService} from '../../services/profile.service';
@@ -12,6 +12,7 @@ import {ProfileService} from '../../services/profile.service';
   imports: [
     CommonModule,
     ChartsModule,
+    BsDropdownModule,
     BsDatepickerModule,
     HomePageRoutingModule,
     PipesModule

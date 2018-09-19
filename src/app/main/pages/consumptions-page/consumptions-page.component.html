@@ -43,7 +43,7 @@
                   <div class="col-md-6">
                     <select class="custom-select" type="text" #tt (change)="getMinMax(tt.value)">
                       <option selected>Choisissez un contrat</option>
-                      <option *ngFor="let contract of contracts" value="{{contract.contractNumber}}">
+                      <option *ngFor="let contract of contracts" value="{{contract.id}}">
                         {{contract.contractNumber}} ({{contract.contractType}})
                       </option>
                     </select>

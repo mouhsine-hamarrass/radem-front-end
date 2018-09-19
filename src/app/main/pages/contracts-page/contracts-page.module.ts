@@ -6,11 +6,13 @@ import { ContractsPageComponent } from './contracts-page.component';
 import {ContractsService} from '../../services/contracts.service';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {FormsModule} from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    BsDropdownModule,
     ContractsPageRoutingModule,
     ChartsModule,
     ComponentsModule
