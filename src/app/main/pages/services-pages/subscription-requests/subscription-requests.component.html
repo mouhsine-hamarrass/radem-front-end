@@ -52,7 +52,7 @@
                   <app-data-not-available *ngIf="!subscriptionRequests || subscriptionRequests.length == 0; else dataAvailable" [colSpan]="4"></app-data-not-available>
                   <ng-template #dataAvailable>
                     <tr *ngFor="let request of subscriptionRequests">
-                      <td>{{request.numDemand}}</td>
+                      <td>{{request.requestNumber}}</td>
                       <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
                       <td>{{request.type}}</td>
                       <td>{{request.status}}</td>

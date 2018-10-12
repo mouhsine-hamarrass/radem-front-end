@@ -38,9 +38,17 @@ export class ServicesService {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
   }
 
+  getSubscriptionRequests(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/subscription_requests`, {headers: headers});
+  }
+
   // complaint
   saveComplaint(complaint: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints`, complaint, {headers: headers});
+  }
+
+  saveComplaintsFeedback(complaintsFeedback: any): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save-feedback`, complaintsFeedback, {headers: headers});
   }
 
   getComplaints(): Observable<Response<any>> {
