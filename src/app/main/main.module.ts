@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SettlementsPageModule} from './pages/settlements-page/settlements-page.module';
 import {UnpaidPageModule} from './pages/unpaid-page/unpaid-page.module';
 import {ComplaintService} from './services/complaint.service';
+import {DirectivesModule} from '../shared/directives/directives.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {ComplaintService} from './services/complaint.service';
     ServicesPagesModule,
     SettlementsPageModule,
     UnpaidPageModule,
+    DirectivesModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

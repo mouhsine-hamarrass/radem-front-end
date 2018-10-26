@@ -63,9 +63,11 @@ export abstract class UIElementBase<T> extends ValueAccessorBase<T> implements O
    */
   @ViewChild(NgModel) protected model: NgModel;
 
-  constructor(protected validators: ValidatorArray,
-              protected asyncValidators: AsyncValidatorArray,
-              protected validationService: ValidationService) {
+  constructor(
+    protected validators: ValidatorArray,
+    protected asyncValidators: AsyncValidatorArray,
+    protected validationService: ValidationService
+  ) {
     super();
   }
 

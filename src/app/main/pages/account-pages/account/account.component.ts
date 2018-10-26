@@ -12,10 +12,10 @@ import {environment} from '../../../../../environments/environment';
 export class AccountComponent implements OnInit {
 
   @ViewChild('img') img: ElementRef;
-  protected result64;
-  protected defaultAvatar;
-  protected user;
-  protected profileForm = new FormGroup({
+  result64;
+  defaultAvatar;
+  user;
+  profileForm = new FormGroup({
     lastname: new FormControl(''),
     firstname: new FormControl(''),
     phone: new FormControl(''),

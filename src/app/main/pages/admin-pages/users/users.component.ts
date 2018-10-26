@@ -14,23 +14,20 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  protected itemsPerPage: number;
-
-  protected numberOfItems: number;
-
-  protected totalItems: number;
-
-  protected totalPages: number;
-
-  protected page: number;
-
-  protected pageSize: number;
-
-  protected keyword: string;
-
+  itemsPerPage: number;
+  numberOfItems: number;
+  totalItems: number;
+  totalPages: number;
+  page: number;
+  pageSize: number;
+  keyword: string;
   users: Array<User>;
 
-  constructor(private adminService: AdminService, private translate: TranslateService, private toastrService: ToastrService) {
+  constructor(
+    private adminService: AdminService,
+    private translate: TranslateService,
+    private toastrService: ToastrService
+  ) {
 
   }
 

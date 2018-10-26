@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { AdminService } from '../main/services/admin.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EnableAccountService } from '../main/services/enable-account.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit, ViewEncapsulation, ViewChild, ElementRef} from '@angular/core';
+import {AdminService} from '../main/services/admin.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {EnableAccountService} from '../main/services/enable-account.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,55 +11,57 @@ import { ActivatedRoute, Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
-  protected method = 'BILL';
-  protected registerForm: FormGroup;
-  protected detailsForm: FormGroup;
-  protected checkbox = false;
-  protected bill: any;
-  protected clicked = false;
-  protected contrat: any;
-  protected reponse: any;
-  protected ref: any;
-  protected serv: any;
-  protected user: any;
-  protected client: any;
-  protected questions: any;
-  protected passCheck = true;
-  protected toStep3 = true;
-  protected buttonCheck = false;
+  method = 'BILL';
+  registerForm: FormGroup;
+  detailsForm: FormGroup;
+  checkbox = false;
+  bill: any;
+  clicked = false;
+  contrat: any;
+  reponse: any;
+  ref: any;
+  serv: any;
+  user: any;
+  client: any;
+  questions: any;
+  passCheck = true;
+  toStep3 = true;
+  buttonCheck = false;
 
-  constructor(private adminService: AdminService,
+  constructor(
+    private adminService: AdminService,
     private enableAccountService: EnableAccountService,
     private formBuilder: FormBuilder,
-    private router: Router) {
-      this.registerForm = this.formBuilder.group({
-        facture: [''],
-        service: [''],
-        contrat: [''],
-        reference: [''],
-        firstname: [''],
-        lastname: [''],
-        questions: [''],
-        answer: [''],
-        firstname2: [''],
-        lastname2: [''],
-        email: [''],
-        phone: [''],
-        username: [''],
-        password: [''],
-        password2: [''],
-      });
-      this.detailsForm = this.formBuilder.group({
-        firstname: [''],
-        lastname: [''],
-        email: [''],
-        phone: [''],
-        username: ['']
-      });
-    }
+    private router: Router
+  ) {
+    this.registerForm = this.formBuilder.group({
+      facture: [''],
+      service: [''],
+      contrat: [''],
+      reference: [''],
+      firstname: [''],
+      lastname: [''],
+      questions: [''],
+      answer: [''],
+      firstname2: [''],
+      lastname2: [''],
+      email: [''],
+      phone: [''],
+      username: [''],
+      password: [''],
+      password2: [''],
+    });
+    this.detailsForm = this.formBuilder.group({
+      firstname: [''],
+      lastname: [''],
+      email: [''],
+      phone: [''],
+      username: ['']
+    });
+  }
 
   get facture() {
-   return this.registerForm.get('facture');
+    return this.registerForm.get('facture');
   }
 
   get service() {
@@ -154,12 +156,12 @@ export class RegisterComponent implements OnInit {
 
   goToStep4() {
     this.client = {
-      lastname : this.user[0].lastName,
-      firstname : this.user[0].firstName,
-      email : this.registerForm.controls.email.value,
-      username : this.registerForm.controls.username.value,
-      phone : this.registerForm.controls.phone.value,
-      password : this.registerForm.controls.password.value,
+      lastname: this.user[0].lastName,
+      firstname: this.user[0].firstName,
+      email: this.registerForm.controls.email.value,
+      username: this.registerForm.controls.username.value,
+      phone: this.registerForm.controls.phone.value,
+      password: this.registerForm.controls.password.value,
     }
     this.detailsForm.controls.firstname.setValue(this.client.firstname);
     this.detailsForm.controls.lastname.setValue(this.client.lastname);

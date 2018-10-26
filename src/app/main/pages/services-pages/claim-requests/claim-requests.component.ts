@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
 
 @Component({
@@ -7,9 +7,12 @@ import {ServicesService} from '../../../services/services.service';
   styleUrls: ['./claim-requests.component.scss']
 })
 export class ClaimRequestsComponent implements OnInit {
-  protected complaints: any;
+  complaints: any;
 
-  constructor(private myServices: ServicesService) { }
+  constructor(
+    private myServices: ServicesService
+  ) {
+  }
 
   ngOnInit() {
     this.myServices.getComplaints().subscribe(response => {

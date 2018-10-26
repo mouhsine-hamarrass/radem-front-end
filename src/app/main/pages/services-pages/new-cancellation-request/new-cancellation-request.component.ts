@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../../../services/services.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ServicesService} from '../../../services/services.service';
+import {FormGroup, FormControl} from '@angular/forms';
 import * as moment from 'moment';
-import { ContractsService } from '../../../services/contracts.service';
-import { Router } from '../../../../../../node_modules/@angular/router';
+import {ContractsService} from '../../../services/contracts.service';
+import {Router} from '../../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-new-cancellation-request',
@@ -12,7 +12,7 @@ import { Router } from '../../../../../../node_modules/@angular/router';
 })
 export class NewCancellationRequestComponent implements OnInit {
   private req: any;
-  protected cancellationForm = new FormGroup({
+  cancellationForm = new FormGroup({
     firstAndLastName: new FormControl(''),
     cin: new FormControl(''),
     delivered: new FormControl(''),
@@ -32,11 +32,14 @@ export class NewCancellationRequestComponent implements OnInit {
     waterTourne: new FormControl(''),
     electricityTourne: new FormControl('')
   });
-  protected subscriptions = [];
+  subscriptions = [];
 
-  constructor(private myServices: ServicesService,
-              private contracts: ContractsService,
-              private router: Router) { }
+  constructor(
+    private myServices: ServicesService,
+    private contracts: ContractsService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     this.myServices.getUser(1).subscribe(response => {
@@ -260,7 +263,8 @@ export class NewCancellationRequestComponent implements OnInit {
       console.log(response);
       this.print();
       this.router.navigate(['/services/cancellation-requests'])
-    }, err => {});
+    }, err => {
+    });
     console.log(this.req);
   }
 

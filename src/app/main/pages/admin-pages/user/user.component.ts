@@ -1,17 +1,16 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import {CommonService} from '../../../services/common.service';
-import * as _ from 'underscore';
 import {AdminService} from '../../../services/admin.service';
-import {PasswordValidation} from '../../../../shared/directives/password-match.directive';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-
 import {UtilsService} from '../../../services/utils.service';
 import {User} from '../../../models/user.model';
 import {environment} from '../../../../../environments/environment';
 import {ServiceModel} from '../../../models/service.model';
+
+import * as _ from 'underscore';
+import {PasswordValidatorDirective} from '../../../../shared/directives/password-valid.directive';
 
 @Component({
   selector: 'app-user',
@@ -32,13 +31,15 @@ export class UserComponent implements OnInit {
   modalForm: FormGroup;
   emailPattern: string;
 
-  constructor(private translate: TranslateService,
-              private utilsService: UtilsService,
-              private adminService: AdminService,
-              private frmBuilder: FormBuilder,
-              private router: Router,
-              private route: ActivatedRoute,
-              private toastrService: ToastrService) {
+  constructor(
+    private translate: TranslateService,
+    private utilsService: UtilsService,
+    private adminService: AdminService,
+    private frmBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastrService: ToastrService
+  ) {
     this.emailPattern = environment.emailPattern;
     this.modalForm = this.frmBuilder.group({
       firstname: ['', Validators.required],
@@ -46,14 +47,12 @@ export class UserComponent implements OnInit {
       username: ['', Validators.required],
       serviceId: [''],
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
-      password: ['', Validators.required],
+      password: ['', Validators.required, PasswordValidatorDirective],
       confirmPassword: ['', Validators.required],
       profileId: ['', Validators.required],
       avatar: [''],
       address: [''],
       enabled: [''],
-    }, {
-      validator: PasswordValidation.MatchPassword
     });
     this.defaultAvatar = environment.defaultAvatar;
   }

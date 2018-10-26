@@ -1,14 +1,14 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
-import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
-import { Color } from 'ng2-charts';
-import { ContractsService } from '../../services/contracts.service';
-import { HomeService } from '../../services/home.service';
-import { AdminService } from '../../services/admin.service';
-import { Setting } from '../../models/setting.model';
-import { ProfileService } from '../../services/profile.service';
-import { AlertModel } from '../../models/alert.model';
-import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {BsDatepickerConfig} from 'ngx-bootstrap';
+import {BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
+import {Color} from 'ng2-charts';
+import {ContractsService} from '../../services/contracts.service';
+import {HomeService} from '../../services/home.service';
+import {AdminService} from '../../services/admin.service';
+import {Setting} from '../../models/setting.model';
+import {ProfileService} from '../../services/profile.service';
+import {AlertModel} from '../../models/alert.model';
+import {BaseChartDirective} from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +16,14 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+
+  alertNotifications: Array<AlertModel>;
+  releves;
+  contracts;
+  minMaxConsumption;
+  bills;
+  alerts: Array<any> = [];
+  // charts
   @ViewChild('barchart')
   barchart: BaseChartDirective;
   advices: Setting;
@@ -36,12 +44,12 @@ export class HomePageComponent implements OnInit {
     'Dec'
   ];
   public chartDatasetsEau: Array<any> = [
-    { data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19], label: '2017' },
-    { data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68], label: '2018' }
+    {data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19], label: '2017'},
+    {data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68], label: '2018'}
   ];
   public chartDatasetsFact: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017' },
-    { data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018' }
+    {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
+    {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
   ];
   public chartOptionsEau: any = {
     title: {
@@ -114,18 +122,14 @@ export class HomePageComponent implements OnInit {
   };
   public chartColorsFact: Array<any> = [this.FactBar1, this.FactBar2];
 
-  protected alertNotifications: Array<AlertModel>;
-  protected releves;
-  protected contracts;
-  protected minMaxConsumption;
-  protected bills;
 
   constructor(
     private contractServices: ContractsService,
     private adminServices: AdminService,
     private profileService: ProfileService,
     private homeService: HomeService
-  ) {}
+  ) {
+  }
 
   public chartOptions(title) {
     this.chartOptionsFact.title = title;
@@ -138,8 +142,8 @@ export class HomePageComponent implements OnInit {
       case '1':
         this.chartConsoTitle = 'Volume en m3';
         this.chartDatasetsFact = [
-          { data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017' },
-          { data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018' }
+          {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
+          {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
         ];
         this.chartDatasetsEau = [
           {
@@ -158,8 +162,8 @@ export class HomePageComponent implements OnInit {
       case '2':
         this.chartConsoTitle = 'Volume en kWh';
         this.chartDatasetsFact = [
-          { data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017' },
-          { data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018' }
+          {data: [28, 48, 40, 19, 86, 27, 19, 86, 27, 90, 68], label: '2017'},
+          {data: [86, 27, 19, 86, 27, 40, 19, 86, 27, 19, 80], label: '2018'}
         ];
         this.chartDatasetsEau = [
           {
@@ -178,8 +182,8 @@ export class HomePageComponent implements OnInit {
       case '3':
         this.chartConsoTitle = 'Volume en m3';
         this.chartDatasetsFact = [
-          { data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19], label: '2017' },
-          { data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68], label: '2018' }
+          {data: [90, 60, 25, 15, 80, 80, 81, 56, 70, 40, 19], label: '2017'},
+          {data: [19, 86, 27, 19, 86, 27, 19, 86, 27, 90, 68], label: '2018'}
         ];
         this.chartDatasetsEau = [
           {
@@ -202,7 +206,8 @@ export class HomePageComponent implements OnInit {
     console.log(e);
   }
 
-  public chartHovered(e: any): void {}
+  public chartHovered(e: any): void {
+  }
 
   applyTheme() {
     // create new object on each property change
@@ -229,22 +234,26 @@ export class HomePageComponent implements OnInit {
     );
     this.contractServices
       .getReleves()
-      .subscribe(response => (this.releves = response), err => {});
+      .subscribe(response => (this.releves = response), err => {
+      });
     this.contractServices.getContracts().subscribe(
       response => {
         this.contracts = response;
       },
-      err => {}
+      err => {
+      }
     );
     this.contractServices
       .getAllBills()
-      .subscribe(Response => (this.bills = Response), err => {});
+      .subscribe(Response => (this.bills = Response), err => {
+      });
   }
 
   changeMinMaxContract(event) {
     console.log(event);
     this.contractServices
       .getMinMaxConsumption(event)
-      .subscribe(response => (this.minMaxConsumption = response[0]), err => {});
+      .subscribe(response => (this.minMaxConsumption = response[0]), err => {
+      });
   }
 }

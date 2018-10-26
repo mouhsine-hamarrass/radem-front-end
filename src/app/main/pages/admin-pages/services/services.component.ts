@@ -13,15 +13,15 @@ import swal from 'sweetalert2';
 })
 export class ServicesComponent implements OnInit {
 
-  protected services: any = Array<ServiceModel>();
-  protected disabled = false;
-  protected page = 1;
-  protected pageSize = 5;
-  protected numberOfItems: number;
-  protected itemsPerPage: number;
-  protected totalElements: number;
-  protected totalPages: number;
-  protected keyword: string;
+  services: any = Array<ServiceModel>();
+  disabled = false;
+  page = 1;
+  pageSize = 5;
+  numberOfItems: number;
+  itemsPerPage: number;
+  totalElements: number;
+  totalPages: number;
+  keyword: string;
 
   serviceId: number;
 
@@ -29,9 +29,11 @@ export class ServicesComponent implements OnInit {
 
   private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-md'};
 
-  constructor(private adminService: AdminService,
-              private toastrService: ToastrService,
-              private modalService: BsModalService) {
+  constructor(
+    private adminService: AdminService,
+    private toastrService: ToastrService,
+    private modalService: BsModalService
+  ) {
   }
 
   ngOnInit() {

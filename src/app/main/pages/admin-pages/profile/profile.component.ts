@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Profile} from '../../../models/profile.model';
 import {UtilsService} from '../../../services/utils.service';
 import {AdminService} from '../../../services/admin.service';
@@ -13,19 +13,21 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class ProfileComponent implements OnInit {
 
-  protected authorities: any;
-  protected selectedAuthorities: any = [];
-  protected profile: Profile = {};
-  protected formProfile;
-  protected FormGroup;
-  protected isSubmitted = false;
+  authorities: any;
+  selectedAuthorities: any = [];
+  profile: Profile = {};
+  formProfile;
+  FormGroup;
+  isSubmitted = false;
 
-  constructor(private utilsService: UtilsService,
-              private adminService: AdminService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private formBuilder: FormBuilder,
-              private toastrService: ToastrService) {
+  constructor(
+    private utilsService: UtilsService,
+    private adminService: AdminService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService
+  ) {
     this.formProfile = this.formBuilder.group({
       title: ['', Validators.required],
       description: []

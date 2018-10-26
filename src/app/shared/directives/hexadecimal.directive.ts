@@ -6,6 +6,7 @@ import {
 
 
 @Directive({
+  // tslint:disable-next-line
   selector: '[hexadecimal][ngModel]',
   providers: [
     {provide: NG_VALIDATORS, useExisting: HexadecimalValidatorDirective, multi: true}
@@ -25,3 +26,4 @@ export class HexadecimalValidatorDirective {
     return {hexadecimal: 'Please enter a hexadecimal value (alphanumeric, 0-9 and A-F)'};
   }
 }
+

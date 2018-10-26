@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  search(): void {
+  search($event: any): void {
     this.onblur.emit(this.keyword);
   }
 

@@ -4,8 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://212.83.140.195:8085/';
-// const server = 'http://localhost:8085/';
+const server = 'http://212.83.140.195:8085/api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
 
@@ -32,10 +31,10 @@ export const environment = {
       clientSecret: 'admin'
     },
     apiUrls: [
-      {id: 'About_SERVICE_URL', url: server + 'api/', requireAuthBefore: false},
-      {id: 'OAUTH_SERVICE_URL', url: server + 'api/auth', requireAuthBefore: false},
+      {id: 'About_SERVICE_URL', url: server + '/', requireAuthBefore: false},
+      {id: 'OAUTH_SERVICE_URL', url: server + '/auth', requireAuthBefore: false},
     ],
-    apiUrl: server + 'api',
+    apiUrl: server,
     jsonApiUrl: jsonServer,
     headers: headers,
     authService: AuthTypes.OAUTH,

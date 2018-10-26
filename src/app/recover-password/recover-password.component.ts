@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { RecoverPasswordService } from '../main/services/recover-password.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {RecoverPasswordService} from '../main/services/recover-password.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -9,21 +9,26 @@ import { RecoverPasswordService } from '../main/services/recover-password.servic
 })
 export class RecoverPasswordComponent implements OnInit {
 
-  protected recoverPasswordForm = new FormGroup({
+  recoverPasswordForm = new FormGroup({
     email: new FormControl('')
   });
-  protected message;
+  message;
 
-  constructor(private recoverPasswordServices: RecoverPasswordService) { }
+  constructor(
+    private recoverPasswordServices: RecoverPasswordService
+  ) {
+  }
 
   ngOnInit() {
   }
 
   reset() {
     this.recoverPasswordServices.sendToken(this.recoverPasswordForm.controls.email.value).subscribe(response => {
-      this.message = 'verifier votre boite de reception!';
-    },
-      err => {console.log(err); });
+        this.message = 'verifier votre boite de reception!';
+      },
+      err => {
+        console.log(err);
+      });
   }
 
 }

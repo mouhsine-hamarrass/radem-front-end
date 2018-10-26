@@ -9,14 +9,17 @@ import {ServicesService} from '../../../services/services.service';
 })
 export class CancellationRequestsComponent implements OnInit {
 
-  protected cancellationRequests: Array<any> = [];
+  cancellationRequests: Array<any> = [];
 
-  constructor(private myServices: ServicesService) {
+  constructor(
+    private myServices: ServicesService
+  ) {
   }
 
   ngOnInit() {
     this.myServices.getTerminationRequests().subscribe(response => {
       this.cancellationRequests = response.data;
-    }, err => {});
+    }, err => {
+    });
   }
 }

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class JsonFileService {
-   constructor(protected http: HttpClient) {
+   constructor(private http: HttpClient) {
    }
 
    /**

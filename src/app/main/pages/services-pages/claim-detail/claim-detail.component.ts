@@ -12,11 +12,13 @@ import {ComplaintModel} from '../../../models/complaint.model';
 })
 export class ClaimDetailComponent implements OnInit {
 
-  protected feedback = new FormControl('');
-  protected complaint: ComplaintModel;
+  feedback = new FormControl('');
+  complaint: ComplaintModel;
 
-  constructor(private myServices: ServicesService,
-              private route: ActivatedRoute) {
+  constructor(
+    private myServices: ServicesService,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
@@ -34,8 +36,8 @@ export class ClaimDetailComponent implements OnInit {
 
   saveFeedback() {
     const complaintsFeedback = {
-      id : this.route.snapshot.paramMap.get('id'),
-      feedback : new FeedbackModel(this.feedback.value, new Date(), false, true)
+      id: this.route.snapshot.paramMap.get('id'),
+      feedback: new FeedbackModel(this.feedback.value, new Date(), false, true)
     };
 
     this.myServices.saveComplaintsFeedback(complaintsFeedback).subscribe(response => {

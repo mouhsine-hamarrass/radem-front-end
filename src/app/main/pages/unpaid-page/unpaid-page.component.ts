@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ContractsService } from '../../services/contracts.service';
-import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ContractsService} from '../../services/contracts.service';
+import {ActivatedRoute, Router} from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-unpaid',
@@ -8,13 +8,17 @@ import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/rou
   styleUrls: ['./unpaid-page.component.scss']
 })
 export class UnpaidPageComponent implements OnInit {
-  protected bills;
-  protected selectedBills = [];
-  protected total;
-  protected totalUnpaid;
-  protected confirmation = false;
+  bills;
+  selectedBills = [];
+  total;
+  totalUnpaid;
+  confirmation = false;
 
-  constructor(private contractServices: ContractsService, private router: Router) { }
+  constructor(
+    private contractServices: ContractsService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     this.total = 0;
@@ -25,7 +29,8 @@ export class UnpaidPageComponent implements OnInit {
         this.totalUnpaid += Number.parseInt(bill.amount);
       });
       console.log(this.bills);
-    }, err => {});
+    }, err => {
+    });
   }
 
   addBill(event, bill: any): void {

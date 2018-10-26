@@ -1,24 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { ServicesService } from "../../../services/services.service";
-import { ActivatedRoute } from "@angular/router";
-import * as _ from "underscore";
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {ServicesService} from '../../../services/services.service';
+import {ActivatedRoute} from '@angular/router';
+import * as _ from 'underscore';
 
 @Component({
-  selector: "app-cancellation-request",
-  templateUrl: "./cancellation-request.component.html",
-  styleUrls: ["./cancellation-request.component.scss"]
+  selector: 'app-cancellation-request',
+  templateUrl: './cancellation-request.component.html',
+  styleUrls: ['./cancellation-request.component.scss']
 })
 export class CancellationRequestComponent implements OnInit {
-  public feedback = new FormControl("");
+  public feedback = new FormControl('');
 
-  protected terminationRequest: any;
-  protected subscriptionIds: any[];
+  terminationRequest: any;
+  subscriptionIds: any[];
 
   constructor(
     private myServices: ServicesService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Profile} from '../../../models/profile.model';
 import swal from 'sweetalert2';
 import {AdminService} from '../../../services/admin.service';
@@ -11,18 +11,20 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class ProfilesComponent implements OnInit {
 
-  protected profiles: any = [];
-  protected disabled = false;
-  protected page = 1;
-  protected pageSize = 5;
-  protected numberOfItems: number;
-  protected itemsPerPage: number;
-  protected totalElements: number;
-  protected totalPages: number;
-  protected keyword: string;
+  profiles: any = [];
+  disabled = false;
+  page = 1;
+  pageSize = 5;
+  numberOfItems: number;
+  itemsPerPage: number;
+  totalElements: number;
+  totalPages: number;
+  keyword: string;
 
-  constructor(private adminService: AdminService,
-              private toastrService: ToastrService) {
+  constructor(
+    private adminService: AdminService,
+    private toastrService: ToastrService
+  ) {
   }
 
   ngOnInit() {

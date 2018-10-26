@@ -12,19 +12,20 @@ import {Directive, OnInit, Input, EventEmitter, ElementRef, Inject} from '@angul
    selector: '[focus]'
 })
 export class FocusDirective implements OnInit {
-   @Input('focus') focus: EventEmitter<boolean>;
+  @Input('focus') focus: EventEmitter<boolean>;
 
-   constructor(@Inject(ElementRef) private element: ElementRef) {
-   }
+  constructor(@Inject(ElementRef) private element: ElementRef) {
+  }
 
-   ngOnInit() {
-      const that = this;
-      this.focus.subscribe(event => {
-         if (event) {
-            setTimeout(() => {
-               that.element.nativeElement.focus();
-            }, 10);
-         }
-      });
-   }
+  ngOnInit() {
+    const that = this;
+    this.focus.subscribe(event => {
+      if (event) {
+        setTimeout(() => {
+          that.element.nativeElement.focus();
+        }, 10);
+      }
+    });
+  }
 }
+

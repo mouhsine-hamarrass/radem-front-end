@@ -1,5 +1,5 @@
 import {Directive} from '@angular/core';
-import {AbstractControl, NG_VALIDATORS,} from '@angular/forms';
+import {AbstractControl, NG_VALIDATORS} from '@angular/forms';
 
 
 @Directive({
@@ -20,6 +20,7 @@ export class PasswordValidatorDirective {
       if (expression.test(value)) {
          return null;
       }
+
       return {passwordValidator: 'Password must be at least 6 characters long, and contain a number.'};
    }
 }

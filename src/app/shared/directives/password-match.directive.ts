@@ -1,6 +1,11 @@
 import {AbstractControl} from '@angular/forms';
+import {Directive, OnInit, Input, EventEmitter, ElementRef, Inject} from '@angular/core';
 
-export class PasswordValidation {
+@Directive({
+  // tslint:disable-next-line
+  selector: '[passwordMatch]'
+})
+export class PasswordMatchDirective {
 
   static MatchPassword(AC: AbstractControl) {
     if (AC.get('password') && AC.get('confirmPassword')) {
