@@ -22,7 +22,7 @@ export class ClaimDetailComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.myServices.getComplaint(id).subscribe(response => {
-      this.complaint = response.data
+      this.complaint = response.data;
       if (this.complaint.feedbacks == null) {
         this.complaint.feedbacks = [];
       }
@@ -33,11 +33,12 @@ export class ClaimDetailComponent implements OnInit {
   }
 
   saveFeedback() {
-    if (!this.complaint.feedbacks) {
-      this.complaint.feedbacks = [];
-    }
-    this.complaint.feedbacks.push(new FeedbackModel(this.feedback.value, new Date(), false, true));
-    this.myServices.saveComplaint(this.complaint).subscribe(response => {
+    const complaintsFeedback = {
+      id : this.route.snapshot.paramMap.get('id'),
+      feedback : new FeedbackModel(this.feedback.value, new Date(), false, true)
+    };
+
+    this.myServices.saveComplaintsFeedback(complaintsFeedback).subscribe(response => {
       this.feedback.reset();
       this.ngOnInit();
     });
