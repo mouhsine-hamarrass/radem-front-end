@@ -58,13 +58,7 @@ export class CancellationRequestComponent implements OnInit {
     firstname: 'Admin',
     lastname: 'AL ADMIN',
     phone: '0633334444'
-  },
-    {
-      id: 3,
-      firstname: 'Taha',
-      lastname: 'Zahir',
-      phone: '0612121212'
-    }
+  }
   ];
 
   constructor(private requestService: AdminService,
@@ -197,14 +191,39 @@ export class CancellationRequestComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         const agentId: number = JSON.parse(localStorage.getItem('user')).id;
-        this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
+        console.log(agentId);
+        if (this.request.status === 'CREATED') {
+          this.requestService.setAsReceived(id, agentId).subscribe(response => {
+            this.selectedStep = this.selectedStep + 1;
+            this.ngOnInit();
+          }, err => {})
+        } else if (this.request.status === 'IN_PROGRESS') {
+          this.requestService.setAsDepositedCounter(id, agentId).subscribe(response => {
+            this.selectedStep = this.selectedStep + 1;
+            this.ngOnInit();
+          }, err => {})
+        } else if (this.request.status === 'DEPOSITED_COUNTER') {
+          this.requestService.setAsUnpaidVerification(id, agentId).subscribe(response => {
+            this.selectedStep = this.selectedStep + 1;
+            this.ngOnInit();
+          }, err => {})
+        } else if (this.request.status === 'UNPAID_VERIFICATION') {
+          this.requestService.setAsSettlement(id, agentId).subscribe(response => {
+            this.selectedStep = this.selectedStep + 1;
+            this.ngOnInit();
+          }, err => {})
+        } else if (this.request.status === 'SETTLEMENT') {
+          this.requestService.setAsClosed(id, agentId).subscribe(response => {
+            this.selectedStep = this.selectedStep + 1;
+            this.ngOnInit();
+          }, err => {})
+        }
+        /*this.requestService.nextStep(id, this.impaye, agentId).subscribe(response => {
           this.request = response.data;
           if (this.request.status === 'CLOSED') {
             this.StepButton.nativeElement.disabled = true;
           }
-        });
-        this.selectedStep = this.selectedStep + 1;
-        this.ngOnInit();
+        });*/
       }
     });
   }
@@ -236,13 +255,14 @@ export class CancellationRequestComponent implements OnInit {
   addIntervenant() {
     this.request.interventionDate = this.addInterventionForm.controls.dateIntervention.value;
     this.request.intervenant = {
-      id: Number.parseInt(this.addInterventionForm.controls.agent.value)
+      id: Number.parseInt(this.addInterventionForm.controls.agent.value, 10)
     };
     this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
     console.log(this.request);
-    this.requestService.saveTerminationRequest(this.request).subscribe(response => {
+    const agentId: number = JSON.parse(localStorage.getItem('user')).id;
+    this.requestService.setAsInProgress(this.request.id, agentId, this.request.intervenant.id, this.request.interventionDate)
+    .subscribe(response => {
       this.modalRef.hide();
-      this.nextStep(this.request.id);
       this.ngOnInit();
     })
   }
@@ -251,7 +271,7 @@ export class CancellationRequestComponent implements OnInit {
   updateIntervenant() {
     this.request.interventionDate = this.requestForm.controls.dateIntervention.value;
     this.request.intervenant = {
-      id: Number.parseInt(this.requestForm.controls.agent.value)
+      id: Number.parseInt(this.requestForm.controls.agent.value, 10)
     }
     console.log(this.request);
     this.requestService.saveTerminationRequest(this.request).subscribe(response => {
