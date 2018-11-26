@@ -68,54 +68,117 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.claim) {
-      switch (this.claim.status) {
-        case 'CREATED':
-          this.selectedStep = 0;
-          break;
-        case 'SUPPORTED':
-          this.selectedStep = 1;
-          break;
-        case 'ANALYSIS':
-          this.selectedStep = 2;
-          break;
-        case 'REQUEST_COMPLEMENT':
-          this.selectedStep = 3;
-          break;
-        case 'TRANSMISSION_OF_INFORMATION':
-          this.selectedStep = 4;
-          break;
-        case 'REPLY_PROVIDED':
-          this.selectedStep = 5;
-          break;
-        case 'CLOSED':
-          this.selectedStep = 6;
-          break;
-      }
-    } else {
-      this.selectedStep = 0;
-    }
-
-    this.wizardState = this.wizard.model;
-
-    this.wizardState.navigationMode.goToStep(
-      this.selectedStep,
-      new EventEmitter(),
-      new EventEmitter()
-    );
-
+    this.loadComplaint();
   }
 
   ngOnInit() {
+  }
+
+  loadComplaint() {
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
-      this.complaintService.getOne(id).subscribe(response => {
-        this.claim = response.data;
-      });
-    }
+    this.complaintService.getOne(id).subscribe(response => {
+      this.claim = response.data;
+      if (this.claim) {
+        switch (this.claim.status) {
+          case 'CREATED':
+            this.selectedStep = 0;
+            break;
+          case 'SUPPORTED':
+            this.selectedStep = 1;
+            break;
+          case 'ANALYSIS':
+            this.selectedStep = 2;
+            break;
+          case 'REQUEST_COMPLEMENT':
+            this.selectedStep = 3;
+            break;
+          case 'TRANSMISSION_OF_INFORMATION':
+            this.selectedStep = 4;
+            break;
+          case 'REPLY_PROVIDED':
+            this.selectedStep = 5;
+            break;
+          case 'CLOSED':
+            this.selectedStep = 6;
+            break;
+        }
+      } else {
+        this.selectedStep = 0;
+      }
+
+      this.wizardState = this.wizard.model;
+
+      this.wizardState.navigationMode.goToStep(
+        this.selectedStep,
+        new EventEmitter(),
+        new EventEmitter()
+      );
+    });
+  }
   }
 
   // Stepper
+  previousStep(id) {
+    swal({
+      title: 'êtes vous sûr?',
+      text: 'Cette action est irréversible!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui!'
+    }).then((result) => {
+      if (result.value) {
+        if (this.claim.status === 'TRANSMISSION_OF_INFORMATION') {
+          this.complaintService.setAsRequestComplement(id).subscribe(response => {}, err => {});
+        }
+        this.ngAfterViewInit();
+      }
+    });
+  }
+
+  requestComplement(id) {
+    swal({
+      title: 'êtes vous sûr?',
+      text: 'Cette action est irréversible!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui!'
+    }).then((result) => {
+      if (result.value) {
+        if (this.claim.status === 'ANALYSIS') {
+          this.complaintService.setAsRequestComplement(id).subscribe(response => {}, err => {});
+        }
+        this.ngOnInit();
+      }
+    });
+  }
+
+  replyProvided(id) {
+    swal({
+      title: 'êtes vous sûr?',
+      text: 'Cette action est irréversible!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui!'
+    }).then((result) => {
+      if (result.value) {
+        if (this.claim.status === 'ANALYSIS') {
+          this.complaintService.setAsReplyProvided(id).subscribe(response => {}, err => {});
+        }
+        this.ngOnInit();
+      }
+    });
+  }
+
   nextStep(id, choice?) {
     swal({
       title: 'êtes vous sûr?',
@@ -125,10 +188,36 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui, supprimer!'
+      confirmButtonText: 'Oui!'
     }).then((result) => {
       if (result.value) {
-        this.complaintService.nextStep(id, choice).subscribe(
+        if (this.claim.status === 'CREATED') {
+          this.complaintService.setAsSupported(id).subscribe(response => {
+            this.loadComplaint();
+          }, err => {});
+        } else if (this.claim.status === 'SUPPORTED') {
+          this.complaintService.setAsAnalysis(id).subscribe(response => {
+            this.loadComplaint();
+          }, err => {});
+        } else if (this.claim.status === 'ANALYSIS') {
+          this.complaintService.setAsRequestComplement(id).subscribe(response => {
+            this.loadComplaint();
+          }, err => {});
+        } else if (this.claim.status === 'REQUEST_COMPLEMENT') {
+          this.complaintService.setAsTransmissionOfInformation(id).subscribe(response => {
+            this.loadComplaint();
+          }, err => {});
+        } else if (this.claim.status === 'TRANSMISSION_OF_INFORMATION') {
+          this.complaintService.setAsReplyProvided(id).subscribe(response => {
+            this.loadComplaint();
+          }, err => {});
+        } else if (this.claim.status === 'REPLY_PROVIDED') {
+          this.complaintService.setAsClosed(id).subscribe(response => {
+            this.loadComplaint();
+          }, err => {});
+          this.StepButton.nativeElement.disabled = true;
+        }
+        /*this.complaintService.nextStep(id, choice).subscribe(
           response => {
             this.claim = response.data;
             if (this.claim.status === 'CLOSED') {
@@ -136,7 +225,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
             }
           },
           err => console.log(err)
-        );
+        );*/
         this.ngOnInit();
       }
     });

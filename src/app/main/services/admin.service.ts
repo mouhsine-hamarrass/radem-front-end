@@ -43,6 +43,42 @@ export class AdminService {
       {headers: this.headers});
   }
 
+  setAsReceived(idRequest: number, agentId: number): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.apiUrl}/termination_requests/${idRequest}/received?agent=${agentId}`, {headers: this.headers});
+  }
+
+  setAsInProgress(idRequest: number, agentId: number, intervenantId: number, intervantionDate: Date): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    // tslint:disable-next-line:max-line-length
+    (`${this.apiUrl}/termination_requests/${idRequest}/in_progress?agent=${agentId}&intervenant=${intervenantId}&interventionDate=${intervantionDate}`, {headers: this.headers});
+  }
+
+  setAsDepositedCounter(idRequest: number, agentId: number): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.apiUrl}/termination_requests/${idRequest}/deposited_counter?agent=${agentId}`, {headers: this.headers});
+  }
+
+  setAsUnpaidVerification(idRequest: number, agentId: number): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.apiUrl}/termination_requests/${idRequest}/unpaid_verification?agent=${agentId}`, {headers: this.headers});
+  }
+
+  setAsSettlement(idRequest: number, agentId: number): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.apiUrl}/termination_requests/${idRequest}/settlement?agent=${agentId}`, {headers: this.headers});
+  }
+
+  setAsRefund(idRequest: number, agentId: number): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.apiUrl}/termination_requests/${idRequest}/refund?agent=${agentId}`, {headers: this.headers});
+  }
+
+  setAsClosed(idRequest: number, agentId: number): Observable<Response<number>> {
+    return this.httpClient.get<Response<any>>
+    (`${this.apiUrl}/termination_requests/${idRequest}/closed?agent=${agentId}`, {headers: this.headers});
+  }
+
 
   // JSon server
   getSolde(): Observable<Response<Array<any>>> {

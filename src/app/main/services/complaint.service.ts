@@ -30,6 +30,31 @@ export class ComplaintService {
     return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/nextstep?choice=${choice}`, {headers: this.headers});
   }
 
+  setAsSupported(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-supported`, {headers: this.headers});
+  }
+
+  setAsAnalysis(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-analysis`, {headers: this.headers});
+  }
+
+  setAsRequestComplement(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-request_complement`, {headers: this.headers});
+  }
+
+  setAsTransmissionOfInformation(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-transmission_of_information`,
+    {headers: this.headers});
+  }
+
+  setAsReplyProvided(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-reply-provided`, {headers: this.headers});
+  }
+
+  setAsClosed(idRequest: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-closed`, {headers: this.headers});
+  }
+
   getAll(): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints`, {headers: this.headers});
   }

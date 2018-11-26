@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ServicesService} from '../../../services/services.service';
 import {ActivatedRoute} from '@angular/router';
+import {WizardComponent, WizardState} from 'angular-archwizard';
 import * as _ from 'underscore';
 
 @Component({
@@ -9,11 +10,14 @@ import * as _ from 'underscore';
   templateUrl: './cancellation-request.component.html',
   styleUrls: ['./cancellation-request.component.scss']
 })
-export class CancellationRequestComponent implements OnInit {
+export class CancellationRequestComponent implements OnInit, AfterViewInit {
+  @ViewChild(WizardComponent) public wizard: WizardComponent;
   public feedback = new FormControl('');
 
   terminationRequest: any;
   subscriptionIds: any[];
+  selectedStep: number;
+  private wizardState: WizardState;
 
   constructor(
     private myServices: ServicesService,
@@ -21,13 +25,51 @@ export class CancellationRequestComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.myServices.getTerminationRequest(id).subscribe(response => {
       this.terminationRequest = response.data;
       this.subscriptionIds = _.pluck(this.terminationRequest.subscriptions, 'id');
-      console.log(this.terminationRequest);
+      if (this.terminationRequest) {
+        switch (this.terminationRequest.status) {
+          case 'CREATED':
+            this.selectedStep = 0;
+            break;
+          case 'RECEIVED':
+            this.selectedStep = 1;
+            break;
+          case 'IN_PROGRESS':
+            this.selectedStep = 2;
+            break;
+          case 'DEPOSITED_COUNTER':
+            this.selectedStep = 3;
+            break;
+          case 'UNPAID_VERIFICATION':
+            this.selectedStep = 4;
+            break;
+          case 'SETTLEMENT':
+            this.selectedStep = 5;
+            break;
+          case 'CLOSED':
+            this.selectedStep = 6;
+            break;
+        }
+      } else {
+        this.selectedStep = 0;
+      }
+
+      this.wizardState = this.wizard.model;
+
+      this.wizardState.navigationMode.goToStep(
+        this.selectedStep,
+        new EventEmitter(),
+        new EventEmitter()
+      );
     });
+
+  }
+
+  ngOnInit() {
   }
 
   saveFeedback() {
@@ -42,7 +84,6 @@ export class CancellationRequestComponent implements OnInit {
     this.myServices
       .saveTerminationRequest(this.terminationRequest)
       .subscribe(response => {
-        console.log(this.terminationRequest);
         this.feedback.reset();
         this.ngOnInit();
       });
