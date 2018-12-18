@@ -1,0 +1,72 @@
+<!-- Sidebar Content starts -->
+<div id="menu" data-scroll-to-active="true" class="main-menu menu-fixed menu-light menu-accordion">
+  <nav id="sidebar">
+    <ul class="navigation navigation-main">
+      <!-- First level menu -->
+
+      <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.clazz]"
+          [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
+          [routerLinkActiveOptions]="{exact: true}">
+        <a href="#{{menuItem.id}}" data-toggle="collapse" aria-expanded="true" [class]="menuItem.submenu.length > 0 ? 'dropdown-toggle' : ''"
+           *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader">
+          <i [ngClass]="[menuItem.icon]"></i>
+          <span class="menu-title">{{menuItem.title}}</span>
+        </a>
+        <a [href]="[menuItem.path]" target="_blank" *ngIf="menuItem.isExternalLink  && !menuItem.isNavHeader">
+          <i [ngClass]="[menuItem.icon]"></i>
+          <span class="menu-title">{{menuItem.title}}</span>
+        </a>
+        <span *ngIf="menuItem.isNavHeader">{{menuItem.title}}</span>
+        <i *ngIf="menuItem.isNavHeader" data-toggle="tooltip" data-placement="right"
+           [attr.data-original-title]="menuItem.title"
+           [ngClass]="[menuItem.icon]"></i>
+
+        <!-- Second level menu -->
+        <ul id="{{menuItem.id}}" class="collapse list-unstyled" *ngIf="menuItem.submenu.length > 0">
+          <li *ngFor="let menuSubItem of menuItem.submenu"
+              [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.clazz]">
+
+            <a data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"
+               [href]="'#' + menuSubItem.id"
+               *ngIf="menuSubItem.submenu.length > 0; else simpleSubLink">
+              <i [ngClass]="[menuSubItem.icon]"></i>
+              <span class="menu-title">{{menuSubItem.title}}</span>
+            </a>
+            <ng-template #simpleSubLink>
+              <a data-toggle="collapse" aria-expanded="true"
+                 [routerLink]="[menuSubItem.path]"
+                 *ngIf="!menuSubItem.isExternalLink && !menuItem.isNavHeader; else externalSubLinkBlock">
+                <i [ngClass]="[menuSubItem.icon]"></i>
+                <span class="menu-title">{{menuSubItem.title}}</span>
+              </a>
+            </ng-template>
+            <ng-template #externalSubLinkBlock>
+              <a [href]="[menuSubItem.path]">
+                <i [ngClass]="[menuSubItem.icon]"></i>
+                <span class="menu-title">{{menuSubItem.title}}</span>
+              </a>
+            </ng-template>
+            <!-- Third level menu -->
+            <ul id="{{menuSubItem.id}}" class="collapse list-unstyled" *ngIf="menuSubItem.submenu.length > 0">
+              <li *ngFor="let menuSubsubItem of menuSubItem.submenu" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"
+                  [ngClass]="[menuSubsubItem.clazz]">
+                <a [routerLink]="[menuSubsubItem.path]"
+                   *ngIf="!menuSubsubItem.isExternalLink && !menuItem.isNavHeader; else externalSubSubLinkBlock">
+                  <i [ngClass]="[menuSubsubItem.icon]"></i>
+                  <span class="menu-title">{{menuSubsubItem.title}}</span>
+                </a>
+                <ng-template #externalSubSubLinkBlock>
+                  <a [href]="[menuSubsubItem.path]">
+                    <i [ngClass]="[menuSubsubItem.icon]"></i>
+                    <span class="menu-title">{{menuSubsubItem.title}}</span>
+                  </a>
+                </ng-template>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

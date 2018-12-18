@@ -1,5 +1,6 @@
 export interface RouteInfo {
     path: string;
+    id: string;
     title: string;
     icon: string;
     clazz: string;

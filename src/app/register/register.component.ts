@@ -124,10 +124,9 @@ export class RegisterComponent implements OnInit {
       this.bill = this.registerForm.controls.facture.value;
       this.adminService.getUserWithBill(this.bill).subscribe(response => {
         this.user = response;
-        if (this.user.count === 0) {
+        if (this.user === undefined || this.user.length === 0) {
           return false;
         }
-        console.log(this.user);
         this.registerForm.controls.firstname.setValue(this.user[0].lastName);
         this.registerForm.controls.lastname.setValue(this.user[0].firstName);
         return true;

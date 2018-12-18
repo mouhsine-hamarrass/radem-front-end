@@ -112,5 +112,16 @@ export const ROUTES: RouteInfo[] = [
     isExternalLink: false,
     isNavHeader: false,
     submenu: []
+  },
+  {
+    path: '/admin',
+    title: 'Administration',
+    icon: '',
+    clazz: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: []
   }
 ];

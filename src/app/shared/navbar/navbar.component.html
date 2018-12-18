@@ -30,9 +30,9 @@
           <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right">
             <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link" id="dropdownUser" ngbDropdownToggle>
               <span class="avatar avatar-online">
-                <img [src]="user.avatar" class="rounded-circle" alt="avatar">
+                <img [src]="user?.avatar" class="rounded-circle" alt="avatar">
               </span>
-              <span class="user-name">{{user.firstname + ' '+ user.lastname}}</span>
+              <span class="user-name">{{user?.firstname + ' '+ user?.lastname}}</span>
             </a>
             <div ngbDropdownMenu aria-labelledby="dropdownUser">
               <a class="dropdown-item" routerLink="/account/profile" >

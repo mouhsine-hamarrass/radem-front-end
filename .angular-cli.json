@@ -33,7 +33,9 @@
       ],
       "scripts": [
         "assets/app/vendors/js/vendors.min.js",
-        "assets/app/vendors/js/ui/prism.min.js"
+        "assets/app/vendors/js/ui/prism.min.js",
+        "assets/app/js/core/app-menu.js",
+        "assets/app/js/core/app.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -11,6 +11,7 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     isExternalLink: false,
     isNavHeader: false,
+    id: 'admin',
     submenu: [
       {
         path: '',
@@ -21,6 +22,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'users',
         submenu: [
           {
             path: '/admin/users',
@@ -31,6 +33,7 @@ export const ROUTES: RouteInfo[] = [
             badgeClass: '',
             isExternalLink: false,
             isNavHeader: false,
+            id: 'list-users',
             submenu: []
           },
           {
@@ -42,6 +45,7 @@ export const ROUTES: RouteInfo[] = [
             badgeClass: '',
             isExternalLink: false,
             isNavHeader: false,
+            id: 'user',
             submenu: []
           }
         ]
@@ -55,6 +59,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'profiles',
         submenu: [
           {
             path: '/admin/profiles',
@@ -65,6 +70,7 @@ export const ROUTES: RouteInfo[] = [
             badgeClass: '',
             isExternalLink: false,
             isNavHeader: false,
+            id: 'list-profiles',
             submenu: []
           },
           {
@@ -76,6 +82,7 @@ export const ROUTES: RouteInfo[] = [
             badgeClass: '',
             isExternalLink: false,
             isNavHeader: false,
+            id: 'profile',
             submenu: []
           }
         ]
@@ -89,6 +96,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'admin-alerts',
         submenu: []
       },
       {
@@ -100,6 +108,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'settings',
         submenu: []
       },
       {
@@ -111,6 +120,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'advices',
         submenu: []
       },
       {
@@ -122,6 +132,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'services',
         submenu: []
       }
     ]
@@ -135,6 +146,7 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     isExternalLink: false,
     isNavHeader: false,
+    id: 'requests',
     submenu: [
       {
         path: '/admin/requests',
@@ -145,6 +157,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'list-requests',
         submenu: []
       }
     ]
@@ -158,6 +171,7 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     isExternalLink: false,
     isNavHeader: false,
+    id: 'complaints',
     submenu: [
       {
         path: '/admin/complaints',
@@ -168,6 +182,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'list-complaints',
         submenu: []
       }
     ]
@@ -181,6 +196,7 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     isExternalLink: false,
     isNavHeader: false,
+    id: 'alerts',
     submenu: [
       {
         path: '/admin/alert-notification',
@@ -191,6 +207,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'alert',
         submenu: []
       },
       {
@@ -202,6 +219,7 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
+        id: 'list-alerts',
         submenu: []
       }
     ]

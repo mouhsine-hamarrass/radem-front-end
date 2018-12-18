@@ -12,10 +12,10 @@ export class LoginGuard implements CanActivate {
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     // go to default page if the user is logged out
-    const isUserLogged = this.authHelper.isUserLogged();
-    if (!isUserLogged) {
-      this.router.navigate(['/'], {queryParams: {returnUrl: state.url}});
-    }
+    // const isUserLogged = this.authHelper.isUserLogged();
+    // if (!isUserLogged) {
+    //   this.router.navigate(['/'], {queryParams: {returnUrl: state.url}});
+    // }
 
     return true;
   }
