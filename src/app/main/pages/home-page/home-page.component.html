@@ -1,104 +1,14 @@
 <div class="content-body">
   <section class="row">
     <div class="col-sm-12">
-      <!-- Alerts-->
-      <div class="card alert-warning">
-        <div class="card-header">
-          <h4 class="card-title">Alerts</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="ft-minus"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div class="card-text">
-              <div *ngFor="let alert of alerts">
-                <p>Alerte de {{alert.alert.alertType.title}}</p>
-                <ul>
-                  <li>
-                    {{alert.alert.description}}
-                  </li>
-                  - Consignes :
-                  <ul>
-                    <li>
-                      {{alert.alert.instructions.content}}
-                    </li>
-                  </ul>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Alerts-->
-      <!-- Consommations -->
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Evolution de consommation</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="ft-minus"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div class="row col-4 col-sm-6 pull-right form-group">
-              <label for="contract" class="col-4">
-                <strong>Contrat :</strong>
-              </label>
-              <div class="col-8">
-                <select id="contract" class="custom-select" (change)="changeContract($event)">
-                  <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                    {{contract.contractNumber}} ({{contract.contractType}})
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-6 col-sm-6">
-                <canvas #barchart baseChart [chartType]="chartType" [datasets]="chartDatasetsEau" [labels]="chartLabels"
-                        [colors]="chartColorsEau"
-                        [options]="chartOptionsEau" [legend]="true" (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)">
-                </canvas>
-              </div>
-              <div class="col-6 col-sm-6">
-                <canvas baseChart [chartType]="chartType" [datasets]="chartDatasetsFact" [labels]="chartLabels"
-                        [colors]="chartColorsFact"
-                        [options]="chartOptionsFact" [legend]="true" (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)">
-                </canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Consommations -->
+
 
       <!-- Derniers paiements -->
       <div class="row match-height">
         <div class="col-xl-6 col-lg-12">
           <div class="card">
             <div class="card-header border-0">
-              <h4 class="card-title">Derniers paiements</h4>
+              <h4 class="card-title"><i class="fa fa-list mr-1"></i>Derniers paiements</h4>
               <a class="heading-elements-toggle">
                 <i class="fa fa-ellipsis-v font-medium-3"></i>
               </a>
@@ -141,7 +51,7 @@
         <div class="col-xl-6 col-lg-12">
           <div class="card">
             <div class="card-header border-0">
-              <h4 class="card-title">Prochaines factures</h4>
+              <h4 class="card-title"><i class="fa fa-file mr-1"></i> Prochaines factures</h4>
               <a class="heading-elements-toggle">
                 <i class="fa fa-ellipsis-v font-medium-3"></i>
               </a>
@@ -184,61 +94,7 @@
 
       <!-- Min/Max Consomations -->
       <div class="row match-height">
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Min/Max Consomations</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <form>
-                <div class="form-group col-12">
-                  <div class="row">
-                    <label for="contract-consumption" class="col-form-label col-4">Contrat</label>
-                    <div class="col-8">
-                      <select id="contract-consumption" #minMax class="custom-select"
-                              (change)="changeMinMaxContract(minMax.value)">
-                        <option selected>Faites votre choix</option>
-                        <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                          {{contract.contractNumber}} ({{contract.contractType}})
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group col-12">
-                  <div class="row">
-                    <label class="col-form-label col-auto">Du</label>
-                    <div class="col-4">
-                      <input type="text" class="form-control" bsDaterangepicker>
-                    </div>
-                    <label class="col-form-label col-auto">Au</label>
-                    <div class="col-4 ">
-                      <input type="text" class="form-control" bsDaterangepicker>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group col-12">
-                  <div class="row">
-                    <div class="col-6">
-                    <span class="card-title">
-                      <strong>Min:</strong> {{minMaxConsumption?.min}}</span>
-                    </div>
-                    <div class="col-6">
-                    <span class="card-title">
-                      <strong>Max:</strong> {{minMaxConsumption?.max}}</span>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- Min/Max Consomations -->
+
 
         <!-- Dernieres relèves -->
         <div class="col-xl-6 col-lg-12">

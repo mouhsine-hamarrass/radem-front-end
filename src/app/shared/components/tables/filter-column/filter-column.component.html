@@ -1,0 +1,48 @@
+<ng-content></ng-content>
+
+<div id="filterList">
+    <div *ngIf="filtertype === 'text'">
+        <input class="form-control nomargin ms-input"
+               [id]="columnName"
+               type="search"
+               [placeholder]="filterPlaceholder || columnName"
+               [(ngModel)]="filter[columnName]"
+               [disabled]="filterDisabled"
+               aria-label="Search" (blur)="search()">
+    </div>
+
+    <div *ngIf="filtertype === 'date'">
+        <div class="input-group">
+            <input [owlDateTime]="cd"
+                   [id]="columnName"
+                   [owlDateTimeTrigger]="cd"
+                   [(ngModel)]="filter[columnName]"
+                   [value]="filter[columnName]"
+                   class="form-control date-readonly ms-input"
+                   readonly
+                   [placeholder]="filterPlaceholder || 'DD-MM-YYYY'"
+                   [disabled]="filterDisabled">
+            <owl-date-time #cd
+                           (afterPickerClosed)="dateChanged(columnName, filter[columnName])"
+                           [pickerType]="'calendar'"
+                           [startAt]="today"></owl-date-time>
+            <div class="input-group-prepend" (click)="emptyFilter(columnName)">
+                <span class="input-group-text" id="basic-addon3"><i class="fa fa-remove"></i></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="filtertype === 'select'">
+        <select class="custom-select ms-input"
+                [id]="columnName"
+                [(ngModel)]="filter[columnName]"
+                (blur)="search()"
+                [disabled]="filterDisabled">
+            <option [value]="filterDefaultValue" selected>{{filterPlaceholder || columnName}}</option>
+            <option *ngFor="let data of filterData"
+                    value="{{data[filterDataKey]}}">{{data[filterDataValue]}}
+            </option>
+        </select>
+    </div>
+</div>

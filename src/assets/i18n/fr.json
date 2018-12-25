@@ -5,6 +5,8 @@
   "menu": {
     "admin": "Admin"
   },
+  "prev": "Précédent",
+  "next": "Suivant",
   "login": {
     "label-username": "Identifiant",
     "label-password": "Mot de passe",
@@ -23,5 +25,6 @@
   "WATER_LEAK": "Fuite d'eau",
   "INVOICE": "Facture",
   "CUT": "Coupure",
-  "OTHER": "Autre"
+  "OTHER": "Autre",
+  "Actions": "ActionsRECEIVED"
 }

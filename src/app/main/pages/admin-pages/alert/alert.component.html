@@ -1,39 +1,39 @@
 <div class="modal-header bg-radem">
-  <h4 class="modal-title pull-left" *ngIf="!alertId">Ajouter une nouvelle alerte</h4>
-  <h4 class="modal-title pull-left" *ngIf="alertId">Modifier l'alerte</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
-    <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-  </button>
+    <h4 class="modal-title pull-left" *ngIf="!alertId">Ajouter une nouvelle alerte</h4>
+    <h4 class="modal-title pull-left" *ngIf="alertId">Modifier l'alerte</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
 </div>
 <div class="modal-body">
-  <form role="form" novalidate [formGroup]="formAlert">
-    <div class="row form-group">
-      <label for="title" class="col-sm-3 control-label">Désignation <span class="danger">*</span> </label>
-      <div class="col-sm-9">
-        <input formControlName="title" id="title" name="name" type="text" placeholder="Désignation" class="form-control required">
-        <div *ngIf="title.invalid && (title.dirty || isSubmitted) && title.errors.required" class="text-danger text-left">
-          La désignation d'alerte est obligatoire
+    <form role="form" novalidate [formGroup]="formAlert">
+        <div class="form-group">
+            <label for="title" class="control-label">Désignation <span class="danger">*</span> </label>
+            <input formControlName="title" id="title" name="name" type="text" placeholder="Désignation"
+                   class="form-control required">
+            <div *ngIf="title.invalid && (title.dirty || isSubmitted) && title.errors.required"
+                 class="text-danger text-left">
+                La désignation d'alerte est obligatoire
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row form-group">
-      <label for="instructions" class="col-3 control-label">Instructions <span class="danger">*</span></label>
-      <div class="col-12">
-        <textarea rows="3" formControlName="instructions" id="instructions" name="name" class="form-control required"></textarea>
-        <div *ngIf="instructions.invalid && (instructions.dirty || isSubmitted) && instructions.errors.required" class="text-danger text-left">
-          Les Instructions d'alerte est obligatoire
+        <div class="form-group">
+            <label for="instructions" class="control-label">Instructions <span class="danger">*</span></label>
+            <textarea rows="3" formControlName="instructions" id="instructions" name="name"
+                      class="form-control required"></textarea>
+            <div *ngIf="instructions.invalid && (instructions.dirty || isSubmitted) && instructions.errors.required"
+                 class="text-danger text-left">
+                Les Instructions d'alerte est obligatoire
+            </div>
         </div>
-      </div>
-    </div>
-  </form>
+    </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="modalRef.hide();"> Annuler
-  </button>
-  <button type="submit" class="btn btn btn-outline-primary" (click)="createAlert();" *ngIf="!alertId"
-          [disabled]="formAlert.invalid">Enregistrer
-  </button>
-  <button type="submit" class="btn btn btn-outline-primary" (click)="saveAlert();" *ngIf="alertId"
-          [disabled]="formAlert.invalid">Modifier
-  </button>
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide();"> Annuler
+    </button>
+    <button type="submit" class="btn btn btn-outline-primary" (click)="createAlert();" *ngIf="!alertId"
+            [disabled]="formAlert.invalid">Enregistrer
+    </button>
+    <button type="submit" class="btn btn btn-outline-primary" (click)="saveAlert();" *ngIf="alertId"
+            [disabled]="formAlert.invalid">Modifier
+    </button>
 </div>

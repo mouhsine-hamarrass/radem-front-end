@@ -7,47 +7,43 @@ import {OnlinePaymentComponent} from './online-payment/online-payment.component'
 import {ServicesPagesRoutingModule} from './services-pages-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CancellationRequestsComponent} from './cancellation-requests/cancellation-requests.component';
-import { NewCancellationRequestComponent } from './new-cancellation-request/new-cancellation-request.component';
-import { ClaimRequestsComponent } from './claim-requests/claim-requests.component';
-import { ClaimDetailComponent } from './claim-detail/claim-detail.component';
-import { PrintableCancellationComponent } from './printable-cancellation/printable-cancellation.component';
-import { NewSubscriptionRequestComponent } from './new-subscription-request/new-subscription-request.component';
+import {NewCancellationRequestComponent} from './new-cancellation-request/new-cancellation-request.component';
+import {ClaimRequestsComponent} from './claim-requests/claim-requests.component';
+import {ClaimDetailComponent} from './claim-detail/claim-detail.component';
+import {PrintableCancellationComponent} from './printable-cancellation/printable-cancellation.component';
+import {NewSubscriptionRequestComponent} from './new-subscription-request/new-subscription-request.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {createTranslateLoader} from '../../../app.translate.factory';
-import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
-import { ArchwizardModule } from 'angular-archwizard';
+import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
+import {ArchwizardModule} from 'angular-archwizard';
 import {ComponentsModule} from '../../../shared/components/components.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ServicesPagesRoutingModule,
-    ArchwizardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    ComponentsModule
-  ],
-  declarations: [
-    ClaimRequestComponent,
-    SubscriptionRequestsComponent,
-    CancellationRequestComponent,
-    CancellationRequestsComponent,
-    NewCancellationRequestComponent,
-    OnlinePaymentComponent,
-    ClaimRequestsComponent,
-    ClaimDetailComponent,
-    PrintableCancellationComponent,
-    NewSubscriptionRequestComponent,
-    SubscriptionDetailComponent,
-  ]
+    imports: [
+        CommonModule,
+        ServicesPagesRoutingModule,
+        ArchwizardModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        ComponentsModule,
+        TranslateModule.forChild(),
+        SharedModule
+    ],
+    declarations: [
+        ClaimRequestComponent,
+        SubscriptionRequestsComponent,
+        CancellationRequestComponent,
+        CancellationRequestsComponent,
+        NewCancellationRequestComponent,
+        OnlinePaymentComponent,
+        ClaimRequestsComponent,
+        ClaimDetailComponent,
+        PrintableCancellationComponent,
+        NewSubscriptionRequestComponent,
+        SubscriptionDetailComponent,
+    ]
 })
 export class ServicesPagesModule {
 }

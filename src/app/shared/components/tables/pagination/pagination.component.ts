@@ -7,20 +7,20 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  currentPage: number;
-  @Input() totalItems: number;
-  @Input() numberOfItems: number;
-  @Input() totalPages: number;
-  @Input() maxSize: number;
-  @Input() disabled: boolean;
-  @Input() align: boolean;
-  @Input() pageBtnClass: string;
-  @Input() firstText: string;
-  @Input() lastText: string;
-  @Input() itemsPerPage: number;
+    currentPage: number;
+    @Input() totalItems: number;
+    @Input() numberOfItems: number;
+    @Input() totalPages: number;
+    @Input() maxSize: number;
+    @Input() disabled: boolean;
+    @Input() align: boolean;
+    @Input() pageBtnClass: string;
+    @Input() firstText: string;
+    @Input() lastText: string;
+    @Input() itemsPerPage: number;
 
-  @Output() numPages: EventEmitter<any> = new EventEmitter();
-  @Output() onpageChanged: EventEmitter<any> = new EventEmitter();
+    @Output() numPages: EventEmitter<any> = new EventEmitter();
+    @Output() onpageChanged: EventEmitter<any> = new EventEmitter();
 
   constructor() {
   }

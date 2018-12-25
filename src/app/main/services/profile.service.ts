@@ -4,6 +4,7 @@ import {environment} from 'environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '../../core/models/response.model';
 import {AlertModel} from '../models/alert.model';
+import {User} from '../models/user.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -16,8 +17,8 @@ export class ProfileService {
     this.urlApi = environment.apiConfig.apiUrl;
   }
 
-  getUser(id: number): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/users/${id}/find`);
+  getUser(id: number): Observable<Response<User>> {
+    return this.httpClient.get<Response<User>>(`${this.urlApi}/users/${id}/find`);
   }
 
   saveProfile(profile: any): Observable<Response<any>>  {

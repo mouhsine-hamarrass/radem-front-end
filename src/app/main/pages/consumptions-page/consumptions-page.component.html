@@ -1,274 +1,256 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
-  <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Ma consommation</h3>
-  </div>
-  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-    <div class="breadcrumb-wrapper col-12">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
-        </li>
-        <li class="breadcrumb-item active">Ma consommation
-        </li>
-      </ol>
+    <div class="content-header-left col-md-6 col-12 mb-1">
+        <h3 class="content-header-title">Ma consommation</h3>
     </div>
-  </div>
+    <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/home">Accueil</a>
+                </li>
+                <li class="breadcrumb-item active">Ma consommation
+                </li>
+            </ol>
+        </div>
+    </div>
 </div>
 <div class="card bgcolor">
-  <div class="card-content collapse show">
-    <div class="card-body" style="padding: 0px;padding-top: 6px;">
-      <div class="card-text centered" style="margin-bottom: 0rem !important;">
-        <h3><i class="fa fa-clock"></i>Prochaine relève le : {{nextReleve}}</h3>
-      </div>
+    <div class="card-content collapse show">
+        <div class="card-body" style="padding: 0px;padding-top: 6px;">
+            <div class="card-text centered" style="margin-bottom: 0rem !important;">
+                <h3><i class="fa fa-clock"></i>Prochaine relève le : {{nextReleve}}</h3>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <div class="row match-height">
-        <div class="col-xl-6 col-lg-12">
-          <div class="card min-height">
-            <div class="card-header border-0">
-              <h4 class="card-title">Min/Max Consommations</h4>
-              <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <form>
-                <div class="row col-md-12 form-group">
-                  <label class="col-form-label col-md-3">Contrat</label>
-                  <div class="col-md-6">
-                    <select class="custom-select" type="text" #tt (change)="getMinMax(tt.value)">
-                      <option selected>Choisissez un contrat</option>
-                      <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                        {{contract.contractNumber}} ({{contract.contractType}})
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row col-md-12 form-group">
-                  <label class="col-form-label col-md-3">Periode du</label>
-                  <div class="col-md-4">
-                    <input type="date" class="form-control">
-                  </div>
-                  <label class="col-form-label">Au</label>
-                  <div class="col-md-4">
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-                <div class="row col-md-12 form-group">
-                  <div class="col-md-5 min">
-                    <span><i class="ft-trending-down"></i>&nbsp;<strong>Minimum:</strong> {{minMax[0]?.min}} m3</span>
-                  </div>
-                  <div class="col-md-5 max">
-                    <span><i class="ft-trending-up"></i>&nbsp;<strong>Maximum:</strong> {{minMax[0]?.max}} m3</span>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Dernieres relèves</h4>
-              <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">index</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let releve of releves">
-                    <td>{{releve.ref}}</td>
-                    <td>{{releve.type}}</td>
-                    <td>{{releve.dateReleve | date:'dd-M-yyyy'}}</td>
-                    <td>{{releve.index}}</td>
-                  </tr>
-                  </tbody>
-                </table><!--
+    <section class="row">
+        <div class="col-sm-12">
+            <div class="row match-height">
+                <div class="col-xl-6 col-lg-12">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h4 class="card-title">Dernieres relèves</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="m-2">
+                                <app-filter (onfilterChanged)="filterConsomation($event)"></app-filter>
+                            </div>
+                            <div class="table-responsive position-relative">
+                                <table class="table mb-0"
+                                       sortable-table (sorted)="onSorted($event)"
+                                       filterable-table (filtred)="onFiltred($event)">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" width="100">{{'# REF' | translate }}
+                                            <span sortable-column="ref"></span>
+                                            <div filterable-column="ref" filter-type="ref"></div>
+                                        </th>
+                                        <th scope="col">{{'Type' | translate }}
+                                            <span sortable-column="type"></span>
+                                            <div filterable-column="type" filter-type="type"></div>
+                                        </th>
+                                        <th scope="col">{{'Date' | translate }}
+                                            <span sortable-column="date"></span>
+                                            <div filterable-column="date" filter-type="date"></div>
+                                        </th>
+                                        <th scope="col">{{'Index' | translate }}
+                                            <span sortable-column="index"></span>
+                                            <div filterable-column="index" filter-type="index"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let releve of releves">
+                                        <td>{{releve.ref}}</td>
+                                        <td>{{releve.type}}</td>
+                                        <td>{{releve.dateReleve | date:'dd-M-yyyy'}}</td>
+                                        <td>{{releve.index}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table><!--
                         <div class="col-xl-12 row" id="releve">
                             <h3><i class="fa fa-info-circle"></i>&nbsp;Prochaine relève le :&nbsp;</h3>
                             <h3>{{nextReleve[0]?.date}}</h3>
                         </div>-->
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Historique de consommation</h4>
-              <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content collapse show">
-              <form>
-                <div class="card-body">
-                  <div class="row col-md-12 form-group">
-                    <label class="col-form-label">Contrat <span class="danger">*</span>:</label>
-                    <div class="col-3">
-                      <select formControlName="contract" type="text" class="custom-select" #t
-                              (change)="setContract(t.value)">
-                        <option value="" disabled selected>Choisissez un contrat</option>
-                        <option *ngFor="let contract of contracts" value="{{contract.contractNumber}}">
-                          {{contract.contractNumber}} ({{contract.contractType}})
-                        </option>
-                      </select>
-                    </div>
-                    <label class="col-form-label">Periode du <span class="danger">*</span> :</label>
-                    <div class="col-auto">
-                      <input formControlName="startDate" type="date" class="form-control">
-                    </div>
-                    <label class="col-form-label">Au <span class="danger">*</span></label>
-                    <div class="col-auto">
-                      <input formControlName="endDate" type="date" class="form-control">
-                    </div>
-                    <div class="col-auto float-right row">
-                      <button type="button" class="btn btn btn-outline-primary" (click)="getConsumptionHistory();">
-                        <i class="fa fa-search"></i></button>
-                      &nbsp;
-                      <div class="btn-group" dropdown>
-                        <button id="button-basic" dropdownToggle type="button"
-                                class="btn btn btn-outline-primary dropdown-toggle download"
-                                aria-controls="dropdown-basic"><i class="fa fa-download"></i>
-                        </button>
-                        <div aria-labelledby="dropdownUser" *dropdownMenu="" class="dropdown-menu">
-                          <a class="dropdown-item" (click)="downloadPdfConsumptions()">
-                            <i class="fa fa-file-pdf-o"></i> Format Pdf
-                          </a>
-                          <a class="dropdown-item" (click)="downloadXlsConsumptions()">
-                            <i class="fa fa-file-excel-o"></i> Format Excel
-                          </a>
+                            </div>
                         </div>
-                      </div>
-
                     </div>
-                  </div>
-                  <div class="table-responsive mx-auto">
-                    <table class="table table-bordered ">
-                      <thead class="table-light">
-                      <tr>
-                        <th scope="col">Période</th>
-                        <th scope="col">Date de relève</th>
-                        <th scope="col">Index</th>
-                        <th scope="col">Consommation</th>
-                        <th scope="col">Montant</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <app-data-not-available *ngIf="!consumptions || consumptions.length == 0; else dataAvailable" [colSpan]="5"></app-data-not-available>
-
-                      <ng-template #dataAvailable>
-                        <tr *ngFor="let consumption of consumptions">
-                          <td>{{consumption.month}}</td>
-                          <td>{{consumption.date}}</td>
-                          <td>{{consumption.index}}</td>
-                          <td>{{consumption.volume}}</td>
-                          <td>{{consumption.amount}} DH</td>
-                        </tr>
-                      </ng-template>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
-              </form>
-            </div>
-          </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Historique de consommation</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                            </div>
+                        </div>
+                        <div class="card-content collapse show">
+                            <form>
+                                <div class="card-body">
+                                    <div class="row col-md-12 form-group">
+                                        <label class="col-form-label">Contrat <span class="danger">*</span>:</label>
+                                        <div class="col-3">
+                                            <select formControlName="contract" type="text" class="custom-select" #t
+                                                    (change)="setContract(t.value)">
+                                                <option value="" disabled selected>Choisissez un contrat</option>
+                                                <option *ngFor="let contract of contracts"
+                                                        value="{{contract.contractNumber}}">
+                                                    {{contract.contractNumber}} ({{contract.contractType}})
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <label class="col-form-label">Periode du <span class="danger">*</span> :</label>
+                                        <div class="col-auto">
+                                            <input formControlName="startDate" type="date" class="form-control">
+                                        </div>
+                                        <label class="col-form-label">Au <span class="danger">*</span></label>
+                                        <div class="col-auto">
+                                            <input formControlName="endDate" type="date" class="form-control">
+                                        </div>
+                                        <div class="col-auto float-right row">
+                                            <button type="button" class="btn btn btn-outline-primary"
+                                                    (click)="getConsumptionHistory();">
+                                                <i class="fa fa-search"></i></button>
+                                            &nbsp;
+                                            <div class="btn-group" dropdown>
+                                                <button id="button-basic" dropdownToggle type="button"
+                                                        class="btn btn btn-outline-primary dropdown-toggle download"
+                                                        aria-controls="dropdown-basic"><i class="fa fa-download"></i>
+                                                </button>
+                                                <div aria-labelledby="dropdownUser" *dropdownMenu=""
+                                                     class="dropdown-menu">
+                                                    <a class="dropdown-item" (click)="downloadPdfConsumptions()">
+                                                        <i class="fa fa-file-pdf-o"></i> Format Pdf
+                                                    </a>
+                                                    <a class="dropdown-item" (click)="downloadXlsConsumptions()">
+                                                        <i class="fa fa-file-excel-o"></i> Format Excel
+                                                    </a>
+                                                </div>
+                                            </div>
 
-        </div>
-        <div class="col-xl-6 col-lg-12">
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive mx-auto">
+                                        <table class="table table-bordered ">
+                                            <thead class="table-light">
+                                            <tr>
+                                                <th scope="col">Période</th>
+                                                <th scope="col">Date de relève</th>
+                                                <th scope="col">Index</th>
+                                                <th scope="col">Consommation</th>
+                                                <th scope="col">Montant</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <app-data-not-available
+                                                    *ngIf="!consumptions || consumptions.length == 0; else dataAvailable"
+                                                    [colSpan]="5"></app-data-not-available>
 
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Informations compteurs</h4>
-              <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content collapse show">
-              <div class="card-body" id="img">
-                <div class="row">
-                  <div class="img">
-                    <img src="/assets/images/compteur.png">
-                  </div>
-                  <div class="col-md-6 counter-info">
-                    <table *ngFor="let meter of meters">
-                      <tr>
-                        <td><strong>Ampérage :</strong></td>
-                        <td>{{meter.amperage}} A</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Voltage :</strong></td>
-                        <td>{{meter.voltage}} V</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Calibre :</strong></td>
-                        <td>{{meter.calibre}} Wh/tour</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Coefficient :</strong></td>
-                        <td>{{meter.coefficient}}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Marque compteur :</strong></td>
-                        <td>{{meter.marque}}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Nombre de roues :</strong></td>
-                        <td>{{meter.roues}}</td>
-                      </tr>
-                    </table>
-                  </div>
+                                            <ng-template #dataAvailable>
+                                                <tr *ngFor="let consumption of consumptions">
+                                                    <td>{{consumption.month}}</td>
+                                                    <td>{{consumption.date}}</td>
+                                                    <td>{{consumption.index}}</td>
+                                                    <td>{{consumption.volume}}</td>
+                                                    <td>{{consumption.amount}} DH</td>
+                                                </tr>
+                                            </ng-template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-            </div>
-          </div>
+                <div class="col-xl-6 col-lg-12">
 
-        </div>
-        <div class="col-xl-6 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Informations compteurs</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                            </div>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body" id="img">
+                                <div class="row">
+                                    <div class="img">
+                                        <img src="/assets/images/compteur.png">
+                                    </div>
+                                    <div class="col-md-6 counter-info">
+                                        <table *ngFor="let meter of meters">
+                                            <tr>
+                                                <td><strong>Ampérage :</strong></td>
+                                                <td>{{meter.amperage}} A</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Voltage :</strong></td>
+                                                <td>{{meter.voltage}} V</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Calibre :</strong></td>
+                                                <td>{{meter.calibre}} Wh/tour</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Coefficient :</strong></td>
+                                                <td>{{meter.coefficient}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Marque compteur :</strong></td>
+                                                <td>{{meter.marque}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nombre de roues :</strong></td>
+                                                <td>{{meter.roues}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Conseil et économie d'énergie</h4>
-              <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content collapse show">
-              <div class="card-body" id="img">
-                <div class="card-text">
-                  <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
-                  <ul>
-                    <li>Vous pouvez également réguler la température de vos radiateurs (à eau chaude) en les
-                      équipant d’un robinet thermostatique.
-                      Celui-ci vous permet de choisir la température qui vous convient selon les pièces et de
-                      réaliser des économies d’énergie.
-                    </li>
-                    <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à purger vos
-                      radiateurs à eau chaude avant de les remettre en marche.
-                    </li>
-                  </ul>
                 </div>
-              </div>
-            </div>
-          </div>
+                <div class="col-xl-6 col-lg-12">
 
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Conseil et économie d'énergie</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                            </div>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body" id="img">
+                                <div class="card-text">
+                                    <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
+                                    <ul>
+                                        <li>Vous pouvez également réguler la température de vos radiateurs (à eau
+                                            chaude) en les
+                                            équipant d’un robinet thermostatique.
+                                            Celui-ci vous permet de choisir la température qui vous convient selon les
+                                            pièces et de
+                                            réaliser des économies d’énergie.
+                                        </li>
+                                        <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à
+                                            purger vos
+                                            radiateurs à eau chaude avant de les remettre en marche.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

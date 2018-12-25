@@ -7,82 +7,123 @@ import {CommonUtil} from '../../../core/helpers/common.util';
 import {ServicesService} from '../../services/services.service';
 
 @Component({
-  selector: 'app-settlements',
-  templateUrl: './settlements-page.component.html',
-  styleUrls: ['./settlements-page.component.scss']
+    selector: 'app-settlements',
+    templateUrl: './settlements-page.component.html',
+    styleUrls: ['./settlements-page.component.scss']
 })
 export class SettlementsPageComponent implements OnInit {
-  public settlements: any;
-  public contracts: any;
-  public contractId: any;
-  public date: Date;
-  public contractForm: FormGroup;
+    public settlements: any;
+    public contracts: any;
+    public contractId: any;
+    public date: Date;
+    public contractForm: FormGroup;
 
-  constructor(private adminService: AdminService,
-              private formBuilder: FormBuilder,
-              private utilsService: UtilsService,
-              private servicesService: ServicesService) {
-    this.contractForm = this.formBuilder.group({
-      contract: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
-    });
-  }
+    page = 1;
+    pageSize = 0;
+    totalElements: number;
+    totalPages: number;
+    numberOfItems: number;
+    itemsPerPage: number;
+    keyword: string;
+    sort: any;
+    filter: any;
 
-  get contract() {
-    return this.contractForm.get('contract');
-  }
+    constructor(private adminService: AdminService,
+                private formBuilder: FormBuilder,
+                private utilsService: UtilsService,
+                private servicesService: ServicesService) {
+        this.contractForm = this.formBuilder.group({
+            contract: ['', Validators.required],
+            startDate: ['', Validators.required],
+            endDate: ['', Validators.required]
+        });
+    }
 
-  get startdate() {
-    return this.contractForm.get('startDate');
-  }
+    get contract() {
+        return this.contractForm.get('contract');
+    }
 
-  get endDate() {
-    return this.contractForm.get('endDate');
-  }
+    get startdate() {
+        return this.contractForm.get('startDate');
+    }
 
-  ngOnInit() {
-    this.adminService.getContracts().subscribe(response => {
-      this.contracts = response;
-    })
-  }
+    get endDate() {
+        return this.contractForm.get('endDate');
+    }
 
-  recherche() {
-    this.adminService.getSettlementsByContract(this.contractId).subscribe(response => {
-      this.settlements = response;
-    })
-  }
+    ngOnInit() {
+        this.getContacts();
+    }
 
-  setContract(id: any) {
-    this.contractId = id;
-  }
+    onSorted(sort: any): void {
+        this.sort = sort;
+        this.getContacts();
+    }
 
-  getConsumptionReport() {
-    this.utilsService.getSettlementsReport().subscribe(response => {
-      console.log(response);
-    })
-  }
+    onFiltred(filter: any): void {
+        this.filter = filter;
+        this.getContacts();
+    }
 
+    getContacts() {
+        this.adminService.getPageableContracts(this.page, this.pageSize, this.keyword, this.filter, this.sort)
+            .subscribe(response => {
+                this.contracts = response.data.content;
+                this.totalElements = response.data.totalElements;
+                this.totalPages = response.data.totalPages;
+                this.itemsPerPage = response.data.size;
+                this.numberOfItems = response.data.numberOfElements;
+            }, err => {
+            });
+    }
 
-  downloadXlsSettlements() {
-    /*
-    this.servicesService.downloadXlsSettlements().subscribe((response) => {
-      if (response && response['body']) {
-        const file = new FileModel('mes-reglements.xls', CommonUtil._arrayBufferToBase64(response['body']));
+    pageChanged(page: number): void {
+        this.page = page;
+        this.getContacts();
+    }
 
-        CommonUtil.downloadFile(file);
-      }
-    });
-    */
-  }
+    pageFilter(pageSize: number): void {
+        this.pageSize = pageSize;
+        this.itemsPerPage = pageSize;
+        this.page = 1;
+        this.getContacts();
+    }
 
-  downloadPdfSettlements() {
-    this.servicesService.downloadPdfSettlements().subscribe((response) => {
-      if (response && response['body']) {
-        const file = new FileModel('mes-reglements.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+    recherche() {
+        this.adminService.getSettlementsByContract(this.contractId).subscribe(response => {
+            this.settlements = response;
+        })
+    }
 
-        CommonUtil.downloadFile(file);
-      }
-    });
-  }
+    setContract(id: any) {
+        this.contractId = id;
+    }
+
+    getConsumptionReport() {
+        this.utilsService.getSettlementsReport().subscribe(response => {
+            console.log(response);
+        })
+    }
+
+    downloadXlsSettlements() {
+        /*
+        this.servicesService.downloadXlsSettlements().subscribe((response) => {
+          if (response && response['body']) {
+            const file = new FileModel('mes-reglements.xls', CommonUtil._arrayBufferToBase64(response['body']));
+
+            CommonUtil.downloadFile(file);
+          }
+        });
+        */
+    }
+
+    downloadPdfSettlements() {
+        this.servicesService.downloadPdfSettlements().subscribe((response) => {
+            if (response && response['body']) {
+                const file = new FileModel('mes-reglements.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+
+                CommonUtil.downloadFile(file);
+            }
+        });
+    }
 }

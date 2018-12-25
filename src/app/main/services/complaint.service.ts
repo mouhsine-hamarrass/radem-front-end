@@ -7,59 +7,77 @@ import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class ComplaintService {
-  private apiUrl: string = environment.apiConfig.apiUrl;
-  private jsonServerApi: string = environment.apiConfig.jsonApiUrl;
-  private headers: HttpHeaders = environment.apiConfig.headers;
+    private apiUrl: string = environment.apiConfig.apiUrl;
+    private jsonServerApi: string = environment.apiConfig.jsonApiUrl;
+    private headers: HttpHeaders = environment.apiConfig.headers;
 
-  constructor(private httpClient: HttpClient) {
-  }
+    constructor(private httpClient: HttpClient) {
+    }
 
-  getList(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.apiUrl}/complaints/list`, {headers: this.headers});
-  }
+    getList(): Observable<Response<Array<any>>> {
+        return this.httpClient.get<Response<Array<any>>>(`${this.apiUrl}/complaints/list`, {headers: this.headers});
+    }
 
-  getOne(id: string): Observable<Response<ComplaintModel>> {
-    return this.httpClient.get<Response<ComplaintModel>>(`${this.apiUrl}/complaints/${id}`, {headers: this.headers});
-  }
+    getPageableComplaints(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
+        if (keyword) {
+            return this.httpClient.post<Response<any>>
+            (`${this.apiUrl}/complaints/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
+                {
+                    filter,
+                    sort
+                });
+        } else {
+            return this.httpClient.post<Response<any>>
+            (`${this.apiUrl}/complaints/paged-list?page=${page}&size=${pageSize}`,
+                {
+                    filter,
+                    sort
+                });
+        }
+    }
 
-  save(complaint: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.apiUrl}/complaints`, complaint, {headers: this.headers});
-  }
+    getOne(id: string): Observable<Response<ComplaintModel>> {
+        return this.httpClient.get<Response<ComplaintModel>>(`${this.apiUrl}/complaints/${id}`, {headers: this.headers});
+    }
 
-  nextStep(idRequest: number, choice: boolean): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/nextstep?choice=${choice}`, {headers: this.headers});
-  }
+    save(complaint: any): Observable<Response<number>> {
+        return this.httpClient.post<Response<number>>(`${this.apiUrl}/complaints`, complaint, {headers: this.headers});
+    }
 
-  setAsSupported(idRequest: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-supported`, {headers: this.headers});
-  }
+    nextStep(idRequest: number, choice: boolean): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/nextstep?choice=${choice}`, {headers: this.headers});
+    }
 
-  setAsAnalysis(idRequest: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-analysis`, {headers: this.headers});
-  }
+    setAsSupported(idRequest: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-supported`, {headers: this.headers});
+    }
 
-  setAsRequestComplement(idRequest: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-request_complement`, {headers: this.headers});
-  }
+    setAsAnalysis(idRequest: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-analysis`, {headers: this.headers});
+    }
 
-  setAsTransmissionOfInformation(idRequest: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-transmission_of_information`,
-    {headers: this.headers});
-  }
+    setAsRequestComplement(idRequest: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-request_complement`, {headers: this.headers});
+    }
 
-  setAsReplyProvided(idRequest: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-reply-provided`, {headers: this.headers});
-  }
+    setAsTransmissionOfInformation(idRequest: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-transmission_of_information`,
+            {headers: this.headers});
+    }
 
-  setAsClosed(idRequest: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-closed`, {headers: this.headers});
-  }
+    setAsReplyProvided(idRequest: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-reply-provided`, {headers: this.headers});
+    }
 
-  getAll(): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints`, {headers: this.headers});
-  }
+    setAsClosed(idRequest: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/${idRequest}/set-as-closed`, {headers: this.headers});
+    }
 
-  getTypes(): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/types`, {headers: this.headers});
-  }
+    getAll(): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints`, {headers: this.headers});
+    }
+
+    getTypes(): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/complaints/types`, {headers: this.headers});
+    }
 }

@@ -1,0 +1,7 @@
+<div class="cursor-pointer d-inline-block">
+  <ng-content></ng-content>
+
+  <i class="fa fa-sort-amount-asc" *ngIf="direction === 'ASC' || !direction" ></i>
+  <i class="fa fa-sort-amount-desc" *ngIf="direction === 'DESC'"></i>
+</div>
+

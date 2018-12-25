@@ -1,46 +1,48 @@
-
-<nav class="navbar navbar-expand-lg navbar-horizontal navbar-fixed navbar-light navbar-without-dd-arrow navbar-shadow menu-border">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-
-      <!-- First level menu -->
-      <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.clazz]"
-          [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
-          [routerLinkActiveOptions]="{exact: true}" >
-
-        <a [routerLink]="menuItem.clazz === 'nav-item' ? [menuItem.path] : null"
-           *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader && menuItem.submenu.length == 0; else externalSubLinkBlock" class="nav-link">
-          <i [ngClass]="[menuItem.icon]"></i>
-          <span class="menu-title">{{menuItem.title}}</span>
-        </a>
-        <ng-template #externalSubLinkBlock>
-          <a [href]="[menuItem.path]" target="_blank" *ngIf="menuItem.isExternalLink  && !menuItem.isNavHeader && menuItem.submenu.length == 0; else secondLevelMenu" class="nav-link">
-            <i [ngClass]="[menuItem.icon]"></i>
-            <span class="menu-title">{{menuItem.title}} ### </span>
-          </a>
-        </ng-template>
-
-        <!-- Second level menu -->
-        <ng-template #secondLevelMenu>
-          <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-            <a ngbDropdownToggle class="nav-link">
-              <i [ngClass]="[menuItem.icon]"></i>
-              <span class="menu-title">{{menuItem.title}}</span>
-            </a>
-            <div class="dropdown-menu" ngbDropdownMenu>
-              <a *ngFor="let menuSubItem of menuItem.submenu"
-                 [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.clazz]"
-                 [routerLink]="menuSubItem.submenu.length > 0 ? null : [menuSubItem.path]" class="nav-link">
-                <i [ngClass]="[menuSubItem.icon]"></i>
-                <span class="menu-title">{{menuSubItem.title}}</span>
-              </a>
-            </div>
-          </div>
-        </ng-template>
-      </li>
-    </ul>
-  </div>
+<nav class="header-menu navbar navbar-expand-lg navbar-horizontal navbar-fixed navbar-light navbar-without-dd-arrow navbar-shadow menu-border">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- First level menu -->
+            <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.clazz]"
+                [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="menuItem.clazz === 'nav-item' ? [menuItem.path] : null"
+                   *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader && menuItem.submenu.length == 0; else externalSubLinkBlock"
+                   class="nav-link">
+                    <i [ngClass]="[menuItem.icon]"></i>
+                    <span class="menu-title">{{menuItem.title}}</span>
+                </a>
+                <ng-template #externalSubLinkBlock>
+                    <a [href]="[menuItem.path]" target="_blank"
+                       *ngIf="menuItem.isExternalLink  && !menuItem.isNavHeader && menuItem.submenu.length == 0; else secondLevelMenu"
+                       class="nav-link">
+                        <i [ngClass]="[menuItem.icon]"></i>
+                        <span class="menu-title">{{menuItem.title}} ### </span>
+                    </a>
+                </ng-template>
+                <!-- Second level menu -->
+                <ng-template #secondLevelMenu>
+                    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                        <a ngbDropdownToggle class="nav-link">
+                            <i [ngClass]="[menuItem.icon]"></i>
+                            <span class="menu-title">{{menuItem.title}}</span>
+                        </a>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <a *ngFor="let menuSubItem of menuItem.submenu"
+                               [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'"
+                               [ngClass]="[menuSubItem.clazz]"
+                               [routerLink]="menuSubItem.submenu.length > 0 ? null : [menuSubItem.path]"
+                               class="nav-link">
+                                <i [ngClass]="[menuSubItem.icon]"></i>
+                                <span class="menu-title">{{menuSubItem.title}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
 </nav>

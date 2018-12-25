@@ -1,12 +1,36 @@
+.header-menu {
+  background-color: #2E5797;
+  padding: 0;
+  .navbar-nav {
+    .nav-item {
+      padding: 1rem 0.1rem;
+      .nav-link {
+        color: #FFF;
+        text-transform: uppercase;
+      }
+    }
+    & .active {
+      border-bottom: 3px solid #45AA4A;
+    }
+    .dropdown-menu {
+      .nav-link {
+        color: #333333;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
 .navbar-container {
   .navbar-nav {
     display: inline-block;
   }
 }
-.navbar-horizontal .dropdown-toggle::after{
+
+.navbar-horizontal .dropdown-toggle::after {
   top: inherit !important;
 }
 
-.menu-item{
+.menu-item {
   white-space: nowrap;
 }

@@ -1,0 +1,21 @@
+#stackNav {
+  .navbar-header {
+
+  }
+  .navbar-container {
+    .nav {
+      .dropdown {
+        .avatar {
+          width: 35px;
+          img {
+            width: 35px;
+            height: 35px;
+          }
+        }
+        .user-name {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}

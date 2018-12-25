@@ -1,73 +1,109 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
-  <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Demandes de résiliation</h3>
-  </div>
-  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-    <div class="breadcrumb-wrapper col-12">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
-        </li>
-        <li class="breadcrumb-item active">Demandes
-        </li>
-      </ol>
+    <div class="content-header-left col-md-6 col-12 mb-1">
+        <h3 class="content-header-title">Demandes de résiliation</h3>
     </div>
-  </div>
+    <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/home">Accueil</a>
+                </li>
+                <li class="breadcrumb-item active">Demandes
+                </li>
+            </ol>
+        </div>
+    </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- What is-->
-      <div id="what-is" class="card">
-        <div class="card-header">
-          <h4 class="card-title">Consulter vos demandes</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline">
-              <li>
-                <a routerLink="/services/new-cancellation-request">
-                  <i class="fa fa-plus"></i> Nouvelle demande de résiliation</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div class="table-responsive mx-auto">
-              <table class="table table-bordered ">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col">Nº de demande</th>
-                    <th scope="col">Polices d'abonnement</th>
-                    <th scope="col">Créée le</th>
-                    <th scope="col">Statut</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <app-data-not-available *ngIf="!cancellationRequests || cancellationRequests.length == 0; else dataAvailable" [colSpan]="4"></app-data-not-available>
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <div id="what-is" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Consulter vos demandes</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline">
+                            <li>
+                                <a routerLink="/services/new-cancellation-request">
+                                    <i class="fa fa-plus"></i> Nouvelle demande de résiliation</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <div class="table-responsive mx-auto">
+                            <div class="row justify-content-between">
+                                <div class="col-12">
+                                    <div class="float-left">
+                                        <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered "
+                                   sortable-table (sorted)="onSorted($event)"
+                                   filterable-table (filtred)="onFiltred($event)">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col">{{'Nº de demande' | translate }}
+                                        <span sortable-column="requestNumber"></span>
+                                        <span filterable-column="requestNumber" filter-type="text"
+                                              filter-placeholder="{{'Nº de demande' | translate }}"></span>
+                                    </th>
+                                    <th scope="col">{{'Polices d\'abonnement' | translate }}
+                                        <span sortable-column="type"></span>
+                                        <span filterable-column="type" filter-type="text"
+                                              filter-placeholder="{{'Polices d\'abonnement' | translate }}"></span>
+                                    </th>
+                                    <th scope="col">{{'Créée le' | translate }}
+                                        <span sortable-column="createdAt"></span>
+                                        <span filterable-column="createdAt" filter-type="date"
+                                              filter-placeholder="{{'Créée le' | translate }}"></span>
+                                    </th>
+                                    <th scope="col">{{'Statut' | translate }}
+                                        <span sortable-column="status"></span>
+                                        <span filterable-column="status" filter-type="text"
+                                              filter-placeholder="{{'Statut' | translate }}"></span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <app-data-not-available
+                                        *ngIf="!cancellationRequests || cancellationRequests.length == 0; else dataAvailable"
+                                        [colSpan]="4"></app-data-not-available>
 
-                <ng-template #dataAvailable>
-                  <tr *ngFor="let request of cancellationRequests">
-                    <td>
-                      <a [routerLink]="['/services/cancellation-request/', request.id]"><b>{{request.requestNumber}}</b></a>
-                    </td>
-                    <td>{{request.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? '' : ','}}
-                      {{request.subscriptions[1]?.subscription}}</td>
-                    <td>{{request.createdAt | date:'dd-M-yyyy'}}</td><td>
-                      <span class="badge badge-primary">{{request.status}}</span>
-                    </td>
-                  </tr>
-                </ng-template>
-                </tbody>
-              </table>
+                                <ng-template #dataAvailable>
+                                    <tr *ngFor="let request of cancellationRequests">
+                                        <td>
+                                            <a [routerLink]="['/services/cancellation-request/', request.id]"><b>{{request.requestNumber}}</b></a>
+                                        </td>
+                                        <td>{{request.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? ''
+                                            : ','}}
+                                            {{request.subscriptions[1]?.subscription}}
+                                        </td>
+                                        <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
+                                        <td>
+                                            <span class="badge badge-primary">{{request.status | translate}}</span>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                </tbody>
+                            </table>
+                            <app-pagination [disabled]="false"
+                                            [numberOfItems]="numberOfItems"
+                                            [itemsPerPage]="itemsPerPage"
+                                            [totalItems]="totalElements"
+                                            [totalPages]="totalPages"
+                                            (onpageChanged)="pageChanged($event)"></app-pagination>
+                        </div>
+                    </div>
+                </div>
+                <!--/ What is-->
             </div>
-          </div>
         </div>
-        <!--/ What is-->
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

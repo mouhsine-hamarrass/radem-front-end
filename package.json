@@ -41,6 +41,8 @@
     "intl": "^1.2.5",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
+    "ng-pick-datetime": "^5.2.2",
+    "ng-pick-datetime-moment": "^1.0.5",
     "ng2-charts": "^1.6.0",
     "ng5-auto-complete": "0.0.8",
     "ngx-bootstrap": "^2.0.5",
