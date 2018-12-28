@@ -18,22 +18,12 @@ export class ComplaintService {
         return this.httpClient.get<Response<Array<any>>>(`${this.apiUrl}/complaints/list`, {headers: this.headers});
     }
 
-    getPageableComplaints(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/complaints/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/complaints/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableComplaints(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/complaints/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getOne(id: string): Observable<Response<ComplaintModel>> {

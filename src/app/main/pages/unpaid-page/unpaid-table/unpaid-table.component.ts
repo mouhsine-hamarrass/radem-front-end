@@ -1,14 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {ServicesService} from '../../../services/services.service';
-import {Statut} from '../../../../shared/models/user.model';
+import {ContractsService} from '../../../services/contracts.service';
 
 @Component({
-    selector: 'app-claim-requests',
-    templateUrl: './claim-requests.component.html',
-    styleUrls: ['./claim-requests.component.scss']
+    selector: 'app-unpaid-table',
+    templateUrl: './unpaid-table.component.html',
+    styleUrls: ['./unpaid-table.component.scss']
 })
-export class ClaimRequestsComponent implements OnInit {
-    complaints: any;
+export class UnpaidTableComponent implements OnInit {
+    bills;
+    total;
+    totalUnpaid;
+
     page = 1;
     pageSize = 0;
     totalElements: number;
@@ -17,29 +19,33 @@ export class ClaimRequestsComponent implements OnInit {
     itemsPerPage: number;
     sort: any;
     filter: any;
-    statusFilter = Object.keys(Statut);
 
-    constructor(private myServices: ServicesService) {
+    constructor(private contractServices: ContractsService) {
     }
 
     ngOnInit() {
-        this.getClaimRequests();
+        this.getAllBills();
     }
 
     onSorted(sort: any): void {
         this.sort = sort;
-        this.getClaimRequests();
+        this.getAllBills();
     }
 
     onFiltred(filter: any): void {
         this.filter = filter;
-        this.getClaimRequests();
+        this.getAllBills();
     }
 
-    getClaimRequests() {
-        this.myServices.getPageableComplaints(this.page, this.pageSize, this.filter, this.sort)
+    getAllBills() {
+        this.total = 0;
+        this.totalUnpaid = 0;
+        this.contractServices.getPageableBills(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
-                this.complaints = response.data.content;
+                this.bills = response.data;
+                this.bills.forEach(bill => {
+                    this.totalUnpaid += Number.parseInt(bill.amount);
+                });
                 this.totalElements = response.data.totalElements;
                 this.totalPages = response.data.totalPages;
                 this.itemsPerPage = response.data.size;
@@ -50,13 +56,14 @@ export class ClaimRequestsComponent implements OnInit {
 
     pageChanged(page: number): void {
         this.page = page;
-        this.getClaimRequests();
+        this.getAllBills();
     }
 
     pageFilter(pageSize: number): void {
         this.pageSize = pageSize;
         this.itemsPerPage = pageSize;
         this.page = 1;
-        this.getClaimRequests();
+        this.getAllBills();
     }
+
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as _ from 'underscore';
 import {AdminService} from '../../../services/admin.service';
+import {Statut} from '../../../../shared/models/user.model';
 
 @Component({
     selector: 'app-requests',
@@ -16,10 +17,10 @@ export class RequestsComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
     agentsFilter: any = [];
+    statusFilter = Object.keys(Statut);
 
     constructor(private adminService: AdminService) {
     }
@@ -27,6 +28,7 @@ export class RequestsComponent implements OnInit {
     ngOnInit() {
         this.LoadCancellationRequest();
         this.agentsFilterable();
+        this.statusFilterable();
     }
 
     onSorted(sort: any): void {
@@ -40,7 +42,7 @@ export class RequestsComponent implements OnInit {
     }
 
     LoadCancellationRequest() {
-        this.adminService.getPageableRequest(this.page, this.pageSize, this.keyword, this.filter, this.sort)
+        this.adminService.getPageableRequest(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
                 this.requests = response.data.content;
                 this.totalElements = response.data.totalElements;
@@ -72,6 +74,10 @@ export class RequestsComponent implements OnInit {
             this.agentsFilter = response.data;
         }, error => {
         });
+    }
+
+    statusFilterable(): void {
+
     }
 
     LoadSubscriptionRequest() {

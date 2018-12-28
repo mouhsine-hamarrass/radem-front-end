@@ -20,7 +20,6 @@ export class AlertsComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
 
@@ -50,7 +49,7 @@ export class AlertsComponent implements OnInit {
     }
 
     getAlerts() {
-        this.adminService.getPageableAlerts(this.page, this.pageSize, this.keyword, this.filter, this.sort)
+        this.adminService.getPageableAlerts(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
                 this.alerts = response.data.content;
                 this.totalElements = response.data.totalElements;

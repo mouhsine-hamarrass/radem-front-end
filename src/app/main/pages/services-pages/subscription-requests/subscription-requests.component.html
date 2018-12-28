@@ -66,10 +66,11 @@
                                             <span filterable-column="type" filter-type="text"
                                                   filter-placeholder="{{'Type' | translate }}"></span>
                                         </th>
-                                        <th scope="col">{{'Statut' | translate }}
+                                        <th scope="col">{{'Status' | translate }}
                                             <span sortable-column="status"></span>
-                                            <span filterable-column="status" filter-type="text"
-                                                  filter-placeholder="{{'Statut' | translate }}"></span>
+                                            <span filterable-column="status" filter-type="select"
+                                                  [filter-select-data]="statusFilter"
+                                                  filter-placeholder="{{'Status' | translate }}"></span>
                                         </th>
                                     </tr>
                                     </thead>

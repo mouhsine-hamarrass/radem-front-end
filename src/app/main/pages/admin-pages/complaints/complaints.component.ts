@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ComplaintService} from '../../../services/complaint.service';
 import {AdminService} from '../../../services/admin.service';
+import {Statut} from '../../../../shared/models/user.model';
 
 @Component({
     selector: 'app-complaints',
@@ -16,10 +17,10 @@ export class ComplaintsComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
     agentsFilter: any = [];
+    statusFilter = Object.keys(Statut);
 
     constructor(private complaintService: ComplaintService,
                 private adminService: AdminService) {
@@ -27,6 +28,7 @@ export class ComplaintsComponent implements OnInit {
 
     ngOnInit() {
         this.getComplaints();
+        this.agentsFilterable();
     }
 
     onSorted(sort: any): void {
@@ -40,7 +42,7 @@ export class ComplaintsComponent implements OnInit {
     }
 
     getComplaints() {
-        this.complaintService.getPageableComplaints(this.page, this.pageSize, this.keyword, this.filter, this.sort)
+        this.complaintService.getPageableComplaints(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
                 this.complaints = response.data.content;
                 this.totalElements = response.data.totalElements;
@@ -65,11 +67,7 @@ export class ComplaintsComponent implements OnInit {
 
     agentsFilterable(): void {
         this.adminService.getAgents().subscribe(response => {
-            // this.agentsFilter = response.data['content'];
-            this.agentsFilter = [
-                {id: 1, title: 'agent 1'},
-                {id: 2, title: 'agent 2'},
-            ]
+            this.agentsFilter = response.data;
         }, error => {
         });
     }

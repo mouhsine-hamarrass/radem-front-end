@@ -25,12 +25,12 @@ export class ServicesService {
         return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`);
     }
 
-    getPageableTerminationRequests(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`);
-        } else {
-            return this.httpClient.get<Response<any>>(`${this.urlApi}/termination_requests/paged-list?page=${page}&size=${pageSize}`);
-        }
+    getPageableTerminationRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/termination_requests/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getTerminationRequest(id: string): Observable<Response<Array<any>>> {
@@ -46,22 +46,13 @@ export class ServicesService {
         return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
     }
 
-    getSubscriptionRequests(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.urlApi}/subscription_requests/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.urlApi}/subscription_requests/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getSubscriptionRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>
+        (`${this.urlApi}/client/subscription_requests?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     // complaint
@@ -77,22 +68,12 @@ export class ServicesService {
         return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints`);
     }
 
-    getPageableComplaints(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.urlApi}/complaints/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.urlApi}/complaints/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableComplaints(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/complaints/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getComplaint(id: string): Observable<Response<ComplaintModel>> {

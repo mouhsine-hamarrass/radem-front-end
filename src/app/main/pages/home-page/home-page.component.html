@@ -1,163 +1,54 @@
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
+    <section class="row">
+        <div class="col-sm-12">
 
+            <div class="card">
+                <div class="card-header border-0">
+                    <h4 class="card-title"><i class="fa fa-list mr-1"></i>Mes impayés</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <a data-action="collapse">
+                                    <i class="ft-minus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <app-unpaid-table></app-unpaid-table>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Derniers paiements -->
-      <div class="row match-height">
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title"><i class="fa fa-list mr-1"></i>Derniers paiements</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
+            <!-- Conseil et économie d'énergie-->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Conseil et économie d'énergie</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <a data-action="collapse">
+                                    <i class="ft-minus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <div [innerHTML]="advices?.value | safeHtml"></div>
+                    </div>
+                </div>
             </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Montant</th>
-                    <th scope="col">Volume</th>
-                  </tr>
-                  </thead>
-                  <tbody *ngIf="bills">
-                  <tr>
-                    <td>{{bills[0]?.numBill}}</td>
-                    <td>{{bills[0]?.subscriptionType}}</td>
-                    <td>{{bills[0]?.amount}} DH</td>
-                    <td>{{bills[0]?.consumption}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{bills[1]?.numBill}}</td>
-                    <td>{{bills[1]?.subscriptionType}}</td>
-                    <td>{{bills[1]?.amount}} DH</td>
-                    <td>{{bills[1]?.consumption}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+            <!--/ Conseil et économie d'énergie-->
         </div>
-        <!-- / Derniers paiements -->
-
-        <!-- Prochaines factures -->
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title"><i class="fa fa-file mr-1"></i> Prochaines factures</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Montant</th>
-                    <th scope="col">Volume</th>
-                  </tr>
-                  </thead>
-                  <tbody *ngIf="bills">
-                  <tr>
-                  <tr>
-                    <td>{{bills[2]?.numBill}}</td>
-                    <td>{{bills[2]?.subscriptionType}}</td>
-                    <td>{{bills[2]?.amount}} DH</td>
-                    <td>{{bills[2]?.consumption}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{bills[3]?.numBill}}</td>
-                    <td>{{bills[3]?.subscriptionType}}</td>
-                    <td>{{bills[3]?.amount}} DH</td>
-                    <td>{{bills[3]?.consumption}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / Prochaines factures -->
-
-      <!-- Min/Max Consomations -->
-      <div class="row match-height">
-
-
-        <!-- Dernieres relèves -->
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Dernieres relèves</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">index</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let releve of releves">
-                    <td>{{releve.ref}}</td>
-                    <td>{{releve.type}}</td>
-                    <td>{{releve.dateReleve | date:'dd-M-yyyy'}}</td>
-                    <td>{{releve.index}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Dernieres relèves -->
-
-      <!-- Conseil et économie d'énergie-->
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Conseil et économie d'énergie</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="ft-minus"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div [innerHTML]="advices?.value | safeHtml"></div>
-          </div>
-        </div>
-      </div>
-      <!--/ Conseil et économie d'énergie-->
-    </div>
-  </section>
+    </section>
 </div>

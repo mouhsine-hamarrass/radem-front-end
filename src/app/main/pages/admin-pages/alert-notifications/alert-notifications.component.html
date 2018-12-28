@@ -1,15 +1,15 @@
 <nav aria-label="breadcrumb">
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Liste des alertes</li>
+        <li class="breadcrumb-item active" aria-current="page">Liste des alertes notifications</li>
     </ul>
 </nav>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title text-muted pull-left">Liste des alertes</h4>
+            <h4 class="card-title text-muted pull-left">Liste des alertes notifications</h4>
             <a class="pull-right" routerLink="/admin/alert-notification">
-                <i class="icon-plus"> Ajouter une nouvelle alerte</i>
+                <i class="icon-plus"> Ajouter une nouvelle alerte notification</i>
             </a>
         </div>
         <div class="card-body">
@@ -35,8 +35,10 @@
                                   filter-placeholder="{{'Instructions' | translate }}"></span>
                         </th>
                         <th scope="col">{{'Client' | translate }}
-                            <span sortable-column="client"></span>
-                            <span filterable-column="client" filter-type="text"
+                            <span sortable-column="agent"></span>
+                            <span filterable-column="agent" filter-type="select"
+                                  [filter-select-data]="agentsFilter"
+                                  filter-select-data-key="id" filter-select-data-value="firstname"
                                   filter-placeholder="{{'Client' | translate }}"></span>
                         </th>
                         <th scope="col">{{'Contrat' | translate }}

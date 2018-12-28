@@ -23,8 +23,16 @@ export class ContractsService {
         return this.httpClient.get<Response<Array<any>>>(`${this.jsonServerApi}/subscriptions?type=electricite`);
     }
 
-    getSubscriptions(): Observable<Array<any>> {
-        return this.httpClient.get<Array<any>>(`${this.jsonServerApi}/subscriptions`);
+    getSubscriptions(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.jsonServerApi}/subscriptions`);
+        /*
+        return this.httpClient.post<Response<any>>
+        (`${this.urlApi}/client/subscription_requests?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+        */
     }
 
     getSubscription(id: number): Observable<Array<any>> {
@@ -35,34 +43,16 @@ export class ContractsService {
         return this.httpClient.get<Response<any>>(`${this.jsonServerApi}/bills?police=${police}`);
     }
 
-    getPageableBills(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.urlApi}/bills/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.urlApi}/bills/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableBills(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/bills/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getAllBills(): Observable<Response<any>> {
         return this.httpClient.get<Response<any>>(`${this.jsonServerApi}/bills`);
-    }
-
-    getPageableAllBills(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.get<Response<any>>(`${this.urlApi}/bills/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`);
-        } else {
-            return this.httpClient.get<Response<any>>(`${this.urlApi}/bills/paged-list?page=${page}&size=${pageSize}`);
-        }
     }
 
     getBill(numBill: string): Observable<Response<any>> {

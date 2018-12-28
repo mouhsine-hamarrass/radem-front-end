@@ -55,6 +55,8 @@
                                 <th scope="col">{{'Profil' | translate }}
                                     <span sortable-column="profile"></span>
                                     <span filterable-column="profile" filter-type="select"
+                                          [filter-select-data]="profilesFilter"
+                                          filter-select-data-key="id" filter-select-data-value="title"
                                          filter-placeholder="{{'Profil' | translate }}"></span>
                                 </th>
                                 <th scope="col">{{'Crée le' | translate }}

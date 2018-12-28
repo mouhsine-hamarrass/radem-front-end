@@ -28,12 +28,13 @@ export class ContractsPageComponent implements OnInit {
     };
 
     page = 1;
-    pageSize = 5;
-    numberOfItems: number;
-    itemsPerPage: number;
+    pageSize = 0;
     totalElements: number;
     totalPages: number;
-    keyword: string;
+    numberOfItems: number;
+    itemsPerPage: number;
+    sort: any;
+    filter: any;
 
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
     public chartType = 'bar';
@@ -78,17 +79,54 @@ export class ContractsPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.contractsServices.getSubscriptions().subscribe(response => {
-            this.subscriptions = response
+        this.getSubscriptions();
+        this.getSoldeCrediteur();
+    }
+
+    onSorted(sort: any): void {
+        this.sort = sort;
+        this.getSubscriptions();
+    }
+
+    onFiltred(filter: any): void {
+        this.filter = filter;
+        this.getSubscriptions();
+    }
+
+    getSubscriptions() {
+        this.contractsServices.getSubscriptions(this.page, this.pageSize, this.filter, this.sort).subscribe(response => {
+            this.subscriptions = response;
+            /*
+            this.subscriptions = response.data.content;
+            this.totalElements = response.data.totalElements;
+            this.totalPages = response.data.totalPages;
+            this.itemsPerPage = response.data.size;
+            this.numberOfItems = response.data.numberOfElements;
+            */
         }, err => {
             console.log(err);
         });
+    }
 
+    getSoldeCrediteur() {
         this.soldeService.getSoldeCrediteur().subscribe(response => {
             this.solde = response;
         }, err => {
             console.log(err);
         });
+    }
+
+
+    pageChanged(page: number): void {
+        this.page = page;
+        this.getSubscriptions();
+    }
+
+    pageFilter(pageSize: number): void {
+        this.pageSize = pageSize;
+        this.itemsPerPage = pageSize;
+        this.page = 1;
+        this.getSubscriptions();
     }
 
     openHistory(template: TemplateRef<any>) {
@@ -107,57 +145,8 @@ export class ContractsPageComponent implements OnInit {
     }
 
     showBills(police: string): void {
-        /*
         this.contractsServices.getBills(police).subscribe(response => {
-            console.log(response);
             this.bills = response;
-        }, err => {
-        });
-        */
-        this.contractsServices.getPageableBills(this.page, this.pageSize, this.keyword).subscribe(response => {
-            this.bills = response.data;
-            this.totalElements = response.data.totalElements;
-            this.totalPages = response.data.totalPages;
-            this.itemsPerPage = response.data.size;
-            this.numberOfItems = response.data.numberOfElements;
-        }, err => {
-        });
-    }
-
-    pageChanged(page: number): void {
-        this.page = page;
-        this.contractsServices.getPageableBills(this.page, this.pageSize, this.keyword).subscribe(response => {
-            this.bills = response.data;
-            this.totalElements = response.data.totalElements;
-            this.totalPages = response.data.totalPages;
-            this.itemsPerPage = response.data.size;
-            this.numberOfItems = response.data.numberOfElements;
-        }, err => {
-        });
-    }
-
-    searchClaimRequests(keyword: string): void {
-        this.page = 1;
-        this.keyword = keyword;
-        this.contractsServices.getPageableBills(this.page, this.pageSize, this.keyword).subscribe(response => {
-            this.bills = response.data.content;
-            this.totalElements = response.data.totalElements;
-            this.totalPages = response.data.totalPages;
-            this.itemsPerPage = response.data.size;
-            this.numberOfItems = response.data.numberOfElements;
-        }, err => {
-        });
-    }
-
-    filterClaimRequests(pageSize: number): void {
-        this.pageSize = pageSize;
-        this.page = 1;
-        this.contractsServices.getPageableBills(this.page, this.pageSize, this.keyword).subscribe(response => {
-            this.bills = response.data.content;
-            this.totalElements = response.data.totalElements;
-            this.totalPages = response.data.totalPages;
-            this.itemsPerPage = response.data.size;
-            this.numberOfItems = response.data.numberOfElements;
         }, err => {
         });
     }

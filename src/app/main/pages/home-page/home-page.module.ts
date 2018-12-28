@@ -7,21 +7,23 @@ import {BsDatepickerConfig, BsDatepickerModule, BsDropdownModule} from 'ngx-boot
 import {PipesModule} from '../../../shared/pipes/pipes.module';
 import {HomeService} from '../../services/home.service';
 import {ProfileService} from '../../services/profile.service';
+import {UnpaidPageModule} from '../unpaid-page/unpaid-page.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ChartsModule,
-    BsDropdownModule,
-    BsDatepickerModule,
-    HomePageRoutingModule,
-    PipesModule
-  ],
-  declarations: [HomePageComponent],
-  providers: [
-    HomeService,
-    ProfileService
-  ]
+    imports: [
+        CommonModule,
+        ChartsModule,
+        BsDropdownModule,
+        BsDatepickerModule,
+        HomePageRoutingModule,
+        PipesModule,
+        UnpaidPageModule
+    ],
+    declarations: [HomePageComponent],
+    providers: [
+        HomeService,
+        ProfileService
+    ]
 })
 export class HomePageModule {
 }

@@ -20,10 +20,10 @@ export class UsersComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
     users: Array<User>;
+    profilesFilter: any = [];
 
     constructor(
         private adminService: AdminService,
@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
         this.listUsers();
+        this.profilesFilterable();
     }
 
     onSorted(sort: any): void {
@@ -47,7 +48,7 @@ export class UsersComponent implements OnInit {
     }
 
     listUsers() {
-        this.adminService.getListUser(this.page, this.pageSize, this.keyword, this.filter, this.sort).subscribe(response => {
+        this.adminService.getListUser(this.page, this.pageSize, this.filter, this.sort).subscribe(response => {
             _.each(response.data.content, (user: User) => {
                 user.createdDate = moment(new Date(user.createdDate)).format(environment.defaultDateFormat);
             });
@@ -70,6 +71,13 @@ export class UsersComponent implements OnInit {
         this.itemsPerPage = pageSize;
         this.page = 1;
         this.listUsers();
+    }
+
+    profilesFilterable(): void {
+        this.adminService.getListProfiles().subscribe(response => {
+            this.profilesFilter = response.data;
+        }, error => {
+        });
     }
 
     changeEnabled(event, user: User): void {

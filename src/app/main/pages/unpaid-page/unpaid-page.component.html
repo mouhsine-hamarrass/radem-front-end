@@ -32,74 +32,9 @@
                 <div class="card-content collapse show">
                     <div class="card-body">
                         <form class="form-inline" *ngIf="!confirmation">
-                            <div class="table-responsive mx-auto">
-                                <div class="row justify-content-between">
-                                    <div class="col-12">
-                                        <div class="float-left">
-                                            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table class="table table-bordered "
-                                       sortable-table (sorted)="onSorted($event)"
-                                       filterable-table (filtred)="onFiltred($event)">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th>
-                                            <input type="checkbox" class="form-control" (change)="selectAll($event)">
-                                        </th>
-                                        <th scope="col">{{'Nº de facture' | translate }}
-                                            <span sortable-column="numBill"></span>
-                                            <span filterable-column="numBill" filter-type="text"
-                                                  filter-placeholder="{{'Nº de facture' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'Nº d\'echeance' | translate }}
-                                            <span sortable-column="dueNumber"></span>
-                                            <span filterable-column="dueNumber" filter-type="text"
-                                                  filter-placeholder="{{'Nº d\'echeance' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'Nº de Police' | translate }}
-                                            <span sortable-column="police"></span>
-                                            <span filterable-column="police" filter-type="text"
-                                                  filter-placeholder="{{'Nº de Police' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'Date d\'écheance' | translate }}
-                                            <span sortable-column="dueDate"></span>
-                                            <span filterable-column="dueDate" filter-type="date"
-                                                  filter-placeholder="{{'Date d\'écheance' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'Type' | translate }}
-                                            <span sortable-column="type"></span>
-                                            <span filterable-column="type" filter-type="text"
-                                                  filter-placeholder="{{'Type' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'Montant (Dhs)' | translate }}
-                                            <span sortable-column="amount"></span>
-                                            <span filterable-column="amount" filter-type="text"
-                                                  filter-placeholder="{{'Montant (Dhs)' | translate }}"></span>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <app-data-not-available *ngIf="!bills || bills.length == 0; else dataAvailable"
-                                                            [colSpan]="7"></app-data-not-available>
-                                    <ng-template #dataAvailable>
-                                        <tr *ngFor="let bill of bills">
-                                            <td scope="row">
-                                                <input type="checkbox" class="form-control"
-                                                       (change)="addBill($event, bill)"/>
-                                            </td>
-                                            <td>{{bill.numBill}}</td>
-                                            <td>{{bill.dueNumber}}</td>
-                                            <td>{{bill.police}}</td>
-                                            <td>{{bill.dueDate}}</td>
-                                            <td>{{bill.type}}</td>
-                                            <td>{{bill.amount}}</td>
-                                        </tr>
-                                    </ng-template>
-                                    </tbody>
-                                </table>
-                            </div>
+
+                            <app-unpaid-table></app-unpaid-table>
+
                             <div class="pull-right" style="width: 100%; margin-top: 10px">
                                 <app-pagination [disabled]="false"
                                                 [numberOfItems]="numberOfItems"

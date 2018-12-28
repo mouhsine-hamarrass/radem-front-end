@@ -28,7 +28,7 @@
     <section class="row">
         <div class="col-sm-12">
             <div class="row match-height">
-                <div class="col-xl-6 col-lg-12">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header border-0">
                             <h4 class="card-title">Dernieres relèves</h4>
@@ -37,8 +37,10 @@
                             </div>
                         </div>
                         <div class="card-content">
-                            <div class="m-2">
-                                <app-filter (onfilterChanged)="filterConsomation($event)"></app-filter>
+                            <div class="row">
+                                <div class="m-2 col-sm-6">
+                                    <app-filter (onfilterChanged)="filterConsomation($event)"></app-filter>
+                                </div>
                             </div>
                             <div class="table-responsive position-relative">
                                 <table class="table mb-0"
@@ -48,19 +50,23 @@
                                     <tr>
                                         <th scope="col" width="100">{{'# REF' | translate }}
                                             <span sortable-column="ref"></span>
-                                            <div filterable-column="ref" filter-type="ref"></div>
+                                            <span filterable-column="ref" filter-type="text"
+                                                  filter-placeholder="{{'ref' | translate }}"></span>
                                         </th>
                                         <th scope="col">{{'Type' | translate }}
                                             <span sortable-column="type"></span>
-                                            <div filterable-column="type" filter-type="type"></div>
+                                            <span filterable-column="type" filter-type="text"
+                                                  filter-placeholder="{{'type' | translate }}"></span>
                                         </th>
                                         <th scope="col">{{'Date' | translate }}
                                             <span sortable-column="date"></span>
-                                            <div filterable-column="date" filter-type="date"></div>
+                                            <span filterable-column="date" filter-type="date"
+                                                  filter-placeholder="{{'date' | translate }}"></span>
                                         </th>
                                         <th scope="col">{{'Index' | translate }}
                                             <span sortable-column="index"></span>
-                                            <div filterable-column="index" filter-type="index"></div>
+                                            <span filterable-column="index" filter-type="text"
+                                                  filter-placeholder="{{'index' | translate }}"></span>
                                         </th>
                                     </tr>
                                     </thead>
@@ -90,7 +96,7 @@
                             </div>
                         </div>
                         <div class="card-content collapse show">
-                            <form>
+                            <form [formGroup]="historyForm">
                                 <div class="card-body">
                                     <div class="row col-md-12 form-group">
                                         <label class="col-form-label">Contrat <span class="danger">*</span>:</label>
@@ -136,14 +142,36 @@
                                         </div>
                                     </div>
                                     <div class="table-responsive mx-auto">
-                                        <table class="table table-bordered ">
+                                        <table class="table table-bordered "
+                                               sortable-table (sorted)="onSorted($event)"
+                                               filterable-table (filtred)="onFiltred($event)">
                                             <thead class="table-light">
                                             <tr>
-                                                <th scope="col">Période</th>
-                                                <th scope="col">Date de relève</th>
-                                                <th scope="col">Index</th>
-                                                <th scope="col">Consommation</th>
-                                                <th scope="col">Montant</th>
+                                                <th scope="col">{{'Période' | translate }}
+                                                    <span sortable-column="type"></span>
+                                                    <span filterable-column="type" filter-type="text"
+                                                          filter-placeholder="{{'Période' | translate }}"></span>
+                                                </th>
+                                                <th scope="col">{{'Date de relève' | translate }}
+                                                    <span sortable-column="type"></span>
+                                                    <span filterable-column="type" filter-type="date"
+                                                          filter-placeholder="{{'Date de relève' | translate }}"></span>
+                                                </th>
+                                                <th scope="col">{{'Index' | translate }}
+                                                    <span sortable-column="type"></span>
+                                                    <span filterable-column="type" filter-type="text"
+                                                          filter-placeholder="{{'Index' | translate }}"></span>
+                                                </th>
+                                                <th scope="col">{{'Consommation' | translate }}
+                                                    <span sortable-column="type"></span>
+                                                    <span filterable-column="type" filter-type="text"
+                                                          filter-placeholder="{{'Consommation' | translate }}"></span>
+                                                </th>
+                                                <th scope="col">{{'Montant' | translate }}
+                                                    <span sortable-column="type"></span>
+                                                    <span filterable-column="type" filter-type="text"
+                                                          filter-placeholder="{{'Montant' | translate }}"></span>
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -165,87 +193,6 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-xl-6 col-lg-12">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Informations compteurs</h4>
-                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                            <div class="heading-elements">
-                            </div>
-                        </div>
-                        <div class="card-content collapse show">
-                            <div class="card-body" id="img">
-                                <div class="row">
-                                    <div class="img">
-                                        <img src="/assets/images/compteur.png">
-                                    </div>
-                                    <div class="col-md-6 counter-info">
-                                        <table *ngFor="let meter of meters">
-                                            <tr>
-                                                <td><strong>Ampérage :</strong></td>
-                                                <td>{{meter.amperage}} A</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Voltage :</strong></td>
-                                                <td>{{meter.voltage}} V</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Calibre :</strong></td>
-                                                <td>{{meter.calibre}} Wh/tour</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Coefficient :</strong></td>
-                                                <td>{{meter.coefficient}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Marque compteur :</strong></td>
-                                                <td>{{meter.marque}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Nombre de roues :</strong></td>
-                                                <td>{{meter.roues}}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-xl-6 col-lg-12">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Conseil et économie d'énergie</h4>
-                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                            <div class="heading-elements">
-                            </div>
-                        </div>
-                        <div class="card-content collapse show">
-                            <div class="card-body" id="img">
-                                <div class="card-text">
-                                    <p>BIEN GÉRER VOTRE CHAUFFAGE SANS JAMAIS JETER DE FROID! </p>
-                                    <ul>
-                                        <li>Vous pouvez également réguler la température de vos radiateurs (à eau
-                                            chaude) en les
-                                            équipant d’un robinet thermostatique.
-                                            Celui-ci vous permet de choisir la température qui vous convient selon les
-                                            pièces et de
-                                            réaliser des économies d’énergie.
-                                        </li>
-                                        <li>La saison froide arrive? Assurez-vous une chaleur optimale en pensant à
-                                            purger vos
-                                            radiateurs à eau chaude avant de les remettre en marche.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

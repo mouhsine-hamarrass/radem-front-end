@@ -18,7 +18,6 @@ export class ProfilesComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
 
@@ -42,7 +41,7 @@ export class ProfilesComponent implements OnInit {
     }
 
     getProfiles() {
-        this.adminService.getPageableListProfiles(this.page, this.pageSize, this.keyword, this.filter, this.sort).subscribe(response => {
+        this.adminService.getPageableListProfiles(this.page, this.pageSize, this.filter, this.sort).subscribe(response => {
             this.profiles = response.data.content;
             this.totalElements = response.data.totalElements;
             this.totalPages = response.data.totalPages;

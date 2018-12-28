@@ -20,7 +20,6 @@ export class ServicesComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
 
@@ -52,7 +51,7 @@ export class ServicesComponent implements OnInit {
     }
 
     getServices() {
-        this.adminService.getPageableServices(this.page, this.pageSize, this.keyword, this.filter, this.sort).subscribe(response => {
+        this.adminService.getPageableServices(this.page, this.pageSize, this.filter, this.sort).subscribe(response => {
             this.services = response.data.content;
             this.totalElements = response.data.totalElements;
             this.totalPages = response.data.totalPages;

@@ -24,7 +24,6 @@ export class SettlementsPageComponent implements OnInit {
     totalPages: number;
     numberOfItems: number;
     itemsPerPage: number;
-    keyword: string;
     sort: any;
     filter: any;
 
@@ -66,7 +65,7 @@ export class SettlementsPageComponent implements OnInit {
     }
 
     getContacts() {
-        this.adminService.getPageableContracts(this.page, this.pageSize, this.keyword, this.filter, this.sort)
+        this.adminService.getPageableContracts(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
                 this.contracts = response.data.content;
                 this.totalElements = response.data.totalElements;

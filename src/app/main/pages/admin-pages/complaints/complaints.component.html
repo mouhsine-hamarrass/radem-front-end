@@ -46,10 +46,10 @@
                                   filter-placeholder="{{'Date création' | translate }}"></span>
                         </th>
                         <th scope="col">{{'Agent' | translate }}
-                            <span sortable-column="title"></span>
-                            <span filterable-column="title" filter-type="select"
+                            <span sortable-column="agent"></span>
+                            <span filterable-column="agent" filter-type="select"
                                   [filter-select-data]="agentsFilter"
-                                  filter-select-data-key="id" filter-select-data-value="title"
+                                  filter-select-data-key="id" filter-select-data-value="firstname"
                                   filter-placeholder="{{'Agent' | translate }}"></span>
                         </th>
                         <th scope="col">{{'Service concerné' | translate }}
@@ -59,7 +59,8 @@
                         </th>
                         <th scope="col">{{'Etat' | translate }}
                             <span sortable-column="status"></span>
-                            <span filterable-column="status" filter-type="text"
+                            <span filterable-column="status" filter-type="select"
+                                  [filter-select-data]="statusFilter"
                                   filter-placeholder="{{'Etat' | translate }}"></span>
                         </th>
                     </tr>

@@ -30,7 +30,6 @@
                 <span class="input-group-text" id="basic-addon3"><i class="fa fa-remove"></i></span>
             </div>
         </div>
-
     </div>
 
     <div *ngIf="filtertype === 'select'">
@@ -41,8 +40,10 @@
                 [disabled]="filterDisabled">
             <option [value]="filterDefaultValue" selected>{{filterPlaceholder || columnName}}</option>
             <option *ngFor="let data of filterData"
-                    value="{{data[filterDataKey]}}">{{data[filterDataValue]}}
+                    value="{{filterDataKey ? data[filterDataKey] : data}}">
+                {{filterDataValue ? data[filterDataValue] : data | translate}}
             </option>
         </select>
     </div>
+
 </div>

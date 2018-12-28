@@ -29,22 +29,12 @@ export class AdminService {
         return this.httpClient.get<Response<Array<any>>>(`${this.apiUrl}/termination_requests`);
     }
 
-    getPageableRequest(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/termination_requests/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/termination_requests/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableRequest(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/termination_requests/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getTerminationRequest(id: number): Observable<Response<Array<any>>> {
@@ -126,22 +116,12 @@ export class AdminService {
         return this.httpClient.get<Response<Array<any>>>(`${this.jsonServerApi}2/contracts`, {headers: this.headers});
     }
 
-    getPageableContracts(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.jsonServerApi}/contracts/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.jsonServerApi}/contracts/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableContracts(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.jsonServerApi}/contracts/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getReleves(): Observable<Response<Array<any>>> {
@@ -216,22 +196,12 @@ export class AdminService {
         return this.httpClient.get<Response<Array<AlertModel>>>(`${this.apiUrl}/alerts`, {headers: this.headers});
     }
 
-    getPageableAlerts(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/alerts/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/alerts/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableAlerts(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/alerts/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     getAlert(idAlert: number): Observable<Response<AlertModel>> {
@@ -247,13 +217,12 @@ export class AdminService {
         return this.httpClient.put<Response<any>>(`${this.apiUrl}/alerts/notifications/${id}/hide`, {headers: this.headers});
     }
 
-    getPageableAlertNotifications(page: number, pageSize: number, keyword: string): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.get<Response<any>>(
-                `${this.apiUrl}/alerts/notifications/paged-list?page=${page - 1}&size=${pageSize}&keyword=${keyword}`);
-        } else {
-            return this.httpClient.get<Response<any>>(`${this.apiUrl}/alerts/notifications/paged-list?page=${page - 1}&size=${pageSize}`);
-        }
+    getPageableAlertNotifications(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     dropAlertNotification(id: number): Observable<Response<any>> {
@@ -281,22 +250,12 @@ export class AdminService {
         return this.httpClient.get<Response<Array<Profile>>>(`${this.apiUrl}/profiles`);
     }
 
-    getPageableListProfiles(page: number, pageSize: number, keyword?: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/profiles/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/profiles/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableListProfiles(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/profiles/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     dropProfile(idProfile: number) {
@@ -312,20 +271,12 @@ export class AdminService {
     }
 
     // Users
-    getListUser(page: number, pageSize: number, keyword?: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getListUser(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     dropUser(idUser: number): Observable<Response<User>> {
@@ -399,22 +350,12 @@ export class AdminService {
         return this.httpClient.delete(`${this.apiUrl}/services/${serviceId}`, {headers: this.headers});
     }
 
-    getPageableServices(page: number, pageSize: number, keyword: string, filter?: any, sort?: any): Observable<Response<any>> {
-        if (keyword) {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/services/paged-list?page=${page - 1}&size=${pageSize}&keyword=${keyword}`,
-                {
-                    filter,
-                    sort
-                });
-        } else {
-            return this.httpClient.post<Response<any>>
-            (`${this.apiUrl}/services/paged-list?page=${page - 1}&size=${pageSize}`,
-                {
-                    filter,
-                    sort
-                });
-        }
+    getPageableServices(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/services/paged-list?page=${page - 1}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     /**

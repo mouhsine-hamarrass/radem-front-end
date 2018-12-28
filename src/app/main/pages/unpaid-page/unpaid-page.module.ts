@@ -6,6 +6,7 @@ import {UnpaidPageComponent} from './unpaid-page.component';
 import {UnpaidPageRoutingModule} from './unpaid-page-routing.module';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared/shared.module';
+import { UnpaidTableComponent } from './unpaid-table/unpaid-table.component';
 
 @NgModule({
     imports: [
@@ -17,8 +18,10 @@ import {SharedModule} from '../../../shared/shared.module';
         SharedModule
     ],
     declarations: [
-        UnpaidPageComponent
-    ]
+        UnpaidPageComponent,
+        UnpaidTableComponent
+    ],
+    exports: [UnpaidTableComponent]
 })
 export class UnpaidPageModule {
 }
