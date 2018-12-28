@@ -10,100 +10,121 @@ headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 @Injectable()
 export class ServicesService {
-  private urlApi: string;
+    private urlApi: string;
 
-  constructor(private httpClient: HttpClient) {
-    this.urlApi = environment.apiConfig.apiUrl;
-  }
+    constructor(private httpClient: HttpClient) {
+        this.urlApi = environment.apiConfig.apiUrl;
+    }
 
-  // termination requests
-  getSubscriptions(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/subscriptions`);
-  }
+    // termination requests
+    getSubscriptions(): Observable<Response<Array<any>>> {
+        return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/subscriptions`);
+    }
 
-  getTerminationRequests(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`);
-  }
+    getTerminationRequests(): Observable<Response<Array<any>>> {
+        return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`);
+    }
 
-  getTerminationRequest(id: string): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests/${id}/find`);
-  }
+    getPageableTerminationRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/termination_requests/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
 
-  saveTerminationRequest(request: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
-  }
+    getTerminationRequest(id: string): Observable<Response<Array<any>>> {
+        return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests/${id}/find`);
+    }
 
-  // subscription request
-  saveSubscriptionRequest(request: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
-  }
+    saveTerminationRequest(request: any): Observable<Response<number>> {
+        return this.httpClient.post<Response<number>>(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
+    }
 
-  getSubscriptionRequests(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/subscription_requests`, {headers: headers});
-  }
+    // subscription request
+    saveSubscriptionRequest(request: any): Observable<Response<number>> {
+        return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
+    }
 
-  // complaint
-  saveComplaint(complaint: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints`, complaint, {headers: headers});
-  }
+    getSubscriptionRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>
+        (`${this.urlApi}/client/subscription_requests?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
 
-  saveComplaintsFeedback(complaintsFeedback: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save-feedback`, complaintsFeedback, {headers: headers});
-  }
+    // complaint
+    saveComplaint(complaint: any): Observable<Response<number>> {
+        return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints`, complaint, {headers: headers});
+    }
 
-  getComplaints(): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints`);
-  }
+    saveComplaintsFeedback(complaintsFeedback: any): Observable<Response<number>> {
+        return this.httpClient.post<Response<number>>(`${this.urlApi}/complaints/save-feedback`, complaintsFeedback, {headers: headers});
+    }
 
-  getComplaint(id: string): Observable<Response<ComplaintModel>> {
-    return this.httpClient.get<Response<ComplaintModel>>(`${this.urlApi}/complaints/${id}`);
-  }
+    getComplaints(): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints`);
+    }
 
-  getObjects(): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/objects`);
-  }
+    getPageableComplaints(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/complaints/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
 
-  // User (temporary service TODO: remove it when localstorage is working)
-  getUser(id: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/users/${id}/find`);
-  }
+    getComplaint(id: string): Observable<Response<ComplaintModel>> {
+        return this.httpClient.get<Response<ComplaintModel>>(`${this.urlApi}/complaints/${id}`);
+    }
 
-  getAllAuthoritiesByCategory(): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>(`${this.urlApi}/authorities`);
-  }
+    getObjects(): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.urlApi}/complaints/objects`);
+    }
 
-  /**
-   * Reporting
-   */
-  downloadPdfConsumptions() {
-    const url = `${this.urlApi}/download/consumptions?ext=pdf`;
-    const req = new HttpRequest('GET', url, {
-      responseType: 'arraybuffer',
-    });
-    return this.httpClient.request(req);
-  }
+    // User (temporary service TODO: remove it when localstorage is working)
+    getUser(id: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.urlApi}/users/${id}/find`);
+    }
 
-  downloadXlsConsumptions() {
-    const url = `${this.urlApi}/download/consumptions?ext=xls`;
-    const req = new HttpRequest('GET', url, {
-      responseType: 'arraybuffer',
-    });
-    return this.httpClient.request(req);
-  }
+    getAllAuthoritiesByCategory(): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.urlApi}/authorities`);
+    }
 
-  downloadPdfSettlements() {
-    const url = `${this.urlApi}/download/settlements?ext=pdf`;
-    const req = new HttpRequest('GET', url, {
-      responseType: 'arraybuffer',
-    });
-    return this.httpClient.request(req);
-  }
+    /**
+     * Reporting
+     */
+    downloadPdfConsumptions() {
+        const url = `${this.urlApi}/download/consumptions?ext=pdf`;
+        const req = new HttpRequest('GET', url, {
+            responseType: 'arraybuffer',
+        });
+        return this.httpClient.request(req);
+    }
 
-  downloadXlsSettlements() {
-    const url = `${this.urlApi}/download/settlements?ext=xls`;
-    const req = new HttpRequest('GET', url, {
-      responseType: 'arraybuffer',
-    });
-    return this.httpClient.request(req);
-  }
+    downloadXlsConsumptions() {
+        const url = `${this.urlApi}/download/consumptions?ext=xls`;
+        const req = new HttpRequest('GET', url, {
+            responseType: 'arraybuffer',
+        });
+        return this.httpClient.request(req);
+    }
+
+    downloadPdfSettlements() {
+        const url = `${this.urlApi}/download/settlements?ext=pdf`;
+        const req = new HttpRequest('GET', url, {
+            responseType: 'arraybuffer',
+        });
+        return this.httpClient.request(req);
+    }
+
+    downloadXlsSettlements() {
+        const url = `${this.urlApi}/download/settlements?ext=xls`;
+        const req = new HttpRequest('GET', url, {
+            responseType: 'arraybuffer',
+        });
+        return this.httpClient.request(req);
+    }
 }

@@ -1,14 +1,14 @@
 <div class="form-group">
-  <div class="input-group mb-3" id="filterControl">
-    <select class="custom-select" id="inputGroupSelect02"
-            [(ngModel)]="selectedItem"
-            (change)="filterChanged($event)">
-      <option *ngFor="let c of filters"
-              value="{{c.value}}">{{c.label}}
-      </option>
-    </select>
-    <div class="input-group-append">
-      <label class="input-group-text" for="inputGroupSelect02">entrées</label>
+    <div class="input-group mb-2" id="filterControl">
+        <select class="custom-select" id="inputGroupSelect02"
+                [(ngModel)]="selectedItem"
+                (change)="filterChanged($event)">
+            <option *ngFor="let c of filters"
+                    value="{{c.value}}">{{c.label}}
+            </option>
+        </select>
+        <div class="input-group-append">
+            <label class="input-group-text" for="inputGroupSelect02">entrées</label>
+        </div>
     </div>
-  </div>
 </div>

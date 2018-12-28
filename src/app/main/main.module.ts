@@ -8,49 +8,52 @@ import {HomePageModule} from './pages/home-page/home-page.module';
 import {ServicesPagesModule} from './pages/services-pages/services-pages.module';
 import {UtilsService} from './services/utils.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {createTranslateLoader} from '../app.translate.factory';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SettlementsPageModule} from './pages/settlements-page/settlements-page.module';
 import {UnpaidPageModule} from './pages/unpaid-page/unpaid-page.module';
 import {ComplaintService} from './services/complaint.service';
 import {DirectivesModule} from '../shared/directives/directives.module';
+import {OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
+import {MY_MOMENT_FORMATS} from '../shared/shared.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    AdminPagesModule,
-    BrowserAnimationsModule,
-    ConsumptionsPageModule,
-    ContractsPageModule,
-    HomePageModule,
-    ServicesPagesModule,
-    SettlementsPageModule,
-    UnpaidPageModule,
-    DirectivesModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-  ],
-  providers: [
-    ServicesService,
-    UtilsService,
-    ComplaintService
-  ],
-  declarations: [],
-  exports: [
-    AdminPagesModule,
-    ConsumptionsPageModule,
-    ContractsPageModule,
-    HomePageModule,
-    ServicesPagesModule,
-    SettlementsPageModule,
-    UnpaidPageModule,
-  ]
+    imports: [
+        CommonModule,
+        AdminPagesModule,
+        BrowserAnimationsModule,
+        ConsumptionsPageModule,
+        ContractsPageModule,
+        HomePageModule,
+        ServicesPagesModule,
+        SettlementsPageModule,
+        UnpaidPageModule,
+        DirectivesModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+    ],
+    providers: [
+        ServicesService,
+        UtilsService,
+        ComplaintService,
+        {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
+    ],
+    declarations: [],
+    exports: [
+        AdminPagesModule,
+        ConsumptionsPageModule,
+        ContractsPageModule,
+        HomePageModule,
+        ServicesPagesModule,
+        SettlementsPageModule,
+        UnpaidPageModule
+    ]
 })
 export class MainModule {
 }

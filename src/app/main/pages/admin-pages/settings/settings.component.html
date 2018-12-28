@@ -1,50 +1,53 @@
 <div id="add-modele">
-   <nav aria-label="breadcrumb">
-      <ul class="breadcrumb">
-         <li class="breadcrumb-item"><a href="#"><i class="icon-settings"></i> Administration</a></li>
-         <li class="breadcrumb-item active" aria-current="page">Parmétrage</li>
-      </ul>
-   </nav>
-   <div class="container-fluid">
-      <div class="card">
-         <div class="card-body">
-            <div class=" table-responsive">
-               <form role="form" novalidate>
-                  <h4 class="card-title text-muted"> </h4>
-                  <table class="table table-bordered">
-                     <thead>
-                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Paramètre</th>
-                        <th scope="col">Valeur</th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                     <app-data-not-available *ngIf="!settings || settings.length == 0; else dataAvailable" [colSpan]="3"></app-data-not-available>
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Parmétrage</li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class=" table-responsive">
+                    <form role="form" novalidate>
+                        <h4 class="card-title text-muted"></h4>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Paramètre</th>
+                                <th scope="col">Valeur</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <app-data-not-available *ngIf="!settings || settings.length == 0; else dataAvailable"
+                                                    [colSpan]="3"></app-data-not-available>
 
-                     <ng-template #dataAvailable>
-                     <tr *ngFor="let param of settings">
-                        <td>
-                           {{param.id}}
-                        </td>
-                        <td>
-                           {{param.key}}
-                        </td>
-                        <td>
-                           <input id="value_{{param.id}}" name="value_{{param.id}}" [(ngModel)]="param.value" type="text" placeholder="Valeur" class="form-control required">
-                        </td>
-                     </tr>
-                     </ng-template>
-                     </tbody>
-                  </table>
-                  <div class="pull-right">
-                     <button class="btn btn btn-outline-primary" (click)="saveSettings()">
-                        Enregistrer
-                     </button>
-                  </div>
-               </form>
+                            <ng-template #dataAvailable>
+                                <tr *ngFor="let param of settings">
+                                    <td>
+                                        {{param.id}}
+                                    </td>
+                                    <td>
+                                        {{param.key}}
+                                    </td>
+                                    <td>
+                                        <input id="value_{{param.id}}" name="value_{{param.id}}"
+                                               [(ngModel)]="param.value" type="text" placeholder="Valeur"
+                                               class="form-control required">
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            </tbody>
+                        </table>
+                        <div class="pull-right">
+                            <button class="btn btn btn-outline-primary" (click)="saveSettings()">
+                                Enregistrer
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

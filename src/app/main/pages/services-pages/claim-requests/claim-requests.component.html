@@ -1,71 +1,104 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
-  <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Réclamations</h3>
-  </div>
-  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-    <div class="breadcrumb-wrapper col-12">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a>Services</a>
-        </li>
-        <li class="breadcrumb-item active">Réclamations
-        </li>
-      </ol>
+    <div class="content-header-left col-md-6 col-12 mb-1">
+        <h3 class="content-header-title">Réclamations</h3>
     </div>
-  </div>
+    <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/home">Accueil</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>Services</a>
+                </li>
+                <li class="breadcrumb-item active">Réclamations
+                </li>
+            </ol>
+        </div>
+    </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- What is-->
-      <div id="what-is" class="card">
-        <div class="card-header">
-          <h4 class="card-title">Consulter vos demandes</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline">
-              <li>
-                <a routerLink="/services/new-claim-request">
-                  <i class="fa fa-plus"></i> Nouvelle réclamation</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive mx-auto">
-            <table class="table table-bordered ">
-              <thead class="table-light">
-              <tr>
-                <th scope="col">Nº de réclamation</th>
-                <th scope="col">Objet</th>
-                <th scope="col">Créée le</th>
-                <th scope="col">Statut</th>
-              </tr>
-              </thead>
-              <tbody>
-              <app-data-not-available *ngIf="!complaints || complaints.length == 0; else dataAvailable" [colSpan]="4"></app-data-not-available>
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <div id="what-is" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Consulter vos demandes</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline">
+                            <li>
+                                <a routerLink="/services/new-claim-request">
+                                    <i class="fa fa-plus"></i> Nouvelle réclamation</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="row justify-content-between">
+                            <div class="col-12">
+                                <div class="float-left">
+                                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered "
+                               sortable-table (sorted)="onSorted($event)"
+                               filterable-table (filtred)="onFiltred($event)">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col">{{'Nº de réclamation' | translate }}
+                                    <span sortable-column="claimNumber"></span>
+                                    <span filterable-column="claimNumber" filter-type="text"
+                                          filter-placeholder="{{'Désignation' | translate }}"></span>
+                                </th>
+                                <th scope="col">{{'Objet' | translate }}
+                                    <span sortable-column="object"></span>
+                                    <span filterable-column="object" filter-type="text"
+                                          filter-placeholder="{{'Objet' | translate }}"></span>
+                                </th>
+                                <th scope="col">{{'Créée le' | translate }}
+                                    <span sortable-column="createdDate"></span>
+                                    <span filterable-column="createdDate" filter-type="date"
+                                          filter-placeholder="{{'Créée le' | translate }}"></span>
+                                </th>
+                                <th scope="col">{{'Status' | translate }}
+                                    <span sortable-column="status"></span>
+                                    <span filterable-column="status" filter-type="select"
+                                          [filter-select-data]="statusFilter"
+                                          filter-placeholder="{{'Status' | translate }}"></span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <app-data-not-available *ngIf="!complaints || complaints.length == 0; else dataAvailable"
+                                                    [colSpan]="4"></app-data-not-available>
 
-              <ng-template #dataAvailable>
-                <tr *ngFor="let complaint of complaints">
-                  <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a>
-                  </td>
-                  <td>{{complaint.object}}</td>
-                  <td>{{complaint.createdDate | date:'dd-M-yyyy'}}</td>
-                  <td><span class="badge badge-primary">{{complaint.status}}</span></td>
-                </tr>
-              </ng-template>
-              </tbody>
-            </table>
-          </div>
+                            <ng-template #dataAvailable>
+                                <tr *ngFor="let complaint of complaints">
+                                    <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a>
+                                    </td>
+                                    <td>{{complaint.object}}</td>
+                                    <td>{{complaint.createdDate | date:'dd-M-yyyy'}}</td>
+                                    <td><span class="badge badge-primary">{{complaint.status}}</span></td>
+                                </tr>
+                            </ng-template>
+                            </tbody>
+                        </table>
+                        <app-pagination [disabled]="false"
+                                        [numberOfItems]="numberOfItems"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalElements"
+                                        [totalPages]="totalPages"
+                                        (onpageChanged)="pageChanged($event)"></app-pagination>
+                    </div>
+                </div>
+                <!--/ What is-->
+            </div>
         </div>
-        <!--/ What is-->
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

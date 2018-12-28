@@ -1,47 +1,121 @@
-<div class="col-md-12 py-3">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Liste des demandes</h4>
-      <div class="table-responsive my-5">
-        <div>
-              <button type="button" class="btn btn btn-outline-primary" (click)="LoadCancellationRequest()" >Résiliations</button>
-              <button type="button" class="btn btn btn-outline-primary" (click)="LoadSubscriptionRequest()">Abonnements</button>
-              <button type="button" class="btn btn btn-outline-primary" (click)="LoadRefundRequest()">Remboursements</button>
-              <input type="text" class="col-3 form-control pull-right" placeholder="Rechercher"/>
-        </div><br>
-        <table class="table table-striped table-bordered table-hover">
-          <thead class="table-light">
-          <tr>
-            <th scope="col">Nº demande</th>
-            <th scope="col">Demandeur</th>
-            <th scope="col">Type</th>
-            <th scope="col">Date création</th>
-            <th scope="col">Agent</th>
-            <th scope="col">Service concerné</th>
-            <th scope="col">Etat</th>
-          </tr>
-          </thead>
-          <tbody>
-          <app-data-not-available *ngIf="!requests || requests.length == 0; else dataAvailable" [colSpan]="7"></app-data-not-available>
+<div>
+    <nav aria-label="breadcrumb" class="doNotPrint">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste des demandes</li>
+        </ul>
+    </nav>
+</div>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title text-muted pull-left">Liste des demandes</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="float-left">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                </div>
+                                <div class="col-12 mb-1">
+                                    <button type="button" class="btn btn btn-outline-primary"
+                                            (click)="LoadCancellationRequest()">
+                                        Résiliations
+                                    </button>
+                                    <button type="button" class="btn btn btn-outline-primary"
+                                            (click)="LoadSubscriptionRequest()">
+                                        Abonnements
+                                    </button>
+                                    <button type="button" class="btn btn btn-outline-primary"
+                                            (click)="LoadRefundRequest()">
+                                        Remboursements
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <table class="table table-striped table-bordered table-hover"
+                       sortable-table (sorted)="onSorted($event)"
+                       filterable-table (filtred)="onFiltred($event)">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">{{'Nº demande' | translate }}
+                            <span sortable-column="requestNumber"></span>
+                            <span filterable-column="requestNumber" filter-type="text"
+                                  filter-placeholder="{{'Nº demande' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Demandeur' | translate }}
+                            <span sortable-column="lastname"></span>
+                            <span filterable-column="lastname" filter-type="text"
+                                  filter-placeholder="{{'Demandeur' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Type' | translate }}
+                            <span sortable-column="type"></span>
+                            <span filterable-column="type" filter-type="text"
+                                  filter-placeholder="{{'Type' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Date création' | translate }}
+                            <span sortable-column="createdAt"></span>
+                            <span filterable-column="createdAt" filter-type="date"
+                                  filter-placeholder="{{'Date création' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Agent' | translate }}
+                            <span sortable-column="agent"></span>
+                            <span filterable-column="agent" filter-type="select"
+                                  [filter-select-data]="agentsFilter"
+                                  filter-select-data-key="id" filter-select-data-value="firstname"
+                                  filter-placeholder="{{'Agent' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Service concerné' | translate }}
+                            <span sortable-column="service"></span>
+                            <span filterable-column="service" filter-type="text"
+                                  filter-placeholder="{{'Service concerné' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Etat' | translate }}
+                            <span sortable-column="status"></span>
+                            <span filterable-column="status" filter-type="select"
+                                  [filter-select-data]="statusFilter"
+                                  filter-placeholder="{{'Etat' | translate }}"></span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <app-data-not-available *ngIf="!requests || requests.length == 0; else dataAvailable"
+                                            [colSpan]="7"></app-data-not-available>
 
-          <ng-template #dataAvailable>
-          <tr *ngFor="let request of requests">
-            <td><a [routerLink] = "['/admin/requests', request.id]">{{request.requestNumber}}</a></td>
-            <td *ngIf="request.applicant != null">{{request.applicant.firstname}} {{request.applicant.lastname}}</td>
-            <td *ngIf="request.applicant == null">{{request.client?.firstname + ' ' + request.client?.lastname}}</td>
-            <td>{{request.type}}</td>
-            <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
-            <td>{{!request.agent ? '-' : request.agent.firstname + ' ' + request.agent.lastname}}</td>
-            <td>{{!request?.service ? '-' : request?.service}}</td>
-            <td><span class="badge badge-primary">{{request.status}}</span></td>
-          </tr>
-          </ng-template>
-          </tbody>
-        </table>
-      </div>
-       <!--Card body end-->
+                    <ng-template #dataAvailable>
+                        <tr *ngFor="let request of requests">
+                            <td><a [routerLink]="['/admin/requests', request.id]">{{request.requestNumber}}</a></td>
+                            <td *ngIf="request.applicant != null">{{request.applicant.firstname}}
+                                {{request.applicant.lastname}}
+                            </td>
+                            <td *ngIf="request.applicant == null">{{request.client?.firstname + ' ' +
+                                request.client?.lastname}}
+                            </td>
+                            <td>{{request.type}}</td>
+                            <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{!request.agent ? '-' : request.agent.firstname + ' ' + request.agent.lastname}}</td>
+                            <td>{{!request?.service ? '-' : request?.service}}</td>
+                            <td><span class="badge badge-primary">{{request.status | translate}}</span></td>
+                        </tr>
+                    </ng-template>
+                    </tbody>
+                </table>
+                <app-pagination [disabled]="false"
+                                [numberOfItems]="numberOfItems"
+                                [itemsPerPage]="itemsPerPage"
+                                [totalItems]="totalElements"
+                                [totalPages]="totalPages"
+                                (onpageChanged)="pageChanged($event)"></app-pagination>
+            </div>
+            <!--Card body end-->
+        </div>
     </div>
-  </div>
 </div>
 
 

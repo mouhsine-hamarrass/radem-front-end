@@ -1,41 +1,97 @@
-<div class="col-md-12 py-3">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Liste des réclamations</h4>
-      <div class="table-responsive my-5">
-        <div>
-          <input type="text" class="col-3 form-control pull-right" placeholder="Rechercher" id="recherche"/>
+<div>
+    <nav aria-label="breadcrumb" class="doNotPrint">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste des réclamations</li>
+        </ul>
+    </nav>
+</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title text-muted pull-left">Liste des réclamations</h4>
         </div>
-        <table class="table table-striped table-bordered table-hover zero-configuration">
-          <thead class="table-light">
-          <tr>
-            <th scope="col">Nº réclamation</th>
-            <th scope="col">Réclameur</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Date création</th>
-            <th scope="col">Agent</th>
-            <th scope="col">Service concerné</th>
-            <th scope="col">Etat</th>
-          </tr>
-          </thead>
-          <tbody>
-          <app-data-not-available *ngIf="!complaints || complaints.length == 0; else dataAvailable" [colSpan]="7"></app-data-not-available>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row justify-content-between">
+                    <div class="col-12">
+                        <div class="float-left">
+                            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover zero-configuration"
+                       sortable-table (sorted)="onSorted($event)"
+                       filterable-table (filtred)="onFiltred($event)">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">{{'Nº réclamation' | translate }}
+                            <span sortable-column="claimNumber"></span>
+                            <span filterable-column="claimNumber" filter-type="text"
+                                  filter-placeholder="{{'Nº réclamation' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Réclameur' | translate }}
+                            <span sortable-column="lastname"></span>
+                            <span filterable-column="lastname" filter-type="text"
+                                  filter-placeholder="{{'Réclameur' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Catégorie' | translate }}
+                            <span sortable-column="object"></span>
+                            <span filterable-column="object" filter-type="text"
+                                  filter-placeholder="{{'Catégorie' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Date création' | translate }}
+                            <span sortable-column="createdAt"></span>
+                            <span filterable-column="createdAt" filter-type="date"
+                                  filter-placeholder="{{'Date création' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Agent' | translate }}
+                            <span sortable-column="agent"></span>
+                            <span filterable-column="agent" filter-type="select"
+                                  [filter-select-data]="agentsFilter"
+                                  filter-select-data-key="id" filter-select-data-value="firstname"
+                                  filter-placeholder="{{'Agent' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Service concerné' | translate }}
+                            <span sortable-column="service"></span>
+                            <span filterable-column="service" filter-type="text"
+                                  filter-placeholder="{{'Service concerné' | translate }}"></span>
+                        </th>
+                        <th scope="col">{{'Etat' | translate }}
+                            <span sortable-column="status"></span>
+                            <span filterable-column="status" filter-type="select"
+                                  [filter-select-data]="statusFilter"
+                                  filter-placeholder="{{'Etat' | translate }}"></span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <app-data-not-available *ngIf="!complaints || complaints.length == 0; else dataAvailable"
+                                            [colSpan]="7"></app-data-not-available>
 
-          <ng-template #dataAvailable>
-            <tr *ngFor="let complaint of complaints">
-              <td><a [routerLink] = "['/admin/complaints', complaint.id]">{{complaint.claimNumber}}</a></td>
-              <td>{{complaint.complainer?.firstname}} {{complaint.complainer?.lastname}}</td>
-              <td>{{complaint.object}}</td>
-              <td>{{complaint.createdAt | date:'dd/MM/yyyy'}}</td>
-              <td>{{!complaint.agent ? '-' : complaint.agent.firstname + ' ' + complaint.agent.lastname}}</td>
-              <td>{{complaint.service}}</td>
-              <td><span class="badge badge-primary">{{complaint.status}}</span></td>
-            </tr>
-          </ng-template>
-          </tbody>
-        </table>
-      </div>
-      <!--Card body end-->
+                    <ng-template #dataAvailable>
+                        <tr *ngFor="let complaint of complaints">
+                            <td><a [routerLink]="['/admin/complaints', complaint.id]">{{complaint.claimNumber}}</a></td>
+                            <td>{{complaint.complainer?.firstname}} {{complaint.complainer?.lastname}}</td>
+                            <td>{{complaint.object}}</td>
+                            <td>{{complaint.createdAt | date:'dd/MM/yyyy'}}</td>
+                            <td>{{!complaint.agent ? '-' : complaint.agent.firstname + ' ' +
+                                complaint.agent.lastname}}
+                            </td>
+                            <td>{{complaint.service}}</td>
+                            <td><span class="badge badge-primary">{{complaint.status | translate}}</span></td>
+                        </tr>
+                    </ng-template>
+                    </tbody>
+                </table>
+                <app-pagination [disabled]="false"
+                                [numberOfItems]="numberOfItems"
+                                [itemsPerPage]="itemsPerPage"
+                                [totalItems]="totalElements"
+                                [totalPages]="totalPages"
+                                (onpageChanged)="pageChanged($event)"></app-pagination>
+            </div>
+            <!--Card body end-->
+        </div>
     </div>
-  </div>
 </div>

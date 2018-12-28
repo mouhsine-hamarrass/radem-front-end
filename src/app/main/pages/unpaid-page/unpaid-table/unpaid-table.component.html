@@ -1,0 +1,68 @@
+<div class="table-responsive mx-auto">
+    <div class="row justify-content-between">
+        <div class="col-12">
+            <div class="float-left">
+                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+            </div>
+        </div>
+    </div>
+    <table class="table table-bordered "
+           sortable-table (sorted)="onSorted($event)"
+           filterable-table (filtred)="onFiltred($event)">
+        <thead class="table-light">
+        <tr>
+            <th>
+                <input type="checkbox" class="form-control" (change)="selectAll($event)">
+            </th>
+            <th scope="col">{{'Nº de facture' | translate }}
+                <span sortable-column="numBill"></span>
+                <span filterable-column="numBill" filter-type="text"
+                      filter-placeholder="{{'Nº de facture' | translate }}"></span>
+            </th>
+            <th scope="col">{{'Annee' | translate }}
+                <span sortable-column="year"></span>
+                <span filterable-column="year" filter-type="text"
+                      filter-placeholder="{{'Annee' | translate }}"></span>
+            </th>
+            <th scope="col">{{'Mois' | translate }}
+                <span sortable-column="month"></span>
+                <span filterable-column="month" filter-type="text"
+                      filter-placeholder="{{'Mois' | translate }}"></span>
+            </th>
+            <th scope="col">{{'Nº d\'abonnement' | translate }}
+                <span sortable-column="dueDate"></span>
+                <span filterable-column="dueDate" filter-type="date"
+                      filter-placeholder="{{'Nº d\'abonnement' | translate }}"></span>
+            </th>
+            <th scope="col">{{'Solde Total' | translate }} (Dhs)
+                <span sortable-column="type"></span>
+                <span filterable-column="type" filter-type="text"
+                      filter-placeholder="{{'Solde total' | translate }} (Dhs)"></span>
+            </th>
+            <th scope="col">{{'Solde exigble' | translate }} (Dhs)
+                <span sortable-column="amount"></span>
+                <span filterable-column="amount" filter-type="text"
+                      filter-placeholder="{{'Solde exigble' | translate }} (Dhs)"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <app-data-not-available *ngIf="!bills || bills.length == 0; else dataAvailable"
+                                [colSpan]="7"></app-data-not-available>
+        <ng-template #dataAvailable>
+            <tr *ngFor="let bill of bills">
+                <td scope="row">
+                    <input type="checkbox" class="form-control"
+                           (change)="addBill($event, bill)"/>
+                </td>
+                <td>{{bill.numBill}}</td>
+                <td>{{bill.dueNumber}}</td>
+                <td>{{bill.police}}</td>
+                <td>{{bill.dueDate}}</td>
+                <td>{{bill.type}}</td>
+                <td>{{bill.amount}}</td>
+            </tr>
+        </ng-template>
+        </tbody>
+    </table>
+</div>

@@ -8,33 +8,34 @@ import {environment} from '../../../environments/environment';
 import {AuthHelper} from '../../core/services/security/auth.helper';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 
 export class NavbarComponent implements OnInit {
-  public user: User;
-  public applogo: string;
+    public user: User;
+    public applogo: string;
+    alerts: Array<any> = [];
 
-  constructor(private oauthService: OAuthService,
-              private utilsService: UtilsService,
-              private toastrService: ToastrService,
-              private router: Router) {
-  }
-
-  ngOnInit() {
-    this.applogo = environment.appLogo;
-    if (localStorage.getItem(AuthHelper.USER_ID)) {
-      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-      this.user.avatar = this.user.avatar || environment.defaultAvatar;
+    constructor(private oauthService: OAuthService,
+                private utilsService: UtilsService,
+                private toastrService: ToastrService,
+                private router: Router) {
     }
-  }
+
+    ngOnInit() {
+        this.applogo = environment.appLogo;
+        if (localStorage.getItem(AuthHelper.USER_ID)) {
+            this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+            this.user.avatar = this.user.avatar || environment.defaultAvatar;
+        }
+    }
 
 
-  public logout() {
-    this.oauthService.logout();
-    this.toastrService.success('À bientôt', '', {timeOut: 1000});
-    this.router.navigate(['/login']);
-  }
+    public logout() {
+        this.oauthService.logout();
+        this.toastrService.success('À bientôt', '', {timeOut: 1000});
+        this.router.navigate(['/login']);
+    }
 }

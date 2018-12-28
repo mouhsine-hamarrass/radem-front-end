@@ -2,7 +2,15 @@
 @import url("colors.css");
 @import url("components.css");
 
-button:focus , a:focus, input:focus{
-  outline: none;
+button:focus, a:focus, input:focus {
+    outline: none;
 }
 
+.bg-info.bg-lighten-3 {
+    background-color: #2E5797 !important;
+    color: #FFFFFF;
+}
+.bg-yellow.bg-lighten-3 {
+    background-color: #F4001A !important;
+    color: #FFFFFF;
+}

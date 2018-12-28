@@ -6,17 +6,20 @@ import {AdminService} from '../../services/admin.service';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {BsDropdownModule} from 'ngx-bootstrap';
 import {ComponentsModule} from '../../../shared/components/components.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ConsumptionsPageRoutingModule,
-    AngularFontAwesomeModule,
-    BsDropdownModule,
-    ComponentsModule
-  ],
-  declarations: [ConsumptionsPageComponent],
-  providers: [AdminService]
+    imports: [
+        CommonModule,
+        ConsumptionsPageRoutingModule,
+        AngularFontAwesomeModule,
+        SharedModule,
+        BsDropdownModule,
+        ComponentsModule
+    ],
+    declarations: [ConsumptionsPageComponent],
+    providers: [AdminService]
 })
 export class ConsumptionsPageModule {
+
 }

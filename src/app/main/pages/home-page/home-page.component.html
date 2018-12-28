@@ -1,307 +1,54 @@
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- Alerts-->
-      <div class="card alert-warning">
-        <div class="card-header">
-          <h4 class="card-title">Alerts</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="ft-minus"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div class="card-text">
-              <div *ngFor="let alert of alerts">
-                <p>Alerte de {{alert.alert.alertType.title}}</p>
-                <ul>
-                  <li>
-                    {{alert.alert.description}}
-                  </li>
-                  - Consignes :
-                  <ul>
-                    <li>
-                      {{alert.alert.instructions.content}}
-                    </li>
-                  </ul>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Alerts-->
-      <!-- Consommations -->
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Evolution de consommation</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="ft-minus"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div class="row col-4 col-sm-6 pull-right form-group">
-              <label for="contract" class="col-4">
-                <strong>Contrat :</strong>
-              </label>
-              <div class="col-8">
-                <select id="contract" class="custom-select" (change)="changeContract($event)">
-                  <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                    {{contract.contractNumber}} ({{contract.contractType}})
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-6 col-sm-6">
-                <canvas #barchart baseChart [chartType]="chartType" [datasets]="chartDatasetsEau" [labels]="chartLabels"
-                        [colors]="chartColorsEau"
-                        [options]="chartOptionsEau" [legend]="true" (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)">
-                </canvas>
-              </div>
-              <div class="col-6 col-sm-6">
-                <canvas baseChart [chartType]="chartType" [datasets]="chartDatasetsFact" [labels]="chartLabels"
-                        [colors]="chartColorsFact"
-                        [options]="chartOptionsFact" [legend]="true" (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)">
-                </canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Consommations -->
+    <section class="row">
+        <div class="col-sm-12">
 
-      <!-- Derniers paiements -->
-      <div class="row match-height">
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Derniers paiements</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Montant</th>
-                    <th scope="col">Volume</th>
-                  </tr>
-                  </thead>
-                  <tbody *ngIf="bills">
-                  <tr>
-                    <td>{{bills[0]?.numBill}}</td>
-                    <td>{{bills[0]?.subscriptionType}}</td>
-                    <td>{{bills[0]?.amount}} DH</td>
-                    <td>{{bills[0]?.consumption}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{bills[1]?.numBill}}</td>
-                    <td>{{bills[1]?.subscriptionType}}</td>
-                    <td>{{bills[1]?.amount}} DH</td>
-                    <td>{{bills[1]?.consumption}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- / Derniers paiements -->
-
-        <!-- Prochaines factures -->
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Prochaines factures</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Montant</th>
-                    <th scope="col">Volume</th>
-                  </tr>
-                  </thead>
-                  <tbody *ngIf="bills">
-                  <tr>
-                  <tr>
-                    <td>{{bills[2]?.numBill}}</td>
-                    <td>{{bills[2]?.subscriptionType}}</td>
-                    <td>{{bills[2]?.amount}} DH</td>
-                    <td>{{bills[2]?.consumption}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{bills[3]?.numBill}}</td>
-                    <td>{{bills[3]?.subscriptionType}}</td>
-                    <td>{{bills[3]?.amount}} DH</td>
-                    <td>{{bills[3]?.consumption}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / Prochaines factures -->
-
-      <!-- Min/Max Consomations -->
-      <div class="row match-height">
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Min/Max Consomations</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <form>
-                <div class="form-group col-12">
-                  <div class="row">
-                    <label for="contract-consumption" class="col-form-label col-4">Contrat</label>
-                    <div class="col-8">
-                      <select id="contract-consumption" #minMax class="custom-select"
-                              (change)="changeMinMaxContract(minMax.value)">
-                        <option selected>Faites votre choix</option>
-                        <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                          {{contract.contractNumber}} ({{contract.contractType}})
-                        </option>
-                      </select>
+            <div class="card">
+                <div class="card-header border-0">
+                    <h4 class="card-title"><i class="fa fa-list mr-1"></i>Mes impayés</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <a data-action="collapse">
+                                    <i class="ft-minus"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                  </div>
                 </div>
-                <div class="form-group col-12">
-                  <div class="row">
-                    <label class="col-form-label col-auto">Du</label>
-                    <div class="col-4">
-                      <input type="text" class="form-control" bsDaterangepicker>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <app-unpaid-table></app-unpaid-table>
                     </div>
-                    <label class="col-form-label col-auto">Au</label>
-                    <div class="col-4 ">
-                      <input type="text" class="form-control" bsDaterangepicker>
-                    </div>
-                  </div>
                 </div>
-                <div class="form-group col-12">
-                  <div class="row">
-                    <div class="col-6">
-                    <span class="card-title">
-                      <strong>Min:</strong> {{minMaxConsumption?.min}}</span>
+            </div>
+
+            <!-- Conseil et économie d'énergie-->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Conseil et économie d'énergie</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <a data-action="collapse">
+                                    <i class="ft-minus"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-6">
-                    <span class="card-title">
-                      <strong>Max:</strong> {{minMaxConsumption?.max}}</span>
-                    </div>
-                  </div>
                 </div>
-              </form>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <div [innerHTML]="advices?.value | safeHtml"></div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <!--/ Conseil et économie d'énergie-->
         </div>
-        <!-- Min/Max Consomations -->
-
-        <!-- Dernieres relèves -->
-        <div class="col-xl-6 col-lg-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <h4 class="card-title">Dernieres relèves</h4>
-              <a class="heading-elements-toggle">
-                <i class="fa fa-ellipsis-v font-medium-3"></i>
-              </a>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="table-responsive position-relative">
-                <table class="table mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col"># REF</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">index</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let releve of releves">
-                    <td>{{releve.ref}}</td>
-                    <td>{{releve.type}}</td>
-                    <td>{{releve.dateReleve | date:'dd-M-yyyy'}}</td>
-                    <td>{{releve.index}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Dernieres relèves -->
-
-      <!-- Conseil et économie d'énergie-->
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Conseil et économie d'énergie</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="ft-minus"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div [innerHTML]="advices?.value | safeHtml"></div>
-          </div>
-        </div>
-      </div>
-      <!--/ Conseil et économie d'énergie-->
-    </div>
-  </section>
+    </section>
 </div>

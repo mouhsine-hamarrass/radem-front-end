@@ -1,0 +1,12 @@
+input, select {
+  padding: .3rem .54rem;
+  height: 27px;
+  background-color: #fff !important;
+}
+.input-group-prepend {
+  height: 27px;
+  .input-group-text {
+    cursor: pointer;
+    padding: 0.35rem;
+  }
+}
