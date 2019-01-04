@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
-import {Statut} from '../../../../shared/models/user.model';
+import {ComplaintStatus, ComplaintType, Statut} from '../../../../shared/models/user.model';
 
 @Component({
     selector: 'app-claim-requests',
@@ -17,7 +17,8 @@ export class ClaimRequestsComponent implements OnInit {
     itemsPerPage: number;
     sort: any;
     filter: any;
-    statusFilter = Object.keys(Statut);
+    complaintStatusFilter = Object.keys(ComplaintStatus);
+    complaintTypeFilter = Object.keys(ComplaintType);
 
     constructor(private myServices: ServicesService) {
     }
@@ -37,7 +38,7 @@ export class ClaimRequestsComponent implements OnInit {
     }
 
     getClaimRequests() {
-        this.myServices.getPageableComplaints(this.page, this.pageSize, this.filter, this.sort)
+        this.myServices.getPageableClientComplaints(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
                 this.complaints = response.data.content;
                 this.totalElements = response.data.totalElements;

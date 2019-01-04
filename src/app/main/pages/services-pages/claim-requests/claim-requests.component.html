@@ -22,7 +22,7 @@
     <section class="row">
         <div class="col-sm-12">
             <!-- What is-->
-            <div id="what-is" class="card">
+            <div id="what-is" class="card mb-0">
                 <div class="card-header">
                     <h4 class="card-title">Consulter vos demandes</h4>
                     <a class="heading-elements-toggle">
@@ -58,7 +58,8 @@
                                 </th>
                                 <th scope="col">{{'Objet' | translate }}
                                     <span sortable-column="object"></span>
-                                    <span filterable-column="object" filter-type="text"
+                                    <span filterable-column="object" filter-type="select"
+                                          [filter-select-data]="complaintTypeFilter"
                                           filter-placeholder="{{'Objet' | translate }}"></span>
                                 </th>
                                 <th scope="col">{{'Créée le' | translate }}
@@ -69,7 +70,7 @@
                                 <th scope="col">{{'Status' | translate }}
                                     <span sortable-column="status"></span>
                                     <span filterable-column="status" filter-type="select"
-                                          [filter-select-data]="statusFilter"
+                                          [filter-select-data]="complaintStatusFilter"
                                           filter-placeholder="{{'Status' | translate }}"></span>
                                 </th>
                             </tr>
@@ -84,7 +85,7 @@
                                     </td>
                                     <td>{{complaint.object}}</td>
                                     <td>{{complaint.createdDate | date:'dd-M-yyyy'}}</td>
-                                    <td><span class="badge badge-primary">{{complaint.status}}</span></td>
+                                    <td><app-badge [status]="complaint.status"></app-badge></td>
                                 </tr>
                             </ng-template>
                             </tbody>

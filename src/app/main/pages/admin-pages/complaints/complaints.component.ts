@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ComplaintService} from '../../../services/complaint.service';
 import {AdminService} from '../../../services/admin.service';
-import {Statut} from '../../../../shared/models/user.model';
+import {ComplaintStatus, ComplaintType} from '../../../../shared/models/user.model';
 
 @Component({
     selector: 'app-complaints',
@@ -20,7 +20,8 @@ export class ComplaintsComponent implements OnInit {
     sort: any;
     filter: any;
     agentsFilter: any = [];
-    statusFilter = Object.keys(Statut);
+    complaintStatusFilter = Object.keys(ComplaintStatus);
+    complaintTypeFilter = Object.keys(ComplaintType);
 
     constructor(private complaintService: ComplaintService,
                 private adminService: AdminService) {

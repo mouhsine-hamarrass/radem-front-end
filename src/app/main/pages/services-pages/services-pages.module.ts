@@ -12,12 +12,14 @@ import {ClaimRequestsComponent} from './claim-requests/claim-requests.component'
 import {ClaimDetailComponent} from './claim-detail/claim-detail.component';
 import {PrintableCancellationComponent} from './printable-cancellation/printable-cancellation.component';
 import {NewSubscriptionRequestComponent} from './new-subscription-request/new-subscription-request.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 import {ArchwizardModule} from 'angular-archwizard';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {SharedModule} from '../../../shared/shared.module';
+import {HttpClient} from '@angular/common/http';
+import { AutoReportsComponent } from './auto-reports/auto-reports.component';
 
 @NgModule({
     imports: [
@@ -28,7 +30,13 @@ import {SharedModule} from '../../../shared/shared.module';
         ReactiveFormsModule,
         TranslateModule,
         ComponentsModule,
-        TranslateModule.forChild(),
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
         SharedModule
     ],
     declarations: [
@@ -37,13 +45,17 @@ import {SharedModule} from '../../../shared/shared.module';
         CancellationRequestComponent,
         CancellationRequestsComponent,
         NewCancellationRequestComponent,
-        OnlinePaymentComponent,
+        // OnlinePaymentComponent,
         ClaimRequestsComponent,
         ClaimDetailComponent,
         PrintableCancellationComponent,
         NewSubscriptionRequestComponent,
         SubscriptionDetailComponent,
+        AutoReportsComponent,
     ]
 })
 export class ServicesPagesModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }

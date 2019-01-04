@@ -76,6 +76,14 @@ export class ServicesService {
             });
     }
 
+    getPageableClientComplaints(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/complaints/client/paged-list?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
+
     getComplaint(id: string): Observable<Response<ComplaintModel>> {
         return this.httpClient.get<Response<ComplaintModel>>(`${this.urlApi}/complaints/${id}`);
     }

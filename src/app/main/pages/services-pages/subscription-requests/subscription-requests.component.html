@@ -22,7 +22,7 @@
     <section class="row">
         <div class="col-sm-12">
             <!-- What is-->
-            <div id="what-is" class="card">
+            <div id="what-is" class="card mb-0">
                 <div class="card-header">
                     <h4 class="card-title">Consulter vos demandes</h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
@@ -80,10 +80,10 @@
                                             [colSpan]="4"></app-data-not-available>
                                     <ng-template #dataAvailable>
                                         <tr *ngFor="let request of subscriptionRequests">
-                                            <td>{{request.requestNumber}}</td>
+                                            <td><a [routerLink]="['/services/subscription-detail/', request.id]"><b>{{request.requestNumber}}</b></a>
                                             <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
                                             <td>{{request.type}}</td>
-                                            <td>{{request.status}}</td>
+                                            <td><app-badge [status]="request.status"></app-badge></td>
                                         </tr>
                                     </ng-template>
                                     </tbody>

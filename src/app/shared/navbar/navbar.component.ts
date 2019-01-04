@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {User} from '../../main/models/user.model';
 import {environment} from '../../../environments/environment';
 import {AuthHelper} from '../../core/services/security/auth.helper';
+import {HomeService} from '../../main/services/home.service';
 
 @Component({
     selector: 'app-navbar',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
 
     constructor(private oauthService: OAuthService,
                 private utilsService: UtilsService,
+                private homeService: HomeService,
                 private toastrService: ToastrService,
                 private router: Router) {
     }
@@ -30,8 +32,24 @@ export class NavbarComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
             this.user.avatar = this.user.avatar || environment.defaultAvatar;
         }
+        this.getNotifications();
     }
 
+    getNotifications() {
+        this.homeService.getAlertsNotification().subscribe(response => {
+            console.log(response.data);
+            this.alerts = response.data
+        }, err => {
+        });
+    }
+
+    readNotification(id, $index) {
+        this.homeService.readAlertNotification(id).subscribe(response => {
+            this.alerts.splice($index, 1);
+        }, err => {
+
+        })
+    }
 
     public logout() {
         this.oauthService.logout();

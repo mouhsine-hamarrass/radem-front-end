@@ -10,6 +10,9 @@ import {ProfileService} from '../../services/profile.service';
 import {AlertModel} from '../../models/alert.model';
 import {BaseChartDirective} from 'ng2-charts/ng2-charts';
 
+import {TranslateService} from '@ngx-translate/core';
+
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -127,8 +130,10 @@ export class HomePageComponent implements OnInit {
     private contractServices: ContractsService,
     private adminServices: AdminService,
     private profileService: ProfileService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private translate: TranslateService
   ) {
+      this.translate.use('fr');
   }
 
   public chartOptions(title) {
