@@ -18,6 +18,7 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
 import {RegisterComponent} from './register/register.component';
 import { EnableAccountComponent } from './enable-account/enable-account.component';
 import { RegisterSuccesComponent } from './register-succes/register-succes.component';
+import {ADVICE_ROUTES} from './routes/advice-page.routes';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACTS_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SETTLEMENTS_PAGES_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
 ];
 

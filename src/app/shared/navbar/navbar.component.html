@@ -48,14 +48,16 @@
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownNotifications">
                             <div *ngIf="alerts.length; else noNotifications">
-                                <div *ngFor="let alert of alerts">
-                                    <a class="dropdown-item" routerLink="">
-                                        <h5>{{alert.alert.alertType.title}}</h5>
-                                        <div class="text-muted">{{alert.alert.description}}</div>
-                                        - Consignes :
-                                        <p> {{alert.alert.instructions.content}}</p>
+                                <div *ngFor="let alert of alerts; let i = index; let $last = last">
+                                    <a class="dropdown-item" *ngIf="alert.status === 'READ'; else unReadStatus">
+                                        <span class="text-muted">{{alert.instructions}}</span>
                                     </a>
-                                    <div class="dropdown-divider"></div>
+                                    <ng-template #unReadStatus>
+                                        <a class="dropdown-item" (click)="readNotification(alert.id, i)">
+                                            <span>{{alert.instructions}}</span>
+                                        </a>
+                                    </ng-template>
+                                    <div class="dropdown-divider" [hidden]="$last"></div>
                                 </div>
                             </div>
                             <ng-template #noNotifications>

@@ -60,7 +60,7 @@
                         <th scope="col">{{'Etat' | translate }}
                             <span sortable-column="status"></span>
                             <span filterable-column="status" filter-type="select"
-                                  [filter-select-data]="statusFilter"
+                                  [filter-select-data]="complaintStatusFilter"
                                   filter-placeholder="{{'Etat' | translate }}"></span>
                         </th>
                     </tr>
@@ -79,7 +79,7 @@
                                 complaint.agent.lastname}}
                             </td>
                             <td>{{complaint.service}}</td>
-                            <td><span class="badge badge-primary">{{complaint.status | translate}}</span></td>
+                            <td><app-badge [status]="complaint.status"></app-badge></td>
                         </tr>
                     </ng-template>
                     </tbody>

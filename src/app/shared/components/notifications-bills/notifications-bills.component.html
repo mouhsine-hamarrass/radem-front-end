@@ -1,0 +1,12 @@
+<div *ngIf="alerts.length; else noNotifications">
+    <div *ngFor="let alert of alerts">
+        <a class="dropdown-item" routerLink="">
+            <h5>{{alert.title}}</h5>
+            <p> {{alert.alert.instructions}}</p>
+        </a>
+        <div class="dropdown-divider"></div>
+    </div>
+</div>
+<ng-template #noNotifications>
+    <span class="dropdown-item">Vous avez {{alerts.length}} notification.</span>
+</ng-template>

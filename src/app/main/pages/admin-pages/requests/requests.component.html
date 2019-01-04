@@ -101,7 +101,7 @@
                             <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
                             <td>{{!request.agent ? '-' : request.agent.firstname + ' ' + request.agent.lastname}}</td>
                             <td>{{!request?.service ? '-' : request?.service}}</td>
-                            <td><span class="badge badge-primary">{{request.status | translate}}</span></td>
+                            <td><app-badge [status]="request.status"></app-badge></td>
                         </tr>
                     </ng-template>
                     </tbody>

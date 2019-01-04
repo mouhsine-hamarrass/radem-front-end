@@ -87,9 +87,7 @@
                                             {{request.subscriptions[1]?.subscription}}
                                         </td>
                                         <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
-                                        <td>
-                                            <span class="badge badge-primary">{{request.status | translate}}</span>
-                                        </td>
+                                        <td><app-badge [status]="request.status"></app-badge></td>
                                     </tr>
                                 </ng-template>
                                 </tbody>

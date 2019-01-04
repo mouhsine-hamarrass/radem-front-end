@@ -8,6 +8,10 @@ import {PipesModule} from '../../../shared/pipes/pipes.module';
 import {HomeService} from '../../services/home.service';
 import {ProfileService} from '../../services/profile.service';
 import {UnpaidPageModule} from '../unpaid-page/unpaid-page.module';
+import {SharedModule} from '../../../shared/shared.module';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {HttpClient} from '@angular/common/http';
+import {createTranslateLoader} from '../../../app.translate.factory';
 
 @NgModule({
     imports: [
@@ -17,7 +21,14 @@ import {UnpaidPageModule} from '../unpaid-page/unpaid-page.module';
         BsDatepickerModule,
         HomePageRoutingModule,
         PipesModule,
-        UnpaidPageModule
+        UnpaidPageModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        })
     ],
     declarations: [HomePageComponent],
     providers: [
@@ -26,4 +37,7 @@ import {UnpaidPageModule} from '../unpaid-page/unpaid-page.module';
     ]
 })
 export class HomePageModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }

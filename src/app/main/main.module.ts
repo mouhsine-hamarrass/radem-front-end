@@ -17,6 +17,7 @@ import {ComplaintService} from './services/complaint.service';
 import {DirectivesModule} from '../shared/directives/directives.module';
 import {OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
 import {MY_MOMENT_FORMATS} from '../shared/shared.module';
+import {AdvicePageModule} from './pages/advice-page/advice-page.module';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import {MY_MOMENT_FORMATS} from '../shared/shared.module';
         HomePageModule,
         ServicesPagesModule,
         SettlementsPageModule,
-        UnpaidPageModule
+        UnpaidPageModule,
+        AdvicePageModule
     ]
 })
 export class MainModule {

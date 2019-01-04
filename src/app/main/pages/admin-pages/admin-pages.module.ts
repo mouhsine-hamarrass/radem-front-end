@@ -14,7 +14,7 @@ import {ProfilesComponent} from './profiles/profiles.component';
 import {ChecklistModule} from 'angular-checklist';
 import {NgxToggleModule} from 'ngx-toggle';
 import {BsDropdownModule, TabsModule} from 'ngx-bootstrap';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SettingsComponent} from './settings/settings.component';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
@@ -30,6 +30,8 @@ import {AlertNotificationsComponent} from './alert-notifications/alert-notificat
 import {ComplaintComponent} from './complaint/complaint.component';
 import {ComplaintsComponent} from './complaints/complaints.component';
 import {SharedModule} from '../../../shared/shared.module';
+import {createTranslateLoader} from '../../../app.translate.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -46,6 +48,13 @@ import {SharedModule} from '../../../shared/shared.module';
         QuillModule,
         ComponentsModule,
         BsDropdownModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
         SharedModule
     ],
     exports: [
@@ -77,4 +86,7 @@ import {SharedModule} from '../../../shared/shared.module';
     ]
 })
 export class AdminPagesModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }
