@@ -10,9 +10,13 @@ body {
     -moz-box-shadow: 0 8px 25px 2px rgba(0,0,0,0.2);
     box-shadow: 0 8px 25px 2px rgba(0,0,0,0.2);
     height: auto !important;
+    background-color: #fff;
+}
+html body.fixed-navbar {
+    padding-top: 0 !important;
 }
 .app-content.content {
-    min-height: auto !important;
+    /*min-height: auto !important;*/
 }
 .bg-info.bg-lighten-3 {
     background-color: #2E5797 !important;
