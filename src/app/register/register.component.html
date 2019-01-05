@@ -119,8 +119,8 @@
                                                 <div class="content col-md-6 condit">
                                                     <input id="conditions" type="checkbox"
                                                            (change)="setCheckbox()"/>
-                                                    <label for="conditions">J'accepte les conditions générales
-                                                        d'utilisation.</label>
+                                                    <label for="conditions" >J'accepte les <a class="term-of-use"  href="" routerLink="/term-of-use">conditions générales
+                                                      d'utilisation.</a> </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,9 +179,12 @@
 
                                         </div>
                                         <div class="btn-group ml-33">
+                                            <button type="button" class="btn btn-secondary" awPreviousStep>Back</button>
                                             <button type="button" id="toStep3" class="btn btn-primary next"
                                                     (click)="goToStep3()" awNextStep>Suivant
                                             </button>
+
+
                                         </div>
                                     </aw-wizard-step>
 
@@ -239,10 +242,14 @@
 
                                         </div>
                                         <div class="btn-group ml-33">
+                                          <button type="button" class="btn btn-secondary" awPreviousStep>Back
+                                          </button>
                                             <button [disabled]="!buttonCheck" type="button"
                                                     class="btn btn-primary next"
                                                     (click)="goToStep4()" awNextStep>Suivant
                                             </button>
+
+
                                         </div>
                                     </aw-wizard-step>
 
@@ -308,10 +315,14 @@
                                             </form>
                                         </div>
                                         <div class="btn-group ml-36">
+                                            <button type="button" class="btn btn-secondary" awPreviousStep>Back
+                                            </button>
                                             <button type="button" class="btn btn-primary" (click)="addUser()"
                                                     awNextStep>
                                                 S'inscrire
                                             </button>
+
+
                                         </div>
                                     </aw-wizard-completion-step>
                                 </aw-wizard>
