@@ -1,329 +1,341 @@
 <div class="container">
-    <app-navbar></app-navbar>
-    <app-second-navbar></app-second-navbar>
+  <app-navbaroffline></app-navbaroffline>
+  <app-second-navbar></app-second-navbar>
 
-    <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
-        <div class="app-content center-layout">
-            <div class="content-body">
-                <section>
-                    <div id="what-is" class="card mb-0">
-                        <div class="card-header">
-                            <div class="row card-title">
-                                <h4 class="ml-h4">Inscription</h4>
-                                <img class="ml-60p" src="/assets/app/images/logo/rademLogo.png">
-                            </div>
-                            <div class="heading-elements">
-                            </div>
-                        </div>
-                        <div class="card-content collapse show">
-                            <div class="card-body">
-                                <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
-                                           [navigationMode]="'strict'">
-                                    <aw-wizard-step [stepTitle]="'Identification'"
-                                                    [navigationSymbol]="{ symbol: '&#xe090;', fontFamily:'Simple-line-icons' }"
-                                                    class="offset-1 col-md-10">
-                                        <div class="mx-auto my-5">
-                                            <h6> Merci de bien vouloir choisir une des options suivantes et
-                                                renseigner
-                                                les
-                                                champs qui s'affichent :</h6>
-                                            <form [formGroup]="registerForm"
-                                                  class="mx-auto ng-pristine ng-valid ng-touched"
-                                                  novalidate>
-                                                <div class="container my-2 mx-6">
-                                                    <div class="nav-vertical">
-                                                        <ul class="nav nav-tabs nav-left nav-border-left">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link active" (click)="setBill()"
-                                                                   id="baseVerticalRight2-tab1" data-toggle="tab"
-                                                                   aria-controls="tabVerticalRight21"
-                                                                   href="#tabVerticalRight21" aria-expanded="true">
-                                                                    Facture</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" (click)="setContr()"
-                                                                   id="baseVerticalRight2-tab2" data-toggle="tab"
-                                                                   aria-controls="tabVerticalRight22"
-                                                                   href="#tabVerticalRight22" aria-expanded="false">
-                                                                    Contrat</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" (click)="setRef()"
-                                                                   id="baseVerticalRight2-tab3" data-toggle="tab"
-                                                                   aria-controls="tabVerticalRight23"
-                                                                   href="#tabVerticalRight23"
-                                                                   aria-expanded="false">Référence</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="tab-content px-1">
-                                                            <div role="tabpanel" class="tab-pane active"
-                                                                 id="tabVerticalRight21"
-                                                                 aria-expanded="true"
-                                                                 aria-labelledby="baseVerticalRight2-tab1">
-                                                                <div class="ml-1">
-                                                                    <label class="form-check-label mb-1"
-                                                                           for="factRadio">Facture
-                                                                        :</label>
-                                                                    <input type="text" formControlName="facture"
-                                                                           required
-                                                                           id="facture" name="facture"
-                                                                           class="form-control form-control col-md-10"
-                                                                           placeholder="Facture">
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="tabVerticalRight22"
-                                                                 aria-labelledby="baseVerticalRight2-tab2">
-                                                                <div class="ml-1">
-                                                                    <label class="form-check-label mb-1"
-                                                                           for="factRadio">Service
-                                                                        :</label>
-                                                                    <select formControlName="service"
-                                                                            class="form-control col-md-10 mb-1" #t>
-                                                                        <option value="eau">Eau</option>
-                                                                        <option value="electricite">Electricité
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="ml-1">
-                                                                    <label class="form-check-label mb-1"
-                                                                           for="factRadio">Contrat
-                                                                        :</label>
-                                                                    <input type="text" formControlName="contrat"
-                                                                           required
-                                                                           id="contrat" name="contrat"
-                                                                           class="form-control form-control col-md-10"
-                                                                           placeholder="Nº de contrat">
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="tabVerticalRight23"
-                                                                 aria-labelledby="baseVerticalRight2-tab3">
-                                                                <div class="ml-1">
-                                                                    <label class="form-check-label mb-1"
-                                                                           for="factRadio">Reference
-                                                                        :</label>
-                                                                    <input type="text" formControlName="reference"
-                                                                           required
-                                                                           id="reference" name="reference"
-                                                                           class="form-control form-control col-md-10"
-                                                                           placeholder="Reference">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <div class="mt-1" style="margin-left: 9rem;">
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="content col-md-6 condit">
-                                                    <input id="conditions" type="checkbox"
-                                                           (change)="setCheckbox()"/>
-                                                    <label for="conditions">J'accepte les conditions générales
-                                                        d'utilisation.</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="btn-group ml-44">
-                                            <button [disabled]="!checkbox" type="button"
-                                                    (click)="goToStep2() === true"
-                                                    class="btn btn-primary" awNextStep>Suivant
-                                            </button>
-                                        </div>
-                                    </aw-wizard-step>
-
-
-                                    <aw-wizard-step [stepTitle]="'Confirmation'"
-                                                    [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
-                                        <div class="offset-2 col-md-8 my-5">
-                                            <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en
-                                                ligne:</h6>
-                                            <form [formGroup]="registerForm">
-                                                <div class="form-group">
-                                                    <label>Nom :</label>
-                                                    <input formControlName="lastname" type="text"
-                                                           class="form-control"
-                                                           disabled>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Prénom :</label>
-                                                    <input formControlName="firstname" type="text"
-                                                           class="form-control"
-                                                           disabled>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Séléctionnez une question :</label>
-                                                    <select formControlName="questions" class="form-control">
-                                                        <option *ngFor="let question of questions"
-                                                                value="{{question.question}}">{{question.question}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Votre réponse :</label>
-                                                    <fieldset class="form-group position-relative">
-                                                        <input type="text" formControlName="answer"
-                                                               class="form-control"
-                                                               placeholder="Votre réponse ..">
-                                                        <div class="form-control-position">
-                                                            <a>
-                                                                <i title="Cliquez pour vérifier votre réponse"
-                                                                   [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'"
-                                                                   class=""
-                                                                   (click)="Verification()"></i>
-                                                            </a>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                        <div class="btn-group ml-33">
-                                            <button type="button" id="toStep3" class="btn btn-primary next"
-                                                    (click)="goToStep3()" awNextStep>Suivant
-                                            </button>
-                                        </div>
-                                    </aw-wizard-step>
-
-
-                                    <aw-wizard-step [stepTitle]="'Infos du compte'"
-                                                    [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
-                                        <div class="offset-2 col-md-8 my-5">
-                                            <h6> Veuillez renseigner vos coordonées dans les champs ci-dessous pour
-                                                confirmer
-                                                votre inscription :</h6>
-                                            <form [formGroup]="registerForm">
-                                                <div class="form-group">
-                                                    <label>Nom :</label>
-                                                    <input formControlName="lastname2" type="text"
-                                                           class="form-control"
-                                                           disabled>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Prénom :</label>
-                                                    <input formControlName="firstname2" type="text"
-                                                           class="form-control"
-                                                           disabled>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Adresse e-mail :</label>
-                                                    <input formControlName="email" type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Numero de téléphone :</label>
-                                                    <input formControlName="phone" type="phone"
-                                                           class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Nom d'utilisateur :</label>
-                                                    <input formControlName="username" type="text"
-                                                           class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Mot de passe :</label>
-                                                    <input formControlName="password" type="password"
-                                                           class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Confirmer votre mot de passe :</label>
-                                                    <input formControlName="password2" type="password"
-                                                           class="form-control"
-                                                           (keyup)="checkPassword()">
-                                                    <label *ngIf="!passCheck" id="passwordCheck">Les mots de passe
-                                                        ne
-                                                        sont
-                                                        pas
-                                                        identiques !</label>
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                        <div class="btn-group ml-33">
-                                            <button [disabled]="!buttonCheck" type="button"
-                                                    class="btn btn-primary next"
-                                                    (click)="goToStep4()" awNextStep>Suivant
-                                            </button>
-                                        </div>
-                                    </aw-wizard-step>
-
-
-                                    <aw-wizard-completion-step [stepTitle]="'Validation'"
-                                                               [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
-                                        <div class="offset-2 col-md-8 my-5">
-                                            <h6>Voici un récapitulatif de vos informations.</h6>
-                                            <form [formGroup]="detailsForm">
-                                                <label>Nom :</label>
-                                                <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="text" formControlName="lastname"
-                                                           class="form-control"
-                                                           disabled>
-                                                    <div class="form-control-position">
-                                                        <i class="ft-user primary font-4"></i>
-                                                    </div>
-                                                </fieldset>
-                                                <div class="form-group">
-                                                    <label>Prénom :</label>
-                                                    <fieldset class="form-group position-relative has-icon-left">
-                                                        <input type="text" formControlName="firstname"
-                                                               class="form-control"
-                                                               disabled>
-                                                        <div class="form-control-position">
-                                                            <i class="ft-user primary font-4"></i>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Téléphone :</label>
-                                                    <fieldset class="form-group position-relative has-icon-left">
-                                                        <input type="text" formControlName="phone"
-                                                               class="form-control"
-                                                               disabled>
-                                                        <div class="form-control-position">
-                                                            <i class="ft-phone primary font-4"></i>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Adresse e-mail :</label>
-                                                    <fieldset class="form-group position-relative has-icon-left">
-                                                        <input type="text" formControlName="email"
-                                                               class="form-control"
-                                                               disabled>
-                                                        <div class="form-control-position">
-                                                            <i class="ft-at-sign primary font-4"></i>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Nom d'utilisateur :</label>
-                                                    <fieldset class="form-group position-relative has-icon-left">
-                                                        <input type="text" formControlName="username"
-                                                               class="form-control"
-                                                               disabled>
-                                                        <div class="form-control-position">
-                                                            <i class="ft-user primary font-4"></i>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="btn-group ml-36">
-                                            <button type="button" class="btn btn-primary" (click)="addUser()"
-                                                    awNextStep>
-                                                S'inscrire
-                                            </button>
-                                        </div>
-                                    </aw-wizard-completion-step>
-                                </aw-wizard>
-                            </div>
-                        </div>
-                        <!--/ What is-->
-                    </div>
-                </section>
+  <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
+    <div class="app-content center-layout">
+      <div class="content-body">
+        <section>
+          <div id="what-is" class="card mb-0">
+            <div class="card-header">
+              <div class="row card-title">
+                <h4 class="ml-h4">Inscription</h4>
+                <img class="ml-60p" src="/assets/app/images/logo/rademLogo.png">
+              </div>
+              <div class="heading-elements">
+              </div>
             </div>
-        </div>
-    </div>
+            <div class="card-content collapse show">
+              <div class="card-body">
+                <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
+                           [navigationMode]="'strict'">
+                  <aw-wizard-step [stepTitle]="'Identification'"
+                                  [navigationSymbol]="{ symbol: '&#xe090;', fontFamily:'Simple-line-icons' }"
+                                  class="offset-1 col-md-10">
+                    <div class="mx-auto my-5">
+                      <h6> Merci de bien vouloir choisir une des options suivantes et
+                        renseigner
+                        les
+                        champs qui s'affichent :</h6>
+                      <form [formGroup]="registerForm"
+                            class="mx-auto ng-pristine ng-valid ng-touched"
+                            novalidate>
+                        <div class="container my-2 mx-6">
+                          <div class="nav-vertical">
+                            <ul class="nav nav-tabs nav-left nav-border-left">
+                              <li class="nav-item">
+                                <a class="nav-link active" (click)="setBill()"
+                                   id="baseVerticalRight2-tab1" data-toggle="tab"
+                                   aria-controls="tabVerticalRight21"
+                                   href="#tabVerticalRight21" aria-expanded="true">
+                                  Facture</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" (click)="setContr()"
+                                   id="baseVerticalRight2-tab2" data-toggle="tab"
+                                   aria-controls="tabVerticalRight22"
+                                   href="#tabVerticalRight22" aria-expanded="false">
+                                  Contrat</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" (click)="setRef()"
+                                   id="baseVerticalRight2-tab3" data-toggle="tab"
+                                   aria-controls="tabVerticalRight23"
+                                   href="#tabVerticalRight23"
+                                   aria-expanded="false">Référence</a>
+                              </li>
+                            </ul>
+                            <div class="tab-content px-1">
+                              <div role="tabpanel" class="tab-pane active"
+                                   id="tabVerticalRight21"
+                                   aria-expanded="true"
+                                   aria-labelledby="baseVerticalRight2-tab1">
+                                <div class="ml-1">
+                                  <label class="form-check-label mb-1"
+                                         for="factRadio">Facture
+                                    :</label>
+                                  <input type="text" formControlName="facture"
+                                         required
+                                         id="facture" name="facture"
+                                         class="form-control form-control col-md-10"
+                                         placeholder="Facture">
+                                </div>
+                              </div>
+                              <div class="tab-pane" id="tabVerticalRight22"
+                                   aria-labelledby="baseVerticalRight2-tab2">
+                                <div class="ml-1">
+                                  <label class="form-check-label mb-1"
+                                         for="factRadio">Service
+                                    :</label>
+                                  <select formControlName="service"
+                                          class="form-control col-md-10 mb-1" #t>
+                                    <option value="eau">Eau</option>
+                                    <option value="electricite">Electricité
+                                    </option>
+                                  </select>
+                                </div>
+                                <div class="ml-1">
+                                  <label class="form-check-label mb-1"
+                                         for="factRadio">Contrat
+                                    :</label>
+                                  <input type="text" formControlName="contrat"
+                                         required
+                                         id="contrat" name="contrat"
+                                         class="form-control form-control col-md-10"
+                                         placeholder="Nº de contrat">
+                                </div>
+                              </div>
+                              <div class="tab-pane" id="tabVerticalRight23"
+                                   aria-labelledby="baseVerticalRight2-tab3">
+                                <div class="ml-1">
+                                  <label class="form-check-label mb-1"
+                                         for="factRadio">Reference
+                                    :</label>
+                                  <input type="text" formControlName="reference"
+                                         required
+                                         id="reference" name="reference"
+                                         class="form-control form-control col-md-10"
+                                         placeholder="Reference">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="mt-1" style="margin-left: 9rem;">
 
-    <app-footer></app-footer>
+                      </div>
+                      <div class="row">
+                        <div class="content col-md-6 condit">
+                          <input id="conditions" type="checkbox"
+                                 (change)="setCheckbox()"/>
+                          <label for="conditions">J'accepte les <a class="term-of-use" href=""
+                                                                   routerLink="/term-of-use">conditions générales
+                            d'utilisation.</a> </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-group ml-44">
+                      <button [disabled]="!checkbox" type="button"
+                              (click)="goToStep2() === true"
+                              class="btn btn-primary" awNextStep>Suivant
+                      </button>
+                    </div>
+                  </aw-wizard-step>
+
+
+                  <aw-wizard-step [stepTitle]="'Confirmation'"
+                                  [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
+                    <div class="offset-2 col-md-8 my-5">
+                      <h6> Veuillez remplir les champs ci-dessous pour créer votre compte en
+                        ligne:</h6>
+                      <form [formGroup]="registerForm">
+                        <div class="form-group">
+                          <label>Nom :</label>
+                          <input formControlName="lastname" type="text"
+                                 class="form-control"
+                                 disabled>
+                        </div>
+                        <div class="form-group">
+                          <label>Prénom :</label>
+                          <input formControlName="firstname" type="text"
+                                 class="form-control"
+                                 disabled>
+                        </div>
+                        <div class="form-group">
+                          <label>Séléctionnez une question :</label>
+                          <select formControlName="questions" class="form-control">
+                            <option *ngFor="let question of questions"
+                                    value="{{question.question}}">{{question.question}}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label>Votre réponse :</label>
+                          <fieldset class="form-group position-relative">
+                            <input type="text" formControlName="answer"
+                                   class="form-control"
+                                   placeholder="Votre réponse ..">
+                            <div class="form-control-position">
+                              <a>
+                                <i title="Cliquez pour vérifier votre réponse"
+                                   [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'"
+                                   class=""
+                                   (click)="Verification()"></i>
+                              </a>
+                            </div>
+                          </fieldset>
+                        </div>
+                      </form>
+
+                    </div>
+                    <div class="btn-group ml-33">
+                      <button type="button" class="btn btn-secondary" awPreviousStep>Back</button>
+                      <button type="button" id="toStep3" class="btn btn-primary next"
+                              (click)="goToStep3()" awNextStep>Suivant
+                      </button>
+
+
+                    </div>
+                  </aw-wizard-step>
+
+
+                  <aw-wizard-step [stepTitle]="'Infos du compte'"
+                                  [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
+                    <div class="offset-2 col-md-8 my-5">
+                      <h6> Veuillez renseigner vos coordonées dans les champs ci-dessous pour
+                        confirmer
+                        votre inscription :</h6>
+                      <form [formGroup]="registerForm">
+                        <div class="form-group">
+                          <label>Nom :</label>
+                          <input formControlName="lastname2" type="text"
+                                 class="form-control"
+                                 disabled>
+                        </div>
+                        <div class="form-group">
+                          <label>Prénom :</label>
+                          <input formControlName="firstname2" type="text"
+                                 class="form-control"
+                                 disabled>
+                        </div>
+                        <div class="form-group">
+                          <label>Adresse e-mail :</label>
+                          <input formControlName="email" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label>Numero de téléphone :</label>
+                          <input formControlName="phone" type="phone"
+                                 class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label>Nom d'utilisateur :</label>
+                          <input formControlName="username" type="text"
+                                 class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label>Mot de passe :</label>
+                          <input formControlName="password" type="password"
+                                 class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label>Confirmer votre mot de passe :</label>
+                          <input formControlName="password2" type="password"
+                                 class="form-control"
+                                 (keyup)="checkPassword()">
+                          <label *ngIf="!passCheck" id="passwordCheck">Les mots de passe
+                            ne
+                            sont
+                            pas
+                            identiques !</label>
+                        </div>
+                      </form>
+
+                    </div>
+                    <div class="btn-group ml-33">
+                      <button type="button" class="btn btn-secondary" awPreviousStep>Back
+                      </button>
+                      <button [disabled]="!buttonCheck" type="button"
+                              class="btn btn-primary next"
+                              (click)="goToStep4()" awNextStep>Suivant
+                      </button>
+
+
+                    </div>
+                  </aw-wizard-step>
+
+
+                  <aw-wizard-completion-step [stepTitle]="'Validation'"
+                                             [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
+                    <div class="offset-2 col-md-8 my-5">
+                      <h6>Voici un récapitulatif de vos informations.</h6>
+                      <form [formGroup]="detailsForm">
+                        <label>Nom :</label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                          <input type="text" formControlName="lastname"
+                                 class="form-control"
+                                 disabled>
+                          <div class="form-control-position">
+                            <i class="ft-user primary font-4"></i>
+                          </div>
+                        </fieldset>
+                        <div class="form-group">
+                          <label>Prénom :</label>
+                          <fieldset class="form-group position-relative has-icon-left">
+                            <input type="text" formControlName="firstname"
+                                   class="form-control"
+                                   disabled>
+                            <div class="form-control-position">
+                              <i class="ft-user primary font-4"></i>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="form-group">
+                          <label>Téléphone :</label>
+                          <fieldset class="form-group position-relative has-icon-left">
+                            <input type="text" formControlName="phone"
+                                   class="form-control"
+                                   disabled>
+                            <div class="form-control-position">
+                              <i class="ft-phone primary font-4"></i>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="form-group">
+                          <label>Adresse e-mail :</label>
+                          <fieldset class="form-group position-relative has-icon-left">
+                            <input type="text" formControlName="email"
+                                   class="form-control"
+                                   disabled>
+                            <div class="form-control-position">
+                              <i class="ft-at-sign primary font-4"></i>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="form-group">
+                          <label>Nom d'utilisateur :</label>
+                          <fieldset class="form-group position-relative has-icon-left">
+                            <input type="text" formControlName="username"
+                                   class="form-control"
+                                   disabled>
+                            <div class="form-control-position">
+                              <i class="ft-user primary font-4"></i>
+                            </div>
+                          </fieldset>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="btn-group ml-36">
+                      <button type="button" class="btn btn-secondary" awPreviousStep>Back
+                      </button>
+                      <button type="button" class="btn btn-primary" (click)="addUser()"
+                              awNextStep>
+                        S'inscrire
+                      </button>
+
+
+                    </div>
+                  </aw-wizard-completion-step>
+                </aw-wizard>
+              </div>
+            </div>
+            <!--/ What is-->
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
 
 </div>

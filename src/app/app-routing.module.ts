@@ -18,6 +18,7 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
 import {RegisterComponent} from './register/register.component';
 import { EnableAccountComponent } from './enable-account/enable-account.component';
 import { RegisterSuccesComponent } from './register-succes/register-succes.component';
+import { TermOfUseComponent } from './term-of-use/term-of-use.component';
 import {ADVICE_ROUTES} from './routes/advice-page.routes';
 
 const appRoutes: Routes = [
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'enable-account', component: EnableAccountComponent},
   {path: 'register-succes', component: RegisterSuccesComponent},
+  {path: 'term-of-use', component: TermOfUseComponent},
   {path: '', component: LoginComponent, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},

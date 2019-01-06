@@ -119,7 +119,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  goToStep2() {
+  goToStep2():boolean {
     if (this.method === 'BILL') {
       this.bill = this.registerForm.controls.facture.value;
       this.adminService.getUserWithBill(this.bill).subscribe(response => {
@@ -150,6 +150,7 @@ export class RegisterComponent implements OnInit {
     this.adminService.getQuestions().subscribe(response => {
       this.questions = response;
     })
+    return false;
   }
 
   goToStep3() {

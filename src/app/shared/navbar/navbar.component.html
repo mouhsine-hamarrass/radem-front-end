@@ -70,8 +70,7 @@
                             </ng-template>
                         </div>
                     </li>
-                    <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
-                        *ngIf="user; else noUserTemplate">
+                    <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right">
                         <div>
                             <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link" id="dropdownUser"
                                ngbDropdownToggle>
@@ -99,18 +98,7 @@
                             </div>
                         </div>
                     </li>
-                    <ng-template #noUserTemplate>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/login">
-                                Se connecter
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/register">
-                                Inscription
-                            </a>
-                        </li>
-                    </ng-template>
+
                 </ul>
             </div>
         </div>
