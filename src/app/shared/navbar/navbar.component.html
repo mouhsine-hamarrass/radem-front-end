@@ -42,7 +42,7 @@
                 </ul>
                 <ul class="nav navbar-nav float-right float-sm-left">
                     <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
-                        *ngIf="user">
+                        *ngIf="user && href !== 'admin'">
                         <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link"
                            id="dropdownNotifications"
                            ngbDropdownToggle>
@@ -70,35 +70,45 @@
                             </ng-template>
                         </div>
                     </li>
-                    <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right">
-                        <div>
-                            <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link" id="dropdownUser"
-                               ngbDropdownToggle>
+                    <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
+                        *ngIf="user; else noUserTemplate">
+                        <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link" id="dropdownUser"
+                           ngbDropdownToggle>
                               <span class="avatar avatar-online">
                                 <img [src]="user?.avatar" class="rounded-circle" alt="avatar">
                               </span>
-                                <span class="user-name">{{user?.firstname + ' '+ user?.lastname}}</span>
+                            <span class="user-name">{{user?.firstname + ' '+ user?.lastname}}</span>
+                        </a>
+                        <div ngbDropdownMenu aria-labelledby="dropdownUser">
+                            <a class="dropdown-item" routerLink="/account/profile">
+                                <i class="ft-user"></i> Mon compte
                             </a>
-                            <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                                <a class="dropdown-item" routerLink="/account/profile">
-                                    <i class="ft-user"></i> Mon compte
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" routerLink="/admin">
-                                    <i class="ft-settings"></i> Administration
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" routerLink="/admin">
-                                    <i class="ft-bell"></i> Notifications
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" (click)="logout()">
-                                    <i class="ft-power"></i> Déconnexion
-                                </a>
-                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" routerLink="/admin">
+                                <i class="ft-settings"></i> Administration
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" routerLink="/alerts">
+                                <i class="ft-bell"></i> Notifications
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" (click)="logout()">
+                                <i class="ft-power"></i> Déconnexion
+                            </a>
                         </div>
                     </li>
-
+                    <ng-template #noUserTemplate>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/login">
+                                Se connecter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/register">
+                                Inscription
+                            </a>
+                        </li>
+                    </ng-template>
                 </ul>
             </div>
         </div>

@@ -18,8 +18,12 @@ html body.fixed-navbar {
     padding-top: 0 !important;
 }
 
+.bg-lighten-3, .bg-lighten-1 {
+    background-color: #FFFFFF !important;
+}
 .app-content {
     background-color: #fff;
+    min-height: calc(100vh - 179px) !important;
 }
 
 .bg-info.bg-lighten-3 {

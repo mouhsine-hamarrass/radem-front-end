@@ -9,6 +9,7 @@ import {Setting} from '../models/setting.model';
 import {ServiceModel} from '../models/service.model';
 import {AlertModel} from '../models/alert.model';
 import {AlertNotificationModel} from '../models/alert-notification.model';
+import {DynamicModel} from '../models/dynamic.model';
 
 
 @Injectable()
@@ -324,6 +325,14 @@ export class AdminService {
 
     saveAdvices(advices: Setting): Observable<Response<Setting>> {
         return this.httpClient.put<Response<Setting>>(`${this.apiUrl}/settings/ADVICES`, advices, {headers: this.headers});
+    }
+
+    getDynamicContent(code: string): Observable<Response<DynamicModel>> {
+        return this.httpClient.get<Response<DynamicModel>>(`${this.apiUrl}/dynamicContent/${code}`);
+    }
+
+    saveDynamicContent(code: string, content: DynamicModel): Observable<Response<DynamicModel>> {
+        return this.httpClient.put<Response<DynamicModel>>(`${this.apiUrl}/dynamicContent/${code}`, content, {headers: this.headers});
     }
 
     /**

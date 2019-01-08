@@ -17,6 +17,7 @@ import {HomeService} from '../../main/services/home.service';
 export class NavbarComponent implements OnInit {
     public user: User;
     public applogo: string;
+    public href: string = '';
     alerts: Array<any> = [];
 
     constructor(private oauthService: OAuthService,
@@ -32,13 +33,17 @@ export class NavbarComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
             this.user.avatar = this.user.avatar || environment.defaultAvatar;
         }
-        this.getNotifications();
+        this.href = this.router.url;
+        this.href = this.href.substr(1, this.href.length - 1);
+        if (this.user && this.user.id && this.href !== 'admin') {
+            this.getNotifications();
+        }
     }
 
     getNotifications() {
         this.homeService.getAlertsNotification().subscribe(response => {
-          if(response && response.data)
-            this.alerts = response.data;
+            if (response && response.data)
+                this.alerts = response.data;
         }, err => {
         });
     }

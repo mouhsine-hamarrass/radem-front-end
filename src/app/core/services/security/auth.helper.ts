@@ -45,7 +45,7 @@ export class AuthHelper {
      * @param token the token with all the info
      * @param expiredTime the total seconds after the page should expire
      */
-    static addTokenInfo(userData: OauthToken, expiredTime: number) {debugger;
+    static addTokenInfo(userData: OauthToken, expiredTime: number) {
         const expiredTimeString = CommonUtil.changeExpiredTime(expiredTime);
         document.cookie = AuthHelper.TOKEN_ID + '=' + userData.accessToken + '; expires=' + expiredTimeString + '; path=/';
         document.cookie = AuthHelper.TOKEN_TYPE + '=' + userData.tokenType + '; expires=' + expiredTimeString + '; path=/';

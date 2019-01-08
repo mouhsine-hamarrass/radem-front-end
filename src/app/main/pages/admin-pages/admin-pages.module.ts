@@ -32,6 +32,7 @@ import {ComplaintsComponent} from './complaints/complaints.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
+import {DynamicContentPagesModule} from './dynamic-content-pages/dynamic-content-pages.module';
 
 @NgModule({
     imports: [
@@ -48,6 +49,7 @@ import {HttpClient} from '@angular/common/http';
         QuillModule,
         ComponentsModule,
         BsDropdownModule,
+        DynamicContentPagesModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,

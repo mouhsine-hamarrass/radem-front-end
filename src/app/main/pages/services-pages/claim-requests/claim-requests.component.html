@@ -1,20 +1,18 @@
 <!--Tooltip Starts-->
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-1">
-        <h3 class="content-header-title">Réclamations</h3>
-    </div>
-    <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-        <div class="breadcrumb-wrapper col-12">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a routerLink="/home">Accueil</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a>Services</a>
-                </li>
-                <li class="breadcrumb-item active">Réclamations
-                </li>
-            </ol>
+<div class="content-header back col-12 mb-1 mt-1">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">Réclamations</h3>
+        </div>
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/home">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active">Réclamations</li>
+                </ol>
+            </div>
         </div>
     </div>
 </div>
@@ -85,7 +83,9 @@
                                     </td>
                                     <td>{{complaint.object}}</td>
                                     <td>{{complaint.createdDate | date:'dd-M-yyyy'}}</td>
-                                    <td><app-badge [status]="complaint.status"></app-badge></td>
+                                    <td>
+                                        <app-badge [status]="complaint.status"></app-badge>
+                                    </td>
                                 </tr>
                             </ng-template>
                             </tbody>

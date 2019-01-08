@@ -1,0 +1,48 @@
+<nav aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Demande de réclamation</li>
+  </ul>
+</nav>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h4>Contenu dynamique</h4>
+    </div>
+    <div class="card-body">
+      <form role="form" [formGroup]="dynamicPageForm" (ngSubmit)="save(dynamicPageForm.value)" novalidate>
+
+        <div class="form-group">
+          <label for="title" class="text-bold-700">Titre</label>
+          <input type="email" class="form-control" formControlName="title"
+                 id="title" placeholder="Titre de la page">
+          <div class="text-danger"
+               *ngIf="!dynamicPageForm.controls['title'].valid && dynamicPageForm.controls['title'].touched">
+            <div *ngIf="dynamicPageForm.controls['title'].errors.required">
+              Ce champs obligatoire
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="content" class="text-bold-700">Contenu</label>
+          <quill-editor #quillEditor formControlName="content"
+                        id="content" placeholder="Contenu de la page">
+          </quill-editor>
+          <div class="text-danger"
+               *ngIf="!dynamicPageForm.controls['content'].valid && dynamicPageForm.controls['content'].touched">
+            <div *ngIf="dynamicPageForm.controls['content'].errors.required">
+              Ce champs obligatoire
+            </div>
+          </div>
+        </div>
+
+        <div class="pull-right">
+          <button class="btn btn btn-outline-primary" [disabled]="dynamicPageForm.invalid" type="submit">
+            Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

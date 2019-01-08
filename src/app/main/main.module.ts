@@ -18,6 +18,8 @@ import {DirectivesModule} from '../shared/directives/directives.module';
 import {OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
 import {MY_MOMENT_FORMATS} from '../shared/shared.module';
 import {AdvicePageModule} from './pages/advice-page/advice-page.module';
+import {DynamicContentPagesModule} from './pages/dynamic-content-pages/dynamic-content-pages.module';
+import {AlertNotificationsPageModule} from './pages/alert-notifications-page/alert-notifications-page.module';
 
 @NgModule({
     imports: [
@@ -31,6 +33,9 @@ import {AdvicePageModule} from './pages/advice-page/advice-page.module';
         SettlementsPageModule,
         UnpaidPageModule,
         DirectivesModule,
+        AdvicePageModule,
+        AlertNotificationsPageModule,
+        DynamicContentPagesModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -54,7 +59,9 @@ import {AdvicePageModule} from './pages/advice-page/advice-page.module';
         ServicesPagesModule,
         SettlementsPageModule,
         UnpaidPageModule,
-        AdvicePageModule
+        AdvicePageModule,
+        AlertNotificationsPageModule,
+        DynamicContentPagesModule
     ]
 })
 export class MainModule {
