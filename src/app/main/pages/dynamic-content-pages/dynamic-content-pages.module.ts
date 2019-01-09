@@ -12,11 +12,21 @@ import {RegulationComponent} from './regulation/regulation.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {DynamicContentPagesRoutingModule} from './dynamic-content-pages-routing.module';
 import { AdviceComponent } from './advice/advice.component';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../../app.translate.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
     imports: [
         CommonModule,
         DynamicContentPagesRoutingModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
         SharedModule
     ],
     declarations: [
@@ -33,4 +43,7 @@ import { AdviceComponent } from './advice/advice.component';
     ]
 })
 export class DynamicContentPagesModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }

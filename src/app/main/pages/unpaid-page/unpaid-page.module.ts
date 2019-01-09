@@ -7,6 +7,9 @@ import {UnpaidPageRoutingModule} from './unpaid-page-routing.module';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared/shared.module';
 import { UnpaidTableComponent } from './unpaid-table/unpaid-table.component';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../../app.translate.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -15,6 +18,13 @@ import { UnpaidTableComponent } from './unpaid-table/unpaid-table.component';
         UnpaidPageRoutingModule,
         AngularFontAwesomeModule,
         ComponentsModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
         SharedModule
     ],
     declarations: [
@@ -24,4 +34,7 @@ import { UnpaidTableComponent } from './unpaid-table/unpaid-table.component';
     exports: [UnpaidTableComponent]
 })
 export class UnpaidPageModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }

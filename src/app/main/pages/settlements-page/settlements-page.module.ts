@@ -7,6 +7,9 @@ import {SettlementsPageRoutingModule} from './settlements-page-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BsDropdownModule} from 'ngx-bootstrap';
 import {SharedModule} from '../../../shared/shared.module';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../../app.translate.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -17,6 +20,13 @@ import {SharedModule} from '../../../shared/shared.module';
         ComponentsModule,
         BsDropdownModule,
         ReactiveFormsModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
         SharedModule
     ],
     declarations: [
@@ -24,4 +34,7 @@ import {SharedModule} from '../../../shared/shared.module';
     ]
 })
 export class SettlementsPageModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }
