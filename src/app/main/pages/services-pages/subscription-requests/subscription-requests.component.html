@@ -2,18 +2,18 @@
 <div class="content-header back col-12 mb-1 mt-1">
     <div class="row">
         <div class="col-md-6 col-12">
-            <h3 class="content-header-title">Demande d'abonnement</h3>
+            <h3 class="content-header-title">{{'Subscription' | translate}}</h3>
         </div>
         <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a routerLink="/home">Accueil</a>
+                        <a routerLink="/home">{{'HOME' | translate}}</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a>Services</a>
                     </li>
-                    <li class="breadcrumb-item active">Abonnement
+                    <li class="breadcrumb-item active">{{'Subscription' | translate}}
                     </li>
                 </ol>
             </div>
@@ -26,13 +26,13 @@
             <!-- What is-->
             <div id="what-is" class="card mb-0">
                 <div class="card-header">
-                    <h4 class="card-title">Consulter vos demandes</h4>
+                    <h4 class="card-title">{{'Consult_your_requests' | translate}}</h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline">
                             <li>
                                 <a routerLink="/services/new-subscription-request">
-                                    <i class="fa fa-plus"></i> Nouvelle demande d'abonnement</a>
+                                    <i class="fa fa-plus"></i>{{'New_subscription_request' | translate}}</a>
                             </li>
                         </ul>
                     </div>
@@ -53,20 +53,20 @@
                                        filterable-table (filtred)="onFiltred($event)">
                                     <thead class="table-light">
                                     <tr>
-                                        <th scope="col">{{'Nº demande' | translate }}
+                                        <th scope="col">{{'REQUEST_NUMBER' | translate }}
                                             <span sortable-column="requestNumber"></span>
                                             <span filterable-column="requestNumber" filter-type="text"
-                                                  filter-placeholder="{{'Nº demande' | translate }}"></span>
+                                                  filter-placeholder="{{'REQUEST_NUMBER' | translate }}"></span>
                                         </th>
-                                        <th scope="col">{{'Créée le' | translate }}
+                                        <th scope="col">{{'CREATED_ON' | translate }}
                                             <span sortable-column="createdAt"></span>
                                             <span filterable-column="createdAt" filter-type="date"
-                                                  filter-placeholder="{{'Créée le' | translate }}"></span>
+                                                  filter-placeholder="{{'CREATED_ON' | translate }}"></span>
                                         </th>
-                                        <th scope="col">{{'Type' | translate }}
+                                        <th scope="col">{{'TYPE' | translate }}
                                             <span sortable-column="type"></span>
                                             <span filterable-column="type" filter-type="text"
-                                                  filter-placeholder="{{'Type' | translate }}"></span>
+                                                  filter-placeholder="{{'TYPE' | translate }}"></span>
                                         </th>
                                         <th scope="col">{{'Status' | translate }}
                                             <span sortable-column="status"></span>
@@ -85,9 +85,7 @@
                                             <td><a [routerLink]="['/services/subscription-detail/', request.id]"><b>{{request.requestNumber}}</b></a>
                                             <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
                                             <td>{{request.type}}</td>
-                                            <td>
-                                                <app-badge [status]="request.status"></app-badge>
-                                            </td>
+                                            <td><app-badge [status]="request.status"></app-badge></td>
                                         </tr>
                                     </ng-template>
                                     </tbody>

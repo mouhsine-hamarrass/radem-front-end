@@ -1,7 +1,7 @@
 <div class="col-md-12 py-3">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Réclamation N°: </h4>
+      <h4 class="card-title">{{'CLAIM' | translate}} N°: </h4>
       <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
         <aw-wizard-step [stepId]="0" [stepTitle]="'Depôt de dossier'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
@@ -28,22 +28,22 @@
       <div class="row" id="cards">
         <fieldset class="col-7 scheduler-border">
           <legend class="scheduler-border">
-            <b>Informations :</b>
+            <b>{{'INFORMATIONS' | translate}} :</b>
           </legend>
           <div style="padding-left: 20px;padding-bottom: 10px;">
             <div class="row">
               <div style="padding-left: 10px;">
                 <table>
                   <tr>
-                    <td>N° demande :</td>
+                    <td>N° {{'Request' | translate}} :</td>
                     <td>{{claim?.claimNumber}}</td>
                   </tr>
                   <tr>
-                    <td>Client :</td>
+                    <td>{{'CLIENT' | translate}} :</td>
                     <td>{{claim?.complainer.fullName}}</td>
                   </tr>
                   <tr>
-                    <td>Date de création :</td>
+                    <td>{{'DATE_OF-CREATION' | translate}} :</td>
                     <td>{{claim?.createdDate | date: 'dd/MM/yyyy' }}</td>
                   </tr>
                 </table>
@@ -53,16 +53,16 @@
         </fieldset>
         <fieldset class="col-4 scheduler-border">
           <legend class="scheduler-border">
-            <b>Intervenants :</b>
+            <b>{{'SPEAKERS' | translate}} :</b>
           </legend>
           <div style="padding-left: 20px;">
             <table>
               <tr>
-                <td>Agent :</td>
+                <td>{{'AGENT' | translate}} :</td>
                 <td>{{claim?.agent?.firstname}} {{claim?.agent?.lastname}}</td>
               </tr>
               <tr>
-                <td>Service concerné :</td>
+                <td>{{'SERVICE_CONCERNED' | translate}} :</td>
                 <td></td>
               </tr>
             </table>
@@ -72,16 +72,16 @@
       <div class="row" id="cards2">
         <fieldset class="col-7 scheduler-border">
           <legend class="scheduler-border">
-            <b>Commentaires</b>
+            <b>{{'COMMENTS' | translate}}</b>
           </legend>
           <div id="commDiv">
             <form class="" [formGroup]="commentForm">
               <div class="row">
 
-                <input #commentaire formControlName="comment" type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
+                <input #commentaire formControlName="comment" type="text" class="col-9 form-control" placeholder="{{'LEAVE_A_COMMENT' | translate}} ..."
                   style="margin-right: 8px;margin-left: 10px;" />
 
-                <button class="btn btn btn-outline-primary" (click)="addComment()">Envoyer</button>
+                <button class="btn btn btn-outline-primary" (click)="addComment()">{{'SEND' | translate}}</button>
               </div>
             </form>
             <br>
@@ -89,16 +89,16 @@
         </fieldset>
         <fieldset class="col-4 scheduler-border" id="divDate">
           <legend class="scheduler-border">
-            <b>Description :</b>
+            <b>{{'DESCRIPTION' | translate}} :</b>
           </legend>
           <div style="padding-left: 20px;">
             <table>
               <tr>
-                <td>Objet :</td>
+                <td>{{'OBJECT' | translate}} :</td>
                 <td>{{claim?.object}}</td>
               </tr>
               <tr>
-                <td>Description :</td>
+                <td>{{'DESCRIPTION' | translate}} :</td>
                 <td>{{claim?.description}}</td>
               </tr>
             </table>
@@ -111,7 +111,8 @@
 
 <ng-template #addIntervention>
   <div class="modal-header bg-radem">
-    <h4 class="modal-title pull-left">Veuillez remplir les champs suivants pour passer à l'étape suivante :</h4>
+    <h4 class="modal-title pull-left">
+      {{'PLEASE_COMPLETE_THE_FOLLOWING_FIELDS_TO_PROCEED_TO_THE_NEXT_STEP' | translate}} :</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
       <span aria-hidden="true">
         <i class="fa fa-times-circle"></i>
@@ -126,15 +127,16 @@
             <form class="" [formGroup]="">
               <label>Agent d'intervention :</label>
               <select formControlName="agent" type="text" #t class="col-12 form-control">
-                <option value="" disabled selected>Choisissez un agent..</option>
+                <option value="" disabled selected>
+                  {{'CHOOSE_AN_AGENT' | translate}}...</option>
                 <option *ngFor="" value=""></option>
               </select>
-              <label>Date d'intervention :</label>
+              <label>{{'INTERVENTION_DATE' | translate}} :</label>
               <input formControlName="dateIntervention" type="date" class="col-12 form-control">
-              <label>Tel d'agent :</label>
+              <label>{{'INTERVENTION_PHONE' | translate}} :</label>
               <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
               <div class="col-md-12" style="margin-left : 34%">
-                <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="modalRef.hide();">Valider</button>
+                <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="modalRef.hide();">{{'VALIDATE' | translate}}</button>
               </div>
             </form>
           </div>

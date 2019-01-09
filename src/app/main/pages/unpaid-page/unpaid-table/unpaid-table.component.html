@@ -14,35 +14,35 @@
             <th>
                 <input type="checkbox" class="form-control" (change)="selectAll($event)">
             </th>
-            <th scope="col">{{'Nº de facture' | translate }}
+            <th scope="col">N° {{'BILL' | translate }}
                 <span sortable-column="numBill"></span>
                 <span filterable-column="numBill" filter-type="text"
-                      filter-placeholder="{{'Nº de facture' | translate }}"></span>
+                      filter-placeholder="N° {{'BILL' | translate }}"></span>
             </th>
-            <th scope="col">{{'Annee' | translate }}
+            <th scope="col">{{'YEAR' | translate }}
                 <span sortable-column="year"></span>
                 <span filterable-column="year" filter-type="text"
-                      filter-placeholder="{{'Annee' | translate }}"></span>
+                      filter-placeholder="{{'YEAR' | translate }}"></span>
             </th>
-            <th scope="col">{{'Mois' | translate }}
+            <th scope="col">{{'MONTH' | translate }}
                 <span sortable-column="month"></span>
                 <span filterable-column="month" filter-type="text"
-                      filter-placeholder="{{'Mois' | translate }}"></span>
+                      filter-placeholder="{{'MONTH' | translate }}"></span>
             </th>
-            <th scope="col">{{'Nº d\'abonnement' | translate }}
+            <th scope="col">{{'SUBSCRIPTION_NUMBER' | translate }}
                 <span sortable-column="dueDate"></span>
                 <span filterable-column="dueDate" filter-type="date"
-                      filter-placeholder="{{'Nº d\'abonnement' | translate }}"></span>
+                      filter-placeholder="{{'SUBSCRIPTION_NUMBER' | translate }}"></span>
             </th>
-            <th scope="col">{{'Solde Total' | translate }} (Dhs)
+            <th scope="col">{{'TOTAL_BALANCE' | translate }} (Dhs)
                 <span sortable-column="type"></span>
                 <span filterable-column="type" filter-type="text"
-                      filter-placeholder="{{'Solde total' | translate }} (Dhs)"></span>
+                      filter-placeholder="{{'TOTAL_BALANCE' | translate }} (Dhs)"></span>
             </th>
-            <th scope="col">{{'Solde exigble' | translate }} (Dhs)
+            <th scope="col">{{'BALANCE_DUE' | translate }} (Dhs)
                 <span sortable-column="amount"></span>
                 <span filterable-column="amount" filter-type="text"
-                      filter-placeholder="{{'Solde exigble' | translate }} (Dhs)"></span>
+                      filter-placeholder="{{'BALANCE_DUE' | translate }} (Dhs)"></span>
             </th>
         </tr>
         </thead>

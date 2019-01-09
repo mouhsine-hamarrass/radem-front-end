@@ -1,18 +1,18 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
   <div class="content-header-left col-6 col-12 mb-1">
-    <h3 class="content-header-title">Nouvelle demande de résiliation</h3>
+    <h3 class="content-header-title">{{'New_request_for_cancellation' | translate }}</h3>
   </div>
   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-6 col-12">
     <div class="breadcrumb-wrapper col-12">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
+          <a routerLink="/home">{{'HOME' | translate }}</a>
         </li>
         <li class="breadcrumb-item">
           <a>Services</a>
         </li>
-        <li class="breadcrumb-item active">Nouvelle demande de résiliation
+        <li class="breadcrumb-item active">{{'New_request_for_cancellation' | translate }}
         </li>
       </ol>
     </div>
@@ -24,7 +24,7 @@
       <!-- What is-->
       <div id="what-is" class="card">
         <div class="card-header">
-          <h4 class="card-title">Nouvelle demande de résiliation</h4>
+          <h4 class="card-title">{{'New_request_for_cancellation' | translate }}</h4>
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
@@ -35,10 +35,10 @@
           <div class="card-body">
             <form class="form" [formGroup]="cancellationForm">
               <fieldset>
-                <legend>Demandeur</legend>
+                <legend>{{'APPLICANT' | translate }}</legend>
                 <div class="row">
                   <div class="form-group col-12">
-                    <label for="fullname" class="col-form-label col-12">Nom et Prenom: </label>
+                    <label for="fullname" class="col-form-label col-12">{{'LASTNAME_AND_FIRSTNAME' | translate }} : </label>
                     <input class="form-control col-12" formControlName="firstAndLastName" id="fullname">
                   </div>
                 </div>
@@ -48,36 +48,37 @@
                     <input class="form-control" formControlName="cin" id="card-id">
                   </div>
                   <div class="form-group col-4">
-                    <label for="delivered">Délivrée le: </label>
+                    <label for="delivered">
+                      {{'ISSUED_ON' | translate }} : </label>
                     <input class="form-control" formControlName="delivered" id="delivered">
                   </div>
                   <div class="form-group col-4">
-                    <label for="at">À: </label>
+                    <label for="at">{{'AT' | translate }}: </label>
                     <input class="form-control" formControlName="at" id="at">
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-3">
                     <input class="" id="feedback_client" name="feedback" type="radio">
-                    <label for="feedback_client" class="noMargin"> Client</label>
+                    <label for="feedback_client" class="noMargin"> {{'CLIENT' | translate }}</label>
                   </div>
                   <div class="form-group col-3">
                     <input class="" id="feedback_procuration" name="feedback" type="radio">
-                    <label for="feedback_procuration" class="noMargin"> Procuration</label>
+                    <label for="feedback_procuration" class="noMargin"> {{'PROXY' | translate }}</label>
                   </div>
                   <div class="form-group col-3">
                     <input class="" id="feedback_lettre" name="feedback" type="radio">
-                    <label for="feedback_lettre" class="noMargin"> Lettre N°</label>
+                    <label for="feedback_lettre" class="noMargin"> {{'LETTER_N°' | translate }}</label>
                   </div>
                   <div class="form-group col-3">
                     <input class="" id="feedback_succession" name="feedback" type="radio">
-                    <label for="feedback_succession" class="noMargin"> Succession</label>
+                    <label for="feedback_succession" class="noMargin">{{'SUCCESSION' | translate }}</label>
                   </div>
                 </div>
               </fieldset>
               <br>
               <fieldset>
-                <legend>Polices d'abonnement</legend>
+                <legend>{{'SUBSCRIPTION_POLICIES' | translate }}</legend>
                 <div class="row">
                   <div class="col-12">
                     <input class="" id="water" formControlName="water" type="checkbox">
@@ -88,41 +89,41 @@
                   <div class="form-group col-6">
                     <label class="noMargin">Police: </label>
                     <select class="form-control" formControlName="waterPolice">
-                      <option value="-1">Sélectionner une valeur</option>
+                      <option value="-1">{{'SELECT_VALUE' | translate }}</option>
                       <option *ngFor="let subscription of waterSubscriptions()" value="{{subscription.id}}">
                         {{subscription.subscription}}
                       </option>
                     </select>
                   </div>
                   <div class="form-group col-6">
-                    <label  for="waterTourne" class="noMargin">Tournée: </label>
+                    <label  for="waterTourne" class="noMargin">{{'TOUR' | translate }}: </label>
                     <input class="form-control" formControlName="waterTourne" id="waterTourne">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12">
                     <input class="" id="electricity" type="checkbox" formControlName="electricity">
-                    <label for="electricity" class="noMargin"> Eléctricite</label>
+                    <label for="electricity" class="noMargin"> {{'ELECTRICITY' | translate }}</label>
                   </div>
                 </div>
                 <div class="row" *ngIf="this.cancellationForm.controls.electricity.value">
                   <div class="form-group col-6">
                     <label class="noMargin">Police: </label>
                     <select class="form-control" formControlName="electricityPolice">
-                      <option value="-1">Sélectionner une valeur</option>
+                      <option value="-1">{{'SELECT_VALUE' | translate }}</option>
                       <option *ngFor="let subscription of electricitySubscriptions()" value="{{subscription.id}}">
                         {{subscription.subscription}}
                       </option>
                     </select>
                   </div>
                   <div class="form-group col-6">
-                    <label for="electricityTourne" class="noMargin">Tournée: </label>
+                    <label for="electricityTourne" class="noMargin">{{'TOUR' | translate }} : </label>
                     <input class="form-control" formControlName="electricityTourne" id="electricityTourne">
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-12">
-                    <label>Date de depose du compteur</label>
+                    <label>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }}</label>
                     <input formControlName="counterDropDate" type="date" class="form-control">
                   </div>
                 </div>
@@ -131,40 +132,40 @@
               <fieldset>
                 <legend>Client</legend>
                 <div class="form-group">
-                  <label for="customer-name">Nom du client: </label>
+                  <label for="customer-name">{{'CLIENT_NAME' | translate }} : </label>
                   <input class="form-control" formControlName="clientName" id="customer-name">
                 </div>
                 <div class="form-group">
-                  <label for="consumption-address">Adresse de consommation: </label>
+                  <label for="consumption-address">{{'CONSUMPTION_ADDRESS' | translate }} : </label>
                   <input class="form-control" formControlName="consumptionAdresse" id="consumption-address">
                 </div>
                 <div class="row">
                   <div class="form-group col-6">
-                    <label for="gsm">Num telephone fixe: </label>
+                    <label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>
                     <input class="form-control" formControlName="landline" id="gsm">
                   </div>
                   <div class="form-group col-6">
-                    <label for="mobile">Portable: </label>
+                    <label for="mobile">{{'PORTABLE' | translate }}: </label>
                     <input class="form-control" formControlName="cellphone" id="mobile">
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-6">
-                    <label for="function">Fonction: </label>
+                    <label for="function">{{'FUNCTION' | translate }} : </label>
                     <input class="form-control" formControlName="function" id="function">
                   </div>
                   <div class="form-group col-6">
-                    <label for="location">Lieu de travail: </label>
+                    <label for="location">{{'WORKPLACE' | translate }} : </label>
                     <input class="form-control" formControlName="placeOfWork" id="location">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="address">Adresse de correspondance: </label>
+                  <label for="address">{{'MAILING_ADDRESS' | translate }} : </label>
                   <input class="form-control" formControlName="correspondenceAdresse" id="address">
                 </div>
               </fieldset>
               <div class="form-actions bottom right">
-                <button class="btn btn-outline-primary" (click)="save()">Enregistrer</button>
+                <button class="btn btn-outline-primary" (click)="save()">{{'SAVE' | translate }}</button>
               </div>
             </form>
           </div>

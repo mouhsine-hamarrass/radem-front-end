@@ -2,26 +2,25 @@
 <div class="content-header back col-12 mb-1 mt-1">
     <div class="row">
         <div class="col-md-6 col-12">
-            <h3 class="content-header-title">Ma consommation</h3>
+            <h3 class="content-header-title">{{'MY_CONSUMPTION' | translate}}</h3>
         </div>
         <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a routerLink="/home">Accueil</a>
+                        <a routerLink="/home">{{'HOME' | translate}}</a>
                     </li>
-                    <li class="breadcrumb-item active">Ma consommation</li>
+                    <li class="breadcrumb-item active">{{'MY_CONSUMPTION' | translate}}
                 </ol>
             </div>
         </div>
     </div>
 </div>
-
-<div class="card bgcolor mb-0">
+<div class="card bgcolor">
     <div class="card-content collapse show">
         <div class="card-body" style="padding: 0px;padding-top: 6px;">
             <div class="card-text centered" style="margin-bottom: 0rem !important;">
-                <h3><i class="fa fa-clock"></i>Prochaine relève le : {{nextReleve}}</h3>
+                <h3><i class="fa fa-clock"></i>{{'NEXT_SHIFT_THE' | translate}} : {{nextReleve}}</h3>
             </div>
         </div>
     </div>
@@ -33,7 +32,7 @@
                 <div class="col-sm-12">
                     <div class="card mb-0">
                         <div class="card-header border-0">
-                            <h4 class="card-title">Dernieres relèves</h4>
+                            <h4 class="card-title">{{'LATEST_SHIFTS' | translate}}</h4>
                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                             </div>
@@ -50,20 +49,20 @@
                                        filterable-table (filtred)="onFiltred($event)">
                                     <thead>
                                     <tr>
-                                        <th scope="col" width="100">{{'# REF' | translate }}
+                                        <th scope="col" width="100">{{'REF' | translate }}
                                             <span sortable-column="ref"></span>
                                             <span filterable-column="ref" filter-type="text"
-                                                  filter-placeholder="{{'ref' | translate }}"></span>
+                                                  filter-placeholder="{{'REF' | translate }}"></span>
                                         </th>
-                                        <th scope="col">{{'Type' | translate }}
+                                        <th scope="col">{{'TYPE' | translate }}
                                             <span sortable-column="type"></span>
                                             <span filterable-column="type" filter-type="text"
-                                                  filter-placeholder="{{'type' | translate }}"></span>
+                                                  filter-placeholder="{{'TYPE' | translate }}"></span>
                                         </th>
-                                        <th scope="col">{{'Date' | translate }}
+                                        <th scope="col">{{'DATE' | translate }}
                                             <span sortable-column="date"></span>
                                             <span filterable-column="date" filter-type="date"
-                                                  filter-placeholder="{{'date' | translate }}"></span>
+                                                  filter-placeholder="{{'DATE' | translate }}"></span>
                                         </th>
                                         <th scope="col">{{'Index' | translate }}
                                             <span sortable-column="index"></span>
@@ -90,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="card mb-0">
+                    <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Historique de consommation</h4>
                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>

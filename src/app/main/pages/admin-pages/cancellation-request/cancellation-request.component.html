@@ -1,7 +1,7 @@
 <div class="col-md-12 py-3">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Demande N°: {{request?.requestNumber}}</h4>
+            <h4 class="card-title">{{'Request' | translate}} N°: {{request?.requestNumber}}</h4>
             <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
                 <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep [stepTitle]="'Créée'"
@@ -9,7 +9,7 @@
                 </aw-wizard-step>
 
                 <ng-template #step0>
-                    <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'"
+                    <aw-wizard-step [stepId]="0" [stepTitle]="'CREATED' | translate"
                                     [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
                     </aw-wizard-step>
                 </ng-template>
@@ -19,24 +19,24 @@
                 </aw-wizard-step>
 
                 <ng-template #step1>
-                    <aw-wizard-step [stepId]="1" [stepTitle]="'Reçue'"
+                    <aw-wizard-step [stepId]="1" [stepTitle]="'RECEIVED' | translate"
                                     [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
                     </aw-wizard-step>
                 </ng-template>
 
                 <aw-wizard-step *ngIf="selectedStep >= 2; else step2" [stepId]="2" awOptionalStep
-                                [stepTitle]="'Intervention'"
+                                [stepTitle]="'INTERVENTION' | translate"
                                 [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
                 <ng-template #step2>
-                    <aw-wizard-step [stepId]="2" [stepTitle]="'Intervention'"
+                    <aw-wizard-step [stepId]="2" [stepTitle]="'INTERVENTION' | translate"
                                     [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
                     </aw-wizard-step>
                 </ng-template>
 
                 <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep
-                                [stepTitle]="'Compteur'"
+                                [stepTitle]="'COUNTER' | translate"
                                 [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
@@ -83,12 +83,12 @@
 
                 <div class="col-md-12" id="buttons">
                     <button type="button" class="btn btn btn-outline-primary" (click)="openUpdateForm(updateForm)"
-                            #UpdateButton>Modifier
+                            #UpdateButton>{{'MODIFY' | translate}}
                     </button>
-                    <button type="button" class="btn btn btn-outline-primary" (click)="focus()">Commentaire</button>
+                    <button type="button" class="btn btn btn-outline-primary" (click)="focus()">{{'COMMENT' | translate}}</button>
                     <button *ngIf="request?.status !== 'CLOSED'" routeLink="/admin/request/${request.id}" type="button"
                             class="btn btn-success" style="margin-left : 10px;" #StepButton
-                            (click)="AddIntervention(addIntervention)" awNextStep>Étape suivante <i
+                            (click)="AddIntervention(addIntervention)" awNextStep>{{'NEXT_STEP' | translate}}<i
                             class="fa fa-chevron-circle-right"></i></button>
                 </div>
             </aw-wizard>
@@ -96,21 +96,21 @@
 
             <div class="row" id="cards">
                 <fieldset class="col-7 scheduler-border">
-                    <legend class="scheduler-border"><b>Informations :</b></legend>
+                    <legend class="scheduler-border"><b>{{'INFORMATIONS' | translate}} :</b></legend>
                     <div style="padding-left: 10px;padding-bottom: 10px;">
                         <div class="row">
                             <div style="padding-left: 10px;">
                                 <table>
                                     <tr>
-                                        <td>N° demande :</td>
+                                        <td>N° {{'Request' | translate}} :</td>
                                         <td>{{request?.requestNumber}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Client :</td>
+                                        <td>{{'CLIENT' | translate}} :</td>
                                         <td>{{request?.client?.firstname}} {{request?.client?.lastname}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Police :</td>
+                                        <td>{{'POLICE' | translate}} :</td>
                                         <td>{{request?.subscriptions[0]?.subscription}} {{!request?.subscriptions[1] ?
                                             '' : ','}} {{request?.subscriptions[1]?.subscription}}
                                         </td>
@@ -120,15 +120,15 @@
                             <div *ngIf="request?.intervenant" style="padding-left: 20px;padding-bottom: 10px;">
                                 <table>
                                     <tr>
-                                        <td>Agent d'intervention :</td>
+                                        <td>{{'INTERVENTION_AGENT' | translate}} :</td>
                                         <td>{{request?.intervenant?.firstname}} {{request?.intervenant?.lastname}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Date d'intervention :</td>
+                                        <td>{{'INTERVENTION_DATE' | translate}} :</td>
                                         <td>{{request?.interventionDate | date: 'dd/MM/yyyy' }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Tel agent :</td>
+                                        <td>{{'INTERVENTION_PHONE' | translate}} :</td>
                                         <td>{{request?.intervenant?.phone}}</td>
                                     </tr>
                                 </table>
@@ -141,14 +141,14 @@
                         <b>Agent :</b>
                     </legend>
                     <div style="padding-left: 20px;padding-top: 10px;">
-                        <p *ngIf="!request?.agent">Aucun agent n'est affecté pour le moment</p>
+                        <p *ngIf="!request?.agent">{{'NO_AGENTS_ARE_AFFECTED_AT_THE_MOMENT' | translate}}</p>
                         <table *ngIf="request?.agent">
                             <tr>
-                                <td>Agent :</td>
+                                <td>{{'AGENT' | translate}} :</td>
                                 <td>{{request?.agent?.firstname}} {{request?.agent?.lastname}}</td>
                             </tr>
                             <tr>
-                                <td>Service concerné :</td>
+                                <td>{{'SERVICE_CONCERNED' | translate}} :</td>
                                 <td></td>
                             </tr>
                         </table>
@@ -158,7 +158,7 @@
             <div class="row" id="cards2">
                 <fieldset class="col-7 scheduler-border">
                     <legend class="scheduler-border">
-                        <b>Commentaires</b>
+                        <b>{{'COMMENTS' | translate}}</b>
                     </legend>
                     <div id="commDiv">
                         <form class="" [formGroup]="commentForm">
@@ -170,11 +170,12 @@
                                        style="margin-right: 8px;margin-left: 10px;"/>
 
                                 <button [disabled]="isEmpty" class="btn btn btn-outline-primary" (click)="addComment()">
-                                    Envoyer
+                                  {{'SEND' | translate}}
                                 </button>
                             </div>
 
-                            <input formControlName="checkbox" type="checkbox" title="">&nbsp;Message public
+                            <input formControlName="checkbox" type="checkbox" title="">&nbsp;
+                          {{'PUBLIC_MESSAGE' | translate}}
                         </form>
                         <br>
                         <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of request?.feedback">
@@ -195,11 +196,11 @@
                     <div style="padding-left: 20px;padding-bottom: 10px;">
                         <table>
                             <tr>
-                                <td>Date création :</td>
+                                <td>{{'DATE_OF-CREATION' | translate}} :</td>
                                 <td>{{request?.createdAt | date: 'dd/MM/yyyy' }}</td>
                             </tr>
                             <tr>
-                                <td>Dernière modification :</td>
+                                <td>{{'LAST_MODIFICATION' | translate}} :</td>
                                 <td>{{request?.lastUpdate| date: 'dd/MM/yyyy' }}</td>
                             </tr>
                         </table>
@@ -212,7 +213,7 @@
 
 <ng-template #updateForm>
     <div class="modal-header bg-radem">
-        <h4 class="modal-title pull-left">Modification :</h4>
+        <h4 class="modal-title pull-left">{{'MODIFICATION' | translate}} :</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
             <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
         </button>
@@ -224,12 +225,12 @@
                     <label>Agent d'intervention :</label>
                     <select formControlName="agent" type="text" #t class="col-12 form-control"
                             (change)="getPhone(t.value)">
-                        <option value="" disabled selected>Choisissez un agent..</option>
+                        <option value="" disabled selected> {{'CHOOSE_AN_AGENT' | translate}} ... </option>
                         <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.firstname}}
                             {{agent.lastname}}
                         </option>
                     </select>
-                    <label>Date d'intervention :</label>
+                    <label>{{'INTERVENTION_DATE' | translate}} :</label>
                     <input formControlName="dateIntervention" type="date" class="col-12 form-control">
                     <label>Tel d'agent :</label>
                     <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
@@ -239,7 +240,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn btn-outline-primary center" id="buttons-update"
-                (click)="updateIntervenant();modalRef.hide()">Valider
+                (click)="updateIntervenant();modalRef.hide()">{{'VALIDATE' | translate}}
         </button>
         <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
     </div>
@@ -247,7 +248,10 @@
 
 <ng-template #addIntervention>
     <div class="modal-header bg-radem">
-        <h4 class="modal-title pull-left">Veuillez remplir les champs suivants pour passer à l'étape suivante :</h4>
+        <h4 class="modal-title pull-left">
+          {{'PLEASE_COMPLETE_THE_FOLLOWING_FIELDS_TO_PROCEED_TO_THE_NEXT_STEP' | translate}}
+          :
+        </h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
             <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
         </button>
@@ -259,21 +263,22 @@
                     <label>Agent d'intervention :</label>
                     <select formControlName="agent" type="text" #t class="col-12 form-control"
                             (change)="getPhone(t.value)">
-                        <option value="" disabled selected>Choisissez un agent..</option>
+                        <option value="" disabled selected>{{'CHOOSE_AN_AGENT' | translate}} ...</option>
                         <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.firstname}}
                             {{agent.lastname}}
                         </option>
                     </select>
-                    <label>Date d'intervention :</label>
+                    <label>{{'INTERVENTION_DATE' | translate}} :</label>
                     <input formControlName="dateIntervention" type="date" class="col-12 form-control">
-                    <label>Tel d'agent :</label>
+                    <label>{{'IINTERVENTION_PHONE' | translate}} :</label>
                     <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
                 </form>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="addIntervenant()">Valider
+        <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="addIntervenant()">
+          {{'VALIDATE' | translate}}
         </button>
     </div>
 </ng-template>

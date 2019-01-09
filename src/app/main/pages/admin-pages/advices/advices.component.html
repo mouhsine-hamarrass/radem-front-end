@@ -1,13 +1,13 @@
 <nav aria-label="breadcrumb">
   <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Conseil et économie d'énergie</li>
+    <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'Advice_and_energy_saving' | translate}}</li>
   </ul>
 </nav>
 <div class="container-fluid">
   <div class="card">
     <div class="card-header">
-      <h4>Conseil et économie d'énergie</h4>
+      <h4>{{'Advice_and_energy_saving' | translate}}</h4>
     </div>
     <div class="card-body">
       <form role="form" novalidate>
@@ -16,7 +16,7 @@
         </div>
         <div class="pull-right">
           <button class="btn btn btn-outline-primary" (click)="save()">
-            Enregistrer
+            {{'SAVE' | translate}}
           </button>
         </div>
       </form>

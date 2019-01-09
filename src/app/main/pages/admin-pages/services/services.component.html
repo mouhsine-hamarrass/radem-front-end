@@ -1,16 +1,16 @@
 <div>
     <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Liste des services</li>
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' | translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'LIST_OF_SERVICES' | translate}}</li>
         </ul>
     </nav>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title text-muted pull-left">Liste des services</h4>
+                <h4 class="card-title text-muted pull-left">{{'LIST_OF_SERVICES' | translate}}</h4>
                 <a class="pull-right">
-                    <i class="icon-plus" (click)="showServiceForm(serviceModal, null)"> Ajouter un nouveau service</i>
+                    <i class="icon-plus" (click)="showServiceForm(serviceModal, null)"> {{'ADD_NEW_SERVICE' | translate}}</i>
                 </a>
             </div>
             <div class="card-body">
