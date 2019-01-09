@@ -36,16 +36,16 @@
                                     <select formControlName="contract" type="text" class="custom-select" #t
                                             (change)="setContract(t.value)">
                                         <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                                        <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                                            {{contract.contractNumber}}
-                                            ({{contract.contractType}})
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-form-label">{{'PERIOD_OF' | translate}}<span class="danger">*</span> :</label>
-                                <div class="col-auto">
-                                    <input formControlName="startDate" type="date" class="form-control">
-                                </div>
+                    <option *ngFor="let contract of contracts" value="{{contract.id}}">
+                      {{contract.contractNumber}}
+                      ({{contract.contractType}})
+                    </option>
+                  </select>
+                </div>
+                                <label class="col-form-label">{{'PERIOD_OF' | translate}} <span class="danger">*</span> :</label>
+                <div class="col-auto">
+                  <input formControlName="startDate" type="date" class="form-control">
+                </div>
                                 <label class="col-form-label">{{'THE' | translate}} <span class="danger">*</span></label>
                                 <div class="col-auto">
                                     <input formControlName="endDate" type="date" class="form-control">
@@ -89,16 +89,16 @@
                                             <span sortable-column="billingPeriod"></span>
                                             <span filterable-column="billingPeriod" filter-type="text"
                                                   filter-placeholder="{{'BILLIN_PERIOD' | translate }}"></span></th>
-                                        <th scope="col">N° {{'BILL' | translate }}
-                                            <span sortable-column="billNumber"></span>
-                                            <span filterable-column="billNumber" filter-type="text"
-                                                  filter-placeholder="N° {{'BILL' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'TYPE' | translate }} {{'BILL' | translate }}
-                                            <span sortable-column="billType"></span>
-                                            <span filterable-column="billType" filter-type="text"
-                                                  filter-placeholder="{{'TYPE' | translate }} {{'BILL' | translate }}"></span>
-                                        </th>
+                                        <th scope="col">{{'BILL_NUMBER' | translate }}
+                      <span sortable-column="billNumber"></span>
+                      <span filterable-column="billNumber" filter-type="text"
+                                                  filter-placeholder="{{'BILL_NUMBER' | translate }}"></span>
+                    </th>
+                                        <th scope="col">{{'TYPE_OF_BILL' | translate }}
+                      <span sortable-column="billType"></span>
+                      <span filterable-column="billType" filter-type="text"
+                                                  filter-placeholder="{{'TYPE_OF_BILL' | translate }}"></span>
+                    </th>
                                         <th scope="col">{{'SETTLEMENT_DATE' | translate }}
                                             <span sortable-column="settlementDate"></span>
                                             <span filterable-column="settlementDate" filter-type="date"

@@ -28,40 +28,40 @@
                         <th scope="col">{{'CLAIM_NUMBER' | translate }}
                             <span sortable-column="claimNumber"></span>
                             <span filterable-column="claimNumber" filter-type="text"
-                                  filter-placeholder="{{'Nº réclamation' | translate }}"></span>
+                                  filter-placeholder="{{'CLAIM_NUMBER' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Réclameur' | translate }}
+                        <th scope="col">{{'CLAIMER' | translate }}
                             <span sortable-column="lastname"></span>
                             <span filterable-column="lastname" filter-type="text"
-                                  filter-placeholder="{{'Réclameur' | translate }}"></span>
+                                  filter-placeholder="{{'CLAIMER' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Catégorie' | translate }}
+                        <th scope="col">{{'CATEGORY' | translate }}
                             <span sortable-column="object"></span>
                             <span filterable-column="object" filter-type="text"
-                                  filter-placeholder="{{'Catégorie' | translate }}"></span>
+                                  filter-placeholder="{{'CATEGORY' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Date création' | translate }}
+                        <th scope="col">{{'DATE_OF-CREATION' | translate }}
                             <span sortable-column="createdAt"></span>
                             <span filterable-column="createdAt" filter-type="date"
-                                  filter-placeholder="{{'Date création' | translate }}"></span>
+                                  filter-placeholder="{{'DATE_OF-CREATION' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Agent' | translate }}
+                        <th scope="col">{{'AGENT' | translate }}
                             <span sortable-column="agent"></span>
                             <span filterable-column="agent" filter-type="select"
                                   [filter-select-data]="agentsFilter"
                                   filter-select-data-key="id" filter-select-data-value="firstname"
-                                  filter-placeholder="{{'Agent' | translate }}"></span>
+                                  filter-placeholder="{{'AGENT' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Service concerné' | translate }}
+                        <th scope="col">{{'SERVICE_CONCERNED' | translate }}
                             <span sortable-column="service"></span>
                             <span filterable-column="service" filter-type="text"
-                                  filter-placeholder="{{'Service concerné' | translate }}"></span>
+                                  filter-placeholder="{{'SERVICE_CONCERNED' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Etat' | translate }}
+                        <th scope="col">{{'STATUS' | translate }}
                             <span sortable-column="status"></span>
                             <span filterable-column="status" filter-type="select"
                                   [filter-select-data]="complaintStatusFilter"
-                                  filter-placeholder="{{'Etat' | translate }}"></span>
+                                  filter-placeholder="{{'STATUS' | translate }}"></span>
                         </th>
                     </tr>
                     </thead>
