@@ -1,18 +1,18 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
   <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Réclamations</h3>
+    <h3 class="content-header-title">{{'CLAIMS' | translate }}</h3>
   </div>
   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
+          <a routerLink="/home">{{'HOME' | translate }}</a>
         </li>
         <li class="breadcrumb-item">
-          <a routerLink="/services/claim-requests">Réclamations</a>
+          <a routerLink="/services/claim-requests">{{'CLAIMS' | translate }}</a>
         </li>
-        <li class="breadcrumb-item active">Réclamation {{complaint?.claimNumber}}
+        <li class="breadcrumb-item active">{{'CLAIM' | translate }} {{complaint?.claimNumber}}
         </li>
       </ol>
     </div>
@@ -24,7 +24,7 @@
       <!-- What is-->
       <div id="what-is" class="card">
         <div class="card-header">
-          <h4 class="card-title">Ma réclamation N°: {{complaint?.claimNumber}} - {{complaint?.object}}</h4>
+          <h4 class="card-title">{{'MY_CLAIM' | translate }} N°: {{complaint?.claimNumber}} - {{complaint?.object}}</h4>
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
@@ -34,20 +34,20 @@
         <div class="card-body">
             <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
-                <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep [stepTitle]="'CREATED' | translate" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
         
                 <ng-template #step0>
-                  <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                  <aw-wizard-step [stepId]="0" [stepTitle]="'CREATED' | translate" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
                   </aw-wizard-step>
                 </ng-template>
         
-                <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep [stepTitle]="'SUPPORTED' | translate" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
         
         
                 <ng-template #step1>
-                  <aw-wizard-step [stepId]="1" [stepTitle]="'Prise en charge'" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
+                  <aw-wizard-step [stepId]="1" [stepTitle]="'SUPPORTED' | translate" [navigationSymbol]="{ symbol: '&#xf274;', fontFamily:'FontAwesome' }">
                   </aw-wizard-step>
                 </ng-template>
         
@@ -56,41 +56,41 @@
         
         
                 <ng-template #step2>
-                  <aw-wizard-step [stepId]="2" [stepTitle]="'Analyse'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+                  <aw-wizard-step [stepId]="2" [stepTitle]="'ANALYSIS' | translate" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
                   </aw-wizard-step>
                 </ng-template>
         
-                <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+                <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep [stepTitle]="'COMPLEMENT' | translate" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
                 </aw-wizard-step>
         
                 <ng-template #step3>
-                  <aw-wizard-step [stepId]="3" [stepTitle]="'Complément'" [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
+                  <aw-wizard-step [stepId]="3" [stepTitle]="'COMPLEMENT' | translate " [navigationSymbol]="{ symbol: '&#xf0c5;', fontFamily:'FontAwesome' }" >
                   </aw-wizard-step>
                 </ng-template>
         
-                <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+                <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep [stepTitle]="'TRANSMISSION' | translate" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
                 </aw-wizard-step>
         
                 <ng-template #step4>
-                  <aw-wizard-step [stepId]="4" [stepTitle]="'Transmission'" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
+                  <aw-wizard-step [stepId]="4" [stepTitle]="'TRANSMISSION' | translate" [navigationSymbol]="{ symbol: '&#xf04e;', fontFamily:'FontAwesome' }" >
                   </aw-wizard-step>
                 </ng-template>
         
-                <aw-wizard-step *ngIf="selectedStep >= 5; else step5" [stepId]="5" awOptionalStep [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
+                <aw-wizard-step *ngIf="selectedStep >= 5; else step5" [stepId]="5" awOptionalStep [stepTitle]="'ANSWER_PROVIDED' | translate" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
                 </aw-wizard-step>
         
         
                 <ng-template #step5>
-                  <aw-wizard-step [stepId]="5" [stepTitle]="'Réponse fournie'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
+                  <aw-wizard-step [stepId]="5" [stepTitle]="'ANSWER_PROVIDED' | translate" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }" >
                   </aw-wizard-step>
                 </ng-template>
         
-                <aw-wizard-completion-step *ngIf="selectedStep >= 6;else step6" awOptionalStep [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
+                <aw-wizard-completion-step *ngIf="selectedStep >= 6;else step6" awOptionalStep [stepId]="6" [stepTitle]="'FENCED' | translate" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
                   <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
                 </aw-wizard-completion-step>
         
                 <ng-template #step6>
-                  <aw-wizard-completion-step  [stepId]="6" [stepTitle]="'Clôture'" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
+                  <aw-wizard-completion-step  [stepId]="6" [stepTitle]="'FENCED' | translate" [navigationSymbol]="{ symbol: '&#xf023;',  fontFamily:'FontAwesome'}">
                     <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
                   </aw-wizard-completion-step>
                 </ng-template>
@@ -140,7 +140,7 @@
           </ul>-->
           <div class="row" id="cards">
             <fieldset class="scheduler-border col-7">
-              <legend class="scheduler-border">Description</legend>
+              <legend class="scheduler-border">{{'DESCRIPTION' | translate }}</legend>
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
@@ -150,18 +150,18 @@
               </div>
             </fieldset>
             <fieldset class="scheduler-border col-4">
-              <legend class="scheduler-border">Agent</legend>
+              <legend class="scheduler-border">{{'AGENT' | translate }}</legend>
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                    <p *ngIf="!complaint?.agent">Aucun agent n'est affecté pour le moment</p>
+                    <p *ngIf="!complaint?.agent">{{'NO_AGENTS_ARE_AFFECTED_AT_THE_MOMENT' | translate }}</p>
                     <table *ngIf="complaint?.agent">
                         <tr>
-                          <td>Agent :</td>
+                          <td>{{'AGENT' | translate }} :</td>
                           <td>{{complaint?.agent?.firstname}} {{complaint?.agent?.lastname}}</td>
                         </tr>
                         <tr>
-                          <td>Service concerné :</td>
+                          <td>{{'SERVICE_CONCERNED' | translate }} :</td>
                           <td></td>
                         </tr>
                       </table>
@@ -172,7 +172,7 @@
           </div>
           <div class="row" id="cards">
             <fieldset class="scheduler-border col-7">
-              <legend class="scheduler-border">Commentaires</legend>
+              <legend class="scheduler-border">{{'COMMENTS' | translate }}</legend>
               <div id="commDiv" style="padding: 20px;overflow: scroll; max-height: 500px;">
                 <form class="">
                   <div class="row">
@@ -195,17 +195,17 @@
               </div>
             </fieldset>
             <fieldset class="scheduler-border col-4">
-              <legend class="scheduler-border">Dates</legend>
+              <legend class="scheduler-border">{{'DATES' | translate }}</legend>
               <div style="padding-left: 20px;padding-bottom: 10px;">
                 <div class="row">
                   <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                     <table>
                       <tr>
-                        <td>Date de creation :</td>
+                        <td>{{'DATE_OF-CREATION' | translate }} :</td>
                         <td>{{complaint?.createdDate | date: 'dd-MM-yyyy'}}</td>
                       </tr>
                       <tr>
-                        <td>Date de modification :</td>
+                        <td>{{'DATE_OF_MODIFICATION' | translate }} :</td>
                         <td>{{complaint?.updatedDate | date: 'dd-MM-yyyy'}}</td>
                       </tr>
                     </table>

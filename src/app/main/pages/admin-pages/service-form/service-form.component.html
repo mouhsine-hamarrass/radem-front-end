@@ -2,13 +2,13 @@
   <form [formGroup]="serviceForm" >
     <div  class="col-12 my-2">
       <div class="form-group row">
-        <label class="col-4 col-form-label" for="name">Nom de service <span class="danger">*</span> : </label>
+        <label class="col-4 col-form-label" for="name">{{'NAME_OF_SERVICE' | translate}} <span class="danger">*</span> : </label>
         <div class="col-8">
           <input name="name" id="name" formControlName="name" type="text" class="form-control">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-form-label col-4" for="description">Description :</label>
+        <label class="col-form-label col-4" for="description">{{'DESCRIPTION' | translate}} :</label>
         <div class="col-12">
           <textarea name="description" id="description" formControlName="description" class="form-control"></textarea>
         </div>
@@ -21,18 +21,18 @@
   <div class="modal-body" *ngIf="modalRef; else service_form"></div>
   <div class="row col-md-12">
     <button [routerLink]="['/admin/services']" class="btn btn btn-outline-primary ml" (click)="createService()" *ngIf="!serviceId"
-            [disabled]="serviceForm.invalid">Enregistrer
+            [disabled]="serviceForm.invalid">Enregistrer{{'SAVE' | translate}}
     </button>
     <button [routerLink]="['/admin/services']" class="btn btn btn-outline-primary ml" (click)="saveService()" *ngIf="serviceId"
-            [disabled]="serviceForm.invalid">Modifier
+            [disabled]="serviceForm.invalid">Modifier{{'MODIFY' | translate}}
     </button>
   </div>
 </div>
 
 <ng-template #modal>
   <div class="modal-header bg-radem">
-    <h4 class="modal-title pull-left" *ngIf="!service?.id">Ajouter un nouveau service</h4>
-    <h4 class="modal-title pull-left" *ngIf="service?.id">Modifier le service <strong>{{service.name}}</strong></h4>
+    <h4 class="modal-title pull-left" *ngIf="!service?.id">{{'ADD_NEW_SERVICE' | translate}}</h4>
+    <h4 class="modal-title pull-left" *ngIf="service?.id">{{'MODIFY_SERVICE' | translate}} <strong>{{service.name}}</strong></h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
       <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
     </button>
@@ -40,13 +40,13 @@
 
   <div class="modal-body" *ngIf="!modalRef; else service_form"></div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modalRef.hide();"> Annuler
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide();"> {{'CANCEL' | translate}}
     </button>
     <button type="submit" class="btn btn btn-outline-primary" (click)="createService()" *ngIf="!serviceId"
-            [disabled]="serviceForm.invalid">Enregistrer
+            [disabled]="serviceForm.invalid">{{'SAVE' | translate}}
     </button>
     <button type="submit" class="btn btn btn-outline-primary" (click)="saveService()" *ngIf="serviceId"
-            [disabled]="serviceForm.invalid">Modifier
+            [disabled]="serviceForm.invalid">{{'MODIFY' | translate}}
     </button>
   </div>
 </ng-template>

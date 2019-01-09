@@ -1,8 +1,8 @@
 <div id="add-modele">
     <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Parmétrage</li>
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'SETTING' | translate}}</li>
         </ul>
     </nav>
     <div class="container-fluid">
@@ -15,8 +15,8 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Paramètre</th>
-                                <th scope="col">Valeur</th>
+                                <th scope="col">{{'SETTING' | translate}}</th>
+                                <th scope="col">{{'VALUE' | translate}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,7 @@
                         </table>
                         <div class="pull-right">
                             <button class="btn btn btn-outline-primary" (click)="saveSettings()">
-                                Enregistrer
+                              {{'SAVE' | translate}}
                             </button>
                         </div>
                     </form>

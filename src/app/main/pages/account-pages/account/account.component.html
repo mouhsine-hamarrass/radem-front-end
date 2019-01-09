@@ -1,16 +1,16 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
   <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Mon profil</h3>
+    <h3 class="content-header-title">{{'MY_PROFIL' | translate}}</h3>
   </div>
   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
+          <a routerLink="/home">{{'HOME' | translate}}</a>
         </li>
         <li class="breadcrumb-item">
-          <a>Mon profil</a>
+          <a>{{'MY_PROFIL' | translate}}</a>
         </li>
       </ol>
     </div>
@@ -24,7 +24,7 @@
       <form class="form" [formGroup]="profileForm">
         <div id="what-is" class="card">
           <div class="card-header">
-            <h4 class="card-title">Mon profil</h4>
+            <h4 class="card-title">{{'MY_PROFIL' | translate}}</h4>
             <a class="heading-elements-toggle">
               <i class="fa fa-ellipsis-v font-medium-3"></i>
             </a>
@@ -33,7 +33,7 @@
                 <img [src]="result64 || defaultAvatar" id="img" #img>
                 <div class="overlay text-center">
                   <label for="photo">
-                    <a class="text-white">Modifier</a>
+                    <a class="text-white">{{'MODIFY' | translate}}</a>
                     <input type="file" id="photo" class="form-control" formControlName="avatar" (change)="onFileChange($event)" accept="image/*"
                            #fileInput>
                   </label>
@@ -45,40 +45,41 @@
             <div class="card-body">
               <div class="row col-12">
                 <div class="form-group col-md-4">
-                  <label for="lastname">Nom: </label>
+                  <label for="lastname">{{'LAST_NAME' | translate}} :</label>
                   <input class="form-control" id="lastname" formControlName="lastname" type="text">
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="firstname">Prenom: </label>
+                  <label for="firstname">{{'FIRST_NAME' | translate}} :</label>
                   <input class="form-control" id="firstname" formControlName="firstname" type="text">
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="phone">Telephone: </label>
+                  <label for="phone">{{'PHONE' | translate}} :</label>
                   <input class="form-control" id="phone" formControlName="phone" type="text">
                 </div>
               </div>
               <div class="row col-12">
                 <div class="form-group col-md-4">
-                  <label for="mail">Email: </label>
+                  <label for="mail">{{'MAIL' | translate}} :</label>
                   <input class="form-control" id="mail" formControlName="mail" type="text">
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="username">Nom d'utilisateur: </label>
+                  <label for="username">{{'USERNAME' | translate}} :</label>
                   <input class="form-control" id="username" formControlName="username" type="text">
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="password">Mot de passe: </label>
+                  <label for="password">{{'label-password' | translate}} : </label>
                   <input class="form-control" id="password" formControlName="password" type="password">
                 </div>
               </div>
               <div class="row col-12">
                 <div class="form-group col-md-12">
-                  <label for="address">Adresse: </label>
+                  <label for="address">{{'ADDRESS' | translate}} :</label>
                   <input class="form-control" id="address" formControlName="address" type="text">
                 </div>
               </div>
               <div class="row">
-                <button class="btn btn btn-outline-primary offset-10" (click)="saveProfile()">Enregistrer</button>
+                <button class="btn btn btn-outline-primary offset-10" (click)="saveProfile()">
+                  {{'SAVE' | translate}}</button>
               </div>
             </div>
           </div>

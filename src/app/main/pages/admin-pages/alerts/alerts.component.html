@@ -1,15 +1,15 @@
 <nav aria-label="breadcrumb">
     <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Liste des alertes</li>
+        <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{'List_of_alerts' | translate}}</li>
     </ul>
 </nav>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title text-muted pull-left">Liste des alertes</h4>
+            <h4 class="card-title text-muted pull-left">{{'List_of_alerts' | translate}}</h4>
             <a class="pull-right">
-                <i class="icon-plus" (click)="showAlertForm(alertForm, null)"> Ajouter une nouvelle alerte</i>
+                <i class="icon-plus" (click)="showAlertForm(alertForm, null)"> {{'ADD_NEW_ALERT' | translate}}</i>
             </a>
         </div>
         <div class="card-body">
@@ -26,15 +26,15 @@
                        filterable-table (filtred)="onFiltred($event)">
                     <thead class="table-light">
                     <tr>
-                        <th scope="col">{{'Désignation' | translate }}
+                        <th scope="col">{{'DESIGNATION' | translate }}
                             <span sortable-column="title"></span>
                             <span filterable-column="title" filter-type="text"
-                                 filter-placeholder="{{'Désignation' | translate }}"></span>
+                                 filter-placeholder="{{'DESIGNATION' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Instructions' | translate }}
+                        <th scope="col">{{'INSTRUCTIONS' | translate }}
                             <span sortable-column="instructions"></span>
                             <span filterable-column="instructions" filter-type="text"
-                                 filter-placeholder="{{'Instructions' | translate }}"></span>
+                                 filter-placeholder="{{'INSTRUCTIONS' | translate }}"></span>
                         </th>
                         <th scope="col">{{'Actions' | translate }}</th>
                     </tr>

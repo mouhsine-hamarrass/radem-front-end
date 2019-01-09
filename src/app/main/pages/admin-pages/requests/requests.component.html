@@ -1,15 +1,15 @@
 <div>
     <nav aria-label="breadcrumb" class="doNotPrint">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> Administration</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Liste des demandes</li>
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' | translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'LIST_OF_REQUESTS' | translate}}</li>
         </ul>
     </nav>
 </div>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title text-muted pull-left">Liste des demandes</h4>
+            <h4 class="card-title text-muted pull-left">{{'LIST_OF_REQUESTS' | translate}}</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -23,15 +23,17 @@
                                 <div class="col-12 mb-1">
                                     <button type="button" class="btn btn btn-outline-primary"
                                             (click)="LoadCancellationRequest()">
-                                        Résiliations
+                                      {{'TERMINATIONS' | translate}}
+
                                     </button>
                                     <button type="button" class="btn btn btn-outline-primary"
                                             (click)="LoadSubscriptionRequest()">
-                                        Abonnements
+                                      {{'SUBSCRIPTIONS' | translate}}
+
                                     </button>
                                     <button type="button" class="btn btn btn-outline-primary"
                                             (click)="LoadRefundRequest()">
-                                        Remboursements
+                                      {{'REFUNDS' | translate}}
                                     </button>
                                 </div>
                             </div>

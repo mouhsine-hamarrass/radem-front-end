@@ -1,18 +1,18 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
   <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Résiliation</h3>
+    <h3 class="content-header-title">{{'TERMINATION' | translate }}</h3>
   </div>
   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
+          <a routerLink="/home">{{'HOME' | translate }}</a>
         </li>
         <li class="breadcrumb-item">
           <a routerLink="/services/cancellation-requests">Demandes</a>
         </li>
-        <li class="breadcrumb-item active">Demande de résiliation {{terminationRequest?.requestNumber}}
+        <li class="breadcrumb-item active">{{'Requests_for_termination' | translate }} {{terminationRequest?.requestNumber}}
         </li>
       </ol>
     </div>
@@ -24,7 +24,7 @@
       <!-- What is-->
       <div id="what-is" class="card mb-0">
         <div class="card-header">
-          <h4 class="card-title">Consulter votre demande</h4>
+          <h4 class="card-title">{{'Consult_your_request' | translate }}</h4>
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
@@ -41,7 +41,7 @@
               </aw-wizard-step>
 
               <ng-template #step0>
-                <aw-wizard-step [stepId]="0" [stepTitle]="'Créée'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step [stepId]="0" [stepTitle]="'CREATED' | translate" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
               </ng-template>
 
@@ -146,21 +146,21 @@
 
             <div class="row" id="cards">
               <fieldset class="scheduler-border col-7">
-                <legend class="scheduler-border">Informations</legend>
+                <legend class="scheduler-border">{{'INFORMATIONS' | translate }}</legend>
                 <div style="padding-left: 20px;padding-bottom: 10px;">
                   <div class="row">
                     <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                       <table>
                         <tr>
-                          <td>N° demande :</td>
+                          <td>N° {{'Request' | translate }} :</td>
                           <td>{{terminationRequest?.requestNumber}}</td>
                         </tr>
                         <tr>
-                          <td>Client :</td>
+                          <td>{{'CLIENT' | translate }} :</td>
                           <td>{{terminationRequest?.client?.lastname}} {{terminationRequest?.client?.firstname}}</td>
                         </tr>
                         <tr>
-                          <td>Police :</td>
+                          <td>{{'POLICE' | translate }} :</td>
                           <td>{{terminationRequest?.subscriptions[0]?.subscription}}
                             {{!terminationRequest?.subscriptions[1] ? '' : ','}}
                             {{terminationRequest?.subscriptions[1]?.subscription}}</td>
@@ -170,16 +170,16 @@
                     <div *ngIf="terminationRequest?.intervenant" style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
                       <table>
                         <tr>
-                          <td>Intervenant : </td>
+                          <td>{{'SPEAKER' | translate }} : </td>
                           <td>{{terminationRequest?.intervenant?.firstname}}
                             {{terminationRequest?.intervenant?.lastname}}</td>
                         </tr>
                         <tr>
-                          <td>Date d'intervention : </td>
+                          <td>{{'INTERVENTION_DATE' | translate }} : </td>
                           <td>{{terminationRequest?.interventionDate | date: 'dd/MM/yyyy'}}</td>
                         </tr>
                         <tr>
-                          <td>Tel agent :</td>
+                          <td>{{'INTERVENTION_PHONE' | translate }} :</td>
                           <td>{{terminationRequest?.intervenant.phone}}</td>
                         </tr>
                       </table>
@@ -192,22 +192,22 @@
                 <div *ngIf="terminationRequest?.agent" style="padding-left: 20px;padding-top: 10px;">
                   <table>
                     <tr>
-                      <td>Agent :</td>
+                      <td>{{'AGENT' | translate }} :</td>
                       <td>{{terminationRequest?.agent?.firstname}} {{terminationRequest?.agent?.lastname}}</td>
                     </tr>
                     <tr>
-                      <td>Service concerné :</td>
+                      <td>{{'SERVICE_CONCERNED' | translate }} :</td>
                       <td></td>
                     </tr>
                   </table>
                 </div>
-                <p *ngIf="!terminationRequest?.agent">Aucun agent n'est affecté pour le moment</p>
+                <p *ngIf="!terminationRequest?.agent">{{'NO_AGENTS_ARE_AFFECTED_AT_THE_MOMENT' | translate }}</p>
               </fieldset>
             </div>
             <div class="row" id="cards2">
 
               <fieldset class="scheduler-border col-7">
-                <legend class="scheduler-border">Commentaires</legend>
+                <legend class="scheduler-border">{{'COMMENTS' | translate }}</legend>
                 <div id="commDiv" style="padding: 20px;overflow: scroll; max-height: 500px;">
                   <form class="">
                     <div class="row">
@@ -215,7 +215,7 @@
                       <input id="commentaire" [formControl]="feedback" type="text" class="col-9 form-control"
                         placeholder="Laisser un commentaire.." />
 
-                      <button class="btn btn btn-outline-primary" (click)="saveFeedback()">Envoyer</button>
+                      <button class="btn btn btn-outline-primary" (click)="saveFeedback()">{{'SEND' | translate }}</button>
                     </div>
                   </form>
                   <br>
@@ -231,19 +231,19 @@
                 </div>
               </fieldset>
               <fieldset class="scheduler-border col-4 max-width">
-                <legend class="scheduler-border">Dates</legend>
+                <legend class="scheduler-border">{{'DATES' | translate }}</legend>
                 <div>
                   <table>
                     <tr>
-                      <td>Date création :</td>
+                      <td>{{'DATE_OF-CREATION' | translate }} :</td>
                       <td>{{terminationRequest?.createdAt | date: 'dd/MM/yyyy' }}</td>
                     </tr>
                     <tr>
-                      <td>Dernière modification :</td>
+                      <td>{{'LAST_MODIFICATION' | translate }} :</td>
                       <td>{{terminationRequest?.lastUpdate| date: 'dd/MM/yyyy' }}</td>
                     </tr>
                     <tr>
-                      <td>Date de depose du compteur :</td>
+                      <td>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }} :</td>
                       <td>{{terminationRequest?.counterDropDate | date: 'dd/MM/yyyy' }}</td>
                     </tr>
                   </table>

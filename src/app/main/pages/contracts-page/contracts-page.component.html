@@ -1,18 +1,18 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-1">
-        <h3 class="content-header-title">Liste des contrats</h3>
+        <h3 class="content-header-title">{{'LIST_OF_CONTRACTS' | translate}}</h3>
     </div>
     <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
         <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a routerLink="/home">Accueil</a>
+                    <a routerLink="/home">{{'HOME' | translate}}</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a>Contrats</a>
                 </li>
-                <li class="breadcrumb-item active">Liste des contrats
+                <li class="breadcrumb-item active">{{'LIST_OF_CONTRACTS' | translate}}
                 </li>
             </ol>
         </div>
@@ -24,7 +24,7 @@
             <!-- What is-->
             <div id="what-is" class="card mb-0">
                 <div class="card-header">
-                    <h4 class="card-title">Mes contrats</h4>
+                    <h4 class="card-title">{{'MY_CONTRACTS' | translate}}</h4>
                     <a class="heading-elements-toggle">
                         <i class="fa fa-ellipsis-v font-medium-3"></i>
                     </a>
@@ -33,7 +33,8 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        Cliquez sur la liste ci-dessous pour avoir le detail de chacun de vos contrat
+                      {{'CLICK_ON_THE_LIST_BELOW_TO_SEE_THE_DETAILS_OF_EACH_OF_YOUR_CONTRACTS' | translate}}
+
                         <div class="table-responsive mx-auto">
                             <div class="row justify-content-between">
                                 <div class="col-12">
@@ -47,40 +48,40 @@
                                    filterable-table (filtred)="onFiltred($event)">
                                 <thead class="table-light">
                                 <tr>
-                                    <th scope="col">{{'Nº contrat' | translate }}
+                                    <th scope="col">{{'CONTRACT_NUMBER' | translate }}
                                         <span sortable-column="police"></span>
                                         <span filterable-column="police" filter-type="text"
-                                              filter-placeholder="{{'Nº contrat' | translate }}"></span>
+                                              filter-placeholder="{{'CONTRACT_NUMBER' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'Etat contrat' | translate }}
+                                    <th scope="col">{{'CONTRACT_STATUS' | translate }}
                                         <span sortable-column="state"></span>
                                         <span filterable-column="state" filter-type="text"
-                                              filter-placeholder="{{'Etat contrat' | translate }}"></span>
+                                              filter-placeholder="{{'CONTRACT_STATUS' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'Adresse' | translate }}
+                                    <th scope="col">{{'ADDRESS' | translate }}
                                         <span sortable-column="address"></span>
                                         <span filterable-column="address" filter-type="text"
-                                              filter-placeholder="{{'Adresse' | translate }}"></span>
+                                              filter-placeholder="{{'ADDRESS' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'Derniere cons' | translate }}
+                                    <th scope="col">{{'LAST_CONSUMPTION' | translate }}
                                         <span sortable-column="lastConsumption"></span>
                                         <span filterable-column="lastConsumption" filter-type="text"
-                                              filter-placeholder="{{'Derniere cons' | translate }}"></span>
+                                              filter-placeholder="{{'LAST_CONSUMPTION' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'Derniere facture' | translate }}
+                                    <th scope="col">{{'LAST_INVOICE' | translate }}
                                         <span sortable-column="toBePayed"></span>
                                         <span filterable-column="toBePayed" filter-type="text"
-                                              filter-placeholder="{{'Derniere facture' | translate }}"></span>
+                                              filter-placeholder="{{'LAST_INVOICE' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'Facture à payer' | translate }}
+                                    <th scope="col">{{'BILL_TO_PAY' | translate }}
                                         <span sortable-column="nextBill"></span>
                                         <span filterable-column="nextBill" filter-type="text"
-                                              filter-placeholder="{{'Facture à payer' | translate }}"></span>
+                                              filter-placeholder="{{'BILL_TO_PAY' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'Historique cons' | translate }}
+                                    <th scope="col">{{'HISTORICAL_CONSUMPTION' | translate }}
                                         <span sortable-column="createdAt"></span>
                                         <span filterable-column="createdAt" filter-type="text"
-                                              filter-placeholder="{{'Historique cons' | translate }}"></span>
+                                              filter-placeholder="{{'HISTORICAL_CONSUMPTION' | translate }}"></span>
                                     </th>
                                 </tr>
                                 </thead>
@@ -125,13 +126,16 @@
                             <table class="table table-bordered ">
                                 <tbody>
                                 <tr>
-                                    <th class="table-active" scope="row" colspan="2">Solde crediteur hors
-                                        participation
+                                    <th class="table-active" scope="row" colspan="2">
+                                      {{'CREDIT_BALANCE_EXCLUDING_PARTICIPATION' | translate }}
                                     </th>
                                     <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurH}}</td>
                                 </tr>
                                 <tr>
-                                    <th class="table-active" scope="row" colspan="2">Solde crediteur participation</th>
+                                    <th class="table-active" scope="row" colspan="2">
+                                      {{'CREDIT_BALANCE_PARTICIPATION' | translate }}
+
+                                    </th>
                                     <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurP}}</td>
                                 </tr>
                                 <tr>
@@ -145,12 +149,12 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Nº facture</th>
-                                    <th scope="col">N° échéances</th>
-                                    <th scope="col">N° police</th>
-                                    <th scope="col">Date d'échéance</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Montant</th>
+                                    <th scope="col">Nº {{'BILL' | translate }}</th>
+                                    <th scope="col">N° {{'DEADLINES' | translate }}</th>
+                                    <th scope="col">N° {{'POLICE' | translate }}</th>
+                                    <th scope="col">{{'DEADLINE' | translate }}</th>
+                                    <th scope="col">{{'TYPE' | translate }}</th>
+                                    <th scope="col">{{'AMOUNT' | translate }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -171,7 +175,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a class="btn btn btn-outline-primary pull-right" href="/account/unpaid">Payer</a>
+                            <a class="btn btn btn-outline-primary pull-right" href="/account/unpaid">{{'PAY' | translate }}</a>
                         </div>
                     </div>
                 </div>
@@ -194,7 +198,7 @@
             <div class="card-header"
                  [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
                 <h4>
-                    <i class="fa fa-info-circle"></i> Informations
+                    <i class="fa fa-info-circle"></i>{{'INFORMATIONS' | translate }}
                 </h4>
             </div>
             <div class="card-content">
@@ -202,35 +206,35 @@
                     <div class="row">
                         <div class="col-12">
                             <p>
-                                <b>Adresse du contrat: </b>{{subscription[0]?.address}}</p>
+                                <b>{{'ADDRESS_OF_THE_CONTRATCT' | translate }} : </b>{{subscription[0]?.address}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
                             <p>
-                                <b>Etat: </b>{{subscription[0]?.state}}</p>
+                                <b>{{'STATUS' | translate }} : </b>{{subscription[0]?.state}}</p>
                         </div>
                         <div class="col-4">
                             <p>
-                                <b>Date d'abonnement: </b>{{subscription[0]?.subscriptionDate}}</p>
+                                <b>{{'SUBSCRIPTION_DATE' | translate }} : </b>{{subscription[0]?.subscriptionDate}}</p>
                         </div>
                         <div class="col-4">
                             <p>
-                                <b>Dpôt de garantie: </b>{{subscription[0]?.deposit}}</p>
+                                <b>{{'SUBSCRIPTION_DATE' | translate }} : </b>{{subscription[0]?.deposit}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
                             <p>
-                                <b>Tarif: </b>{{subscription[0]?.cost}}</p>
+                                <b>{{'RATE' | translate }} : </b>{{subscription[0]?.cost}}</p>
                         </div>
                         <div class="col-4">
                             <p>
-                                <b>Calibre de compteur: </b>{{subscription[0]?.calibre}}</p>
+                                <b>{{'COUNTER_GAUGE' | translate }} : </b>{{subscription[0]?.calibre}}</p>
                         </div>
                         <div class="col-4">
                             <p>
-                                <b>Mode de paiement: </b>{{subscription[0]?.paimentMethod}}</p>
+                                <b>{{'PAYMENT_METHOD' | translate }} : </b>{{subscription[0]?.paimentMethod}}</p>
                         </div>
                     </div>
                 </div>
@@ -242,7 +246,7 @@
                     <div class="card-header"
                          [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
                         <h4>
-                            <i class="fa fa-tachometer"></i> Dernier index
+                            <i class="fa fa-tachometer"></i>{{'LAST_INDEX' | translate }}
                         </h4>
                     </div>
                     <div class="card-content">
@@ -250,15 +254,15 @@
 
                             <table>
                                 <tr>
-                                    <th>N° compteur:</th>
+                                    <th>{{'COUNTER_NUMBER' | translate }} :</th>
                                     <td>{{subscription[0]?.lastIndex.meterNumber}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Date de relève:</th>
+                                    <th>{{'DATE_OF_REPORTS' | translate }} :</th>
                                     <td>{{subscription[0]?.lastIndex.date}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Index:</th>
+                                    <th>{{'INDEX' | translate }} :</th>
                                     <td>{{subscription[0]?.lastIndex.index}}</td>
                                 </tr>
                             </table>
@@ -271,22 +275,22 @@
                     <div class="card-header"
                          [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
                         <h4>
-                            <i class="fa fa-file-text"></i> Dernière facture
+                            <i class="fa fa-file-text"></i> {{'LAST_INVOICE' | translate }}
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             <table>
                                 <tr>
-                                    <th>Date:</th>
+                                    <th>{{'DATE' | translate }}:</th>
                                     <td>{{subscription[0]?.lastBill.date}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Montant:</th>
+                                    <th>{{'AMOUNT' | translate }} :</th>
                                     <td>{{subscription[0]?.lastBill.amount}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Consommation:</th>
+                                    <th>{{'CONSUMPTION' | translate }} :</th>
                                     <td>{{subscription[0]?.lastBill.consumption}}</td>
                                 </tr>
                             </table>
@@ -300,7 +304,7 @@
 
 <ng-template #waterBillDetails>
     <div class="modal-header modal-radem">
-        <h4 class="modal-title pull-left">Détails de la facture</h4>
+        <h4 class="modal-title pull-left">{{'INVOICE_DETAILS' | translate }}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -314,15 +318,15 @@
                 <div class="media-body row  mt-1 ml-1">
                     <div class="col-4">
                         <p>
-                            <b>Numero de contrat:</b> {{bill.police}}</p>
+                            <b>{{'CONTRACT_NUMBER' | translate }} :</b> {{bill.police}}</p>
                     </div>
                     <div class="col-4">
                         <p>
-                            <b>Numero de facture:</b> {{bill.numBill}}</p>
+                            <b>{{'INVOICE_NUMBER' | translate }} :</b> {{bill.numBill}}</p>
                     </div>
                     <div class="col-4">
                         <p>
-                            <b>Montant facture:</b> {{bill.amount}}</p>
+                            <b>{{'INVOICE_AMOUNT' | translate }} :</b> {{bill.amount}}</p>
                     </div>
                 </div>
             </div>
@@ -331,21 +335,21 @@
             <table class="table table-responsive">
                 <thead class="table-dark">
                 <tr>
-                    <th scope="row">Libelle</th>
-                    <th scope="col">Prix unitaire</th>
-                    <th scope="col">Quantite</th>
-                    <th scope="col">Montant HT</th>
-                    <th scope="col">Taux TVA</th>
-                    <th scope="col">Montant TVA</th>
+                    <th scope="row">{{'LABEL' | translate }}</th>
+                    <th scope="col">{{'UNIT_PRICE' | translate }}</th>
+                    <th scope="col">{{'QUANTITY' | translate }}</th>
+                    <th scope="col">{{'AMOUNT_HT' | translate }}</th>
+                    <th scope="col">{{'VAT_RATE' | translate }}</th>
+                    <th scope="col">{{'VAT_AMOUNT' | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="bg-blue-grey bg-lighten-4 black text-center">
-                    <td colspan="6" class="">Redevences fixes</td>
+                    <td colspan="6" class="">{{'FIXED_FEES' | translate }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Entretien
-                        <br>branchement
+                    <th scope="row">{{'MAINTENANCE' | translate }}
+                        <br>{{'EMBRANCHMENT' | translate }}
                     </th>
                     <td class="text-center">-</td>
                     <td class="text-center">-</td>
@@ -354,8 +358,8 @@
                     <td class="">{{bill.embranchementMaintenance*20/100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Location
-                        <br>compteur
+                    <th scope="row">{{'LOCATION' | translate }}
+                        <br>{{'COUNTER' | translate }}
                     </th>
                     <td class="text-center">-</td>
                     <td class="text-center">-</td>
@@ -364,8 +368,8 @@
                     <td class="">{{bill.meterLeasing*7/100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Entretien
-                        <br>compteur
+                    <th scope="row">{{'MAINTENANCE' | translate }}
+                        <br>{{'COUNTER' | translate }}
                     </th>
                     <td class="text-center">-</td>
                     <td class="text-center">-</td>
@@ -374,7 +378,7 @@
                     <td class="">{{bill.meterMaintenance*20/100}}</td>
                 </tr>
                 <tr class="bg-blue-grey bg-lighten-4 black text-center">
-                    <td colspan="6" class="">Consommation d'eau</td>
+                    <td colspan="6" class="">{{'WATER_CONSUMPTION' | translate }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tranche 5</th>
@@ -388,7 +392,7 @@
                     <td colspan="6" class="">Tppan</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 1</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 1</th>
                     <td class="">{{bill.tranches.tranche1.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche1.quantity}}</td>
                     <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -396,7 +400,7 @@
                     <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 2</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 2</th>
                     <td class="">{{bill.tranches.tranche2.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche2.quantity}}</td>
                     <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -404,7 +408,7 @@
                     <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 3</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 3</th>
                     <td class="">{{bill.tranches.tranche3.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche3.quantity}}</td>
                     <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -420,12 +424,12 @@
             <div class="row">
                 <!--<div class="col-md-4"></div>-->
                 <div class="offset-4 col-md-4">
-                    <p class="card-text font-weight-bold">Total HT:
+                    <p class="card-text font-weight-bold">{{'TOTAL_HT' | translate }} :
                         <span class="font-weight-normal mx-2">700.00(DHs)</span>
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <p class="card-text font-weight-bold">Total TVA:
+                    <p class="card-text font-weight-bold">{{'TOTAL_TVA' | translate }} :
                         <span class="font-weight-normal mx-2">39.21(DHs)</span>
                     </p>
                 </div>
@@ -436,7 +440,7 @@
 
 <ng-template #electricityBillDetails>
     <div class="modal-header modal-radem">
-        <h4 class="modal-title pull-left">Détails de la facture</h4>
+        <h4 class="modal-title pull-left">{{'INVOICE_DETAILS' | translate }}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -450,15 +454,15 @@
                 <div class="media-body row  mt-1 ml-1">
                     <div class="col-4">
                         <p>
-                            <b>Numero de contrat:</b> {{bill.police}}</p>
+                            <b>{{'CONTRACT_NUMBER' | translate }}:</b> {{bill.police}}</p>
                     </div>
                     <div class="col-4">
                         <p>
-                            <b>Numero de facture:</b> {{bill.numBill}}</p>
+                            <b>{{'INVOICE_NUMBER' | translate }}:</b> {{bill.numBill}}</p>
                     </div>
                     <div class="col-4">
                         <p>
-                            <b>Montant facture:</b> {{bill.amount}}</p>
+                            <b>{{'INVOICE_AMOUNT' | translate }}:</b> {{bill.amount}}</p>
                     </div>
                 </div>
             </div>
@@ -467,21 +471,21 @@
             <table class="table table-responsive">
                 <thead class="table-dark">
                 <tr>
-                    <th scope="row">Libelle</th>
-                    <th scope="col">Prix unitaire</th>
-                    <th scope="col">Quantite</th>
-                    <th scope="col">Montant HT</th>
-                    <th scope="col">Taux TVA</th>
-                    <th scope="col">Montant TVA</th>
+                  <th scope="row">{{'LABEL' | translate }}</th>
+                  <th scope="col">{{'UNIT_PRICE' | translate }}</th>
+                  <th scope="col">{{'QUANTITY' | translate }}</th>
+                  <th scope="col">{{'AMOUNT_HT' | translate }}</th>
+                  <th scope="col">{{'VAT_RATE' | translate }}</th>
+                  <th scope="col">{{'VAT_AMOUNT' | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="bg-blue-grey bg-lighten-4 black text-center">
-                    <td colspan="6" class="">Redevences fixes</td>
+                    <td colspan="6" class="">{{'FIXED_FEES' | translate }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Entretien
-                        <br>branchement
+                    <th scope="row">{{'MAINTENANCE' | translate }}
+                      <br>{{'EMBRANCHMENT' | translate }}
                     </th>
                     <td class=""></td>
                     <td class=""></td>
@@ -490,8 +494,8 @@
                     <td class="">{{bill.embranchementMaintenance*20/100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Location
-                        <br>compteur
+                    <th scope="row">{{'LOCATION' | translate }}
+                      <br>{{'COUNTER' | translate }}
                     </th>
                     <td class=""></td>
                     <td class=""></td>
@@ -500,8 +504,8 @@
                     <td class="">{{bill.meterLeasing*7/100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Entretien
-                        <br>compteur
+                    <th scope="row">{{'MAINTENANCE' | translate }}
+                      <br>{{'COUNTER' | translate }}
                     </th>
                     <td class=""></td>
                     <td class=""></td>
@@ -510,10 +514,10 @@
                     <td class="">{{bill.meterMaintenance*20/100}}</td>
                 </tr>
                 <tr class="bg-blue-grey bg-lighten-4 black text-center">
-                    <td colspan="6">Consomation electricite</td>
+                    <td colspan="6">{{'ELECTRICITY_CONSUMPTION' | translate }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 5</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 5</th>
                     <td class="">{{bill.tranches.tranche5.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche5.quantity}}</td>
                     <td class="">{{bill.tranches.tranche5.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -524,7 +528,7 @@
                     <td colspan="6">Tppan</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 1</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 1</th>
                     <td class="">{{bill.tranches.tranche1.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche1.quantity}}</td>
                     <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -532,7 +536,7 @@
                     <td class="">{{bill.tranches.tranche1.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 2</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 2</th>
                     <td class="">{{bill.tranches.tranche2.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche2.quantity}}</td>
                     <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -540,7 +544,7 @@
                     <td class="">{{bill.tranches.tranche2.unitPrice * bill.tranches.tranche1.quantity * 14 / 100}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Tranche 3</th>
+                    <th scope="row">{{'TRANCHE' | translate }} 3</th>
                     <td class="">{{bill.tranches.tranche3.unitPrice}}</td>
                     <td class="">{{bill.tranches.tranche3.quantity}}</td>
                     <td class="">{{bill.tranches.tranche3.unitPrice * bill.tranches.tranche1.quantity}}</td>
@@ -557,12 +561,12 @@
         <div class="row">
             <!--<div class="col-md-4"></div>-->
             <div class="offset-4 col-md-4">
-                <p class="card-text font-weight-bold">Total HT:
+                <p class="card-text font-weight-bold">{{'TOTAL_HT' | translate }}:
                     <span class="font-weight-normal mx-2">700.00(DHs)</span>
                 </p>
             </div>
             <div class="col-md-4">
-                <p class="card-text font-weight-bold">Total TVA:
+                <p class="card-text font-weight-bold">{{'TOTAL_TVA' | translate }}:
                     <span class="font-weight-normal mx-2">39.21(DHs)</span>
                 </p>
             </div>
@@ -572,7 +576,7 @@
 
 <ng-template #historyDetail>
     <div class="modal-header bg-radem">
-        <h4 class="modal-title pull-left">Historique de consomation</h4>
+        <h4 class="modal-title pull-left">{{'CONSUMPTION_HISTORY' | translate }}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -583,8 +587,8 @@
                 <table class="table table-responsive">
                     <thead class="table-secondary">
                     <tr>
-                        <th scope="row">Periode</th>
-                        <th scope="col">Montant HT</th>
+                        <th scope="row">{{'PERIOD' | translate }}</th>
+                        <th scope="col">{{'AMOUNT_HT' | translate }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -597,7 +601,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <h5 class="card-title text-center">Evolution de votre consomation en (m3)</h5>
+                    <h5 class="card-title text-center">{{'EVOLUTION_OF_YOUR_CONSUMPTION_IN_(M3)' | translate }}</h5>
                     <div class="card-body">
                         <div style="display: block">
                             <canvas baseChart

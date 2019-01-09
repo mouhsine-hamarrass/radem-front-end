@@ -1,18 +1,18 @@
 <!--Tooltip Starts-->
 <div class="content-header row">
   <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">Abonnement</h3>
+    <h3 class="content-header-title">{{'Subscription' | translate }}</h3>
   </div>
   <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil</a>
+          <a routerLink="/home">Accueil{{'HOME' | translate }}</a>
         </li>
         <li class="breadcrumb-item">
           <a>Services</a>
         </li>
-        <li class="breadcrumb-item active">Demande 1
+        <li class="breadcrumb-item active">{{'Request' | translate }} 1
         </li>
       </ol>
     </div>
@@ -24,7 +24,7 @@
       <!-- What is-->
       <div id="what-is" class="card">
         <div class="card-header">
-          <h4 class="card-title">Demande d'abonnement N°</h4>
+          <h4 class="card-title">{{'subscription_request' | translate }} N°</h4>
           <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
           <div class="heading-elements">
             <ul class="list-inline">
@@ -38,19 +38,19 @@
             <div class="card-text">
               <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
-                <aw-wizard-step [stepId]="0" [stepTitle]="'Depôt de dossier'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step [stepId]="0" [stepTitle]="'FILE_EPOSIT' | translate" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
-                <aw-wizard-step [stepId]="1" [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step [stepId]="1" [stepTitle]="'INTERVENTION' | translate" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
-                <aw-wizard-step [stepId]="2" [stepTitle]="'Pose Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step [stepId]="2" [stepTitle]="'COUNTER_POSE' | translate" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
-                <aw-wizard-step [stepId]="3" [stepTitle]="'Facture'" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step [stepId]="3" [stepTitle]="'INVOICE' | translate" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
-                <aw-wizard-step [stepId]="4" [stepTitle]="'Abonné'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }">
+                <aw-wizard-step [stepId]="4" [stepTitle]="'SUBSCRIBER' | translate" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }">
                 </aw-wizard-step>
 
                 <div class="col-md-12" id="buttons">
@@ -59,45 +59,45 @@
 
               <div class="row" id="cards">
                 <fieldset class="col-7 scheduler-border">
-                  <legend class="scheduler-border"><b>Informations :</b></legend>
+                  <legend class="scheduler-border"><b>{{'INFORMATIONS' | translate }} :</b></legend>
                   <div style="padding-left: 20px;padding-bottom: 10px;">
                     <div class="row">
                       <div style="padding-left: 10px;">
                         <table>
                           <tr>
-                            <td>N° demande :</td>
+                            <td>N° {{'Request' | translate }} :</td>
                             <td>{{claim?.claimNumber}}</td>
                           </tr>
                           <tr>
-                            <td>Client :</td>
+                            <td>{{'CLIENT' | translate }} :</td>
                             <td>{{claim?.complainer?.lastname}} {{claim?.complainer?.firstname}}</td>
                           </tr>
                           <tr>
-                            <td>Objet :</td>
+                            <td>{{'OBJECT' | translate }} :</td>
                             <td>{{claim?.object}}</td>
                           </tr>
                         </table>
                       </div>
-                      <div id="descDiv">Description :{{claim?.description}}
+                      <div id="descDiv">{{'DESCRIPTION' | translate }} :{{claim?.description}}
                       </div>
                     </div>
                   </div>
                 </fieldset>
                 <fieldset class="col-4 scheduler-border">
                   <legend class="scheduler-border">
-                    <b>Intervenants :</b>
+                    <b>{{'SPEAKERS' | translate }} :</b>
                   </legend>
                   <div style="padding-left: 20px;">
                     <p *ngIf="!claim?.agent">
-                      Aucun Intervenant n'est affecté pour le moment
+                      {{'NO_SPEAKER_IS_ASSIGNED_FOR_THE_MOMENT' | translate }}
                     </p>
                     <table *ngIf="claim?.agent">
                       <tr>
-                        <td>Agent :</td>
+                        <td>{{'AGENT' | translate }} :</td>
                         <td>{{claim?.agent?.firstname}} {{claim?.agent?.lastname}}</td>
                       </tr>
                       <tr>
-                        <td>Service concerné :</td>
+                        <td>{{'SERVICE_CONCERNED' | translate }} :</td>
                         <td></td>
                       </tr>
                     </table>
@@ -107,7 +107,7 @@
               <div class="row" id="cards2">
                 <fieldset class="col-7 scheduler-border">
                   <legend class="scheduler-border">
-                    <b>Commentaires</b>
+                    <b>{{'COMMENTS' | translate }}</b>
                   </legend>
                   <div id="commDiv">
                     <form class="">
@@ -116,7 +116,7 @@
                         <input #commentaire type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
                           style="margin-right: 8px;margin-left: 10px;" />
 
-                        <button class="btn btn btn-outline-primary">Envoyer</button>
+                        <button class="btn btn btn-outline-primary">{{'SEND' | translate }}</button>
                       </div>
                     </form><br>
                     <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of claim?.feedback">
@@ -137,11 +137,11 @@
                   <div style="padding-left: 20px;">
                     <table>
                       <tr>
-                        <td>Date de création :</td>
+                        <td>{{'DATE_OF-CREATION' | translate }} :</td>
                         <td>{{claim?.createdDate | date:'dd-M-yyyy'}}</td>
                       </tr>
                       <tr>
-                        <td>Dernière modification :</td>
+                        <td>{{'DATE_OF_MODIFICATION' | translate }} :</td>
                         <td>{{claim?.updatedDate | date:'dd-M-yyyy'}}</td>
                       </tr>
                     </table>
