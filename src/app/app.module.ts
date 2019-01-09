@@ -16,17 +16,19 @@ import {environment} from '../environments/environment';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
 import {BoxedWithSidebarLayoutComponent} from './layouts/boxed-with-sidebar-layout/boxed-with-sidebar-layout.component';
 import {TwoColumnsLayoutComponent} from './layouts/2-columns-layout/2-columns-layout.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { RecoverPasswordComponent } from './recover-password/recover-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {RecoverPasswordComponent} from './recover-password/recover-password.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {RegisterComponent} from './register/register.component';
 import {MainModule} from './main/main.module';
-import { EnableAccountComponent } from './enable-account/enable-account.component';
-import { EnableAccountService } from './main/services/enable-account.service';
-import { RegisterSuccesComponent } from './register-succes/register-succes.component';
-import { RecoverPasswordService } from './main/services/recover-password.service';
+import {EnableAccountComponent} from './enable-account/enable-account.component';
+import {EnableAccountService} from './main/services/enable-account.service';
+import {RegisterSuccesComponent} from './register-succes/register-succes.component';
+import {RecoverPasswordService} from './main/services/recover-password.service';
 import {ToastrModule} from 'ngx-toastr';
+import {TermOfUseComponent} from './term-of-use/term-of-use.component';
+import {OnlinePaymentComponent} from './main/pages/services-pages/online-payment/online-payment.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import {ToastrModule} from 'ngx-toastr';
     ResetPasswordComponent,
     RegisterComponent,
     EnableAccountComponent,
-    RegisterSuccesComponent
+    RegisterSuccesComponent,
+    TermOfUseComponent,
+    OnlinePaymentComponent
   ],
   imports: [
     BrowserModule,

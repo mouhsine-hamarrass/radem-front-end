@@ -45,6 +45,7 @@ import {FilterService} from './services/filter.service';
 import {SortableColumnComponent} from './components/tables/sortable-column/sortable-column.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
+import { NavbarofflineComponent } from './navbaroffline/navbaroffline.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
         SortTableDirective,
         SortableColumnComponent,
         FilterColumnComponent,
-        FilterTableDirective
+        FilterTableDirective,
+        NavbarofflineComponent
     ],
     imports: [
         CommonModule,
@@ -120,6 +122,7 @@ import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
         OwlMomentDateTimeModule,
+        NavbarofflineComponent
     ],
     providers: [
         PrintService,

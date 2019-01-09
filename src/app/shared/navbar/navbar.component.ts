@@ -37,11 +37,12 @@ export class NavbarComponent implements OnInit {
 
     getNotifications() {
         this.homeService.getAlertsNotification().subscribe(response => {
-            console.log(response.data);
-            this.alerts = response.data
+          if(response && response.data)
+            this.alerts = response.data;
         }, err => {
         });
     }
+
 
     readNotification(id, $index) {
         this.homeService.readAlertNotification(id).subscribe(response => {

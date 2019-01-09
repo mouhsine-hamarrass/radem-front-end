@@ -1,0 +1,88 @@
+<!-- fixed-top-->
+<nav id="stackNav" #stackNav
+     class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-light navbar-border">
+  <div class="navbar-wrapper">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav flex-row">
+        <li class="nav-item mobile-menu d-md-none mr-auto">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" routerLink="/home" style=" padding-top: 7px;">
+            <img alt="stack admin logo" src="assets/app/images/logo/radem-logo-ico.png" class="brand-logo"
+                 id="stackLogo" style="height: 40px;">
+
+            <img alt="stack admin logo" src="assets/app/images/logo/radem-logo.png" class="brand-logo"
+                 id="stackLogo-text" style="height:  30px; padding-left: 0;">
+          </a>
+        </li>
+        <!--
+        <li class="nav-item" style=" padding-top: 7px;">
+            <a class="navbar-brand">
+                <i class="fa fa-phone"></i>
+                <span>05-35-52-18-01/02/03</span>
+                    <span class="text-muted">24/7 Services</span>
+            </a>
+        </li>
+        -->
+      </ul>
+    </div>
+    <div class="navbar-container content">
+      <div class="collapse navbar-collapse" id="navbarNav1">
+        <ul class="nav navbar-nav mr-auto float-left">
+          <li class="nav-item d-none d-md-block">
+            <a routerLink="/changelog" class="nav-link nav-menu-main hidden-xs font-small-3 d-none"
+               id="stackNavBack" #stackNavBack>
+              <i class="ft-arrow-left"></i>Back
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav float-right float-sm-left">
+          <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
+              *ngIf="user">
+            <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link"
+               id="dropdownNotifications"
+               ngbDropdownToggle>
+              <i class="fa fa-2x fa-bell-o"></i>
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownNotifications">
+              <div *ngIf="alerts.length; else noNotifications">
+                <div *ngFor="let alert of alerts; let i = index; let $last = last">
+                  <a class="dropdown-item" *ngIf="alert.status === 'READ'; else unReadStatus">
+                    <span class="text-muted">{{alert.instructions}}</span>
+                  </a>
+                  <ng-template #unReadStatus>
+                    <a class="dropdown-item" (click)="readNotification(alert.id, i)">
+                      <span>{{alert.instructions}}</span>
+                    </a>
+                  </ng-template>
+                  <div class="dropdown-divider"></div>
+                </div>
+                <div>
+                  <span class="dropdown-item">Afficher toutes les notifications.</span>
+                </div>
+              </div>
+              <ng-template #noNotifications>
+                <span class="dropdown-item">Vous avez {{alerts.length}} notification.</span>
+              </ng-template>
+            </div>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/login">
+                Se connecter
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/register">
+                Inscription
+              </a>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
