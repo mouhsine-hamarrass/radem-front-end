@@ -1,24 +1,49 @@
-<!-- Conseil et économie d'énergie-->
-<div class="card mb-0">
-    <div class="card-header">
-        <h4 class="card-title">Conseil et économie d'énergie</h4>
-        <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-        </a>
-        <div class="heading-elements">
-            <ul class="list-inline mb-0">
-                <li>
-                    <a data-action="collapse">
-                        <i class="ft-minus"></i>
-                    </a>
-                </li>
-            </ul>
+<!--Tooltip Starts-->
+<div class="content-header back col-12 mb-1 mt-1">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">Conseil</h3>
         </div>
-    </div>
-    <div class="card-content collapse show">
-        <div class="card-body">
-            <div [innerHTML]="advices?.value | safeHtml"></div>
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/home">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active">Conseil</li>
+                </ol>
+            </div>
         </div>
     </div>
 </div>
-<!--/ Conseil et économie d'énergie-->
+<div class="content-body">
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <!-- Conseil et économie d'énergie-->
+            <div class="card mb-0">
+                <div class="card-header">
+                    <h4 class="card-title">Conseil et économie d'énergie</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <a data-action="collapse">
+                                    <i class="ft-minus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <div [innerHTML]="advices?.value | safeHtml"></div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Conseil et économie d'énergie-->
+        </div>
+    </section>
+</div>

@@ -1,0 +1,131 @@
+<div class="content-header back col-12 mb-1 mt-1">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">Abonnement</h3>
+        </div>
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/home">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active">Abonnement</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-body">
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <!-- Conseil et économie d'énergie-->
+            <div class="card mb-0">
+                <div class="card-header">
+                    <h4 class="card-title">{{dynamic?.title}}</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <a data-action="collapse">
+                                    <i class="ft-minus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <div [innerHTML]="dynamic?.content | safeHtml"></div>
+                        <div *ngIf="!dynamic?.content">
+                            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam at autem
+                                beatae consectetur dolor dolores, eaque ex impedit nam necessitatibus nulla praesentium
+                                quae quas reprehenderit repudiandae sequi sint voluptatum.
+                            </div>
+                            <div>Ab cum dignissimos dolore laboriosam laudantium tempore ullam! Amet cumque ea earum
+                                excepturi explicabo optio quasi repudiandae sequi temporibus unde? Blanditiis
+                                consectetur dolor hic porro recusandae soluta veniam voluptatem voluptatum!
+                            </div>
+                            <div>Corporis eius facere fuga iusto optio pariatur quisquam, repellat! Aliquam, consequatur
+                                distinctio eos esse eum ex maiores mollitia odit perferendis perspiciatis placeat
+                                quaerat quas quisquam quod saepe, sit sunt voluptatibus?
+                            </div>
+                            <div>Beatae cupiditate debitis explicabo mollitia nesciunt nobis praesentium quod tempora!
+                                Ad aliquam assumenda deleniti dolores exercitationem illo illum, in nesciunt odio
+                                pariatur provident quasi quia quod suscipit velit vitae voluptatum.
+                            </div>
+                            <div>Doloribus earum facilis hic magnam numquam praesentium sequi totam unde. Atque beatae
+                                consectetur deleniti dolorem, exercitationem, ipsam itaque magni maxime necessitatibus,
+                                nemo nisi odit omnis quam sapiente tempore totam vero?
+                            </div>
+                            <div>Aperiam asperiores cum cupiditate dolores est et, maxime obcaecati quis vitae voluptas!
+                                Aperiam earum incidunt ipsam modi molestiae nobis optio saepe. Aliquid minima molestiae
+                                numquam quibusdam recusandae sit veritatis voluptates?
+                            </div>
+                            <div>Ad autem dolore ea eligendi inventore libero magni minus nemo nisi odio qui tempore
+                                temporibus, tenetur voluptas, voluptatem! Iusto magni maiores omnis perferendis placeat
+                                quasi quibusdam rerum? Eius, laborum, maxime.
+                            </div>
+                            <div>Aspernatur assumenda consequuntur dolor officiis quod. Ad beatae cumque dicta
+                                doloremque officiis. Deserunt eos, illum labore quaerat quas qui quisquam sunt. Earum
+                                enim fuga impedit modi odit optio repudiandae. Harum?
+                            </div>
+                            <div>Architecto dignissimos dolorum facere, mollitia nesciunt nostrum odio, officia optio,
+                                porro quod tenetur veritatis voluptate! Aliquam amet, asperiores, enim excepturi
+                                incidunt laudantium libero minima necessitatibus nostrum possimus veritatis vitae,
+                                voluptatibus?
+                            </div>
+                            <div>Aperiam consequuntur dicta dolorum eaque ex explicabo fuga fugiat, fugit illo itaque
+                                iure nesciunt nobis officia omnis pariatur perspiciatis placeat quidem quo,
+                                reprehenderit repudiandae rerum sit ullam veniam voluptas voluptate.
+                            </div>
+                            <div>Ad adipisci aliquid aspernatur autem consectetur consequuntur delectus dicta dolores
+                                earum illum ipsum laboriosam laudantium, maxime molestiae natus nihil numquam quasi quos
+                                ratione repudiandae sapiente sequi suscipit ullam voluptate voluptatem!
+                            </div>
+                            <div>Aperiam ducimus ex id numquam quaerat quam qui, quidem ratione. Accusamus beatae
+                                explicabo hic minus perspiciatis quam quibusdam recusandae sunt. Aliquam amet
+                                architecto, magnam nihil quae reprehenderit repudiandae ullam voluptas.
+                            </div>
+                            <div>Commodi dolores, et molestias nihil repellat sit sunt ullam veniam. Amet asperiores at
+                                et tempora! Aliquam atque dolorum ducimus facere incidunt, sint voluptatibus. Excepturi
+                                inventore recusandae sequi sit vel! Velit.
+                            </div>
+                            <div>Adipisci aliquid aspernatur deserunt dolores hic illum minima nemo officiis, quisquam
+                                rerum ullam voluptas! Beatae cumque, deleniti eius esse, expedita laudantium mollitia
+                                neque nisi placeat porro quos ratione sunt, totam.
+                            </div>
+                            <div>Atque blanditiis dolorem ea enim eos excepturi fugiat incidunt, ipsam laboriosam magni
+                                minus quod sint ut! Accusamus asperiores aut consectetur corporis doloremque earum ex
+                                laborum maxime, officia quas quibusdam, sit!
+                            </div>
+                            <div>Accusamus assumenda aut cupiditate debitis dignissimos dolorem earum esse eveniet
+                                exercitationem fuga hic id in inventore ipsam iste itaque laudantium molestiae molestias
+                                necessitatibus nemo nostrum numquam omnis, quae sapiente vitae?
+                            </div>
+                            <div>Aliquid aperiam assumenda deleniti dignissimos dolorem est eveniet explicabo laborum
+                                numquam, obcaecati perferendis qui, quia quos repellendus sed sunt tempora ullam
+                                voluptatem! A ducimus fuga inventore praesentium quam, rerum sapiente.
+                            </div>
+                            <div>Ad consequatur cumque dicta dolore doloremque doloribus earum eos error facere, fuga
+                                incidunt laborum magnam minus praesentium saepe sequi suscipit tenetur ut voluptatem
+                                voluptatibus. Amet autem consequuntur dolor hic voluptatibus!
+                            </div>
+                            <div>Atque cum deserunt doloribus fuga minus quas rem vel voluptatem. Ab autem commodi illum
+                                impedit, iure repudiandae saepe suscipit veritatis voluptate? Excepturi explicabo iste
+                                mollitia numquam quaerat quisquam, unde voluptatum?
+                            </div>
+                            <div>Assumenda autem excepturi fuga harum iste, iusto molestiae nihil repellat! Amet animi
+                                aperiam aspernatur assumenda, earum eligendi eum exercitationem harum itaque laboriosam,
+                                laborum necessitatibus nisi odio, optio quas quidem voluptatibus?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Conseil et économie d'énergie-->
+        </div>
+    </section>
+</div>
