@@ -8,6 +8,9 @@ import {ComponentsModule} from '../../../shared/components/components.module';
 import {FormsModule} from '@angular/forms';
 import {BsDropdownModule} from 'ngx-bootstrap';
 import {SharedModule} from '../../../shared/shared.module';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../../app.translate.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -17,6 +20,13 @@ import {SharedModule} from '../../../shared/shared.module';
         ContractsPageRoutingModule,
         ChartsModule,
         ComponentsModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
         SharedModule
     ],
     declarations: [ContractsPageComponent],
@@ -25,4 +35,7 @@ import {SharedModule} from '../../../shared/shared.module';
     ]
 })
 export class ContractsPageModule {
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }

@@ -7,6 +7,9 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {BsDropdownModule} from 'ngx-bootstrap';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {SharedModule} from '../../../shared/shared.module';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../../app.translate.factory';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -15,11 +18,20 @@ import {SharedModule} from '../../../shared/shared.module';
         AngularFontAwesomeModule,
         SharedModule,
         BsDropdownModule,
-        ComponentsModule
+        ComponentsModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
     ],
     declarations: [ConsumptionsPageComponent],
     providers: [AdminService]
 })
 export class ConsumptionsPageModule {
-
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }
