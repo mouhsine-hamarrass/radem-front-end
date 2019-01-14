@@ -304,7 +304,8 @@
   "PLANNED_MAINTENANCE_IS_CURRENTLY_IN_PROGRESS":"La maintenance planifiée est actuellement en cours",
   "PLEASE_COME_BACK_SOON":"S'il vous plaît revenez bientôt",
   "WE_APOLOGIZE_FOR_ANY_INCONVENIENCE":"Nous nous excusons pour tout inconvénient",
-  "REFRESH":"Acutaliser"
+  "REFRESH":"Acutaliser",
+  "FIELD_REQUIRED": "Ce champs obligatoire"
 
 
 

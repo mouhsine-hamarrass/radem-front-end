@@ -1,6 +1,6 @@
 export interface DynamicModel {
     id?: number;
-    code?: string;
+    key?: string;
     title?: string;
     content?: string;
 }

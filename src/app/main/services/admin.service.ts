@@ -327,12 +327,16 @@ export class AdminService {
         return this.httpClient.put<Response<Setting>>(`${this.apiUrl}/settings/ADVICES`, advices, {headers: this.headers});
     }
 
-    getDynamicContent(code: string): Observable<Response<DynamicModel>> {
-        return this.httpClient.get<Response<DynamicModel>>(`${this.apiUrl}/dynamicContent/${code}`);
+    getAllDynamicPages(): Observable<Response<Array<DynamicModel>>> {
+        return this.httpClient.get<Response<Array<DynamicModel>>>(`${this.apiUrl}/dynamic-pages`);
     }
 
-    saveDynamicContent(code: string, content: DynamicModel): Observable<Response<DynamicModel>> {
-        return this.httpClient.put<Response<DynamicModel>>(`${this.apiUrl}/dynamicContent/${code}`, content, {headers: this.headers});
+    getDynamicContent(key: string): Observable<Response<DynamicModel>> {
+        return this.httpClient.get<Response<DynamicModel>>(`${this.apiUrl}/dynamic-pages/${key}`);
+    }
+
+    saveDynamicContent(content: DynamicModel): Observable<Response<DynamicModel>> {
+        return this.httpClient.put<Response<DynamicModel>>(`${this.apiUrl}/dynamic-page/edit`, content, {headers: this.headers});
     }
 
     /**

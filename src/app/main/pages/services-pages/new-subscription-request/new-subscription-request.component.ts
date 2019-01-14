@@ -29,10 +29,6 @@ export class NewSubscriptionRequestComponent implements OnInit {
     constructor(private servicesService: ServicesService,
                 private formBuilder: FormBuilder) {
         this.subscriptionForm = this.formBuilder.group({
-            'subscriptionType': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
             'firstAndLastName': ['', Validators.compose(
                 [
                     Validators.required
@@ -61,7 +57,31 @@ export class NewSubscriptionRequestComponent implements OnInit {
                 [
                     Validators.required
                 ])],
+            'adressNumber': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
             'address': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'building': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'apartment': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'floor': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'address_supplement': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'subscriptionType': ['', Validators.compose(
                 [
                     Validators.required
                 ])],

@@ -136,7 +136,7 @@ export const ROUTES: RouteInfo[] = [
                 submenu: []
             },
             {
-                path: '',
+                path: '/admin/dynamic',
                 title: 'Contenu dynamique',
                 icon: 'icon-files',
                 clazz: 'nav-item',
@@ -145,128 +145,7 @@ export const ROUTES: RouteInfo[] = [
                 isExternalLink: false,
                 isNavHeader: false,
                 id: 'dynamic',
-                submenu: [
-                    {
-                        path: '/admin/dashboard_content',
-                        title: 'Tableau de bord',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'dashboard_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/subscription_content',
-                        title: 'Demandes d\'abonnements',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'subscription_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/cancellation_content',
-                        title: 'Demandes de résiliation',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'cancellation_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/autoReport_content',
-                        title: 'Auto relève',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'autoReport_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/claim_content',
-                        title: 'Réclamations',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'claim_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/contracts_content',
-                        title: 'Mes contrats',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'contracts_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/unpaid_content',
-                        title: 'Mes impayés',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'unpaid_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/settlements_content',
-                        title: 'Mes réglements',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'settlements_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/consumptions_content',
-                        title: 'Ma consommation',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'consumptions_content',
-                        submenu: []
-                    },
-                    {
-                        path: '/admin/advice_content',
-                        title: 'Conseil',
-                        icon: 'icon-support',
-                        clazz: 'nav-item',
-                        badge: '',
-                        badgeClass: '',
-                        isExternalLink: false,
-                        isNavHeader: false,
-                        id: 'advice_content',
-                        submenu: []
-                    },
-                ]
+                submenu: []
             },
         ]
     },
