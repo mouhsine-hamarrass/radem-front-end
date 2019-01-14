@@ -1,259 +1,291 @@
 <!--Tooltip Starts-->
-<div class="content-header row">
-  <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">{{'TERMINATION' | translate }}</h3>
-  </div>
-  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-    <div class="breadcrumb-wrapper col-12">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a routerLink="/home">{{'HOME' | translate }}</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a routerLink="/services/cancellation-requests">Demandes</a>
-        </li>
-        <li class="breadcrumb-item active">{{'Requests_for_termination' | translate }} {{terminationRequest?.requestNumber}}
-        </li>
-      </ol>
+<div class="content-header back col-12 mb-1 mt-1">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">{{'TERMINATION' | translate}}</h3>
+        </div>
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/home">{{'HOME' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a routerLink="/services/cancellation-requests">Demandes</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{'Requests_for_termination' | translate }}
+                        {{terminationRequest?.requestNumber}}
+                    </li>
+                </ol>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- What is-->
-      <div id="what-is" class="card mb-0">
-        <div class="card-header">
-          <h4 class="card-title">{{'Consult_your_request' | translate }}</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-
-            <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
-
-              <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep [stepTitle]="'Créée'"
-                [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
-              </aw-wizard-step>
-
-              <ng-template #step0>
-                <aw-wizard-step [stepId]="0" [stepTitle]="'CREATED' | translate" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
-                </aw-wizard-step>
-              </ng-template>
-
-              <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep [stepTitle]="'Reçue'"
-                [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
-              </aw-wizard-step>
-
-              <ng-template #step1>
-                <aw-wizard-step [stepId]="1" [stepTitle]="'Reçue'" [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
-                </aw-wizard-step>
-              </ng-template>
-
-              <aw-wizard-step *ngIf="selectedStep >= 2; else step2" [stepId]="2" awOptionalStep [stepTitle]="'Intervention'"
-                [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
-              </aw-wizard-step>
-
-              <ng-template #step2>
-                <aw-wizard-step [stepId]="2" [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
-                </aw-wizard-step>
-              </ng-template>
-
-              <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep [stepTitle]="'Compteur'"
-                [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
-              </aw-wizard-step>
-
-              <ng-template #step3>
-                <aw-wizard-step [stepId]="3" [stepTitle]="'Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
-                </aw-wizard-step>
-              </ng-template>
-
-              <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep [stepTitle]="'Vérification'"
-                [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }">
-              </aw-wizard-step>
-
-              <ng-template #step4>
-                <aw-wizard-step [stepId]="4" [stepTitle]="'Vérification'" [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }">
-                </aw-wizard-step>
-              </ng-template>
-
-              <aw-wizard-step *ngIf="selectedStep >= 5; else step5" [stepId]="5" awOptionalStep [stepTitle]="'Réglement'"
-                [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
-              </aw-wizard-step>
-
-              <ng-template #step5>
-                <aw-wizard-step [stepId]="5" [stepTitle]="'Réglement'" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
-                </aw-wizard-step>
-              </ng-template>
-
-              <aw-wizard-completion-step *ngIf="selectedStep >= 6; else step6" awOptionalStep [stepId]="6" [stepTitle]="'Cloture'"
-                [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
-                <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
-              </aw-wizard-completion-step>
-
-              <ng-template #step6>
-                <aw-wizard-completion-step [stepId]="6" [stepTitle]="'Cloture'" [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
-                  <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
-                </aw-wizard-completion-step>
-              </ng-template>
-            </aw-wizard>
-
-            <!--<ul class="steps steps-7">
-              <li [ngClass]="{current: terminationRequest?.status === 'CREATED'}">
-                <p class="mx-auto">
-                  <em>Créée</em>
-                </p>
-              </li>
-              <li [ngClass]="{current: terminationRequest?.status === 'RECEIVED'}">
-                <p>
-                  <em>Reçue</em>
-                </p>
-              </li>
-              <li [ngClass]="{current: terminationRequest?.status === 'IN_PROGRESS'}">
-                <p>
-                  <em>Intervention en cours</em>
-                </p>
-              </li>
-              <li [ngClass]="{current: terminationRequest?.status === 'DEPOSITED_COUNTER'}">
-                <p>
-                  <em>Compteur deposé</em>
-                  <span></span>
-                </p>
-              </li>
-              <li [ngClass]="{current: terminationRequest?.status === 'UNPAID_VERIFICATION'}">
-                <p>
-                  <em>Verification impayés</em>
-                  <span></span>
-                </p>
-              </li>
-              <li [ngClass]="{current: terminationRequest?.status === 'SETTLEMENT'}">
-                <p>
-                  <em>Reglement/Remboursement</em>
-                  <span></span>
-                </p>
-              </li>
-              <li [ngClass]="{current: terminationRequest?.status === 'CLOSED'}">
-                <p>
-                  <em>Cloture</em>
-                  <span></span>
-                </p>
-              </li>
-            </ul>-->
-
-            <div class="row" id="cards">
-              <fieldset class="scheduler-border col-7">
-                <legend class="scheduler-border">{{'INFORMATIONS' | translate }}</legend>
-                <div style="padding-left: 20px;padding-bottom: 10px;">
-                  <div class="row">
-                    <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                      <table>
-                        <tr>
-                          <td>N° {{'Request' | translate }} :</td>
-                          <td>{{terminationRequest?.requestNumber}}</td>
-                        </tr>
-                        <tr>
-                          <td>{{'CLIENT' | translate }} :</td>
-                          <td>{{terminationRequest?.client?.lastname}} {{terminationRequest?.client?.firstname}}</td>
-                        </tr>
-                        <tr>
-                          <td>{{'POLICE' | translate }} :</td>
-                          <td>{{terminationRequest?.subscriptions[0]?.subscription}}
-                            {{!terminationRequest?.subscriptions[1] ? '' : ','}}
-                            {{terminationRequest?.subscriptions[1]?.subscription}}</td>
-                        </tr>
-                      </table>
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <div id="what-is" class="card mb-0">
+                <div class="card-header">
+                    <h4 class="card-title">{{'Consult_your_request' | translate }}</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
                     </div>
-                    <div *ngIf="terminationRequest?.intervenant" style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
-                      <table>
-                        <tr>
-                          <td>{{'SPEAKER' | translate }} : </td>
-                          <td>{{terminationRequest?.intervenant?.firstname}}
-                            {{terminationRequest?.intervenant?.lastname}}</td>
-                        </tr>
-                        <tr>
-                          <td>{{'INTERVENTION_DATE' | translate }} : </td>
-                          <td>{{terminationRequest?.interventionDate | date: 'dd/MM/yyyy'}}</td>
-                        </tr>
-                        <tr>
-                          <td>{{'INTERVENTION_PHONE' | translate }} :</td>
-                          <td>{{terminationRequest?.intervenant.phone}}</td>
-                        </tr>
-                      </table>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                        <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
+                                   [navigationMode]="'free'">
+
+                            <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep
+                                            [stepTitle]="'Créée'"
+                                            [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                            </aw-wizard-step>
+
+                            <ng-template #step0>
+                                <aw-wizard-step [stepId]="0" [stepTitle]="'CREATED' | translate"
+                                                [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                                </aw-wizard-step>
+                            </ng-template>
+
+                            <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep
+                                            [stepTitle]="'Reçue'"
+                                            [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+                            </aw-wizard-step>
+
+                            <ng-template #step1>
+                                <aw-wizard-step [stepId]="1" [stepTitle]="'Reçue'"
+                                                [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+                                </aw-wizard-step>
+                            </ng-template>
+
+                            <aw-wizard-step *ngIf="selectedStep >= 2; else step2" [stepId]="2" awOptionalStep
+                                            [stepTitle]="'Intervention'"
+                                            [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+                            </aw-wizard-step>
+
+                            <ng-template #step2>
+                                <aw-wizard-step [stepId]="2" [stepTitle]="'Intervention'"
+                                                [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+                                </aw-wizard-step>
+                            </ng-template>
+
+                            <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep
+                                            [stepTitle]="'Compteur'"
+                                            [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+                            </aw-wizard-step>
+
+                            <ng-template #step3>
+                                <aw-wizard-step [stepId]="3" [stepTitle]="'Compteur'"
+                                                [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+                                </aw-wizard-step>
+                            </ng-template>
+
+                            <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep
+                                            [stepTitle]="'Vérification'"
+                                            [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }">
+                            </aw-wizard-step>
+
+                            <ng-template #step4>
+                                <aw-wizard-step [stepId]="4" [stepTitle]="'Vérification'"
+                                                [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }">
+                                </aw-wizard-step>
+                            </ng-template>
+
+                            <aw-wizard-step *ngIf="selectedStep >= 5; else step5" [stepId]="5" awOptionalStep
+                                            [stepTitle]="'Réglement'"
+                                            [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
+                            </aw-wizard-step>
+
+                            <ng-template #step5>
+                                <aw-wizard-step [stepId]="5" [stepTitle]="'Réglement'"
+                                                [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
+                                </aw-wizard-step>
+                            </ng-template>
+
+                            <aw-wizard-completion-step *ngIf="selectedStep >= 6; else step6" awOptionalStep [stepId]="6"
+                                                       [stepTitle]="'Cloture'"
+                                                       [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
+                                <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
+                            </aw-wizard-completion-step>
+
+                            <ng-template #step6>
+                                <aw-wizard-completion-step [stepId]="6" [stepTitle]="'Cloture'"
+                                                           [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
+                                    <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
+                                </aw-wizard-completion-step>
+                            </ng-template>
+                        </aw-wizard>
+
+                        <!--<ul class="steps steps-7">
+                          <li [ngClass]="{current: terminationRequest?.status === 'CREATED'}">
+                            <p class="mx-auto">
+                              <em>Créée</em>
+                            </p>
+                          </li>
+                          <li [ngClass]="{current: terminationRequest?.status === 'RECEIVED'}">
+                            <p>
+                              <em>Reçue</em>
+                            </p>
+                          </li>
+                          <li [ngClass]="{current: terminationRequest?.status === 'IN_PROGRESS'}">
+                            <p>
+                              <em>Intervention en cours</em>
+                            </p>
+                          </li>
+                          <li [ngClass]="{current: terminationRequest?.status === 'DEPOSITED_COUNTER'}">
+                            <p>
+                              <em>Compteur deposé</em>
+                              <span></span>
+                            </p>
+                          </li>
+                          <li [ngClass]="{current: terminationRequest?.status === 'UNPAID_VERIFICATION'}">
+                            <p>
+                              <em>Verification impayés</em>
+                              <span></span>
+                            </p>
+                          </li>
+                          <li [ngClass]="{current: terminationRequest?.status === 'SETTLEMENT'}">
+                            <p>
+                              <em>Reglement/Remboursement</em>
+                              <span></span>
+                            </p>
+                          </li>
+                          <li [ngClass]="{current: terminationRequest?.status === 'CLOSED'}">
+                            <p>
+                              <em>Cloture</em>
+                              <span></span>
+                            </p>
+                          </li>
+                        </ul>-->
+
+                        <div class="row" id="cards">
+                            <fieldset class="scheduler-border col-7">
+                                <legend class="scheduler-border">{{'INFORMATIONS' | translate }}</legend>
+                                <div style="padding-left: 20px;padding-bottom: 10px;">
+                                    <div class="row">
+                                        <div style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                                            <table>
+                                                <tr>
+                                                    <td>N° {{'Request' | translate }} :</td>
+                                                    <td>{{terminationRequest?.requestNumber}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{'CLIENT' | translate }} :</td>
+                                                    <td>{{terminationRequest?.client?.lastname}}
+                                                        {{terminationRequest?.client?.firstname}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{'POLICE' | translate }} :</td>
+                                                    <td>{{terminationRequest?.subscriptions[0]?.subscription}}
+                                                        {{!terminationRequest?.subscriptions[1] ? '' : ','}}
+                                                        {{terminationRequest?.subscriptions[1]?.subscription}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div *ngIf="terminationRequest?.intervenant"
+                                             style="padding-left: 20px;padding-top: 10px;padding-bottom: 10px;">
+                                            <table>
+                                                <tr>
+                                                    <td>{{'SPEAKER' | translate }} :</td>
+                                                    <td>{{terminationRequest?.intervenant?.firstname}}
+                                                        {{terminationRequest?.intervenant?.lastname}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{'INTERVENTION_DATE' | translate }} :</td>
+                                                    <td>{{terminationRequest?.interventionDate | date: 'dd/MM/yyyy'}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{'INTERVENTION_PHONE' | translate }} :</td>
+                                                    <td>{{terminationRequest?.intervenant.phone}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="scheduler-border col-4">
+                                <legend class="scheduler-border">Agent</legend>
+                                <div *ngIf="terminationRequest?.agent" style="padding-left: 20px;padding-top: 10px;">
+                                    <table>
+                                        <tr>
+                                            <td>{{'AGENT' | translate }} :</td>
+                                            <td>{{terminationRequest?.agent?.firstname}}
+                                                {{terminationRequest?.agent?.lastname}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'SERVICE_CONCERNED' | translate }} :</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <p *ngIf="!terminationRequest?.agent">{{'NO_AGENTS_ARE_AFFECTED_AT_THE_MOMENT' |
+                                    translate }}</p>
+                            </fieldset>
+                        </div>
+                        <div class="row" id="cards2">
+
+                            <fieldset class="scheduler-border col-7">
+                                <legend class="scheduler-border">{{'COMMENTS' | translate }}</legend>
+                                <div id="commDiv" style="padding: 20px;overflow: scroll; max-height: 500px;">
+                                    <form class="">
+                                        <div class="row">
+
+                                            <input id="commentaire" [formControl]="feedback" type="text"
+                                                   class="col-9 form-control"
+                                                   placeholder="Laisser un commentaire.."/>
+
+                                            <button class="btn btn btn-outline-primary" (click)="saveFeedback()">
+                                                {{'SEND' | translate }}
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <br>
+                                    <div class="row" style="margin-bottom: 10px;"
+                                         *ngFor="let feedback of terminationRequest?.feedback">
+                                        <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
+                                        <div class="border-comm col-10" id="comm">
+                                            {{feedback.message}}
+                                        </div>
+                                        <div class="col-md-4 pull-right" style="margin-left:400px; color: gray">
+                                            <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="scheduler-border col-4 max-width">
+                                <legend class="scheduler-border">{{'DATES' | translate }}</legend>
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>{{'DATE_OF-CREATION' | translate }} :</td>
+                                            <td>{{terminationRequest?.createdAt | date: 'dd/MM/yyyy' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'LAST_MODIFICATION' | translate }} :</td>
+                                            <td>{{terminationRequest?.lastUpdate| date: 'dd/MM/yyyy' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }} :</td>
+                                            <td>{{terminationRequest?.counterDropDate | date: 'dd/MM/yyyy' }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </fieldset>
-              <fieldset class="scheduler-border col-4">
-                <legend class="scheduler-border">Agent</legend>
-                <div *ngIf="terminationRequest?.agent" style="padding-left: 20px;padding-top: 10px;">
-                  <table>
-                    <tr>
-                      <td>{{'AGENT' | translate }} :</td>
-                      <td>{{terminationRequest?.agent?.firstname}} {{terminationRequest?.agent?.lastname}}</td>
-                    </tr>
-                    <tr>
-                      <td>{{'SERVICE_CONCERNED' | translate }} :</td>
-                      <td></td>
-                    </tr>
-                  </table>
-                </div>
-                <p *ngIf="!terminationRequest?.agent">{{'NO_AGENTS_ARE_AFFECTED_AT_THE_MOMENT' | translate }}</p>
-              </fieldset>
+                <!--/ What is-->
             </div>
-            <div class="row" id="cards2">
-
-              <fieldset class="scheduler-border col-7">
-                <legend class="scheduler-border">{{'COMMENTS' | translate }}</legend>
-                <div id="commDiv" style="padding: 20px;overflow: scroll; max-height: 500px;">
-                  <form class="">
-                    <div class="row">
-
-                      <input id="commentaire" [formControl]="feedback" type="text" class="col-9 form-control"
-                        placeholder="Laisser un commentaire.." />
-
-                      <button class="btn btn btn-outline-primary" (click)="saveFeedback()">{{'SEND' | translate }}</button>
-                    </div>
-                  </form>
-                  <br>
-                  <div class="row" style="margin-bottom: 10px;" *ngFor="let feedback of terminationRequest?.feedback">
-                    <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
-                    <div class="border-comm col-10" id="comm">
-                      {{feedback.message}}
-                    </div>
-                    <div class="col-md-4 pull-right" style="margin-left:400px; color: gray">
-                      <i>le {{feedback.sendingDate | date: 'dd/MM/yyyy'}}.</i>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset class="scheduler-border col-4 max-width">
-                <legend class="scheduler-border">{{'DATES' | translate }}</legend>
-                <div>
-                  <table>
-                    <tr>
-                      <td>{{'DATE_OF-CREATION' | translate }} :</td>
-                      <td>{{terminationRequest?.createdAt | date: 'dd/MM/yyyy' }}</td>
-                    </tr>
-                    <tr>
-                      <td>{{'LAST_MODIFICATION' | translate }} :</td>
-                      <td>{{terminationRequest?.lastUpdate| date: 'dd/MM/yyyy' }}</td>
-                    </tr>
-                    <tr>
-                      <td>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }} :</td>
-                      <td>{{terminationRequest?.counterDropDate | date: 'dd/MM/yyyy' }}</td>
-                    </tr>
-                  </table>
-                </div>
-              </fieldset>
-            </div>
-          </div>
         </div>
-        <!--/ What is-->
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

@@ -1,333 +1,339 @@
 <div class="container">
-  <app-navbar></app-navbar>
-  <app-second-navbar></app-second-navbar>
-
-  <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
-    <div class="app-content center-layout">
-      <div class="content-body">
-        <section>
-          <div id="what-is" class="card mb-0">
-            <div class="card-header">
-              <div class="row card-title">
-                <h4 class="ml-h4">{{'REGISTRATION' | translate }}</h4>
-                <img class="ml-60p" src="/assets/app/images/logo/rademLogo.png">
-              </div>
-              <div class="heading-elements">
-              </div>
+    <div class="auth-container">
+        <app-navbar></app-navbar>
+        <app-second-navbar></app-second-navbar>
+        <!--Tooltip Starts-->
+        <div class="content-header back col-12 mb-1 mt-1">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <h3 class="content-header-title">{{'REGISTRATION' | translate }}</h3>
+                </div>
             </div>
-            <div class="card-content collapse show">
-              <div class="card-body">
-                <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
-                           [navigationMode]="'strict'">
-                  <aw-wizard-step [stepTitle]="'Identification'"
-                                  [navigationSymbol]="{ symbol: '&#xe090;', fontFamily:'Simple-line-icons' }"
-                                  class="offset-1 col-md-10">
-                    <div class="mx-auto my-5">
-                      <h6>
-                        {{'PLEASE_CHOOSE_ONE_OF_THE_FOLLOWING_OPTIONS_AND_FILL_IN_THE_FIELDS_THAT_APPEAR' | translate }}
-                         :</h6>
-                      <form [formGroup]="registerForm"
-                            class="mx-auto ng-pristine ng-valid ng-touched"
-                            novalidate>
-                        <div class="container my-2 mx-6">
-                          <div class="nav-vertical">
-                            <ul class="nav nav-tabs nav-left nav-border-left">
-                              <li class="nav-item">
-                                <a class="nav-link active" (click)="setBill()"
-                                   id="baseVerticalRight2-tab1" data-toggle="tab"
-                                   aria-controls="tabVerticalRight21"
-                                   href="#tabVerticalRight21" aria-expanded="true">
-                                  Facture</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" (click)="setContr()"
-                                   id="baseVerticalRight2-tab2" data-toggle="tab"
-                                   aria-controls="tabVerticalRight22"
-                                   href="#tabVerticalRight22" aria-expanded="false">
-                                  Contrat</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" (click)="setRef()"
-                                   id="baseVerticalRight2-tab3" data-toggle="tab"
-                                   aria-controls="tabVerticalRight23"
-                                   href="#tabVerticalRight23"
-                                   aria-expanded="false">Référence</a>
-                              </li>
-                            </ul>
-                            <div class="tab-content px-1">
-                              <div role="tabpanel" class="tab-pane active"
-                                   id="tabVerticalRight21"
-                                   aria-expanded="true"
-                                   aria-labelledby="baseVerticalRight2-tab1">
-                                <div class="ml-1">
-                                  <label class="form-check-label mb-1"
-                                         for="factRadio">{{'INVOICE' | translate }}
-                                    :</label>
-                                  <input type="text" formControlName="facture"
-                                         required
-                                         id="facture" name="facture"
-                                         class="form-control form-control col-md-10"
-                                         placeholder="{{'INVOICE' | translate }}">
-                                </div>
-                              </div>
-                              <div class="tab-pane" id="tabVerticalRight22"
-                                   aria-labelledby="baseVerticalRight2-tab2">
-                                <div class="ml-1">
-                                  <label class="form-check-label mb-1"
-                                         for="factRadio">{{'SERVICE' | translate }}
-                                    :</label>
-                                  <select formControlName="service"
-                                          class="form-control col-md-10 mb-1" #t>
-                                    <option value="eau">{{'WATER' | translate }}</option>
-                                    <option value="electricite">{{'ELECTRICITY' | translate }}
-                                    </option>
-                                  </select>
-                                </div>
-                                <div class="ml-1">
-                                  <label class="form-check-label mb-1"
-                                         for="factRadio">{{'CONTRACT' | translate}}
-                                    :</label>
-                                  <input type="text" formControlName="contrat"
-                                         required
-                                         id="contrat" name="contrat"
-                                         class="form-control form-control col-md-10"
-                                         placeholder="{{'CONTRACT' | translate}}">
-                                </div>
-                              </div>
-                              <div class="tab-pane" id="tabVerticalRight23"
-                                   aria-labelledby="baseVerticalRight2-tab3">
-                                <div class="ml-1">
-                                  <label class="form-check-label mb-1"
-                                         for="factRadio">{{'REFERENCE' | translate}}
-                                    :</label>
-                                  <input type="text" formControlName="reference"
-                                         required
-                                         id="reference" name="reference"
-                                         class="form-control form-control col-md-10"
-                                         placeholder="Reference">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+        </div>
+        <div class="content-body">
+            <section>
+                <div id="what-is" class="card mb-0">
+                    <div class="card-header">
+                        <div class="row card-title">
+                           <!-- <h4 class="ml-h4">Inscription</h4>-->
                         </div>
-                      </form>
-                      <div class="mt-1" style="margin-left: 9rem;">
-
-                      </div>
-                      <div class="row">
-                        <div class="content col-md-6 condit">
-                          <input id="conditions" type="checkbox"
-                                 (change)="setCheckbox()"/>
-                          <label for="conditions">{{'I_ACCEPT' | translate}} <a class="term-of-use" href=""
-                                                                   routerLink="/term-of-use">{{'THE_GENERAL_CONDITIONS_OF_USE' | translate}}.</a> </label>
+                        <div class="heading-elements">
                         </div>
-                      </div>
                     </div>
-                    <div class="btn-group ml-44">
-                      <button [disabled]="!checkbox" type="button"
-                              (click)="goToStep2() === true"
-                              class="btn btn-primary" awNextStep>{{'next' | translate}}
-                      </button>
+                    <div class="card-content collapse show">
+                        <div class="card-body">
+                            <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
+                                       [navigationMode]="'strict'">
+                                <aw-wizard-step [stepTitle]="'Identification'"
+                                                [navigationSymbol]="{ symbol: '&#xe090;', fontFamily:'Simple-line-icons' }"
+                                                class="offset-1 col-md-10">
+                                    <div class="mx-auto my-5">
+                                        <h6>
+                                            {{'PLEASE_CHOOSE_ONE_OF_THE_FOLLOWING_OPTIONS_AND_FILL_IN_THE_FIELDS_THAT_APPEAR' | translate }}
+                                            :</h6>
+                                        <form [formGroup]="registerForm"
+                                              class="mx-auto ng-pristine ng-valid ng-touched"
+                                              novalidate>
+                                            <div class="container my-2 mx-6">
+                                                <div class="nav-vertical">
+                                                    <ul class="nav nav-tabs nav-left nav-border-left">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" (click)="setBill()"
+                                                               id="baseVerticalRight2-tab1" data-toggle="tab"
+                                                               aria-controls="tabVerticalRight21"
+                                                               href="#tabVerticalRight21" aria-expanded="true">
+                                                                Facture</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" (click)="setContr()"
+                                                               id="baseVerticalRight2-tab2" data-toggle="tab"
+                                                               aria-controls="tabVerticalRight22"
+                                                               href="#tabVerticalRight22" aria-expanded="false">
+                                                                Contrat</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" (click)="setRef()"
+                                                               id="baseVerticalRight2-tab3" data-toggle="tab"
+                                                               aria-controls="tabVerticalRight23"
+                                                               href="#tabVerticalRight23"
+                                                               aria-expanded="false">Référence</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content px-1">
+                                                        <div role="tabpanel" class="tab-pane active"
+                                                             id="tabVerticalRight21"
+                                                             aria-expanded="true"
+                                                             aria-labelledby="baseVerticalRight2-tab1">
+                                                            <div class="ml-1">
+                                                                <label class="form-check-label mb-1"
+                                                                       for="factRadio">{{'INVOICE' | translate }}
+                                                                    :</label>
+                                                                <input type="text" formControlName="facture"
+                                                                       required
+                                                                       id="facture" name="facture"
+                                                                       class="form-control form-control col-md-10"
+                                                                       placeholder="{{'INVOICE' | translate }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane" id="tabVerticalRight22"
+                                                             aria-labelledby="baseVerticalRight2-tab2">
+                                                            <div class="ml-1">
+                                                                <label class="form-check-label mb-1"
+                                                                       for="factRadio">{{'SERVICE' | translate }}
+                                                                    :</label>
+                                                                <select formControlName="service"
+                                                                        class="form-control col-md-10 mb-1" #t>
+                                                                    <option value="eau">{{'WATER' | translate }}</option>
+                                                                    <option value="electricite">{{'ELECTRICITY' | translate }}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="ml-1">
+                                                                <label class="form-check-label mb-1"
+                                                                       for="factRadio">{{'CONTRACT' | translate}}
+                                                                    :</label>
+                                                                <input type="text" formControlName="contrat"
+                                                                       required
+                                                                       id="contrat" name="contrat"
+                                                                       class="form-control form-control col-md-10"
+                                                                       placeholder="{{'CONTRACT' | translate}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane" id="tabVerticalRight23"
+                                                             aria-labelledby="baseVerticalRight2-tab3">
+                                                            <div class="ml-1">
+                                                                <label class="form-check-label mb-1"
+                                                                       for="factRadio">{{'REFERENCE' | translate}}
+                                                                    :</label>
+                                                                <input type="text" formControlName="reference"
+                                                                       required
+                                                                       id="reference" name="reference"
+                                                                       class="form-control form-control col-md-10"
+                                                                       placeholder="Reference">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="mt-1" style="margin-left: 9rem;">
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="content col-md-6 condit">
+                                                <input id="conditions" type="checkbox"
+                                                       (change)="setCheckbox()"/>
+                                                <label for="conditions">{{'I_ACCEPT' | translate}} <a class="term-of-use" href=""
+                                                                                                      routerLink="/term-of-use">{{'THE_GENERAL_CONDITIONS_OF_USE' | translate}}.</a>                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group ml-44">
+                                        <button [disabled]="!checkbox" type="button"
+                                                (click)="goToStep2() === true"
+                                                class="btn btn-primary" awNextStep>{{'next' | translate}}
+                                        </button>
+                                    </div>
+                                </aw-wizard-step>
+
+
+                                <aw-wizard-step [stepTitle]="'CONFIRMATION' | translate"
+                                                [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
+                                    <div class="offset-2 col-md-8 my-5">
+                                        <h6>{{'PLEASE_FILL_IN_THE_FIELDS_BELOW_TO_CREATE_YOUR_ACCOUNT_ONLINE' | translate}} :</h6>
+
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <label>{{'LAST_NAME' | translate}} :</label>
+                                                <input formControlName="lastname" type="text"
+                                                       class="form-control"
+                                                       disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'FIRST_NAME' | translate}} :</label>
+                                                <input formControlName="firstname" type="text"
+                                                       class="form-control"
+                                                       disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'SELECT_A_QUESTION' | translate}} :</label>
+                                                <select formControlName="questions" class="form-control">
+                                                    <option *ngFor="let question of questions"
+                                                            value="{{question.question}}">{{question.question}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'YOUR_ANSWER' | translate}} :</label>
+                                                <fieldset class="form-group position-relative">
+                                                    <input type="text" formControlName="answer"
+                                                           class="form-control"
+                                                           placeholder="{{'YOUR_ANSWER' | translate}} ..">
+                                                    <div class="form-control-position">
+                                                        <a>
+                                                            <i title="'CLICK_TO_CHECK_YOUR_ANSWER' | translate"
+                                                               [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'"
+                                                               class=""
+                                                               (click)="Verification()"></i>
+                                                        </a>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </form>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" id="toStep3" class="btn btn-primary next"
+                                                        (click)="goToStep3()" awNextStep>{{'Next' | translate}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aw-wizard-step>
+
+
+                                <aw-wizard-step [stepTitle]="'Infos du compte'"
+                                                [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
+                                    <div class="offset-2 col-md-8 my-5">
+                                        <h6> {{'PLEASE_ENTER_YOUR_DETAILS_IN_THE_FIELDS_BELOW_TO_CONFIRM_YOUR_REGISTRATION' | translate}} :</h6>
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <label>{{'LAST_NAME' | translate}} :</label>
+                                                <input formControlName="lastname2" type="text"
+                                                       class="form-control"
+                                                       disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'FIRST_NAME' | translate}} :</label>
+                                                <input formControlName="firstname2" type="text"
+                                                       class="form-control"
+                                                       disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'MAIL' | translate}} :</label>
+                                                <input formControlName="email" type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'PHONE' | translate}} :</label>
+                                                <input formControlName="phone" type="phone"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'Username' | translate}} :</label>
+                                                <input formControlName="username" type="text"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'PASSWORD' | translate}} :</label>
+                                                <input formControlName="password" type="password"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'CONFIRM_THE_PASSWORD' | translate}} :</label>
+                                                <input formControlName="password2" type="password"
+                                                       class="form-control"
+                                                       (keyup)="checkPassword()">
+                                                <label *ngIf="!passCheck" id="passwordCheck">{{'PASSWORDS_ARE_NOT_THE_SAME' | translate}}s !</label>
+                                            </div>
+                                        </form>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button [disabled]="!buttonCheck" type="button"
+                                                        class="btn btn-primary next"
+                                                        (click)="goToStep4()" awNextStep>{{'Next' | translate}}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </aw-wizard-step>
+
+
+                                <aw-wizard-completion-step [stepTitle]="'VALIDATION' | translate'"
+                                                           [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
+                                    <div class="offset-2 col-md-8 my-5">
+                                        <h6>{{'HERE_IS_A_SUMMARY_OF_YOUR_INFORMATION' | translate}}.</h6>
+                                        <form [formGroup]="detailsForm">
+                                            <label>{{'LAST_NAME' | translate}} :</label>
+                                            <fieldset class="form-group position-relative has-icon-left">
+                                                <input type="text" formControlName="lastname"
+                                                       class="form-control"
+                                                       disabled>
+                                                <div class="form-control-position">
+                                                    <i class="ft-user primary font-4"></i>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <label>{{'FIRST_NAME' | translate}} :</label>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="text" formControlName="firstname"
+                                                           class="form-control"
+                                                           disabled>
+                                                    <div class="form-control-position">
+                                                        <i class="ft-user primary font-4"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'PHONE' | translate}} :</label>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="text" formControlName="phone"
+                                                           class="form-control"
+                                                           disabled>
+                                                    <div class="form-control-position">
+                                                        <i class="ft-phone primary font-4"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'MAIL' | translate}} :</label>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="text" formControlName="email"
+                                                           class="form-control"
+                                                           disabled>
+                                                    <div class="form-control-position">
+                                                        <i class="ft-at-sign primary font-4"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'Username' | translate}} :</label>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="text" formControlName="username"
+                                                           class="form-control"
+                                                           disabled>
+                                                    <div class="form-control-position">
+                                                        <i class="ft-user primary font-4"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </form>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-primary" (click)="addUser()"
+                                                        awNextStep>{{'SIGN_UP' | translate}}</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </aw-wizard-completion-step>
+                            </aw-wizard>
+                        </div>
                     </div>
-                  </aw-wizard-step>
-
-
-                  <aw-wizard-step [stepTitle]="'CONFIRMATION' | translate"
-                                  [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
-                    <div class="offset-2 col-md-8 my-5">
-
-                      <h6>{{'PLEASE_FILL_IN_THE_FIELDS_BELOW_TO_CREATE_YOUR_ACCOUNT_ONLINE' | translate}} :</h6>
-                      <form [formGroup]="registerForm">
-                        <div class="form-group">
-                          <label>{{'LAST_NAME' | translate}}  :</label>
-                          <input formControlName="lastname" type="text"
-                                 class="form-control"
-                                 disabled>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'FIRST_NAME' | translate}} :</label>
-                          <input formControlName="firstname" type="text"
-                                 class="form-control"
-                                 disabled>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'SELECT_A_QUESTION' | translate}} :</label>
-                          <select formControlName="questions" class="form-control">
-                            <option *ngFor="let question of questions"
-                                    value="{{question.question}}">{{question.question}}
-                            </option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'YOUR_ANSWER' | translate}} :</label>
-                          <fieldset class="form-group position-relative">
-                            <input type="text" formControlName="answer"
-                                   class="form-control"
-                                   placeholder="{{'YOUR_ANSWER' | translate}} ...">
-                            <div class="form-control-position">
-                              <a>
-                                <i title="'CLICK_TO_CHECK_YOUR_ANSWER' | translate"
-                                   [ngClass]="!toStep3 ? 'fa fa-check' : 'fa fa-times'"
-                                   class=""
-                                   (click)="Verification()"></i>
-                              </a>
-                            </div>
-                          </fieldset>
-                        </div>
-                      </form>
-
-                    </div>
-                    <div class="btn-group ml-33">
-                      <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
-                      <button type="button" id="toStep3" class="btn btn-primary next"
-                              (click)="goToStep3()" awNextStep>{{'Next' | translate}}
-                      </button>
-
-
-                    </div>
-                  </aw-wizard-step>
-
-
-                  <aw-wizard-step [stepTitle]="'Infos du compte'"
-                                  [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
-                    <div class="offset-2 col-md-8 my-5">
-                      <h6>{{'PLEASE_ENTER_YOUR_DETAILS_IN_THE_FIELDS_BELOW_TO_CONFIRM_YOUR_REGISTRATION' | translate}} :</h6>
-                      <form [formGroup]="registerForm">
-                        <div class="form-group">
-                          <label>{{'LAST_NAME' | translate}} :</label>
-                          <input formControlName="lastname2" type="text"
-                                 class="form-control"
-                                 disabled>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'FIRST_NAME' | translate}} :</label>
-                          <input formControlName="firstname2" type="text"
-                                 class="form-control"
-                                 disabled>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'MAIL' | translate}} :</label>
-                          <input formControlName="email" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>{{'PHONE' | translate}} :</label>
-                          <input formControlName="phone" type="phone"
-                                 class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>{{'Username' | translate}} :</label>
-                          <input formControlName="username" type="text"
-                                 class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>{{'PASSWORD' | translate}} :</label>
-                          <input formControlName="password" type="password"
-                                 class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>{{'CONFIRM_THE_PASSWORD' | translate}} :</label>
-                          <input formControlName="password2" type="password"
-                                 class="form-control"
-                                 (keyup)="checkPassword()">
-                          <label *ngIf="!passCheck" id="passwordCheck">{{'PASSWORDS_ARE_NOT_THE_SAME' | translate}} !</label>
-                        </div>
-                      </form>
-
-                    </div>
-                    <div class="btn-group ml-33">
-                      <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}
-                      </button>
-                      <button [disabled]="!buttonCheck" type="button"
-                              class="btn btn-primary next"
-                              (click)="goToStep4()" awNextStep>{{'Next' | translate}}
-                      </button>
-
-
-                    </div>
-                  </aw-wizard-step>
-
-
-                  <aw-wizard-completion-step [stepTitle]="'VALIDATION' | translate"
-                                             [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
-                    <div class="offset-2 col-md-8 my-5">
-                      <h6>{{'HERE_IS_A_SUMMARY_OF_YOUR_INFORMATION' | translate}}.</h6>
-                      <form [formGroup]="detailsForm">
-                        <label>{{'LAST_NAME' | translate}} :</label>
-                        <fieldset class="form-group position-relative has-icon-left">
-                          <input type="text" formControlName="lastname"
-                                 class="form-control"
-                                 disabled>
-                          <div class="form-control-position">
-                            <i class="ft-user primary font-4"></i>
-                          </div>
-                        </fieldset>
-                        <div class="form-group">
-                          <label>{{'FIRST_NAME' | translate}} :</label>
-                          <fieldset class="form-group position-relative has-icon-left">
-                            <input type="text" formControlName="firstname"
-                                   class="form-control"
-                                   disabled>
-                            <div class="form-control-position">
-                              <i class="ft-user primary font-4"></i>
-                            </div>
-                          </fieldset>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'PHONE' | translate}} :</label>
-                          <fieldset class="form-group position-relative has-icon-left">
-                            <input type="text" formControlName="phone"
-                                   class="form-control"
-                                   disabled>
-                            <div class="form-control-position">
-                              <i class="ft-phone primary font-4"></i>
-                            </div>
-                          </fieldset>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'MAIL' | translate}} :</label>
-                          <fieldset class="form-group position-relative has-icon-left">
-                            <input type="text" formControlName="email"
-                                   class="form-control"
-                                   disabled>
-                            <div class="form-control-position">
-                              <i class="ft-at-sign primary font-4"></i>
-                            </div>
-                          </fieldset>
-                        </div>
-                        <div class="form-group">
-                          <label>{{'Username' | translate}} :</label>
-                          <fieldset class="form-group position-relative has-icon-left">
-                            <input type="text" formControlName="username"
-                                   class="form-control"
-                                   disabled>
-                            <div class="form-control-position">
-                              <i class="ft-user primary font-4"></i>
-                            </div>
-                          </fieldset>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="btn-group ml-36">
-                      <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}
-                      </button>
-                      <button type="button" class="btn btn-primary" (click)="addUser()"
-                              awNextStep>
-                       {{'SIGN_UP' | translate}}
-                      </button>
-
-
-                    </div>
-                  </aw-wizard-completion-step>
-                </aw-wizard>
-              </div>
-            </div>
-            <!--/ What is-->
-          </div>
-        </section>
-      </div>
+                    <!--/ What is-->
+                </div>
+            </section>
+        </div>
+        <app-footer></app-footer>
     </div>
-  </div>
-
-  <app-footer></app-footer>
-
 </div>

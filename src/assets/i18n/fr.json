@@ -313,6 +313,8 @@
   "PLEASE_COME_BACK_SOON":"S'il vous plaît revenez bientôt",
   "WE_APOLOGIZE_FOR_ANY_INCONVENIENCE":"Nous nous excusons pour tout inconvénient",
   "REFRESH":"Acutaliser",
+  "FIELD_REQUIRED": "Ce champs obligatoire",
+  "REFRESH":"Acutaliser",
   "LEAVE_A_COMMENT":"Laisser un commentaire ...",
   "CREATED_AT":"Fait le",
   "DELETE":"Supprimer",

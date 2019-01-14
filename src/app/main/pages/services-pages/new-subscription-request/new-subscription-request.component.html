@@ -1,136 +1,177 @@
 <!--Tooltip Starts-->
-<div class="content-header row">
-  <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">{{'New_subscription_request' | translate }}</h3>
-  </div>
-  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-    <div class="breadcrumb-wrapper col-12">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a routerLink="/home">{{'HOME' | translate }}</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a>Services</a>
-        </li>
-        <li class="breadcrumb-item active">{{'New_subscription_request' | translate }}
-        </li>
-      </ol>
+<div class="content-header back col-12 mb-1 mt-1">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">{{'New_subscription_request' | translate }}</h3>
+        </div>
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/home">{{'HOME' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Services</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{'New_subscription_request' | translate }}
+                    </li>
+                </ol>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <div id="what-is" class="card">
-        <div class="card-header">
-          <h4 class="card-title">{{'New_subscription_request' | translate }}</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-          </div>
+    <section class="row">
+        <div class="col-sm-12">
+            <div id="what-is" class="card mb-0">
+                <div class="card-header">
+                    <h4 class="card-title">{{'New_subscription_request' | translate }}</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <form role="form" [formGroup]="subscriptionForm"
+                              (ngSubmit)="saveRequest(subscriptionForm.value)" novalidate>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="lfname">{{'LASTNAME_AND_FIRSTNAME' | translate }} / {{'SOCIAL_REASON' |
+                                        translate }} : </label>
+                                    <input type="text" class="form-control" id="lfname"
+                                           formControlName="firstAndLastName">
+                                    <div class="text-danger"
+                                         *ngIf="!subscriptionForm.controls['firstAndLastName'].valid && subscriptionForm.controls['firstAndLastName'].touched">
+                                        <div *ngIf="subscriptionForm.controls['firstAndLastName'].errors.required">
+                                            {{'FIELD_REQUIRED' | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="profession">{{'PROFESSION' | translate }} / {{'ACTIVITY' | translate }}
+                                        : </label>
+                                    <input type="text" class="form-control" id="profession"
+                                           formControlName="profession">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="workplace">{{'WORKPLACE' | translate }} : </label>
+                                    <input type="text" class="form-control" id="workplace"
+                                           formControlName="workingPlace">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="address_of_the_workplace">{{'ADDRESS_OF_THE_WORKPLACE' | translate }}
+                                        : </label>
+                                    <input type="text" class="form-control" id="address_of_the_workplace"
+                                           formControlName="addressOfWork">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <fieldset class="scheduler-border col-12">
+                                    <legend class="scheduler-border">{{'PHONE' | translate }}</legend>
+                                    <div class="row">
+                                        <div class="form-group col-4">
+                                            <label for="portable">{{'PORTABLE' | translate }} : </label>
+                                            <input type="text" class="form-control" id="portable"
+                                                   formControlName="cellphone">
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for="fixed_at_home">{{'FIXED_AT_HOME' | translate }} : </label>
+                                            <input type="text" class="form-control" id="fixed_at_home"
+                                                   formControlName="homePhonenumber">
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for="fixed_office">{{'FIXED_OFFICE' | translate }} : </label>
+                                            <input type="text" class="form-control" id="fixed_office"
+                                                   formControlName="workPhonenumber">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="row">
+                                <fieldset class="scheduler-border col-12">
+                                    <legend class="scheduler-border">{{'ADDRESS' | translate }}</legend>
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label for="n">{{'N°' | translate }} : </label>
+                                            <input type="text" class="form-control" id="n"
+                                                   formControlName="adressNumber">
+                                        </div>
+                                        <div class="form-group col-sm-10">
+                                            <label for="street">{{'STREET' | translate }} / {{'BOULEVARD' | translate
+                                                }} / {{'AVENUE' | translate }} : </label>
+                                            <input type="text" class="form-control" id="street"
+                                                   formControlName="address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="building">{{'BUILDING' | translate }} : </label>
+                                            <input type="text" class="form-control" id="building"
+                                                   formControlName="building">
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="apartment">{{'APARTMENT' | translate }} : </label>
+                                            <input type="text" class="form-control" id="apartment"
+                                                   formControlName="apartment">
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="floor">{{'FLOOR' | translate }} : </label>
+                                            <input type="text" class="form-control" id="floor"
+                                                   formControlName="floor">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label for="address_supplement">{{'ADDRESS_SUPPLEMENT' | translate }}
+                                                : </label>
+                                            <input type="text" class="form-control" id="address_supplement"
+                                                   formControlName="address_supplement">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="row">
+                                <fieldset class="scheduler-border col-12">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="subscriptionType"
+                                               formControlName="subscriptionType">
+                                        <label class="form-check-label textbold"
+                                               for="subscriptionType">Predecesseur</label>
+                                    </div>
+
+                                    <div *ngIf="subscriptionForm.controls['subscriptionType'].value" class="row">
+                                        <div class="form-group col-4">
+                                            <label for="successor_of">{{'SUCCESSOR_OF' | translate }} : </label>
+                                            <input type="text" class="form-control" id="successor_of"
+                                                   formControlName="predecessor">
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for="water_contract">{{'POLICE' | translate }}, {{'OR' | translate }}
+                                                {{'WATER_CONTRACT' | translate }} : </label>
+                                            <input type="text" class="form-control" id="water_contract"
+                                                   formControlName="oldWaterSubscription">
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for="electricity_contract">{{'POLICE' | translate }}, {{'OR' |
+                                                translate }}
+                                                {{'ELECTRICITY_CONTRACT' | translate }}: </label>
+                                            <input type="text" class="form-control" id="electricity_contract"
+                                                   formControlName="oldElectricitySubscription">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <button class="btn btn btn-outline-primary pull-right"
+                                    [disabled]="subscriptionForm.invalid" type="submit">{{'SAVE' | translate }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <form [formGroup]="subscriptionRequestForm">
-              <div class="row">
-                <div class="form-group col-6">
-                  <label for="card-id">{{'LASTNAME_AND_FIRSTNAME' | translate }} / {{'SOCIAL_REASON' | translate }} : </label>
-                  <input class="form-control" id="card-id">
-                </div>
-                <div class="form-group col-6">
-                  <label for="card-id">{{'PROFESSION' | translate }} / {{'ACTIVITY' | translate }} : </label>
-                  <input class="form-control" id="card-id">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-6">
-                  <label for="card-id">{{'WORKPLACE' | translate }} : </label>
-                  <input class="form-control" id="card-id">
-                </div>
-                <div class="form-group col-6">
-                  <label for="card-id">{{'ADDRESS_OF_THE_WORKPLACE' | translate }} : </label>
-                  <input class="form-control" id="card-id">
-                </div>
-              </div>
-              <div class="row">
-                <fieldset class="scheduler-border col-12">
-                  <legend class="scheduler-border">{{'PHONE' | translate }}</legend>
-                  <div class="row">
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'PORTABLE' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'FIXED_AT_HOME' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'FIXED_OFFICE' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-              <div class="row">
-                <fieldset class="scheduler-border col-12">
-                  <legend class="scheduler-border">{{'ADDRESS' | translate }}</legend>
-                  <div class="row">
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'N°' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-8">
-                      <label for="card-id">{{'STREET' | translate }} / {{'BOULEVARD' | translate }} / {{'AVENUE' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'BUILDING' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'APARTMENT' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'FLOOR' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-12">
-                      <label for="card-id">{{'ADDRESS_SUPPLEMENT' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-              <div class="row">
-                <fieldset class="scheduler-border col-12">
-                  <legend class="scheduler-border"><input class="" name="subscriptionType" id="subscriptionType" type="checkbox" formControlName="subscriptionType"> Predecesseur</legend>
-                  <div *ngIf="subscriptionRequestForm.controls.subscriptionType.value" class="row">
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'SUCCESSOR_OF' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'POLICE' | translate }}, {{'OR' | translate }} {{'WATER_CONTRACT' | translate }} : </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                    <div class="form-group col-4">
-                      <label for="card-id">{{'POLICE' | translate }}, {{'OR' | translate }} {{'ELECTRICITY_CONTRACT' | translate }}: </label>
-                      <input class="form-control" id="card-id">
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-              <button class="btn btn btn-outline-primary pull-right" (click)="saveRequest()">{{'SAVE' | translate }}</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

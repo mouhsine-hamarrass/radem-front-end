@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdviceComponent } from './advice.component';
+import { DynamicContentComponent } from './dynamic-content.component';
 
-describe('AdviceComponent', () => {
-  let component: AdviceComponent;
-  let fixture: ComponentFixture<AdviceComponent>;
+describe('DynamicContentComponent', () => {
+  let component: DynamicContentComponent;
+  let fixture: ComponentFixture<DynamicContentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdviceComponent ]
+      declarations: [ DynamicContentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdviceComponent);
+    fixture = TestBed.createComponent(DynamicContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

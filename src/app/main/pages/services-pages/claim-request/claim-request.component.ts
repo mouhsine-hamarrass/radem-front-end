@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {ServicesService} from '../../../services/services.service';
 import {Router} from '@angular/router';
@@ -25,22 +25,19 @@ export class ClaimRequestComponent implements OnInit {
     ) {
         // this.translate.use('fr');
         this.complaintForm = this.formBuilder.group({
-            numero: [],
-            objet: [],
-            description: []
+            'numero': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'objet': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'description': ['', Validators.compose(
+                [
+                    Validators.required
+                ])]
         });
-    }
-
-    get numero() {
-        return this.complaintForm.controls.numero.value;
-    }
-
-    get objet() {
-        return this.complaintForm.controls.objet.value;
-    }
-
-    get description() {
-        return this.complaintForm.controls.description.value;
     }
 
     ngOnInit() {
@@ -53,8 +50,8 @@ export class ClaimRequestComponent implements OnInit {
     save(): void {
         const complaint = {
             claimNumber: this.reqNumber,
-            object: this.objet,
-            description: this.description,
+            object: this.complaintForm.controls['objet'].value,
+            description: this.complaintForm.controls['description'].value,
             complainer: JSON.parse(localStorage.getItem('user'))
         };
         this.myServices.saveComplaint(complaint).subscribe(response => {

@@ -1,177 +1,201 @@
 <!--Tooltip Starts-->
-<div class="content-header row">
-  <div class="content-header-left col-6 col-12 mb-1">
-    <h3 class="content-header-title">{{'New_request_for_cancellation' | translate }}</h3>
-  </div>
-  <div class="content-header-right breadcrumbs-right breadcrumbs-top col-6 col-12">
-    <div class="breadcrumb-wrapper col-12">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a routerLink="/home">{{'HOME' | translate }}</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a>Services</a>
-        </li>
-        <li class="breadcrumb-item active">{{'New_request_for_cancellation' | translate }}
-        </li>
-      </ol>
+<div class="content-header back col-12 mb-1 mt-1">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">{{'New_request_for_cancellation' | translate }}</h3>
+        </div>
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/home">{{'HOME' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{'New_request_for_cancellation' | translate }}
+                    </li>
+                </ol>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- What is-->
-      <div id="what-is" class="card">
-        <div class="card-header">
-          <h4 class="card-title">{{'New_request_for_cancellation' | translate }}</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-          </div>
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <div id="what-is" class="card mb-0">
+                <div class="card-header">
+                    <h4 class="card-title">{{'New_request_for_cancellation' | translate }}</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="fa fa-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <form class="form" [formGroup]="cancellationForm"
+                              (ngSubmit)="save(cancellationForm.value)" novalidate>
+                            <fieldset>
+                                <legend>{{'APPLICANT' | translate }}</legend>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label for="fullname" class="col-form-label">
+                                            {{'LASTNAME_AND_FIRSTNAME' | translate }} : </label>
+                                        <input class="form-control" formControlName="firstAndLastName" id="fullname">
+                                        <div class="text-danger"
+                                             *ngIf="!cancellationForm.controls['firstAndLastName'].valid && cancellationForm.controls['firstAndLastName'].touched">
+                                            <div *ngIf="cancellationForm.controls['firstAndLastName'].errors.required">
+                                                {{'FIELD_REQUIRED' | translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label for="card-id">CIN : </label>
+                                        <input class="form-control" formControlName="cin" id="card-id">
+                                        <div class="text-danger"
+                                             *ngIf="!cancellationForm.controls['cin'].valid && cancellationForm.controls['cin'].touched">
+                                            <div *ngIf="cancellationForm.controls['cin'].errors.required">
+                                                {{'FIELD_REQUIRED' | translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="delivered">
+                                            {{'ISSUED_ON' | translate }} : </label>
+                                        <input class="form-control" formControlName="delivered" id="delivered">
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="at">{{'AT' | translate }} : </label>
+                                        <input class="form-control" formControlName="at" id="at">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-3">
+                                        <input class="" id="feedback_client" name="feedback" type="radio">
+                                        <label for="feedback_client" class="noMargin"> {{'CLIENT' | translate }}</label>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <input class="" id="feedback_procuration" name="feedback" type="radio">
+                                        <label for="feedback_procuration" class="noMargin"> {{'PROXY' | translate
+                                            }}</label>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <input class="" id="feedback_lettre" name="feedback" type="radio">
+                                        <label for="feedback_lettre" class="noMargin"> {{'LETTER_N°' | translate
+                                            }}</label>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <input class="" id="feedback_succession" name="feedback" type="radio">
+                                        <label for="feedback_succession" class="noMargin">{{'SUCCESSION' | translate
+                                            }}</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br>
+                            <fieldset>
+                                <legend>{{'SUBSCRIPTION_POLICIES' | translate }}</legend>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input class="" id="water" formControlName="water" type="checkbox">
+                                        <label for="water" class="noMargin"> Eau</label>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="this.cancellationForm.controls['water'].value">
+                                    <div class="form-group col-6">
+                                        <label class="noMargin">Police: </label>
+                                        <select class="form-control" formControlName="waterPolice">
+                                            <option value="-1">{{'SELECT_VALUE' | translate }}</option>
+                                            <option *ngFor="let subscription of waterSubscriptions()"
+                                                    value="{{subscription.id}}">
+                                                {{subscription.subscription}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="waterTourne" class="noMargin">{{'TOUR' | translate }} : </label>
+                                        <input class="form-control" formControlName="waterTourne" id="waterTourne">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input class="" id="electricity" type="checkbox" formControlName="electricity">
+                                        <label for="electricity" class="noMargin"> {{'ELECTRICITY' | translate
+                                            }}</label>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="this.cancellationForm.controls['electricity'].value">
+                                    <div class="form-group col-6">
+                                        <label class="noMargin">Police: </label>
+                                        <select class="form-control" formControlName="electricityPolice">
+                                            <option value="-1">{{'SELECT_VALUE' | translate }}</option>
+                                            <option *ngFor="let subscription of electricitySubscriptions()"
+                                                    value="{{subscription.id}}">
+                                                {{subscription.subscription}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="electricityTourne" class="noMargin">{{'TOUR' | translate }}
+                                            : </label>
+                                        <input class="form-control" formControlName="electricityTourne"
+                                               id="electricityTourne">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }}</label>
+                                        <input formControlName="counterDropDate" type="date" class="form-control">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br>
+                            <fieldset>
+                                <legend>Client</legend>
+                                <div class="form-group">
+                                    <label for="customer-name">{{'CLIENT_NAME' | translate }} : </label>
+                                    <input class="form-control" formControlName="clientName" id="customer-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="consumption-address">{{'CONSUMPTION_ADDRESS' | translate }} : </label>
+                                    <input class="form-control" formControlName="consumptionAdresse"
+                                           id="consumption-address">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>
+                                        <input class="form-control" formControlName="landline" id="gsm">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="mobile">{{'PORTABLE' | translate }} : </label>
+                                        <input class="form-control" formControlName="cellphone" id="mobile">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="function">{{'FUNCTION' | translate }} : </label>
+                                        <input class="form-control" formControlName="function" id="function">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="location">{{'WORKPLACE' | translate }} : </label>
+                                        <input class="form-control" formControlName="placeOfWork" id="location">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">{{'MAILING_ADDRESS' | translate }} : </label>
+                                    <input class="form-control" formControlName="correspondenceAdresse" id="address">
+                                </div>
+                            </fieldset>
+                            <div class="form-actions bottom right">
+                                <button class="btn btn-outline-primary"
+                                        [disabled]="cancellationForm.invalid" type="submit">{{'SAVE' | translate }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--/ What is-->
+            </div>
         </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <form class="form" [formGroup]="cancellationForm">
-              <fieldset>
-                <legend>{{'APPLICANT' | translate }}</legend>
-                <div class="row">
-                  <div class="form-group col-12">
-                    <label for="fullname" class="col-form-label col-12">{{'LASTNAME_AND_FIRSTNAME' | translate }} : </label>
-                    <input class="form-control col-12" formControlName="firstAndLastName" id="fullname">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-4">
-                    <label for="card-id">CIN : </label>
-                    <input class="form-control" formControlName="cin" id="card-id">
-                  </div>
-                  <div class="form-group col-4">
-                    <label for="delivered">
-                      {{'ISSUED_ON' | translate }} : </label>
-                    <input class="form-control" formControlName="delivered" id="delivered">
-                  </div>
-                  <div class="form-group col-4">
-                    <label for="at">{{'AT' | translate }} : </label>
-                    <input class="form-control" formControlName="at" id="at">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-3">
-                    <input class="" id="feedback_client" name="feedback" type="radio">
-                    <label for="feedback_client" class="noMargin"> {{'CLIENT' | translate }}</label>
-                  </div>
-                  <div class="form-group col-3">
-                    <input class="" id="feedback_procuration" name="feedback" type="radio">
-                    <label for="feedback_procuration" class="noMargin"> {{'PROXY' | translate }}</label>
-                  </div>
-                  <div class="form-group col-3">
-                    <input class="" id="feedback_lettre" name="feedback" type="radio">
-                    <label for="feedback_lettre" class="noMargin"> {{'LETTER_N°' | translate }}</label>
-                  </div>
-                  <div class="form-group col-3">
-                    <input class="" id="feedback_succession" name="feedback" type="radio">
-                    <label for="feedback_succession" class="noMargin">{{'SUCCESSION' | translate }}</label>
-                  </div>
-                </div>
-              </fieldset>
-              <br>
-              <fieldset>
-                <legend>{{'SUBSCRIPTION_POLICIES' | translate }}</legend>
-                <div class="row">
-                  <div class="col-12">
-                    <input class="" id="water" formControlName="water" type="checkbox">
-                    <label for="water" class="noMargin"> Eau</label>
-                  </div>
-                </div>
-                <div class="row" *ngIf="this.cancellationForm.controls.water.value">
-                  <div class="form-group col-6">
-                    <label class="noMargin">Police: </label>
-                    <select class="form-control" formControlName="waterPolice">
-                      <option value="-1">{{'SELECT_VALUE' | translate }}</option>
-                      <option *ngFor="let subscription of waterSubscriptions()" value="{{subscription.id}}">
-                        {{subscription.subscription}}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-6">
-                    <label  for="waterTourne" class="noMargin">{{'TOUR' | translate }} : </label>
-                    <input class="form-control" formControlName="waterTourne" id="waterTourne">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <input class="" id="electricity" type="checkbox" formControlName="electricity">
-                    <label for="electricity" class="noMargin"> {{'ELECTRICITY' | translate }}</label>
-                  </div>
-                </div>
-                <div class="row" *ngIf="this.cancellationForm.controls.electricity.value">
-                  <div class="form-group col-6">
-                    <label class="noMargin">Police: </label>
-                    <select class="form-control" formControlName="electricityPolice">
-                      <option value="-1">{{'SELECT_VALUE' | translate }}</option>
-                      <option *ngFor="let subscription of electricitySubscriptions()" value="{{subscription.id}}">
-                        {{subscription.subscription}}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-6">
-                    <label for="electricityTourne" class="noMargin">{{'TOUR' | translate }} : </label>
-                    <input class="form-control" formControlName="electricityTourne" id="electricityTourne">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-12">
-                    <label>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }}</label>
-                    <input formControlName="counterDropDate" type="date" class="form-control">
-                  </div>
-                </div>
-              </fieldset>
-              <br>
-              <fieldset>
-                <legend>Client</legend>
-                <div class="form-group">
-                  <label for="customer-name">{{'CLIENT_NAME' | translate }} : </label>
-                  <input class="form-control" formControlName="clientName" id="customer-name">
-                </div>
-                <div class="form-group">
-                  <label for="consumption-address">{{'CONSUMPTION_ADDRESS' | translate }} : </label>
-                  <input class="form-control" formControlName="consumptionAdresse" id="consumption-address">
-                </div>
-                <div class="row">
-                  <div class="form-group col-6">
-                    <label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>
-                    <input class="form-control" formControlName="landline" id="gsm">
-                  </div>
-                  <div class="form-group col-6">
-                    <label for="mobile">{{'PORTABLE' | translate }} : </label>
-                    <input class="form-control" formControlName="cellphone" id="mobile">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-6">
-                    <label for="function">{{'FUNCTION' | translate }} : </label>
-                    <input class="form-control" formControlName="function" id="function">
-                  </div>
-                  <div class="form-group col-6">
-                    <label for="location">{{'WORKPLACE' | translate }} : </label>
-                    <input class="form-control" formControlName="placeOfWork" id="location">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="address">{{'MAILING_ADDRESS' | translate }} : </label>
-                  <input class="form-control" formControlName="correspondenceAdresse" id="address">
-                </div>
-              </fieldset>
-              <div class="form-actions bottom right">
-                <button class="btn btn-outline-primary" (click)="save()">{{'SAVE' | translate }}</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!--/ What is-->
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

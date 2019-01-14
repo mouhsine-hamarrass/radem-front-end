@@ -1,56 +1,76 @@
 <nav aria-label="breadcrumb">
-  <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{'ALERT_NOTIFICATION' | translate}}</li>
-  </ul>
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{'ALERT_NOTIFICATION' | translate}}</li>
+    </ul>
 </nav>
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header">
-      <h4 class="card-title">{{'ADD_NEW_ALERT' | translate}}</h4>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">{{'ADD_NEW_ALERT' | translate}}</h4>
+        </div>
+        <div class="card-body">
+            <form role="form" [formGroup]="alertForm" novalidate (submit)="saveNotificationAlert()">
+                <div class="col-12 form-group">
+                    <div class="row">
+                        <label class="col-form-label col-2">{{'ALERT' | translate}} : <span
+                                class="danger">*</span></label>
+                        <div class="col-4">
+                            <select formControlName="type" class="custom-select" type="text" #t
+                                    (change)="setAlert(t.value)">
+                                <option value="" selected disabled>{{'Make_your_choice' | translate}}</option>
+                                <option *ngFor="let alert of alerts" value="{{alert.id}}">{{alert.title}}</option>
+                            </select>
+                            <div class="text-danger"
+                                 *ngIf="!alertForm.controls['type'].valid && alertForm.controls['type'].touched">
+                                <div *ngIf="alertForm.controls['type'].errors.required">
+                                    {{'Veuillez choisir un type d\'alert' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 form-group">
+                    <div class="row">
+                        <label class="col-form-label col-2">{{'Alert_Preview' | translate}} :</label>
+                        <div class="col-8">
+                            <textarea formControlName="description" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 form-group">
+                    <div class="row">
+                        <label class="col-form-label col-2">{{'The_contract_concerned' | translate}} : <span class="danger">*</span></label>
+                        <div class="col-3">
+                            <select formControlName="contract" class="custom-select" type="text" #t2
+                                    (change)="setClient(t2.value)">
+                                <option value="" selected disabled>{{'Choose_a_contract' | translate}}</option>
+                                <option *ngFor="let contract of contracts" value="{{contract.contract}}">
+                                    {{contract.contract}}
+                                </option>
+                            </select>
+                            <div class="text-danger"
+                                 *ngIf="!alertForm.controls['contract'].valid && alertForm.controls['contract'].touched">
+                                <div *ngIf="alertForm.controls['contract'].errors.required">
+                                    {{'Veuillez choisir une contrat' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <input formControlName="client" type="text" class="form-control" disabled/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <button class="btn btn btn-outline-primary pull-right" type="submit"
+                                [disabled]="alertForm.invalid">
+                            {{'VALIDATE' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="card-body">
-      <form [formGroup]="alertForm">
-        <div class="col-12 form-group">
-          <div class="row">
-            <label class="col-form-label col-2">{{'ALERT' | translate}} :</label>
-            <div class="col-4">
-              <select formControlName="type" class="custom-select" type="text" #t (change)="setAlert(t.value)">
-                <option value="" selected disabled>{{'Make_your_choice' | translate}}</option>
-                <option *ngFor="let alert of alerts" value="{{alert.id}}">{{alert.title}}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 form-group">
-          <div class="row">
-            <label class="col-form-label col-2">{{'Alert_Preview' | translate}} :</label>
-            <div class="col-8">
-              <textarea formControlName="description" class="form-control"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 form-group">
-          <div class="row">
-            <label class="col-form-label col-2">{{'The_contract_concerned' | translate}} :</label>
-            <div class="col-3">
-              <select formControlName="contract" class="custom-select" type="text" #t2 (change)="setClient(t2.value)">
-                <option value="" selected disabled>{{'Choose_a_contract' | translate}}</option>
-                <option *ngFor="let contract of contracts" value="{{contract.contract}}">{{contract.contract}}
-                </option>
-              </select>
-            </div>
-            <div class="col-3">
-              <input formControlName="client" type="text" class="form-control" disabled>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 text-right">
-            <button class="btn btn btn-outline-primary pull-right" (click)="saveNotificationAlert()">{{'VALIDATE' | translate}}</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 </div>
