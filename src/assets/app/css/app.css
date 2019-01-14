@@ -14,6 +14,13 @@ body {
     background-color: #fff;
 }
 
+.auth-container {
+    -webkit-box-shadow: 0 8px 25px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 8px 25px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px 2px rgba(0, 0, 0, 0.2);
+    height: auto !important;
+}
+
 html body.fixed-navbar {
     padding-top: 0 !important;
 }

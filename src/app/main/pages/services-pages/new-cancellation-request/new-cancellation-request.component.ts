@@ -1,62 +1,117 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {ContractsService} from '../../../services/contracts.service';
-import {Router} from '../../../../../../node_modules/@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-new-cancellation-request',
-  templateUrl: './new-cancellation-request.component.html',
-  styleUrls: ['./new-cancellation-request.component.scss']
+    selector: 'app-new-cancellation-request',
+    templateUrl: './new-cancellation-request.component.html',
+    styleUrls: ['./new-cancellation-request.component.scss']
 })
 export class NewCancellationRequestComponent implements OnInit {
-  private req: any;
-  cancellationForm = new FormGroup({
-    firstAndLastName: new FormControl(''),
-    cin: new FormControl(''),
-    delivered: new FormControl(''),
-    at: new FormControl(''),
-    clientName: new FormControl(''),
-    consumptionAdresse: new FormControl(''),
-    correspondenceAdresse: new FormControl(''),
-    landline: new FormControl(''),
-    cellphone: new FormControl(''),
-    function: new FormControl(''),
-    placeOfWork: new FormControl(''),
-    water: new FormControl(''),
-    electricity: new FormControl(''),
-    counterDropDate: new FormControl(''),
-    waterPolice: new FormControl(''),
-    electricityPolice: new FormControl(''),
-    waterTourne: new FormControl(''),
-    electricityTourne: new FormControl('')
-  });
-  subscriptions = [];
+    private req: any;
+    subscriptions = [];
+    cancellationForm: FormGroup;
 
-  constructor(
-    private myServices: ServicesService,
-    private contracts: ContractsService,
-    private router: Router
-  ) {
-  }
+    constructor(
+        private myServices: ServicesService,
+        private contracts: ContractsService,
+        private formBuilder: FormBuilder,
+        private router: Router) {
+        this.cancellationForm = this.formBuilder.group({
+            'firstAndLastName': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'cin': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'delivered': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'at': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'clientName': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'consumptionAdresse': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'correspondenceAdresse': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'landline': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'cellphone': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'function': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'placeOfWork': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'water': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'electricity': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'counterDropDate': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'waterPolice': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'electricityPolice': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'waterTourne': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+            'electricityTourne': ['', Validators.compose(
+                [
+                    Validators.required
+                ])],
+        });
+    }
 
-  ngOnInit() {
-    this.myServices.getUser(1).subscribe(response => {
-      this.cancellationForm.controls.clientName.setValue(response.data.lastname + ' ' + response.data.firstname);
-      this.cancellationForm.controls.consumptionAdresse.setValue(response.data.address);
-      this.cancellationForm.controls.cellphone.setValue(response.data.phone);
-    });
-    this.subscriptions = (JSON.parse(localStorage.getItem('user'))).subscriptions;
-    console.log(this.subscriptions);
-  }
+    ngOnInit() {
+        this.myServices.getUser(1).subscribe(response => {
+            this.cancellationForm.controls['clientName'].setValue(response.data.lastname + ' ' + response.data.firstname);
+            this.cancellationForm.controls['consumptionAdresse'].setValue(response.data.address);
+            this.cancellationForm.controls['cellphone'].setValue(response.data.phone);
+        });
+        this.subscriptions = (JSON.parse(localStorage.getItem('user'))).subscriptions;
+        console.log(this.subscriptions);
+    }
 
-  print() {
-    let popupWin, __HEAD;
-    __HEAD = document.querySelector('head').innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-    popupWin.document.open();
-    popupWin.document.write(`
+    print() {
+        let popupWin, __HEAD;
+        __HEAD = document.querySelector('head').innerHTML;
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(`
         <html>
           <head>${__HEAD}
           <style>
@@ -241,38 +296,38 @@ export class NewCancellationRequestComponent implements OnInit {
         </div>
         </body>
         </html>`
-    );
-    popupWin.document.close();
-  }
-
-  save() {
-    this.req = {
-      requestNumber: Math.floor(Math.random() * 100000),
-      counterDropDate: this.cancellationForm.controls.counterDropDate.value,
-      subscriptions: [],
-      applicantType: 'CLIENT',
-      client: JSON.parse(localStorage.getItem('user'))
-    };
-    if (this.cancellationForm.controls.water.value) {
-      this.req.subscriptions.push(this.cancellationForm.controls.waterPolice.value);
+        );
+        popupWin.document.close();
     }
-    if (this.cancellationForm.controls.electricity.value) {
-      this.req.subscriptions.push(this.cancellationForm.controls.electricityPolice.value);
+
+    save() {
+        this.req = {
+            requestNumber: Math.floor(Math.random() * 100000),
+            counterDropDate: this.cancellationForm.controls['counterDropDate'].value,
+            subscriptions: [],
+            applicantType: 'CLIENT',
+            client: JSON.parse(localStorage.getItem('user'))
+        };
+        if (this.cancellationForm.controls.water.value) {
+            this.req.subscriptions.push(this.cancellationForm.controls['waterPolice'].value);
+        }
+        if (this.cancellationForm.controls.electricity.value) {
+            this.req.subscriptions.push(this.cancellationForm.controls['electricityPolice'].value);
+        }
+        this.myServices.saveTerminationRequest(this.req).subscribe(response => {
+            console.log(response);
+            this.print();
+            this.router.navigate(['/services/cancellation-requests'])
+        }, err => {
+        });
+        console.log(this.req);
     }
-    this.myServices.saveTerminationRequest(this.req).subscribe(response => {
-      console.log(response);
-      this.print();
-      this.router.navigate(['/services/cancellation-requests'])
-    }, err => {
-    });
-    console.log(this.req);
-  }
 
-  waterSubscriptions(): any[] {
-    return this.subscriptions.filter(subscription => subscription.type === 'Eau');
-  }
+    waterSubscriptions(): any[] {
+        return this.subscriptions.filter(subscription => subscription.type === 'Eau');
+    }
 
-  electricitySubscriptions(): any[] {
-    return this.subscriptions.filter(subscription => subscription.type === 'Electricite');
-  }
+    electricitySubscriptions(): any[] {
+        return this.subscriptions.filter(subscription => subscription.type === 'Electricite');
+    }
 }

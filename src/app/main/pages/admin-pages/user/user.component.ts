@@ -8,6 +8,7 @@ import {UtilsService} from '../../../services/utils.service';
 import {User} from '../../../models/user.model';
 import {environment} from '../../../../../environments/environment';
 import {ServiceModel} from '../../../models/service.model';
+import {PasswordMatchDirective} from '../../../../shared/directives/password-match.directive';
 
 import * as _ from 'underscore';
 import {PasswordValidatorDirective} from '../../../../shared/directives/password-valid.directive';
@@ -47,12 +48,14 @@ export class UserComponent implements OnInit {
             username: ['', Validators.required],
             serviceId: [''],
             email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
-            password: ['', Validators.required, PasswordValidatorDirective],
+            password: ['', Validators.required],
             confirmPassword: ['', Validators.required],
             profileId: ['', Validators.required],
             avatar: [''],
             address: [''],
             enabled: [''],
+        }, {
+            validator: PasswordMatchDirective.MatchPassword
         });
         this.defaultAvatar = environment.defaultAvatar;
     }

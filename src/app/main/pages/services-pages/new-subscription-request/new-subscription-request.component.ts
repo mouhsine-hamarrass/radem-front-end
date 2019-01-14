@@ -8,23 +8,7 @@ import {ServicesService} from '../../../services/services.service';
     styleUrls: ['./new-subscription-request.component.scss']
 })
 export class NewSubscriptionRequestComponent implements OnInit {
-
     subscriptionForm: FormGroup;
-
-    public subscriptionRequestForm = new FormGroup({
-        subscriptionType: new FormControl(''),
-        firstAndLastName: new FormControl(''),
-        profession: new FormControl(''),
-        workingPlace: new FormControl(''),
-        addressOfWork: new FormControl(''),
-        cellphone: new FormControl(''),
-        homePhonenumber: new FormControl(''),
-        workPhonenumber: new FormControl(''),
-        address: new FormControl(''),
-        predecessor: new FormControl(''),
-        oldWaterSubscription: new FormControl(''),
-        oldElectricitySubscription: new FormControl('')
-    });
 
     constructor(private servicesService: ServicesService,
                 private formBuilder: FormBuilder) {
@@ -109,10 +93,10 @@ export class NewSubscriptionRequestComponent implements OnInit {
             client: JSON.parse(localStorage.getItem('user')),
             subscriptionType: 'NEW'
         };
-        if (this.subscriptionRequestForm.controls.subscriptionType.value) {
-            subscriptionReq.predecessor = this.subscriptionRequestForm.controls.predecessor.value;
-            subscriptionReq.oldWaterSubscription = this.subscriptionRequestForm.controls.oldWaterSubscription.value;
-            subscriptionReq.oldElectricitySubscription = this.subscriptionRequestForm.controls.oldElectricitySubscription.value;
+        if (this.subscriptionForm.controls['subscriptionType'].value) {
+            subscriptionReq.predecessor = this.subscriptionForm.controls['predecessor'].value;
+            subscriptionReq.oldWaterSubscription = this.subscriptionForm.controls['oldWaterSubscription'].value;
+            subscriptionReq.oldElectricitySubscription = this.subscriptionForm.controls['oldElectricitySubscription'].value;
             subscriptionReq.subscriptionType = 'MUTATION';
         }
         subscriptionReq = {
