@@ -32,7 +32,7 @@ import {ComplaintsComponent} from './complaints/complaints.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
-import {DynamicContentPagesModule} from './dynamic-content-pages/dynamic-content-pages.module';
+import {DynamicContentComponent} from './dynamic-content/dynamic-content.component';
 
 @NgModule({
     imports: [
@@ -49,7 +49,6 @@ import {DynamicContentPagesModule} from './dynamic-content-pages/dynamic-content
         QuillModule,
         ComponentsModule,
         BsDropdownModule,
-        DynamicContentPagesModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
@@ -82,6 +81,7 @@ import {DynamicContentPagesModule} from './dynamic-content-pages/dynamic-content
         AlertNotificationsComponent,
         ComplaintComponent,
         ComplaintsComponent,
+        DynamicContentComponent
     ],
     providers: [
         AdminService

@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DynamicModel} from '../../../../models/dynamic.model';
-import {AdminService} from '../../../../services/admin.service';
+import {Component, OnInit} from '@angular/core';
+import {AdminService} from '../../../services/admin.service';
 import {ToastrService} from 'ngx-toastr';
+import {DynamicModel} from '../../../models/dynamic.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-cancellation-request',
-  templateUrl: './cancellation-request.component.html',
-  styleUrls: ['./cancellation-request.component.scss']
+    selector: 'app-dynamic-content',
+    templateUrl: './dynamic-content.component.html',
+    styleUrls: ['./dynamic-content.component.scss']
 })
-export class CancellationRequestComponent implements OnInit {
+export class DynamicContentComponent implements OnInit {
 
     dynamicPageForm: FormGroup;
     dynamicContent: DynamicModel = {};
-    code: string;
     private translate: TranslateService;
+    dynamicList: Array<DynamicModel>;
+    chosenDynamic: string;
 
     constructor(private adminServices: AdminService,
                 private toastrService: ToastrService,
@@ -34,7 +35,23 @@ export class CancellationRequestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent(this.code).subscribe(response => {
+        this.getDynamicList();
+    }
+
+    getDynamicList() {
+        this.adminServices.getAllDynamicPages().subscribe(response => {
+            this.dynamicList = response.data;
+        }, error => {
+            console.log(error);
+        })
+    }
+
+    choseDynamicToDisplay() {
+        this.getDynamicContent(this.chosenDynamic);
+    }
+
+    getDynamicContent(chosenDynamic) {
+        this.adminServices.getDynamicContent(chosenDynamic).subscribe(response => {
             this.dynamicContent = response.data;
             for (const key in this.dynamicContent) {
                 if (this.dynamicContent.hasOwnProperty(key)) {
@@ -49,7 +66,7 @@ export class CancellationRequestComponent implements OnInit {
     }
 
     save(dynamicContent) {
-        this.adminServices.saveDynamicContent(this.code, dynamicContent).subscribe(response => {
+        this.adminServices.saveDynamicContent(dynamicContent).subscribe(response => {
             this.toastrService.success(this.translate.instant('SUCCESS_MODIFICATION'), '');
         }, err => {
             this.toastrService.error(this.translate.instant('OOPS_FAILED_CHANGE'), '');

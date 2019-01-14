@@ -15,7 +15,7 @@
                 <div id="what-is" class="card mb-0">
                     <div class="card-header">
                         <div class="row card-title">
-                           <!-- <h4 class="ml-h4">Inscription</h4>-->
+                            <!-- <h4 class="ml-h4">Inscription</h4>-->
                         </div>
                         <div class="heading-elements">
                         </div>
@@ -29,7 +29,8 @@
                                                 class="offset-1 col-md-10">
                                     <div class="mx-auto my-5">
                                         <h6>
-                                            {{'PLEASE_CHOOSE_ONE_OF_THE_FOLLOWING_OPTIONS_AND_FILL_IN_THE_FIELDS_THAT_APPEAR' | translate }}
+                                            {{'PLEASE_CHOOSE_ONE_OF_THE_FOLLOWING_OPTIONS_AND_FILL_IN_THE_FIELDS_THAT_APPEAR'
+                                            | translate }}
                                             :</h6>
                                         <form [formGroup]="registerForm"
                                               class="mx-auto ng-pristine ng-valid ng-touched"
@@ -83,8 +84,10 @@
                                                                     :</label>
                                                                 <select formControlName="service"
                                                                         class="form-control col-md-10 mb-1" #t>
-                                                                    <option value="eau">{{'WATER' | translate }}</option>
-                                                                    <option value="electricite">{{'ELECTRICITY' | translate }}
+                                                                    <option value="eau">{{'WATER' | translate }}
+                                                                    </option>
+                                                                    <option value="electricite">{{'ELECTRICITY' |
+                                                                        translate }}
                                                                     </option>
                                                                 </select>
                                                             </div>
@@ -123,8 +126,10 @@
                                             <div class="content col-md-6 condit">
                                                 <input id="conditions" type="checkbox"
                                                        (change)="setCheckbox()"/>
-                                                <label for="conditions">{{'I_ACCEPT' | translate}} <a class="term-of-use" href=""
-                                                                                                      routerLink="/term-of-use">{{'THE_GENERAL_CONDITIONS_OF_USE' | translate}}.</a>                                             </div>
+                                                <label for="conditions">{{'I_ACCEPT' | translate}}
+                                                    <a class="term-of-use" href=""
+                                                       routerLink="/term-of-use">{{'THE_GENERAL_CONDITIONS_OF_USE' |
+                                                        translate}}.</a></label></div>
                                         </div>
                                     </div>
                                     <div class="btn-group ml-44">
@@ -139,7 +144,8 @@
                                 <aw-wizard-step [stepTitle]="'CONFIRMATION' | translate"
                                                 [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }">
                                     <div class="offset-2 col-md-8 my-5">
-                                        <h6>{{'PLEASE_FILL_IN_THE_FIELDS_BELOW_TO_CREATE_YOUR_ACCOUNT_ONLINE' | translate}} :</h6>
+                                        <h6>{{'PLEASE_FILL_IN_THE_FIELDS_BELOW_TO_CREATE_YOUR_ACCOUNT_ONLINE' |
+                                            translate}} :</h6>
 
                                         <form [formGroup]="registerForm">
                                             <div class="form-group">
@@ -182,7 +188,9 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
+                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK'
+                                                    | translate}}
+                                                </button>
                                             </div>
                                             <div class="col-6">
                                                 <button type="button" id="toStep3" class="btn btn-primary next"
@@ -197,7 +205,9 @@
                                 <aw-wizard-step [stepTitle]="'Infos du compte'"
                                                 [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }">
                                     <div class="offset-2 col-md-8 my-5">
-                                        <h6> {{'PLEASE_ENTER_YOUR_DETAILS_IN_THE_FIELDS_BELOW_TO_CONFIRM_YOUR_REGISTRATION' | translate}} :</h6>
+                                        <h6>
+                                            {{'PLEASE_ENTER_YOUR_DETAILS_IN_THE_FIELDS_BELOW_TO_CONFIRM_YOUR_REGISTRATION'
+                                            | translate}} :</h6>
                                         <form [formGroup]="registerForm">
                                             <div class="form-group">
                                                 <label>{{'LAST_NAME' | translate}} :</label>
@@ -235,13 +245,16 @@
                                                 <input formControlName="password2" type="password"
                                                        class="form-control"
                                                        (keyup)="checkPassword()">
-                                                <label *ngIf="!passCheck" id="passwordCheck">{{'PASSWORDS_ARE_NOT_THE_SAME' | translate}}s !</label>
+                                                <label *ngIf="!passCheck" id="passwordCheck">{{'PASSWORDS_ARE_NOT_THE_SAME'
+                                                    | translate}}s !</label>
                                             </div>
                                         </form>
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
+                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK'
+                                                    | translate}}
+                                                </button>
                                             </div>
                                             <div class="col-6">
                                                 <button [disabled]="!buttonCheck" type="button"
@@ -255,7 +268,7 @@
                                 </aw-wizard-step>
 
 
-                                <aw-wizard-completion-step [stepTitle]="'VALIDATION' | translate'"
+                                <aw-wizard-completion-step [stepTitle]="'VALIDATION' | translate"
                                                            [navigationSymbol]="{ symbol: '&#xe080;', fontFamily:'Simple-line-icons' }">
                                     <div class="offset-2 col-md-8 my-5">
                                         <h6>{{'HERE_IS_A_SUMMARY_OF_YOUR_INFORMATION' | translate}}.</h6>
@@ -317,11 +330,14 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK' | translate}}</button>
+                                                <button type="button" class="btn btn-secondary" awPreviousStep>{{'BACK'
+                                                    | translate}}
+                                                </button>
                                             </div>
                                             <div class="col-6">
                                                 <button type="button" class="btn btn-primary" (click)="addUser()"
-                                                        awNextStep>{{'SIGN_UP' | translate}}</button>
+                                                        awNextStep>{{'SIGN_UP' | translate}}
+                                                </button>
                                             </div>
                                         </div>
 
