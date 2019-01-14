@@ -18,6 +18,7 @@ import swal from 'sweetalert2';
 import {ClaimModel} from '../../../models/claim.model';
 import {FeedbackModel} from '../../../models/feedback.model';
 import {ComplaintService} from '../../../services/complaint.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-complaint',
@@ -38,6 +39,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   requestUpdate: any;
   modalRef: BsModalRef;
   private wizardState: WizardState;
+  private translate: TranslateService;
   config = {
     backdrop: true,
     ignoreBackdropClick: false,
@@ -121,14 +123,14 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   // Stepper
   previousStep(id) {
     swal({
-      title: 'êtes vous sûr?',
-      text: 'Cette action est irréversible!',
+      title: this.translate.instant('ARE_YOU_SURE'),
+      text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui!'
+      cancelButtonText: this.translate.instant('CANCEL'),
+      confirmButtonText: this.translate.instant('YES')
     }).then((result) => {
       if (result.value) {
         if (this.claim.status === 'TRANSMISSION_OF_INFORMATION') {
@@ -141,14 +143,14 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   requestComplement(id) {
     swal({
-      title: 'êtes vous sûr?',
-      text: 'Cette action est irréversible!',
+      title: this.translate.instant('ARE_YOU_SURE'),
+      text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui!'
+      cancelButtonText: this.translate.instant('CANCEL'),
+      confirmButtonText: this.translate.instant('YES')
     }).then((result) => {
       if (result.value) {
         if (this.claim.status === 'ANALYSIS') {
@@ -161,14 +163,14 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   replyProvided(id) {
     swal({
-      title: 'êtes vous sûr?',
-      text: 'Cette action est irréversible!',
+      title: this.translate.instant('ARE_YOU_SURE'),
+      text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui!'
+      cancelButtonText: this.translate.instant('CANCEL'),
+      confirmButtonText: this.translate.instant('YES')
     }).then((result) => {
       if (result.value) {
         if (this.claim.status === 'ANALYSIS') {
@@ -181,14 +183,14 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   nextStep(id, choice?) {
     swal({
-      title: 'êtes vous sûr?',
-      text: 'Cette action est irréversible!',
+      title: this.translate.instant('ARE_YOU_SURE'),
+      text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui!'
+      cancelButtonText: this.translate.instant('CANCEL'),
+      confirmButtonText: this.translate.instant('YES')
     }).then((result) => {
       if (result.value) {
         if (this.claim.status === 'CREATED') {

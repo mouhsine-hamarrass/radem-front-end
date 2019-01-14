@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
 import {ToastrService} from 'ngx-toastr';
 import {Setting} from '../../../models/setting.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -10,6 +11,7 @@ import {Setting} from '../../../models/setting.model';
 })
 export class SettingsComponent implements OnInit {
   public settings: Array<Setting>;
+  private translate: TranslateService;
 
   constructor(private adminService: AdminService,
               private toastrService: ToastrService) {
@@ -25,9 +27,9 @@ export class SettingsComponent implements OnInit {
   saveSettings() {
     this.adminService.saveSettings(this.settings).subscribe(response => {
       this.settings = response.data;
-      this.toastrService.success('La modification effectuée avec succès', '');
+      this.toastrService.success(this.translate.instant('SUCCESS_MODIFICATION'), '');
     }, (err) => {
-      this.toastrService.success('Oups! Erreur de modification.', '');
+      this.toastrService.success(this.translate.instant('OOPS_FAILED_CHANGE'), '');
     });
   }
 }

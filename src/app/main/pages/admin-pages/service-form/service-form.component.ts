@@ -4,6 +4,7 @@ import {AdminService} from '../../../services/admin.service';
 import {ServiceModel} from '../../../models/service.model';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-service-form',
@@ -20,6 +21,7 @@ export class ServiceFormComponent implements OnInit {
   @Input() serviceId: number;
 
   @Output() refreshData = new EventEmitter<boolean>();
+  private translate: TranslateService;
 
   constructor(private adminService: AdminService, private formBuilder: FormBuilder, private toastrService: ToastrService) {
     this.serviceForm = this.formBuilder.group({
@@ -50,7 +52,7 @@ export class ServiceFormComponent implements OnInit {
     this.service = new ServiceModel(this.serviceId, this.name.value, this.description.value);
 
     this.adminService.saveService(this.serviceId, this.service).subscribe(response => {
-      this.toastrService.success('L\'opération d\'ajout réussite', '');
+      this.toastrService.success(this.translate.instant('THE_SUCCESSFUL_ADDITION_OPERATION'), '');
       this.refreshData.emit(true);
       this.modalRef.hide();
     }, err => {
@@ -62,7 +64,7 @@ export class ServiceFormComponent implements OnInit {
     this.service = new ServiceModel(this.serviceId, this.name.value, this.description.value);
 
     this.adminService.createService(this.service).subscribe(response => {
-      this.toastrService.success('L\'opération de modification réussite', '');
+      this.toastrService.success(this.translate.instant('THE_SUCCESSFUL_CHANGE_OPERATION'), '');
       this.refreshData.emit(true);
       this.modalRef.hide();
     }, err => {

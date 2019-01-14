@@ -5,6 +5,7 @@ import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit {
   formProfile;
   FormGroup;
   isSubmitted = false;
+  private translate: TranslateService;
 
   constructor(
     private utilsService: UtilsService,
@@ -78,11 +80,11 @@ export class ProfileComponent implements OnInit {
     this.profile.authoritiesIds = this.selectedAuthorities;
     this.adminService.saveProfile(this.profile).subscribe(response => {
       if (this.profile.id == null) {
-        this.toastrService.success('Profil ajouté', '', {
+        this.toastrService.success(this.translate.instant('PROFILE_ADDED'), '', {
           timeOut: 2000,
         });
       } else {
-        this.toastrService.success('Profil modifié', '', {
+        this.toastrService.success(this.translate.instant('MODIFIED_PROFILE'), '', {
           timeOut: 2000,
         });
       }

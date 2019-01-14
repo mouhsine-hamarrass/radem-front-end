@@ -46,43 +46,43 @@
                        filterable-table (filtred)="onFiltred($event)">
                     <thead class="table-light">
                     <tr>
-                        <th scope="col">{{'Nº demande' | translate }}
+                        <th scope="col">{{'REQUEST_NUMBER' | translate }}
                             <span sortable-column="requestNumber"></span>
                             <span filterable-column="requestNumber" filter-type="text"
-                                  filter-placeholder="{{'Nº demande' | translate }}"></span>
+                                  filter-placeholder="{{'REQUEST_NUMBER' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Demandeur' | translate }}
+                        <th scope="col">{{'APPLICANT' | translate }}
                             <span sortable-column="lastname"></span>
                             <span filterable-column="lastname" filter-type="text"
-                                  filter-placeholder="{{'Demandeur' | translate }}"></span>
+                                  filter-placeholder="{{'APPLICANT' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Type' | translate }}
+                        <th scope="col">{{'TYPE' | translate }}
                             <span sortable-column="type"></span>
                             <span filterable-column="type" filter-type="text"
-                                  filter-placeholder="{{'Type' | translate }}"></span>
+                                  filter-placeholder="{{'TYPE' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Date création' | translate }}
+                        <th scope="col">{{'DATE_OF-CREATION' | translate }}
                             <span sortable-column="createdAt"></span>
                             <span filterable-column="createdAt" filter-type="date"
-                                  filter-placeholder="{{'Date création' | translate }}"></span>
+                                  filter-placeholder="{{'DATE_OF-CREATION' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Agent' | translate }}
+                        <th scope="col">{{'AGENT' | translate }}
                             <span sortable-column="agent"></span>
                             <span filterable-column="agent" filter-type="select"
                                   [filter-select-data]="agentsFilter"
                                   filter-select-data-key="id" filter-select-data-value="firstname"
-                                  filter-placeholder="{{'Agent' | translate }}"></span>
+                                  filter-placeholder="{{'AGENT' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Service concerné' | translate }}
+                        <th scope="col">{{'SERVICE_CONCERNED' | translate }}
                             <span sortable-column="service"></span>
                             <span filterable-column="service" filter-type="text"
-                                  filter-placeholder="{{'Service concerné' | translate }}"></span>
+                                  filter-placeholder="{{'SERVICE_CONCERNED' | translate }}"></span>
                         </th>
-                        <th scope="col">{{'Etat' | translate }}
+                        <th scope="col">{{'STATUS' | translate }}
                             <span sortable-column="status"></span>
                             <span filterable-column="status" filter-type="select"
                                   [filter-select-data]="statusFilter"
-                                  filter-placeholder="{{'Etat' | translate }}"></span>
+                                  filter-placeholder="{{'STATUS' | translate }}"></span>
                         </th>
                     </tr>
                     </thead>

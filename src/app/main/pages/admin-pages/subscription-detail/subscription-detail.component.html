@@ -4,19 +4,19 @@
       <h4 class="card-title">{{'CLAIM' | translate}} N°: </h4>
       <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
-        <aw-wizard-step [stepId]="0" [stepTitle]="'Depôt de dossier'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+        <aw-wizard-step [stepId]="0" [stepTitle]="'FILE_EPOSIT' | translate" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
         </aw-wizard-step>
 
-        <aw-wizard-step [stepId]="1" [stepTitle]="'Intervention'" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+        <aw-wizard-step [stepId]="1" [stepTitle]="'INTERVENTION' | translate" [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
         </aw-wizard-step>
 
-        <aw-wizard-step [stepId]="2" [stepTitle]="'Pose Compteur'" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+        <aw-wizard-step [stepId]="2" [stepTitle]="'COUNTER_POSE' | translate" [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
         </aw-wizard-step>
 
-        <aw-wizard-step [stepId]="3" [stepTitle]="'Facture'" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
+        <aw-wizard-step [stepId]="3" [stepTitle]="'INVOICE' | translate" [navigationSymbol]="{ symbol: '&#xf0d6;', fontFamily:'FontAwesome' }">
         </aw-wizard-step>
 
-        <aw-wizard-step [stepId]="4" [stepTitle]="'Abonné'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }">
+        <aw-wizard-step [stepId]="4" [stepTitle]="'SUBSCRIBER' | translate" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily:'FontAwesome' }">
         </aw-wizard-step>
 
         <div class="col-md-12" id="buttons">
@@ -125,7 +125,7 @@
         <div class="card">
           <div class="card-body">
             <form class="" [formGroup]="">
-              <label>Agent d'intervention :</label>
+              <label>{{'INTERVENTION_AGENT' | translate}} :</label>
               <select formControlName="agent" type="text" #t class="col-12 form-control">
                 <option value="" disabled selected>
                   {{'CHOOSE_AN_AGENT' | translate}}...</option>

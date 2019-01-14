@@ -5,6 +5,7 @@ import {BsModalRef} from 'ngx-bootstrap';
 import {AlertNotificationModel} from '../../../models/alert-notification.model';
 import swal from 'sweetalert2';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-alert-notifications',
@@ -23,6 +24,7 @@ export class AlertNotificationsComponent implements OnInit {
     sort: any;
     filter: any;
     agentsFilter: any = [];
+    private translate: TranslateService;
 
     constructor(private adminService: AdminService,
                 private toastrService: ToastrService) {
@@ -76,18 +78,18 @@ export class AlertNotificationsComponent implements OnInit {
 
     dropAlertNotification(alertNotificationId: number) {
         swal({
-            title: 'Etes-vous sûr de vouloir continuer',
-            text: 'Cette action est irréversible',
+            title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_CONTINUE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, Je suis sûr!'
+            confirmButtonText: this.translate.instant('YES_I_AM_SURE')
         }).then((result) => {
             if (result.value) {
                 this.adminService.dropAlertNotification(alertNotificationId).subscribe((response) => {
                     if (response.status === 'OK') {
-                        this.toastrService.success('Opération réussite', '');
+                        this.toastrService.success(this.translate.instant('SUCCESS_OPERATION'), '');
                         this.getAlertNotifications();
                     }
                 }, (err) => {

@@ -6,6 +6,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AlertModel} from '../../../models/alert.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alert',
@@ -29,6 +30,7 @@ export class AlertComponent implements OnInit {
               private adminService: AdminService,
               private route: ActivatedRoute,
               private router: Router,
+              private translate: TranslateService,
               private formBuilder: FormBuilder,
               private toastrService: ToastrService) {
     this.formAlert = this.formBuilder.group({
@@ -72,7 +74,7 @@ export class AlertComponent implements OnInit {
     );
 
     this.adminService.createAlert(this.alert).subscribe(response => {
-      this.toastrService.success('L\'alerte ajoutée', '');
+      this.toastrService.success(this.translate.instant('ADDED_ALERT'), '');
       this.modalRef.hide();
       this.refreshAlerts.emit(true);
     }, err => {
@@ -89,7 +91,7 @@ export class AlertComponent implements OnInit {
     );
 
     this.adminService.saveAlert(this.alert.id, this.alert).subscribe(response => {
-      this.toastrService.success('L\'alerte modifiée', '');
+      this.toastrService.success(this.translate.instant('MODIFIED_ALERT'), '');
       this.modalRef.hide();
       this.refreshAlerts.emit(true);
     }, err => {

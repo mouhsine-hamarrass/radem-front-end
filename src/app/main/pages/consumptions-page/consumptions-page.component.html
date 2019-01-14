@@ -91,7 +91,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Historique de consommation</h4>
+                            <h4 class="card-title">{{'CONSUMPTION_HISTORY' | translate }}</h4>
                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                             </div>
@@ -100,22 +100,22 @@
                             <form [formGroup]="historyForm">
                                 <div class="card-body">
                                     <div class="row col-md-12 form-group">
-                                        <label class="col-form-label">Contrat <span class="danger">*</span>:</label>
+                                        <label class="col-form-label">{{'CONTRACT' | translate }} <span class="danger">*</span>:</label>
                                         <div class="col-3">
                                             <select formControlName="contract" type="text" class="custom-select" #t
                                                     (change)="setContract(t.value)">
-                                                <option value="" disabled selected>Choisissez un contrat</option>
+                                                <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate }}</option>
                                                 <option *ngFor="let contract of contracts"
                                                         value="{{contract.contractNumber}}">
                                                     {{contract.contractNumber}} ({{contract.contractType}})
                                                 </option>
                                             </select>
                                         </div>
-                                        <label class="col-form-label">Periode du <span class="danger">*</span> :</label>
+                                        <label class="col-form-label">{{'PERIOD_OF' | translate }} <span class="danger"> *</span> :</label>
                                         <div class="col-auto">
                                             <input formControlName="startDate" type="date" class="form-control">
                                         </div>
-                                        <label class="col-form-label">Au <span class="danger">*</span></label>
+                                        <label class="col-form-label">{{'AT' | translate }} <span class="danger">*</span></label>
                                         <div class="col-auto">
                                             <input formControlName="endDate" type="date" class="form-control">
                                         </div>
@@ -132,10 +132,10 @@
                                                 <div aria-labelledby="dropdownUser" *dropdownMenu=""
                                                      class="dropdown-menu">
                                                     <a class="dropdown-item" (click)="downloadPdfConsumptions()">
-                                                        <i class="fa fa-file-pdf-o"></i> Format Pdf
+                                                        <i class="fa fa-file-pdf-o"></i>{{'PDF_FORMAT' | translate }}
                                                     </a>
                                                     <a class="dropdown-item" (click)="downloadXlsConsumptions()">
-                                                        <i class="fa fa-file-excel-o"></i> Format Excel
+                                                        <i class="fa fa-file-excel-o"></i>{{'EXCEL_FORMAT' | translate }}
                                                     </a>
                                                 </div>
                                             </div>
@@ -148,30 +148,30 @@
                                                filterable-table (filtred)="onFiltred($event)">
                                             <thead class="table-light">
                                             <tr>
-                                                <th scope="col">{{'Période' | translate }}
+                                                <th scope="col">{{'PERIOD' | translate }}
                                                     <span sortable-column="type"></span>
                                                     <span filterable-column="type" filter-type="text"
-                                                          filter-placeholder="{{'Période' | translate }}"></span>
+                                                          filter-placeholder="{{'PERIOD' | translate }}"></span>
                                                 </th>
-                                                <th scope="col">{{'Date de relève' | translate }}
+                                                <th scope="col">{{'DATE_OF_REPORTS' | translate }}
                                                     <span sortable-column="type"></span>
                                                     <span filterable-column="type" filter-type="date"
-                                                          filter-placeholder="{{'Date de relève' | translate }}"></span>
+                                                          filter-placeholder="{{'DATE_OF_REPORTS' | translate }}"></span>
                                                 </th>
                                                 <th scope="col">{{'Index' | translate }}
                                                     <span sortable-column="type"></span>
                                                     <span filterable-column="type" filter-type="text"
                                                           filter-placeholder="{{'Index' | translate }}"></span>
                                                 </th>
-                                                <th scope="col">{{'Consommation' | translate }}
+                                                <th scope="col">{{'CONSUMPTION' | translate }}
                                                     <span sortable-column="type"></span>
                                                     <span filterable-column="type" filter-type="text"
-                                                          filter-placeholder="{{'Consommation' | translate }}"></span>
+                                                          filter-placeholder="{{'CONSUMPTION' | translate }}"></span>
                                                 </th>
-                                                <th scope="col">{{'Montant' | translate }}
+                                                <th scope="col">{{'AMOUNT' | translate }}
                                                     <span sortable-column="type"></span>
                                                     <span filterable-column="type" filter-type="text"
-                                                          filter-placeholder="{{'Montant' | translate }}"></span>
+                                                          filter-placeholder="{{'AMOUNT' | translate }}"></span>
                                                 </th>
                                             </tr>
                                             </thead>

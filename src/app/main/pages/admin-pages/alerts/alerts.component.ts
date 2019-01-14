@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import {BsModalRef, ModalOptions} from 'ngx-bootstrap';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {AlertModel} from '../../../models/alert.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-alerts',
@@ -26,6 +27,7 @@ export class AlertsComponent implements OnInit {
     alertId: number;
 
     modalRef: BsModalRef;
+    private translate: TranslateService;
 
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-md'};
 
@@ -74,21 +76,21 @@ export class AlertsComponent implements OnInit {
 
     dropAlert(alertId: number) {
         swal({
-            title: 'êtes vous sûr?',
-            text: 'Cette action est irréversible!',
+            title: this.translate.instant('ARE_YOU_SURE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',
             cancelButtonColor: '#3085d6',
-            cancelButtonText: 'Annuler',
-            confirmButtonText: 'Oui, supprimer!'
+            cancelButtonText: this.translate.instant('CANCEL'),
+            confirmButtonText: this.translate.instant('YES_DELETE')
         }).then((result) => {
             if (result.value) {
                 this.adminService.dropAlert(alertId).subscribe(response => {
                     this.alerts.splice(this.alerts.indexOf(this.alerts.find(alert => alert.id === alertId)), 1);
-                    this.toastrService.success('L\'alerte a été supprimée.', 'Supprimer !');
+                    this.toastrService.success(this.translate.instant('THE_ALERT_HAS_BEEN_REMOVED'), this.translate.instant('DELETE_!'));
                 }, err => {
-                    this.toastrService.error('L\'alerte ne peut pas être supprimée!', 'L\'alerte est déjà utilisée');
+                    this.toastrService.error(this.translate.instant('THE_ALERT_CAN_NOT_BE_DELETED'), this.translate.instant('THE_ALERT_IS_ALREADY_IN_USE'));
                 });
             }
         });
