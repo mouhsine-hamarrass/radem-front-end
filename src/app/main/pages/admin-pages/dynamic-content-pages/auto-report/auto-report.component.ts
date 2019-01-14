@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DynamicModel} from '../../../../models/dynamic.model';
 import {AdminService} from '../../../../services/admin.service';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auto-report',
@@ -14,6 +15,7 @@ export class AutoReportComponent implements OnInit {
     dynamicPageForm: FormGroup;
     dynamicContent: DynamicModel = {};
     code: string;
+    private translate: TranslateService;
 
     constructor(private adminServices: AdminService,
                 private toastrService: ToastrService,
@@ -48,9 +50,9 @@ export class AutoReportComponent implements OnInit {
 
     save(dynamicContent) {
         this.adminServices.saveDynamicContent(this.code, dynamicContent).subscribe(response => {
-            this.toastrService.success('Modification réussite', '');
+            this.toastrService.success(this.translate.instant('SUCCESS_MODIFICATION'), '');
         }, err => {
-            this.toastrService.error('Oops! modification échoué', '');
+            this.toastrService.error(this.translate.instant('OOPS_FAILED_CHANGE'), '');
             console.log(err);
         });
     }

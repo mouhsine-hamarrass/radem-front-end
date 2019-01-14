@@ -3,6 +3,7 @@ import {Profile} from '../../../models/profile.model';
 import swal from 'sweetalert2';
 import {AdminService} from '../../../services/admin.service';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-profiles',
@@ -20,6 +21,7 @@ export class ProfilesComponent implements OnInit {
     itemsPerPage: number;
     sort: any;
     filter: any;
+    private translate: TranslateService;
 
     constructor(
         private adminService: AdminService,
@@ -65,23 +67,23 @@ export class ProfilesComponent implements OnInit {
 
     dropProfile(idProfile: number) {
         swal({
-            title: 'êtes vous sûr?',
-            text: 'Cette action est irréversible!',
+            title: this.translate.instant('ARE_YOU_SURE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: 'Annuler',
-            confirmButtonText: 'Oui, supprimer!'
+            cancelButtonText: this.translate.instant('CANCEL'),
+            confirmButtonText: this.translate.instant('YES_DELETE')
         }).then((result) => {
             if (result.value) {
                 if (this.profiles.find(profil => profil.id === idProfile).users === 0) {
                     this.adminService.dropProfile(idProfile).subscribe(response => {
                         this.profiles.splice(this.profiles.indexOf(this.profiles.find(profil => profil.id === idProfile)), 1);
-                        this.toastrService.success('Le profil a été supprimé.', 'Supprimé !');
+                        this.toastrService.success(this.translate.instant('THE_PROFILE_HAS_BEEN_DELETED'), this.translate.instant('DELETE_!'));
                     });
                 } else {
-                    this.toastrService.error('le profil ne peut pas être supprimé!', 'Profile déjà utilisé');
+                    this.toastrService.error(this.translate.instant('THE_PROFILE_CAN_NOT_BE_DELETED'), this.translate.instant('PREVIOUSLY_USED_PROFILE'));
                 }
             }
         });

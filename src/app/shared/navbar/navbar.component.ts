@@ -7,6 +7,7 @@ import {User} from '../../main/models/user.model';
 import {environment} from '../../../environments/environment';
 import {AuthHelper} from '../../core/services/security/auth.helper';
 import {HomeService} from '../../main/services/home.service';
+ import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-navbar',
@@ -19,6 +20,7 @@ export class NavbarComponent implements OnInit {
     public applogo: string;
     public href: string = '';
     alerts: Array<any> = [];
+    private translate: TranslateService;
 
     constructor(private oauthService: OAuthService,
                 private utilsService: UtilsService,
@@ -59,7 +61,7 @@ export class NavbarComponent implements OnInit {
 
     public logout() {
         this.oauthService.logout();
-        this.toastrService.success('À bientôt', '', {timeOut: 1000});
+        this.toastrService.success(this.translate.instant('SEE_YOU_SOON'), '', {timeOut: 1000});
         this.router.navigate(['/login']);
     }
 }

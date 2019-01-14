@@ -216,7 +216,7 @@ export class UserComponent implements OnInit {
                 user.id = this.user.id;
                 this.adminService.editUser(user).subscribe((response) => {
                     if (response && response.data) {
-                        this.toastrService.success('Opération réussite', '');
+                        this.toastrService.success(this.translate.instant('SUCCESS_OPERATION'), '');
                         this.router.navigate(['/admin/users']);
                     }
                 }, (err) => {
@@ -225,7 +225,7 @@ export class UserComponent implements OnInit {
             } else {
                 this.adminService.createUser(user).subscribe((response) => {
                     if (response && response.data) {
-                        this.toastrService.success('Opération réussite', '');
+                        this.toastrService.success(this.translate.instant('SUCCESS_OPERATION'), '');
                         this.router.navigate(['/admin/users']);
                     }
                 }, (err) => {

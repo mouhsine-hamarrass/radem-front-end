@@ -105,18 +105,18 @@ export class UsersComponent implements OnInit {
 
     dropUser(idUser): void {
         swal({
-            title: 'Etes-vous sûr de vouloir continuer',
-            text: 'Cette action est irréversible',
+            title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_CONTINUE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, Je suis sûr!'
+            confirmButtonText: this.translate.instant('YES_I_AM_SURE')
         }).then((result) => {
             if (result.value) {
                 this.adminService.dropUser(idUser).subscribe((response) => {
                     if (response.status === 'OK') {
-                        this.toastrService.success('Opération réussite', '');
+                        this.toastrService.success(this.translate.instant('SUCCESS_OPERATION'), '');
                         this.listUsers();
                     }
                 }, (err) => {

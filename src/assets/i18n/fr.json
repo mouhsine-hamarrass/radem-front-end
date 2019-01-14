@@ -46,6 +46,7 @@
   "IN_PROGRESS": "En progress",
   "DEPOSITED_COUNTER": "Dépositaire comptoir",
   "UNPAID_VERIFICATION": "Non rémunérée vérification",
+  "VERIFICATION": "Vérification",
   "SETTLEMENT": "Accord",
   "REFUND": "Rembourser",
   "UNPAID_LIST": "Mes impayés",
@@ -66,7 +67,7 @@
   "MODIFY":"Modifier",
   "CANCEL":"Annuler",
   "LAST_NAME":"Nom",
-  "FIRST_NAME":"Prenom",
+  "FIRST_NAME":"Prénom",
   "LASTNAME_AND_FIRSTNAME":"Nom et Prénom",
   "PHONE":"Telephone",
   "MAIL":"Email",
@@ -79,6 +80,7 @@
   "CLAIM":"Réclamation",
   "MY_CLAIM":"Ma réclamation",
   "Advice_and_energy_saving":"Conseil et économie d'énergie",
+  "ADVICE":"Conseil",
   "ADD_NEW_ALERT":"Ajouter une nouvelle alerte",
   "MODIFY_ALERT":"Modifier l'alerte",
   "DESIGNATION":"Désignation",
@@ -87,6 +89,8 @@
   "INSTRUCTIONS":"Instructions",
   "ADMINISTRATION":"Administration",
   "ALERT_NOTIFICATION":"Notification d'alerte",
+  "NOTIFICATION":"notification",
+  "ALERT_NOTIFICATIONS":"Alert notifications",
   "Make_your_choice":"Faite votre choix",
   "Alert_Preview":"Aperçu de l'alerte",
   "The_contract_concerned":"Le contrat concerné",
@@ -127,6 +131,7 @@
   "MODIFY_PROFIL":"Modifier le profil",
   "NAME_PROFIL":"Nom du profil",
   "THE_PROFILE_NAME_IS_REQUIRED":"Le nom de profil est obligatoire",
+  "THE_PROFILE_NAME":"Le nom de profil",
   "ACCESS_RIGHTS":"Droits d'accès",
   "LIST_OF_PROFILES":"Liste des profils",
   "LIST_OF_REQUESTS":"Liste des demandes",
@@ -151,7 +156,8 @@
   "EMAIL_IS_REQUIRED":"L'email est obligatoire",
   "THE_EMAIL_IS_INVALID":"L'email est invalide",
   "PASSWORD_IS_REQUIRED":"Le mot de passe est obligatoire",
-  "CONFIRM_THE_PASSWORD":"Confirmez le mot de passe",
+  "PASSWORDS_ARE_NOT_THE_SAME":"Les mots de passe ne sont pas identiques",
+  "CONFIRM_THE_PASSWORD":"Confirmez votre mot de passe",
   "THE_TWO_PASSWORDS_ARE_NOT_IDENTICAL":"Les deux mots de passes ne sont pas identiques",
   "PROFILE_PICTURE":"Photo de profil",
   "TYPE_OF_ACCOUNT":"Type de compte",
@@ -161,6 +167,7 @@
   "USERS_LIST":"Liste des utilisateurs",
   "ADVICE_AND_ENERGY_SAVING":"Conseil et économie d'énergie",
   "MY_CONSUMPTION":"Ma consommation",
+  "CONSUMPTION":"Consommation",
   "NEXT_SHIFT_THE":"Prochaine relève le",
   "LATEST_SHIFTS":"Dernieres relèves",
   "CONSUMPTION_HISTORY":"Historique de consommation",
@@ -172,13 +179,14 @@
   "CONTRACT":"Contrat",
   "CLICK_ON_THE_LIST_BELOW_TO_SEE_THE_DETAILS_OF_EACH_OF_YOUR_CONTRACTS":" Cliquez sur la liste ci-dessous pour avoir le détail de chacun de vos contrats",
   "CREDIT_BALANCE_EXCLUDING_PARTICIPATION":"Solde créditeur hors participation",
-  "CREDIT_BALANCE_PARTICIPATION":"Solde creéditeur participation",
+  "CREDIT_BALANCE_PARTICIPATION":"Solde créditeur participation",
   "BILL":"facture",
   "DEADLINES":"échéances",
   "DEADLINE":"Date d'échéance",
   "AMOUNT":"Montant",
   "PAY":"Payer",
   "MY_REGULATIONS":"Mes réglements",
+  "REGULATION":"Réglement",
   "CONSULT_YOUR_REGULATIONS":"Consulter vos réglements",
   "THE":"Au",
   "PDF_FORMAT":"Format Pdf",
@@ -243,7 +251,7 @@
   "ADDRESS_SUPPLEMENT":"Complément d'adresse",
   "OR":"ou",
   "WATER_CONTRACT":"contrat d'eau",
-  "'ELECTRICITY_CONTRACT":"contrat d'electricité",
+  "ELECTRICITY_CONTRACT":"contrat d'electricité",
   "AUTONOMOUS_WATER_AND_ELECTRICITY_DISTRIBUTION_REGION":"RÉGIE AUTONOME DE DISTRIBUTION D'EAU ET D'ELECTRICITÉ MEKNÈS",
   "WATER":"EAU",
   "TERMINATION_DESK":"Guichet de résiliation",
@@ -304,52 +312,64 @@
   "PLANNED_MAINTENANCE_IS_CURRENTLY_IN_PROGRESS":"La maintenance planifiée est actuellement en cours",
   "PLEASE_COME_BACK_SOON":"S'il vous plaît revenez bientôt",
   "WE_APOLOGIZE_FOR_ANY_INCONVENIENCE":"Nous nous excusons pour tout inconvénient",
-  "REFRESH":"Acutaliser"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "REFRESH":"Acutaliser",
+  "LEAVE_A_COMMENT":"Laisser un commentaire ...",
+  "CREATED_AT":"Fait le",
+  "DELETE":"Supprimer",
+  "EDIT":"Éditer",
+  "ACTIVATED":"Activé",
+  "DISABLED":"Désactivé",
+  "ACCOUNT_RECOVERY":"Récupération de compte",
+  "YOUR_EMAIL_ADDRESS":"Votre adresse email",
+  "NEW_CLIENT":"Nouveau client",
+  "REGISTRATION":"Inscription",
+  "PLEASE_CHOOSE_ONE_OF_THE_FOLLOWING_OPTIONS_AND_FILL_IN_THE_FIELDS_THAT_APPEAR":"Merci de bien vouloir choisir une des options suivantes et renseigner les champs qui s'affichent",
+  "REFERENCE":"Reference",
+  "I_ACCEPT":"J'accepte",
+  "THE_GENERAL_CONDITIONS_OF_USE":"les conditions générales d'utilisation",
+  "PLEASE_FILL_IN_THE_FIELDS_BELOW_TO_CREATE_YOUR_ACCOUNT_ONLINE":"Veuillez remplir les champs ci-dessous pour créer votre compte en ligne",
+  "CONFIRMATION":"Confirmation",
+  "SELECT_A_QUESTION":"Séléctionnez une question",
+  "YOUR_ANSWER":"Votre réponse",
+  "CLICK_TO_CHECK_YOUR_ANSWER":"Cliquez pour vérifier votre réponse",
+  "BACK":"Retour",
+  "PLEASE_ENTER_YOUR_DETAILS_IN_THE_FIELDS_BELOW_TO_CONFIRM_YOUR_REGISTRATION":"Veuillez renseigner vos coordonées dans les champs ci-dessous pour confirmer votre inscription",
+  "HERE_IS_A_SUMMARY_OF_YOUR_INFORMATION":"Voici un récapitulatif de vos informations",
+  "VALIDATION":"Validation",
+  "MSG_SUCCES_REGISTER":"Un email vient d'être envoyé sur votre addresse éléctronique, veuillez vérifiez celle-ci pour activé votre compte !",
+  "CHANGING_THE_PASSWORD":"Modification du mot de passe",
+  "NEW_PASSWORD":"Nouveau mot de passe",
+  "YOU_HAVE":"Vous avez",
+  "SUCCESSOR_OF":"Successeur de",
+  "WELCOME":"Bienvenu",
+  "SUCCESS_MODIFICATION":"Modification réussite",
+  "SUCCESS_OPERATION":"Opération réussite",
+  "OOPS_FAILED_CHANGE":"Oops! modification échouée",
+  "ADDED_ALERT":"L'alerte ajoutée",
+  "MODIFIED_ALERT":"L'alerte modifiée",
+  "YES_I_AM_SURE":"Oui, Je suis sûr!",
+  "ARE_YOU_SURE_YOU_WANT_TO_CONTINUE":"Êtes-vous sûr de vouloir continuer ?",
+  "THIS_ACTION_IS_IRREVERSIBLE":"Cette action est irréversible",
+  "ARE_YOU_SURE":"Êtes vous sûr ?",
+  "YES_DELETE":"Oui, supprimer !",
+  "THE_ALERT_HAS_BEEN_REMOVED":"L'alerte a été supprimée.",
+  "DELETE_!":"Supprimer !",
+  "THE_ALERT_CAN_NOT_BE_DELETED":"L'alerte ne peut pas être supprimée !",
+  "THE_ALERT_IS_ALREADY_IN_USE":"L'alerte est déjà utilisée",
+  "YES":"Oui !",
+  "PROFILE_ADDED":"Profil ajouté",
+  "MODIFIED_PROFILE":"Profil modifié",
+  "THE_PROFILE_HAS_BEEN_DELETED":"Le profil a été supprimé.",
+  "THE_PROFILE_CAN_NOT_BE_DELETED":"Le profil ne peut pas être supprimé !",
+  "PREVIOUSLY_USED_PROFILE":"Profil déjà utilisé",
+  "THE_SUCCESSFUL_ADDITION_OPERATION":"L'opération d'ajout réussite",
+  "THE_SUCCESSFUL_CHANGE_OPERATION":"L'opération de modification réussite",
+  "THE_SERVICE_HAS_BEEN_DELETED":"Le service a été supprimé.",
+  "THE_SERVICE_CAN_NOT_BE_DELETED":"Le service ne peut pas être supprimé !",
+  "THIS_SERVICE_IS_ALREADY_USED":"Ce service est déjà utilisé",
+  "CLAIM_SUCCESSFULLY_ADDED":"Réclamation ajoutée avec succes",
+  "CHECK_YOUR_INBOX":"Vérifier votre boite de réception !",
+  "SEE_YOU_SOON":"À bientôt"
 
 
 

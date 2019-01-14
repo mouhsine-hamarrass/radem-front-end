@@ -8,6 +8,7 @@ import {ContactModel} from '../../../models/contact.model';
 import {SubscriptionModel} from '../../../models/subscription.model';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alert-notification',
@@ -27,6 +28,7 @@ export class AlertNotificationComponent implements OnInit {
               private formBuilder: FormBuilder,
               private activeRoute: ActivatedRoute,
               private router: Router,
+              private translate: TranslateService,
               private toastrService: ToastrService) {
     this.alertForm = this.formBuilder.group({
       type: ['', Validators.required],
@@ -93,7 +95,7 @@ export class AlertNotificationComponent implements OnInit {
 
     this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
       this.alertNotification = response.data;
-      this.toastrService.success('Opération réussite', '');
+      this.toastrService.success(this.translate.instant('SUCCESS_OPERATION'), '');
       this.router.navigate(['/admin/alert-notifications']);
     }, err => {
 

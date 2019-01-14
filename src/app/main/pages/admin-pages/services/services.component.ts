@@ -5,6 +5,7 @@ import {BsModalRef, ModalOptions} from 'ngx-bootstrap';
 import {ServiceModel} from '../../../models/service.model';
 import {ToastrService} from 'ngx-toastr';
 import swal from 'sweetalert2';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-services',
@@ -24,6 +25,7 @@ export class ServicesComponent implements OnInit {
     filter: any;
 
     serviceId: number;
+    private translate: TranslateService;
 
     modalRef: BsModalRef;
 
@@ -75,21 +77,21 @@ export class ServicesComponent implements OnInit {
 
     removeService(serviceId: number) {
         swal({
-            title: 'êtes vous sûr?',
-            text: 'Cette action est irréversible!',
+            title: this.translate.instant('ARE_YOU_SURE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd6366',
             cancelButtonColor: '#404E67',
-            cancelButtonText: 'Annuler',
-            confirmButtonText: 'Oui, supprimer!'
+            cancelButtonText: this.translate.instant('CANCEL'),
+            confirmButtonText: this.translate.instant('YES_DELETE')
         }).then((result) => {
             if (result.value) {
                 this.adminService.removeService(serviceId).subscribe(response => {
                     this.services.splice(this.services.indexOf(this.services.find(alertType => alertType.id === serviceId)), 1);
-                    this.toastrService.success('Le service a été supprimé.', 'Supprimé !');
+                    this.toastrService.success(this.translate.instant('THE_SERVICE_HAS_BEEN_DELETED'), this.translate.instant('DELETE_!'));
                 }, err => {
-                    this.toastrService.error('le service ne peut pas être supprimé!', 'Ce service est déjà utilisé');
+                    this.toastrService.error(this.translate.instant('THE_SERVICE_CAN_NOT_BE_DELETED'), this.translate.instant('THIS_SERVICE_IS_ALREADY_USED'));
                 });
             }
         });

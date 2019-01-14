@@ -7,7 +7,7 @@
     <div class="breadcrumb-wrapper col-12">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a routerLink="/home">Accueil{{'HOME' | translate }}</a>
+          <a routerLink="/home">{{'HOME' | translate }}</a>
         </li>
         <li class="breadcrumb-item">
           <a>Services</a>
@@ -65,7 +65,7 @@
                       <div style="padding-left: 10px;">
                         <table>
                           <tr>
-                            <td>N° {{'Request' | translate }} :</td>
+                            <td>{{'Number_Request' | translate }} :</td>
                             <td>{{claim?.claimNumber}}</td>
                           </tr>
                           <tr>
@@ -113,7 +113,7 @@
                     <form class="">
                       <div class="row">
 
-                        <input #commentaire type="text" class="col-9 form-control" placeholder="Laisser un commentaire.."
+                        <input #commentaire type="text" class="col-9 form-control" placeholder="{{'LEAVE_A_COMMENT' | translate }} ..."
                           style="margin-right: 8px;margin-left: 10px;" />
 
                         <button class="btn btn btn-outline-primary">{{'SEND' | translate }}</button>
@@ -132,7 +132,7 @@
                 </fieldset>
                 <fieldset class="col-4 scheduler-border" id="divDate">
                   <legend class="scheduler-border">
-                    <b>Dates :</b>
+                    <b>{{'DATES' | translate }} :</b>
                   </legend>
                   <div style="padding-left: 20px;">
                     <table>

@@ -27,42 +27,42 @@
                                filterable-table (filtred)="onFiltred($event)">
                             <thead class="table-light">
                             <tr>
-                                <th scope="col">{{'Prénom' | translate }}
+                                <th scope="col">{{'FIRST_NAME' | translate }}
                                     <span sortable-column="firstName"></span>
                                     <span filterable-column="firstName" filter-type="text"
-                                         filter-placeholder="{{'Prénom' | translate }}"></span>
+                                         filter-placeholder="{{'FIRST_NAME' | translate }}"></span>
                                 </th>
-                                <th scope="col">{{'Nom' | translate }}
+                                <th scope="col">{{'LAST_NAME' | translate }}
                                     <span sortable-column="lastName"></span>
                                     <span filterable-column="lastName" filter-type="text"
-                                         filter-placeholder="{{'Nom' | translate }}"></span>
+                                         filter-placeholder="{{'LAST_NAME' | translate }}"></span>
                                 </th>
-                                <th scope="col">{{'Username' | translate }}
+                                <th scope="col">{{'USERNAME' | translate }}
                                     <span sortable-column="username"></span>
                                     <span filterable-column="username" filter-type="text"
-                                         filter-placeholder="{{'Username' | translate }}"></span>
+                                         filter-placeholder="{{'USERNAME' | translate }}"></span>
                                 </th>
-                                <th scope="col">{{'Service' | translate }}
+                                <th scope="col">{{'SERVICE' | translate }}
                                     <span sortable-column="service"></span>
                                     <span filterable-column="service" filter-type="text"
-                                         filter-placeholder="{{'Service' | translate }}"></span>
+                                         filter-placeholder="{{'SERVICE' | translate }}"></span>
                                 </th>
-                                <th scope="col">{{'E-mail' | translate }}
+                                <th scope="col">{{'MAIL' | translate }}
                                     <span sortable-column="email"></span>
                                     <span filterable-column="email" filter-type="text"
-                                         filter-placeholder="{{'E-mail' | translate }}"></span>
+                                         filter-placeholder="{{'MAIL' | translate }}"></span>
                                 </th>
-                                <th scope="col">{{'Profil' | translate }}
+                                <th scope="col">{{'PROFIL' | translate }}
                                     <span sortable-column="profile"></span>
                                     <span filterable-column="profile" filter-type="select"
                                           [filter-select-data]="profilesFilter"
                                           filter-select-data-key="id" filter-select-data-value="title"
-                                         filter-placeholder="{{'Profil' | translate }}"></span>
+                                         filter-placeholder="{{'PROFIL' | translate }}"></span>
                                 </th>
-                                <th scope="col">{{'Crée le' | translate }}
+                                <th scope="col">{{'CREATED_ON' | translate }}
                                     <span sortable-column="createdDate"></span>
                                     <span filterable-column="createdDate" filter-type="date"
-                                         filter-placeholder="{{'Crée le' | translate }}"></span>
+                                         filter-placeholder="{{'CREATED_ON' | translate }}"></span>
                                 </th>
                                 <th scope="col" width="110">{{'Actions' | translate }}</th>
                             </tr>
@@ -84,9 +84,9 @@
                                     <td>
                                         <ngx-toggle
                                                 onColor="primary"
-                                                onText="Activé"
+                                                onText="'ACTIVATED' | translate"
                                                 offColor="secondary"
-                                                offText="Désactivé"
+                                                offText="'DISABLED' | translate"
                                                 [size]="'sm'"
                                                 [(value)]="user.enabled"
                                                 (click)="changeEnabled($event, user)">
@@ -94,12 +94,12 @@
                                         <ul class="list-inline list-unstyled text-center">
                                             <li class="list-inline-item">
                                                 <i class="fa fa fa-fw fa-times text-danger actions_icon cursor-pointer"
-                                                   tooltip="Supprimer"
+                                                   tooltip="'DELETE' | translate"
                                                    (click)="dropUser(user.id)"></i>
                                             </li>
                                             <li class="list-inline-item">
                                                 <i class="fa fa-fw fa-pencil text-info actions_icon cursor-pointer"
-                                                   tooltip="Editer"
+                                                   tooltip="'EDIT' | translate"
                                                    [routerLink]="['/admin/users/', user.id]"></i>
                                             </li>
                                         </ul>

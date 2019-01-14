@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as _ from 'underscore';
 import {AdminService} from '../../../services/admin.service';
 import {Statut} from '../../../../shared/models/user.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-requests',
@@ -21,6 +22,7 @@ export class RequestsComponent implements OnInit {
     filter: any;
     agentsFilter: any = [];
     statusFilter = Object.keys(Statut);
+    private translate: TranslateService;
 
     constructor(private adminService: AdminService) {
     }
@@ -50,7 +52,7 @@ export class RequestsComponent implements OnInit {
                 this.itemsPerPage = response.data.size;
                 this.numberOfItems = response.data.numberOfElements;
                 _.each(this.requests, (element: any) => {
-                    _.extend(element, {type: 'Résiliation'});
+                    _.extend(element, {type: this.translate.instant('TERMINATION')});
                 });
             }, (err) => {
 

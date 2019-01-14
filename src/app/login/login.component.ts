@@ -60,7 +60,7 @@ export class LoginComponent extends UIFormComponent implements OnInit {
         this.loading = false;
         // navigate to returnUrl just if login successfully
         if (userData.accessToken) {
-          this.toastrService.success('Bienvenue', '');
+          this.toastrService.success(this.translate.instant('WELCOME'), '');
           this.router.navigate(['/home']);
 
         } else {

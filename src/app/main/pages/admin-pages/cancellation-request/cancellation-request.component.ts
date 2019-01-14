@@ -20,6 +20,7 @@ import swal from 'sweetalert2';
 
 // @ts-ignore
 import _ = require('underscore');
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-cancellation-request',
@@ -60,6 +61,8 @@ export class CancellationRequestComponent implements OnInit {
         phone: '0633334444'
     }
     ];
+
+  private translate: TranslateService;
 
     constructor(private requestService: AdminService,
                 private router: Router,
@@ -180,14 +183,14 @@ export class CancellationRequestComponent implements OnInit {
     // Stepper
     nextStep(id) {
         swal({
-            title: 'êtes vous sûr?',
-            text: 'Cette action est irréversible!',
+            title: this.translate.instant('ARE_YOU_SURE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: 'Annuler',
-            confirmButtonText: 'Oui, supprimer!'
+            cancelButtonText: this.translate.instant('CANCEL'),
+            confirmButtonText: this.translate.instant('YES_DELETE')
         }).then((result) => {
             if (result.value) {
                 const agentId: number = JSON.parse(localStorage.getItem('user')).id;
