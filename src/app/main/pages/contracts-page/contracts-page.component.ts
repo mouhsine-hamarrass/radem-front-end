@@ -59,12 +59,12 @@ export class ContractsPageComponent implements OnInit {
     public chartType = 'bar';
     public chartLabels: Array<any> = ['Jan', 'Féf', 'Mar', 'Avr', 'May', 'Jun', 'Jui', 'Auo', 'Sep', 'Oct', 'Nov', 'Dec'];
     public chartDatasets: Array<any> = [
-        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: '2017'},
-        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: '2018'}
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: ''},
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: ''}
     ];
     public chartOptions: any = {
         title: {
-            text: 'Moyenne de consomation (2017-2018)',
+            text: 'Moyenne de consomation',
             display: true,
         },
         responsive: true
@@ -99,7 +99,6 @@ export class ContractsPageComponent implements OnInit {
     ngOnInit() {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-            this.user.clientNo = '0012566'; // TODO to remove after
         }
         this.getSubscriptions();
     }
@@ -140,13 +139,13 @@ export class ContractsPageComponent implements OnInit {
 
     getHistoryConsumptions(template: TemplateRef<any>, id: string) {
         this.contractsServices.getHistoryConsumptions(id).subscribe(response => {
-            this.history = response.data;
+            this.history = response.data;debugger;
             _.each(this.history, (histo, i) => {
-                debugger;
                 _.each(histo.consumptions, (cons, j) => {
                     this.chartDatasets[i]['data'][j + 1] = cons;
-                    histo.month = this.chartLabels[j + 1];
-                    histo.montant = parseFloat(cons);
+                    this.chartDatasets[i]['label'] = histo.annee;
+                    // histo.month = this.chartLabels[j + 1];
+                    // histo.montant = parseFloat(cons);
                 });
             });
             this.modalRef = this.modalService.show(template, this.modalOptions);
@@ -179,8 +178,8 @@ export class ContractsPageComponent implements OnInit {
                         this.contract.dateFinAbonnement =
                             moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
                     }
+                    this.counter = responseCounter.data;
                     if (this.counter) {
-                        this.counter = responseCounter.data;
                         this.counter.datePoseCompteur =
                             moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
                     }

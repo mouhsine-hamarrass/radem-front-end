@@ -20,12 +20,12 @@ export class NavbarComponent implements OnInit {
     public applogo: string;
     public href: string = '';
     alerts: Array<any> = [];
-    private translate: TranslateService;
 
     constructor(private oauthService: OAuthService,
                 private utilsService: UtilsService,
                 private homeService: HomeService,
                 private toastrService: ToastrService,
+                private translate: TranslateService,
                 private router: Router) {
     }
 

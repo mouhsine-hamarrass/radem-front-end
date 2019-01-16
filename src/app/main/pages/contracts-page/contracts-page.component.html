@@ -623,9 +623,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let histo of history; let i=index">
-                        <td>{{chartDatasets[i]}}</td>
-                        <td>{{histo[i]}}</td>
+                    <tr *ngFor="let histo of history[0]?.consumptions; let i=index">
+                        <td>{{chartLabels[i]}}</td>
+                        <td>{{histo}}</td>
                     </tr>
                     </tbody>
                 </table>
