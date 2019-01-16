@@ -5,6 +5,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {environment} from '../../../../../environments/environment';
 import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -31,6 +33,8 @@ export class AccountComponent implements OnInit {
 
     constructor(private profileService: ProfileService,
                 private router: Router,
+                private translate: TranslateService,
+                private toastrService: ToastrService,
                 private authHelper: AuthHelper) {
         this.defaultAvatar = environment.defaultAvatar;
     }
@@ -77,9 +81,14 @@ export class AccountComponent implements OnInit {
         };
         this.profileService.saveProfile(profile).subscribe(response => {
             console.log(response.data);
-            this.router.navigate(['/login']);
+            if (response && response.data) {
+                localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(response.data));
+                this.toastrService.success(this.translate.instant('SUCCESS_MODIFICATION'), '');
+            } else {
+                this.toastrService.error(this.translate.instant('OOPS_FAILED_CHANGE'), '');
+            }
         }, err => {
+            this.toastrService.error(this.translate.instant('OOPS_FAILED_CHANGE'), '');
         });
     }
-
 }
