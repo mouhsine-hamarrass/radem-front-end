@@ -57,7 +57,6 @@ export class SettlementsPageComponent implements OnInit {
     ngOnInit() {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-            this.user.clientNo = '0012566'; // TODO to remove after
         }
         this.getContacts();
     }

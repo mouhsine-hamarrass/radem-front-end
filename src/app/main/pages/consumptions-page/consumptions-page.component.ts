@@ -60,7 +60,6 @@ export class ConsumptionsPageComponent implements OnInit {
     ngOnInit() {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-            this.user.clientNo = '0012566'; // TODO to remove after
         }
         this.getContracts();
         this.getActiveContracts();
@@ -100,7 +99,7 @@ export class ConsumptionsPageComponent implements OnInit {
             this.pageSizeConsumption,
             this.filterConsumption,
             this.sortConsumption)
-            .subscribe(response => {debugger;
+            .subscribe(response => {
                 this.consumptions = response.data.content;
                 this.totalElementsConsumption = response.data.totalElements;
                 this.totalPagesConsumption = response.data.totalPages;
@@ -163,7 +162,7 @@ export class ConsumptionsPageComponent implements OnInit {
 
     setContract(contractNumber: any) {
         this.contractNumber = contractNumber;
-        this.getConsumptionHistory();
+        // this.getConsumptionHistory();
     }
 
     downloadXlsConsumptions() {

@@ -59,12 +59,12 @@ export class ContractsPageComponent implements OnInit {
     public chartType = 'bar';
     public chartLabels: Array<any> = ['Jan', 'Féf', 'Mar', 'Avr', 'May', 'Jun', 'Jui', 'Auo', 'Sep', 'Oct', 'Nov', 'Dec'];
     public chartDatasets: Array<any> = [
-        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: '2017'},
-        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: '2018'}
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: ''},
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: ''}
     ];
     public chartOptions: any = {
         title: {
-            text: 'Moyenne de consomation (2017-2018)',
+            text: 'Moyenne de consomation',
             display: true,
         },
         responsive: true
@@ -99,7 +99,6 @@ export class ContractsPageComponent implements OnInit {
     ngOnInit() {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-            this.user.clientNo = '0012566'; // TODO to remove after
         }
         this.getSubscriptions();
     }
@@ -135,24 +134,19 @@ export class ContractsPageComponent implements OnInit {
 
     getSoldeByNumContract(id) {
         this.contractsServices.getSoldeByNumContract(id).subscribe(response => {
-            debugger;
-
         }, error => console.log(error));
     }
 
     getHistoryConsumptions(template: TemplateRef<any>, id: string) {
         this.contractsServices.getHistoryConsumptions(id).subscribe(response => {
-            this.history = response.data;
+            this.history = response.data;debugger;
             _.each(this.history, (histo, i) => {
-                histo.month = this.chartLabels[parseFloat(histo.periode) - 1];
-                histo.montant = parseFloat(histo.soldeTotal) + parseFloat(histo.soldeExigible);
-                const index = parseFloat(histo.periode) - 1;
-                debugger;
-                if (index <= 11) {
-                    this.chartDatasets[0].data[index] = histo.montant;
-                } else {
-                    this.chartDatasets[1].data[index] = histo.montant;
-                }
+                _.each(histo.consumptions, (cons, j) => {
+                    this.chartDatasets[i]['data'][j + 1] = cons;
+                    this.chartDatasets[i]['label'] = histo.annee;
+                    // histo.month = this.chartLabels[j + 1];
+                    // histo.montant = parseFloat(cons);
+                });
             });
             this.modalRef = this.modalService.show(template, this.modalOptions);
             console.log(this.history);
@@ -176,16 +170,22 @@ export class ContractsPageComponent implements OnInit {
             this.contractsServices.getCounterByContractId(id).subscribe(responseCounter => {
                 this.contractsServices.getSoldeByNumContract(id).subscribe(responseSolde => {
                     this.contract = responseContract.data;
-                    this.contract.dateCreationAbonnement = moment(new Date(this.contract.dateCreationAbonnement)).format(environment.defaultDateFormatNoTime);
-                    this.contract.dateEffetAbonnement = moment(new Date(this.contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
-                    this.contract.dateFinAbonnement = moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
-
+                    if (this.contract) {
+                        this.contract.dateCreationAbonnement =
+                            moment(new Date(this.contract.dateCreationAbonnement)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateEffetAbonnement =
+                            moment(new Date(this.contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateFinAbonnement =
+                            moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
+                    }
                     this.counter = responseCounter.data;
-                    this.counter.datePoseCompteur = moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
-
+                    if (this.counter) {
+                        this.counter.datePoseCompteur =
+                            moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
+                    }
                     this.solde = {
-                        soldeExigible: responseSolde.data['soldeExigible'],
-                        soldetot: responseSolde.data['soldetot']
+                        soldeExigible: responseSolde.data['soldeExigible'] || 0,
+                        soldetot: responseSolde.data['soldetot'] || 0
                     };
 
                     this.modalRef = this.modalService.show(template, this.config);
