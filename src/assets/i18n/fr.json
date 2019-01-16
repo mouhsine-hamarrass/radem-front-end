@@ -50,6 +50,7 @@
   "SETTLEMENT": "Accord",
   "REFUND": "Rembourser",
   "UNPAID_LIST": "Mes impayés",
+  "UNPAID": "Impayés",
   "Subscription":"Abonnement",
   "HOME":"Accueil",
   "Consult_your_requests":"Consulter vos demandes",
@@ -62,6 +63,7 @@
   "Number_Request":"Numéro de demande",
   "New_request_for_cancellation":"Nouvelle demande de résiliation",
   "Request_for_cancellation":"Demande de résiliation",
+  "Request_for_claim":"Demande de réclamation",
   "MY_PROFIL":"Mon profil",
   "PROFIL":"Profil",
   "MODIFY":"Modifier",
@@ -176,6 +178,7 @@
   "PERIOD":"Période",
   "LIST_OF_CONTRACTS":"Liste des contrats",
   "MY_CONTRACTS":"Mes contrats",
+  "CONTRACTS":"Contrats",
   "CONTRACT":"Contrat",
   "CLICK_ON_THE_LIST_BELOW_TO_SEE_THE_DETAILS_OF_EACH_OF_YOUR_CONTRACTS":" Cliquez sur la liste ci-dessous pour avoir le détail de chacun de vos contrats",
   "CREDIT_BALANCE_EXCLUDING_PARTICIPATION":"Solde créditeur hors participation",
@@ -268,6 +271,7 @@
   "BILL_TO_PAY":"Facture à payer",
   "HISTORICAL_CONSUMPTION":"Historique de consommation",
   "SUBSCRIPTION_DATE":"Date d'abonnement",
+  "SUBSCRIPTION":"Abonnement",
   "SUBSCRIPTION_END_DATE":"Date de fin d'abonnement",
   "SUBSCRIPTION_EFFECT_DATE":"Date d'effet d'abonnement",
   "RATE":"Tarif",
@@ -386,6 +390,8 @@
   "CLAIM_SUCCESSFULLY_ADDED":"Réclamation ajoutée avec succes",
   "CHECK_YOUR_INBOX":"Vérifier votre boite de réception !",
   "SEE_YOU_SOON":"À bientôt"
+
+
 
 
 
