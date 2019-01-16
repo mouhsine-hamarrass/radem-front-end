@@ -4,16 +4,6 @@
         <div class="col-md-6 col-12">
             <h3 class="content-header-title">{{'MY_PROFIL' | translate}}</h3>
         </div>
-        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a routerLink="/home">{{'HOME' | translate}}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{'MY_PROFIL' | translate}}</li>
-                </ol>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -24,10 +14,6 @@
             <form class="form" [formGroup]="profileForm" novalidate>
                 <div id="what-is" class="mb-0">
                     <div class="card-header">
-                        <h4 class="card-title">{{'MY_PROFIL' | translate}}</h4>
-                        <a class="heading-elements-toggle">
-                            <i class="fa fa-ellipsis-v font-medium-3"></i>
-                        </a>
                         <div class="heading-elements">
                             <div class="card card-photo">
                                 <img [src]="result64 || defaultAvatar" id="img" #img>
@@ -42,6 +28,7 @@
                             </div>
                         </div>
                     </div>
+                  <br/>
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <div class="row col-12">

@@ -1,3 +1,7 @@
+.auth-container{
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2) !important;
+}
+
 .ml-7 {
   margin-left: 7rem;
 }
@@ -5,7 +9,9 @@
 .line-on-side {
   margin: -7px 0 15px !important;
 }
-
+.card .card {
+  margin-top: 12%;
+}
 .card-footer {
   padding-bottom : 0;
   padding-top : 10px;
@@ -36,4 +42,21 @@
   margin: 0  !important;
   padding: 0 !important; }
 .help-block ul li {
-  list-style: none; }
+  list-style: none;
+}
+
+.btn-primary {
+  border-color: #2c5599 !important;
+  background-color: #2c5599!important;
+  color: #FFFFFF;
+
+}
+.btn-primary:hover{
+  border-color: #214479 !important;
+  background-color: #214479!important;
+}
+
+a {
+  color: #214479;
+  text-decoration: none;
+}

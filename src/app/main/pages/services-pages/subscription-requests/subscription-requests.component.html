@@ -2,41 +2,19 @@
 <div class="content-header back col-12 mb-1 mt-1">
     <div class="row">
         <div class="col-md-6 col-12">
-            <h3 class="content-header-title">{{'Subscription' | translate}}</h3>
+            <h3 class="content-header-title">{{'subscriptions_requests' | translate}}</h3>
         </div>
-        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a routerLink="/home">{{'HOME' | translate}}</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a>Services</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{'Subscription' | translate}}
-                    </li>
-                </ol>
-            </div>
-        </div>
+      <div class="col-md-6 col-12 text-right">
+        <a routerLink="/services/new-subscription-request" class="btn btn-primary btn-new-claim">
+          <i class="fa fa-plus"></i> {{'New_subscription_request' | translate}}</a>
+      </div>
     </div>
 </div>
 <div class="content-body">
     <section class="row">
         <div class="col-sm-12">
             <!-- What is-->
-            <div id="what-is" class="card mb-0">
-                <div class="card-header">
-                    <h4 class="card-title">{{'Consult_your_requests' | translate}}</h4>
-                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                    <div class="heading-elements">
-                        <ul class="list-inline">
-                            <li>
-                                <a routerLink="/services/new-subscription-request">
-                                    <i class="fa fa-plus"></i>{{'New_subscription_request' | translate}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div id="what-is" class="mb-0">
                 <div class="card-content collapse show">
                     <div class="card-body">
                         <div class="card-text">

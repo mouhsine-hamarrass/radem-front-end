@@ -4,7 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://192.168.100.9:8085/api';
+const server = 'http://192.168.100.12:8085/api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
 let headers = new HttpHeaders();
