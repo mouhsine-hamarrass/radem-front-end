@@ -9,7 +9,7 @@ import {DynamicModel} from '../../../models/dynamic.model';
 })
 export class AutoReportComponent implements OnInit {
 
-    dynamic: DynamicModel = {};
+    dynamic: DynamicModel;
 
     constructor(private adminServices: AdminService) {
     }

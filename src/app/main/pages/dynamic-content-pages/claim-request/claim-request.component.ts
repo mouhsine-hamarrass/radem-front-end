@@ -9,7 +9,7 @@ import {AdminService} from '../../../services/admin.service';
 })
 export class ClaimRequestComponent implements OnInit {
 
-    dynamic: DynamicModel = {};
+    dynamic: DynamicModel;
 
     constructor(private adminServices: AdminService) {
     }
