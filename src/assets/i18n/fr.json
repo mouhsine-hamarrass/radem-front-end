@@ -7,6 +7,7 @@
   },
   "prev": "Précédent",
   "next": "Suivant",
+  "Next": "Suivant",
   "login": {
     "label-username": "Identifiant",
     "label-password": "Mot de passe",
@@ -57,6 +58,7 @@
   "Consult_your_request":"Consulter votre demande",
   "New_subscription_request":"Nouvelle demande d'abonnement",
   "subscription_request":"Demande d'abonnement",
+  "subscriptions_requests":"Demandes d'abonnements",
   "Requests_for_termination":"Demandes de résiliation",
   "Requests":"Demandes",
   "Request":"Demande",
@@ -310,6 +312,7 @@
   "AUTO_RELIEVING":"Auto relève",
   "YOUR_ACCOUNT_HAS_BEEN_ACTIVATED_SUCCESSFULLY!":"Votre compte a été activé avec succès !",
   "LOG_IN":"Se connecter",
+  "LOG_IN2":"Connexion",
   "FORGOT_YOUR_PASSWORD_?":"Mot de passe oublié ?",
   "SIGN_UP":"S'inscrire",
   "THE_APP_IS_TEMPORARILY_UNAVAILABLE":"L'application est temporairement indisponible",

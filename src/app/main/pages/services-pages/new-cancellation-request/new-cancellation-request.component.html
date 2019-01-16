@@ -4,17 +4,6 @@
         <div class="col-md-6 col-12">
             <h3 class="content-header-title">{{'New_request_for_cancellation' | translate }}</h3>
         </div>
-        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a routerLink="/home">{{'HOME' | translate }}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{'New_request_for_cancellation' | translate }}
-                    </li>
-                </ol>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -22,15 +11,7 @@
     <section class="row">
         <div class="col-sm-12">
             <!-- What is-->
-            <div id="what-is" class="card mb-0">
-                <div class="card-header">
-                    <h4 class="card-title">{{'New_request_for_cancellation' | translate }}</h4>
-                    <a class="heading-elements-toggle">
-                        <i class="fa fa-ellipsis-v font-medium-3"></i>
-                    </a>
-                    <div class="heading-elements">
-                    </div>
-                </div>
+            <div id="what-is" class="mb-0">
                 <div class="card-content collapse show">
                     <div class="card-body">
                         <form class="form" [formGroup]="cancellationForm"
