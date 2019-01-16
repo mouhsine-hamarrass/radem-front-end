@@ -89,6 +89,28 @@ export class AdminService {
     }
 
 
+    getPageableActiveContracts(numClient: string, page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/contracts/actives/${numClient}?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
+
+    getPageableHistoryConsumptions(numContract: string, page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.apiUrl}/consumptions/${numContract}?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
+
+    getAllContractByNumClient(numClient: string): Observable<Response<number>> {
+        return this.httpClient.get<Response<any>>
+        (`${this.apiUrl}/contracts/contractNo/${numClient}`, {headers: this.headers});
+    }
+
+
     // JSon server
     getSolde(): Observable<Response<Array<any>>> {
         return this.httpClient.get<Response<Array<any>>>(`${this.jsonServerApi}/factures`, {headers: this.headers});
@@ -115,14 +137,6 @@ export class AdminService {
 
     getContracts(): Observable<Response<Array<any>>> {
         return this.httpClient.get<Response<Array<any>>>(`${this.jsonServerApi}2/contracts`, {headers: this.headers});
-    }
-
-    getPageableContracts(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
-        return this.httpClient.post<Response<any>>(`${this.jsonServerApi}/contracts/paged-list?page=${page}&size=${pageSize}`,
-            {
-                filter,
-                sort
-            });
     }
 
     getReleves(): Observable<Response<Array<any>>> {

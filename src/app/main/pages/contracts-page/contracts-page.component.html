@@ -34,8 +34,7 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                      {{'CLICK_ON_THE_LIST_BELOW_TO_SEE_THE_DETAILS_OF_EACH_OF_YOUR_CONTRACTS' | translate}}
-
+                        {{'CLICK_ON_THE_LIST_BELOW_TO_SEE_THE_DETAILS_OF_EACH_OF_YOUR_CONTRACTS' | translate}}
                         <div class="table-responsive mx-auto">
                             <div class="row justify-content-between">
                                 <div class="col-12">
@@ -50,76 +49,74 @@
                                 <thead class="table-light">
                                 <tr>
                                     <th scope="col">{{'CONTRACT_NUMBER' | translate }}
-                                        <span sortable-column="police"></span>
-                                        <span filterable-column="police" filter-type="text"
+                                        <span sortable-column="id"></span>
+                                        <span filterable-column="id" filter-type="text"
                                               filter-placeholder="{{'CONTRACT_NUMBER' | translate }}"></span>
                                     </th>
                                     <th scope="col">{{'CONTRACT_STATUS' | translate }}
-                                        <span sortable-column="state"></span>
-                                        <span filterable-column="state" filter-type="text"
+                                        <span sortable-column="etatContrat"></span>
+                                        <span filterable-column="etatContrat" filter-type="text"
                                               filter-placeholder="{{'CONTRACT_STATUS' | translate }}"></span>
                                     </th>
+                                    <th scope="col">{{'SUBSCRIPTION_DATE' | translate }}
+                                        <span sortable-column="dateEffetAbonnement"></span>
+                                        <span filterable-column="dateEffetAbonnement" filter-type="date"
+                                              filter-placeholder="{{'SUBSCRIPTION_DATE' | translate }}"></span>
+                                    </th>
+                                    <th scope="col">{{'SUBSCRIPTION_END_DATE' | translate }}
+                                        <span sortable-column="dateFinAbonnement"></span>
+                                        <span filterable-column="dateFinAbonnement" filter-type="text"
+                                              filter-placeholder="{{'SUBSCRIPTION_END_DATE' | translate }}"></span>
+                                    </th>
                                     <th scope="col">{{'ADDRESS' | translate }}
-                                        <span sortable-column="address"></span>
-                                        <span filterable-column="address" filter-type="text"
+                                        <span sortable-column="adresseClientPayeur"></span>
+                                        <span filterable-column="adresseClientPayeur" filter-type="text"
                                               filter-placeholder="{{'ADDRESS' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'LAST_CONSUMPTION' | translate }}
-                                        <span sortable-column="lastConsumption"></span>
-                                        <span filterable-column="lastConsumption" filter-type="text"
-                                              filter-placeholder="{{'LAST_CONSUMPTION' | translate }}"></span>
+                                    <th scope="col">{{'RATE' | translate }}
+                                        <span sortable-column="tariff"></span>
+                                        <span filterable-column="tariff" filter-type="text"
+                                              filter-placeholder="{{'RATE' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'LAST_INVOICE' | translate }}
-                                        <span sortable-column="toBePayed"></span>
-                                        <span filterable-column="toBePayed" filter-type="text"
-                                              filter-placeholder="{{'LAST_INVOICE' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'BILL_TO_PAY' | translate }}
-                                        <span sortable-column="nextBill"></span>
-                                        <span filterable-column="nextBill" filter-type="text"
-                                              filter-placeholder="{{'BILL_TO_PAY' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'HISTORICAL_CONSUMPTION' | translate }}
-                                        <span sortable-column="createdAt"></span>
-                                        <span filterable-column="createdAt" filter-type="text"
-                                              filter-placeholder="{{'HISTORICAL_CONSUMPTION' | translate }}"></span>
-                                    </th>
+                                    <th scope="col">{{'MORE_DETAILS' | translate }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <app-data-not-available
-                                        *ngIf="!subscriptions || subscriptions.length == 0; else dataAvailable"
+                                        *ngIf="!contracts || contracts.length == 0; else dataAvailable"
                                         [colSpan]="7"></app-data-not-available>
                                 <ng-template #dataAvailable>
-                                    <tr *ngFor="let subscription of subscriptions" class="text-center"
-                                        [ngClass]="subscription.type === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
+                                    <tr *ngFor="let contract of contracts" class="text-center"
+                                        [ngClass]="contract.typeContrat === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
                                         <td style="cursor: pointer;"
-                                            (click)="openDetailSubscription(detailSubscription, subscription.id)">
-                                            <i [ngClass]="subscription.type === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i>
+                                            (click)="openContractDetails(detailSubscription, contract.id)">
+                                            <i [ngClass]="contract.typeContrat === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i>
                                             &nbsp;
-                                            <b>{{subscription.police}}</b>
+                                            <b>{{contract.id}}</b>
                                         </td>
-                                        <td>{{subscription.state}}</td>
-                                        <td>{{subscription.address}}</td>
-                                        <td>{{subscription.lastConsumption}}</td>
-                                        <td>{{subscription.toBePayed}}</td>
-                                        <td style="cursor: pointer;" (click)="showBills(subscription.police)">
-                                            <b>{{subscription.nextBill}}</b>
-                                        </td>
+                                        <td>{{contract.etatContrat}}</td>
+                                        <td>{{contract.dateEffetAbonnement}}</td>
+                                        <td>{{contract.dateFinAbonnement}}</td>
+                                        <td>{{contract.adresseClientPayeur}}</td>
+                                        <td>{{contract.tariff}}</td>
                                         <td>
-                                            <i class="fa fa-history" (click)="openHistory(historyDetail)"></i>
+                                            <i class="fa fa-list-alt cursor-pointer pull-left"
+                                               (click)="getAllBillsByContractId(contract.id)"></i>
+                                            <i class="fa fa-history cursor-pointer pull-right"
+                                               (click)="getHistoryConsumptions(historyDetail, contract.id)"></i>
                                         </td>
                                     </tr>
                                 </ng-template>
                                 </tbody>
                             </table>
-                            <app-pagination [disabled]="false"
-                                            [numberOfItems]="numberOfItems"
-                                            [itemsPerPage]="itemsPerPage"
-                                            [totalItems]="totalElements"
-                                            [totalPages]="totalPages"
-                                            (onpageChanged)="pageChanged($event)"></app-pagination>
                         </div>
+                        <app-pagination [disabled]="false"
+                                        [numberOfItems]="numberOfItems"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalElements"
+                                        [totalPages]="totalPages"
+                                        (onpageChanged)="pageChanged($event)"></app-pagination>
+                        <!--
                         <div class="offset-6">
                             <ng-template #emptyTD>
                                 <td>0.00</td>
@@ -128,13 +125,13 @@
                                 <tbody>
                                 <tr>
                                     <th class="table-active" scope="row" colspan="2">
-                                      {{'CREDIT_BALANCE_EXCLUDING_PARTICIPATION' | translate }}
+                                        {{'CREDIT_BALANCE_EXCLUDING_PARTICIPATION' | translate }}
                                     </th>
                                     <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurH}}</td>
                                 </tr>
                                 <tr>
                                     <th class="table-active" scope="row" colspan="2">
-                                      {{'CREDIT_BALANCE_PARTICIPATION' | translate }}
+                                        {{'CREDIT_BALANCE_PARTICIPATION' | translate }}
 
                                     </th>
                                     <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurP}}</td>
@@ -146,37 +143,34 @@
                                 </tbody>
                             </table>
                         </div>
+                        -->
                         <div class="table-responsive" *ngIf="bills">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Nº {{'BILL' | translate }}</th>
-                                    <th scope="col">N° {{'DEADLINES' | translate }}</th>
-                                    <th scope="col">N° {{'POLICE' | translate }}</th>
-                                    <th scope="col">{{'DEADLINE' | translate }}</th>
-                                    <th scope="col">{{'TYPE' | translate }}</th>
-                                    <th scope="col">{{'AMOUNT' | translate }}</th>
+                                    <th scope="col">{{'Nº Contrat' | translate }}</th>
+                                    <th scope="col">{{'Solde' | translate }}</th>
+                                    <th scope="col">{{'Sodle exigible' | translate }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let bill of bills">
-                                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'eau'"
+                                    <td *ngIf="bill.subscriptionType === 'eau'"
                                         (click)="openBillDetail(waterBillDetails, bill.numBill)">
-                                        <b>{{bill.numBill}}</b>
+                                        <b class="cursor-pointer">{{bill.numBill}}</b>
                                     </td>
-                                    <td style="cursor: pointer;" *ngIf="bill.subscriptionType === 'electricite'"
+                                    <td *ngIf="bill.subscriptionType === 'electricite'"
                                         (click)="openBillDetail(electricityBillDetails, bill.numBill)">
-                                        <b>{{bill.numBill}}</b>
+                                        <b class="cursor-pointer">{{bill.numBill}}</b>
                                     </td>
-                                    <td>{{bill.dueNumber}}</td>
-                                    <td>{{bill.police}}</td>
-                                    <td>{{bill.dueDate}}</td>
-                                    <td>{{bill.type}}</td>
-                                    <td>{{bill.amount}}</td>
+                                    <td>{{bill.numeroAbt}}</td>
+                                    <td>{{bill.solde}}</td>
+                                    <td>{{bill.soldeExigible}}</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <a class="btn btn btn-outline-primary pull-right" href="/account/unpaid">{{'PAY' | translate }}</a>
+                            <a class="btn btn btn-outline-primary pull-right" href="/account/unpaid">{{'PAY' | translate
+                                }}</a>
                         </div>
                     </div>
                 </div>
@@ -188,118 +182,151 @@
 
 <ng-template #detailSubscription>
     <div class="modal-header modal-radem">
-        <h4 class="modal-title pull-left">Détails contrat d'{{subscription[0]?.type}} N°:
-            {{subscription[0]?.police}}</h4>
+        <h4 class="modal-title pull-left">Détails de contrat N°: {{contract.id}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <div class="card">
-            <div class="card-header"
-                 [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
-                <h4>
-                    <i class="fa fa-info-circle"></i>{{'INFORMATIONS' | translate }}
-                </h4>
-            </div>
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <p>
-                                <b>{{'ADDRESS_OF_THE_CONTRATCT' | translate }} : </b>{{subscription[0]?.address}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <p>
-                                <b>{{'STATUS' | translate }} : </b>{{subscription[0]?.state}}</p>
-                        </div>
-                        <div class="col-4">
-                            <p>
-                                <b>{{'SUBSCRIPTION_DATE' | translate }} : </b>{{subscription[0]?.subscriptionDate}}</p>
-                        </div>
-                        <div class="col-4">
-                            <p>
-                                <b>{{'SUBSCRIPTION_DATE' | translate }} : </b>{{subscription[0]?.deposit}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <p>
-                                <b>{{'RATE' | translate }} : </b>{{subscription[0]?.cost}}</p>
-                        </div>
-                        <div class="col-4">
-                            <p>
-                                <b>{{'COUNTER_GAUGE' | translate }} : </b>{{subscription[0]?.calibre}}</p>
-                        </div>
-                        <div class="col-4">
-                            <p>
-                                <b>{{'PAYMENT_METHOD' | translate }} : </b>{{subscription[0]?.paimentMethod}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+        <tabset>
+            <tab heading="Informations">
                 <div class="card">
                     <div class="card-header"
-                         [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
+                         [ngClass]="contract?.typeContrat === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
                         <h4>
-                            <i class="fa fa-tachometer"></i>{{'LAST_INDEX' | translate }}
+                            <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>N° contrat : </b> {{contract?.id}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>Solde total: </b>
+                                        <span class="text-muted">{{solde?.soldetot}}</span>
+                                    </p>
 
-                            <table>
-                                <tr>
-                                    <th>{{'COUNTER_NUMBER' | translate }} :</th>
-                                    <td>{{subscription[0]?.lastIndex.meterNumber}}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{'DATE_OF_REPORTS' | translate }} :</th>
-                                    <td>{{subscription[0]?.lastIndex.date}}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{'INDEX' | translate }} :</th>
-                                    <td>{{subscription[0]?.lastIndex.index}}</td>
-                                </tr>
-                            </table>
+                                    <p>
+                                        <b>Solde exigible : </b>
+                                        <span class="text-muted">{{solde?.soldeExigible}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>Catégorie : </b>
+                                        <span class="text-muted">{{contract?.libelleCategorieAbonnement}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Payeur : </b>{{contract?.nomClientPayeur + ' ' +
+                                        contract?.prenomClientPayeur}}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>Titulaire : </b>{{contract?.nomClientTitulaire + ' ' +
+                                        contract?.prenomClientTitulaire}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Adresse: </b> {{contract?.adresseClientPayeur}}</p>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'STATUS' | translate }} : </b>{{contract?.etatContrat}}</p>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Date de création d'abonnement : </b>{{contract?.dateCreationAbonnement}}</p>
+                                </div>
+                                <div class="col-md-6" *ngIf="contract?.dateFinAbonnement">
+                                    <p><b>Date de fin d'abonnement : </b>{{contract?.dateFinAbonnement}}</p>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="contract?.dateEffetAbonnement">
+                                <div class="col-md-6">
+                                    <p><b>Date d'effet d'abonnement : </b>{{contract?.dateEffetAbonnement}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><b>{{'RATE' | translate }} : </b>{{contract?.tariff}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
+            </tab>
+            <tab heading="Dossier compteur">
                 <div class="card">
                     <div class="card-header"
                          [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
                         <h4>
-                            <i class="fa fa-file-text"></i> {{'LAST_INVOICE' | translate }}
+                            <i class="fa fa-tachometer"></i>&nbsp;Dossier compteur
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <table>
-                                <tr>
-                                    <th>{{'DATE' | translate }}:</th>
-                                    <td>{{subscription[0]?.lastBill.date}}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{'AMOUNT' | translate }} :</th>
-                                    <td>{{subscription[0]?.lastBill.amount}}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{'CONSUMPTION' | translate }} :</th>
-                                    <td>{{subscription[0]?.lastBill.consumption}}</td>
-                                </tr>
-                            </table>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <img src="assets/images/compteur.png" alt="Compteur" style="width: 80%">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mt-1">
+                                        <table>
+                                            <tr>
+                                                <th>N° physique :</th>
+                                                <td>{{counter?.numeroPhysiqueCompteur}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>État :</th>
+                                                <td>{{counter?.codeEtatCompteur}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Coefficient :</th>
+                                                <td>{{counter?.diametreCompteur}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Ampérage :</th>
+                                                <td>{{counter?.libelleReglageDisjoncteur}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre des roues :</th>
+                                                <td>{{counter?.diametreCompteur}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre de cadran :</th>
+                                                <td>{{counter?.diametreCompteur}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Date de dépose :</th>
+                                                <td>{{counter?.datePoseCompteur}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </tab>
+        </tabset>
     </div>
 </ng-template>
 
@@ -472,12 +499,12 @@
             <table class="table table-responsive">
                 <thead class="table-dark">
                 <tr>
-                  <th scope="row">{{'LABEL' | translate }}</th>
-                  <th scope="col">{{'UNIT_PRICE' | translate }}</th>
-                  <th scope="col">{{'QUANTITY' | translate }}</th>
-                  <th scope="col">{{'AMOUNT_HT' | translate }}</th>
-                  <th scope="col">{{'VAT_RATE' | translate }}</th>
-                  <th scope="col">{{'VAT_AMOUNT' | translate }}</th>
+                    <th scope="row">{{'LABEL' | translate }}</th>
+                    <th scope="col">{{'UNIT_PRICE' | translate }}</th>
+                    <th scope="col">{{'QUANTITY' | translate }}</th>
+                    <th scope="col">{{'AMOUNT_HT' | translate }}</th>
+                    <th scope="col">{{'VAT_RATE' | translate }}</th>
+                    <th scope="col">{{'VAT_AMOUNT' | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -486,7 +513,7 @@
                 </tr>
                 <tr>
                     <th scope="row">{{'MAINTENANCE' | translate }}
-                      <br>{{'EMBRANCHMENT' | translate }}
+                        <br>{{'EMBRANCHMENT' | translate }}
                     </th>
                     <td class=""></td>
                     <td class=""></td>
@@ -496,7 +523,7 @@
                 </tr>
                 <tr>
                     <th scope="row">{{'LOCATION' | translate }}
-                      <br>{{'COUNTER' | translate }}
+                        <br>{{'COUNTER' | translate }}
                     </th>
                     <td class=""></td>
                     <td class=""></td>
@@ -506,7 +533,7 @@
                 </tr>
                 <tr>
                     <th scope="row">{{'MAINTENANCE' | translate }}
-                      <br>{{'COUNTER' | translate }}
+                        <br>{{'COUNTER' | translate }}
                     </th>
                     <td class=""></td>
                     <td class=""></td>
@@ -593,9 +620,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let month of history; let i=index">
-                        <td>{{history[i].month}}</td>
-                        <td>{{history[i].value}}</td>
+                    <tr *ngFor="let histo of history; let i=index">
+                        <td>{{histo.month}}</td>
+                        <td>{{histo.montant}}</td>
                     </tr>
                     </tbody>
                 </table>

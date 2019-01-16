@@ -4,6 +4,12 @@ import {BsModalRef, BsModalService, ModalOptions} from 'ngx-bootstrap';
 import {AdminService} from '../../services/admin.service';
 import {Color} from 'ng2-charts';
 import * as _ from 'underscore';
+import {User} from '../../models/user.model';
+import {AuthHelper} from '../../../core/services/security/auth.helper';
+import * as moment from 'moment';
+import {environment} from '../../../../environments/environment';
+import {ContractModel} from '../../models/contract.model';
+import {CounterModel} from '../../models/counter.model';
 
 
 @Component({
@@ -12,9 +18,15 @@ import * as _ from 'underscore';
     styleUrls: ['./contracts-page.component.scss']
 })
 export class ContractsPageComponent implements OnInit {
+
+    public user: User;
+    public contracts: Array<ContractModel>;
+    public contract: ContractModel;
+    public counter: CounterModel;
+
     months: any;
     values: any;
-    solde: Array<any> = [];
+    solde: any;
     history: any;
     subscriptions;
     subscription: Array<any> = [];
@@ -36,13 +48,19 @@ export class ContractsPageComponent implements OnInit {
     sort: any;
     filter: any;
 
+    pageBills = 1;
+    pageSizeBills = 0;
+    totalElementsBills: number;
+    totalPagesBills: number;
+    numberOfItemsBills: number;
+    itemsPerPageBills: number;
+
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
     public chartType = 'bar';
-    // public chartConsoTitle = 'Moyenne des 12 dernier mois';
-    public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+    public chartLabels: Array<any> = ['Jan', 'Féf', 'Mar', 'Avr', 'May', 'Jun', 'Jui', 'Auo', 'Sep', 'Oct', 'Nov', 'Dec'];
     public chartDatasets: Array<any> = [
-        {data: [65, 59, 80, 81, 56, 70, 40, 30, 20, 15, 68], label: '2017'},
-        {data: [28, 48, 40, 19, 86, 27, 90, 60, 25, 15, 80], label: '2018'}
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: '2017'},
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: '2018'}
     ];
     public chartOptions: any = {
         title: {
@@ -79,8 +97,11 @@ export class ContractsPageComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (localStorage.getItem(AuthHelper.USER_ID)) {
+            this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+            this.user.clientNo = '0012566'; // TODO to remove after
+        }
         this.getSubscriptions();
-        this.getSoldeCrediteur();
     }
 
     onSorted(sort: any): void {
@@ -94,28 +115,49 @@ export class ContractsPageComponent implements OnInit {
     }
 
     getSubscriptions() {
-        this.contractsServices.getSubscriptions(this.page, this.pageSize, this.filter, this.sort).subscribe(response => {
-            this.subscriptions = response;
-            /*
-            this.subscriptions = response.data.content;
-            this.totalElements = response.data.totalElements;
-            this.totalPages = response.data.totalPages;
-            this.itemsPerPage = response.data.size;
-            this.numberOfItems = response.data.numberOfElements;
-            */
-        }, err => {
-            console.log(err);
-        });
+        this.contractsServices.getPageableContracts(this.user.clientNo, this.page, this.pageSize, this.filter, this.sort)
+            .subscribe(response => {
+                _.each(response.data['content'], (contract: ContractModel) => {
+                    contract.dateEffetAbonnement =
+                        moment(new Date(contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
+                    contract.dateFinAbonnement =
+                        moment(new Date(contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
+                });
+                this.contracts = response.data['content'];
+                this.totalElements = response.data['totalElements'];
+                this.totalPages = response.data['totalPages'];
+                this.itemsPerPage = response.data['size'];
+                this.numberOfItems = response.data['numberOfElements'];
+            }, error => {
+                console.log(error);
+            });
     }
 
-    getSoldeCrediteur() {
-        this.soldeService.getSoldeCrediteur().subscribe(response => {
-            this.solde = response;
-        }, err => {
-            console.log(err);
-        });
+    getSoldeByNumContract(id) {
+        this.contractsServices.getSoldeByNumContract(id).subscribe(response => {
+            debugger;
+
+        }, error => console.log(error));
     }
 
+    getHistoryConsumptions(template: TemplateRef<any>, id: string) {
+        this.contractsServices.getHistoryConsumptions(id).subscribe(response => {
+            this.history = response.data;
+            _.each(this.history, (histo, i) => {
+                histo.month = this.chartLabels[parseFloat(histo.periode) - 1];
+                histo.montant = parseFloat(histo.soldeTotal) + parseFloat(histo.soldeExigible);
+                const index = parseFloat(histo.periode) - 1;
+                debugger;
+                if (index <= 11) {
+                    this.chartDatasets[0].data[index] = histo.montant;
+                } else {
+                    this.chartDatasets[1].data[index] = histo.montant;
+                }
+            });
+            this.modalRef = this.modalService.show(template, this.modalOptions);
+            console.log(this.history);
+        }, error => console.log(error));
+    }
 
     pageChanged(page: number): void {
         this.page = page;
@@ -129,26 +171,37 @@ export class ContractsPageComponent implements OnInit {
         this.getSubscriptions();
     }
 
-    openHistory(template: TemplateRef<any>) {
-        this.soldeService.getConsumptionHistory().subscribe(response => {
-            this.modalRef = this.modalService.show(template, this.modalOptions);
-            this.history = response;
-            console.log(this.history);
+    openContractDetails(template: TemplateRef<any>, id: string) {
+        this.contractsServices.getDetailsContract(id).subscribe(responseContract => {
+            this.contractsServices.getCounterByContractId(id).subscribe(responseCounter => {
+                this.contractsServices.getSoldeByNumContract(id).subscribe(responseSolde => {
+                    this.contract = responseContract.data;
+                    this.contract.dateCreationAbonnement = moment(new Date(this.contract.dateCreationAbonnement)).format(environment.defaultDateFormatNoTime);
+                    this.contract.dateEffetAbonnement = moment(new Date(this.contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
+                    this.contract.dateFinAbonnement = moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
+
+                    this.counter = responseCounter.data;
+                    this.counter.datePoseCompteur = moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
+
+                    this.solde = {
+                        soldeExigible: responseSolde.data['soldeExigible'],
+                        soldetot: responseSolde.data['soldetot']
+                    };
+
+                    this.modalRef = this.modalService.show(template, this.config);
+                }, error => console.log(error));
+            }, err => console.log(err));
+        }, err => console.log(err));
+    }
+
+    getAllBillsByContractId(id) {
+        this.contractsServices.getUnpaidInvoicesByContractId(id, this.pageBills, this.pageSizeBills).subscribe(response => {
+            this.bills = response.data['content'];
+            this.totalElementsBills = response.data['totalElements'];
+            this.totalPagesBills = response.data['totalPages'];
+            this.itemsPerPageBills = response.data['size'];
+            this.numberOfItemsBills = response.data['numberOfElements'];
         })
-    }
-
-    openDetailSubscription(template: TemplateRef<any>, subscriptionId: number) {
-        this.contractsServices.getSubscription(subscriptionId).subscribe(response => {
-            this.modalRef = this.modalService.show(template, this.config);
-            this.subscription = response;
-        });
-    }
-
-    showBills(police: string): void {
-        this.contractsServices.getBills(police).subscribe(response => {
-            this.bills = response;
-        }, err => {
-        });
     }
 
     openBillDetail(template: TemplateRef<any>, numBill: string) {

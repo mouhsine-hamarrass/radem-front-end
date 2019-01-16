@@ -267,6 +267,7 @@
   "BILL_TO_PAY":"Facture à payer",
   "HISTORICAL_CONSUMPTION":"Historique de consommation",
   "SUBSCRIPTION_DATE":"Date d'abonnement",
+  "SUBSCRIPTION_END_DATE":"Date de fin d'abonnement",
   "RATE":"Tarif",
   "COUNTER_GAUGE":"Calibre de compteur",
   "PAYMENT_METHOD":"Mode de paiement",
@@ -276,6 +277,7 @@
   "INDEX":"Index",
   "LAST_INVOICE":"Dernière facture",
   "INVOICE_DETAILS":"Détails de la facture",
+  "MORE_DETAILS":"Détails",
   "CONTRACT_NUMBER":"Numéro de contrat",
   "INVOICE_NUMBER":"Numéro de facture",
   "INVOICE_AMOUNT":"Montant de facture",
@@ -372,8 +374,6 @@
   "CLAIM_SUCCESSFULLY_ADDED":"Réclamation ajoutée avec succes",
   "CHECK_YOUR_INBOX":"Vérifier votre boite de réception !",
   "SEE_YOU_SOON":"À bientôt"
-
-
 
 
 
