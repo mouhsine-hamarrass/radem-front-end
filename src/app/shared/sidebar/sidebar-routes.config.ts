@@ -138,7 +138,7 @@ export const ROUTES: RouteInfo[] = [
             {
                 path: '/admin/dynamic',
                 title: 'Contenu dynamique',
-                icon: 'icon-files',
+                icon: 'icon-list',
                 clazz: 'nav-item',
                 badge: '',
                 badgeClass: '',

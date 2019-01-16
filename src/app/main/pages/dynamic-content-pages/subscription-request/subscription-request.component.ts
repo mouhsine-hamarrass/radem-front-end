@@ -15,7 +15,7 @@ export class SubscriptionRequestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('dem_abt').subscribe(
             response => {
                 this.dynamic = response.data;
             },

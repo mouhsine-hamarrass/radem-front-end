@@ -15,7 +15,7 @@ export class ConsumptionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('ma_conso').subscribe(
             response => {
                 this.dynamic = response.data;
             },

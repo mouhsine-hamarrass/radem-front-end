@@ -15,7 +15,7 @@ export class ContractComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('mes_cntr').subscribe(
             response => {
                 this.dynamic = response.data;
             },

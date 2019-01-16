@@ -59,10 +59,10 @@
                                             <span>{{alert.instructions}}</span>
                                         </a>
                                     </ng-template>
-                                    <div class="dropdown-divider"></div>
                                 </div>
+                                <div class="dropdown-divider"></div>
                                 <div>
-                                    <span class="dropdown-item">Afficher toutes les notifications.</span>
+                                    <span class="dropdown-item"><a routerLink="/alerts">Afficher toutes les notifications.</a></span>
                                 </div>
                             </div>
                             <ng-template #noNotifications>
@@ -86,10 +86,6 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" routerLink="/admin">
                                 <i class="ft-settings"></i> Administration
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" routerLink="/alerts">
-                                <i class="ft-bell"></i> Notifications
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" (click)="logout()">

@@ -15,7 +15,7 @@ export class RegulationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('mes_reg').subscribe(
             response => {
                 this.dynamic = response.data;
             },
