@@ -15,7 +15,7 @@ export class AutoReportComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('auto_releve').subscribe(
             response => {
                 this.dynamic = response.data;
             },

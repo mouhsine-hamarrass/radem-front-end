@@ -15,7 +15,7 @@ export class UnpaidComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('mes_imp').subscribe(
             response => {
                 this.dynamic = response.data;
             },

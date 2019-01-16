@@ -15,7 +15,7 @@ export class ClaimRequestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('rec').subscribe(
             response => {
                 this.dynamic = response.data;
             },

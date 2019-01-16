@@ -15,7 +15,7 @@ export class CancellationRequestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.adminServices.getDynamicContent('').subscribe(
+        this.adminServices.getDynamicContent('dem_res').subscribe(
             response => {
                 this.dynamic = response.data;
             },
