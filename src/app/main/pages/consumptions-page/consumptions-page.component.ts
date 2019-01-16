@@ -7,6 +7,8 @@ import {ContractsService} from '../../services/contracts.service';
 import {UtilsService} from '../../services/utils.service';
 import {FileModel} from '../../../core/models/file.model';
 import {ServicesService} from '../../services/services.service';
+import {User} from '../../models/user.model';
+import {AuthHelper} from '../../../core/services/security/auth.helper';
 
 @Component({
     selector: 'app-consumption-page',
@@ -14,24 +16,33 @@ import {ServicesService} from '../../services/services.service';
     styleUrls: ['./consumptions-page.component.scss']
 })
 export class ConsumptionsPageComponent implements OnInit {
+    public user: User;
+    userContracts: any;
     contracts: any;
-    minMaxForm: FormGroup;
     historyForm: FormGroup;
     releves: any;
     nextReleve: any;
     contractNumber: any;
     consumptions: any;
-    minMax;
     meters: any;
 
-    page = 1;
-    pageSize = 0;
-    totalElements: number;
-    totalPages: number;
-    numberOfItems: number;
-    itemsPerPage: number;
-    sort: any;
-    filter: any;
+    pageContract = 1;
+    pageSizeContract = 0;
+    totalElementsContract: number;
+    numberOfItemsContract: number;
+    totalPagesContract: number;
+    itemsPerPageContract: number;
+    sortContract: any;
+    filterContract: any;
+
+    pageConsumption = 1;
+    pageSizeConsumption = 0;
+    numberOfItemsConsumption: number;
+    totalElementsConsumption: number;
+    totalPagesConsumption: number;
+    itemsPerPageConsumption: number;
+    sortConsumption: any;
+    filterConsumption: any;
 
     constructor(
         private contractServices: ContractsService,
@@ -39,11 +50,6 @@ export class ConsumptionsPageComponent implements OnInit {
         private utilsService: UtilsService,
         private formBuilder: FormBuilder,
         private servicesService: ServicesService) {
-        this.minMaxForm = this.formBuilder.group({
-            contract: ['', Validators.required],
-            startDate: ['', Validators.required],
-            endDate: ['', Validators.required]
-        });
         this.historyForm = this.formBuilder.group({
             contract: ['', Validators.required],
             startDate: ['', Validators.required],
@@ -52,94 +58,122 @@ export class ConsumptionsPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.minMax = [{'min': '0', 'max': '0'}];
-        this.adminService.getContracts().subscribe(response => {
-            this.contracts = response;
-        });
+        if (localStorage.getItem(AuthHelper.USER_ID)) {
+            this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+            this.user.clientNo = '0012566'; // TODO to remove after
+        }
+        this.getContracts();
+        this.getActiveContracts();
+    }
 
-        this.adminService.getReleves().subscribe(response => {
-            this.releves = response;
+    getContracts() {
+        this.adminService.getAllContractByNumClient(this.user.clientNo).subscribe(response => {debugger;
+            this.userContracts = response.data;
         });
+    }
 
-        this.adminService.getNextReleve().subscribe(response => {
-            this.nextReleve = response[0].date;
-        });
-
+    getCounter() {
         this.adminService.getCompteur().subscribe(response => {
-            this.meters = response;
+            this.meters = response.data;
         })
     }
 
-    getConsomationList() {
-        /*
-        this.adminService.getListModels(this.page, this.pageSize, this.filter, this.sort).subscribe(response => {
-            this.modeles = response.data.content;
-            this.totalElements = response.data.totalElements;
-            this.totalPages = response.data.totalPages;
-            this.itemsPerPage = response.data.size;
-            this.numberOfItems = response.data.numberOfElements;
-        }, err => {
-        });
-        */
-    }
-
-    onSorted(sort: any): void {
-        this.sort = sort;
-        this.getConsomationList();
-    }
-
-    onFiltred(filter: any): void {
-        this.filter = filter;
-        this.getConsomationList();
-    }
-
-    pageChanged(pageNo: number) {
-        this.page = pageNo;
-        this.getConsomationList();
-    }
-
-    filterConsomation(pageSize: number) {
-        this.pageSize = pageSize;
-        this.itemsPerPage = pageSize;
-        this.page = 1;
-        this.getConsomationList();
+    getActiveContracts() {
+        this.adminService.getPageableActiveContracts(this.user.clientNo,
+            this.pageContract,
+            this.pageSizeContract,
+            this.filterContract,
+            this.sortContract)
+            .subscribe(response => {
+                this.contracts = response.data.content;
+                this.totalElementsContract = response.data.totalElements;
+                this.totalPagesContract = response.data.totalPages;
+                this.itemsPerPageContract = response.data.size;
+                this.numberOfItemsContract = response.data.numberOfElements;
+                console.log(this.contracts);
+            }, err => console.log(err));
     }
 
     getConsumptionHistory() {
-        this.adminService.getConsumptions(this.contractNumber).subscribe(response => {
-            this.consumptions = response;
-        })
+        this.adminService.getPageableHistoryConsumptions(this.contractNumber,
+            this.pageConsumption,
+            this.pageSizeConsumption,
+            this.filterConsumption,
+            this.sortConsumption)
+            .subscribe(response => {debugger;
+                this.consumptions = response.data.content;
+                this.totalElementsConsumption = response.data.totalElements;
+                this.totalPagesConsumption = response.data.totalPages;
+                this.itemsPerPageConsumption = response.data.size;
+                this.numberOfItemsConsumption = response.data.numberOfElements;
+                console.log(this.consumptions);
+            }, err => console.log(err));
     }
+
+    onSortedContract(sort: any): void {
+        this.sortContract = sort;
+        this.getActiveContracts();
+    }
+
+    onFiltredContract(filter: any): void {
+        this.filterContract = filter;
+        this.getActiveContracts();
+    }
+
+    pageChangedContract(pageNo: number) {
+        this.pageContract = pageNo;
+        this.getActiveContracts();
+    }
+
+    pageFilterContract(pageSize: number): void {
+        this.pageSizeContract = pageSize;
+        this.itemsPerPageContract = pageSize;
+        this.pageContract = 1;
+        this.getActiveContracts();
+    }
+
+
+    onSortedConsumption(sort: any): void {
+        this.sortConsumption = sort;
+        this.getConsumptionHistory();
+    }
+
+    onFiltredConsumption(filter: any): void {
+        this.filterConsumption = filter;
+        this.getConsumptionHistory();
+    }
+
+    pageChangedConsumption(pageNo: number) {
+        this.pageConsumption = pageNo;
+        this.getConsumptionHistory();
+    }
+
+    pageFilterConsumption(pageSize: number): void {
+        this.pageSizeConsumption = pageSize;
+        this.itemsPerPageConsumption = pageSize;
+        this.pageConsumption = 1;
+        this.getConsumptionHistory();
+    }
+
 
     getConsumptionReport() {
         this.utilsService.getConsumptionReport().subscribe(response => {
         })
     }
 
-    getMinMax(contractId: any) {
-        this.contractServices
-            .getMinMaxConsumption(contractId)
-            .subscribe(response => {
-                this.minMax[0].min = response[0].min;
-                this.minMax[0].max = response[0].max;
-            }, err => {
-            });
-    }
-
     setContract(contractNumber: any) {
         this.contractNumber = contractNumber;
+        this.getConsumptionHistory();
     }
 
     downloadXlsConsumptions() {
-        /*
         this.servicesService.downloadXlsConsumptions().subscribe((response) => {
-          if (response && response['body']) {
-            const file = new FileModel('mes-consommations.xls', CommonUtil._arrayBufferToBase64(response['body']));
+            if (response && response['body']) {
+                const file = new FileModel('mes-consommations.xls', CommonUtil._arrayBufferToBase64(response['body']));
 
-            CommonUtil.downloadFile(file);
-          }
+                CommonUtil.downloadFile(file);
+            }
         });
-        */
     }
 
     downloadPdfConsumptions() {
@@ -151,6 +185,4 @@ export class ConsumptionsPageComponent implements OnInit {
             }
         });
     }
-
-
 }

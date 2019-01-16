@@ -6,7 +6,7 @@ import {ContractsPageComponent} from './contracts-page.component';
 import {ContractsService} from '../../services/contracts.service';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {FormsModule} from '@angular/forms';
-import {BsDropdownModule} from 'ngx-bootstrap';
+import {BsDropdownModule, TabsModule} from 'ngx-bootstrap';
 import {SharedModule} from '../../../shared/shared.module';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createTranslateLoader} from '../../../app.translate.factory';
@@ -17,6 +17,7 @@ import {HttpClient} from '@angular/common/http';
         CommonModule,
         FormsModule,
         BsDropdownModule,
+        TabsModule,
         ContractsPageRoutingModule,
         ChartsModule,
         ComponentsModule,

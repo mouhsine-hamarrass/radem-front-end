@@ -5,6 +5,9 @@ import {UtilsService} from '../../services/utils.service';
 import {FileModel} from '../../../core/models/file.model';
 import {CommonUtil} from '../../../core/helpers/common.util';
 import {ServicesService} from '../../services/services.service';
+import {ContractsService} from '../../services/contracts.service';
+import {User} from '../../models/user.model';
+import {AuthHelper} from '../../../core/services/security/auth.helper';
 
 @Component({
     selector: 'app-settlements',
@@ -12,6 +15,7 @@ import {ServicesService} from '../../services/services.service';
     styleUrls: ['./settlements-page.component.scss']
 })
 export class SettlementsPageComponent implements OnInit {
+    public user: User;
     public settlements: any;
     public contracts: any;
     public contractId: any;
@@ -27,7 +31,7 @@ export class SettlementsPageComponent implements OnInit {
     sort: any;
     filter: any;
 
-    constructor(private adminService: AdminService,
+    constructor(private adminService: ContractsService,
                 private formBuilder: FormBuilder,
                 private utilsService: UtilsService,
                 private servicesService: ServicesService) {
@@ -51,6 +55,10 @@ export class SettlementsPageComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (localStorage.getItem(AuthHelper.USER_ID)) {
+            this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+            this.user.clientNo = '0012566'; // TODO to remove after
+        }
         this.getContacts();
     }
 
@@ -65,13 +73,13 @@ export class SettlementsPageComponent implements OnInit {
     }
 
     getContacts() {
-        this.adminService.getPageableContracts(this.page, this.pageSize, this.filter, this.sort)
+        this.adminService.getPageableContracts(this.user.clientNo, this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
-                this.contracts = response.data.content;
-                this.totalElements = response.data.totalElements;
-                this.totalPages = response.data.totalPages;
-                this.itemsPerPage = response.data.size;
-                this.numberOfItems = response.data.numberOfElements;
+                this.contracts = response.data['content'];
+                this.totalElements = response.data['totalElements'];
+                this.totalPages = response.data['totalPages'];
+                this.itemsPerPage = response.data['size'];
+                this.numberOfItems = response.data['numberOfElements'];
             }, err => {
             });
     }
@@ -89,9 +97,11 @@ export class SettlementsPageComponent implements OnInit {
     }
 
     recherche() {
+        /*
         this.adminService.getSettlementsByContract(this.contractId).subscribe(response => {
             this.settlements = response;
         })
+        */
     }
 
     setContract(id: any) {
