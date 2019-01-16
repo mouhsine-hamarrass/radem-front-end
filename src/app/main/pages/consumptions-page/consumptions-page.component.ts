@@ -100,7 +100,7 @@ export class ConsumptionsPageComponent implements OnInit {
             this.pageSizeConsumption,
             this.filterConsumption,
             this.sortConsumption)
-            .subscribe(response => {debugger;
+            .subscribe(response => {
                 this.consumptions = response.data.content;
                 this.totalElementsConsumption = response.data.totalElements;
                 this.totalPagesConsumption = response.data.totalPages;
@@ -163,7 +163,7 @@ export class ConsumptionsPageComponent implements OnInit {
 
     setContract(contractNumber: any) {
         this.contractNumber = contractNumber;
-        this.getConsumptionHistory();
+        // this.getConsumptionHistory();
     }
 
     downloadXlsConsumptions() {

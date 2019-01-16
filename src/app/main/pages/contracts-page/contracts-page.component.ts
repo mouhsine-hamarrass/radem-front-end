@@ -135,8 +135,6 @@ export class ContractsPageComponent implements OnInit {
 
     getSoldeByNumContract(id) {
         this.contractsServices.getSoldeByNumContract(id).subscribe(response => {
-            debugger;
-
         }, error => console.log(error));
     }
 
@@ -144,15 +142,12 @@ export class ContractsPageComponent implements OnInit {
         this.contractsServices.getHistoryConsumptions(id).subscribe(response => {
             this.history = response.data;
             _.each(this.history, (histo, i) => {
-                histo.month = this.chartLabels[parseFloat(histo.periode) - 1];
-                histo.montant = parseFloat(histo.soldeTotal) + parseFloat(histo.soldeExigible);
-                const index = parseFloat(histo.periode) - 1;
                 debugger;
-                if (index <= 11) {
-                    this.chartDatasets[0].data[index] = histo.montant;
-                } else {
-                    this.chartDatasets[1].data[index] = histo.montant;
-                }
+                _.each(histo.consumptions, (cons, j) => {
+                    this.chartDatasets[i]['data'][j + 1] = cons;
+                    histo.month = this.chartLabels[j + 1];
+                    histo.montant = parseFloat(cons);
+                });
             });
             this.modalRef = this.modalService.show(template, this.modalOptions);
             console.log(this.history);
@@ -176,16 +171,22 @@ export class ContractsPageComponent implements OnInit {
             this.contractsServices.getCounterByContractId(id).subscribe(responseCounter => {
                 this.contractsServices.getSoldeByNumContract(id).subscribe(responseSolde => {
                     this.contract = responseContract.data;
-                    this.contract.dateCreationAbonnement = moment(new Date(this.contract.dateCreationAbonnement)).format(environment.defaultDateFormatNoTime);
-                    this.contract.dateEffetAbonnement = moment(new Date(this.contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
-                    this.contract.dateFinAbonnement = moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
-
-                    this.counter = responseCounter.data;
-                    this.counter.datePoseCompteur = moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
-
+                    if (this.contract) {
+                        this.contract.dateCreationAbonnement =
+                            moment(new Date(this.contract.dateCreationAbonnement)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateEffetAbonnement =
+                            moment(new Date(this.contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateFinAbonnement =
+                            moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
+                    }
+                    if (this.counter) {
+                        this.counter = responseCounter.data;
+                        this.counter.datePoseCompteur =
+                            moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
+                    }
                     this.solde = {
-                        soldeExigible: responseSolde.data['soldeExigible'],
-                        soldetot: responseSolde.data['soldetot']
+                        soldeExigible: responseSolde.data['soldeExigible'] || 0,
+                        soldetot: responseSolde.data['soldetot'] || 0
                     };
 
                     this.modalRef = this.modalService.show(template, this.config);

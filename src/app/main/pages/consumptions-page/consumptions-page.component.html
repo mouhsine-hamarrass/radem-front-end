@@ -37,15 +37,15 @@
                                filterable-table (filtred)="onFiltredContract($event)">
                             <thead>
                             <tr>
-                                <th scope="col" width="100">N° contrat
-                                    <span sortable-column="ref"></span>
-                                    <span filterable-column="ref" filter-type="text"
-                                          filter-placeholder="N° contrat"></span>
+                                <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate}}
+                                    <span sortable-column="numCta"></span>
+                                    <span filterable-column="numCta" filter-type="text"
+                                          filter-placeholder="{{'CONTRACT_NUMBER' | translate}}"></span>
                                 </th>
-                                <th scope="col">Catégorie
-                                    <span sortable-column="type"></span>
-                                    <span filterable-column="type" filter-type="text"
-                                          filter-placeholder="Catégorie"></span>
+                                <th scope="col">{{'CATEGORY' | translate}}
+                                    <span sortable-column="categorieAbonnement"></span>
+                                    <span filterable-column="categorieAbonnement" filter-type="text"
+                                          filter-placeholder="{{'CATEGORY' | translate}}"></span>
                                 </th>
                                 <!--
                                 <th scope="col">Prochaine relève
@@ -54,10 +54,10 @@
                                           filter-placeholder="Prochaine relève"></span>
                                 </th>
                                 -->
-                                <th scope="col">Dernier index
-                                    <span sortable-column="index"></span>
-                                    <span filterable-column="index" filter-type="text"
-                                          filter-placeholder="Dernier index"></span>
+                                <th scope="col">{{'LAST_INDEX' | translate}}
+                                    <span sortable-column="perTrn"></span>
+                                    <span filterable-column="perTrn" filter-type="text"
+                                          filter-placeholder="Dernier index {{'LAST_INDEX' | translate}}"></span>
                                 </th>
                                 <!--
                                 <th scope="col">Dernier paiement
@@ -66,15 +66,15 @@
                                           filter-placeholder="Dernier paiement"></span>
                                 </th>
                                 -->
-                                <th scope="col">Solde
-                                    <span sortable-column="index"></span>
-                                    <span filterable-column="index" filter-type="text"
-                                          filter-placeholder="Solde"></span>
+                                <th scope="col">{{'TOTAL_BALANCE' | translate}}
+                                    <span sortable-column="soldetot"></span>
+                                    <span filterable-column="soldetot" filter-type="text"
+                                          filter-placeholder="{{'TOTAL_BALANCE' | translate}}"></span>
                                 </th>
-                                <th scope="col">Solde exigible
-                                    <span sortable-column="index"></span>
-                                    <span filterable-column="index" filter-type="text"
-                                          filter-placeholder="Solde exigible"></span>
+                                <th scope="col">{{'BALANCE_DUE' | translate}}
+                                    <span sortable-column="soldeExigible"></span>
+                                    <span filterable-column="soldeExigible" filter-type="text"
+                                          filter-placeholder="{{'BALANCE_DUE' | translate}}"></span>
                                 </th>
                             </tr>
                             </thead>
@@ -88,7 +88,7 @@
                                 <td>{{releve.soldeExigible}}</td>
                             </tr>
                             <tr *ngIf="!contracts || contracts.length == 0">
-                                <td [colSpan]="6"> Désolé, aucun résultat n'a été trouvé></td>
+                                <td [colSpan]="6"> > {{'SORRY_NO_DATA_AVAIBELE' | translate}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -109,7 +109,7 @@
                 <div class="heading-elements"></div>
             </div>
             <div class="card-content collapse show">
-                <form [formGroup]="historyForm">
+                <form role="form" [formGroup]="historyForm" novalidate>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
@@ -133,16 +133,28 @@
                             <label class="col-form-label">{{'PERIOD_OF' | translate }} <span class="danger"> *</span>
                                 :</label>
                             <div class="col-auto">
-                                <input formControlName="startDate" type="date" class="form-control">
+                                <input formControlName="startDate" type="date" class="form-control" />
+                                <div class="text-danger position-absolute mb-1"
+                                     *ngIf="!historyForm.controls['startDate'].valid && historyForm.controls['startDate'].touched">
+                                    <div *ngIf="historyForm.controls['startDate'].errors.required">
+                                        {{'FIELD_REQUIRED' | translate}}
+                                    </div>
+                                </div>
                             </div>
                             <label class="col-form-label">{{'AT' | translate }} <span
                                     class="danger">*</span></label>
                             <div class="col-auto">
-                                <input formControlName="endDate" type="date" class="form-control">
+                                <input formControlName="endDate" type="date" class="form-control" />
+                                <div class="text-danger position-absolute mb-1"
+                                     *ngIf="!historyForm.controls['endDate'].valid && historyForm.controls['endDate'].touched">
+                                    <div *ngIf="historyForm.controls['endDate'].errors.required">
+                                        {{'FIELD_REQUIRED' | translate}}
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-auto float-right row">
                                 <button type="button" class="btn btn btn-outline-primary"
-                                        (click)="getConsumptionHistory();">
+                                        (click)="getConsumptionHistory();" [disabled]="historyForm.invalid">
                                     <i class="fa fa-search"></i></button>
                                 &nbsp;
                                 <div class="btn-group" dropdown>
