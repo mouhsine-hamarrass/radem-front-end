@@ -4,7 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://212.83.140.195:8085/api';
+const server = 'http://212.83.140.195:8085/radem-ael-api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
 
@@ -12,7 +12,7 @@ let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 export const environment = {
-  appName: 'RADEMAGENCY',
+  appName: 'RADEM-AEL',
   appLogo: './assets/images/logo.png',
   production: false,
   envName: 'test',
