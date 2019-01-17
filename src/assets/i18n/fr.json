@@ -304,7 +304,7 @@
   "VAT_AMOUNT":"Montant TVA",
   "FIXED_FEES":"Redevances fixes",
   "MAINTENANCE":"Entretien",
-  "Branchement":"EMBRANCHMENT",
+  "EMBRANCHMENT":"Branchement",
   "LOCATION":"Location",
   "COUNTER":"compteur",
   "WATER_CONSUMPTION":"Consommation d'eau",
