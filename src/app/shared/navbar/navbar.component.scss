@@ -32,3 +32,26 @@
 .btn-subscribe:hover{
   background-color: #b33a3a !important;
 }
+
+
+
+
+
+/*
+  Code par Rachid EL KADDOURI
+  -- Responsive Design
+ */
+@media only screen and (max-width: 768px){
+  .btn-subscribe{
+    margin-left:11px;
+  }
+
+  .second-navbar-toggler{
+    padding: 14px !important;
+  }
+
+  .dropdown-menu{
+    position: absolute;
+  }
+
+}

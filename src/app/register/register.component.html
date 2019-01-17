@@ -3,16 +3,10 @@
         <app-navbar></app-navbar>
         <app-second-navbar></app-second-navbar>
         <!--Tooltip Starts-->
-        <div class="content-header back col-12 mb-1 mt-1">
-            <div class="row">
-                <div class="col-md-6 col-12">
-                    <h3 class="content-header-title">{{'REGISTRATION' | translate }}</h3>
-                </div>
-            </div>
-        </div>
+
         <div class="content-body">
             <section>
-                <div id="what-is" class="card mb-0">
+                <div id="what-is" class="mb-0">
                     <div class="card-header">
                         <div class="row card-title">
                             <!-- <h4 class="ml-h4">Inscription</h4>-->
@@ -43,14 +37,14 @@
                                                                id="baseVerticalRight2-tab1" data-toggle="tab"
                                                                aria-controls="tabVerticalRight21"
                                                                href="#tabVerticalRight21" aria-expanded="true">
-                                                                Facture</a>
+                                                              {{'INVOICE' | translate }}</a>
                                                         </li>
                                                         <li class="nav-item">
                                                             <a class="nav-link" (click)="setContr()"
                                                                id="baseVerticalRight2-tab2" data-toggle="tab"
                                                                aria-controls="tabVerticalRight22"
                                                                href="#tabVerticalRight22" aria-expanded="false">
-                                                                Contrat</a>
+                                                              {{'CONTRACT' | translate }}</a>
                                                         </li>
                                                         <li class="nav-item">
                                                             <a class="nav-link" (click)="setRef()"
