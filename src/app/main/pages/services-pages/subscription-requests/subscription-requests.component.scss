@@ -1,10 +1,21 @@
-.btn-new-claim {
+.btn-new-subscription-request {
   border-color: #2c5599 !important;
   background-color: #2c5599!important;
   color: #FFFFFF;
 
 }
-.btn-new-claim:hover{
+.btn-new-subscription-request:hover{
   border-color: #214479 !important;
   background-color: #214479!important;
 }
+
+/*
+  Code par Rachid EL KADDOURI
+  -- Responsive Design
+ */
+@media only screen and (max-width: 768px){
+  .container-btn-new-subscription-request{
+    text-align: left !important;
+  }
+}
+

@@ -8,14 +8,14 @@
 </div>
 <div class="content-body">
     <section class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <div id="what-is" class="mb-0">
                 <div class="card-content collapse show">
                     <div class="card-body">
                         <form role="form" [formGroup]="subscriptionForm"
                               (ngSubmit)="saveRequest(subscriptionForm.value)" novalidate>
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                     <label for="lfname">{{'LASTNAME_AND_FIRSTNAME' | translate }} / {{'SOCIAL_REASON' |
                                         translate }} : </label>
                                     <input type="text" class="form-control" id="lfname"
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                     <label for="profession">{{'PROFESSION' | translate }} / {{'ACTIVITY' | translate }}
                                         : </label>
                                     <input type="text" class="form-control" id="profession"
@@ -35,12 +35,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                     <label for="workplace">{{'WORKPLACE' | translate }} : </label>
                                     <input type="text" class="form-control" id="workplace"
                                            formControlName="workingPlace">
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                     <label for="address_of_the_workplace">{{'ADDRESS_OF_THE_WORKPLACE' | translate }}
                                         : </label>
                                     <input type="text" class="form-control" id="address_of_the_workplace"
@@ -48,20 +48,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <fieldset class="scheduler-border col-12">
+                                <fieldset class="scheduler-border col-lg-6 col-md-12 col-sm-12">
                                     <legend class="scheduler-border">{{'PHONE' | translate }}</legend>
                                     <div class="row">
-                                        <div class="form-group col-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="portable">{{'PORTABLE' | translate }} : </label>
                                             <input type="text" class="form-control" id="portable"
                                                    formControlName="cellphone">
                                         </div>
-                                        <div class="form-group col-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="fixed_at_home">{{'FIXED_AT_HOME' | translate }} : </label>
                                             <input type="text" class="form-control" id="fixed_at_home"
                                                    formControlName="homePhonenumber">
                                         </div>
-                                        <div class="form-group col-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="fixed_office">{{'FIXED_OFFICE' | translate }} : </label>
                                             <input type="text" class="form-control" id="fixed_office"
                                                    formControlName="workPhonenumber">
@@ -70,15 +70,15 @@
                                 </fieldset>
                             </div>
                             <div class="row">
-                                <fieldset class="scheduler-border col-12">
+                                <fieldset class="scheduler-border col-lg-12 col-md-12 col-sm-12">
                                     <legend class="scheduler-border">{{'ADDRESS' | translate }}</legend>
                                     <div class="row">
-                                        <div class="form-group col-sm-2">
+                                        <div class="form-group col-lg-2 col-md-12 col-sm-12">
                                             <label for="n">{{'N°' | translate }} : </label>
                                             <input type="text" class="form-control" id="n"
                                                    formControlName="adressNumber">
                                         </div>
-                                        <div class="form-group col-sm-10">
+                                        <div class="form-group col-lg-10 col-md-12 col-sm-12">
                                             <label for="street">{{'STREET' | translate }} / {{'BOULEVARD' | translate
                                                 }} / {{'AVENUE' | translate }} : </label>
                                             <input type="text" class="form-control" id="street"
@@ -86,24 +86,24 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="building">{{'BUILDING' | translate }} : </label>
                                             <input type="text" class="form-control" id="building"
                                                    formControlName="building">
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="apartment">{{'APARTMENT' | translate }} : </label>
                                             <input type="text" class="form-control" id="apartment"
                                                    formControlName="apartment">
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="floor">{{'FLOOR' | translate }} : </label>
                                             <input type="text" class="form-control" id="floor"
                                                    formControlName="floor">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-12">
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                             <label for="address_supplement">{{'ADDRESS_SUPPLEMENT' | translate }}
                                                 : </label>
                                             <input type="text" class="form-control" id="address_supplement"
@@ -113,7 +113,7 @@
                                 </fieldset>
                             </div>
                             <div class="row">
-                                <fieldset class="scheduler-border col-12">
+                                <fieldset class="scheduler-border col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="subscriptionType"
                                                formControlName="subscriptionType">
@@ -122,18 +122,18 @@
                                     </div>
 
                                     <div *ngIf="subscriptionForm.controls['subscriptionType'].value" class="row">
-                                        <div class="form-group col-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="successor_of">{{'SUCCESSOR_OF' | translate }} : </label>
                                             <input type="text" class="form-control" id="successor_of"
                                                    formControlName="predecessor">
                                         </div>
-                                        <div class="form-group col-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="water_contract">{{'POLICE' | translate }}, {{'OR' | translate }}
                                                 {{'WATER_CONTRACT' | translate }} : </label>
                                             <input type="text" class="form-control" id="water_contract"
                                                    formControlName="oldWaterSubscription">
                                         </div>
-                                        <div class="form-group col-4">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                             <label for="electricity_contract">{{'POLICE' | translate }}, {{'OR' |
                                                 translate }}
                                                 {{'ELECTRICITY_CONTRACT' | translate }}: </label>

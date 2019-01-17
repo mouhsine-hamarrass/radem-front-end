@@ -34,3 +34,35 @@
 .menu-item {
   white-space: nowrap;
 }
+
+.dropdown-menu{
+  color: white!important;
+  top: 40px!important;
+  left: 0px!important;
+  background-color: rgb(8, 8, 8)!important;
+  border-top: 2px solid!important;
+  border-radius: inherit!important;
+  border-top-color: white!important;
+}
+
+.menu-title{
+  color:white;
+}
+
+/*
+  Code par Rachid EL KADDOURI
+  -- Responsive Design
+ */
+@media only screen and (max-width: 768px){
+  .header-menu {
+    padding: 12px !important;
+
+  }
+  .navbar-light .navbar-toggler{
+    background-color: white !important;
+  }
+
+  .dropdown-menu{
+    position: absolute;
+  }
+}

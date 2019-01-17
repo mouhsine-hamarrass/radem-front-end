@@ -5,3 +5,17 @@
 table {
   text-align: center;
 }
+
+.container-btn-actions{
+  margin-top: 40px;
+}
+
+/*
+  Code par Rachid EL KADDOURI
+  -- Responsive Design
+ */
+@media only screen and (max-width: 768px){
+  .container-btn-actions{
+    margin-top: 5px;
+  }
+}
