@@ -12,6 +12,7 @@ import {SharedModule} from '../../../shared/shared.module';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {createTranslateLoader} from '../../../app.translate.factory';
+import {ConsumptionsPageModule} from '../consumptions-page/consumptions-page.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import {createTranslateLoader} from '../../../app.translate.factory';
         HomePageRoutingModule,
         PipesModule,
         UnpaidPageModule,
+        ConsumptionsPageModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,

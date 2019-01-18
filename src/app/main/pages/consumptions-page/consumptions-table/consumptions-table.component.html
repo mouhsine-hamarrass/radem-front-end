@@ -1,3 +1,76 @@
-<p>
-  consumptions-table works!
-</p>
+<div class="table-responsive mx-auto">
+    <div class="row justify-content-between">
+        <div class="col-12">
+            <div class="float-left">
+                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+            </div>
+        </div>
+    </div>
+    <table class="table table-bordered "
+           sortable-table (sorted)="onSorted($event)"
+           filterable-table (filtred)="onFiltred($event)">
+        <thead>
+        <tr>
+            <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate}}
+                <span sortable-column="numCta"></span>
+                <span filterable-column="numCta" filter-type="text"
+                      filter-placeholder="{{'CONTRACT_NUMBER' | translate}}"></span>
+            </th>
+            <th scope="col">{{'CATEGORY' | translate}}
+                <span sortable-column="categorieAbonnement"></span>
+                <span filterable-column="categorieAbonnement" filter-type="text"
+                      filter-placeholder="{{'CATEGORY' | translate}}"></span>
+            </th>
+            <!--
+            <th scope="col">Prochaine relève
+                <span sortable-column="date"></span>
+                <span filterable-column="date" filter-type="date"
+                      filter-placeholder="Prochaine relève"></span>
+            </th>
+            -->
+            <th scope="col">{{'LAST_INDEX' | translate}}
+                <span sortable-column="perTrn"></span>
+                <span filterable-column="perTrn" filter-type="text"
+                      filter-placeholder="Dernier index {{'LAST_INDEX' | translate}}"></span>
+            </th>
+            <!--
+            <th scope="col">Dernier paiement
+                <span sortable-column="index"></span>
+                <span filterable-column="index" filter-type="text"
+                      filter-placeholder="Dernier paiement"></span>
+            </th>
+            -->
+            <th scope="col">{{'TOTAL_BALANCE' | translate}}
+                <span sortable-column="soldetot"></span>
+                <span filterable-column="soldetot" filter-type="text"
+                      filter-placeholder="{{'TOTAL_BALANCE' | translate}}"></span>
+            </th>
+            <th scope="col">{{'BALANCE_DUE' | translate}}
+                <span sortable-column="soldeExigible"></span>
+                <span filterable-column="soldeExigible" filter-type="text"
+                      filter-placeholder="{{'BALANCE_DUE' | translate}}"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <app-data-not-available *ngIf="!contracts || contracts.length == 0; else dataAvailable"
+                                [colSpan]="6"></app-data-not-available>
+        <ng-template #dataAvailable>
+            <tr *ngFor="let releve of contracts">
+                <td>{{releve.numCta}}</td>
+                <td>{{releve.categorieAbonnement}}</td>
+                <!--<td>{{releve.dateReleve | date:'dd-M-yyyy'}}</td>-->
+                <td>{{releve.perTrn}}</td>
+                <td>{{releve.soldetot}}</td>
+                <td>{{releve.soldeExigible}}</td>
+            </tr>
+        </ng-template>
+        </tbody>
+    </table>
+</div>
+<app-pagination [disabled]="false"
+                [numberOfItems]="numberOfItems"
+                [itemsPerPage]="itemsPerPage"
+                [totalItems]="totalElements"
+                [totalPages]="totalPages"
+                (onpageChanged)="pageChanged($event)"></app-pagination>

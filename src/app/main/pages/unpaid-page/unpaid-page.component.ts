@@ -23,26 +23,6 @@ export class UnpaidPageComponent implements OnInit {
 
     }
 
-    addBill(event, bill: any): void {
-        if (event.target.checked) {
-            this.total += Number.parseInt(bill.amount);
-            this.selectedBills.push(bill);
-        } else {
-            this.total -= Number.parseInt(bill.amount);
-            this.selectedBills.splice(this.selectedBills.indexOf(bill), 1);
-        }
-    }
-
-    selectAll(event): void {
-        if (event.target.checked) {
-            this.total = this.totalUnpaid;
-            // this.selectedBills = this.bills;
-        } else {
-            this.total = 0;
-            // this.selectedBills = [];
-        }
-    }
-
     submit() {
         if (this.selectedBills.length !== 0) {
             this.confirmation = true;

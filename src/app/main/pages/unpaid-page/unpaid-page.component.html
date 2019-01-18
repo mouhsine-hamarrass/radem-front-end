@@ -13,18 +13,9 @@
             <div id="what-is" class="mb-0">
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <form class="form-inline" *ngIf="!confirmation">
+                        <div *ngIf="!confirmation">
 
                             <app-unpaid-table></app-unpaid-table>
-
-                            <div class="pull-right" style="width: 100%; margin-top: 10px">
-                                <app-pagination [disabled]="false"
-                                                [numberOfItems]="numberOfItems"
-                                                [itemsPerPage]="itemsPerPage"
-                                                [totalItems]="totalElements"
-                                                [totalPages]="totalPages"
-                                                (onpageChanged)="pageChanged($event)"></app-pagination>
-                            </div>
 
                             <div class="row col-md-12 text-right">
                                 <div class="form-group form-inline">
@@ -49,11 +40,11 @@
                                 <input class="btn btn btn-outline-primary mb-2" type="button"
                                        value="Régler vos factures" (click)="submit()">
                             </div>
-                        </form>
+                        </div>
                         <form class="form-inline" *ngIf="confirmation">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
-                                    <thead class="table-light">
+                                    <thead>
                                     <tr>
                                         <th scope="col">Nº de facture</th>
                                         <th scope="col">Nº d'echeance</th>

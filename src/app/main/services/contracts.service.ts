@@ -84,6 +84,14 @@ export class ContractsService {
             });
     }
 
+    getPageableUnpaidBills(clientNo: string, page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+        return this.httpClient.post<Response<any>>(`${this.urlApi}/invoices/all/unpaid/${clientNo}?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
+
     getAllBills(): Observable<Response<any>> {
         return this.httpClient.get<Response<any>>(`${this.jsonServerApi}/bills`);
     }

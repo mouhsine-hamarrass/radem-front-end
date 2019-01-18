@@ -81,13 +81,42 @@
                 <table class="table table-bordered "
                        sortable-table (sorted)="onSorted($event)"
                        filterable-table (filtred)="onFiltred($event)">
-                  <thead class="table-light">
+                  <thead>
                   <tr>
                     <th scope="col">{{'BILLIN_PERIOD' | translate }}
                       <span sortable-column="billingPeriod"></span>
                       <span filterable-column="billingPeriod" filter-type="text"
                             filter-placeholder="{{'BILLIN_PERIOD' | translate }}"></span></th>
                     <th scope="col">{{'BILL_NUMBER' | translate }}
+                                        <div aria-labelledby="dropdownUser" *dropdownMenu="" class="dropdown-menu">
+                                            <a class="dropdown-item" (click)="downloadPdfSettlements()">
+                                                <i class="fa fa-file-pdf-o"></i>{{'PDF_FORMAT' | translate}}
+                                            </a>
+                                            <a class="dropdown-item" (click)="downloadXlsSettlements()">
+                                                <i class="fa fa-file-excel-o"></i>{{'EXCEL_FORMAT' | translate}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive mx-auto">
+                                <div class="row justify-content-between">
+                                    <div class="col-12">
+                                        <div class="float-left">
+                                            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered "
+                                       sortable-table (sorted)="onSorted($event)"
+                                       filterable-table (filtred)="onFiltred($event)">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">{{'BILLIN_PERIOD' | translate }}
+                                            <span sortable-column="billingPeriod"></span>
+                                            <span filterable-column="billingPeriod" filter-type="text"
+                                                  filter-placeholder="{{'BILLIN_PERIOD' | translate }}"></span></th>
+                                        <th scope="col">{{'BILL_NUMBER' | translate }}
                       <span sortable-column="billNumber"></span>
                       <span filterable-column="billNumber" filter-type="text"
                             filter-placeholder="{{'BILL_NUMBER' | translate }}"></span>
