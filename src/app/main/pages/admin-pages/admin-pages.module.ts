@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
 import {AdminPagesRoutingModule} from './admin-pages-routing.module';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
-import {RequestsComponent} from './requests/requests.component';
 import {AdminService} from '../../services/admin.service';
 import {ArchwizardModule} from 'angular-archwizard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -33,6 +32,12 @@ import {SharedModule} from '../../../shared/shared.module';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
 import {DynamicContentComponent} from './dynamic-content/dynamic-content.component';
+import { RequestsCancellationComponent } from './requests-cancellation/requests-cancellation.component';
+import { RequestsSubscriptionComponent } from './requests-subscription/requests-subscription.component';
+import { RequestsRefundComponent } from './requests-refund/requests-refund.component';
+import { RequestCancellationDetailComponent } from './request-cancellation-detail/request-cancellation-detail.component';
+import { RequestSubscriptionDetailComponent } from './request-subscription-detail/request-subscription-detail.component';
+import { RequestRefundDetailComponent } from './request-refund-detail/request-refund-detail.component';
 
 @NgModule({
     imports: [
@@ -64,7 +69,6 @@ import {DynamicContentComponent} from './dynamic-content/dynamic-content.compone
     declarations: [
         AdminDashboardComponent,
         CancellationRequestComponent,
-        RequestsComponent,
         UserComponent,
         UsersComponent,
         ProfileComponent,
@@ -81,7 +85,13 @@ import {DynamicContentComponent} from './dynamic-content/dynamic-content.compone
         AlertNotificationsComponent,
         ComplaintComponent,
         ComplaintsComponent,
-        DynamicContentComponent
+        DynamicContentComponent,
+        RequestsCancellationComponent,
+        RequestsSubscriptionComponent,
+        RequestsRefundComponent,
+        RequestCancellationDetailComponent,
+        RequestSubscriptionDetailComponent,
+        RequestRefundDetailComponent
     ],
     providers: [
         AdminService

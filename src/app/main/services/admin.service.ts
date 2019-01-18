@@ -11,6 +11,7 @@ import {AlertModel} from '../models/alert.model';
 import {AlertNotificationModel} from '../models/alert-notification.model';
 import {DynamicModel} from '../models/dynamic.model';
 import {ConsumptionModel} from '../models/consumption.model';
+import {SubscriptionModel} from '../models/subscription.model';
 
 
 @Injectable()
@@ -27,11 +28,11 @@ export class AdminService {
         return this.httpClient.get<Response<any>>(`${this.apiUrl}/termination_requests/${idRequest}/find`, {headers: this.headers});
     }
 
-    getTerminationRequests(): Observable<Response<Array<any>>> {
-        return this.httpClient.get<Response<Array<any>>>(`${this.apiUrl}/termination_requests`);
+    getSubscriptionDetails(id: string): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.apiUrl}/subscription_request/${id}/details`, {headers: this.headers});
     }
 
-    getPageableRequest(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
+    getPageableTerminationRequest(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
         return this.httpClient.post<Response<any>>(`${this.apiUrl}/termination_requests/paged-list?page=${page}&size=${pageSize}`,
             {
                 filter,
@@ -39,8 +40,20 @@ export class AdminService {
             });
     }
 
-    getTerminationRequest(id: number): Observable<Response<Array<any>>> {
-        return this.httpClient.get<Response<Array<any>>>(`${this.apiUrl}/termination_requests/${id}/find`);
+    getPageableSubscriptionRequest(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<SubscriptionModel>> {
+        return this.httpClient.post<Response<SubscriptionModel>>(`${this.apiUrl}/subscription_requests?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
+    }
+
+    getPageableRefundRequest(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<SubscriptionModel>> {
+        return this.httpClient.post<Response<SubscriptionModel>>(`${this.apiUrl}/refund_requests?page=${page}&size=${pageSize}`,
+            {
+                filter,
+                sort
+            });
     }
 
     saveTerminationRequest(request: any): Observable<Response<number>> {
@@ -360,7 +373,7 @@ export class AdminService {
     }
 
     saveDynamicContent(content: DynamicModel): Observable<Response<DynamicModel>> {
-        return this.httpClient.put<Response<DynamicModel>>(`${this.apiUrl}/dynamic-page/edit`, content, {headers: this.headers});
+        return this.httpClient.put<Response<DynamicModel>>(`${this.apiUrl}/dynamic-pages/edit`, content, {headers: this.headers});
     }
 
     /**

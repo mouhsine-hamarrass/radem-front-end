@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
-import {RequestsComponent} from './requests/requests.component';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
 import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
@@ -17,6 +16,12 @@ import {AlertNotificationsComponent} from './alert-notifications/alert-notificat
 import {ComplaintsComponent} from './complaints/complaints.component';
 import {ComplaintComponent} from './complaint/complaint.component';
 import {DynamicContentComponent} from './dynamic-content/dynamic-content.component';
+import {RequestsSubscriptionComponent} from './requests-subscription/requests-subscription.component';
+import {RequestsRefundComponent} from './requests-refund/requests-refund.component';
+import {RequestsCancellationComponent} from './requests-cancellation/requests-cancellation.component';
+import {RequestSubscriptionDetailComponent} from './request-subscription-detail/request-subscription-detail.component';
+import {RequestCancellationDetailComponent} from './request-cancellation-detail/request-cancellation-detail.component';
+import {RequestRefundDetailComponent} from './request-refund-detail/request-refund-detail.component';
 
 const routes: Routes = [
     {
@@ -30,10 +35,24 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'requests',
-                component: RequestsComponent,
+                path: 'requests-subscription',
+                component: RequestsSubscriptionComponent,
                 data: {
-                    title: 'Liste des demandes'
+                    title: 'Liste des demandes abonnements'
+                }
+            },
+            {
+                path: 'requests-cancellation',
+                component: RequestsCancellationComponent,
+                data: {
+                    title: 'Liste des demandes résiliations'
+                }
+            },
+            {
+                path: 'requests-refund',
+                component: RequestsRefundComponent,
+                data: {
+                    title: 'Liste des demandes remboursement'
                 }
             },
             {
@@ -50,18 +69,27 @@ const routes: Routes = [
                     title: 'Réclamation'
                 }
             },
+
             {
-                path: 'requests/:id',
-                component: CancellationRequestComponent,
+                path: 'detail-subscription/:id',
+                component: RequestSubscriptionDetailComponent,
+                // component: CancellationRequestComponent,
+                data: {
+                    title: 'Demande d\'abonnement'
+                }
+            },
+            {
+                path: 'detail-cancellation/:id',
+                component: RequestCancellationDetailComponent,
                 data: {
                     title: 'Demande de résiliation'
                 }
             },
             {
-                path: 'subscriptions/:id',
-                component: SubscriptionDetailComponent,
+                path: 'detail-remboursement/:id',
+                component: RequestRefundDetailComponent,
                 data: {
-                    title: 'Abonnement'
+                    title: 'Demande de remboursement'
                 }
             },
             {
