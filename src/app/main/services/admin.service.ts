@@ -10,6 +10,7 @@ import {ServiceModel} from '../models/service.model';
 import {AlertModel} from '../models/alert.model';
 import {AlertNotificationModel} from '../models/alert-notification.model';
 import {DynamicModel} from '../models/dynamic.model';
+import {ConsumptionModel} from '../models/consumption.model';
 
 
 @Injectable()
@@ -97,9 +98,18 @@ export class AdminService {
             });
     }
 
-    getPageableHistoryConsumptions(numContract: string, page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
-        return this.httpClient.post<Response<any>>(`${this.apiUrl}/consumptions/${numContract}?page=${page}&size=${pageSize}`,
+    getPageableHistoryConsumptions(contractNo: string,
+                                   dateDebut: any,
+                                   dateFin: any,
+                                   page: number,
+                                   pageSize: number,
+                                   filter?: any,
+                                   sort?: any): Observable<Response<Array<ConsumptionModel>>> {
+        return this.httpClient.post<Response<Array<ConsumptionModel>>>(`${this.apiUrl}/consumptions?page=${page}&size=${pageSize}`,
             {
+                contractNo,
+                dateDebut,
+                dateFin,
                 filter,
                 sort
             });

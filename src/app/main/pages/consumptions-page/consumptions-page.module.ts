@@ -10,7 +10,7 @@ import {SharedModule} from '../../../shared/shared.module';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
-import { ConsumptionsTableComponent } from './consumptions-table/consumptions-table.component';
+import {ConsumptionsTableComponent} from './consumptions-table/consumptions-table.component';
 
 @NgModule({
     imports: [
@@ -29,7 +29,8 @@ import { ConsumptionsTableComponent } from './consumptions-table/consumptions-ta
         }),
     ],
     declarations: [ConsumptionsPageComponent, ConsumptionsTableComponent],
-    providers: [AdminService]
+    providers: [AdminService],
+    exports: [ConsumptionsTableComponent]
 })
 export class ConsumptionsPageModule {
     constructor(private translate: TranslateService) {

@@ -9,6 +9,8 @@ import {FileModel} from '../../../core/models/file.model';
 import {ServicesService} from '../../services/services.service';
 import {User} from '../../models/user.model';
 import {AuthHelper} from '../../../core/services/security/auth.helper';
+import * as moment from 'moment';
+import {ConsumptionModel} from '../../models/consumption.model';
 
 @Component({
     selector: 'app-consumption-page',
@@ -20,20 +22,9 @@ export class ConsumptionsPageComponent implements OnInit {
     userContracts: any;
     contracts: any;
     historyForm: FormGroup;
-    releves: any;
-    nextReleve: any;
     contractNumber: any;
-    consumptions: any;
+    consumptions: Array<ConsumptionModel>;
     meters: any;
-
-    pageContract = 1;
-    pageSizeContract = 0;
-    totalElementsContract: number;
-    numberOfItemsContract: number;
-    totalPagesContract: number;
-    itemsPerPageContract: number;
-    sortContract: any;
-    filterContract: any;
 
     pageConsumption = 1;
     pageSizeConsumption = 0;
@@ -62,11 +53,10 @@ export class ConsumptionsPageComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
         this.getContracts();
-        this.getActiveContracts();
     }
 
     getContracts() {
-        this.adminService.getAllContractByNumClient(this.user.clientNo).subscribe(response => {debugger;
+        this.adminService.getAllContractByNumClient(this.user.clientNo).subscribe(response => {
             this.userContracts = response.data;
         });
     }
@@ -77,58 +67,26 @@ export class ConsumptionsPageComponent implements OnInit {
         })
     }
 
-    getActiveContracts() {
-        this.adminService.getPageableActiveContracts(this.user.clientNo,
-            this.pageContract,
-            this.pageSizeContract,
-            this.filterContract,
-            this.sortContract)
-            .subscribe(response => {
-                this.contracts = response.data.content;
-                this.totalElementsContract = response.data.totalElements;
-                this.totalPagesContract = response.data.totalPages;
-                this.itemsPerPageContract = response.data.size;
-                this.numberOfItemsContract = response.data.numberOfElements;
-                console.log(this.contracts);
-            }, err => console.log(err));
-    }
-
     getConsumptionHistory() {
-        this.adminService.getPageableHistoryConsumptions(this.contractNumber,
+        const contract = this.historyForm.controls['contract'].value;
+        const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
+        const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
+        this.adminService.getPageableHistoryConsumptions(contract,
+            startDate,
+            endDate,
             this.pageConsumption,
             this.pageSizeConsumption,
             this.filterConsumption,
             this.sortConsumption)
             .subscribe(response => {
-                this.consumptions = response.data.content;
-                this.totalElementsConsumption = response.data.totalElements;
-                this.totalPagesConsumption = response.data.totalPages;
-                this.itemsPerPageConsumption = response.data.size;
-                this.numberOfItemsConsumption = response.data.numberOfElements;
+                // this.consumptions = response.data['content'];
+                this.consumptions = response.data;
+                this.totalElementsConsumption = response.data['totalElements'];
+                this.totalPagesConsumption = response.data['totalPages'];
+                this.itemsPerPageConsumption = response.data['size'];
+                this.numberOfItemsConsumption = response.data['numberOfElements'];
                 console.log(this.consumptions);
             }, err => console.log(err));
-    }
-
-    onSortedContract(sort: any): void {
-        this.sortContract = sort;
-        this.getActiveContracts();
-    }
-
-    onFiltredContract(filter: any): void {
-        this.filterContract = filter;
-        this.getActiveContracts();
-    }
-
-    pageChangedContract(pageNo: number) {
-        this.pageContract = pageNo;
-        this.getActiveContracts();
-    }
-
-    pageFilterContract(pageSize: number): void {
-        this.pageSizeContract = pageSize;
-        this.itemsPerPageContract = pageSize;
-        this.pageContract = 1;
-        this.getActiveContracts();
     }
 
 

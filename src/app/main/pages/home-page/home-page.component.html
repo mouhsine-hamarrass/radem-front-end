@@ -1,27 +1,35 @@
 <div class="content-header back col-12 mb-1 mt-1">
-  <div class="row">
-    <div class="col-md-6 col-12">
-      <h3 class="content-header-title">{{'DASHBOARD' | translate}}</h3>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title">{{'DASHBOARD' | translate}}</h3>
+        </div>
     </div>
-  </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
+    <section class="row">
+        <div class="col-sm-12">
+            <div class="mb-0">
+                <div class="card-header border-0">
+                    <h4 class="card-title">{{'UNPAID_LIST' | translate}}</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <app-unpaid-table></app-unpaid-table>
+                    </div>
+                </div>
+            </div>
 
-      <div class="mb-0">
-        <div class="card-header border-0">
-          <h4 class="card-title">{{'UNPAID_LIST' | translate}}</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
+            <div class="mb-0">
+                <div class="card-header border-0">
+                    <h4 class="content-header-title">{{'Extrait des contrats (actifs)' | translate}}</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <app-consumptions-table></app-consumptions-table>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <app-unpaid-table></app-unpaid-table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>
