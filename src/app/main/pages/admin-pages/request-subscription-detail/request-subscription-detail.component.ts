@@ -159,7 +159,7 @@ export class RequestSubscriptionDetailComponent implements OnInit, AfterViewInit
                 console.log(agentId);
                 if (this.request.status === 'CREATED') {
 
-                    this.requestService.setAsReceived(id, agentId).subscribe(response => {
+                    this.requestService.setAsReceivedSubscription(id, agentId).subscribe(response => {
                         this.selectedStep = this.selectedStep + 1;
                         this.ngOnInit();
                     }, err => {

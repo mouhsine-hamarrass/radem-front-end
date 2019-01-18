@@ -71,6 +71,11 @@ export class AdminService {
         (`${this.apiUrl}/termination_requests/${idRequest}/received?agent=${agentId}`, {headers: this.headers});
     }
 
+    setAsReceivedSubscription(idRequest: number, agentId: number): Observable<Response<number>> {
+        return this.httpClient.get<Response<any>>
+        (`${this.apiUrl}/subscription_requests/${idRequest}/received?agent=${agentId}`, {headers: this.headers});
+    }
+
     setAsInProgress(idRequest: number, agentId: number, intervenantId: number, intervantionDate: Date): Observable<Response<number>> {
         return this.httpClient.get<Response<any>>
         // tslint:disable-next-line:max-line-length
