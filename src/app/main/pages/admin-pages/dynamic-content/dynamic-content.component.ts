@@ -14,14 +14,13 @@ export class DynamicContentComponent implements OnInit {
 
     dynamicPageForm: FormGroup;
     dynamicContent: DynamicModel = {};
-    private translate: TranslateService;
     dynamicList: Array<DynamicModel>;
-    chosenDynamic: string;
+    chosenDynamic = '';
 
     constructor(private adminServices: AdminService,
                 private toastrService: ToastrService,
+                private translate: TranslateService,
                 private formBuilder: FormBuilder) {
-
         this.dynamicPageForm = this.formBuilder.group({
             'title': ['', Validators.compose(
                 [
@@ -65,8 +64,10 @@ export class DynamicContentComponent implements OnInit {
         });
     }
 
-    save(dynamicContent) {
-        this.adminServices.saveDynamicContent(dynamicContent).subscribe(response => {
+    save() {
+        this.dynamicContent.title = this.dynamicPageForm.controls['title'].value;
+        this.dynamicContent.content = this.dynamicPageForm.controls['content'].value;
+        this.adminServices.saveDynamicContent(this.dynamicContent).subscribe(response => {
             this.toastrService.success(this.translate.instant('SUCCESS_MODIFICATION'), '');
         }, err => {
             this.toastrService.error(this.translate.instant('OOPS_FAILED_CHANGE'), '');

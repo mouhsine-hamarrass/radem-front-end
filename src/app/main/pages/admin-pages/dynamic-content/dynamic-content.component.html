@@ -11,15 +11,15 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="title-dynamic" class="text-bold-700">Choisir le contenu dynamique à modifier</label>
                 <select name="title" id="title-dynamic" [(ngModel)]="chosenDynamic" (change)="choseDynamicToDisplay()"
                         class="form-control">
+                    <option value="" disabled selected>Choisir le contenu dynamique</option>
                     <option *ngFor="let dynamic of dynamicList"
                             [value]="dynamic.key">{{dynamic.title | translate}}
                     </option>
                 </select>
             </div>
-            <div *ngIf="chosenDynamic">
+            <div>
                 <form role="form" [formGroup]="dynamicPageForm" (ngSubmit)="save(dynamicPageForm.value)" novalidate>
                     <div class="form-group">
                         <label for="title" class="text-bold-700">Titre</label>
@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="pull-right">
-                        <button class="btn btn btn-outline-primary" [disabled]="dynamicPageForm.invalid" type="submit">
+                        <button class="btn btn btn-outline-primary" [disabled]="dynamicPageForm.invalid || !chosenDynamic" type="submit">
                             Enregistrer
                         </button>
                     </div>

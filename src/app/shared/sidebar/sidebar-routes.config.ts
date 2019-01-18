@@ -161,8 +161,32 @@ export const ROUTES: RouteInfo[] = [
         id: 'requests',
         submenu: [
             {
-                path: '/admin/requests',
-                title: 'Liste des demandes',
+                path: '/admin/requests-subscription',
+                title: 'Abonnements',
+                icon: 'icon-list',
+                clazz: 'nav-item',
+                badge: '',
+                badgeClass: '',
+                isExternalLink: false,
+                isNavHeader: false,
+                id: 'list-requests',
+                submenu: []
+            },
+            {
+                path: '/admin/requests-cancellation',
+                title: 'Résiliations',
+                icon: 'icon-list',
+                clazz: 'nav-item',
+                badge: '',
+                badgeClass: '',
+                isExternalLink: false,
+                isNavHeader: false,
+                id: 'list-requests',
+                submenu: []
+            },
+            {
+                path: '/admin/requests-refund',
+                title: 'Remboursement',
                 icon: 'icon-list',
                 clazz: 'nav-item',
                 badge: '',

@@ -1,43 +1,22 @@
 <div>
     <nav aria-label="breadcrumb" class="doNotPrint">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' | translate}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{'LIST_OF_REQUESTS' | translate}}</li>
+            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' |
+                translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'subscriptions_requests' | translate}}</li>
         </ul>
     </nav>
 </div>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title text-muted pull-left">{{'LIST_OF_REQUESTS' | translate}}</h4>
+            <h4 class="card-title text-muted pull-left">{{'subscriptions_requests' | translate}}</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="float-left">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                                </div>
-                                <div class="col-12 mb-1">
-                                    <button type="button" class="btn btn btn-outline-primary"
-                                            (click)="LoadCancellationRequest()">
-                                      {{'TERMINATIONS' | translate}}
-
-                                    </button>
-                                    <button type="button" class="btn btn btn-outline-primary"
-                                            (click)="LoadSubscriptionRequest()">
-                                      {{'SUBSCRIPTIONS' | translate}}
-
-                                    </button>
-                                    <button type="button" class="btn btn btn-outline-primary"
-                                            (click)="LoadRefundRequest()">
-                                      {{'REFUNDS' | translate}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-2">
+                        <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
                     </div>
                 </div>
                 <br>
@@ -51,6 +30,7 @@
                             <span filterable-column="requestNumber" filter-type="text"
                                   filter-placeholder="{{'REQUEST_NUMBER' | translate }}"></span>
                         </th>
+                        <!--
                         <th scope="col">{{'APPLICANT' | translate }}
                             <span sortable-column="lastname"></span>
                             <span filterable-column="lastname" filter-type="text"
@@ -61,11 +41,13 @@
                             <span filterable-column="type" filter-type="text"
                                   filter-placeholder="{{'TYPE' | translate }}"></span>
                         </th>
+                        -->
                         <th scope="col">{{'DATE_OF-CREATION' | translate }}
                             <span sortable-column="createdAt"></span>
                             <span filterable-column="createdAt" filter-type="date"
                                   filter-placeholder="{{'DATE_OF-CREATION' | translate }}"></span>
                         </th>
+                        <!--
                         <th scope="col">{{'AGENT' | translate }}
                             <span sortable-column="agent"></span>
                             <span filterable-column="agent" filter-type="select"
@@ -78,6 +60,7 @@
                             <span filterable-column="service" filter-type="text"
                                   filter-placeholder="{{'SERVICE_CONCERNED' | translate }}"></span>
                         </th>
+                        -->
                         <th scope="col">{{'STATUS' | translate }}
                             <span sortable-column="status"></span>
                             <span filterable-column="status" filter-type="select"
@@ -92,18 +75,25 @@
 
                     <ng-template #dataAvailable>
                         <tr *ngFor="let request of requests">
-                            <td><a [routerLink]="['/admin/requests', request.id]">{{request.requestNumber}}</a></td>
+                            <td><a [routerLink]="['/admin/detail-subscription', request.id]">{{request.requestNumber}}</a></td>
+                            <!--
                             <td *ngIf="request.applicant != null">{{request.applicant.firstname}}
                                 {{request.applicant.lastname}}
                             </td>
                             <td *ngIf="request.applicant == null">{{request.client?.firstname + ' ' +
                                 request.client?.lastname}}
                             </td>
+
                             <td>{{request.type}}</td>
+                            -->
                             <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+                            <!--
                             <td>{{!request.agent ? '-' : request.agent.firstname + ' ' + request.agent.lastname}}</td>
                             <td>{{!request?.service ? '-' : request?.service}}</td>
-                            <td><app-badge [status]="request.status"></app-badge></td>
+                            -->
+                            <td>
+                                <app-badge [status]="request.status"></app-badge>
+                            </td>
                         </tr>
                     </ng-template>
                     </tbody>

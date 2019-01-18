@@ -1,0 +1,252 @@
+<div class="col-md-12 py-3">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Réclamation N°: {{request?.requestNumber}}</h4>
+
+            <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
+
+                <aw-wizard-step *ngIf="selectedStep >= 0; else step0" [stepId]="0" awOptionalStep
+                                [stepTitle]="'FILING_APPLICATION' | translate"
+                                [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <ng-template #step0>
+                    <aw-wizard-step [stepId]="0" [stepTitle]="'FILING_APPLICATION' | translate"
+                                    [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily:'FontAwesome' }">
+                    </aw-wizard-step>
+                </ng-template>
+
+                <aw-wizard-step *ngIf="selectedStep >= 1; else step1" [stepId]="1" awOptionalStep
+                                [stepTitle]="'INTERVENTION' | translate"
+                                [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <ng-template #step1>
+                    <aw-wizard-step [stepId]="1" [stepTitle]="'INTERVENTION' | translate"
+                                    [navigationSymbol]="{ symbol: '&#xf252;', fontFamily:'FontAwesome' }">
+                    </aw-wizard-step>
+                </ng-template>
+
+                <aw-wizard-step *ngIf="selectedStep >= 2; else step2" [stepId]="2" awOptionalStep
+                                [stepTitle]="'METER_POSES' | translate"
+                                [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <ng-template #step2>
+                    <aw-wizard-step [stepId]="2" [stepTitle]="'METER_POSES' | translate"
+                                    [navigationSymbol]="{ symbol: '&#xf0ad;', fontFamily:'FontAwesome' }">
+                    </aw-wizard-step>
+                </ng-template>
+
+                <aw-wizard-step *ngIf="selectedStep >= 3; else step3" [stepId]="3" awOptionalStep
+                                [stepTitle]="'SUBSCRIPTION_INVOICE' | translate"
+                                [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <ng-template #step3>
+                    <aw-wizard-step [stepId]="3" [stepTitle]="'SUBSCRIPTION_INVOICE' | translate"
+                                    [navigationSymbol]="{ symbol: '&#xf0e4;', fontFamily:'FontAwesome' }">
+                    </aw-wizard-step>
+                </ng-template>
+
+                <aw-wizard-step *ngIf="selectedStep >= 4; else step4" [stepId]="4" awOptionalStep
+                                [stepTitle]="'SUBSCRIBED' | translate"
+                                [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }">
+                </aw-wizard-step>
+
+                <ng-template #step4>
+                    <aw-wizard-step [stepId]="4" [stepTitle]="'SUBSCRIBED' | translate"
+                                    [navigationSymbol]="{ symbol: '&#xf002;', fontFamily:'FontAwesome' }">
+                    </aw-wizard-step>
+                </ng-template>
+
+
+                <ng-template #step4>
+                    <aw-wizard-completion-step [stepId]="4" [stepTitle]="'FENCED' | translate"
+                                               [navigationSymbol]="{ symbol: '&#xf00c;',  fontFamily:'FontAwesome'}">
+                        <!--<button type="button" class="btn btn btn-outline-primary" (click)="finishFunction()">Finish</button>-->
+                    </aw-wizard-completion-step>
+                </ng-template>
+
+                <div class="col-md-12 mt-2" id="buttons">
+                    <button type="button" class="btn btn btn-outline-primary" (click)="openUpdateForm(updateForm)"
+                            #UpdateButton>{{'MODIFY' | translate}}
+                    </button>
+                    <button type="button" class="btn btn btn-outline-primary" (click)="focus()">{{'COMMENT' |
+                        translate}}
+                    </button>
+                    <button *ngIf="request?.status !== 'CLOSED'" routeLink="/admin/request/${request.id}" type="button"
+                            class="btn btn-success" style="margin-left : 10px;" #StepButton
+                            (click)="AddIntervention(addIntervention)" awNextStep>{{'NEXT_STEP' | translate}}<i
+                            class="fa fa-chevron-circle-right"></i></button>
+                </div>
+            </aw-wizard>
+
+
+            <div class="row mt-2" id="cards">
+                <fieldset class="col-7 scheduler-border">
+                    <legend class="scheduler-border">
+                        <b>Informations :</b>
+                    </legend>
+                    <div style="padding-left: 20px;padding-bottom: 10px;">
+                        <div class="row">
+                            <div style="padding-left: 10px;">
+                                <table>
+                                    <tr>
+                                        <td>N° demande :</td>
+                                        <td>{{request?.requestNumber}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Client :</td>
+                                        <td>{{request?.intervenant.firstname}} {{request?.intervenant.lastname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date de création :</td>
+                                        <td>{{request?.createdDate | date: 'dd/MM/yyyy' }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-4 scheduler-border">
+                    <legend class="scheduler-border">
+                        <b>Intervenants :</b>
+                    </legend>
+                    <div style="padding-left: 20px;">
+                        <table>
+                            <tr>
+                                <td>Agent :</td>
+                                <td>{{request?.agent?.firstname}} {{request?.agent?.lastname}}</td>
+                            </tr>
+                            <tr>
+                                <td>Service concerné :</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="row mt-2" id="cards2">
+                <fieldset class="col-7 scheduler-border">
+                    <legend class="scheduler-border">
+                        <b>Commentaires</b>
+                    </legend>
+                    <div id="commDiv">
+                        <form class="" [formGroup]="commentForm">
+                            <div class="row">
+
+                                <input #commentaire formControlName="comment" type="text" class="col-9 form-control"
+                                       placeholder="Laisser un commentaire.."
+                                       style="margin-right: 8px;margin-left: 10px;"/>
+
+                                <button class="btn btn btn-outline-primary" (click)="addComment()">Envoyer</button>
+                            </div>
+                        </form>
+                        <br>
+                    </div>
+                    <div class="col-12">
+                        <div class="row" *ngFor="let feedback of request?.feedback">
+                            <img id="img" src="assets/images/profile.png" alt="" height="40" width="40">
+                            <div class="border-comm col-10" id="comm">
+                                {{feedback?.message}}
+                            </div>
+                            <div class="col-md-4 pull-right" id="divDateComm">
+                                <i>le {{feedback?.sendingDate | date: 'dd/MM/yyyy'}}.</i>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-4 scheduler-border" id="divDate">
+                    <legend class="scheduler-border">
+                        <b>Description :</b>
+                    </legend>
+                    <div style="padding-left: 20px;">
+                        <table>
+                            <tr>
+                                <td>Objet :</td>
+                                <td>{{request?.object}}</td>
+                            </tr>
+                            <tr>
+                                <td>Description :</td>
+                                <td>{{request?.description}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #updateForm>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">{{'MODIFICATION' | translate}} :</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="" [formGroup]="requestForm">
+                    <label>Agent d'intervention :</label>
+                    <select formControlName="agent" type="text" #t class="col-12 form-control"
+                            (change)="getPhone(t.value)">
+                        <option value="" disabled selected> {{'CHOOSE_AN_AGENT' | translate}} ...</option>
+                        <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.firstname}}
+                            {{agent.lastname}}
+                        </option>
+                    </select>
+                    <label>{{'INTERVENTION_DATE' | translate}} :</label>
+                    <input formControlName="dateIntervention" type="date" class="col-12 form-control">
+                    <label>Tel d'agent :</label>
+                    <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn btn-outline-primary center" id="buttons-update"
+                (click)="updateIntervenant();modalRef.hide()">{{'VALIDATE' | translate}}
+        </button>
+        <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
+    </div>
+</ng-template>
+
+<ng-template #addIntervention>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">
+            {{'PLEASE_COMPLETE_THE_FOLLOWING_FIELDS_TO_PROCEED_TO_THE_NEXT_STEP' | translate}}
+            :
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="" [formGroup]="addInterventionForm">
+                    <label>Agent d'intervention :</label>
+                    <select formControlName="agent" type="text" #t class="col-12 form-control"
+                            (change)="getPhone(t.value)">
+                        <option value="" disabled selected>{{'CHOOSE_AN_AGENT' | translate}} ...</option>
+                        <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.firstname}}
+                            {{agent.lastname}}
+                        </option>
+                    </select>
+                    <label>{{'INTERVENTION_DATE' | translate}} :</label>
+                    <input formControlName="dateIntervention" type="date" class="col-12 form-control">
+                    <label>{{'IINTERVENTION_PHONE' | translate}} :</label>
+                    <input formControlName="phone" type="tel" class="col-12 form-control" readonly>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="addIntervenant()">
+            {{'VALIDATE' | translate}}
+        </button>
+    </div>
+</ng-template>

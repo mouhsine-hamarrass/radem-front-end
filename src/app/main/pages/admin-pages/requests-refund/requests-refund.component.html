@@ -1,0 +1,105 @@
+<div>
+  <nav aria-label="breadcrumb" class="doNotPrint">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' |
+        translate}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{'Requests_for_refund' | translate}}</li>
+    </ul>
+  </nav>
+</div>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title text-muted pull-left">{{'Requests_for_refund' | translate}}</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="row">
+          <div class="col-md-2">
+            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+          </div>
+        </div>
+        <br>
+        <table class="table table-striped table-bordered table-hover"
+               sortable-table (sorted)="onSorted($event)"
+               filterable-table (filtred)="onFiltred($event)">
+          <thead class="table-light">
+          <tr>
+            <th scope="col">{{'REQUEST_NUMBER' | translate }}
+              <span sortable-column="requestNumber"></span>
+              <span filterable-column="requestNumber" filter-type="text"
+                    filter-placeholder="{{'REQUEST_NUMBER' | translate }}"></span>
+            </th>
+            <th scope="col">{{'APPLICANT' | translate }}
+              <span sortable-column="lastname"></span>
+              <span filterable-column="lastname" filter-type="text"
+                    filter-placeholder="{{'APPLICANT' | translate }}"></span>
+            </th>
+            <th scope="col">{{'TYPE' | translate }}
+              <span sortable-column="type"></span>
+              <span filterable-column="type" filter-type="text"
+                    filter-placeholder="{{'TYPE' | translate }}"></span>
+            </th>
+            <th scope="col">{{'DATE_OF-CREATION' | translate }}
+              <span sortable-column="createdAt"></span>
+              <span filterable-column="createdAt" filter-type="date"
+                    filter-placeholder="{{'DATE_OF-CREATION' | translate }}"></span>
+            </th>
+            <th scope="col">{{'AGENT' | translate }}
+              <span sortable-column="agent"></span>
+              <span filterable-column="agent" filter-type="select"
+                    [filter-select-data]="agentsFilter"
+                    filter-select-data-key="id" filter-select-data-value="firstname"
+                    filter-placeholder="{{'AGENT' | translate }}"></span>
+            </th>
+            <th scope="col">{{'SERVICE_CONCERNED' | translate }}
+              <span sortable-column="service"></span>
+              <span filterable-column="service" filter-type="text"
+                    filter-placeholder="{{'SERVICE_CONCERNED' | translate }}"></span>
+            </th>
+            <th scope="col">{{'STATUS' | translate }}
+              <span sortable-column="status"></span>
+              <span filterable-column="status" filter-type="select"
+                    [filter-select-data]="statusFilter"
+                    filter-placeholder="{{'STATUS' | translate }}"></span>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <app-data-not-available *ngIf="!requests || requests.length == 0; else dataAvailable"
+                                  [colSpan]="7"></app-data-not-available>
+
+          <ng-template #dataAvailable>
+            <tr *ngFor="let request of requests">
+              <td><a [routerLink]="['/admin/requests', request.id]">{{request.requestNumber}}</a></td>
+              <td *ngIf="request.applicant != null">{{request.applicant.firstname}}
+                {{request.applicant.lastname}}
+              </td>
+              <td *ngIf="request.applicant == null">{{request.client?.firstname + ' ' +
+                request.client?.lastname}}
+              </td>
+              <td>{{request.type}}</td>
+              <td>{{request.createdAt | date: 'dd/MM/yyyy' }}</td>
+              <td>{{!request.agent ? '-' : request.agent.firstname + ' ' + request.agent.lastname}}</td>
+              <td>{{!request?.service ? '-' : request?.service}}</td>
+              <td>
+                <app-badge [status]="request.status"></app-badge>
+              </td>
+            </tr>
+          </ng-template>
+          </tbody>
+        </table>
+        <app-pagination [disabled]="false"
+                        [numberOfItems]="numberOfItems"
+                        [itemsPerPage]="itemsPerPage"
+                        [totalItems]="totalElements"
+                        [totalPages]="totalPages"
+                        (onpageChanged)="pageChanged($event)"></app-pagination>
+      </div>
+      <!--Card body end-->
+    </div>
+  </div>
+</div>
+
+
+
