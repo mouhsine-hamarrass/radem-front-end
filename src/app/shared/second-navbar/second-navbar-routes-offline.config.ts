@@ -4,7 +4,7 @@ const mainRoute = '/advices';
 export const ROUTES_OFFLINE: RouteInfo[] = [
     {
         path: mainRoute + '/home',
-        title: 'Tableau de bord',
+        title: 'Accueil',
         icon: '',
         clazz: 'nav-item',
         badge: '',

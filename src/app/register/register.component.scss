@@ -1,3 +1,7 @@
+body{
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2) !important;
+}
+
 .card-header {
   padding-bottom: 0;
 }
@@ -120,6 +124,10 @@ aw-wizard {
   cursor:pointer;
 }
 
+.form-control:focus{
+  border-color: #214479;
+}
+
 
 /*
   Code par Rachid EL KADDOURI
@@ -128,6 +136,10 @@ aw-wizard {
 @media only screen and (max-width: 768px){
   .custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a{
     font-size: 9px;
+  }
+
+  aw-wizard-navigation-bar{
+    margin-bottom: 40px;
   }
   aw-wizard .wizard-steps.horizontal{
     margin-left: -22px;

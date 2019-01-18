@@ -45,6 +45,10 @@
   list-style: none;
 }
 
+.form-control:focus{
+  border-color: #214479;
+}
+
 .btn-primary {
   border-color: #2c5599 !important;
   background-color: #2c5599!important;
