@@ -175,65 +175,27 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
-        path: '',
+        path: '/admin/complaints',
         title: 'Réclamations',
         icon: 'icon-speech',
-        clazz: '',
+        clazz: 'nav-item',
         badge: '',
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
         id: 'complaints',
-        submenu: [
-            {
-                path: '/admin/complaints',
-                title: 'Liste des réclamations',
-                icon: 'icon-list',
-                clazz: 'nav-item',
-                badge: '',
-                badgeClass: '',
-                isExternalLink: false,
-                isNavHeader: false,
-                id: 'list-complaints',
-                submenu: []
-            }
-        ]
+        submenu: []
     },
     {
-        path: '',
-        title: 'Alertes',
+        path: '/admin/alert-notifications',
+        title: 'Notifications',
         icon: 'icon-bell',
-        clazz: '',
+        clazz: 'nav-item',
         badge: '',
         badgeClass: '',
         isExternalLink: false,
         isNavHeader: false,
         id: 'alerts',
-        submenu: [
-            {
-                path: '/admin/alert-notification',
-                title: 'Ajouter une alerte',
-                icon: 'icon-plus',
-                clazz: 'nav-item',
-                badge: '',
-                badgeClass: '',
-                isExternalLink: false,
-                isNavHeader: false,
-                id: 'alert',
-                submenu: []
-            },
-            {
-                path: '/admin/alert-notifications',
-                title: 'Liste des alertes',
-                icon: 'icon-list',
-                clazz: 'nav-item',
-                badge: '',
-                badgeClass: '',
-                isExternalLink: false,
-                isNavHeader: false,
-                id: 'list-alerts',
-                submenu: []
-            }
-        ]
+        submenu: []
     }
 ];

@@ -10,6 +10,16 @@ table {
   margin-top: 40px;
 }
 
+.card-header{
+  padding: 0.8rem;
+  margin-bottom: 0;
+  background-color: #eef0f3;
+  border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
+  h3{
+    margin-top: 8px;
+  }
+}
+
 /*
   Code par Rachid EL KADDOURI
   -- Responsive Design

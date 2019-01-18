@@ -1,3 +1,7 @@
+.container{
+ // box-shadow: 0 0 10px 0 rgba(0,0,0,0.2) !important;
+}
+
 .table-responsive {
   margin-top: 15px;
 }
@@ -33,4 +37,14 @@ table th, table td {
 
 .border-water {
   border-bottom: 1px solid #1ca3ec;
+}
+
+.card-header{
+  padding: 0.8rem;
+  margin-bottom: 0;
+  background-color: #eef0f3;
+  border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
+  h3{
+    margin-top: 8px;
+  }
 }

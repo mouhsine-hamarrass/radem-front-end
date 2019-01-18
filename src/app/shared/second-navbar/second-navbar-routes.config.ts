@@ -4,7 +4,7 @@ export const ROUTES: RouteInfo[] = [
 
     {
         path: '/home',
-        title: 'Tableau de bord',
+        title: 'Accueil',
         icon: '',
         clazz: 'nav-item',
         badge: '',

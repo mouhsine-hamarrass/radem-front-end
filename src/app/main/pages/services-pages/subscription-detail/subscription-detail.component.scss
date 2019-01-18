@@ -89,3 +89,13 @@ fieldset.col-4 {
 .scheduler-border::after {
   border: 0;
 }
+
+.card-header{
+  padding: 0.8rem;
+  margin-bottom: 0;
+  background-color: #eef0f3;
+  border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
+  h3{
+    margin-top: 8px;
+  }
+}
