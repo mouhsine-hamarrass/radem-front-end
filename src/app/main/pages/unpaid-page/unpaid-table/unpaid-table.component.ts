@@ -8,6 +8,7 @@ import {AuthHelper} from '../../../../core/services/security/auth.helper';
     templateUrl: './unpaid-table.component.html',
     styleUrls: ['./unpaid-table.component.scss']
 })
+
 export class UnpaidTableComponent implements OnInit {
     bills;
     selectedBills = [];

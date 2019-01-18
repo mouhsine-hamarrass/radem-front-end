@@ -21,11 +21,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered "
+                            <table class="table"
                                    sortable-table (sorted)="onSorted($event)"
                                    filterable-table (filtred)="onFiltred($event)">
-                                <thead>
+                                <thead class="table-light">
                                 <tr>
+                                    <th scope="col">{{'TYPE' | translate }}
+                                        <span sortable-column="typeContrat"></span>
+                                    </th>
                                     <th scope="col">{{'CONTRACT_NUMBER' | translate }}
                                         <span sortable-column="id"></span>
                                         <span filterable-column="id" filter-type="text"
@@ -46,10 +49,15 @@
                                         <span filterable-column="dateFinAbonnement" filter-type="text"
                                               filter-placeholder="{{'SUBSCRIPTION_END_DATE' | translate }}"></span>
                                     </th>
-                                    <th scope="col">{{'ADDRESS' | translate }}
-                                        <span sortable-column="adresseClientPayeur"></span>
-                                        <span filterable-column="adresseClientPayeur" filter-type="text"
-                                              filter-placeholder="{{'ADDRESS' | translate }}"></span>
+                                    <th scope="col">{{'TOTAL_BALANCE' | translate }}
+                                        <span sortable-column="soldeTot"></span>
+                                        <span filterable-column="soldeTot" filter-type="text"
+                                              filter-placeholder="{{'TOTAL_BALANCE' | translate }}"></span>
+                                    </th>
+                                    <th scope="col">{{'BALANCE_DUE' | translate }}
+                                        <span sortable-column="soldeExigible"></span>
+                                        <span filterable-column="soldeExigible" filter-type="text"
+                                              filter-placeholder="{{'BALANCE_DUE' | translate }}"></span>
                                     </th>
                                     <th scope="col">{{'RATE' | translate }}
                                         <span sortable-column="tariff"></span>
@@ -64,18 +72,21 @@
                                         *ngIf="!contracts || contracts.length == 0; else dataAvailable"
                                         [colSpan]="7"></app-data-not-available>
                                 <ng-template #dataAvailable>
-                                    <tr *ngFor="let contract of contracts" class="text-center"
-                                        [ngClass]="contract.typeContrat === 'eau' ? 'bg-info bg-lighten-3' : 'bg-yellow bg-lighten-3'">
-                                        <td style="cursor: pointer;"
+                                    <tr *ngFor="let contract of contracts" class="text-center">
+                                        <td [ngClass]="contract.typeContrat === 'eau' ? 'water' : 'electricity'" class="text-center">
+                                            <i class="fa fa-2x text-white" [ngClass]="contract.typeContrat === 'eau' ? 'fa-tint' : 'fa-bolt'"></i>
+                                        </td>
+
+                                        <td class="cursor-pointer"
                                             (click)="openContractDetails(detailSubscription, contract.id)">
-                                            <i [ngClass]="contract.typeContrat === 'eau' ? 'fa fa-tint' : 'fa fa-bolt'"></i>
                                             &nbsp;
                                             <b>{{contract.id}}</b>
                                         </td>
                                         <td>{{contract.etatContrat}}</td>
                                         <td>{{contract.dateEffetAbonnement}}</td>
                                         <td>{{contract.dateFinAbonnement}}</td>
-                                        <td>{{contract.adresseClientPayeur}}</td>
+                                        <td>{{contract.soldeTot}}</td>
+                                        <td>{{contract.soldeExigible}}</td>
                                         <td>{{contract.tariff}}</td>
                                         <td>
                                             <i class="fa fa-list-alt cursor-pointer pull-left"
@@ -99,7 +110,7 @@
                             <ng-template #emptyTD>
                                 <td>0.00</td>
                             </ng-template>
-                            <table class="table table-bordered ">
+                            <table class="table">
                                 <tbody>
                                 <tr>
                                     <th class="table-active" scope="row" colspan="2">
@@ -123,8 +134,8 @@
                         </div>
                         -->
                         <div class="table-responsive" *ngIf="bills">
-                            <table class="table table-bordered">
-                                <thead>
+                            <table class="table">
+                                <thead class="table-light">
                                 <tr>
                                     <th scope="col">{{'CONTRACT_NUMBER' | translate }}</th>
                                     <th scope="col">{{'TOTAL_BALANCE' | translate }}</th>
@@ -252,7 +263,7 @@
                     </div>
                 </div>
             </tab>
-            <tab heading="Dossier compteur">
+            <tab heading="{{'COUNTER' | translate}}">
                 <div class="card">
                     <div class="card-header"
                          [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">

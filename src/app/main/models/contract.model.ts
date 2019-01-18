@@ -10,6 +10,8 @@ export class ContractModel {
     prenomClientTitulaire?: string;
     nomClientPayeur?: string;
     prenomClientPayeur?: string;
+    soldeTot?: string;
+    soldeExigible?: string;
     adresseClientPayeur?: string;
     libelleCategorieAbonnement?: string;
     libelleTypeReseau?: string;
@@ -27,6 +29,8 @@ export class ContractModel {
                 nomClientPayeur: string,
                 prenomClientPayeur: string,
                 adresseClientPayeur: string,
+                soldeTot: string,
+                soldeExigible: string,
                 libelleCategorieAbonnement: string,
                 libelleTypeReseau: string,
                 tariff: string) {
@@ -42,6 +46,8 @@ export class ContractModel {
         this.nomClientPayeur = nomClientPayeur;
         this.prenomClientPayeur = prenomClientPayeur;
         this.adresseClientPayeur = adresseClientPayeur;
+        this.soldeTot = soldeTot;
+        this.soldeExigible = soldeExigible;
         this.libelleCategorieAbonnement = libelleCategorieAbonnement;
         this.libelleTypeReseau = libelleTypeReseau;
     }

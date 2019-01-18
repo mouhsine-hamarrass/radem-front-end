@@ -24,10 +24,10 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered "
+                        <table class="table"
                                sortable-table (sorted)="onSorted($event)"
                                filterable-table (filtred)="onFiltred($event)">
-                            <thead>
+                            <thead class="table-light">
                             <tr>
                                 <th scope="col">{{'CLAIM_NUMBER' | translate }}
                                     <span sortable-column="claimNumber"></span>
