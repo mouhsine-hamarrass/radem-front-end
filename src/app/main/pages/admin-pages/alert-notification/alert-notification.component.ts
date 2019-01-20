@@ -89,7 +89,7 @@ export class AlertNotificationComponent implements OnInit {
             null,
             new ClientModel(this.user[0].id, this.user[0].fullName, new ContactModel(1, null, null, null, null)),
             this.description.value,
-            new SubscriptionModel(null, this.user[0].contract, 'tournee', 'eau'),
+            null, // new SubscriptionModel(null, this.user[0].contract, 'tournee', 'eau'),
             new AlertModel(this.alert.id, null, null)
         );
         this.adminService.saveAlertNotification(this.alertNotification).subscribe(response => {
