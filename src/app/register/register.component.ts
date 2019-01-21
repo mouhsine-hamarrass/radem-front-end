@@ -3,6 +3,7 @@ import {AdminService} from '../main/services/admin.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EnableAccountService} from '../main/services/enable-account.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {RegistrationQuestionModel} from "../main/models/registration-question.model";
 
 @Component({
   selector: 'app-register',
@@ -23,10 +24,10 @@ export class RegisterComponent implements OnInit {
   serv: any;
   user: any;
   client: any;
-  questions: any;
   passCheck = true;
   toStep3 = true;
   buttonCheck = false;
+  registrationQuestions: Array<RegistrationQuestionModel> = [];
 
   constructor(
     private adminService: AdminService,
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
       reference: [''],
       firstname: [''],
       lastname: [''],
-      questions: [''],
+      registrationQuestions: [''],
       answer: [''],
       firstname2: [''],
       lastname2: [''],
@@ -117,9 +118,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.adminService.getRegistrationQuestions().subscribe(response => {
+      this.registrationQuestions = response.data;
+    }, err => {
+      console.log(err);
+    });
   }
 
-  goToStep2():boolean {
+  goToStep2(): boolean {
     if (this.method === 'BILL') {
       this.bill = this.registerForm.controls.facture.value;
       this.adminService.getUserWithBill(this.bill).subscribe(response => {
@@ -147,9 +153,6 @@ export class RegisterComponent implements OnInit {
         this.registerForm.controls.lastname.setValue(this.user[0].firstName);
       })
     }
-    this.adminService.getQuestions().subscribe(response => {
-      this.questions = response;
-    })
     return false;
   }
 
@@ -178,7 +181,7 @@ export class RegisterComponent implements OnInit {
   addUser() {
     this.adminService.saveUser(this.client).subscribe(response => {
       console.log(response);
-      this.enableAccountService.sendToken(this.client.email).subscribe(response => {
+      this.enableAccountService.sendToken(this.client.email).subscribe(resp => {
         this.router.navigate(['/register-succes']);
       })
     })
