@@ -1,6 +1,9 @@
 export class ContractModel {
     id?: number;
+    numeroContrat?: string;
     etatContrat?: string;
+    usage?: string;
+    comment?: string;
     dateCreationAbonnement?: string;
     dateEffetAbonnement?: string;
     dateFinAbonnement?: string;
@@ -18,7 +21,10 @@ export class ContractModel {
     tariff?: string;
 
     constructor(id: number,
+                numeroContrat: string,
                 etatContrat: string,
+                usage: string,
+                comment: string,
                 dateCreationAbonnement: string,
                 dateEffetAbonnement: string,
                 dateFinAbonnement: string,
@@ -35,7 +41,10 @@ export class ContractModel {
                 libelleTypeReseau: string,
                 tariff: string) {
         this.id = id;
+        this.numeroContrat = numeroContrat;
         this.etatContrat = etatContrat;
+        this.usage = usage;
+        this.comment = comment;
         this.dateCreationAbonnement = dateCreationAbonnement;
         this.dateEffetAbonnement = dateEffetAbonnement;
         this.dateFinAbonnement = dateFinAbonnement;

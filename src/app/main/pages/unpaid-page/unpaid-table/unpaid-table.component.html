@@ -6,34 +6,16 @@
             </div>
         </div>
     </div>
-    <table class="table"
-           sortable-table (sorted)="onSorted($event)"
-           filterable-table (filtred)="onFiltred($event)">
+    <table class="table">
         <thead class="table-light">
         <tr>
-            <th>
+            <th *ngIf="multiBillSelect">
                 <input type="checkbox" class="form-control" (change)="selectAll($event)">
             </th>
-            <th scope="col">{{'YEAR' | translate }}
-                <span sortable-column="anneeTrn"></span>
-                <span filterable-column="anneeTrn" filter-type="text"
-                      filter-placeholder="{{'YEAR' | translate }}"></span>
-            </th>
-            <th scope="col">{{'MONTH' | translate }}
-                <span sortable-column="periode"></span>
-                <span filterable-column="periode" filter-type="text"
-                      filter-placeholder="{{'MONTH' | translate }}"></span>
-            </th>
-            <th scope="col">{{'TOTAL_BALANCE' | translate }}
-                <span sortable-column="solde"></span>
-                <span filterable-column="solde" filter-type="date"
-                      filter-placeholder="{{'TOTAL_BALANCE' | translate }}"></span>
-            </th>
-            <th scope="col">{{'BALANCE_DUE' | translate }} (Dhs)
-                <span sortable-column="soldeExigible"></span>
-                <span filterable-column="soldeExigible" filter-type="text"
-                      filter-placeholder="{{'BALANCE_DUE' | translate }} (Dhs)"></span>
-            </th>
+            <th scope="col">{{'YEAR' | translate }}</th>
+            <th scope="col">{{'MONTH' | translate }}</th>
+            <th scope="col">{{'TOTAL_BALANCE' | translate }}</th>
+            <th scope="col">{{'BALANCE_DUE' | translate }} (Dhs)</th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +23,7 @@
                                 [colSpan]="7"></app-data-not-available>
         <ng-template #dataAvailable>
             <tr *ngFor="let bill of bills">
-                <td scope="row">
+                <td scope="row" *ngIf="multiBillSelect">
                     <input type="checkbox" class="form-control"
                            (change)="addBill($event, bill)"/>
                 </td>

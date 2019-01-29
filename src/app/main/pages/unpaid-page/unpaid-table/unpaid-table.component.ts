@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ContractsService} from '../../../services/contracts.service';
 import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
@@ -26,6 +26,8 @@ export class UnpaidTableComponent implements OnInit {
     sort: any;
     filter: any;
 
+    @Input() multiBillSelect = false;
+
     constructor(private contractServices: ContractsService) {
     }
 
@@ -49,7 +51,7 @@ export class UnpaidTableComponent implements OnInit {
     getAllUnpaidBills() {
         this.total = 0;
         this.totalUnpaid = 0;
-        this.contractServices.getPageableUnpaidBills(this.user.clientNo, this.page, this.pageSize, this.filter, this.sort)
+        this.contractServices.getPageableUnpaidBills(this.page, this.pageSize)
             .subscribe(response => {
                 this.bills = response.data.content;
                 this.bills.forEach(bill => {

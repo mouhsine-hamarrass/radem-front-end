@@ -46,3 +46,6 @@ html body.fixed-navbar {
     background-color: #F4001A !important;
     color: #FFFFFF;
 }
+aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}

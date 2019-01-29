@@ -91,9 +91,7 @@
                             </div>
                         </div>
                         <div class="table-responsive mx-auto">
-                            <table class="table table-bordered"
-                                   sortable-table (sorted)="onSortedConsumption($event)"
-                                   filterable-table (filtred)="onFiltredConsumption($event)">
+                            <table class="table table-bordered">
                                 <thead class="table-light">
                                 <tr>
                                     <!--
@@ -103,36 +101,12 @@
                                               filter-placeholder="{{'CONTRACT_NUMBER' | translate}}"></span>
                                     </th>
                                     -->
-                                    <th scope="col">{{'DATE_OF_REPORTS' | translate}}
-                                        <span sortable-column="dateReleve"></span>
-                                        <span filterable-column="dateReleve" filter-type="text"
-                                              filter-placeholder="{{'DATE_OF_REPORTS' | translate}}"></span>
-                                    </th>
-                                    <th scope="col">{{'LAST_INDEX' | translate}}
-                                        <span sortable-column="perTrn"></span>
-                                        <span filterable-column="perTrn" filter-type="text"
-                                              filter-placeholder="{{'LAST_INDEX' | translate}}"></span>
-                                    </th>
-                                    <th scope="col">{{'PERIOD' | translate}}
-                                        <span sortable-column="periode"></span>
-                                        <span filterable-column="periode" filter-type="text"
-                                              filter-placeholder="{{'PERIOD' | translate}}"></span>
-                                    </th>
-                                    <th scope="col">{{'INDEX_TYPE' | translate}}
-                                        <span sortable-column="typeIndex"></span>
-                                        <span filterable-column="typeIndex" filter-type="text"
-                                              filter-placeholder="{{'INDEX_TYPE' | translate}}"></span>
-                                    </th>
-                                    <th scope="col">{{'BALANCE_DUE' | translate}}
-                                        <span sortable-column="valIdxCso"></span>
-                                        <span filterable-column="valIdxCso" filter-type="text"
-                                              filter-placeholder="{{'BALANCE_DUE' | translate}}"></span>
-                                    </th>
-                                    <th scope="col">{{'INDEX_CONSUM_VALUE' | translate}}
-                                        <span sortable-column="volFacEauCso"></span>
-                                        <span filterable-column="volFacEauCso" filter-type="text"
-                                              filter-placeholder="{{'INDEX_CONSUM_VALUE' | translate}}"></span>
-                                    </th>
+                                    <th scope="col">{{'DATE_OF_REPORTS' | translate}}</th>
+                                    <th scope="col">{{'LAST_INDEX' | translate}}</th>
+                                    <th scope="col">{{'PERIOD' | translate}}</th>
+                                    <th scope="col">{{'INDEX_TYPE' | translate}}</th>
+                                    <th scope="col">{{'BALANCE_DUE' | translate}}</th>
+                                    <th scope="col">{{'INDEX_CONSUM_VALUE' | translate}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

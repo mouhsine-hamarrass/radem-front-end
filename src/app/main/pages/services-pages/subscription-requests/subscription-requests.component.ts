@@ -40,7 +40,7 @@ export class SubscriptionRequestsComponent implements OnInit {
     }
 
     getSubscriptions(): void {
-        this.myServices.getSubscriptionRequests(this.page, this.pageSize, this.filter, this.sort)
+        this.myServices.getSubscriptionRequests(this.page, this.pageSize)
             .subscribe(response => {
                 this.subscriptionRequests = response.data.content;
                 this.totalElements = response.data.totalElements;

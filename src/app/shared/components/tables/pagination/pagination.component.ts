@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+    selector: 'app-pagination',
+    templateUrl: './pagination.component.html',
+    styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit {
 
@@ -18,18 +18,19 @@ export class PaginationComponent implements OnInit {
     @Input() firstText: string;
     @Input() lastText: string;
     @Input() itemsPerPage: number;
+    @Input() showPagination = false;
 
     @Output() numPages: EventEmitter<any> = new EventEmitter();
     @Output() onpageChanged: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  pageChanged(event: any): void {
-    this.currentPage = event.page;
-    this.onpageChanged.emit(event.page);
-  }
+    pageChanged(event: any): void {
+        this.currentPage = event.page;
+        this.onpageChanged.emit(event.page);
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }

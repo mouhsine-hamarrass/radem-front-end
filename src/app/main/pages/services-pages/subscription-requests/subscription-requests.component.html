@@ -26,32 +26,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table"
-                                       sortable-table (sorted)="onSorted($event)"
-                                       filterable-table (filtred)="onFiltred($event)">
+                                <table class="table">
                                     <thead class="table-light">
                                     <tr>
-                                        <th scope="col">{{'REQUEST_NUMBER' | translate }}
-                                            <span sortable-column="requestNumber"></span>
-                                            <span filterable-column="requestNumber" filter-type="text"
-                                                  filter-placeholder="{{'REQUEST_NUMBER' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'CREATED_ON' | translate }}
-                                            <span sortable-column="createdAt"></span>
-                                            <span filterable-column="createdAt" filter-type="date"
-                                                  filter-placeholder="{{'CREATED_ON' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'TYPE' | translate }}
-                                            <span sortable-column="type"></span>
-                                            <span filterable-column="type" filter-type="text"
-                                                  filter-placeholder="{{'TYPE' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'Status' | translate }}
-                                            <span sortable-column="status"></span>
-                                            <span filterable-column="status" filter-type="select"
-                                                  [filter-select-data]="statusFilter"
-                                                  filter-placeholder="{{'Status' | translate }}"></span>
-                                        </th>
+                                        <th scope="col">{{'REQUEST_NUMBER' | translate }}</th>
+                                        <th scope="col">{{'CREATED_ON' | translate }}</th>
+                                        <th scope="col">{{'TYPE' | translate }}</th>
+                                        <th scope="col">{{'Status' | translate }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>

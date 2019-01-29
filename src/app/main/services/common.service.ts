@@ -50,7 +50,7 @@ export class CommonService {
     return match;
   }
 
-  public setSettings(text?, enableSearchFilter?, groupBy?, badgeShowLimit?, disabled?, searchPlaceholderText?, selectAllText?,
+  public initMultiSelect(text?, enableSearchFilter?, groupBy?, badgeShowLimit?, disabled?, searchPlaceholderText?, selectAllText?,
                      unSelectAllText?, classes?) {
     return {
       text: text || 'Sélectionner une valeur',

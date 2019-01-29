@@ -52,11 +52,11 @@ export class ConsumptionsPageComponent implements OnInit {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
-        this.getContracts();
+        this.getClientContracts();
     }
 
-    getContracts() {
-        this.adminService.getAllContractByNumClient(this.user.clientNo).subscribe(response => {
+    getClientContracts() {
+        this.adminService.getAllContractByNumClient().subscribe(response => {
             this.userContracts = response.data;
         });
     }
@@ -75,9 +75,7 @@ export class ConsumptionsPageComponent implements OnInit {
             startDate,
             endDate,
             this.pageConsumption,
-            this.pageSizeConsumption,
-            this.filterConsumption,
-            this.sortConsumption)
+            this.pageSizeConsumption)
             .subscribe(response => {
                 // this.consumptions = response.data['content'];
                 this.consumptions = response.data;

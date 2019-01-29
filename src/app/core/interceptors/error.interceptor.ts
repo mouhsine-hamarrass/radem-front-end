@@ -49,7 +49,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
             console.log(response.error.data);
           } else {
-            if (response.status === 404 || response.status === 400 || response.status === 500) {
+            if (response.status === 403 || response.status === 404 || response.status === 400 || response.status === 500) {
               if (typeof response.error === 'string') {
                 this.translate.get(JSON.parse(response.error).message).subscribe(msg => {
                   this.toastr.error(msg, '', {

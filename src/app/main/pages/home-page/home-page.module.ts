@@ -13,10 +13,12 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {HttpClient} from '@angular/common/http';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {ConsumptionsPageModule} from '../consumptions-page/consumptions-page.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         ChartsModule,
         BsDropdownModule,
         BsDatepickerModule,
@@ -24,6 +26,7 @@ import {ConsumptionsPageModule} from '../consumptions-page/consumptions-page.mod
         PipesModule,
         UnpaidPageModule,
         ConsumptionsPageModule,
+        SharedModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,

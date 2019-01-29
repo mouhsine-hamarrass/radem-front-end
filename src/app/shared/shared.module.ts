@@ -45,6 +45,7 @@ import {FilterService} from './services/filter.service';
 import {SortableColumnComponent} from './components/tables/sortable-column/sortable-column.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
         OwlMomentDateTimeModule,
+        AngularMultiSelectModule
     ],
     exports: [
         CommonModule,
@@ -120,6 +122,7 @@ import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
         OwlMomentDateTimeModule,
+        AngularMultiSelectModule
     ],
     providers: [
         PrintService,

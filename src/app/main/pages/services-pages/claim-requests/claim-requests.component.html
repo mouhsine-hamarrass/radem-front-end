@@ -24,33 +24,13 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table"
-                               sortable-table (sorted)="onSorted($event)"
-                               filterable-table (filtred)="onFiltred($event)">
+                        <table class="table">
                             <thead class="table-light">
                             <tr>
-                                <th scope="col">{{'CLAIM_NUMBER' | translate }}
-                                    <span sortable-column="claimNumber"></span>
-                                    <span filterable-column="claimNumber" filter-type="text"
-                                          filter-placeholder="{{'DESIGNATION' | translate }}"></span>
-                                </th>
-                                <th scope="col">{{'OBJECT' | translate }}
-                                    <span sortable-column="object"></span>
-                                    <span filterable-column="object" filter-type="select"
-                                          [filter-select-data]="complaintTypeFilter"
-                                          filter-placeholder="{{'OBJECT' | translate }}"></span>
-                                </th>
-                                <th scope="col">{{'CREATED_ON' | translate }}
-                                    <span sortable-column="createdDate"></span>
-                                    <span filterable-column="createdDate" filter-type="date"
-                                          filter-placeholder="{{'CREATED_ON' | translate }}"></span>
-                                </th>
-                                <th scope="col">{{'Status' | translate }}
-                                    <span sortable-column="status"></span>
-                                    <span filterable-column="status" filter-type="select"
-                                          [filter-select-data]="complaintStatusFilter"
-                                          filter-placeholder="{{'Status' | translate }}"></span>
-                                </th>
+                                <th scope="col">{{'CLAIM_NUMBER' | translate }}</th>
+                                <th scope="col">{{'OBJECT' | translate }}</th>
+                                <th scope="col">{{'CREATED_ON' | translate }}</th>
+                                <th scope="col">{{'Status' | translate }}</th>
                             </tr>
                             </thead>
                             <tbody>

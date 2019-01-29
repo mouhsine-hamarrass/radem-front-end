@@ -6,11 +6,12 @@ import {ToastrService} from 'ngx-toastr';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import swal from 'sweetalert2';
 import {TranslateService} from '@ngx-translate/core';
-import _ from 'underscore';
 import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute} from '@angular/router';
 import {SubscriptionRequestStatus} from '../../../../shared/models/user.model';
 import * as moment from 'moment';
+import * as _ from 'underscore';
+import {User} from '../../../models/user.model';
 
 @Component({
     selector: 'app-request-subscription-detail',
@@ -22,7 +23,8 @@ export class RequestSubscriptionDetailComponent implements OnInit, AfterViewInit
     @ViewChild('StepButton') StepButton: ElementRef;
     @ViewChild('UpdateButton') UpdateButton: ElementRef;
     @ViewChild('commentaire') commentaire: ElementRef;
-    agents: any = [];
+    agents: Array<User>;
+    agent: User;
     request: SubscriptionModel;
     requestForm: FormGroup;
     commentForm: FormGroup;
@@ -63,14 +65,8 @@ export class RequestSubscriptionDetailComponent implements OnInit, AfterViewInit
 
     }
 
-    getAgents(): void {
-        this.requestService.getAgents().subscribe(response => {
-            this.agents = response.data;
-        }, error => {
-        });
-    }
-
     ngOnInit() {
+        this.getAgents();
         this.getRequest();
     }
 
@@ -83,27 +79,18 @@ export class RequestSubscriptionDetailComponent implements OnInit, AfterViewInit
         const id: string = this.route.snapshot.paramMap.get('id');
         if (id !== null) {
             this.requestService.getSubscriptionDetails(id).subscribe(response => {
-                this.request = response.data;
-                console.log(this.request);
-                this.checkStatus();
-                if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
-                    this.UpdateButton.nativeElement.disabled = true;
-                } else {
-                    this.UpdateButton.nativeElement.disabled = false;
+                if (response && response.data) {
+                    this.request = response.data;
+                    console.log(this.request);
+                    this.checkStatus();
+                    if (this.request.status === 'RECEIVED' || this.request.status === 'CREATED') {
+                        this.UpdateButton.nativeElement.disabled = true;
+                    } else {
+                        this.UpdateButton.nativeElement.disabled = false;
+                    }
                 }
             });
         }
-    }
-
-    openUpdateForm(template: TemplateRef<any>) {
-        this.modalRef = this.modalService.show(template, this.config);
-        this.requestForm.controls.agent.setValue(this.request.intervenant.id);
-        this.requestForm.controls.dateIntervention.setValue(moment(this.request.interventionDate).format('YYYY-MM-DD'));
-        this.requestForm.controls.phone.setValue(this.agents[this.request.intervenant.id - 1].phone);
-    }
-
-    focus() {
-        this.commentaire.nativeElement.focus();
     }
 
     checkStatus() {
@@ -128,6 +115,56 @@ export class RequestSubscriptionDetailComponent implements OnInit, AfterViewInit
         this.wizardState.navigationMode.goToStep(this.selectedStep, new EventEmitter(), new EventEmitter());
     }
 
+    getAgents(): void {
+        this.requestService.getAgents().subscribe(response => {
+            this.agents = response.data;
+        }, error => {
+        });
+    }
+
+    getPhone(id) {
+        if (id && id !== null) {
+            this.agent = _.findWhere(this.agents, {id: parseFloat(id)});
+            this.addInterventionForm.controls.phone.setValue(this.agent.phone);
+            this.requestForm.controls.phone.setValue(this.agent.phone);
+        }
+    }
+
+    addIntervenant() {
+        this.request.interventionDate = this.addInterventionForm.controls.dateIntervention.value;
+        this.request.intervenant = {
+            id: Number.parseInt(this.addInterventionForm.controls.agent.value, 10)
+        };
+        this.request.subscriptions = _.pluck(this.request.subscriptions, 'id');
+        console.log(this.request);
+        const agentId: number = JSON.parse(localStorage.getItem('user')).id;
+        this.requestService.setAsInProgress(this.request.id, agentId, this.request.intervenant.id, this.request.interventionDate)
+            .subscribe(response => {
+                this.modalRef.hide();
+                this.ngOnInit();
+            })
+    }
+
+    updateIntervenant() {
+        this.request.interventionDate = this.requestForm.controls.dateIntervention.value;
+        this.request.intervenant = {
+            id: Number.parseInt(this.requestForm.controls.agent.value, 10)
+        };
+        console.log(this.request);
+        this.requestService.saveTerminationRequest(this.request).subscribe(response => {
+            console.log(response);
+            this.ngOnInit();
+        })
+    }
+
+    openUpdateForm(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template, this.config);
+        this.requestForm.controls.agent.setValue(this.request.intervenant.id);
+        this.requestForm.controls.dateIntervention.setValue(moment(this.request.interventionDate).format('YYYY-MM-DD'));
+        this.requestForm.controls.phone.setValue(this.agents[this.request.intervenant.id - 1].phone);
+    }
+
+
     AddIntervention(template: TemplateRef<any>) {
         if (this.request.status === 'UNPAID_VERIFICATION') {
             /*
@@ -139,7 +176,8 @@ export class RequestSubscriptionDetailComponent implements OnInit, AfterViewInit
         } else if (this.request.status === 'RECEIVED') {
             this.modalRef = this.modalService.show(template, this.config);
         } else {
-            this.nextStep(this.request.id);
+            //this.nextStep(this.request.id);
+            this.modalRef = this.modalService.show(template, this.config);
         }
     }
 

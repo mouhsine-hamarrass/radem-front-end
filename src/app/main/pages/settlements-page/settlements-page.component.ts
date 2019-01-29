@@ -8,6 +8,7 @@ import {ServicesService} from '../../services/services.service';
 import {ContractsService} from '../../services/contracts.service';
 import {User} from '../../models/user.model';
 import {AuthHelper} from '../../../core/services/security/auth.helper';
+import {ContractModel} from '../../models/contract.model';
 
 @Component({
     selector: 'app-settlements',
@@ -16,8 +17,9 @@ import {AuthHelper} from '../../../core/services/security/auth.helper';
 })
 export class SettlementsPageComponent implements OnInit {
     public user: User;
+    userContracts: Array<ContractModel>;
     public settlements: any;
-    public contracts: any;
+    public contracts: Array<ContractModel>;
     public contractId: any;
     public date: Date;
     public contractForm: FormGroup;
@@ -31,7 +33,8 @@ export class SettlementsPageComponent implements OnInit {
     sort: any;
     filter: any;
 
-    constructor(private adminService: ContractsService,
+    constructor(private contractServices: ContractsService,
+                private adminService: AdminService,
                 private formBuilder: FormBuilder,
                 private utilsService: UtilsService,
                 private servicesService: ServicesService) {
@@ -59,6 +62,7 @@ export class SettlementsPageComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
         this.getContacts();
+        this.getClientContracts();
     }
 
     onSorted(sort: any): void {
@@ -71,8 +75,14 @@ export class SettlementsPageComponent implements OnInit {
         this.getContacts();
     }
 
+    getClientContracts() {
+        this.adminService.getAllContractByNumClient().subscribe(response => {
+            this.userContracts = response.data;
+        });
+    }
+
     getContacts() {
-        this.adminService.getPageableContracts(this.user.clientNo, this.page, this.pageSize, this.filter, this.sort)
+        this.contractServices.getPageableContracts(this.page, this.pageSize)
             .subscribe(response => {
                 this.contracts = response.data['content'];
                 this.totalElements = response.data['totalElements'];
@@ -97,7 +107,7 @@ export class SettlementsPageComponent implements OnInit {
 
     recherche() {
         /*
-        this.adminService.getSettlementsByContract(this.contractId).subscribe(response => {
+        this.contractServices.getSettlementsByContract(this.contractId).subscribe(response => {
             this.settlements = response;
         })
         */

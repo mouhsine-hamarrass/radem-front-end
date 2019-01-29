@@ -1,35 +1,199 @@
 <div class="card-header content-header back col-12">
     <div class="row">
         <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-1x fa-tachometer" style="color: #2c5599;"></i> {{'DASHBOARD' | translate}}</h3>
+            <h3 class="content-header-title"><i class="fa fa-1x fa-tachometer" style="color: #2c5599;"></i>
+                {{'DASHBOARD' | translate}}</h3>
+        </div>
+        <div class="col-md-6 col-12 text-right">
+            <button class="btn btn-secondary"
+                    (click)="openModalLinkContract(linkContract)">
+                <i class="fa fa-plus"></i>&nbsp; {{'LINK_CONTRACT' | translate}}
+            </button>
         </div>
     </div>
 </div>
-<div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <div class="mb-0">
-                <div class="card-header border-0">
-                    <h4 class="card-title"><!--<i class="fa fa-get-pocket" style="color: #2c5599;"></i>-->  {{'UNPAID_LIST' | translate}}</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <app-unpaid-table></app-unpaid-table>
+<div class="card-header content-header back col-12 sub-header">
+    <div class="col-12 content-header">
+        <div class="row align-items-center">
+            <div class="col-lg-11 col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-3 has-border">
+                        <select type="text" class="form-control contract-dropdown" #t
+                                (change)="setContract(t.value)">
+                            <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                            <option *ngFor="let contract of userContracts" value="{{contract.numeroContrat}}">
+                                {{contract.numeroContrat}}
+                                ({{contract.typeContrat}})
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col has-border">
+                        <i class="fa fa-users icon"></i>&nbsp;
+                        <span class="sub-title" tooltip="">Rachid EL KADOURI</span>
+                    </div>
+                    <div class="col-md-6 has-border">
+                        <i class="fa fa-map-marker icon"></i>&nbsp;
+                        <span class="sub-title">Hay Essalama, 23, rue 4, Boujdour</span>
                     </div>
                 </div>
             </div>
-
-            <div class="mb-0">
-                <div class="card-header border-0">
-                    <h4 class="content-header-title"><!--<i class="fa fa-tasks" style="color: #2c5599;"></i>-->  {{'Extrait des contrats (actifs)' | translate}}</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <app-consumptions-table></app-consumptions-table>
-                    </div>
+            <div class="col-lg-1 col-md-2">
+                <div class="status text-right">
+                    <i class="fa fa-circle icon success"></i>&nbsp;
+                    <span>Active</span>
                 </div>
             </div>
-
         </div>
-    </section>
+    </div>
 </div>
+
+<div class="content-body">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="deck solde">
+                    <div class="deck-body">
+                        <div class="title text-white">{{'UNPAID_BALANCE' | translate}}</div>
+                        <div style="margin-top: 70px">
+                            <span class="text-white">{{'VALUE' | translate}}</span>
+                            <div class="value text-white">2340,35 DH</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="deck bill">
+                    <div class="deck-body">
+                        <div class="title text-white">{{'LATEST_BILL' | translate}}</div>
+                        <div style="margin-top: 9px">
+                            <span class="text-white">{{'MONTH' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">Octobre 2019</div>
+
+                            <span class="text-white">{{'VALUE' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">340,24 DHs</div>
+
+                            <span class="text-white">{{'CONSUMPTION' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">220,23 m<sup>3</sup></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="deck payment">
+                    <div class="deck-body">
+                        <div class="title text-white">Dernier paiement</div>
+                        <div style="margin-top: 24px;">
+                            <span class="text-white">{{'AMOUNT' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">340,24 DHs</div>
+
+                            <span class="text-white">{{'MODE' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">Espece</div>
+
+                            <span class="text-white">{{'DATE' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">26/10/2019</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="deck location">
+                    <div class="deck-body">
+                        <div class="title text-white">{{'INDEX_VISIT' | translate}}</div>
+                        <div style="margin-top: 24px;">
+                            <span class="text-white">{{'LAST_INDEX' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">3876878</div>
+
+                            <span class="text-white">{{'LAST_INDEX_DATE' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">11/06/2019</div>
+
+                            <span class="text-white">{{'NEXT_VISITE' | translate}}</span>
+                            <div class="font-weight-bold font-size-large text-white">13/07/2019</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="deck card-deck-outline">
+            <div class="deck-body">
+                <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
+                <div class="card-deck-content">
+                    <div class="card-body">
+                        <div [innerHTML]="advices?.value || '' | safeHtml"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #linkContract>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">
+            {{'LINK_CONTRACT' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" novalidate [formGroup]="formLinkContract">
+            <div class="form-group">
+                <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}</label>
+                <input formControlName="numeroContrat" id="numeroContrat" class="form-control required"/>
+                <div class="text-danger"
+                     *ngIf="!formLinkContract.controls['numeroContrat'].valid && formLinkContract.controls['numeroContrat'].touched">
+                    <div *ngIf="formLinkContract.controls['numeroContrat'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="numeroFacture" class="control-label">{{'BILL_NUMBER' | translate}}<span
+                                class="danger">*</span></label>
+                        <input formControlName="numeroFacture" id="numeroFacture" class="form-control required"/>
+                        <div class="text-danger"
+                             *ngIf="!formLinkContract.controls['numeroFacture'].valid && formLinkContract.controls['numeroFacture'].touched">
+                            <div *ngIf="formLinkContract.controls['numeroFacture'].errors.required">
+                                {{'FIELD_REQUIRED' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="monthNumber" class="control-label">{{'MONTH' | translate}}<span
+                                class="danger">*</span></label>
+                        <select id="monthNumber" formControlName="month" class="form-control" required>
+                            <option value="" disabled selected>Choisir un mois</option>
+                            <option class="month" *ngFor="let item of [].constructor(12); let i = index"
+                                    [value]="i+1">{{i+1}}
+                            </option>
+                        </select>
+                        <div class="text-danger"
+                             *ngIf="!formLinkContract.controls['month'].valid && formLinkContract.controls['month'].touched">
+                            <div *ngIf="formLinkContract.controls['month'].errors.required">
+                                {{'FIELD_REQUIRED' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide(); formLinkContract.reset()">
+            {{'CANCEL' | translate}}
+        </button>
+        <button type="submit" class="btn btn btn-outline-primary" (click)="linkMyContract(formLinkContract.value);"
+                [disabled]="formLinkContract.invalid">
+            {{'SAVE' | translate}}
+        </button>
+    </div>
+</ng-template>
