@@ -15,7 +15,7 @@
                             <div class="col-12">
                                 <div class="float-left">
                                     <form class="form-inline">
-                                        <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                        <app-filter (onfilterChanged)="pageFilter($event)" [showFilter]="true"></app-filter>
                                     </form>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <app-pagination [disabled]="false"
+                    <app-pagination [showPagination]="true"
                                     [numberOfItems]="numberOfItems"
                                     [itemsPerPage]="itemsPerPage"
                                     [totalItems]="totalElements"

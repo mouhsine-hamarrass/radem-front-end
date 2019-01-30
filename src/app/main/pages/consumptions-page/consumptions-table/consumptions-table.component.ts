@@ -31,17 +31,16 @@ export class ConsumptionsTableComponent implements OnInit {
     }
 
     getActiveContracts() {
-        this.adminService.getPageableActiveContracts(this.user.clientNo,
+        this.adminService.getPageableActiveContracts(
             this.page,
-            this.pageSize,
-            this.filter,
-            this.sort)
+            this.pageSize)
             .subscribe(response => {
                 this.contracts = response.data.content;
                 this.totalElements = response.data.totalElements;
                 this.totalPages = response.data.totalPages;
                 this.itemsPerPage = response.data.size;
                 this.numberOfItems = response.data.numberOfElements;
+                console.log(response);
             }, err => console.log(err));
     }
 

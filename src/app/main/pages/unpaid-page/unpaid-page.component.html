@@ -13,74 +13,110 @@
             <div id="what-is" class="mb-0">
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <div *ngIf="!confirmation">
-
-                            <app-unpaid-table></app-unpaid-table>
-
-                            <div class="row col-md-12 text-right">
-                                <div class="form-group form-inline">
-                                    <label>
-                                        <strong>Total des impayés : </strong>
-                                    </label>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <input class="form-control-plaintext" type="text" id="staticEmail2"
-                                           value="{{totalUnpaid}}"
-                                           readonly>
-                                </div>
-                                <div class="form-group form-inline">
-                                    <label>
-                                        <strong>Montant a régler : </strong>
-                                    </label>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <input class="form-control-plaintext text-danger" type="text" value="{{total}}"
-                                           readonly>
+                        <div class="row ">
+                            <div class="col-md-4 align-self-start">
+                                <div class="multicheckbox">
+                                    <angular2-multiselect [data]="userContracts"
+                                                          [(ngModel)]="selectedContract"
+                                                          [settings]="dropdownSettings">
+                                    </angular2-multiselect>
                                 </div>
                             </div>
+                            <div class="col-md-6 align-self-start">
+                                <button class="btn btn-outline-info" (click)="getAllUnpaidBills()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="table-responsive mx-auto">
+                                <div class="row justify-content-between">
+                                    <div class="col-12">
+                                        <div class="float-left">
+                                            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" class="form-control" #checkboxes
+                                                   (change)="toggleCheckAll($event)"/>
+                                        </th>
+                                        <th scope="col">{{'YEAR_MONTH' | translate }}</th>
+                                        <th scope="col">{{'BILL_NUMBER' | translate }}</th>
+                                        <th scope="col">{{'AMOUNT' | translate }} (Dhs)</th>
+                                        <th scope="col">{{'BALANCE' | translate }} (Dhs)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <app-data-not-available
+                                            *ngIf="!contractsBills || contractsBills.length == 0; else dataAvailable"
+                                            [colSpan]="4">
+                                    </app-data-not-available>
+                                    <ng-template #dataAvailable>
+                                        <ng-container *ngFor="let contractBills of contractsBills">
+                                            <tr style="background-color: dodgerblue;">
+                                                <td>
+                                                    <input type="checkbox" class="form-control"
+                                                           #checkboxes
+                                                           (change)="toggleAddBills($event, contractBills)"/>
+                                                </td>
+                                                <td>{{contractBills.numeroContrat}} - {{contractBills.typeContrat}}</td>
+                                                <td colspan="3" class="text-center">{{contractBills.address}}</td>
+                                            </tr>
+                                            <tr *ngFor="let bill of contractBills.bills"
+                                                [ngClass]="bill.isExigible ? 'bg-accent-1' : 'bg-accent-3'">
+                                                <td>
+                                                    <input type="checkbox" class="form-control"
+                                                           #checkboxes
+                                                           [attr.data-type]="bill.isExigible"
+                                                           [disabled]="bill.isExigible"
+                                                           [checked]="bill.isExigible || bill.checked"
+                                                           [attr.data-value]="bill.solde"
+                                                           (change)="toggleAddBill($event, bill)"/>
+                                                </td>
+                                                <td>{{bill.periode}} - {{bill.year}}</td>
+                                                <td>{{bill.numeroFacture}}</td>
+                                                <td>{{bill.soldeExigible}}</td>
+                                                <td>{{bill.solde}}</td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-template>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <app-pagination [showPagination]="totalPages > 1"
+                                            [numberOfItems]="numberOfItems"
+                                            [itemsPerPage]="itemsPerPage"
+                                            [totalItems]="totalElements"
+                                            [totalPages]="totalPages"
+                                            (onpageChanged)="pageChanged($event)"></app-pagination>
+
+                            <div class="col-md-12 text-right mt-1">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label>Total des impayés :</label>
+                                        <span class=" font-weight-bold text-danger">{{totalUnpaid}} DH</span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label>Montant a régler : </label>
+                                        <span class="text-muted font-weight-bold">{{total}} DH</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row col-md-12 text-right">
                                 <input class="btn btn btn-outline-primary mb-2" type="button"
                                        value="Régler vos factures" (click)="submit()">
                             </div>
                         </div>
-                        <form class="form-inline" *ngIf="confirmation">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th scope="col">Nº de facture</th>
-                                        <th scope="col">Nº d'echeance</th>
-                                        <th scope="col">Nº de Police</th>
-                                        <th scope="col">Date d'écheance</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Montant (Dhs)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr *ngFor="let bill of selectedBills">
-                                        <td>{{bill.numBill}}</td>
-                                        <td>{{bill.dueNumber}}</td>
-                                        <td>{{bill.police}}</td>
-                                        <td>{{bill.dueDate}}</td>
-                                        <td>{{bill.type}}</td>
-                                        <td>{{bill.amount}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row col-md-12 text-right">
-                                <div class="form-group form-inline">
-                                    <label>
-                                        <strong>Montant à payer : </strong>
-                                    </label>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <input class="form-control-plaintext text-danger" type="text" value="{{total}}"
-                                           readonly>
-                                </div>
-                            </div>
-                            <div class="row col-md-12 text-right">
-                                <input class="btn btn btn-outline-primary mb-2" type="button" value="Payer">&nbsp;
-                                <input class="btn btn-secondary mb-2" type="button" value="Annuler" (click)="cancel()">
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>

@@ -6,21 +6,11 @@
             </div>
         </div>
     </div>
-    <table class="table"
-           sortable-table (sorted)="onSorted($event)"
-           filterable-table (filtred)="onFiltred($event)">
+    <table class="table">
         <thead class="table-light">
         <tr>
-            <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate}}
-                <span sortable-column="numCta"></span>
-                <span filterable-column="numCta" filter-type="text"
-                      filter-placeholder="{{'CONTRACT_NUMBER' | translate}}"></span>
-            </th>
-            <th scope="col">{{'CATEGORY' | translate}}
-                <span sortable-column="categorieAbonnement"></span>
-                <span filterable-column="categorieAbonnement" filter-type="text"
-                      filter-placeholder="{{'CATEGORY' | translate}}"></span>
-            </th>
+            <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate}}</th>
+            <th scope="col">{{'CATEGORY' | translate}}</th>
             <!--
             <th scope="col">Prochaine relève
                 <span sortable-column="date"></span>
@@ -28,11 +18,7 @@
                       filter-placeholder="Prochaine relève"></span>
             </th>
             -->
-            <th scope="col">{{'LAST_INDEX' | translate}}
-                <span sortable-column="perTrn"></span>
-                <span filterable-column="perTrn" filter-type="text"
-                      filter-placeholder="Dernier index {{'LAST_INDEX' | translate}}"></span>
-            </th>
+            <th scope="col">{{'LAST_INDEX' | translate}}</th>
             <!--
             <th scope="col">Dernier paiement
                 <span sortable-column="index"></span>
@@ -40,16 +26,8 @@
                       filter-placeholder="Dernier paiement"></span>
             </th>
             -->
-            <th scope="col">{{'TOTAL_BALANCE' | translate}}
-                <span sortable-column="soldetot"></span>
-                <span filterable-column="soldetot" filter-type="text"
-                      filter-placeholder="{{'TOTAL_BALANCE' | translate}}"></span>
-            </th>
-            <th scope="col">{{'BALANCE_DUE' | translate}}
-                <span sortable-column="soldeExigible"></span>
-                <span filterable-column="soldeExigible" filter-type="text"
-                      filter-placeholder="{{'BALANCE_DUE' | translate}}"></span>
-            </th>
+            <th scope="col">{{'TOTAL_BALANCE' | translate}}</th>
+            <th scope="col">{{'BALANCE_DUE' | translate}}</th>
         </tr>
         </thead>
         <tbody>
@@ -68,7 +46,7 @@
         </tbody>
     </table>
 </div>
-<app-pagination [disabled]="false"
+<app-pagination [showPagination]="totalPages > 1"
                 [numberOfItems]="numberOfItems"
                 [itemsPerPage]="itemsPerPage"
                 [totalItems]="totalElements"

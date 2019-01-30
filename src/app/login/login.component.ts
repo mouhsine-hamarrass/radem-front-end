@@ -69,9 +69,6 @@ export class LoginComponent extends UIFormComponent implements OnInit {
           });
         }
       }, error => {
-        this.translate.get('login.error-user-unauthorized').subscribe(msg => {
-          this.toastrService.error(msg, '');
-        });
         this.loading = false;
       });
   }

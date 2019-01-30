@@ -20,9 +20,9 @@
                                     <select formControlName="contract" type="text" class="custom-select" #t
                                             (change)="setContract(t.value)">
                                         <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                                        <option *ngFor="let contract of contracts" value="{{contract.id}}">
-                                            {{contract.contractNumber}}
-                                            ({{contract.contractType}})
+                                        <option *ngFor="let contract of userContracts" value="{{contract.numeroContrat}}">
+                                            {{contract.numeroContrat}}
+                                            ({{contract.typeContrat}})
                                         </option>
                                     </select>
                                 </div>
@@ -69,35 +69,12 @@
                                        filterable-table (filtred)="onFiltred($event)">
                                     <thead class="table-light">
                                     <tr>
-                                        <th scope="col">{{'BILLIN_PERIOD' | translate }}
-                                            <span sortable-column="billingPeriod"></span>
-                                            <span filterable-column="billingPeriod" filter-type="text"
-                                                  filter-placeholder="{{'BILLIN_PERIOD' | translate }}"></span></th>
-                                        <th scope="col">{{'BILL_NUMBER' | translate }}
-                                            <span sortable-column="billNumber"></span>
-                                            <span filterable-column="billNumber" filter-type="text"
-                                                  filter-placeholder="{{'BILL_NUMBER' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'TYPE_OF_BILL' | translate }}
-                                            <span sortable-column="billType"></span>
-                                            <span filterable-column="billType" filter-type="text"
-                                                  filter-placeholder="{{'TYPE_OF_BILL' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'SETTLEMENT_DATE' | translate }}
-                                            <span sortable-column="settlementDate"></span>
-                                            <span filterable-column="settlementDate" filter-type="date"
-                                                  filter-placeholder="{{'SETTLEMENT_DATE' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'AMOUNT_IN_DH_TTC' | translate }}
-                                            <span sortable-column="amount"></span>
-                                            <span filterable-column="amount" filter-type="text"
-                                                  filter-placeholder="{{'AMOUNT_IN_DH_TTC' | translate }}"></span>
-                                        </th>
-                                        <th scope="col">{{'SETTLEMENT_MODE' | translate }}
-                                            <span sortable-column="SettlementMode"></span>
-                                            <span filterable-column="SettlementMode" filter-type="text"
-                                                  filter-placeholder="{{'SETTLEMENT_MODE' | translate }}"></span>
-                                        </th>
+                                        <th scope="col">{{'BILLIN_PERIOD' | translate }}</th>
+                                        <th scope="col">{{'BILL_NUMBER' | translate }}</th>
+                                        <th scope="col">{{'TYPE_OF_BILL' | translate }}</th>
+                                        <th scope="col">{{'SETTLEMENT_DATE' | translate }}</th>
+                                        <th scope="col">{{'AMOUNT_IN_DH_TTC' | translate }}</th>
+                                        <th scope="col">{{'SETTLEMENT_MODE' | translate }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -118,13 +95,13 @@
                                     </ng-template>
                                     </tbody>
                                 </table>
-                                <app-pagination [disabled]="false"
-                                                [numberOfItems]="numberOfItems"
-                                                [itemsPerPage]="itemsPerPage"
-                                                [totalItems]="totalElements"
-                                                [totalPages]="totalPages"
-                                                (onpageChanged)="pageChanged($event)"></app-pagination>
                             </div>
+                            <app-pagination [showPagination]="totalPages > 1"
+                                            [numberOfItems]="numberOfItems"
+                                            [itemsPerPage]="itemsPerPage"
+                                            [totalItems]="totalElements"
+                                            [totalPages]="totalPages"
+                                            (onpageChanged)="pageChanged($event)"></app-pagination>
                         </div>
                     </form>
                 </div>

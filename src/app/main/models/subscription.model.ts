@@ -1,6 +1,8 @@
 export class SubscriptionModel {
     id?: number;
+    object?: number;
     subscription?: string;
+    description?: string;
     tournee?: string;
     type?: string;
 
@@ -14,7 +16,9 @@ export class SubscriptionModel {
     agent?: any;
 
     constructor(id: number,
+                object: string,
                 subscription: string,
+                description: string,
                 tournee: string,
                 type: string,
 
@@ -28,7 +32,9 @@ export class SubscriptionModel {
                 agent: string) {
 
         this.id = id;
+        this.object = id;
         this.subscription = subscription;
+        this.description = subscription;
         this.tournee = tournee;
         this.type = type;
 

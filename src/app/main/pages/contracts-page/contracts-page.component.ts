@@ -9,7 +9,9 @@ import {AuthHelper} from '../../../core/services/security/auth.helper';
 import * as moment from 'moment';
 import {environment} from '../../../../environments/environment';
 import {ContractModel} from '../../models/contract.model';
-import {CounterModel} from '../../models/counter.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import swal from 'sweetalert2';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -22,9 +24,9 @@ export class ContractsPageComponent implements OnInit {
     public user: User;
     public contracts: Array<ContractModel>;
     public contract: ContractModel;
-    public counter: CounterModel;
 
-    months: any;
+    formLinkContract: FormGroup;
+
     values: any;
     solde: any;
     history: any;
@@ -56,44 +58,16 @@ export class ContractsPageComponent implements OnInit {
     itemsPerPageBills: number;
 
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
-    public chartType = 'bar';
-    public chartLabels: Array<any> = ['Jan', 'Féf', 'Mar', 'Avr', 'May', 'Jun', 'Jui', 'Auo', 'Sep', 'Oct', 'Nov', 'Dec'];
-    public chartDatasets: Array<any> = [
-        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: ''},
-        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: ''}
-    ];
-    public chartOptions: any = {
-        title: {
-            text: 'Moyenne de consomation',
-            display: true,
-        },
-        responsive: true
-    };
-    private firstYbar: Color = {
-        backgroundColor: 'rgba(151,187,205, 1)',
-        borderWidth: 1,
-        borderColor: 'rgba(151,187,205,1)',
-        pointBackgroundColor: 'rgba(151,187,205,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(220,220,220,1)'
-    };
-    private secondYbar: Color = {
-        backgroundColor: 'rgba(180, 228, 250, 1)',
-        borderWidth: 1,
-        borderColor: 'rgba(180, 228, 250,1)',
-        pointBackgroundColor: 'rgba(180, 228, 250,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(151,187,205,1)'
-    };
-    public chartColors: Array<any> = [
-        this.firstYbar,
-        this.secondYbar
-    ];
 
     constructor(private modalService: BsModalService,
+                private formBuilder: FormBuilder,
+                private translate: TranslateService,
                 private contractsServices: ContractsService, private soldeService: AdminService) {
+        this.formLinkContract = this.formBuilder.group({
+            numeroContrat: ['', Validators.required],
+            numeroFacture: ['', Validators.required],
+            month: ['', Validators.required]
+        });
     }
 
     ngOnInit() {
@@ -114,7 +88,7 @@ export class ContractsPageComponent implements OnInit {
     }
 
     getSubscriptions() {
-        this.contractsServices.getPageableContracts(this.user.clientNo, this.page, this.pageSize, this.filter, this.sort)
+        this.contractsServices.getPageableContracts( this.page, this.pageSize)
             .subscribe(response => {
                 _.each(response.data['content'], (contract: ContractModel) => {
                     contract.dateEffetAbonnement =
@@ -132,25 +106,29 @@ export class ContractsPageComponent implements OnInit {
             });
     }
 
-    getSoldeByNumContract(id) {
-        this.contractsServices.getSoldeByNumContract(id).subscribe(response => {
-        }, error => console.log(error));
+    openModalLinkContract(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template, this.modalOptions);
     }
 
-    getHistoryConsumptions(template: TemplateRef<any>, id: string) {
-        this.contractsServices.getHistoryConsumptions(id).subscribe(response => {
-            this.history = response.data;debugger;
-            _.each(this.history, (histo, i) => {
-                _.each(histo.consumptions, (cons, j) => {
-                    this.chartDatasets[i]['data'][j + 1] = cons;
-                    this.chartDatasets[i]['label'] = histo.annee;
-                    // histo.month = this.chartLabels[j + 1];
-                    // histo.montant = parseFloat(cons);
-                });
-            });
-            this.modalRef = this.modalService.show(template, this.modalOptions);
-            console.log(this.history);
-        }, error => console.log(error));
+    linkMyContract(formValues) {
+        this.formLinkContract.reset();
+        this.modalRef.hide();
+    }
+
+    unLinkMyContract(contractId) {
+        swal({
+            title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_CONTINUE'),
+            text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: this.translate.instant('YES_I_AM_SURE')
+        }).then((result) => {
+            if (result.value) {
+                this.getSubscriptions();
+            }
+        });
     }
 
     pageChanged(page: number): void {
@@ -165,10 +143,10 @@ export class ContractsPageComponent implements OnInit {
         this.getSubscriptions();
     }
 
-    openContractDetails(template: TemplateRef<any>, id: string) {
-        this.contractsServices.getDetailsContract(id).subscribe(responseContract => {
-            this.contractsServices.getCounterByContractId(id).subscribe(responseCounter => {
-                this.contractsServices.getSoldeByNumContract(id).subscribe(responseSolde => {
+    openContractDetails(template: TemplateRef<any>, numContract: string) {
+        if (numContract && numContract !== null) {
+            this.contractsServices.getDetailsContract(numContract).subscribe(responseContract => {
+                this.contractsServices.getSoldeByNumContract(numContract).subscribe(responseSolde => {
                     this.contract = responseContract.data;
                     if (this.contract) {
                         this.contract.dateCreationAbonnement =
@@ -178,11 +156,6 @@ export class ContractsPageComponent implements OnInit {
                         this.contract.dateFinAbonnement =
                             moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
                     }
-                    this.counter = responseCounter.data;
-                    if (this.counter) {
-                        this.counter.datePoseCompteur =
-                            moment(new Date(this.counter.datePoseCompteur)).format(environment.defaultDateFormatNoTime);
-                    }
                     this.solde = {
                         soldeExigible: responseSolde.data['soldeExigible'] || 0,
                         soldetot: responseSolde.data['soldetot'] || 0
@@ -191,33 +164,15 @@ export class ContractsPageComponent implements OnInit {
                     this.modalRef = this.modalService.show(template, this.config);
                 }, error => console.log(error));
             }, err => console.log(err));
-        }, err => console.log(err));
+        }
     }
 
-    getAllBillsByContractId(id) {
-        this.contractsServices.getUnpaidInvoicesByContractId(id, this.pageBills, this.pageSizeBills).subscribe(response => {
-            this.bills = response.data['content'];
-            this.totalElementsBills = response.data['totalElements'];
-            this.totalPagesBills = response.data['totalPages'];
-            this.itemsPerPageBills = response.data['size'];
-            this.numberOfItemsBills = response.data['numberOfElements'];
-        })
-    }
-
-    openBillDetail(template: TemplateRef<any>, numBill: string) {
-        this.contractsServices.getBill(numBill).subscribe(response => {
-            console.log(this.bill);
-            this.modalRef = this.modalService.show(template, this.config);
-            this.bill = response[0];
+    getAllBillsByContractId(numContract) {
+        return new Promise(resolve => {
+            this.contractsServices.getUnpaidInvoicesByContractId(numContract).subscribe(response => {
+                this.bills = response.data;
+                resolve(this.bills);
+            });
         });
     }
-
-    public chartClicked(e: any): void {
-        console.log(e);
-    }
-
-    public chartHovered(e: any): void {
-
-    }
-
 }

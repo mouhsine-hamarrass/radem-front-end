@@ -2,7 +2,14 @@
 <div class="card-header content-header back col-12">
     <div class="row">
         <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONTRACTS' | translate}}</h3>
+            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONTRACTS' |
+                translate}}</h3>
+        </div>
+        <div class="col-md-6 col-12 text-right">
+            <button class="btn btn-primary"
+                    (click)="openModalLinkContract(linkContract)"><i class="fa fa-plus"></i>&nbsp;
+                {{'LINK_CONTRACT' | translate}}
+            </button>
         </div>
     </div>
 </div>
@@ -11,9 +18,9 @@
         <div class="col-sm-12">
             <!-- What is-->
             <div id="what-is" class="mb-0">
-                <div class="card-content collapse show">
+                <div class="card-content">
                     <div class="card-body">
-                        <div class="table-responsive mx-auto">
+                        <div class="table-responsive">
                             <div class="row justify-content-between">
                                 <div class="col-12">
                                     <div class="float-left">
@@ -21,50 +28,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table"
-                                   sortable-table (sorted)="onSorted($event)"
-                                   filterable-table (filtred)="onFiltred($event)">
+                            <table class="table">
                                 <thead class="table-light">
                                 <tr>
-                                    <th scope="col">{{'TYPE' | translate }}
-                                        <span sortable-column="typeContrat"></span>
-                                    </th>
-                                    <th scope="col">{{'CONTRACT_NUMBER' | translate }}
-                                        <span sortable-column="id"></span>
-                                        <span filterable-column="id" filter-type="text"
-                                              filter-placeholder="{{'CONTRACT_NUMBER' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'CONTRACT_STATUS' | translate }}
-                                        <span sortable-column="etatContrat"></span>
-                                        <span filterable-column="etatContrat" filter-type="text"
-                                              filter-placeholder="{{'CONTRACT_STATUS' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'SUBSCRIPTION_DATE' | translate }}
-                                        <span sortable-column="dateEffetAbonnement"></span>
-                                        <span filterable-column="dateEffetAbonnement" filter-type="date"
-                                              filter-placeholder="{{'SUBSCRIPTION_DATE' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'SUBSCRIPTION_END_DATE' | translate }}
-                                        <span sortable-column="dateFinAbonnement"></span>
-                                        <span filterable-column="dateFinAbonnement" filter-type="text"
-                                              filter-placeholder="{{'SUBSCRIPTION_END_DATE' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'TOTAL_BALANCE' | translate }}
-                                        <span sortable-column="soldeTot"></span>
-                                        <span filterable-column="soldeTot" filter-type="text"
-                                              filter-placeholder="{{'TOTAL_BALANCE' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'BALANCE_DUE' | translate }}
-                                        <span sortable-column="soldeExigible"></span>
-                                        <span filterable-column="soldeExigible" filter-type="text"
-                                              filter-placeholder="{{'BALANCE_DUE' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'RATE' | translate }}
-                                        <span sortable-column="tariff"></span>
-                                        <span filterable-column="tariff" filter-type="text"
-                                              filter-placeholder="{{'RATE' | translate }}"></span>
-                                    </th>
-                                    <th scope="col">{{'MORE_DETAILS' | translate }}</th>
+                                    <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate }}</th>
+                                    <th scope="col">{{'STATUS' | translate }}</th>
+                                    <th scope="col">{{'HOLDER' | translate }}</th>
+                                    <th scope="col">{{'CONSUMPTION_ADDRESS' | translate }}</th>
+                                    <th scope="col">{{'USAGE' | translate }}</th>
+                                    <th scope="col">{{'COMMENT' | translate }}</th>
+                                    <th scope="col" width="140">{{'ACTIONS' | translate }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -73,94 +46,43 @@
                                         [colSpan]="7"></app-data-not-available>
                                 <ng-template #dataAvailable>
                                     <tr *ngFor="let contract of contracts" class="text-center">
-                                        <td [ngClass]="contract.typeContrat === 'eau' ? 'water' : 'electricity'" class="text-center">
-                                            <i class="fa fa-2x text-white" [ngClass]="contract.typeContrat === 'eau' ? 'fa-tint' : 'fa-bolt'"></i>
+                                        <td class="text-left">
+                                            <span class="network-icon"
+                                                  [ngClass]="contract.typeContrat === 'eau' ? 'water' : 'electricity'">
+                                            <i class="fa fa-2x text-white"
+                                               [ngClass]="contract.typeContrat === 'eau' ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
+                                           </span>&nbsp;
+                                            <b>{{contract.numeroContrat}}</b>
                                         </td>
-
-                                        <td class="cursor-pointer"
-                                            (click)="openContractDetails(detailSubscription, contract.id)">
-                                            &nbsp;
-                                            <b>{{contract.id}}</b>
+                                        <td>{{contract.usage}}</td>
+                                        <td>{{contract.nomClientTitulaire}} {{contract.prenomClientTitulaire}}</td>
+                                        <td>{{contract.adresseClientPayeur}}</td>
+                                        <td class="text-left">
+                                            <b>{{contract.etatContrat}}</b>
                                         </td>
-                                        <td>{{contract.etatContrat}}</td>
-                                        <td>{{contract.dateEffetAbonnement}}</td>
-                                        <td>{{contract.dateFinAbonnement}}</td>
-                                        <td>{{contract.soldeTot}}</td>
-                                        <td>{{contract.soldeExigible}}</td>
-                                        <td>{{contract.tariff}}</td>
+                                        <td>{{contract.comment}}</td>
                                         <td>
-                                            <i class="fa fa-list-alt cursor-pointer pull-left"
-                                               (click)="getAllBillsByContractId(contract.id)"></i>
-                                            <i class="fa fa-history cursor-pointer pull-right"
-                                               (click)="getHistoryConsumptions(historyDetail, contract.id)"></i>
+                                            <i class="fa fa-list-alt cursor-pointer"
+                                               tooltip="Détails"
+                                               (click)="openContractDetails(detailSubscription, contract.numeroContrat)"></i>
+                                            <i class="fa fa-unlink cursor-pointer"
+                                               tooltip="Détachement"
+                                               (click)="unLinkMyContract(contract.numeroContrat)"></i>
+                                            <i class="fa fa-unlink cursor-pointer pull-right"
+                                               tooltip="Résiliation"
+                                               (click)="unLinkMyContract(contract.numeroContrat)"></i>
                                         </td>
                                     </tr>
                                 </ng-template>
                                 </tbody>
                             </table>
                         </div>
-                        <app-pagination [disabled]="false"
+                        <app-pagination [showPagination]="totalPages > 1"
                                         [numberOfItems]="numberOfItems"
                                         [itemsPerPage]="itemsPerPage"
                                         [totalItems]="totalElements"
                                         [totalPages]="totalPages"
                                         (onpageChanged)="pageChanged($event)"></app-pagination>
-                        <!--
-                        <div class="offset-6">
-                            <ng-template #emptyTD>
-                                <td>0.00</td>
-                            </ng-template>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th class="table-active" scope="row" colspan="2">
-                                        {{'CREDIT_BALANCE_EXCLUDING_PARTICIPATION' | translate }}
-                                    </th>
-                                    <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurH}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="table-active" scope="row" colspan="2">
-                                        {{'CREDIT_BALANCE_PARTICIPATION' | translate }}
-
-                                    </th>
-                                    <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.crediteurP}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="table-active" scope="row" colspan="2">Solde provision</th>
-                                    <td *ngIf="solde?.length; else emptyTD">{{solde[0]?.provision}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        -->
-                        <div class="table-responsive" *ngIf="bills">
-                            <table class="table">
-                                <thead class="table-light">
-                                <tr>
-                                    <th scope="col">{{'CONTRACT_NUMBER' | translate }}</th>
-                                    <th scope="col">{{'TOTAL_BALANCE' | translate }}</th>
-                                    <th scope="col">{{'BALANCE_DUE' | translate }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let bill of bills">
-                                    <td *ngIf="bill.subscriptionType === 'eau'"
-                                        (click)="openBillDetail(waterBillDetails, bill.numBill)">
-                                        <b class="cursor-pointer">{{bill.numBill}}</b>
-                                    </td>
-                                    <td *ngIf="bill.subscriptionType === 'electricite'"
-                                        (click)="openBillDetail(electricityBillDetails, bill.numBill)">
-                                        <b class="cursor-pointer">{{bill.numBill}}</b>
-                                    </td>
-                                    <td>{{bill.numeroAbt}}</td>
-                                    <td>{{bill.solde}}</td>
-                                    <td>{{bill.soldeExigible}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <a class="btn btn btn-outline-primary pull-right" routerLink="/account/unpaid">{{'PAY' |
-                                translate }}</a>
-                        </div>
                     </div>
                 </div>
                 <!--/ What is-->
@@ -171,154 +93,95 @@
 
 <ng-template #detailSubscription>
     <div class="modal-header modal-radem">
-        <h4 class="modal-title pull-left">{{'CONTRACT_DETAILS' | translate}} N°: {{contract.id}}</h4>
+        <h4 class="modal-title pull-left">{{'CONTRACT_DETAILS' | translate}} N°: {{contract.numeroContrat}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <tabset>
-            <tab heading="{{'INFORMATIONS' | translate}}">
-                <div class="card">
-                    <div class="card-header"
-                         [ngClass]="contract?.typeContrat === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
-                        <h4>
-                            <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
-                        </h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>
-                                        <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.id}}
-                                    </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>
-                                        <b>{{'TOTAL_BALANCE' | translate}}: </b>
-                                        <span class="text-muted">{{solde?.soldetot}}</span>
-                                    </p>
+        <div class="card">
+            <div class="card-header"
+                 [ngClass]="contract?.typeContrat === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
+                <h4>
+                    <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
+                </h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.numeroContrat}}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <b>{{'TOTAL_BALANCE' | translate}}: </b>
+                                <span class="text-muted">{{solde?.soldetot}}</span>
+                            </p>
 
-                                    <p>
-                                        <b>{{'BALANCE_DUE' | translate}} : </b>
-                                        <span class="text-muted">{{solde?.soldeExigible}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>
-                                        <b>{{'CATEGORY' | translate}} : </b>
-                                        <span class="text-muted">{{contract?.libelleCategorieAbonnement}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><b>{{'PAYER' | translate}} : </b>{{contract?.nomClientPayeur + ' ' +
-                                        contract?.prenomClientPayeur}}</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>
-                                        <b>{{'Holder' | translate}} : </b>{{contract?.nomClientTitulaire + ' ' +
-                                        contract?.prenomClientTitulaire}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.adresseClientPayeur}}</p>
-                                </div>
-                                <div class="col-md-6"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><b>{{'STATUS' | translate }} : </b>{{contract?.etatContrat}}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateCreationAbonnement}}
-                                    </p>
-                                </div>
-                                <div class="col-md-6" *ngIf="contract?.dateFinAbonnement">
-                                    <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateFinAbonnement}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row" *ngIf="contract?.dateEffetAbonnement">
-                                <div class="col-md-6">
-                                    <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffetAbonnement}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p><b>{{'RATE' | translate }} : </b>{{contract?.tariff}}</p>
-                                </div>
-                            </div>
+                            <p>
+                                <b>{{'BALANCE_DUE' | translate}} : </b>
+                                <span class="text-muted">{{solde?.soldeExigible}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <b>{{'CATEGORY' | translate}} : </b>
+                                <span class="text-muted">{{contract?.libelleCategorieAbonnement}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>{{'PAYER' | translate}} : </b>{{contract?.nomClientPayeur + ' ' +
+                                contract?.prenomClientPayeur}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <b>{{'Holder' | translate}} : </b>{{contract?.nomClientTitulaire + ' ' +
+                                contract?.prenomClientTitulaire}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.adresseClientPayeur}}</p>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>{{'STATUS' | translate }} : </b>{{contract?.etatContrat}}</p>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateCreationAbonnement}}
+                            </p>
+                        </div>
+                        <div class="col-md-6" *ngIf="contract?.dateFinAbonnement">
+                            <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateFinAbonnement}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="contract?.dateEffetAbonnement">
+                        <div class="col-md-6">
+                            <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffetAbonnement}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><b>{{'RATE' | translate }} : </b>{{contract?.tariff}}</p>
                         </div>
                     </div>
                 </div>
-            </tab>
-            <tab heading="{{'COUNTER' | translate}}">
-                <div class="card">
-                    <div class="card-header"
-                         [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
-                        <h4>
-                            <i class="fa fa-tachometer"></i>&nbsp;Dossier compteur
-                        </h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <img src="assets/images/compteur.png" alt="Compteur" style="width: 80%">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="mt-1">
-                                        <table>
-                                            <tr>
-                                                <th>{{'NUMBER_PHYSIC' | translate}} :</th>
-                                                <td>{{counter?.numeroPhysiqueCompteur}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>{{'STATUS' | translate}} :</th>
-                                                <td>{{counter?.codeEtatCompteur}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>{{'COEFFICIENT' | translate}} :</th>
-                                                <td>{{counter?.diametreCompteur}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>{{'AMPERAGE' | translate}} :</th>
-                                                <td>{{counter?.libelleReglageDisjoncteur}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>{{'NUMBER_WHEELS' | translate}} :</th>
-                                                <td>{{counter?.diametreCompteur}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>{{'NUMBER_DIALS' | translate}} :</th>
-                                                <td>{{counter?.diametreCompteur}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>{{'DATE_FILING' | translate}} :</th>
-                                                <td>{{counter?.datePoseCompteur}}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </tab>
-        </tabset>
+            </div>
+        </div>
     </div>
 </ng-template>
 
@@ -639,5 +502,72 @@
                 </div>
             </div>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #linkContract>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">
+            {{'LINK_CONTRACT' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" novalidate [formGroup]="formLinkContract">
+            <div class="form-group">
+                <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}</label>
+                <input formControlName="numeroContrat" id="numeroContrat" class="form-control required"/>
+                <div class="text-danger"
+                     *ngIf="!formLinkContract.controls['numeroContrat'].valid && formLinkContract.controls['numeroContrat'].touched">
+                    <div *ngIf="formLinkContract.controls['numeroContrat'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="numeroFacture" class="control-label">{{'BILL_NUMBER' | translate}}<span
+                                class="danger">*</span></label>
+                        <input formControlName="numeroFacture" id="numeroFacture" class="form-control required"/>
+                        <div class="text-danger"
+                             *ngIf="!formLinkContract.controls['numeroFacture'].valid && formLinkContract.controls['numeroFacture'].touched">
+                            <div *ngIf="formLinkContract.controls['numeroFacture'].errors.required">
+                                {{'FIELD_REQUIRED' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="monthNumber" class="control-label">{{'MONTH' | translate}}<span
+                                class="danger">*</span></label>
+                        <select id="monthNumber" formControlName="month" class="form-control" required>
+                            <option value="" disabled selected>Choisir un mois</option>
+                            <option class="month" *ngFor="let item of [].constructor(12); let i = index"
+                                    [value]="i+1">{{i+1}}
+                            </option>
+                        </select>
+                        <div class="text-danger"
+                             *ngIf="!formLinkContract.controls['month'].valid && formLinkContract.controls['month'].touched">
+                            <div *ngIf="formLinkContract.controls['month'].errors.required">
+                                {{'FIELD_REQUIRED' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide(); formLinkContract.reset()">
+            {{'CANCEL' | translate}}
+        </button>
+        <button type="submit" class="btn btn btn-outline-primary" (click)="linkMyContract(formLinkContract.value);"
+                [disabled]="formLinkContract.invalid">
+            {{'SAVE' | translate}}
+        </button>
     </div>
 </ng-template>

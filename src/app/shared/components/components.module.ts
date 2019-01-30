@@ -13,7 +13,6 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {BadgeComponent} from './badge/badge.component';
 import {createTranslateLoader} from '../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
-import { NotificationsBillsComponent } from './notifications-bills/notifications-bills.component';
 
 @NgModule({
     imports: [
@@ -38,7 +37,6 @@ import { NotificationsBillsComponent } from './notifications-bills/notifications
         PaginationComponent,
         SearchComponent,
         BadgeComponent,
-        NotificationsBillsComponent
     ],
     declarations: [
         PageNotFoundComponent,
@@ -48,7 +46,6 @@ import { NotificationsBillsComponent } from './notifications-bills/notifications
         PaginationComponent,
         SearchComponent,
         BadgeComponent,
-        NotificationsBillsComponent
     ],
     providers: [
         SpinnerService

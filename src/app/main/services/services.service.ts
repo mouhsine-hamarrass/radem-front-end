@@ -46,13 +46,9 @@ export class ServicesService {
         return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
     }
 
-    getSubscriptionRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
-        return this.httpClient.post<Response<any>>
-        (`${this.urlApi}/client/subscription_requests?page=${page}&size=${pageSize}`,
-            {
-                filter,
-                sort
-            });
+    getSubscriptionRequests(page: number, pageSize: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>
+        (`${this.urlApi}/client/subscription_requests?page=${page}&size=${pageSize}`);
     }
 
     // complaint

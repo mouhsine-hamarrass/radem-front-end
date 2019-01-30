@@ -1,89 +1,141 @@
 <div class="container">
-  <app-navbar></app-navbar>
-  <app-second-navbar></app-second-navbar>
-
-  <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
-    <div class="app-content center-layout">
-      <div class="content-body">
-        <section>
-          <div id="what-is" class="card mb-0">
-            <div class="card-header">
-              <div class="row card-title">
-                <h4 class="ml-h4">Term of Use</h4>
-
-              </div>
-              <div class="heading-elements">
-              </div>
-            </div>
-            <div class="card-content collapse show">
-              <div class="card-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque aut dolores,
-                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam vitae voluptatem!
-                Natus, nostrum?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum eligendi, expedita
-                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus pariatur, quia sapiente?
-
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+    <div *ngIf="!hideNavigation">
+        <app-navbar></app-navbar>
+        <app-second-navbar></app-second-navbar>
     </div>
-  </div>
-  <app-footer></app-footer>
+
+    <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
+        <div class="app-content center-layout">
+            <div class="content-body">
+                <section>
+                    <div id="what-is" class="card mb-0">
+                        <div class="card-header">
+                            <div class="row card-title">
+                                <h4 class="ml-h4">Term of Use</h4>
+
+                            </div>
+                            <div class="heading-elements">
+                            </div>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda atque
+                                aut dolores,
+                                earum eligendi eum excepturi expedita modi nesciunt, nihil omnis, optio sapiente totam
+                                vitae voluptatem!
+                                Natus, nostrum?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae cumque dolorum
+                                eligendi, expedita
+                                id iste maxime! Ab atque, dolores ducimus et, expedita facilis in maiores natus
+                                pariatur, quia sapiente?
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!hideNavigation">
+        <app-footer></app-footer>
+    </div>
 </div>

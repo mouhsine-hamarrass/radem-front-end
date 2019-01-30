@@ -1,7 +1,7 @@
 <div class="col-md-12 py-3">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Réclamation N°: {{request?.requestNumber}}</h4>
+            <h4 class="card-title">Abonnement N°: {{request?.requestNumber}}</h4>
 
             <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'" [navigationMode]="'free'">
 
@@ -72,13 +72,11 @@
                     <button type="button" class="btn btn btn-outline-primary" (click)="openUpdateForm(updateForm)"
                             #UpdateButton>{{'MODIFY' | translate}}
                     </button>
-                    <button type="button" class="btn btn btn-outline-primary" (click)="focus()">{{'COMMENT' |
-                        translate}}
-                    </button>
                     <button *ngIf="request?.status !== 'CLOSED'" routeLink="/admin/request/${request.id}" type="button"
                             class="btn btn-success" style="margin-left : 10px;" #StepButton
-                            (click)="AddIntervention(addIntervention)" awNextStep>{{'NEXT_STEP' | translate}}<i
-                            class="fa fa-chevron-circle-right"></i></button>
+                            (click)="AddIntervention(addIntervention)" awNextStep>{{'NEXT_STEP' | translate}}
+                        &nbsp;
+                        <i class="fa fa-chevron-circle-right"></i></button>
                 </div>
             </aw-wizard>
 
@@ -102,7 +100,7 @@
                                     </tr>
                                     <tr>
                                         <td>Date de création :</td>
-                                        <td>{{request?.createdDate | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{request?.createdAt | date: 'dd/MM/yyyy' }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -207,10 +205,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn btn-outline-primary center" id="buttons-update"
+        <button class="btn btn btn-outline-primary center buttons-update"
                 (click)="updateIntervenant();modalRef.hide()">{{'VALIDATE' | translate}}
         </button>
-        <button class="btn btn-secondary center" id="buttons-update" (click)="modalRef.hide()">Annuler</button>
+        <button class="btn btn-secondary center buttons-update" (click)="modalRef.hide()">Annuler</button>
     </div>
 </ng-template>
 
@@ -245,7 +243,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn btn-outline-primary center" id="buttons-update" (click)="addIntervenant()">
+        <button class="btn btn btn-outline-primary center buttons-update" (click)="addIntervenant()">
             {{'VALIDATE' | translate}}
         </button>
     </div>

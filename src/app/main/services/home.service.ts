@@ -20,8 +20,8 @@ export class HomeService {
         return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/find/${idUser}`, {headers: headers});
     }
 
-    getAlertsNotification(): Observable<Response<Array<AlertNotificationModel>>> {
-        return this.httpClient.get<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications`);
+    getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
+        return this.httpClient.get<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications?page=${page}&size=${pageSize}`);
     }
 
     readAlertNotification(id: number): Observable<Response<any>> {

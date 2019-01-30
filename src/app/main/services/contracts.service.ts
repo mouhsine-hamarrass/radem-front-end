@@ -46,34 +46,26 @@ export class ContractsService {
         return this.httpClient.get<Response<any>>(`${this.urlApi}/invoices/solde/${numContract}`);
     }
 
-    getPageableContracts(clientNo: string, page: number, pageSize: number, filter?: any, sort?: any):
+    getPageableContracts(page: number, pageSize: number):
         Observable<Response<ContractModel>> {
-        return this.httpClient.post<Response<ContractModel>>
-        (`${this.urlApi}/contracts/paged-list/${clientNo}?page=${page}&size=${pageSize}`,
-            {
-                filter,
-                sort
-            });
+        return this.httpClient.get<Response<ContractModel>>
+        (`${this.urlApi}/contracts/paged-list?page=${page}&size=${pageSize}`);
     }
 
-    getDetailsContract(id: string): Observable<Response<ContractModel>> {
-        return this.httpClient.get<Response<ContractModel>>(`${this.urlApi}/contracts/${id}`);
+    getDetailsContract(num_contract: string): Observable<Response<ContractModel>> {
+        return this.httpClient.get<Response<ContractModel>>(`${this.urlApi}/contracts/${num_contract}`);
     }
 
     getCounterByContractId(num_contract: string): Observable<Response<CounterModel>> {
         return this.httpClient.get<Response<CounterModel>>(`${this.urlApi}/counter/${num_contract}`);
     }
 
-    getUnpaidInvoicesByContractId(num_contract: string, page: number, pageSize: number): Observable<Response<ContractModel>> {
-        return this.httpClient.get<Response<ContractModel>>(`${this.urlApi}/invoices/unpaid/${num_contract}?page=${page}&size=${pageSize}`);
+    gePageabletUnpaidInvoicesByContractId(num_contract: string, page: number, pageSize: number): Observable<Response<ContractModel>> {
+        return this.httpClient.get<Response<ContractModel>>(`${this.urlApi}/invoices/unpaid/${num_contract}/paged-list?page=${page}&size=${pageSize}`);
     }
 
-    getSubscription(id: number): Observable<Array<any>> {
-        return this.httpClient.get<Array<any>>(`${this.jsonServerApi}/subscriptions?id=${id}`);
-    }
-
-    getBills(police: string): Observable<Response<any>> {
-        return this.httpClient.get<Response<any>>(`${this.jsonServerApi}/bills?police=${police}`);
+    getUnpaidInvoicesByContractId(num_contract: string): Observable<Response<ContractModel>> {
+        return this.httpClient.get<Response<ContractModel>>(`${this.urlApi}/invoices/unpaid/${num_contract}`);
     }
 
     getPageableBills(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
@@ -84,12 +76,8 @@ export class ContractsService {
             });
     }
 
-    getPageableUnpaidBills(clientNo: string, page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
-        return this.httpClient.post<Response<any>>(`${this.urlApi}/invoices/all/unpaid/${clientNo}?page=${page}&size=${pageSize}`,
-            {
-                filter,
-                sort
-            });
+    getPageableUnpaidBills(page: number, pageSize: number): Observable<Response<any>> {
+        return this.httpClient.get<Response<any>>(`${this.urlApi}/invoices/all/unpaid?page=${page}&size=${pageSize}`);
     }
 
     getAllBills(): Observable<Response<any>> {
