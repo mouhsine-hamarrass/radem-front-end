@@ -1,21 +1,13 @@
 import {Injectable} from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {tap} from 'rxjs/operators/tap';
 import {TranslateService} from '@ngx-translate/core';
 import {Subject} from 'rxjs/Subject';
 import * as moment from 'moment';
 import * as _ from 'underscore';
-import swal from 'sweetalert2';
-import {Validators} from '@angular/forms';
 import {AuthHelper} from '../../core/services/security/auth.helper';
 import {NgxPermissionsService, NgxRolesService} from 'ngx-permissions';
 import {DataService} from '../../shared/services/data.service';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Rx';
-import {Response} from '../../core/models/response.model';
-import {AlertModel} from '../models/alert.model';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class CommonService {
@@ -26,8 +18,7 @@ export class CommonService {
   constructor(private translate: TranslateService,
               private permissionsService: NgxPermissionsService,
               private dataService: DataService,
-              private rolesService: NgxRolesService,
-              private httpClient: HttpClient) {
+              private rolesService: NgxRolesService) {
     this.urlApi = environment.apiConfig.apiUrl;
   }
 

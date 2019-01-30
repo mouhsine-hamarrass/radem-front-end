@@ -46,6 +46,7 @@ import {SortableColumnComponent} from './components/tables/sortable-column/sorta
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
         TooltipModule.forRoot(),
         PopoverModule.forRoot(),
         CollapseModule.forRoot(),
+        NgxPermissionsModule.forRoot(),
         ArchwizardModule,
         NgxToggleModule,
         ChecklistModule,
@@ -122,7 +124,8 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
         OwlMomentDateTimeModule,
-        AngularMultiSelectModule
+        AngularMultiSelectModule,
+        NgxPermissionsModule
     ],
     providers: [
         PrintService,

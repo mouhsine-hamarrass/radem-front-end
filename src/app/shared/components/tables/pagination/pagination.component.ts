@@ -12,7 +12,6 @@ export class PaginationComponent implements OnInit {
     @Input() numberOfItems: number;
     @Input() totalPages: number;
     @Input() maxSize: number;
-    @Input() disabled: boolean;
     @Input() align: boolean;
     @Input() pageBtnClass: string;
     @Input() firstText: string;

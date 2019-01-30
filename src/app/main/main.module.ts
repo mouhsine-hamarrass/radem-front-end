@@ -20,6 +20,8 @@ import {MY_MOMENT_FORMATS} from '../shared/shared.module';
 import {AdvicePageModule} from './pages/advice-page/advice-page.module';
 import {DynamicContentPagesModule} from './pages/dynamic-content-pages/dynamic-content-pages.module';
 import {AlertNotificationsPageModule} from './pages/alert-notifications-page/alert-notifications-page.module';
+import {CommonService} from './services/common.service';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 @NgModule({
     imports: [
@@ -48,6 +50,7 @@ import {AlertNotificationsPageModule} from './pages/alert-notifications-page/ale
         ServicesService,
         UtilsService,
         ComplaintService,
+        CommonService,
         {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
     ],
     declarations: [],

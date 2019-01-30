@@ -49,3 +49,9 @@ html body.fixed-navbar {
 aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
+
+.multicheckbox {
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}

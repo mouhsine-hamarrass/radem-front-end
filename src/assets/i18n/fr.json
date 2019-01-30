@@ -212,6 +212,7 @@
   "MODE":"Mode",
   "YEAR":"Année",
   "MONTH":"Mois",
+  "YEAR_MONTH":"Année/Mois",
   "SUBSCRIPTION_NUMBER":"Nº d'abonnement",
   "CONTRACT_NUMBER":"Nº de contrat",
   "BILL_NUMBER":"Nº de facture",

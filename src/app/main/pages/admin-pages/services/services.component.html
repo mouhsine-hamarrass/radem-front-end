@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="float-left">
-                                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                <app-filter (onfilterChanged)="pageFilter($event)" [showFilter]="true"></app-filter>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         </ng-template>
                         </tbody>
                     </table>
-                    <app-pagination [disabled]="false"
+                    <app-pagination [showPagination]="true"
                                     [numberOfItems]="numberOfItems"
                                     [itemsPerPage]="itemsPerPage"
                                     [totalItems]="totalElements"

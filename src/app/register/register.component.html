@@ -93,8 +93,7 @@
                                         </form>
                                     </aw-wizard-step>
 
-
-                                    <aw-wizard-step [stepTitle]="'CONFIRMATION' | translate"
+                                    <aw-wizard-step [stepTitle]="'Infos du compte' | translate"
                                                     [navigationSymbol]="{ symbol: '&#xe003;', fontFamily:'Simple-line-icons' }"
                                                     class="offset-md-1 col-md-10">
                                         <form [formGroup]="secondStep" novalidate>
@@ -207,8 +206,7 @@
                                         </form>
                                     </aw-wizard-step>
 
-
-                                    <aw-wizard-step [stepTitle]="'Infos du compte'"
+                                    <aw-wizard-step [stepTitle]="'Attachement' | translate"
                                                     [navigationSymbol]="{ symbol: '&#xe060;', fontFamily:'Simple-line-icons' }"
                                                     class="offset-md-1 col-md-10">
                                         <form [formGroup]="thirdStep" novalidate>
@@ -286,6 +284,11 @@
                                                     </button>
                                                 </div>
                                                 <div class="col-6 text-right">
+                                                    <button [disabled]="thirdStep.invalid || !checkbox" type="button"
+                                                            (click)="generateRecap()"
+                                                            class="btn btn-primary next"
+                                                            awNextStep>{{'Next' | translate}}
+                                                    </button>
                                                     <button [disabled]="thirdStep.invalid || !checkbox" type="button"
                                                             (click)="generateRecap()"
                                                             class="btn btn-primary next"
