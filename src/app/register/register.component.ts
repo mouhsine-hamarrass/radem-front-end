@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     clicked = false;
     reponse: any;
     ref: any;
-    user: any;
+    user: any;re
     clientRecap: any;
     toStep3 = true;
     registrationQuestions: Array<RegistrationQuestionModel> = [];
@@ -70,10 +70,9 @@ export class RegisterComponent implements OnInit {
         });
 
         this.thirdStep = this.formBuilder.group({
-            numeroContrat: ['0000003', Validators.compose([Validators.required])],
-            numeroFacture: ['0000003', Validators.compose([Validators.required])],
-            month: ['10', Validators.compose([Validators.required])],
-            combinedContractNo: [null],
+            numeroContrat: [''],
+            numeroFacture: [''],
+            month: ['']
         });
         this.attachContractRequest = {
             status: undefined,
