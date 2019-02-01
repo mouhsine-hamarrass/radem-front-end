@@ -10,6 +10,12 @@
     "username-or-password-is-incorrect" : "L'email ou le mot de passe sont incorrect",
     "no_user_with_given_token": "Votre compte à été déjà activé ou ce token est invalid. "
   },
+  "validations": {
+    "required": {
+      "username": "Identifiant est obligatoire",
+      "password": "Le mot de passe est obligatoire"
+    }
+  },
   "prev": "Précédent",
   "next": "Suivant",
   "Next": "Suivant",
@@ -222,7 +228,12 @@
 
   "CONTRACT_ATTACHED":"Votre contrat a été attacher.",
   "CONTRACT_UNATTACHED":"Votre contrat n'a pas été attacher.",
+
+  "CONTRACT_ATTACHABLE":"Opération réussie. Votre pouvez attacher cette contrat.",
+  "CONTRACT_UNATTACHABLE":"Votre ne pouvez pas attacher cette contrat",
+
   "SERVER_ERROR":"Une erreur s'est produite merci de réessayer ultérieurement",
+  "SERVER_DOWN":"Serveur non disponible",
 
   "REQUEST_NUMBER":"Nº de demande",
   "TOTAL_BALANCE":"Solde total",

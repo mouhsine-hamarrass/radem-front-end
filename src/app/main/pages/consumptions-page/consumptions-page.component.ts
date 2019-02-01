@@ -26,8 +26,8 @@ export class ConsumptionsPageComponent implements OnInit {
     contractNumber: any;
     consumptions: Array<ConsumptionModel>;
 
-    today: Date = moment();
-    minDate: Date = moment().subtract(5, 'years');
+    today: any = moment();
+    minDate: any = moment().subtract(5, 'years');
 
     page = 1;
     pageSize = 0;
@@ -153,12 +153,12 @@ export class ConsumptionsPageComponent implements OnInit {
     }
 
 
-    pageChangedConsumption(pageNo: number) {
+    pageChanged(pageNo: number) {
         this.page = pageNo;
         this.getConsumptionHistory();
     }
 
-    pageFilterConsumption(pageSize: number): void {
+    pageFilter(pageSize: number): void {
         this.pageSize = pageSize;
         this.itemsPerPage = pageSize;
         this.page = 1;

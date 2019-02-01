@@ -39,6 +39,7 @@ export class RegisterComponent implements OnInit {
     toStep3 = true;
     registrationQuestions: Array<RegistrationQuestionModel> = [];
     emailPattern: string;
+    basicContractDto: any;
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
 
     constructor(
@@ -111,16 +112,16 @@ export class RegisterComponent implements OnInit {
         this.adminService.registerAttachContract(contractLink.numeroContrat, contractLink.numeroFacture, contractLink.month)
             .subscribe(response => {
                 if (response.data) {
-                    if (response.data.status) {
-                        this.attachContractRequest.status = 'success';
-                        this.attachContractRequest.message = this.translate.instant('CONTRACT_ATTACHED');
-                    } else {
-                        this.attachContractRequest.status = 'warning';
-                        this.attachContractRequest.message = this.translate.instant('CONTRACT_UNATTACHED');
-                    }
+                    this.basicContractDto = {
+                        contractNo: contractLink.numeroContrat,
+                        childs: response.data.childs,
+                        type: response.data.type
+                    };
+                    this.attachContractRequest.status = 'success';
+                    this.attachContractRequest.message = this.translate.instant('CONTRACT_ATTACHABLE');
                 } else {
-                    this.attachContractRequest.status = 'danger';
-                    this.attachContractRequest.message = this.translate.instant('SERVER_ERROR');
+                    this.attachContractRequest.status = 'warning';
+                    this.attachContractRequest.message = this.translate.instant('CONTRACT_UNATTACHABLE');
                 }
             }, error => {
                 this.attachContractRequest.status = 'danger';
@@ -141,10 +142,8 @@ export class RegisterComponent implements OnInit {
             registrationQuestion: this.secondStep.controls['registrationQuestions'].value,
             registrationAnswer: this.secondStep.controls['answer'].value,
 
-            simpleContractDto: {
-                contractNo: this.thirdStep.controls['numeroContrat'].value,
-                combinedContractNo: this.thirdStep.controls['combinedContractNo'].value
-            },
+            basicContractDto: this.basicContractDto,
+
             numeroContrat: this.thirdStep.controls['numeroContrat'].value,
             numeroFacture: this.thirdStep.controls['numeroFacture'].value,
             selectedMonth: this.months[this.thirdStep.controls['month'].value - 1],

@@ -45,9 +45,9 @@
                                         <th>
                                             <div class="pure-checkbox">
                                                 <input type="checkbox" #checkboxes
-                                                       id="mainCheckbox"
+                                                       id="head"
                                                        (change)="toggleCheckAll($event, contractsBills)"/>
-                                                <label for="mainCheckbox"></label>
+                                                <label for="head"></label>
                                             </div>
                                         </th>
                                         <th scope="col">{{'YEAR_MONTH' | translate }}</th>
@@ -67,27 +67,27 @@
                                                 <td>
                                                     <div class="pure-checkbox">
                                                         <input type="checkbox" #checkboxes
-                                                               [id]="contractBills.numeroContrat"
+                                                               [id]="'head-' + contractBills.numeroContrat"
                                                                (change)="toggleAddBills($event, contractBills)"/>
-                                                        <label [for]="contractBills.numeroContrat"></label>
+                                                        <label [for]="'head-' + contractBills.numeroContrat"></label>
                                                     </div>
                                                 </td>
                                                 <td>{{contractBills.numeroContrat}} - {{contractBills.typeContrat}}</td>
                                                 <td colspan="3" class="text-center">{{contractBills.address}}</td>
                                             </tr>
-                                            <tr *ngFor="let bill of contractBills.bills"
+                                            <tr *ngFor="let bill of contractBills.bills; let i = index"
                                                 class="bills-list"
                                                 [ngClass]="bill.isExigible ? 'bg-accent-1' : 'bg-accent-3'">
                                                 <td>
                                                     <div class="pure-checkbox">
                                                         <input type="checkbox" #checkboxes
-                                                               [id]="bill.numeroFacture"
+                                                               [id]="'head-' + contractBills.numeroContrat + '-' + i"
                                                                [attr.data-type]="bill.isExigible"
                                                                [disabled]="bill.isExigible"
                                                                [checked]="bill.isExigible || bill.checked"
                                                                [attr.data-value]="bill.solde"
-                                                               (change)="toggleAddBill($event, bill)"/>
-                                                        <label [for]="bill.numeroFacture"></label>
+                                                               (change)="toggleAddBill($event, bill, contractBills.numeroContrat)"/>
+                                                        <label [for]="'head-' + contractBills.numeroContrat + '-' + i"></label>
                                                     </div>
                                                 </td>
                                                 <td>{{bill.periode}} - {{bill.year}}</td>

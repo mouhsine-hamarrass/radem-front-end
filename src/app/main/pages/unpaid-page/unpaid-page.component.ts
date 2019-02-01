@@ -7,6 +7,7 @@ import {ContractModel} from '../../models/contract.model';
 import * as moment from 'moment';
 import * as _ from 'underscore';
 import {CommonService} from '../../services/common.service';
+import * as $ from 'jquery/dist/jquery.min.js';
 
 @Component({
     selector: 'app-unpaid',
@@ -144,6 +145,7 @@ export class UnpaidPageComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
         this.getClientContracts();
+        // this.test();
     }
 
     getClientContracts() {
@@ -247,8 +249,9 @@ export class UnpaidPageComponent implements OnInit {
         }
     }
 
-    toggleAddBill($event, bill) {
+    toggleAddBill($event, bill, parentSelector) {
         const operation = $event.currentTarget.checked ? 'add' : 'minus';
+        // $('#head-' + parentSelector).prop('indeterminate', true);
         bill.checked = $event.currentTarget.checked;
         if (!bill.isExigible) {
             this.calcTotal(parseFloat(bill.solde), operation);
@@ -277,16 +280,6 @@ export class UnpaidPageComponent implements OnInit {
         }
     }
 
-    selectAll(event): void {
-        if (event.target.checked) {
-            this.total = this.totalUnpaid;
-            // this.selectedBills = this.bills;
-        } else {
-            this.total = 0;
-            // this.selectedBills = [];
-        }
-    }
-
     submit() {
         if (this.selectedBills.length !== 0) {
         }
@@ -297,4 +290,53 @@ export class UnpaidPageComponent implements OnInit {
         this.selectedBills = [];
     }
 
+    test() {
+        $(document.body).on('change', '.main-page input[type="checkbox"]', function (e) {
+            // $('input[type="checkbox"]').on('change', function (e) {
+            const checked = $(this).prop('checked'),
+                container = $(this).parent().parent().parent().parent(),
+                siblings = container.siblings();
+
+            container.find('input[type="checkbox"]').prop({
+                indeterminate: false,
+                checked: checked
+            });
+
+            function checkSiblings(el) {
+                let parent = el.parent().parent(),
+                    all = true;
+
+                el.siblings().each(function () {
+                    return all = ($(this).children('input[type="checkbox"]').prop('checked') === checked);
+                });
+
+                if (all && checked) {
+
+                    parent.children('input[type="checkbox"]').prop({
+                        indeterminate: false,
+                        checked: checked
+                    });
+
+                    checkSiblings(parent);
+
+                } else if (all && !checked) {
+
+                    parent.children('input[type="checkbox"]').prop('checked', checked);
+                    parent.children('input[type="checkbox"]').prop('indeterminate', (parent.find('input[type="checkbox"]:checked').length > 0));
+                    checkSiblings(parent);
+
+                } else {
+
+                    el.parents('li').children('input[type="checkbox"]').prop({
+                        indeterminate: true,
+                        checked: false
+                    });
+
+                }
+
+            }
+
+            //checkSiblings(container);
+        });
+    }
 }
