@@ -22,6 +22,8 @@ export class RegisterComponent implements OnInit {
     months = ['Janv.', 'Févr.', 'Mars.', 'Avr.', 'Mai.', 'Juin.', 'Juil.', 'Août.', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
     registerForm: FormGroup;
 
+    attachContractRequest: any;
+
     modalRef: BsModalRef;
 
     firstStep: FormGroup;
@@ -67,10 +69,15 @@ export class RegisterComponent implements OnInit {
         });
 
         this.thirdStep = this.formBuilder.group({
-            numeroContrat: ['', Validators.compose([Validators.required])],
-            numeroFacture: ['', Validators.compose([Validators.required])],
-            month: ['', Validators.compose([Validators.required])]
+            numeroContrat: ['0000003', Validators.compose([Validators.required])],
+            numeroFacture: ['0000003', Validators.compose([Validators.required])],
+            month: ['10', Validators.compose([Validators.required])],
+            combinedContractNo: [null],
         });
+        this.attachContractRequest = {
+            status: undefined,
+            message: undefined
+        }
     }
 
     ngOnInit() {
@@ -79,12 +86,6 @@ export class RegisterComponent implements OnInit {
         }, err => {
             console.log(err);
         });
-    }
-
-    goToStep3() {
-        this.registerForm.controls.firstname2.setValue(this.user[0].firstName);
-        this.registerForm.controls.lastname2.setValue(this.user[0].lastName);
-        this.registerForm.controls.email.setValue(this.user[0].email);
     }
 
     registerUser() {
@@ -97,20 +98,35 @@ export class RegisterComponent implements OnInit {
         })
     }
 
-    Verification() {
-        this.adminService.getAnswer(this.registerForm.controls.questions.value).subscribe(response => {
-            this.reponse = response;
-            if (this.reponse[0].answer === this.registerForm.controls.answer.value) {
-                this.toStep3 = false;
-            } else {
-                this.toStep3 = true;
-            }
-        })
-        this.clicked = false;
-    }
-
     setCheckbox() {
         this.checkbox = !this.checkbox;
+    }
+
+    linkContract() {
+        const contractLink = {
+            numeroContrat: this.thirdStep.controls['numeroContrat'].value,
+            numeroFacture: this.thirdStep.controls['numeroFacture'].value,
+            month: this.thirdStep.controls['month'].value
+        };
+        this.adminService.registerAttachContract(contractLink.numeroContrat, contractLink.numeroFacture, contractLink.month)
+            .subscribe(response => {
+                if (response.data) {
+                    if (response.data.status) {
+                        this.attachContractRequest.status = 'success';
+                        this.attachContractRequest.message = this.translate.instant('CONTRACT_ATTACHED');
+                    } else {
+                        this.attachContractRequest.status = 'warning';
+                        this.attachContractRequest.message = this.translate.instant('CONTRACT_UNATTACHED');
+                    }
+                } else {
+                    this.attachContractRequest.status = 'danger';
+                    this.attachContractRequest.message = this.translate.instant('SERVER_ERROR');
+                }
+            }, error => {
+                this.attachContractRequest.status = 'danger';
+                this.attachContractRequest.message = this.translate.instant('SERVER_ERROR');
+                console.log(error);
+            })
     }
 
     generateRecap() {
@@ -125,6 +141,10 @@ export class RegisterComponent implements OnInit {
             registrationQuestion: this.secondStep.controls['registrationQuestions'].value,
             registrationAnswer: this.secondStep.controls['answer'].value,
 
+            simpleContractDto: {
+                contractNo: this.thirdStep.controls['numeroContrat'].value,
+                combinedContractNo: this.thirdStep.controls['combinedContractNo'].value
+            },
             numeroContrat: this.thirdStep.controls['numeroContrat'].value,
             numeroFacture: this.thirdStep.controls['numeroFacture'].value,
             selectedMonth: this.months[this.thirdStep.controls['month'].value - 1],

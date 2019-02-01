@@ -39,10 +39,6 @@ body{
   margin-left : 11rem;
 }
 
-.next {
-  margin-left : 18rem !important;
-}
-
 .ml-13 {
   margin-left: 14rem;
 }
@@ -142,11 +138,7 @@ aw-wizard {
   aw-wizard-navigation-bar{
     margin-bottom: 40px;
   }
-  aw-wizard .wizard-steps.horizontal{
-    margin-left: -22px;
-    margin-top: -15%;
-    width: 118%;
-  }
+
   label{
     display: inline;
   }
@@ -157,15 +149,6 @@ aw-wizard {
   .ml-44 {
     margin-left: 85%;
     margin-top: -10%;
-  }
-
-  aw-wizard-step {
-    width: 108%;
-    margin-left: -13%;
-  }
-
-  .next {
-    margin-left: 66% !important;
   }
 
   aw-wizard-completion-step {

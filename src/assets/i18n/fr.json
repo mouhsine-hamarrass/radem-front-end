@@ -219,6 +219,11 @@
   "CONTRACT_STATUS":"État de contrat",
   "STATUS":"État",
   "LINK_CONTRACT":"Attacher un contrat",
+
+  "CONTRACT_ATTACHED":"Votre contrat a été attacher.",
+  "CONTRACT_UNATTACHED":"Votre contrat n'a pas été attacher.",
+  "SERVER_ERROR":"Une erreur s'est produite merci de réessayer ultérieurement",
+
   "REQUEST_NUMBER":"Nº de demande",
   "TOTAL_BALANCE":"Solde total",
   "UNPAID_BALANCE":"Solde Impaye",
@@ -303,6 +308,8 @@
   "COUNTER_NUMBER":"N° compteur",
   "DATE_OF_REPORTS":"Date de relève",
   "INDEX":"Index",
+  "Volume":"Volume",
+  "NOTATION_RELEVANCE":"Annoation de relève",
   "INDEX_TYPE":"Type d'index",
   "INDEX_CONSUM_VALUE":"Valeur d'index de consomation",
   "INVOICE_VOLUME":"Volume de facture",

@@ -51,7 +51,17 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
 }
 
 .multicheckbox {
-    border: 1px solid #d3d3d3;
-    border-radius: 5px;
     margin-bottom: 15px;
+}
+
+.pure-checkbox input[type="checkbox"]:checked + label:before {
+    border-color: #0079FE;
+    background-color: #0079FE !important;
+}
+.pure-checkbox input[type="checkbox"]:checked:disabled + label:before {
+    border-color: #d3d3d3;
+    background-color: #d3d3d3 !important;
+}
+.date-readonly {
+    background-color: #FFFFFF !important;
 }
