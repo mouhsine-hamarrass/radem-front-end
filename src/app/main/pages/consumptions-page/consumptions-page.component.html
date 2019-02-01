@@ -2,32 +2,96 @@
 <div class="card-header content-header back col-12">
     <div class="row">
         <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONSUMPTION' | translate}}</h3>
+            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONSUMPTION' |
+                translate}}</h3>
         </div>
     </div>
 </div>
 <div class="content-body">
     <section>
         <div class="mb-0">
-            <div class="card-header">
-                <h4 class="card-title"><!--<i class="fa fa-get-pocket" style="color: #2c5599;"></i>--> {{'Extrait des contrats (actifs)' | translate}}</h4>
-            </div>
             <div class="card-content">
                 <div class="card-body">
-                   <app-consumptions-table></app-consumptions-table>
+                    <div class="col-12">
+                        <div class="row">
+                            <label class="col-form-label">{{'CONTRACT' | translate }} <span
+                                    class="danger">*</span>:</label>
+                            <div class="col-3">
+                                <select type="text" class="custom-select" #t
+                                        (change)="setContract(t.value)">
+                                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate }}
+                                    </option>
+                                    <option *ngFor="let contract of userContracts"
+                                            [value]="contract?.numeroContrat">
+                                        {{contract.numeroContrat}} ({{contract.typeContrat}})
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-1">
+                        <div class="row">
+                            <div class="col-6 col-sm-6">
+                                <canvas baseChart [chartType]="chartType" [datasets]="chartDatasetsEau"
+                                        [labels]="chartLabels"
+                                        [colors]="chartColorsEau"
+                                        [options]="chartOptionsEau" [legend]="true">
+                                </canvas>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                <canvas baseChart [chartType]="chartType" [datasets]="chartDatasetsFact"
+                                        [labels]="chartLabels"
+                                        [colors]="chartColorsFact"
+                                        [options]="chartOptionsFact" [legend]="true">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col">{{'DATE_OF_REPORTS' | translate }}</th>
+                                    <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
+                                    <th scope="col">{{'INDEX' | translate }}</th>
+                                    <th scope="col">{{'Volume' | translate }}</th>
+                                    <th scope="col">{{'NOTATION_RELEVANCE' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <app-data-not-available
+                                        *ngIf="!contracts || contracts.length == 0; else dataAvailable"
+                                        [colSpan]="7"></app-data-not-available>
+                                <ng-template #dataAvailable>
+                                    <tr *ngFor="let contract of contracts" class="text-center">
+                                        <td>{{contract.usage}}</td>
+                                        <td>{{contract.nomClientTitulaire}} {{contract.prenomClientTitulaire}}</td>
+                                        <td>{{contract.adresseClientPayeur}}</td>
+                                        <td>{{contract.etatContrat}}</td>
+                                        <td>{{contract.comment}}</td>
+                                    </tr>
+                                </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
         <div class="card mb-0">
             <div class="card-header">
-                <h4 class="content-header-title"><!--<i class="fa fa-tasks" style="color: #2c5599;"></i>--> {{'CONSUMPTION_HISTORY' | translate }}</h4>
+                <h4 class="content-header-title">{{'CONSUMPTION_HISTORY' | translate }}</h4>
             </div>
             <div class="card-content">
                 <form role="form" [formGroup]="historyForm" novalidate>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
-                                <app-filter (onfilterChanged)="pageFilterConsumption($event)"></app-filter>
+                                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
                             </div>
                         </div>
                         <div class="row col-md-12 form-group">
@@ -47,7 +111,14 @@
                             <label class="col-form-label">{{'PERIOD_OF' | translate }} <span class="danger"> *</span>
                                 :</label>
                             <div class="col-auto">
-                                <input formControlName="startDate" type="date" class="form-control" />
+                                <input [owlDateTime]="sd"
+                                       [owlDateTimeTrigger]="sd"
+                                       [min]="minDate"
+                                       [max]="today"
+                                       formControlName="startDate"
+                                       class="form-control date-readonly"
+                                       id="startDate" readonly>
+                                <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
                                 <div class="text-danger position-absolute mb-1"
                                      *ngIf="!historyForm.controls['startDate'].valid && historyForm.controls['startDate'].touched">
                                     <div *ngIf="historyForm.controls['startDate'].errors.required">
@@ -58,7 +129,14 @@
                             <label class="col-form-label">{{'AT' | translate }} <span
                                     class="danger">*</span></label>
                             <div class="col-auto">
-                                <input formControlName="endDate" type="date" class="form-control" />
+                                <input [owlDateTime]="ed"
+                                       [owlDateTimeTrigger]="ed"
+                                       [min]="minDate"
+                                       [max]="historyForm.controls['startDate'].value"
+                                       formControlName="endDate"
+                                       class="form-control date-readonly"
+                                       id="endDate" readonly>
+                                <owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>
                                 <div class="text-danger position-absolute mb-1"
                                      *ngIf="!historyForm.controls['endDate'].valid && historyForm.controls['endDate'].touched">
                                     <div *ngIf="historyForm.controls['endDate'].errors.required">
@@ -91,49 +169,38 @@
                             </div>
                         </div>
                         <div class="table-responsive mx-auto">
-                            <table class="table table-bordered">
+                            <table class="table">
                                 <thead class="table-light">
                                 <tr>
-                                    <!--
-                                    <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate}}
-                                        <span sortable-column="id"></span>
-                                        <span filterable-column="id" filter-type="text"
-                                              filter-placeholder="{{'CONTRACT_NUMBER' | translate}}"></span>
-                                    </th>
-                                    -->
-                                    <th scope="col">{{'DATE_OF_REPORTS' | translate}}</th>
-                                    <th scope="col">{{'LAST_INDEX' | translate}}</th>
-                                    <th scope="col">{{'PERIOD' | translate}}</th>
-                                    <th scope="col">{{'INDEX_TYPE' | translate}}</th>
-                                    <th scope="col">{{'BALANCE_DUE' | translate}}</th>
-                                    <th scope="col">{{'INDEX_CONSUM_VALUE' | translate}}</th>
+                                    <th scope="col">{{'DATE_OF_REPORTS' | translate }}</th>
+                                    <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
+                                    <th scope="col">{{'INDEX' | translate }}</th>
+                                    <th scope="col">{{'Volume' | translate }}</th>
+                                    <th scope="col">{{'NOTATION_RELEVANCE' | translate }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <app-data-not-available
                                         *ngIf="!consumptions || consumptions.length == 0; else dataAvailable"
-                                        [colSpan]="6"></app-data-not-available>
-
+                                        [colSpan]="7"></app-data-not-available>
                                 <ng-template #dataAvailable>
-                                    <tr *ngFor="let consumption of consumptions">
-                                        <!--<td>{{consumption.id}}</td>-->
-                                        <td>{{consumption.dateReleve}}</td>
-                                        <td>{{consumption.nombreJour}}</td>
-                                        <td>{{consumption.periode}}</td>
-                                        <td>{{consumption.typeIndex}}</td>
-                                        <td>{{consumption.valIdxCso}}</td>
-                                        <td>{{consumption.volFacEauCso}}</td>
+                                    <tr *ngFor="let consumption of consumptions" class="text-center">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </ng-template>
                                 </tbody>
                             </table>
                         </div>
-                        <app-pagination [showPagination]="totalPagesConsumption > 1"
-                                        [numberOfItems]="numberOfItemsConsumption"
-                                        [itemsPerPage]="itemsPerPageConsumption"
-                                        [totalItems]="totalElementsConsumption"
-                                        [totalPages]="totalPagesConsumption"
-                                        (onpageChanged)="pageChangedConsumption($event)"></app-pagination>
+                        <app-pagination [showPagination]="totalPages > 1"
+                                        [numberOfItems]="numberOfItems"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalElements"
+                                        [totalPages]="totalPages"
+                                        (onpageChanged)="pageChanged($event)"></app-pagination>
                     </div>
                 </form>
             </div>

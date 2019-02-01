@@ -7,6 +7,7 @@ import {ContractModel} from '../../models/contract.model';
 import * as moment from 'moment';
 import * as _ from 'underscore';
 import {CommonService} from '../../services/common.service';
+import * as $ from 'jquery/dist/jquery.min.js';
 
 @Component({
     selector: 'app-unpaid',
@@ -21,7 +22,8 @@ export class UnpaidPageComponent implements OnInit {
     totalUnpaid: number;
 
     toggleContracts = false;
-    toggleBillsContracts = false;
+    totalBillsContracts = 0;
+    totalBillsExigible = 0;
 
     user: User;
     userContracts: Array<ContractModel> = [];
@@ -58,7 +60,7 @@ export class UnpaidPageComponent implements OnInit {
                         numeroFacture: 'FAC-7987894',
                         periode: 12,
                         year: 2018,
-                        solde: 1200,
+                        solde: 100,
                         soldeExigible: 0,
                         isExigible: false
                     },
@@ -67,8 +69,8 @@ export class UnpaidPageComponent implements OnInit {
                         numeroFacture: 'FAC-987984',
                         periode: 8,
                         year: 2018,
-                        solde: 78,
-                        soldeExigible: 200,
+                        solde: 100,
+                        soldeExigible: 100,
                         isExigible: true
                     }
                 ]
@@ -84,8 +86,8 @@ export class UnpaidPageComponent implements OnInit {
                         numeroFacture: 'FAC-987987',
                         periode: 4,
                         year: 2017,
-                        solde: 2289,
-                        soldeExigible: 3200,
+                        solde: 100,
+                        soldeExigible: 100,
                         isExigible: true
                     },
                     {
@@ -101,7 +103,7 @@ export class UnpaidPageComponent implements OnInit {
             },
             {
                 id: 3,
-                numeroContrat: 'ABC123456',
+                numeroContrat: 'ABC123459',
                 typeContrat: 'A',
                 address: 'dezdiehzihjfoizehfoiez ua',
                 bills: [
@@ -110,8 +112,8 @@ export class UnpaidPageComponent implements OnInit {
                         numeroFacture: 'FAC-89789I',
                         periode: 2,
                         year: 2016,
-                        solde: 1200,
-                        soldeExigible: 200,
+                        solde: 100,
+                        soldeExigible: 100,
                         isExigible: false
                     },
                     {
@@ -119,8 +121,8 @@ export class UnpaidPageComponent implements OnInit {
                         numeroFacture: 'FAC-7897984',
                         periode: 5,
                         year: 2016,
-                        solde: 150,
-                        soldeExigible: 300,
+                        solde: 100,
+                        soldeExigible: 100,
                         isExigible: false
                     },
                     {
@@ -128,8 +130,8 @@ export class UnpaidPageComponent implements OnInit {
                         numeroFacture: 'FAC-78789789',
                         periode: 11,
                         year: 2016,
-                        solde: 889,
-                        soldeExigible: 200,
+                        solde: 100,
+                        soldeExigible: 100,
                         isExigible: true
                     }
                 ]
@@ -143,15 +145,20 @@ export class UnpaidPageComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
         this.getClientContracts();
+        // this.test();
     }
 
     getClientContracts() {
         this.adminService.getAllContractByNumClient().subscribe(response => {
-            this.userContracts = response.data;
-            console.log(this.userContracts);
-            _.each(this.userContracts, (element: any) => {
-                _.extend(element, {id: element.numeroContrat, itemName: `${element.numeroContrat} - (${element.typeContrat})`});
-            });
+            if (response.data) {
+                this.userContracts = response.data;
+                console.log(this.userContracts);
+                _.each(this.userContracts, (element: any) => {
+                    _.extend(element, {id: element.numeroContrat, itemName: `${element.numeroContrat} - (${element.typeContrat})`});
+                });
+            }
+        }, error => {
+
         });
     }
 
@@ -172,11 +179,23 @@ export class UnpaidPageComponent implements OnInit {
     }
 
     calcUnpaidBills(): void {
+        this.totalUnpaid = 0;
+        this.total = 0;
+        this.totalBillsExigible = 0;
         this.contractsBills.map((contract) => {
             contract.bills.map((bill, index) => {
                 this.totalUnpaid += parseFloat(bill.solde);
+                this.total += bill.isExigible ? bill.solde : 0;
+                this.totalBillsExigible += bill.isExigible ? bill.solde : 0;
             })
-        })
+        });
+        /*
+        this.checkboxes.forEach((element) => {
+            if (element.nativeElement.getAttribute('data-type') === 'true') {
+                element.nativeElement.indeterminate = true
+            }
+        });
+        */
     }
 
     calcTotal(amount, operation): void {
@@ -187,35 +206,56 @@ export class UnpaidPageComponent implements OnInit {
         }
     }
 
-    toggleCheckAll($event) {
-        const operation = $event.currentTarget.checked ? 'add' : 'minus';
-        this.checkboxes.forEach((element) => {
-            if (element.nativeElement.getAttribute('data-type') !== 'true') {
-                element.nativeElement.checked = $event.currentTarget.checked;
-            }
-            const total = element.nativeElement.getAttribute('data-value');
-            if (total) {
-                this.calcTotal(total, operation);
-            }
-        });
-    }
-
-    toggleAddBills($event, contract) {
-        const operation = $event.currentTarget.checked ? 'add' : 'minus';
-        if (contract && contract.bills) {
-            contract.bills.forEach((bill) => {
-                bill.checked = $event.currentTarget.checked;
-                const total = parseFloat(bill.solde);
-                this.calcTotal(total, operation);
+    toggleCheckAll($event, contractsBills) {
+        if (contractsBills && contractsBills.length) {
+            this.calcUnpaidBills();
+            const operation = $event.currentTarget.checked ? 'add' : 'minus';
+            this.checkboxes.forEach((element) => {
+                if (element.nativeElement.getAttribute('data-type') !== 'true') {
+                    element.nativeElement.checked = $event.currentTarget.checked;
+                    if (operation === 'add') {
+                        const total = element.nativeElement.getAttribute('data-value');
+                        if (total) {
+                            this.calcTotal(total, operation);
+                        }
+                    }
+                }
+            });
+            contractsBills.forEach((contract) => {
+                contract.bills.forEach((bill) => {
+                    bill.checked = $event.currentTarget.checked
+                });
             });
         }
     }
-r
-    toggleAddBill($event, bill) {
+
+    toggleAddBills($event, contract) {
+        if (contract && contract.bills) {
+            const operation = $event.currentTarget.checked ? 'add' : 'minus';
+            contract.bills.forEach((bill, i) => {
+                if (!bill.isExigible) {
+                    if (bill.checked) {
+                        if (operation === 'minus') {
+                            this.calcTotal(parseFloat(bill.solde), operation);
+                        }
+                    } else {
+                        if (operation === 'add') {
+                            this.calcTotal(parseFloat(bill.solde), operation);
+                        }
+                    }
+                    bill.checked = $event.currentTarget.checked;
+                }
+            });
+        }
+    }
+
+    toggleAddBill($event, bill, parentSelector) {
         const operation = $event.currentTarget.checked ? 'add' : 'minus';
+        // $('#head-' + parentSelector).prop('indeterminate', true);
         bill.checked = $event.currentTarget.checked;
-        const total = parseFloat(bill.solde);
-        this.calcTotal(total, operation);
+        if (!bill.isExigible) {
+            this.calcTotal(parseFloat(bill.solde), operation);
+        }
     }
 
     pageChanged(page: number): void {
@@ -240,16 +280,6 @@ r
         }
     }
 
-    selectAll(event): void {
-        if (event.target.checked) {
-            this.total = this.totalUnpaid;
-            // this.selectedBills = this.bills;
-        } else {
-            this.total = 0;
-            // this.selectedBills = [];
-        }
-    }
-
     submit() {
         if (this.selectedBills.length !== 0) {
         }
@@ -260,4 +290,53 @@ r
         this.selectedBills = [];
     }
 
+    test() {
+        $(document.body).on('change', '.main-page input[type="checkbox"]', function (e) {
+            // $('input[type="checkbox"]').on('change', function (e) {
+            const checked = $(this).prop('checked'),
+                container = $(this).parent().parent().parent().parent(),
+                siblings = container.siblings();
+
+            container.find('input[type="checkbox"]').prop({
+                indeterminate: false,
+                checked: checked
+            });
+
+            function checkSiblings(el) {
+                let parent = el.parent().parent(),
+                    all = true;
+
+                el.siblings().each(function () {
+                    return all = ($(this).children('input[type="checkbox"]').prop('checked') === checked);
+                });
+
+                if (all && checked) {
+
+                    parent.children('input[type="checkbox"]').prop({
+                        indeterminate: false,
+                        checked: checked
+                    });
+
+                    checkSiblings(parent);
+
+                } else if (all && !checked) {
+
+                    parent.children('input[type="checkbox"]').prop('checked', checked);
+                    parent.children('input[type="checkbox"]').prop('indeterminate', (parent.find('input[type="checkbox"]:checked').length > 0));
+                    checkSiblings(parent);
+
+                } else {
+
+                    el.parents('li').children('input[type="checkbox"]').prop({
+                        indeterminate: true,
+                        checked: false
+                    });
+
+                }
+
+            }
+
+            //checkSiblings(container);
+        });
+    }
 }

@@ -10,6 +10,12 @@
     "username-or-password-is-incorrect" : "L'email ou le mot de passe sont incorrect",
     "no_user_with_given_token": "Votre compte à été déjà activé ou ce token est invalid. "
   },
+  "validations": {
+    "required": {
+      "username": "Identifiant est obligatoire",
+      "password": "Le mot de passe est obligatoire"
+    }
+  },
   "prev": "Précédent",
   "next": "Suivant",
   "Next": "Suivant",
@@ -219,6 +225,16 @@
   "CONTRACT_STATUS":"État de contrat",
   "STATUS":"État",
   "LINK_CONTRACT":"Attacher un contrat",
+
+  "CONTRACT_ATTACHED":"Votre contrat a été attacher.",
+  "CONTRACT_UNATTACHED":"Votre contrat n'a pas été attacher.",
+
+  "CONTRACT_ATTACHABLE":"Opération réussie. Votre pouvez attacher cette contrat.",
+  "CONTRACT_UNATTACHABLE":"Votre ne pouvez pas attacher cette contrat",
+
+  "SERVER_ERROR":"Une erreur s'est produite merci de réessayer ultérieurement",
+  "SERVER_DOWN":"Serveur non disponible",
+
   "REQUEST_NUMBER":"Nº de demande",
   "TOTAL_BALANCE":"Solde total",
   "UNPAID_BALANCE":"Solde Impaye",
@@ -303,6 +319,8 @@
   "COUNTER_NUMBER":"N° compteur",
   "DATE_OF_REPORTS":"Date de relève",
   "INDEX":"Index",
+  "Volume":"Volume",
+  "NOTATION_RELEVANCE":"Annoation de relève",
   "INDEX_TYPE":"Type d'index",
   "INDEX_CONSUM_VALUE":"Valeur d'index de consomation",
   "INVOICE_VOLUME":"Volume de facture",
