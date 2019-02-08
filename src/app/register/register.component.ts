@@ -10,6 +10,8 @@ import {environment} from '../../environments/environment';
 import {User} from '../main/models/user.model';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {ContractAttachModel} from '../main/models/contract-attach.model';
+import {ServicesService} from '../main/services/services.service';
 
 @Component({
     selector: 'app-register',
@@ -20,7 +22,6 @@ import {TranslateService} from '@ngx-translate/core';
 export class RegisterComponent implements OnInit {
     method = 'BILL';
     months = ['Janv.', 'Févr.', 'Mars.', 'Avr.', 'Mai.', 'Juin.', 'Juil.', 'Août.', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
-    registerForm: FormGroup;
 
     attachContractRequest: any;
 
@@ -31,19 +32,17 @@ export class RegisterComponent implements OnInit {
     thirdStep: FormGroup;
 
     checkbox = false;
-    clicked = false;
-    reponse: any;
     ref: any;
-    user: any;re
+    user: any;
     clientRecap: any;
-    toStep3 = true;
     registrationQuestions: Array<RegistrationQuestionModel> = [];
     emailPattern: string;
-    basicContractDto: any;
+    basicContractDto: ContractAttachModel;
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
 
     constructor(
         private adminService: AdminService,
+        private services: ServicesService,
         private enableAccountService: EnableAccountService,
         private formBuilder: FormBuilder,
         private toastrService: ToastrService,
@@ -108,13 +107,14 @@ export class RegisterComponent implements OnInit {
             numeroFacture: this.thirdStep.controls['numeroFacture'].value,
             month: this.thirdStep.controls['month'].value
         };
-        this.adminService.registerAttachContract(contractLink.numeroContrat, contractLink.numeroFacture, contractLink.month)
+        this.services.registerAttachContract(contractLink.numeroContrat, contractLink.numeroFacture, contractLink.month)
             .subscribe(response => {
                 if (response.data) {
                     this.basicContractDto = {
                         contractNo: contractLink.numeroContrat,
                         childs: response.data.childs,
-                        type: response.data.type
+                        type: response.data.type,
+                        typeNetwork: response.data.typeNetwork
                     };
                     this.attachContractRequest.status = 'success';
                     this.attachContractRequest.message = this.translate.instant('CONTRACT_ATTACHABLE');

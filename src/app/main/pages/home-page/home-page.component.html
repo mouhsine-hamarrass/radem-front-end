@@ -15,32 +15,35 @@
 <div class="card-header content-header back col-12 sub-header">
     <div class="col-12 content-header">
         <div class="row align-items-center">
-            <div class="col-lg-11 col-md-10">
+            <div class="col-lg-10 col-md-10">
                 <div class="row align-items-center">
                     <div class="col-md-3 has-border">
-                        <select type="text" class="form-control contract-dropdown" #t
-                                (change)="setContract(t.value)">
+                        <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
+                                (change)="setContract(selectedContract)">
                             <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                            <option *ngFor="let contract of userContracts" value="{{contract.numeroContrat}}">
-                                {{contract.numeroContrat}}
-                                ({{contract.typeContrat}})
+                            <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                                {{contract.contractNo}}
+                                ({{contract.type}})
                             </option>
                         </select>
                     </div>
-                    <div class="col has-border">
+                    <div class="col has-border" [hidden]="!clientDetails">
                         <i class="fa fa-users icon"></i>&nbsp;
-                        <span class="sub-title" tooltip="">Rachid EL KADOURI</span>
+                        <span class="sub-title" tooltip="">{{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}</span>
                     </div>
-                    <div class="col-md-6 has-border">
+                    <div class="col-md-6 has-border" [hidden]="!clientDetails">
                         <i class="fa fa-map-marker icon"></i>&nbsp;
-                        <span class="sub-title">Hay Essalama, 23, rue 4, Boujdour</span>
+                        <span class="sub-title">{{clientDetails?.consumptionAddress}}</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1 col-md-2">
+            <div class="col-lg-2 col-md-2" [hidden]="!clientDetails">
                 <div class="status text-right">
-                    <i class="fa fa-circle icon success"></i>&nbsp;
-                    <span>Active</span>
+                    <!--
+                    <i class="fa fa-circle icon"
+                       [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
+                       -->
+                    <span>{{clientDetails?.contractStatus}}</span>
                 </div>
             </div>
         </div>
@@ -56,7 +59,7 @@
                         <div class="title text-white">{{'UNPAID_BALANCE' | translate}}</div>
                         <div style="margin-top: 70px">
                             <span class="text-white">{{'VALUE' | translate}}</span>
-                            <div class="value text-white">2340,35 DH</div>
+                            <div class="value text-white">{{unpaidBalance | numeral}} DH</div>
                         </div>
                     </div>
                 </div>
@@ -67,13 +70,25 @@
                         <div class="title text-white">{{'LATEST_BILL' | translate}}</div>
                         <div style="margin-top: 9px">
                             <span class="text-white">{{'MONTH' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">Octobre 2019</div>
+                            <div class="font-weight-bold font-size-large text-white">
+                                {{ lastInvoice?.month && months[lastInvoice?.month*1 -1]}} {{lastInvoice?.year}}
+                            </div>
 
                             <span class="text-white">{{'VALUE' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">340,24 DHs</div>
+                            <div class="font-weight-bold font-size-large text-white">
+                                {{lastInvoice?.value | numeral}} DH
+                            </div>
 
                             <span class="text-white">{{'CONSUMPTION' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">220,23 m<sup>3</sup></div>
+                            <div class="font-weight-bold font-size-large text-white">
+                                {{lastInvoice?.consumption}}
+                                <ng-container *ngIf="lastInvoice?.type_network === 'EAU'">
+                                    m<sup>3</sup>
+                                </ng-container>
+                                <ng-container *ngIf="lastInvoice?.type_network === 'ELEC'">
+                                    KW
+                                </ng-container>
+                            </div>
                         </div>
 
                     </div>
@@ -83,16 +98,20 @@
             <div class="col-md-6">
                 <div class="deck payment">
                     <div class="deck-body">
-                        <div class="title text-white">Dernier paiement</div>
+                        <div class="title text-white">{{'LAST_PAYMENT' | translate}}</div>
                         <div style="margin-top: 24px;">
                             <span class="text-white">{{'AMOUNT' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">340,24 DHs</div>
+                            <div class="font-weight-bold font-size-large text-white">{{lastPayment?.amount | numeral}}
+                                DH
+                            </div>
 
                             <span class="text-white">{{'MODE' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">Espece</div>
+                            <div class="font-weight-bold font-size-large text-white">{{lastPayment?.mode}}</div>
 
                             <span class="text-white">{{'DATE' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">26/10/2019</div>
+                            <div class="font-weight-bold font-size-large text-white">{{lastPayment?.date
+                                | date:'dd-MM-yyyy'}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,13 +123,19 @@
                         <div class="title text-white">{{'INDEX_VISIT' | translate}}</div>
                         <div style="margin-top: 24px;">
                             <span class="text-white">{{'LAST_INDEX' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">3876878</div>
+                            <div class="font-weight-bold font-size-large text-white">
+                                {{lastVisitLastIndexDetails?.lastInedx}}
+                            </div>
 
                             <span class="text-white">{{'LAST_INDEX_DATE' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">11/06/2019</div>
+                            <div class="font-weight-bold font-size-large text-white">
+                                {{lastVisitLastIndexDetails?.dateLastIndex | date:'dd-MM-yyyy'}}
+                            </div>
 
                             <span class="text-white">{{'NEXT_VISITE' | translate}}</span>
-                            <div class="font-weight-bold font-size-large text-white">13/07/2019</div>
+                            <div class="font-weight-bold font-size-large text-white">
+                                {{lastVisitLastIndexDetails?.dateNextVisit | date:'dd-MM-yyyy'}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,7 +167,8 @@
     <div class="modal-body">
         <form role="form" novalidate [formGroup]="formLinkContract">
             <div class="form-group">
-                <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}</label>
+                <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}<span
+                        class="danger">*</span></label>
                 <input formControlName="numeroContrat" id="numeroContrat" class="form-control required"/>
                 <div class="text-danger"
                      *ngIf="!formLinkContract.controls['numeroContrat'].valid && formLinkContract.controls['numeroContrat'].touched">
@@ -172,8 +198,8 @@
                                 class="danger">*</span></label>
                         <select id="monthNumber" formControlName="month" class="form-control" required>
                             <option value="" disabled selected>Choisir un mois</option>
-                            <option class="month" *ngFor="let item of [].constructor(12); let i = index"
-                                    [value]="i+1">{{i+1}}
+                            <option class="month" *ngFor="let month of months; let i = index"
+                                    [value]="i+1">{{month}}
                             </option>
                         </select>
                         <div class="text-danger"

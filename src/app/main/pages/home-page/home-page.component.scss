@@ -14,6 +14,9 @@
 
 .sub-header {
   padding: 0;
+  .sub-title, .icon, .contract-dropdown {
+    font-size: 1.1rem !important;
+  }
   .content-header {
     .contract-dropdown {
       height: calc(2.3rem);
@@ -28,6 +31,15 @@
     .sub-title, .icon, .contract-dropdown {
       font-size: 1.2rem;
       color: #2c5599;
+    }
+    .status {
+      .icon {
+        font-size: 0.8rem;
+      }
+      span {
+        font-size: 12px;
+        font-weight: bold;
+      }
     }
   }
 }
