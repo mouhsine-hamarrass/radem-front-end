@@ -13,6 +13,8 @@ import {DynamicModel} from '../models/dynamic.model';
 import {ConsumptionModel} from '../models/consumption.model';
 import {SubscriptionModel} from '../models/subscription.model';
 import {RegistrationQuestionModel} from '../models/registration-question.model';
+import {ContractAttachModel} from '../models/contract-attach.model';
+import {CounterModel} from '../models/counter.model';
 
 
 @Injectable()
@@ -40,23 +42,6 @@ export class AdminService {
                 sort
             });
     }
-
-    registerAttachContract(contractNo: string, invoiceNo: string, month: number): Observable<Response<any>> {
-        return this.httpClient.post<Response<any>>(`${this.apiUrl}/auth/attach-contract`, {
-            contractNo,
-            invoiceNo,
-            month
-        })
-    }
-
-    attachContract(contractNo: string, invoiceNo: string, month: number): Observable<Response<any>> {
-        return this.httpClient.post<Response<any>>(`${this.apiUrl}/contract/attach`, {
-            contractNo,
-            invoiceNo,
-            month
-        })
-    }
-
 
     getPageableSubscriptionRequest(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<SubscriptionModel>> {
         return this.httpClient.post<Response<SubscriptionModel>>(`${this.apiUrl}/subscription_requests?page=${page}&size=${pageSize}`,

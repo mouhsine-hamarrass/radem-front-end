@@ -1,8 +1,15 @@
 export class ContractModel {
     id?: number;
+    contractNo?: string;
+    holderLastname?: string;
+    holderFirstname?: string;
+    addressConsumption?: string;
+    usage?: string;
+    typeNetwork?: string;
+    status?: string;
+    /* model keep changing a lot, above recent values.*/
     numeroContrat?: string;
     etatContrat?: string;
-    usage?: string;
     comment?: string;
     dateCreationAbonnement?: string;
     dateEffetAbonnement?: string;
@@ -21,9 +28,16 @@ export class ContractModel {
     tariff?: string;
 
     constructor(id: number,
+                contractNo: string,
+                holderLastname: string,
+                holderFirstname: string,
+                addressConsumption: string,
+                usage: string,
+                typeNetwork: string,
+                status: string,
+                /* model keep changing a lot, above recent values.*/
                 numeroContrat: string,
                 etatContrat: string,
-                usage: string,
                 comment: string,
                 dateCreationAbonnement: string,
                 dateEffetAbonnement: string,
@@ -39,11 +53,19 @@ export class ContractModel {
                 soldeExigible: string,
                 libelleCategorieAbonnement: string,
                 libelleTypeReseau: string,
-                tariff: string) {
+                tariff: string
+    ) {
         this.id = id;
+        this.contractNo = contractNo;
+        this.holderLastname = holderLastname;
+        this.holderFirstname = holderFirstname;
+        this.addressConsumption = addressConsumption;
+        this.usage = usage;
+        this.typeNetwork = typeNetwork;
+        this.status = status;
+        /* model keep changing a lot, above recent values.*/
         this.numeroContrat = numeroContrat;
         this.etatContrat = etatContrat;
-        this.usage = usage;
         this.comment = comment;
         this.dateCreationAbonnement = dateCreationAbonnement;
         this.dateEffetAbonnement = dateEffetAbonnement;

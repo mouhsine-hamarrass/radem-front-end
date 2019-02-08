@@ -296,6 +296,7 @@
   "SUBSCRIBER":"Abonné",
   "NO_SPEAKER_IS_ASSIGNED_FOR_THE_MOMENT":"Aucun Intervenant n'est affecté pour le moment",
   "LAST_CONSUMPTION":"Dérnière consommation",
+  "LAST_PAYMENT":"Dérnière paiement",
   "CONSUMPTION":"Consommation",
   "LAST_INVOICE":"Dérnière facture",
   "BILL_TO_PAY":"Facture à payer",

@@ -2,7 +2,6 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ContractsService} from '../../services/contracts.service';
 import {BsModalRef, BsModalService, ModalOptions} from 'ngx-bootstrap';
 import {AdminService} from '../../services/admin.service';
-import {Color} from 'ng2-charts';
 import * as _ from 'underscore';
 import {User} from '../../models/user.model';
 import {AuthHelper} from '../../../core/services/security/auth.helper';
@@ -12,6 +11,7 @@ import {ContractModel} from '../../models/contract.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import swal from 'sweetalert2';
 import {TranslateService} from '@ngx-translate/core';
+import {ServicesService} from '../../services/services.service';
 
 
 @Component({
@@ -50,19 +50,14 @@ export class ContractsPageComponent implements OnInit {
     sort: any;
     filter: any;
 
-    pageBills = 1;
-    pageSizeBills = 0;
-    totalElementsBills: number;
-    totalPagesBills: number;
-    numberOfItemsBills: number;
-    itemsPerPageBills: number;
-
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
 
     constructor(private modalService: BsModalService,
                 private formBuilder: FormBuilder,
                 private translate: TranslateService,
-                private contractsServices: ContractsService, private soldeService: AdminService) {
+                private contractsServices: ContractsService,
+                private services: ServicesService
+    ) {
         this.formLinkContract = this.formBuilder.group({
             numeroContrat: ['', Validators.required],
             numeroFacture: ['', Validators.required],
@@ -74,21 +69,21 @@ export class ContractsPageComponent implements OnInit {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
-        this.getSubscriptions();
+        this.getContractList();
     }
 
     onSorted(sort: any): void {
         this.sort = sort;
-        this.getSubscriptions();
+        this.getContractList();
     }
 
     onFiltred(filter: any): void {
         this.filter = filter;
-        this.getSubscriptions();
+        this.getContractList();
     }
 
-    getSubscriptions() {
-        this.contractsServices.getPageableContracts( this.page, this.pageSize)
+    getContractList() {
+        this.contractsServices.getPageableContracts(this.page, this.pageSize)
             .subscribe(response => {
                 _.each(response.data['content'], (contract: ContractModel) => {
                     contract.dateEffetAbonnement =
@@ -115,7 +110,7 @@ export class ContractsPageComponent implements OnInit {
         this.modalRef.hide();
     }
 
-    unLinkMyContract(contractId) {
+    unLinkMyContract(contractNo) {
         swal({
             title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_CONTINUE'),
             text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
@@ -126,21 +121,27 @@ export class ContractsPageComponent implements OnInit {
             confirmButtonText: this.translate.instant('YES_I_AM_SURE')
         }).then((result) => {
             if (result.value) {
-                this.getSubscriptions();
+                this.services.detachContract(contractNo).subscribe(response => {
+                    if (response.data) {
+                        this.getContractList();
+                    }
+                }, error => {
+                    console.log(error)
+                });
             }
         });
     }
 
     pageChanged(page: number): void {
         this.page = page;
-        this.getSubscriptions();
+        this.getContractList();
     }
 
     pageFilter(pageSize: number): void {
         this.pageSize = pageSize;
         this.itemsPerPage = pageSize;
         this.page = 1;
-        this.getSubscriptions();
+        this.getContractList();
     }
 
     openContractDetails(template: TemplateRef<any>, numContract: string) {
@@ -167,12 +168,4 @@ export class ContractsPageComponent implements OnInit {
         }
     }
 
-    getAllBillsByContractId(numContract) {
-        return new Promise(resolve => {
-            this.contractsServices.getUnpaidInvoicesByContractId(numContract).subscribe(response => {
-                this.bills = response.data;
-                resolve(this.bills);
-            });
-        });
-    }
 }

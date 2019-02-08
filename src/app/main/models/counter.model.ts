@@ -1,25 +1,34 @@
 export class CounterModel {
     id?: number;
-    codeEtatCompteur?: string;
-    datePoseCompteur?: string;
-    diametreCompteur?: string;
-    libelleModeleCompteur?: string;
-    libelleReglageDisjoncteur?: string;
-    numeroPhysiqueCompteur?: string;
+    physiqueNo?: string;
+    status?: string;
+    brand?: string;
+    coefficientReader?: string;
+    beakerSettings?: string;
+    numberWheels?: string;
+    numberDial?: string;
+    dateRemoval?: string;
+    typeNetwork?: string;
 
     constructor(id: number,
-                codeEtatCompteur: string,
-                datePoseCompteur: string,
-                diametreCompteur: string,
-                libelleModeleCompteur: string,
-                libelleReglageDisjoncteur: string,
-                numeroPhysiqueCompteur: string) {
+                physiqueNo: string,
+                status: string,
+                brand: string,
+                coefficientReader: string,
+                beakerSettings: string,
+                numberWheels: string,
+                numberDial: string,
+                dateRemoval: string,
+                typeNetwork: string
+    ) {
         this.id = id;
-        this.codeEtatCompteur = codeEtatCompteur;
-        this.datePoseCompteur = datePoseCompteur;
-        this.diametreCompteur = diametreCompteur;
-        this.libelleModeleCompteur = libelleModeleCompteur;
-        this.libelleReglageDisjoncteur = libelleReglageDisjoncteur;
-        this.numeroPhysiqueCompteur = numeroPhysiqueCompteur;
+        this.physiqueNo = physiqueNo;
+        this.status = status;
+        this.brand = brand;
+        this.coefficientReader = coefficientReader;
+        this.beakerSettings = beakerSettings;
+        this.numberWheels = numberWheels;
+        this.numberDial = numberDial;
+        this.typeNetwork = typeNetwork;
     }
 }
