@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import * as _ from 'underscore';
 import {CommonService} from '../../services/common.service';
 import * as $ from 'jquery/dist/jquery.min.js';
+import {ContractAttachModel} from '../../models/contract-attach.model';
+import {ServicesService} from '../../services/services.service';
 
 @Component({
     selector: 'app-unpaid',
@@ -20,13 +22,14 @@ export class UnpaidPageComponent implements OnInit {
     selectedBills = [];
     total: number;
     totalUnpaid: number;
+    contractId: string;
 
     toggleContracts = false;
     totalBillsContracts = 0;
     totalBillsExigible = 0;
 
     user: User;
-    userContracts: Array<ContractModel> = [];
+    clientContracts: Array<ContractAttachModel> = [];
     page = 1;
     pageSize = 0;
     totalElements: number;
@@ -42,6 +45,7 @@ export class UnpaidPageComponent implements OnInit {
     constructor(
         private contractServices: ContractsService,
         private commonService: CommonService,
+        private services: ServicesService,
         private adminService: AdminService) {
         this.dropdownSettings = this.commonService.initMultiSelect('Filtrer les contrats', true, '', 1);
         this.total = 0;
@@ -144,21 +148,21 @@ export class UnpaidPageComponent implements OnInit {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
-        this.getClientContracts();
+        this.getClientAttachedContracts();
         // this.test();
     }
 
-    getClientContracts() {
-        this.adminService.getAllContractByNumClient().subscribe(response => {
-            if (response.data) {
-                this.userContracts = response.data;
-                console.log(this.userContracts);
-                _.each(this.userContracts, (element: any) => {
-                    _.extend(element, {id: element.numeroContrat, itemName: `${element.numeroContrat} - (${element.typeContrat})`});
-                });
+    getClientAttachedContracts() {
+        this.services.clientAttachedContracts().subscribe(response => {
+            this.clientContracts = response.data;
+            _.each(this.clientContracts, (element: any) => {
+                _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
+            });
+            if (this.clientContracts.length) {
+                this.setContract(this.clientContracts[0].contractNo);
             }
-        }, error => {
-
+        }, err => {
+            console.log(err)
         });
     }
 
@@ -229,6 +233,10 @@ export class UnpaidPageComponent implements OnInit {
         }
     }
 
+    setContract(id: any) {
+        this.contractId = id;
+    }
+
     toggleAddBills($event, contract) {
         if (contract && contract.bills) {
             const operation = $event.currentTarget.checked ? 'add' : 'minus';
@@ -290,53 +298,4 @@ export class UnpaidPageComponent implements OnInit {
         this.selectedBills = [];
     }
 
-    test() {
-        $(document.body).on('change', '.main-page input[type="checkbox"]', function (e) {
-            // $('input[type="checkbox"]').on('change', function (e) {
-            const checked = $(this).prop('checked'),
-                container = $(this).parent().parent().parent().parent(),
-                siblings = container.siblings();
-
-            container.find('input[type="checkbox"]').prop({
-                indeterminate: false,
-                checked: checked
-            });
-
-            function checkSiblings(el) {
-                let parent = el.parent().parent(),
-                    all = true;
-
-                el.siblings().each(function () {
-                    return all = ($(this).children('input[type="checkbox"]').prop('checked') === checked);
-                });
-
-                if (all && checked) {
-
-                    parent.children('input[type="checkbox"]').prop({
-                        indeterminate: false,
-                        checked: checked
-                    });
-
-                    checkSiblings(parent);
-
-                } else if (all && !checked) {
-
-                    parent.children('input[type="checkbox"]').prop('checked', checked);
-                    parent.children('input[type="checkbox"]').prop('indeterminate', (parent.find('input[type="checkbox"]:checked').length > 0));
-                    checkSiblings(parent);
-
-                } else {
-
-                    el.parents('li').children('input[type="checkbox"]').prop({
-                        indeterminate: true,
-                        checked: false
-                    });
-
-                }
-
-            }
-
-            //checkSiblings(container);
-        });
-    }
 }

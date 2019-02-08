@@ -19,11 +19,10 @@
                             <div class="col-3">
                                 <select type="text" class="custom-select" #t
                                         (change)="setContract(t.value)">
-                                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate }}
-                                    </option>
-                                    <option *ngFor="let contract of userContracts"
-                                            [value]="contract?.numeroContrat">
-                                        {{contract.numeroContrat}} ({{contract.typeContrat}})
+                                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                                    <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                                        {{contract.contractNo}}
+                                        ({{contract.type}})
                                     </option>
                                 </select>
                             </div>
@@ -100,11 +99,10 @@
                             <div class="col-3">
                                 <select formControlName="contract" type="text" class="custom-select" #t
                                         (change)="setContract(t.value)">
-                                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate }}
-                                    </option>
-                                    <option *ngFor="let contract of userContracts"
-                                            [value]="contract?.numeroContrat">
-                                        {{contract.numeroContrat}} ({{contract.typeContrat}})
+                                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                                    <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                                        {{contract.contractNo}}
+                                        ({{contract.type}})
                                     </option>
                                 </select>
                             </div>

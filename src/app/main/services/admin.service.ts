@@ -15,6 +15,7 @@ import {SubscriptionModel} from '../models/subscription.model';
 import {RegistrationQuestionModel} from '../models/registration-question.model';
 import {ContractAttachModel} from '../models/contract-attach.model';
 import {CounterModel} from '../models/counter.model';
+import {SettlementModel} from '../models/settlement.model';
 
 
 @Injectable()
@@ -170,28 +171,23 @@ export class AdminService {
         return this.httpClient.get<Response<any>>(`${this.apiUrl}/contracts/actives/paged-list?page=${page}&size=${pageSize}`);
     }
 
-    getPageableHistoryConsumptions(contractNo
-                                       :
-                                       string,
-                                   dateDebut
-                                       :
-                                       any,
-                                   dateFin
-                                       :
-                                       any,
-                                   page
-                                       :
-                                       number,
-                                   pageSize
-                                       :
-                                       number
-    ):
+    getPageableSettlements(contractNo: string, dateStart: any, dateEnd: any, page: number, pageSize: number):
+        Observable<Response<Array<SettlementModel>>> {
+        return this.httpClient.post<Response<Array<SettlementModel>>>(`${this.apiUrl}/contracts/settlements?page=${page}&size=${pageSize}`,
+            {
+                contractNo,
+                dateStart,
+                dateEnd
+            });
+    }
+
+    getPageableHistoryConsumptions(contractNo: string, dateStart: any, dateEnd: any, page: number, pageSize: number):
         Observable<Response<Array<ConsumptionModel>>> {
         return this.httpClient.post<Response<Array<ConsumptionModel>>>(`${this.apiUrl}/consumptions?page=${page}&size=${pageSize}`,
             {
                 contractNo,
-                dateDebut,
-                dateFin
+                dateStart,
+                dateEnd
             });
     }
 
