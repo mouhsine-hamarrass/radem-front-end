@@ -20,23 +20,50 @@
                                     <select formControlName="contract" type="text" class="custom-select" #t
                                             (change)="setContract(t.value)">
                                         <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                                        <option *ngFor="let contract of userContracts" value="{{contract.numeroContrat}}">
-                                            {{contract.numeroContrat}}
-                                            ({{contract.typeContrat}})
+                                        <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                                            {{contract.contractNo}}
+                                            ({{contract.type}})
                                         </option>
                                     </select>
                                 </div>
                                 <label class="col-form-label">{{'PERIOD_OF' | translate}} <span class="danger">*</span> :</label>
                                 <div class="col-auto">
-                                    <input formControlName="startDate" type="date" class="form-control">
+                                    <input [owlDateTime]="sd"
+                                           [owlDateTimeTrigger]="sd"
+                                           [min]="minDate"
+                                           [max]="today"
+                                           formControlName="startDate"
+                                           class="form-control date-readonly"
+                                           id="startDate" readonly>
+                                    <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
+                                    <div class="text-danger position-absolute mb-1"
+                                         *ngIf="!contractForm.controls['startDate'].valid && contractForm.controls['startDate'].touched">
+                                        <div *ngIf="contractForm.controls['startDate'].errors.required">
+                                            {{'FIELD_REQUIRED' | translate}}
+                                        </div>
+                                    </div>
                                 </div>
                                 <label class="col-form-label">{{'THE' | translate}} <span class="danger">*</span></label>
                                 <div class="col-auto">
-                                    <input formControlName="endDate" type="date" class="form-control">
+                                    <input [owlDateTime]="ed"
+                                           [owlDateTimeTrigger]="ed"
+                                           [min]="minDate"
+                                           [max]="today"
+                                           formControlName="endDate"
+                                           class="form-control date-readonly"
+                                           id="endDate" readonly>
+                                    <owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>
+                                    <div class="text-danger position-absolute mb-1"
+                                         *ngIf="!contractForm.controls['endDate'].valid && contractForm.controls['endDate'].touched">
+                                        <div *ngIf="contractForm.controls['endDate'].errors.required">
+                                            {{'FIELD_REQUIRED' | translate}}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-auto float-right row">
-                                    <button type="button" class="btn btn btn-outline-primary" (click)="recherche();"><i
-                                            class="fa fa-search"></i>
+                                    <button type="button" class="btn btn btn-outline-primary"
+                                            (click)="getSettlements()" [disabled]="contractForm.invalid">
+                                        <i class="fa fa-search"></i>
                                     </button>
                                     &nbsp;
                                     <div class="btn-group" dropdown>
@@ -85,12 +112,12 @@
 
                                     <ng-template #dataAvailable>
                                         <tr *ngFor="let settlement of settlements">
-                                            <td>{{settlement.billingPeriod}}</td>
-                                            <td>{{settlement.billNumber}}</td>
-                                            <td>{{settlement.billType}}</td>
-                                            <td>{{settlement.settlementDate}}</td>
+                                            <td>{{settlement.month}} - {{settlement.year}}</td>
+                                            <td>{{settlement.invoiceNo}}</td>
+                                            <td>{{settlement.typeNetwork}}</td>
+                                            <td>{{settlement.paymentDate | date:'dd-MM-yyyy'}}</td>
                                             <td>{{settlement.amount}}</td>
-                                            <td>{{settlement.SettlementMode}}</td>
+                                            <td>{{settlement.paymentMode}}</td>
                                         </tr>
                                     </ng-template>
                                     </tbody>

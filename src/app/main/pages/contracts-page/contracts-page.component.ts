@@ -147,23 +147,24 @@ export class ContractsPageComponent implements OnInit {
     openContractDetails(template: TemplateRef<any>, numContract: string) {
         if (numContract && numContract !== null) {
             this.contractsServices.getDetailsContract(numContract).subscribe(responseContract => {
-                this.contractsServices.getSoldeByNumContract(numContract).subscribe(responseSolde => {
+                // this.contractsServices.getSoldeByNumContract(numContract).subscribe(responseSolde => {
                     this.contract = responseContract.data;
                     if (this.contract) {
-                        this.contract.dateCreationAbonnement =
-                            moment(new Date(this.contract.dateCreationAbonnement)).format(environment.defaultDateFormatNoTime);
-                        this.contract.dateEffetAbonnement =
-                            moment(new Date(this.contract.dateEffetAbonnement)).format(environment.defaultDateFormatNoTime);
-                        this.contract.dateFinAbonnement =
-                            moment(new Date(this.contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateSubscription =
+                            moment(new Date(this.contract.dateSubscription)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateEffectSubscription =
+                            moment(new Date(this.contract.dateEffectSubscription)).format(environment.defaultDateFormatNoTime);
+                        this.contract.dateEndSubscription =
+                            moment(new Date(this.contract.dateEndSubscription)).format(environment.defaultDateFormatNoTime);
                     }
+                    /*
                     this.solde = {
                         soldeExigible: responseSolde.data['soldeExigible'] || 0,
                         soldetot: responseSolde.data['soldetot'] || 0
                     };
-
+                    */
                     this.modalRef = this.modalService.show(template, this.config);
-                }, error => console.log(error));
+                // }, error => console.log(error));
             }, err => console.log(err));
         }
     }

@@ -9,6 +9,9 @@ import {ContractsService} from '../../services/contracts.service';
 import {User} from '../../models/user.model';
 import {AuthHelper} from '../../../core/services/security/auth.helper';
 import {ContractModel} from '../../models/contract.model';
+import {ContractAttachModel} from '../../models/contract-attach.model';
+import * as moment from 'moment';
+import {SettlementModel} from '../../models/settlement.model';
 
 @Component({
     selector: 'app-settlements',
@@ -17,12 +20,14 @@ import {ContractModel} from '../../models/contract.model';
 })
 export class SettlementsPageComponent implements OnInit {
     public user: User;
-    userContracts: Array<ContractModel>;
-    public settlements: any;
-    public contracts: Array<ContractModel>;
+    clientContracts: Array<ContractAttachModel>;
+    public settlements: Array<SettlementModel>;
     public contractId: any;
     public date: Date;
     public contractForm: FormGroup;
+
+    today: any = moment();
+    minDate: any = moment().subtract(5, 'years');
 
     page = 1;
     pageSize = 0;
@@ -37,54 +42,52 @@ export class SettlementsPageComponent implements OnInit {
                 private adminService: AdminService,
                 private formBuilder: FormBuilder,
                 private utilsService: UtilsService,
-                private servicesService: ServicesService) {
+                private services: ServicesService) {
         this.contractForm = this.formBuilder.group({
             contract: ['', Validators.required],
-            startDate: ['', Validators.required],
-            endDate: ['', Validators.required]
+            startDate: [this.today, Validators.required],
+            endDate: [this.today, Validators.required]
         });
-    }
-
-    get contract() {
-        return this.contractForm.get('contract');
-    }
-
-    get startdate() {
-        return this.contractForm.get('startDate');
-    }
-
-    get endDate() {
-        return this.contractForm.get('endDate');
     }
 
     ngOnInit() {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
-        this.getContacts();
-        this.getClientContracts();
+        this.getClientAttachedContracts();
+    }
+
+    getClientAttachedContracts() {
+        this.services.clientAttachedContracts().subscribe(response => {
+            this.clientContracts = response.data;
+            if (this.clientContracts.length) {
+                this.setContract(this.clientContracts[0].contractNo);
+            }
+        }, err => {
+            console.log(err)
+        });
     }
 
     onSorted(sort: any): void {
         this.sort = sort;
-        this.getContacts();
+        this.getSettlements();
     }
 
     onFiltred(filter: any): void {
         this.filter = filter;
-        this.getContacts();
+        this.getSettlements();
     }
 
-    getClientContracts() {
-        this.adminService.getAllContractByNumClient().subscribe(response => {
-            this.userContracts = response.data;
-        });
-    }
-
-    getContacts() {
-        this.contractServices.getPageableContracts(this.page, this.pageSize)
+    getSettlements() {
+        const contract = this.contractForm.controls['contract'].value;
+        const startDate = moment(new Date(this.contractForm.controls['startDate'].value));
+        const endDate = moment(new Date(this.contractForm.controls['endDate'].value));
+        this.adminService.getPageableSettlements(contract,
+            startDate,
+            endDate,
+            this.page, this.pageSize)
             .subscribe(response => {
-                this.contracts = response.data['content'];
+                this.settlements = response.data['content'];
                 this.totalElements = response.data['totalElements'];
                 this.totalPages = response.data['totalPages'];
                 this.itemsPerPage = response.data['size'];
@@ -95,14 +98,14 @@ export class SettlementsPageComponent implements OnInit {
 
     pageChanged(page: number): void {
         this.page = page;
-        this.getContacts();
+        this.getSettlements();
     }
 
     pageFilter(pageSize: number): void {
         this.pageSize = pageSize;
         this.itemsPerPage = pageSize;
         this.page = 1;
-        this.getContacts();
+        this.getSettlements();
     }
 
     recherche() {
@@ -125,7 +128,7 @@ export class SettlementsPageComponent implements OnInit {
 
     downloadXlsSettlements() {
         /*
-        this.servicesService.downloadXlsSettlements().subscribe((response) => {
+        this.services.downloadXlsSettlements().subscribe((response) => {
           if (response && response['body']) {
             const file = new FileModel('mes-reglements.xls', CommonUtil._arrayBufferToBase64(response['body']));
 
@@ -136,7 +139,7 @@ export class SettlementsPageComponent implements OnInit {
     }
 
     downloadPdfSettlements() {
-        this.servicesService.downloadPdfSettlements().subscribe((response) => {
+        this.services.downloadPdfSettlements().subscribe((response) => {
             if (response && response['body']) {
                 const file = new FileModel('mes-reglements.pdf', CommonUtil._arrayBufferToBase64(response['body']));
 

@@ -1,12 +1,17 @@
 export class ContractModel {
     id?: number;
     contractNo?: string;
+    holderName?: string;
+    payerName?: string;
     holderLastname?: string;
     holderFirstname?: string;
     addressConsumption?: string;
     usage?: string;
     typeNetwork?: string;
     status?: string;
+    dateSubscription?: string;
+    dateEndSubscription?: string;
+    dateEffectSubscription?: string;
     /* model keep changing a lot, above recent values.*/
     numeroContrat?: string;
     etatContrat?: string;
@@ -29,12 +34,17 @@ export class ContractModel {
 
     constructor(id: number,
                 contractNo: string,
+                holderName: string,
+                payerName: string,
                 holderLastname: string,
                 holderFirstname: string,
                 addressConsumption: string,
                 usage: string,
                 typeNetwork: string,
                 status: string,
+                dateSubscription: string,
+                dateEndSubscription: string,
+                dateEffectSubscription: string,
                 /* model keep changing a lot, above recent values.*/
                 numeroContrat: string,
                 etatContrat: string,
@@ -57,12 +67,17 @@ export class ContractModel {
     ) {
         this.id = id;
         this.contractNo = contractNo;
+        this.holderName = holderName;
+        this.payerName = payerName;
         this.holderLastname = holderLastname;
         this.holderFirstname = holderFirstname;
         this.addressConsumption = addressConsumption;
         this.usage = usage;
         this.typeNetwork = typeNetwork;
         this.status = status;
+        this.dateSubscription = dateSubscription;
+        this.dateEndSubscription = dateEndSubscription;
+        this.dateEffectSubscription = dateEffectSubscription;
         /* model keep changing a lot, above recent values.*/
         this.numeroContrat = numeroContrat;
         this.etatContrat = etatContrat;

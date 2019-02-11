@@ -12,6 +12,8 @@ import {AuthHelper} from '../../../core/services/security/auth.helper';
 import * as moment from 'moment';
 import {ConsumptionModel} from '../../models/consumption.model';
 import {Color} from 'ng2-charts';
+import {ContractAttachModel} from '../../models/contract-attach.model';
+import {ContractModel} from '../../models/contract.model';
 
 @Component({
     selector: 'app-consumption-page',
@@ -20,8 +22,8 @@ import {Color} from 'ng2-charts';
 })
 export class ConsumptionsPageComponent implements OnInit {
     public user: User;
-    userContracts: any;
-    contracts: any;
+    clientContracts: Array<ContractAttachModel>;
+    contracts: Array<ContractModel>;
     historyForm: FormGroup;
     contractNumber: any;
     consumptions: Array<ConsumptionModel>;
@@ -111,7 +113,7 @@ export class ConsumptionsPageComponent implements OnInit {
         private adminService: AdminService,
         private utilsService: UtilsService,
         private formBuilder: FormBuilder,
-        private servicesService: ServicesService) {
+        private services: ServicesService) {
         this.historyForm = this.formBuilder.group({
             contract: ['', Validators.required],
             startDate: [this.today, Validators.required],
@@ -123,12 +125,18 @@ export class ConsumptionsPageComponent implements OnInit {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
-        this.getClientContracts();
+        this.getClientAttachedContracts();
     }
 
-    getClientContracts() {
-        this.adminService.getAllContractByNumClient().subscribe(response => {
-            this.userContracts = response.data;
+
+    getClientAttachedContracts() {
+        this.services.clientAttachedContracts().subscribe(response => {
+            this.clientContracts = response.data;
+            if (this.clientContracts.length) {
+                this.setContract(this.clientContracts[0].contractNo);
+            }
+        }, err => {
+            console.log(err)
         });
     }
 
@@ -177,7 +185,7 @@ export class ConsumptionsPageComponent implements OnInit {
     }
 
     downloadXlsConsumptions() {
-        this.servicesService.downloadXlsConsumptions().subscribe((response) => {
+        this.services.downloadXlsConsumptions().subscribe((response) => {
             if (response && response['body']) {
                 const file = new FileModel('mes-consommations.xls', CommonUtil._arrayBufferToBase64(response['body']));
 
@@ -187,7 +195,7 @@ export class ConsumptionsPageComponent implements OnInit {
     }
 
     downloadPdfConsumptions() {
-        this.servicesService.downloadPdfConsumptions().subscribe((response) => {
+        this.services.downloadPdfConsumptions().subscribe((response) => {
             if (response && response['body']) {
                 const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
 

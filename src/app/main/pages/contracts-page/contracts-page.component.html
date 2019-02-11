@@ -66,7 +66,7 @@
                                             <i class="fa fa-list-alt cursor-pointer"
                                                tooltip="Détails"
                                                (click)="openContractDetails(detailSubscription, contract.contractNo)"></i>
-                                            <i class="fa fa-unlink cursor-pointer"
+                                            <i class="fa fa-unlink cursor-pointer pull-left"
                                                tooltip="Détachement"
                                                (click)="unLinkMyContract(contract.contractNo)"></i>
                                             <i class="fa fa-unlink cursor-pointer pull-right"
@@ -107,12 +107,23 @@
                     <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
                 </h4>
             </div>
+            <!--
+            addressConsumption: "1 RES ATLAS RUE HOUCIN B ALI AP"
+            contractNo: "0000003"
+            dateEffectSubscription: 1190073600000
+            dateEndSubscription: null
+            dateSubscription: 1190073600000
+            holderName: "ABDERRAOUF CHBICHEB"
+            payerName: "ABDERRAOUF CHBICHEB"
+            status: "EN COURS/FOURNITURE SERV"
+            usage: "BT COMMERCIAL"
+            -->
             <div class="card-content">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <p>
-                                <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.numeroContrat}}
+                                <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.contractNo}}
                             </p>
                         </div>
                         <div class="col-md-6">
@@ -130,48 +141,46 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p>
-                                <b>{{'CATEGORY' | translate}} : </b>
-                                <span class="text-muted">{{contract?.libelleCategorieAbonnement}}</span>
+                                <b>{{'USAGE' | translate}} : </b>
+                                <span class="text-muted">{{contract?.usage}}</span>
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><b>{{'PAYER' | translate}} : </b>{{contract?.nomClientPayeur + ' ' +
-                                contract?.prenomClientPayeur}}</p>
+                            <p><b>{{'PAYER' | translate}} : </b>{{contract?.payerName}}</p>
                         </div>
                         <div class="col-md-6">
                             <p>
-                                <b>{{'Holder' | translate}} : </b>{{contract?.nomClientTitulaire + ' ' +
-                                contract?.prenomClientTitulaire}}
+                                <b>{{'Holder' | translate}} : </b>{{contract?.holderName}}
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.adresseClientPayeur}}</p>
+                            <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.addressConsumption}}</p>
                         </div>
                         <div class="col-md-6"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><b>{{'STATUS' | translate }} : </b>{{contract?.etatContrat}}</p>
+                            <p><b>{{'STATUS' | translate }} : </b>{{contract?.status}}</p>
                         </div>
                     </div>
                     <br/>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateCreationAbonnement}}
+                            <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateSubscription}}
                             </p>
                         </div>
                         <div class="col-md-6" *ngIf="contract?.dateFinAbonnement">
-                            <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateFinAbonnement}}
+                            <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateEndSubscription}}
                             </p>
                         </div>
                     </div>
                     <div class="row" *ngIf="contract?.dateEffetAbonnement">
                         <div class="col-md-6">
-                            <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffetAbonnement}}
+                            <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffectSubscription}}
                             </p>
                         </div>
                     </div>
