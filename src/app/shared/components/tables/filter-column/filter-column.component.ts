@@ -40,22 +40,9 @@ export class FilterColumnComponent implements OnInit {
     @Input('filter-placeholder')
     filterPlaceholder: string;
 
-    @Input('filter-status-for')
-    filterStatusFor: string = 'default';
-    keyword: any;
-
     constructor(private filterService: FilterService) {
     }
 
-    statusList(): Array<string> {
-        const statusList = Object.keys(this.statusTypes);
-        if (this.filterStatusFor !== 'default') {
-            return _.difference(statusList, _.without(statusList, 'CANCELED', 'PUBLISHED'));
-        } else { // For publication status
-            return _.difference(statusList, _.without(statusList, 'CANCELED', 'DELETED', 'DRAFT', 'IN_MODERATION',
-                'PUBLISHED', 'RECYCLED', 'REJECTED', 'TO_BE_MODERATED', 'TO_BE_PUBLISHED'));
-        }
-    }
 
     dateChanged(columnName, inputValue): void {
         if (inputValue) {

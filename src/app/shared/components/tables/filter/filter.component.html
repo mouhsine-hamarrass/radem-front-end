@@ -1,3 +1,10 @@
+<!--
+ Name: Filter component
+ Description: Display a dropdown list that contains number of result to display in a table,
+ Input: showFilter: boolean
+ Output: onfilterChanged: EventEmitter
+
+ -->
 <div class="form-group" *ngIf="showFilter">
     <div class="input-group mb-2" id="filterControl">
         <select class="custom-select" id="inputGroupSelect02"
@@ -8,7 +15,7 @@
             </option>
         </select>
         <div class="input-group-append">
-            <label class="input-group-text" for="inputGroupSelect02">entrées</label>
+            <label class="input-group-text" for="inputGroupSelect02">{{'ENTRES' | translate}}</label>
         </div>
     </div>
 </div>

@@ -1,3 +1,17 @@
+<!--
+ Name: Pagination component
+ Description: Display pagination,
+              Display a pagination list bellow the table to determin the number of result passed
+ Input: totalItems: number // total number of result
+        numberOfItems: number // current page
+        totalPages: number // number of pages
+        pageBtnClass: custom class to re-define the component style position/color/size/...
+        itemsPerPage: number // number of result to display per page
+        showPagination: boolean // Decide whatever to display/hide pagination
+
+ Output: onpageChanged: EventEmitter // call this function whenever we change a page
+
+ -->
 <div class="row align-items-center" *ngIf="showPagination">
   <div class="col-xs-6 col-6">
     <strong *ngIf="totalPages">{{'Affichès' | translate}} {{numberOfItems + ' / ' + totalItems}} {{'entrées' | translate}}</strong>

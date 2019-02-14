@@ -1,1 +1,9 @@
-<td [attr.colspan]="colSpan" class="text-center">Désolé, aucun résultat n'a été trouvé</td>
+<!--
+ Name: Data Not available component
+ Description: Display an empty table,
+              Display a custom message to the user if the table has no data
+ Input: colSpan: number
+ Output: NONE
+
+ -->
+<td [attr.colspan]="colSpan" class="text-center">{{'SORRY_NO_DATA_AVAIBELE' | translate}}</td>

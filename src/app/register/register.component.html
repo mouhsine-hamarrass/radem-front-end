@@ -298,7 +298,7 @@
                                                         </div>
                                                         <div class="col-sm-2 col-xs-4 text-right pr-sm-1 pr-xs-0">
                                                             <button type="button"
-                                                                    [disabled]="thirdStep.invalid || !checkbox"
+                                                                    [disabled]="!checkbox"
                                                                     (click)="generateRecap()"
                                                                     class="btn btn-primary"
                                                                     awNextStep>{{'Next' | translate}}

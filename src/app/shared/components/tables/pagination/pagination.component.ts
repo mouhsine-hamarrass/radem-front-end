@@ -14,12 +14,9 @@ export class PaginationComponent implements OnInit {
     @Input() maxSize: number;
     @Input() align: boolean;
     @Input() pageBtnClass: string;
-    @Input() firstText: string;
-    @Input() lastText: string;
     @Input() itemsPerPage: number;
     @Input() showPagination = false;
 
-    @Output() numPages: EventEmitter<any> = new EventEmitter();
     @Output() onpageChanged: EventEmitter<any> = new EventEmitter();
 
     constructor() {

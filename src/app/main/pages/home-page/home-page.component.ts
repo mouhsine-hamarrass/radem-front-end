@@ -18,145 +18,162 @@ import {LastPaymentModel} from '../../models/last-payment.model';
 
 
 @Component({
-    selector: 'app-home-page',
-    templateUrl: './home-page.component.html',
-    styleUrls: ['./home-page.component.scss']
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-    @ViewChild('contractDropDown') contractDropDown: ElementRef;
-    public user: User;
-    advices: Setting;
-    clientContracts: Array<ContractAttachModel>;
-    clientDetails: any;
-    unpaidBalance = '0.00';
-    selectedContract: string;
-    lastVisitLastIndexDetails: LastIndexNextVisitModel;
-    lastInvoice: LastInvoiceModel;
-    lastPayment: LastPaymentModel;
+  @ViewChild('contractDropDown') contractDropDown: ElementRef;
+  public user: User;
+  advices: Setting;
+  clientContracts: Array<ContractAttachModel>;
+  clientDetails: any;
+  unpaidBalance = '0.00';
+  selectedContract: string;
+  lastVisitLastIndexDetails: LastIndexNextVisitModel;
+  lastInvoice: LastInvoiceModel;
+  lastPayment: LastPaymentModel;
+  attachContractRequest: any;
 
-    modalRef: BsModalRef;
-    config = {
-        backdrop: true,
-        ignoreBackdropClick: false,
-        class: 'modal-lg'
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: false,
+    class: 'modal-lg'
+  };
+  months = ['Janv.', 'Févr.', 'Mars.', 'Avr.', 'Mai.', 'Juin.', 'Juil.', 'Août.', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
+  formLinkContract: FormGroup;
+  private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
+
+  constructor(
+    private contractServices: ContractsService,
+    private adminServices: AdminService,
+    private services: ServicesService,
+    private profileService: ProfileService,
+    private homeService: HomeService,
+    private formBuilder: FormBuilder,
+    private modalService: BsModalService,
+    private translate: TranslateService) {
+    this.attachContractRequest = {
+      status: undefined,
+      message: undefined
     };
-    months = ['Janv.', 'Févr.', 'Mars.', 'Avr.', 'Mai.', 'Juin.', 'Juil.', 'Août.', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
-    formLinkContract: FormGroup;
-    private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
+    this.formLinkContract = this.formBuilder.group({
+      numeroContrat: ['', Validators.required],
+      numeroFacture: ['', Validators.required],
+      month: ['', Validators.required]
+    });
 
-    constructor(
-        private contractServices: ContractsService,
-        private adminServices: AdminService,
-        private services: ServicesService,
-        private profileService: ProfileService,
-        private homeService: HomeService,
-        private formBuilder: FormBuilder,
-        private modalService: BsModalService,
-        private translate: TranslateService) {
-        this.formLinkContract = this.formBuilder.group({
-            numeroContrat: ['', Validators.required],
-            numeroFacture: ['', Validators.required],
-            month: ['', Validators.required]
-        });
+  }
 
+
+  ngOnInit() {
+    if (localStorage.getItem(AuthHelper.USER_ID)) {
+      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
+    this.getAdvice();
+    this.getClientAttachedContracts()
+  }
 
+  getClientAttachedContracts() {
+    this.services.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+      if (this.clientContracts.length) {
+        this.selectedContract = this.clientContracts[0].contractNo;
+        this.setContract(this.clientContracts[0].contractNo);
+      }
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    ngOnInit() {
-        if (localStorage.getItem(AuthHelper.USER_ID)) {
-            this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-        }
-        this.getAdvice();
-        this.getClientAttachedContracts()
-    }
+  openModalLinkContract(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.modalOptions);
+  }
 
-    getClientAttachedContracts() {
-        this.services.clientAttachedContracts().subscribe(response => {
-            this.clientContracts = response.data;
-            if (this.clientContracts.length) {
-                this.selectedContract = this.clientContracts[0].contractNo;
-                this.setContract(this.clientContracts[0].contractNo);
-            }
-        }, err => {
-            console.log(err)
-        });
-    }
+  closeModal() {
+    this.formLinkContract.reset();
+    this.modalRef.hide();
+    this.attachContractRequest.status = undefined;
+  }
 
-    openModalLinkContract(template: TemplateRef<any>) {
-        this.modalRef = this.modalService.show(template, this.modalOptions);
-    }
+  linkMyContract(formData) {
+    const contract = {
+      contractNo: formData.numeroContrat,
+      invoiceNo: formData.numeroFacture,
+      month: formData.month,
+    };
+    this.services.attachContract(contract.contractNo, contract.invoiceNo, contract.month).subscribe(response => {
+      if (response.data) {
+        this.attachContractRequest.status = 'success';
+        this.attachContractRequest.message = this.translate.instant('CONTRACT_ATTACHABLE');
+        this.getClientAttachedContracts();
+      } else {
+        this.attachContractRequest.status = 'warning';
+        this.attachContractRequest.message = this.translate.instant('CONTRACT_UNATTACHABLE');
+      }
+    }, err => {
+      this.attachContractRequest.status = undefined;
+      console.log(err)
+    });
+  }
 
-    linkMyContract(formData) {
-        this.formLinkContract.reset();
-        this.modalRef.hide();
-        const contract = {
-            contractNo: formData.numeroContrat,
-            invoiceNo: formData.numeroFacture,
-            month: formData.month,
-        };
-        this.services.attachContract(contract.contractNo, contract.invoiceNo, contract.month).subscribe(response => {
-            this.getClientAttachedContracts();
-        }, err => {
-            console.log(err)
-        });
-    }
+  setContract(contractNo: string) {
+    this.getClientDetailsByContract(contractNo);
+    this.getUnpaidBalanceByContract(contractNo);
+    this.getLastVisitLastIndexByContract(contractNo);
+    this.getLastInvoiceByContract(contractNo);
+    this.getLastPaymentByContract(contractNo);
+  }
 
-    setContract(contractNo: string) {
-        this.getClientDetailsByContract(contractNo);
-        this.getUnpaidBalanceByContract(contractNo);
-        this.getLastVisitLastIndexByContract(contractNo);
-        this.getLastInvoiceByContract(contractNo);
-        this.getLastPaymentByContract(contractNo);
-    }
+  getClientDetailsByContract(contractNo: string) {
+    this.services.getClientDetailsByContractNo(contractNo).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getClientDetailsByContract(contractNo: string) {
-        this.services.getClientDetailsByContractNo(contractNo).subscribe(response => {
-            this.clientDetails = response.data;
-            console.log(this.clientDetails);
-        }, err => {
-            console.log(err)
-        });
-    }
+  getUnpaidBalanceByContract(contractNo: string) {
+    this.services.getUnpaidBalanceByContractNo(contractNo).subscribe(response => {
+      this.unpaidBalance = response.data;
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getUnpaidBalanceByContract(contractNo: string) {
-        this.services.getUnpaidBalanceByContractNo(contractNo).subscribe(response => {
-            this.unpaidBalance = response.data;
-        }, err => {
-            console.log(err)
-        });
-    }
+  getLastVisitLastIndexByContract(contractNo: string) {
+    this.services.getLastVisitLastIndexByContractNo(contractNo).subscribe(response => {
+      this.lastVisitLastIndexDetails = response.data;
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getLastVisitLastIndexByContract(contractNo: string) {
-        this.services.getLastVisitLastIndexByContractNo(contractNo).subscribe(response => {
-            this.lastVisitLastIndexDetails = response.data;
-        }, err => {
-            console.log(err)
-        });
-    }
+  getLastInvoiceByContract(contractNo: string) {
+    this.services.getLastInvoiceByContractNo(contractNo).subscribe(response => {
+      this.lastInvoice = response.data;
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getLastInvoiceByContract(contractNo: string) {
-        this.services.getLastInvoiceByContractNo(contractNo).subscribe(response => {
-            this.lastInvoice = response.data;
-        }, err => {
-            console.log(err)
-        });
-    }
+  getLastPaymentByContract(contractNo: string) {
+    this.services.getLastPaymentByContractNo(contractNo).subscribe(response => {
+      this.lastPayment = response.data;
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getLastPaymentByContract(contractNo: string) {
-        this.services.getLastPaymentByContractNo(contractNo).subscribe(response => {
-            this.lastPayment = response.data;
-        }, err => {
-            console.log(err)
-        });
-    }
-
-    getAdvice() {
-        this.adminServices.getAdvices().subscribe(
-            response => {
-                this.advices = response.data;
-            }, err => {
-                console.log(err)
-            });
-    }
+  getAdvice() {
+    this.adminServices.getAdvices().subscribe(
+      response => {
+        this.advices = response.data;
+      }, err => {
+        console.log(err)
+      });
+  }
 
 }

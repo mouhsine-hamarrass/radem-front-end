@@ -57,9 +57,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     <app-data-not-available
                                             *ngIf="!contractsBills || contractsBills.length == 0; else dataAvailable"
-                                            [colSpan]="4">
+                                            [colSpan]="5">
                                     </app-data-not-available>
                                     <ng-template #dataAvailable>
                                         <ng-container *ngFor="let contractBills of contractsBills">
@@ -67,33 +68,33 @@
                                                 <td>
                                                     <div class="pure-checkbox">
                                                         <input type="checkbox" #checkboxes
-                                                               [id]="'head-' + contractBills.numeroContrat"
+                                                               [id]="'head-' + contractBills.contactNo"
                                                                (change)="toggleAddBills($event, contractBills)"/>
-                                                        <label [for]="'head-' + contractBills.numeroContrat"></label>
+                                                        <label [for]="'head-' + contractBills.contactNo"></label>
                                                     </div>
                                                 </td>
-                                                <td>{{contractBills.numeroContrat}} - {{contractBills.typeContrat}}</td>
-                                                <td colspan="3" class="text-center">{{contractBills.address}}</td>
+                                                <td>{{contractBills.contactNo}} - {{contractBills.typeNetwork}}</td>
+                                                <td colspan="3" class="text-center">{{contractBills.addressConsumption}}</td>
                                             </tr>
-                                            <tr *ngFor="let bill of contractBills.bills; let i = index"
+                                            <tr *ngFor="let bill of contractBills.invoices; let i = index"
                                                 class="bills-list"
-                                                [ngClass]="bill.isExigible ? 'bg-accent-1' : 'bg-accent-3'">
+                                                [ngClass]="bill.exigible ? 'bg-accent-1' : 'bg-accent-3'">
                                                 <td>
                                                     <div class="pure-checkbox">
                                                         <input type="checkbox" #checkboxes
-                                                               [id]="'head-' + contractBills.numeroContrat + '-' + i"
-                                                               [attr.data-type]="bill.isExigible"
-                                                               [disabled]="bill.isExigible"
-                                                               [checked]="bill.isExigible || bill.checked"
-                                                               [attr.data-value]="bill.solde"
-                                                               (change)="toggleAddBill($event, bill, contractBills.numeroContrat)"/>
-                                                        <label [for]="'head-' + contractBills.numeroContrat + '-' + i"></label>
+                                                               [id]="'head-' + contractBills.contactNo + '-' + i"
+                                                               [attr.data-type]="bill.exigible"
+                                                               [disabled]="bill.exigible"
+                                                               [checked]="bill.exigible || bill.checked"
+                                                               [attr.data-value]="bill.balance"
+                                                               (change)="toggleAddBill($event, bill, contractBills.contactNo)"/>
+                                                        <label [for]="'head-' + contractBills.contactNo + '-' + i"></label>
                                                     </div>
                                                 </td>
-                                                <td>{{bill.periode}} - {{bill.year}}</td>
-                                                <td>{{bill.numeroFacture}}</td>
-                                                <td><b>{{bill.soldeExigible | numeral}}</b></td>
-                                                <td><b>{{bill.solde | numeral}}</b></td>
+                                                <td>{{bill.month}} - {{bill.year}}</td>
+                                                <td>{{bill.invoiceNo}}</td>
+                                                <td><b>{{bill.amount | numeral}}</b></td>
+                                                <td><b>{{bill.balance | numeral}}</b></td>
                                             </tr>
                                         </ng-container>
                                     </ng-template>

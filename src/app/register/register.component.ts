@@ -69,9 +69,9 @@ export class RegisterComponent implements OnInit {
         });
 
         this.thirdStep = this.formBuilder.group({
-            numeroContrat: [''],
-            numeroFacture: [''],
-            month: ['']
+            numeroContrat: ['', Validators.compose([Validators.required])],
+            numeroFacture: ['', Validators.compose([Validators.required])],
+            month: ['', Validators.compose([Validators.required])]
         });
         this.attachContractRequest = {
             status: undefined,
@@ -123,8 +123,11 @@ export class RegisterComponent implements OnInit {
                     this.attachContractRequest.message = this.translate.instant('CONTRACT_UNATTACHABLE');
                 }
             }, error => {
+              this.attachContractRequest.status = undefined;
+              /*
                 this.attachContractRequest.status = 'danger';
                 this.attachContractRequest.message = this.translate.instant('SERVER_ERROR');
+                */
                 console.log(error);
             })
     }
