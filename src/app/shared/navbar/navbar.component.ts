@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
         this.href = this.router.url;
         this.href = this.href.substr(1, this.href.length - 1);
         if (this.user && this.user.id && this.href !== 'admin') {
-            this.getNotifications();
+           // this.getNotifications();
         }
     }
 

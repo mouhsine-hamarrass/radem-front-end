@@ -1,49 +1,66 @@
+<!--
+ Name: Filter Column component
+ Description: Display a filterable input,
+              Add a Text/Date or dropdown input to each column in a table and make it filterable
+
+ Input: filterable-column: string // alias that define the column that we want to filter with
+        filter-type: string // choose between filter with text input, date or dropdown element
+        filter-disabled: boolean // Decide whatever the input should be disabled or not
+        filter-select-data: any // Used only if the filter type chosen was dropdown (Pass data to the dropdown element)
+        filter-select-data-key: string // Specify the value of each option in the dropdown input. NOTICE: the key should be in the data passed
+        filter-select-data-value: string // Specify the label to display in the dropdown list. NOTICE: the value should be in the data passed
+        filter-select-default-value: string // Specify a default value to display in the dropdown list. NOTICE: the value should be in the data passed
+        filter-placeholder: string // Display a placeholder to define the value of the input
+
+ Output: NONE
+
+ -->
 <ng-content></ng-content>
 
 <div id="filterList">
-    <div *ngIf="filtertype === 'text'">
-        <input class="form-control nomargin ms-input"
-               [id]="columnName"
-               type="search"
-               [placeholder]="filterPlaceholder || columnName"
-               [(ngModel)]="filter[columnName]"
-               [disabled]="filterDisabled"
-               aria-label="Search" (blur)="search()">
-    </div>
+  <div *ngIf="filtertype === 'text'">
+    <input class="form-control nomargin ms-input"
+           [id]="columnName"
+           type="search"
+           [placeholder]="filterPlaceholder || columnName"
+           [(ngModel)]="filter[columnName]"
+           [disabled]="filterDisabled"
+           aria-label="Search" (blur)="search()">
+  </div>
 
-    <div *ngIf="filtertype === 'date'">
-        <div class="input-group">
-            <input [owlDateTime]="cd"
-                   [id]="columnName"
-                   [owlDateTimeTrigger]="cd"
-                   [(ngModel)]="filter[columnName]"
-                   [value]="filter[columnName]"
-                   class="form-control date-readonly ms-input"
-                   readonly
-                   [placeholder]="filterPlaceholder || 'DD-MM-YYYY'"
-                   [disabled]="filterDisabled">
-            <owl-date-time #cd
-                           (afterPickerClosed)="dateChanged(columnName, filter[columnName])"
-                           [pickerType]="'calendar'"
-                           [startAt]="today"></owl-date-time>
-            <div class="input-group-prepend" (click)="emptyFilter(columnName)">
-                <span class="input-group-text" id="basic-addon3"><i class="fa fa-remove"></i></span>
-            </div>
-        </div>
+  <div *ngIf="filtertype === 'date'">
+    <div class="input-group">
+      <input [owlDateTime]="cd"
+             [id]="columnName"
+             [owlDateTimeTrigger]="cd"
+             [(ngModel)]="filter[columnName]"
+             [value]="filter[columnName]"
+             class="form-control date-readonly ms-input"
+             readonly
+             [placeholder]="filterPlaceholder || 'DD-MM-YYYY'"
+             [disabled]="filterDisabled">
+      <owl-date-time #cd
+                     (afterPickerClosed)="dateChanged(columnName, filter[columnName])"
+                     [pickerType]="'calendar'"
+                     [startAt]="today"></owl-date-time>
+      <div class="input-group-prepend" (click)="emptyFilter(columnName)">
+        <span class="input-group-text" id="basic-addon3"><i class="fa fa-remove"></i></span>
+      </div>
     </div>
+  </div>
 
-    <div *ngIf="filtertype === 'select'">
-        <select class="custom-select ms-input"
-                [id]="columnName"
-                [(ngModel)]="filter[columnName]"
-                (blur)="search()"
-                [disabled]="filterDisabled">
-            <option [value]="filterDefaultValue" selected>{{filterPlaceholder || columnName}}</option>
-            <option *ngFor="let data of filterData"
-                    value="{{filterDataKey ? data[filterDataKey] : data}}">
-                {{filterDataValue ? data[filterDataValue] : data | translate}}
-            </option>
-        </select>
-    </div>
+  <div *ngIf="filtertype === 'select'">
+    <select class="custom-select ms-input"
+            [id]="columnName"
+            [(ngModel)]="filter[columnName]"
+            (blur)="search()"
+            [disabled]="filterDisabled">
+      <option [value]="filterDefaultValue" selected>{{filterPlaceholder || columnName}}</option>
+      <option *ngFor="let data of filterData"
+              value="{{filterDataKey ? data[filterDataKey] : data}}">
+        {{filterDataValue ? data[filterDataValue] : data | translate}}
+      </option>
+    </select>
+  </div>
 
 </div>

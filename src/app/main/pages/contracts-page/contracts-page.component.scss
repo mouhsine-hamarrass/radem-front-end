@@ -1,6 +1,12 @@
-.container{
- // box-shadow: 0 0 10px 0 rgba(0,0,0,0.2) !important;
+.container {
+  // box-shadow: 0 0 10px 0 rgba(0,0,0,0.2) !important;
 }
+
+.area-btn {
+  background: transparent;
+  border: none;
+}
+
 .network-icon {
   display: inline-block;
   border-radius: 100%;
@@ -10,22 +16,28 @@
   text-align: right;
   margin: 0;
   padding: 0;
+
   i {
     font-size: 1.25em;
   }
 }
+
 .table-responsive {
   margin-top: 15px;
 }
+
 table th, table td {
   padding: 0.5rem 1.5rem !important;
 }
+
 .water {
   background-color: #2d91c7;
 }
+
 .fa-2x {
   font-size: 1.4em;
 }
+
 .electricity {
   background-color: #de3a42;
 }
@@ -54,12 +66,13 @@ table th, table td {
   border-bottom: 1px solid #1ca3ec;
 }
 
-.card-header{
+.card-header {
   padding: 0.8rem;
   margin-bottom: 0;
   background-color: #eef0f3;
   border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
-  h3{
+
+  h3 {
     margin-top: 8px;
   }
 }

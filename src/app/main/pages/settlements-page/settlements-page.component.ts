@@ -8,7 +8,6 @@ import {ServicesService} from '../../services/services.service';
 import {ContractsService} from '../../services/contracts.service';
 import {User} from '../../models/user.model';
 import {AuthHelper} from '../../../core/services/security/auth.helper';
-import {ContractModel} from '../../models/contract.model';
 import {ContractAttachModel} from '../../models/contract-attach.model';
 import * as moment from 'moment';
 import {SettlementModel} from '../../models/settlement.model';
@@ -139,7 +138,10 @@ export class SettlementsPageComponent implements OnInit {
     }
 
     downloadPdfSettlements() {
-        this.services.downloadPdfSettlements().subscribe((response) => {
+      const contract = this.contractForm.controls['contract'].value;
+      const startDate = moment(new Date(this.contractForm.controls['startDate'].value));
+      const endDate = moment(new Date(this.contractForm.controls['endDate'].value));
+        this.services.downloadPdfSettlements(contract, startDate, endDate).subscribe((response) => {debugger;
             if (response && response['body']) {
                 const file = new FileModel('mes-reglements.pdf', CommonUtil._arrayBufferToBase64(response['body']));
 
