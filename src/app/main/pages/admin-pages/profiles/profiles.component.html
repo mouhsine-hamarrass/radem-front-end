@@ -1,72 +1,82 @@
 <div>
-    <nav aria-label="breadcrumb">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' | translate}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{'LIST_OF_PROFILES' | translate}}</li>
-        </ul>
-    </nav>
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-              <h4 class="card-title text-muted">{{'LIST_OF_PROFILES' | translate}}</h4>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="float-left">
-                                <app-filter (onfilterChanged)="pageFilter($event)" [showFilter]="true"></app-filter>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-striped table-bordered table-hover"
-                           sortable-table (sorted)="onSorted($event)"
-                           filterable-table (filtred)="onFiltred($event)">
-                        <thead class="table-light">
-                        <tr>
-                            <th scope="col">{{'THE_PROFILE_NAME' | translate }}
-                                <span sortable-column="title"></span>
-                                <span filterable-column="title" filter-type="text"
-                                     filter-placeholder="{{'THE_PROFILE_NAME' | translate }}"></span>
-                            </th>
-                            <th scope="col">{{'DESCRIPTION' | translate }}
-                                <span sortable-column="description"></span>
-                                <span filterable-column="description" filter-type="text"
-                                     filter-placeholder="{{'DESCRIPTION' | translate }}"></span>
-                            </th>
-                            <th scope="col">{{'Actions' | translate }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <app-data-not-available *ngIf="!profiles || profiles.length == 0; else dataAvailable"
-                                                [colSpan]="3"></app-data-not-available>
+  <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i> {{'ADMINISTRATION' | translate}}
+      </a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{'LIST_OF_PROFILES' | translate}}</li>
+    </ul>
+  </nav>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-muted">{{'LIST_OF_PROFILES' | translate}}</h4>
 
-                        <ng-template #dataAvailable>
-                            <tr *ngFor="let profile of profiles">
-                                <td>{{profile.title}}</td>
-                                <td>{{profile.description}}</td>
-                                <td>
-                                    <ul class="list-unstyled list-inline text-center nomargin">
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-pencil text-info"
-                                               [routerLink]="['/admin/profiles/',profile.id]">
-                                            </i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-times text-danger" (click)="dropProfile(profile.id)">
-                                            </i>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </ng-template>
-                        </tbody>
-                    </table>
-                    <app-pagination [showPagination]="true"
-                                    [numberOfItems]="numberOfItems"
-                                    [itemsPerPage]="itemsPerPage"
-                                    [totalItems]="totalElements"
-                                    [totalPages]="totalPages"
-                                    (onpageChanged)="pageChanged($event)"></app-pagination>
-                </div>
+        <div class="clearfix"></div>
+        <div class="row ">
+          <div class="col-12">
+            <div class="float-left m-2">
+              <form class="form-inline">
+                <app-filter (onfilterChanged)="pageFilter($event)" [showFilter]="true"></app-filter>
+              </form>
             </div>
+            <div class="float-right m-2">
+              <button type="button" class="btn btn-success"
+                      routerLink="/admin/profile"> {{'nouveau' | translate}} </button>
+            </div>
+          </div>
         </div>
+
+        <table class="table table-striped table-bordered table-hover"
+               sortable-table (sorted)="onSorted($event)"
+               filterable-table (filtred)="onFiltred($event)">
+          <thead class="table-light">
+          <tr>
+            <th scope="col">{{'THE_PROFILE_NAME' | translate }}
+              <span sortable-column="title"></span>
+              <span filterable-column="title" filter-type="text"
+                    filter-placeholder="{{'THE_PROFILE_NAME' | translate }}"></span>
+            </th>
+            <th scope="col">{{'DESCRIPTION' | translate }}
+              <span sortable-column="description"></span>
+              <span filterable-column="description" filter-type="text"
+                    filter-placeholder="{{'DESCRIPTION' | translate }}"></span>
+            </th>
+            <th scope="col">{{'Actions' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <app-data-not-available *ngIf="!profiles || profiles.length == 0; else dataAvailable"
+                                  [colSpan]="3"></app-data-not-available>
+
+          <ng-template #dataAvailable>
+            <tr *ngFor="let profile of profiles">
+              <td>{{profile.title}}</td>
+              <td>{{profile.description}}</td>
+              <td>
+                <ul class="list-unstyled list-inline text-center nomargin">
+                  <li class="list-inline-item">
+                    <i class="fa fa-pencil text-info"
+                       [routerLink]="['/admin/profiles/',profile.id]">
+                    </i>
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa fa-times text-danger" (click)="dropProfile(profile.id)">
+                    </i>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </ng-template>
+          </tbody>
+        </table>
+        <app-pagination [showPagination]="true"
+                        [numberOfItems]="numberOfItems"
+                        [itemsPerPage]="itemsPerPage"
+                        [totalItems]="totalElements"
+                        [totalPages]="totalPages"
+                        (onpageChanged)="pageChanged($event)"></app-pagination>
+      </div>
+    </div>
+  </div>
 </div>
 

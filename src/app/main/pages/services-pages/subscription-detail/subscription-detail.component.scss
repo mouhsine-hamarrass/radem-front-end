@@ -1,6 +1,13 @@
 aw-wizard {
   width: 100% !important;
+  margin-bottom: 30px;
+  aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li:after {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0052a2;
+  }
 }
+
 //.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.current div a {
 //  color: #4BB3FD;
 //}
@@ -13,25 +20,23 @@ aw-wizard {
   text-decoration-color: #4BB3FD !important;
   //background-color: #4BB3FD !important;
 }
+
 .custom-css aw-wizard-navigation-bar.horizontal .state-circle {
   width: 10px !important;
   height: 10px !important;
 }
-.custom-css aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li.current:after{
+
+.custom-css aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li.current:after {
   color: #3BB3FD !important;
 }
-.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a{
+
+.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
   color: #000000;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li.done:after {
-  border-color: #0052a2 !important;
-  text-decoration-color: #0052a2 !important;
-  //background-color: #0052a2 !important;
-}
-.custom-css aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li.done:after{
-  color: #0052A2 !important;
-}
+
+
+
 
 .custom-css aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
   text-transform: none;
@@ -46,12 +51,13 @@ aw-wizard {
   text-decoration: underline;
   color: #4BB3FD;
 }
+
 fieldset.scheduler-border {
   border: 1px solid #0052a2 !important;
   padding: 0 0.8em 0 0.8em !important;
   margin: 0 0 1.5em 0 !important;
-  -webkit-box-shadow:  0px 0px 0px 0px #000;
-          box-shadow:  0px 0px 0px 0px #000;
+  -webkit-box-shadow: 0px 0px 0px 0px #000;
+  box-shadow: 0px 0px 0px 0px #000;
   font-weight: normal !important;
 }
 
@@ -63,7 +69,7 @@ legend.scheduler-border {
 }
 
 fieldset.col-7 {
-  padding : 0px;
+  padding: 0px;
 }
 
 #commDiv {
@@ -73,16 +79,15 @@ fieldset.col-7 {
 }
 
 #divDateComm {
-  margin-left:380px;
   color: gray;
 }
 
 fieldset.col-4 {
-  padding : 0px;
-  margin-left : 40px !important;
+  padding: 0px;
+  margin-left: 40px !important;
 }
 
-#divDate{
+#divDate {
   max-height: 100px !important;
 }
 
@@ -90,12 +95,13 @@ fieldset.col-4 {
   border: 0;
 }
 
-.card-header{
+.card-header {
   padding: 0.8rem;
   margin-bottom: 0;
   background-color: #eef0f3;
   border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
-  h3{
+
+  h3 {
     margin-top: 8px;
   }
 }

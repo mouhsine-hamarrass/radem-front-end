@@ -29,6 +29,7 @@ import {RecoverPasswordService} from './main/services/recover-password.service';
 import {ToastrModule} from 'ngx-toastr';
 import {TermOfUseComponent} from './term-of-use/term-of-use.component';
 import {OnlinePaymentComponent} from './main/pages/services-pages/online-payment/online-payment.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {OnlinePaymentComponent} from './main/pages/services-pages/online-payment
     EnableAccountComponent,
     RegisterSuccesComponent,
     TermOfUseComponent,
-    OnlinePaymentComponent
+    OnlinePaymentComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,139 +1,177 @@
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> Mes impayés</h3>
-        </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> Mes impayés</h3>
     </div>
+  </div>
 </div>
 <div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <div id="what-is" class="mb-0">
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                        <div class="row ">
-                            <div class="col-md-4 align-self-start">
-                                <div class="multicheckbox">
-                                    <angular2-multiselect [data]="clientContracts"
-                                                          [(ngModel)]="selectedContract"
-                                                          [settings]="dropdownSettings">
-                                    </angular2-multiselect>
-                                </div>
-                            </div>
-                            <div class="col-md-6 align-self-start">
-                                <button class="btn btn-outline-secondary" (click)="getAllUnpaidBills()">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="table-responsive mx-auto">
-                                <div class="row justify-content-between">
-                                    <div class="col-12">
-                                        <div class="float-left">
-                                            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <table class="table">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th>
-                                            <div class="pure-checkbox">
-                                                <input type="checkbox" #checkboxes
-                                                       id="head"
-                                                       (change)="toggleCheckAll($event, contractsBills)"/>
-                                                <label for="head"></label>
-                                            </div>
-                                        </th>
-                                        <th scope="col">{{'YEAR_MONTH' | translate }}</th>
-                                        <th scope="col">{{'BILL_NUMBER' | translate }}</th>
-                                        <th scope="col">{{'AMOUNT' | translate }} (Dhs)</th>
-                                        <th scope="col">{{'BALANCE' | translate }} (Dhs)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <app-data-not-available
-                                            *ngIf="!contractsBills || contractsBills.length == 0; else dataAvailable"
-                                            [colSpan]="5">
-                                    </app-data-not-available>
-                                    <ng-template #dataAvailable>
-                                        <ng-container *ngFor="let contractBills of contractsBills">
-                                            <tr class="contract-list">
-                                                <td>
-                                                    <div class="pure-checkbox">
-                                                        <input type="checkbox" #checkboxes
-                                                               [id]="'head-' + contractBills.contactNo"
-                                                               (change)="toggleAddBills($event, contractBills)"/>
-                                                        <label [for]="'head-' + contractBills.contactNo"></label>
-                                                    </div>
-                                                </td>
-                                                <td>{{contractBills.contactNo}} - {{contractBills.typeNetwork}}</td>
-                                                <td colspan="3" class="text-center">{{contractBills.addressConsumption}}</td>
-                                            </tr>
-                                            <tr *ngFor="let bill of contractBills.invoices; let i = index"
-                                                class="bills-list"
-                                                [ngClass]="bill.exigible ? 'bg-accent-1' : 'bg-accent-3'">
-                                                <td>
-                                                    <div class="pure-checkbox">
-                                                        <input type="checkbox" #checkboxes
-                                                               [id]="'head-' + contractBills.contactNo + '-' + i"
-                                                               [attr.data-type]="bill.exigible"
-                                                               [disabled]="bill.exigible"
-                                                               [checked]="bill.exigible || bill.checked"
-                                                               [attr.data-value]="bill.balance"
-                                                               (change)="toggleAddBill($event, bill, contractBills.contactNo)"/>
-                                                        <label [for]="'head-' + contractBills.contactNo + '-' + i"></label>
-                                                    </div>
-                                                </td>
-                                                <td>{{bill.month}} - {{bill.year}}</td>
-                                                <td>{{bill.invoiceNo}}</td>
-                                                <td><b>{{bill.amount | numeral}}</b></td>
-                                                <td><b>{{bill.balance | numeral}}</b></td>
-                                            </tr>
-                                        </ng-container>
-                                    </ng-template>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <app-pagination [showPagination]="totalPages > 1"
-                                            [numberOfItems]="numberOfItems"
-                                            [itemsPerPage]="itemsPerPage"
-                                            [totalItems]="totalElements"
-                                            [totalPages]="totalPages"
-                                            (onpageChanged)="pageChanged($event)"></app-pagination>
-
-                            <div class="col-md-12 text-right mt-1">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label>Total des impayés :</label>
-                                        <span class=" font-weight-bold text-danger">{{totalUnpaid | numeral}} DH</span>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label>Montant a régler : </label>
-                                        <span class="text-muted font-weight-bold">{{total | numeral}} DH</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row col-md-12 text-right">
-                                <input class="btn btn btn-outline-secondary mb-2" type="button"
-                                       value="Régler vos factures" (click)="submit()">
-                            </div>
-                        </div>
-                    </div>
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="mb-0">
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="row ">
+              <div class="col-md-4 align-self-start">
+                <div class="multicheckbox">
+                  <angular2-multiselect [data]="clientContracts"
+                                        [(ngModel)]="selectedContract"
+                                        [settings]="dropdownSettings">
+                  </angular2-multiselect>
                 </div>
+              </div>
+              <div class="col-md-6 align-self-start">
+                <button class="btn btn-outline-secondary" (click)="getAllUnpaidBills()">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
-            <!--/ What is-->
+            <!--
+            <div class="list">
+              <h1>Indeterminate Checkboxes</h1>
+              <ul>
+                <li>
+                  <span class="tb-col">
+                      <input type="checkbox" name="tall" id="tall">
+                      <label for="tall"></label>
+                    </span>
+                  <span class="tb-col">{{'YEAR_MONTH' | translate }}</span>
+                  <span class="tb-col">{{'BILL_NUMBER' | translate }}</span>
+                  <span class="tb-col">{{'AMOUNT' | translate }}</span>
+                  <span class="tb-col">{{'BALANCE' | translate }}</span>
+                  <ul *ngFor="let contractBills of contractsBills; let i = index">
+                    <li class="tb-row">
+                      <span class="tb-col tb-block">
+                        <input type="checkbox" [name]="'tall-' + i + 1" [id]="'tall-' + i + 1">
+                        <label [for]="'tall-' + i + 1">
+                          {{contractBills.contactNo}} - {{contractBills.typeNetwork}}</label>
+                      </span>
+                      <ul *ngFor="let bill of contractBills.invoices; let j = index">
+                        <li class="tb-row">
+                          <span class="tb-col">
+                            <input type="checkbox" [name]="'tall-' + i + 1 +'-' + j +1"
+                                   [id]="'tall-' + i + 1+ '-' + j + 1">
+                            <label [for]="'tall-' + i + 1 + '-' + j + 1"></label>
+                          </span>
+                          <span class="tb-col">{{bill.month}} - {{bill.year}}</span>
+                          <span class="tb-col">{{bill.invoiceNo}}</span>
+                          <span class="tb-col">{{bill.amount | numeral}}</span>
+                          <span class="tb-col">{{bill.balance | numeral}}</span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+             -->
+            <div>
+              <div class="table-responsive mx-auto">
+                <div class="row justify-content-between">
+                  <div class="col-12">
+                    <div class="float-left">
+                      <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table">
+                  <thead class="table-light">
+                  <tr>
+                    <th>
+                      <div class="pure-checkbox">
+                        <input type="checkbox" #checkboxes
+                               id="head"
+                               (change)="toggleCheckAll($event, contractsBills)"/>
+                        <label for="head"></label>
+                      </div>
+                    </th>
+                    <th scope="col">{{'YEAR_MONTH' | translate }}</th>
+                    <th scope="col">{{'BILL_NUMBER' | translate }}</th>
+                    <th scope="col">{{'AMOUNT' | translate }} (Dhs)</th>
+                    <th scope="col">{{'BALANCE' | translate }} (Dhs)</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <app-data-not-available
+                    *ngIf="!contractsBills || contractsBills.length == 0; else dataAvailable"
+                    [colSpan]="5">
+                  </app-data-not-available>
+                  <ng-template #dataAvailable>
+                    <ng-container *ngFor="let contractBills of contractsBills">
+                      <tr class="contract-list">
+                        <td>
+                          <div class="pure-checkbox">
+                            <input type="checkbox" #checkboxes
+                                   [id]="'head-' + contractBills.contactNo"
+                                   (change)="toggleAddBills($event, contractBills, contractsBills)"/>
+                            <label [for]="'head-' + contractBills.contactNo"></label>
+                          </div>
+                        </td>
+                        <td>{{contractBills.contactNo}} - {{contractBills.typeNetwork}}</td>
+                        <td colspan="3" class="text-center">{{contractBills.addressConsumption}}</td>
+                      </tr>
+                      <tr *ngFor="let bill of contractBills.invoices; let i = index"
+                          class="bills-list"
+                          [ngClass]="bill.exigible ? 'bg-accent-1' : 'bg-accent-3'">
+                        <td>
+                          <div class="pure-checkbox">
+                            <input type="checkbox" #checkboxes
+                                   [id]="'head-' + contractBills.contactNo + '-' + i"
+                                   [attr.data-type]="bill.exigible"
+                                   [disabled]="bill.exigible"
+                                   [checked]="bill.exigible || bill.checked"
+                                   [attr.data-value]="bill.balance"
+                                   (change)="toggleAddBill($event, bill, contractBills)"/>
+                            <label [for]="'head-' + contractBills.contactNo + '-' + i"></label>
+                          </div>
+                        </td>
+                        <td>{{bill.month}} - {{bill.year}}</td>
+                        <td>{{bill.invoiceNo}}</td>
+                        <td><b>{{bill.amount | numeral}}</b></td>
+                        <td><b>{{bill.balance | numeral}}</b></td>
+                      </tr>
+                    </ng-container>
+                  </ng-template>
+                  </tbody>
+                </table>
+              </div>
+
+              <app-pagination [showPagination]="totalPages > 1"
+                              [numberOfItems]="numberOfItems"
+                              [itemsPerPage]="itemsPerPage"
+                              [totalItems]="totalElements"
+                              [totalPages]="totalPages"
+                              (onpageChanged)="pageChanged($event)"></app-pagination>
+
+              <div class="col-md-12 text-right mt-1">
+                <div class="row">
+                  <div class="form-group">
+                    <label>Total des impayés :</label>
+                    <span class=" font-weight-bold text-danger">{{totalUnpaid | numeral}} DH</span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <label>Montant a régler : </label>
+                    <span class="text-muted font-weight-bold">{{total | numeral}} DH</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row col-md-12 text-right">
+                <input class="btn btn btn-outline-secondary mb-2" type="button"
+                       value="Régler vos factures" (click)="submit()">
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+      <!--/ What is-->
+    </div>
+  </section>
 </div>

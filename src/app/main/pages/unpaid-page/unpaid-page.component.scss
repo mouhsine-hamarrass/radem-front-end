@@ -3,6 +3,7 @@
   margin-bottom: 0;
   background-color: #eef0f3;
   border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
+
   h3 {
     margin-top: 8px;
   }
@@ -10,27 +11,14 @@
 
 .contract-list {
   background-color: #2c5599;
+
   td {
     color: #FFFFFF;
   }
+
   .pure-checkbox input[type="checkbox"] + label:before {
     border-color: #FFFFFF;
     background-color: transparent;
-  }
-  .pure-checkbox input[type="checkbox"]:indeterminate + label:after {
-    content: '';
-    width: 8px;
-    height: 2px;
-    position: absolute;
-    z-index: 99999;
-    background-color: white;
-    right: 15px;
-    left: 5px;
-    top: -1px;
-    -webkit-transform: rotate(0deg) scale(1);
-    -webkit-transform: scale(1);
-    margin-top: 0;
-    border: 0;
   }
 }
 
@@ -44,4 +32,27 @@
 
 .bg-accent-3 {
   background-color: #FFFFFF;
+}
+
+
+.list {
+  display: table;
+  margin: 1em;
+
+  ul {
+    display: table-row;
+
+    li.tb-row {
+      display: table-row;
+
+      .tb-col {
+        display: table-cell;
+        padding: .5em 1em;
+      }
+
+      .tb-block {
+        display: block;
+      }
+    }
+  }
 }

@@ -62,6 +62,25 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
     border-color: #d3d3d3;
     background-color: #d3d3d3 !important;
 }
+
+.pure-checkbox input[type="checkbox"]:indeterminate + label:before {
+  background-color: #0079FE !important;
+}
+
+.pure-checkbox input[type="checkbox"]:indeterminate + label:after {
+  content: '';
+  width: 8px;
+  height: 2px;
+  position: absolute;
+  z-index: 99999;
+  background-color: white;
+  right: 15px;
+  left: 5px;
+  top: -1px;
+  -webkit-transform: rotate(0deg) scale(1);
+  margin-top: 0;
+  border: 0;
+}
 .date-readonly {
-    background-color: #FFFFFF !important;
+  background-color: #FFFFFF !important;
 }

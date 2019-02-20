@@ -235,6 +235,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   // Add Comment
   addComment() {
+    /*
     if (this.checkbox.value === null || this.checkbox.value === '') {
       this.isPublic = false;
     } else {
@@ -251,6 +252,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     );
 
     this.isEmpty = true;
+    */
   }
 
   focus() {

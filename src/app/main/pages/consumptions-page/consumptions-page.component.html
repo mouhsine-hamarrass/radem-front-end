@@ -95,8 +95,8 @@
               <label class="col-form-label">{{'CONTRACT' | translate }} <span
                 class="danger">*</span>:</label>
               <div class="col-3">
-                <select formControlName="contract" type="text" class="custom-select" #t
-                        (change)="setHistoryContract(t.value)">
+                <select formControlName="contract" type="text" class="custom-select"
+                        (change)="setHistoryContract()">
                   <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
                   <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
                     {{contract.contractNo}}
@@ -156,9 +156,9 @@
                     <a class="dropdown-item" (click)="downloadPdfConsumptions()">
                       <i class="fa fa-file-pdf-o"></i> {{'PDF_FORMAT' | translate }}
                     </a>
-                    <a class="dropdown-item" (click)="downloadXlsConsumptions()">
+                    <!--<a class="dropdown-item" (click)="downloadXlsConsumptions()">
                       <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
-                    </a>
+                    </a>-->
                   </div>
                 </div>
 

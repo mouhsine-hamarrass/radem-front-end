@@ -61,7 +61,7 @@ export class LoginComponent extends UIFormComponent implements OnInit {
         // navigate to returnUrl just if login successfully
         if (userData.accessToken) {
           this.toastrService.success(this.translate.instant('WELCOME'), '');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/checkProfile']);
 
         } else {
           this.translate.get('login.error-no-token-sent').subscribe(msg => {
