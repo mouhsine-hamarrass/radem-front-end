@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <div [innerHTML]="advices?.value | safeHtml"></div>
+                        <div [innerHTML]="advices?.value || '' | safeHtml"></div>
                     </div>
                 </div>
             </div>

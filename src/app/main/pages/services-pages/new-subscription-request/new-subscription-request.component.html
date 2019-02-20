@@ -16,8 +16,9 @@
                               (ngSubmit)="saveRequest()" novalidate>
                             <div class="row">
                                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
+
                                     <label for="lfname">{{'LASTNAME_AND_FIRSTNAME' | translate }} / {{'SOCIAL_REASON' |
-                                        translate }} : </label>
+                                        translate }} : <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="lfname"
                                            formControlName="firstAndLastName">
                                     <div class="text-danger"

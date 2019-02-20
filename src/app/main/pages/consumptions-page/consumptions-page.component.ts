@@ -253,7 +253,10 @@ export class ConsumptionsPageComponent implements OnInit {
   }
 
   downloadXlsConsumptions() {
-    this.services.downloadXlsConsumptions().subscribe((response) => {
+    const contract = this.historyForm.controls['contract'].value;
+    const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
+    const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
+    this.services.downloadXlsConsumptions(contract, startDate, endDate).subscribe((response) => {
       if (response && response['body']) {
         const file = new FileModel('mes-consommations.xls', CommonUtil._arrayBufferToBase64(response['body']));
 
@@ -263,7 +266,10 @@ export class ConsumptionsPageComponent implements OnInit {
   }
 
   downloadPdfConsumptions() {
-    this.services.downloadPdfConsumptions().subscribe((response) => {
+    const contract = this.historyForm.controls['contract'].value;
+    const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
+    const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
+    this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
       if (response && response['body']) {
         const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
 

@@ -141,7 +141,7 @@ export class SettlementsPageComponent implements OnInit {
       const contract = this.contractForm.controls['contract'].value;
       const startDate = moment(new Date(this.contractForm.controls['startDate'].value));
       const endDate = moment(new Date(this.contractForm.controls['endDate'].value));
-        this.services.downloadPdfSettlements(contract, startDate, endDate).subscribe((response) => {debugger;
+        this.services.downloadPdfSettlements(contract, startDate, endDate).subscribe((response) => {
             if (response && response['body']) {
                 const file = new FileModel('mes-reglements.pdf', CommonUtil._arrayBufferToBase64(response['body']));
 

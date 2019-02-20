@@ -11,7 +11,7 @@ import {WizardComponent, WizardState} from 'angular-archwizard';
   templateUrl: './claim-detail.component.html',
   styleUrls: ['./claim-detail.component.scss']
 })
-export class ClaimDetailComponent implements OnInit , AfterViewInit {
+export class ClaimDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(WizardComponent) public wizard: WizardComponent;
   @ViewChild('StepButton') StepButton: ElementRef;
   @ViewChild('UpdateButton') UpdateButton: ElementRef;
@@ -81,6 +81,7 @@ export class ClaimDetailComponent implements OnInit , AfterViewInit {
   }
 
   saveFeedback() {
+    /*
     const complaintsFeedback = {
       id: this.route.snapshot.paramMap.get('id'),
       feedback: new FeedbackModel(this.feedback.value, new Date(), false, true)
@@ -90,5 +91,6 @@ export class ClaimDetailComponent implements OnInit , AfterViewInit {
       this.feedback.reset();
       this.ngOnInit();
     });
+    */
   }
 }

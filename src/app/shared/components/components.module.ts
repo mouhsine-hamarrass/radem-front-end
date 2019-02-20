@@ -13,46 +13,49 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {BadgeComponent} from './badge/badge.component';
 import {createTranslateLoader} from '../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
+import {MultiLevelTreeTableComponent} from './tables/multi-level-tree-table/multi-level-tree-table.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        PaginationModule.forRoot(),
-        AlertModule.forRoot(),
-        FormsModule,
-        TranslateModule.forRoot(),
-        TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-    ],
-    exports: [
-        PageNotFoundComponent,
-        SpinnerComponent,
-        DataNotAvailableComponent,
-        FilterComponent,
-        PaginationComponent,
-        SearchComponent,
-        BadgeComponent,
-    ],
-    declarations: [
-        PageNotFoundComponent,
-        SpinnerComponent,
-        DataNotAvailableComponent,
-        FilterComponent,
-        PaginationComponent,
-        SearchComponent,
-        BadgeComponent,
-    ],
-    providers: [
-        SpinnerService
-    ]
+  imports: [
+    CommonModule,
+    PaginationModule.forRoot(),
+    AlertModule.forRoot(),
+    FormsModule,
+    TranslateModule.forRoot(),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+  ],
+  exports: [
+    PageNotFoundComponent,
+    SpinnerComponent,
+    DataNotAvailableComponent,
+    FilterComponent,
+    PaginationComponent,
+    SearchComponent,
+    BadgeComponent,
+    MultiLevelTreeTableComponent
+  ],
+  declarations: [
+    PageNotFoundComponent,
+    SpinnerComponent,
+    DataNotAvailableComponent,
+    FilterComponent,
+    PaginationComponent,
+    SearchComponent,
+    BadgeComponent,
+    MultiLevelTreeTableComponent,
+  ],
+  providers: [
+    SpinnerService
+  ]
 })
 export class ComponentsModule {
-    constructor(private translate: TranslateService) {
-        this.translate.use(localStorage['language']);
-    }
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage['language']);
+  }
 }

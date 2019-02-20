@@ -431,28 +431,16 @@ export class AdminService {
     return this.httpClient.put<Response<AlertModel>>(`${this.apiUrl}/alerts/${alertId}`, alert, {headers: this.headers});
   }
 
-  dropAlert(alertId
-              :
-              number
-  ):
-    Observable<Response<any>> {
+  dropAlert(alertId: number): Observable<Response<any>> {
     return this.httpClient.delete<Response<any>>(`${this.apiUrl}/alerts/${alertId}`, {headers: this.headers});
   }
 
 // Profiles
-  getListProfiles()
-    :
-    Observable<Response<Array<Profile>>> {
+  getListProfiles(): Observable<Response<Array<Profile>>> {
     return this.httpClient.get<Response<Array<Profile>>>(`${this.apiUrl}/profiles`);
   }
 
-  getPageableListProfiles(page
-                            :
-                            number, pageSize
-                            :
-                            number, filter ?: any, sort ?: any
-  ):
-    Observable<Response<any>> {
+  getPageableListProfiles(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/profiles/paged-list?page=${page}&size=${pageSize}`,
       {
         filter,
@@ -460,36 +448,20 @@ export class AdminService {
       });
   }
 
-  dropProfile(idProfile
-                :
-                number
-  ) {
+  dropProfile(idProfile: number) {
     return this.httpClient.post(`${this.apiUrl}/profiles/${idProfile}/delete`, null, {headers: this.headers});
   }
 
-  saveProfile(profile
-                :
-                Profile
-  ) {
+  saveProfile(profile: Profile) {
     return this.httpClient.post(`${this.apiUrl}/profile/save`, profile, {headers: this.headers});
   }
 
-  getProfile(idProfile
-               :
-               string
-  ):
-    Observable<Response<Profile>> {
+  getProfile(idProfile: string): Observable<Response<Profile>> {
     return this.httpClient.get<Response<Profile>>(`${this.apiUrl}/profiles/${idProfile}/find`, {headers: this.headers});
   }
 
 // Users
-  getListUser(page
-                :
-                number, pageSize
-                :
-                number, filter ?: any, sort ?: any
-  ):
-    Observable<Response<any>> {
+  getListUser(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}`,
       {
         filter,
@@ -505,40 +477,23 @@ export class AdminService {
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/${idUser}/delete`, null, {headers: this.headers});
   }
 
-  createUser(user
-               :
-               User
-  ):
-    Observable<Response<User>> {
+  createUser(user: User): Observable<Response<User>> {
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/save`, user, {headers: this.headers});
   }
 
-  enableUser(idUser
-               :
-               number
-  ):
-    Observable<Response<User>> {
+  enableUser(idUser: number): Observable<Response<User>> {
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/${idUser}/enable`, null, {headers: this.headers});
   }
 
-  disableUser(idUser
-                :
-                number
-  ):
-    Observable<Response<User>> {
+  disableUser(idUser: number): Observable<Response<User>> {
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/${idUser}/disable`, null, {headers: this.headers});
   }
 
-  editUser(user
-             :
-             User
-  ):
-    Observable<Response<User>> {
+  editUser(user: User): Observable<Response<User>> {
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/edit`, user, {headers: this.headers});
   }
 
-  getUser(idUser
-            :
+  getUser(idUser:
             string
   ):
     Observable<Response<User>> {
@@ -576,9 +531,7 @@ export class AdminService {
     return this.httpClient.put<Response<any>>(`${this.apiUrl}/settings`, settings, {headers: this.headers});
   }
 
-  getAdvices()
-    :
-    Observable<Response<Setting>> {
+  getAdvices(): Observable<Response<Setting>> {
     return this.httpClient.get<Response<Setting>>(`${this.apiUrl}/settings/ADVICES`);
   }
 

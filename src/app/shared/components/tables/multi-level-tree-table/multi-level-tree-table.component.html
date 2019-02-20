@@ -1,0 +1,57 @@
+<table class="table">
+  <thead class="table-light">
+  <tr>
+    <th>
+      <div class="pure-checkbox">
+        <input type="checkbox"
+               id="head"/>
+        <label for="head"></label>
+      </div>
+    </th>
+    <ng-container *ngFor="let col of tableColumns">
+      <th scope="col">{{col?.name | translate }}</th>
+    </ng-container>
+  </tr>
+  </thead>
+  <tbody>
+
+  <app-data-not-available
+    *ngIf="!tableData || tableData.length == 0; else dataAvailable"
+    [colSpan]="tableColumns.length">
+  </app-data-not-available>
+
+  <ng-template #dataAvailable>
+    <ng-container *ngFor="let data of tableData; let i = index">
+      <tr>
+        <td>
+          <div class="pure-checkbox">
+            <input type="checkbox"
+                   [id]="'head-' + i + 1"/>
+            <label [for]="'head-' + i + 1"></label>
+          </div>
+        </td>
+        <ng-container *ngFor="let col of tableColumns">
+          <td>{{data[col.prop]}}</td>
+        </ng-container>
+      </tr>
+      <ng-container *ngIf="data.children">
+        <tr *ngFor="let child of data.children; let j = index">
+          <td style="padding-left: 5rem;">
+            <div class="pure-checkbox">
+              <input type="checkbox"
+                     [id]="'head-' + i + 1 + '-' + j + 1"
+                     [disabled]="child.disabled"
+                     [checked]="child.disabled || child.checked"
+                     [attr.data-value]="child"/>
+              <label [for]="'head-' + i + 1 + '-' + j + 1"></label>
+            </div>
+          </td>
+          <ng-container *ngFor="let col of tableColumns">
+            <td>{{child[col.prop]}}</td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+  </tbody>
+</table>

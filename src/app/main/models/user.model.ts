@@ -1,15 +1,17 @@
 import {User as CustomUser} from '../../core/models/user.model';
 
 export class User extends CustomUser {
-    service?: string;
-    address: string;
-    admin: boolean;
-    avatar: string;
-    settings: any;
-    enabled: boolean;
-    phone: string;
-    profile: any;
-    authorities: any;
-    createdDate: string;
-    clientNo: string
+  service?: string;
+  address: string;
+  admin: boolean;
+  requestsFollow: boolean;
+  avatar: string;
+  settings: any;
+  enabled: boolean;
+  phone: string;
+  profile: any;
+  profileType: number;
+  authorities: any;
+  createdDate: string;
+  clientNo: string
 }

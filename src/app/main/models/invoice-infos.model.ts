@@ -1,8 +1,8 @@
 export interface InvoiceInfosModel {
   id?: number;
   invoiceNo?: string;
-  year?: string;
-  month?: string;
+  year?: number;
+  month?: number;
   balance?: number;
   amount?: number;
   exigible?: boolean;

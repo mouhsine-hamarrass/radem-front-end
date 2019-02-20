@@ -11,6 +11,9 @@ import {LastInvoiceModel} from '../models/last-invoice.model';
 import {LastPaymentModel} from '../models/last-payment.model';
 import 'rxjs/add/observable/of';
 import * as _ from 'underscore';
+import {StatusModel} from '../models/status.model';
+import {SubscriptionRequestModel} from '../models/subscription-request.model';
+import {FeedbackModel} from '../models/feedback.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -186,10 +189,17 @@ export class ServicesService {
     */
   }
 
-  getCounterDetailsByContractNo(contractNo: string): Observable<Response<CounterModel>> {
-    return this.httpClient.get<Response<CounterModel>>(`${this.urlApi}/counter-details/${contractNo}`)
+  getSubscriptionStatus(): Observable<Response<Array<StatusModel>>> {
+    return this.httpClient.get<Response<Array<StatusModel>>>(`${this.urlApi}/subscription-request-status/all`);
   }
 
+  saveFeedback(requestId: number, feedback: FeedbackModel): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/requests/${requestId}/feedback/submit`, feedback, {headers: headers});
+  }
+
+  getSubscriptionDetails(requestNo: string): Observable<Response<SubscriptionRequestModel>> {
+    return this.httpClient.get<Response<SubscriptionRequestModel>>(`${this.urlApi}/subscription-request/details/${requestNo}`);
+  }
 
   // termination requests
   getSubscriptions(): Observable<Response<Array<any>>> {
@@ -221,9 +231,9 @@ export class ServicesService {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
   }
 
-  getSubscriptionRequests(page: number, pageSize: number): Observable<Response<any>> {
-    return this.httpClient.get<Response<any>>
-    (`${this.urlApi}/client/subscription_requests?page=${page}&size=${pageSize}`);
+  getSubscriptionRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<SubscriptionRequestModel>>> {
+    return this.httpClient.get<Response<Array<SubscriptionRequestModel>>>
+    (`${this.urlApi}/subscription-requests/${contractNo}?page=${page}&size=${pageSize}`);
   }
 
   // complaint
@@ -275,24 +285,8 @@ export class ServicesService {
   /**
    * Reporting
    */
-  downloadPdfConsumptions() {
-    const url = `${this.urlApi}/download/consumptions?ext=pdf`;
-    const req = new HttpRequest('GET', url, {
-      responseType: 'arraybuffer',
-    });
-    return this.httpClient.request(req);
-  }
-
-  downloadXlsConsumptions() {
-    const url = `${this.urlApi}/download/consumptions?ext=xls`;
-    const req = new HttpRequest('GET', url, {
-      responseType: 'arraybuffer',
-    });
-    return this.httpClient.request(req);
-  }
-
-  downloadPdfSettlements(contractNo: string, dateStart: any, dateEnd: any) {
-    const url = `${this.urlApi}/download/settlements?ext=pdf`;
+  downloadPdfConsumptions(contractNo: string, dateStart: any, dateEnd: any) {
+    const url = `${this.urlApi}/reports/downloads/consumptions?ext=pdf`;
     const req = new HttpRequest('POST', url, {
       contractNo,
       dateStart,
@@ -303,9 +297,37 @@ export class ServicesService {
     return this.httpClient.request(req);
   }
 
-  downloadXlsSettlements() {
-    const url = `${this.urlApi}/download/settlements?ext=xls`;
-    const req = new HttpRequest('GET', url, {
+  downloadXlsConsumptions(contractNo: string, dateStart: any, dateEnd: any) {
+    const url = `${this.urlApi}/reports/downloads/consumptions?ext=xls`;
+    const req = new HttpRequest('POST', url, {
+      contractNo,
+      dateStart,
+      dateEnd
+    }, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
+  }
+
+  downloadPdfSettlements(contractNo: string, dateStart: any, dateEnd: any) {
+    const url = `${this.urlApi}/reports/downloads/settlements?ext=pdf`;
+    const req = new HttpRequest('POST', url, {
+      contractNo,
+      dateStart,
+      dateEnd
+    }, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
+  }
+
+  downloadXlsSettlements(contractNo: string, dateStart: any, dateEnd: any) {
+    const url = `${this.urlApi}/reports/downloads/settlements?ext=xls`;
+    const req = new HttpRequest('POST', url, {
+      contractNo,
+      dateStart,
+      dateEnd
+    }, {
       responseType: 'arraybuffer',
     });
     return this.httpClient.request(req);
