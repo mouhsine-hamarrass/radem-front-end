@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {ServicesService} from '../../../services/services.service';
+import {SubscriptionReqModel} from '../../../models/subscriptionReq.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-subscription-request',
@@ -11,6 +13,7 @@ export class NewSubscriptionRequestComponent implements OnInit {
   subscriptionForm: FormGroup;
 
   constructor(private servicesService: ServicesService,
+              private router: Router,
               private formBuilder: FormBuilder) {
     this.subscriptionForm = this.formBuilder.group({
       'firstAndLastName': ['', Validators.compose(
@@ -61,37 +64,58 @@ export class NewSubscriptionRequestComponent implements OnInit {
         [
           Validators.required
         ])],
-      'address_supplement': ['', Validators.compose(
-        [
-          Validators.required
-        ])],
-      'subscriptionType': ['', Validators.compose(
-        [
-          Validators.required
-        ])],
-      'predecessor': ['', Validators.compose(
-        [
-          Validators.required
-        ])],
-      'oldWaterSubscription': ['', Validators.compose(
-        [
-          Validators.required
-        ])],
-      'oldElectricitySubscription': ['', Validators.compose(
-        [
-          Validators.required
-        ])]
+      'address_supplement': [''],
+      'subscriptionType': [''],
+      'successor': [''],
+      'contractType': ['Water'],
+      'contract': [''],
+      'oldWaterSubscription': [''],
+      'oldElectricitySubscription': ['']
     });
   }
 
   ngOnInit() {
   }
 
-  saveRequest(): void {
-    const subscriptionReq: any = {};
+  changeSuccessor($event) {
+    if ($event.target.checked) {
+      this.subscriptionForm.controls['successor'].setValidators([Validators.required]);
+      this.subscriptionForm.controls['contract'].setValidators([Validators.required]);
+
+    } else {
+      this.subscriptionForm.removeControl('successor');
+      this.subscriptionForm.removeControl('contract');
+      this.subscriptionForm.removeControl('oldWaterSubscription');
+    }
+
+  }
+
+  saveRequest(formData): void {
+    const subscriptionReq: SubscriptionReqModel = formData;
+    if (this.subscriptionForm.controls['subscriptionType'].value) {
+      subscriptionReq.subscriptionType = 'MUTATION';
+
+
+      console.log(this.subscriptionForm.controls['contractType'].value !== 'Water');
+      if (this.subscriptionForm.controls['contractType'].value === 'Water') {
+        subscriptionReq.oldWaterSubscription = this.subscriptionForm.controls['contract'].value;
+        subscriptionReq.oldElectricitySubscription = null;
+
+      } else {
+        subscriptionReq.oldElectricitySubscription = this.subscriptionForm.controls['contract'].value;
+        subscriptionReq.oldWaterSubscription = null;
+      }
+
+
+    } else {
+      subscriptionReq.subscriptionType = 'NEW';
+    }
+
     this.servicesService.saveSubscriptionRequest(subscriptionReq).subscribe(response => {
       console.log(response);
+      this.router.navigate(['/services'])
     }, err => {
+      console.log(err);
     });
     console.log(subscriptionReq);
   }
