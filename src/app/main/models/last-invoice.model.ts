@@ -1,6 +1,6 @@
 export interface LastInvoiceModel {
     id?: number;
-    month?: string;
+    month?: number;
     year?: string;
     value?: string;
     consumption?: string;

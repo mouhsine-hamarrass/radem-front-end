@@ -69,8 +69,8 @@ export class NewSubscriptionRequestComponent implements OnInit {
       'successor': [''],
       'contractType': ['Water'],
       'contract': [''],
-      'oldWaterSubscription': [''],
-      'oldElectricitySubscription': ['']
+      'oldWaterSubscription': [null],
+      'oldElectricitySubscription': [null]
     });
   }
 
@@ -83,9 +83,15 @@ export class NewSubscriptionRequestComponent implements OnInit {
       this.subscriptionForm.controls['contract'].setValidators([Validators.required]);
 
     } else {
-      this.subscriptionForm.removeControl('successor');
-      this.subscriptionForm.removeControl('contract');
-      this.subscriptionForm.removeControl('oldWaterSubscription');
+
+      this.subscriptionForm.controls['successor'].clearValidators();
+      this.subscriptionForm.controls['successor'].updateValueAndValidity();
+
+      this.subscriptionForm.controls['contract'].clearValidators();
+      this.subscriptionForm.controls['contract'].updateValueAndValidity();
+
+      this.subscriptionForm.controls['oldWaterSubscription'].clearValidators();
+      this.subscriptionForm.controls['oldWaterSubscription'].updateValueAndValidity();
     }
 
   }

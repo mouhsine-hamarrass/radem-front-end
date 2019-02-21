@@ -1,182 +1,303 @@
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'New_request_for_cancellation' | translate }}</h3>
-        </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'New_request_for_cancellation' | translate }}
+      </h3>
     </div>
+  </div>
 </div>
 
 <div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <div id="what-is" class="mb-0">
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                        <form class="form" [formGroup]="cancellationForm"
-                              (ngSubmit)="save()" novalidate>
-                            <fieldset>
-                                <legend>{{'APPLICANT' | translate }}</legend>
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <label for="fullname" class="col-form-label">
-                                            {{'LASTNAME_AND_FIRSTNAME' | translate }} : </label>
-                                        <input class="form-control" formControlName="firstAndLastName" id="fullname">
-                                        <div class="text-danger"
-                                             *ngIf="!cancellationForm.controls['firstAndLastName'].valid && cancellationForm.controls['firstAndLastName'].touched">
-                                            <div *ngIf="cancellationForm.controls['firstAndLastName'].errors.required">
-                                                {{'FIELD_REQUIRED' | translate}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-4">
-                                        <label for="card-id">CIN : </label>
-                                        <input class="form-control" formControlName="cin" id="card-id">
-                                        <div class="text-danger"
-                                             *ngIf="!cancellationForm.controls['cin'].valid && cancellationForm.controls['cin'].touched">
-                                            <div *ngIf="cancellationForm.controls['cin'].errors.required">
-                                                {{'FIELD_REQUIRED' | translate}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-4">
-                                        <label for="delivered">
-                                            {{'ISSUED_ON' | translate }} : </label>
-                                        <input class="form-control" formControlName="delivered" id="delivered">
-                                    </div>
-                                    <div class="form-group col-4">
-                                        <label for="at">{{'AT' | translate }} : </label>
-                                        <input class="form-control" formControlName="at" id="at">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-3">
-                                        <input class="" id="feedback_client" name="feedback" type="radio">
-                                        <label for="feedback_client" class="noMargin"> {{'CLIENT' | translate }}</label>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <input class="" id="feedback_procuration" name="feedback" type="radio">
-                                        <label for="feedback_procuration" class="noMargin"> {{'PROXY' | translate
-                                            }}</label>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <input class="" id="feedback_lettre" name="feedback" type="radio">
-                                        <label for="feedback_lettre" class="noMargin"> {{'LETTER_N°' | translate
-                                            }}</label>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <input class="" id="feedback_succession" name="feedback" type="radio">
-                                        <label for="feedback_succession" class="noMargin">{{'SUCCESSION' | translate
-                                            }}</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <br>
-                            <fieldset>
-                                <legend>{{'SUBSCRIPTION_POLICIES' | translate }}</legend>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <input class="" id="water" formControlName="water" type="checkbox">
-                                        <label for="water" class="noMargin"> Eau</label>
-                                    </div>
-                                </div>
-                                <div class="row" *ngIf="this.cancellationForm.controls['water'].value">
-                                    <div class="form-group col-6">
-                                        <label class="noMargin">Police: </label>
-                                        <select class="form-control" formControlName="waterPolice">
-                                            <option value="-1">{{'SELECT_VALUE' | translate }}</option>
-                                            <option *ngFor="let subscription of waterSubscriptions()"
-                                                    value="{{subscription.id}}">
-                                                {{subscription.subscription}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="waterTourne" class="noMargin">{{'TOUR' | translate }} : </label>
-                                        <input class="form-control" formControlName="waterTourne" id="waterTourne">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <input class="" id="electricity" type="checkbox" formControlName="electricity">
-                                        <label for="electricity" class="noMargin"> {{'ELECTRICITY' | translate
-                                            }}</label>
-                                    </div>
-                                </div>
-                                <div class="row" *ngIf="this.cancellationForm.controls['electricity'].value">
-                                    <div class="form-group col-6">
-                                        <label class="noMargin">Police: </label>
-                                        <select class="form-control" formControlName="electricityPolice">
-                                            <option value="-1">{{'SELECT_VALUE' | translate }}</option>
-                                            <option *ngFor="let subscription of electricitySubscriptions()"
-                                                    value="{{subscription.id}}">
-                                                {{subscription.subscription}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="electricityTourne" class="noMargin">{{'TOUR' | translate }}
-                                            : </label>
-                                        <input class="form-control" formControlName="electricityTourne"
-                                               id="electricityTourne">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <label>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }}</label>
-                                        <input formControlName="counterDropDate" type="date" class="form-control">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <br>
-                            <fieldset>
-                                <legend>Client</legend>
-                                <div class="form-group">
-                                    <label for="customer-name">{{'CLIENT_NAME' | translate }} : </label>
-                                    <input class="form-control" formControlName="clientName" id="customer-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="consumption-address">{{'CONSUMPTION_ADDRESS' | translate }} : </label>
-                                    <input class="form-control" formControlName="consumptionAdresse"
-                                           id="consumption-address">
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>
-                                        <input class="form-control" formControlName="landline" id="gsm">
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="mobile">{{'PORTABLE' | translate }} : </label>
-                                        <input class="form-control" formControlName="cellphone" id="mobile">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="function">{{'FUNCTION' | translate }} : </label>
-                                        <input class="form-control" formControlName="function" id="function">
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="location">{{'WORKPLACE' | translate }} : </label>
-                                        <input class="form-control" formControlName="placeOfWork" id="location">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">{{'MAILING_ADDRESS' | translate }} : </label>
-                                    <input class="form-control" formControlName="correspondenceAdresse" id="address">
-                                </div>
-                            </fieldset>
-                            <div class="form-actions bottom right">
-                                <button class="btn btn-outline-primary"
-                                        [disabled]="cancellationForm.invalid" type="submit">{{'SAVE' | translate }}</button>
-                            </div>
-                        </form>
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="mb-0">
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <form class="form" [formGroup]="cancellationForm"
+                  (ngSubmit)="save(cancellationForm.value)" novalidate>
+              <fieldset>
+                <legend>{{'APPLICANT' | translate }}</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="fullname">
+                        {{'LASTNAME_AND_FIRSTNAME' | translate }} : <span class="text-danger">*</span></label>
+                      <input class="form-control" formControlName="firstAndLastName" id="fullname">
+                      <div class="text-danger"
+                           *ngIf="!cancellationForm.controls['firstAndLastName'].valid && cancellationForm.controls['firstAndLastName'].touched">
+                        <div *ngIf="cancellationForm.controls['firstAndLastName'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
                     </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="card-id">{{'CIN' | translate }} : <span class="text-danger">*</span></label>
+                      <input class="form-control" formControlName="cin" id="card-id">
+                      <div class="text-danger"
+                           *ngIf="!cancellationForm.controls['cin'].valid && cancellationForm.controls['cin'].touched">
+                        <div *ngIf="cancellationForm.controls['cin'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-                <!--/ What is-->
-            </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="delivered">
+                        {{'ISSUED_ON' | translate }} : </label>
+
+                      <input [owlDateTime]="sd"
+                             [owlDateTimeTrigger]="sd"
+                             [max]="today"
+                             formControlName="delivered"
+                             class="form-control date-readonly"
+                             id="delivered" readonly>
+                      <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
+                      <div class="text-danger position-absolute mb-1"
+                           *ngIf="!cancellationForm.controls['delivered'].valid && cancellationForm.controls['delivered'].touched">
+                        <div *ngIf="cancellationForm.controls['delivered'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="at">{{'AT' | translate }} : </label>
+
+                      <input [owlDateTime]="ed"
+                             [owlDateTimeTrigger]="ed"
+                             [max]="today"
+                             formControlName="at"
+                             class="form-control date-readonly"
+                             id="at" readonly>
+                      <owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>
+                      <div class="text-danger position-absolute mb-1"
+                           *ngIf="!cancellationForm.controls['at'].valid && cancellationForm.controls['at'].touched">
+                        <div *ngIf="cancellationForm.controls['at'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="requestType">{{'REQUEST_TYPE' | translate }} : </label>
+                      <select id="requestType" class="form-control" formControlName="typeDemandeur">
+                        <option value="client">{{'CLIENT' | translate }}</option>
+                        <option value="procuration">{{'PROXY' | translate}}</option>
+                        <option value="letter">{{'LETTER_N°' | translate}}</option>
+                        <option value="succession">{{'SUCCESSION' | translate}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+              </fieldset>
+              <br>
+              <fieldset>
+                <legend>{{'SUBSCRIPTION_POLICIES' | translate }}</legend>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <input class="" id="water" formControlName="policeType" type="radio" value="WATER"
+                           (change)="switchContractType('WATER')">
+                    <label for="water" class="noMargin"> {{'WATER' | translate }}</label>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="" id="electricity" formControlName="policeType" type="radio" value="ELECTRICITY"
+                           (change)="switchContractType('ELECTRICITY')">
+                    <label for="electricity" class="noMargin"> {{'ELECTRICITY' | translate }}</label>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <ng-container
+                    *ngIf="this.cancellationForm.controls['policeType'].value === 'WATER'; then waterPolice; else electrPolice">
+                  </ng-container>
+
+                  <ng-template #waterPolice>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="noMargin">{{'POLICE' | translate }} </label>
+                        <select class="form-control" formControlName="waterPolice">
+                          <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                          <option *ngFor="let contract of filterContract('EAU BT')" value="{{contract.contractNo}}">
+                            {{contract.contractNo}}
+                            ({{contract.type}})
+                          </option>
+                        </select>
+                        <div class="text-danger position-absolute mb-1"
+                             *ngIf="!cancellationForm.controls['waterPolice'].valid && cancellationForm.controls['waterPolice'].touched">
+                          <div *ngIf="cancellationForm.controls['waterPolice'].errors.required">
+                            {{'FIELD_REQUIRED' | translate}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="waterTourne" class="noMargin">{{'TOUR' | translate }} : </label>
+                        <input class="form-control" formControlName="waterTourne" id="waterTourne">
+                      </div>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #electrPolice>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="noMargin">{{'POLICE' | translate }} </label>
+                        <select class="form-control" formControlName="electricityPolice">
+                          <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                          <option *ngFor="let contract of filterContract('ELECTRICITE BT') "
+                                  value="{{contract.contractNo}}">
+                            {{contract.contractNo}}
+                            ({{contract.type}})
+                          </option>
+                        </select>
+                        <div class="text-danger position-absolute mb-1"
+                             *ngIf="!cancellationForm.controls['electricityPolice'].valid && cancellationForm.controls['electricityPolice'].touched">
+                          <div *ngIf="cancellationForm.controls['electricityPolice'].errors.required">
+                            {{'FIELD_REQUIRED' | translate}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="electricityTourne" class="noMargin">{{'TOUR' | translate }}: </label>
+                        <input class="form-control" formControlName="electricityTourne"
+                               id="electricityTourne">
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group ">
+                      <label for="counterDropDate">{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }}</label>
+                      <input [owlDateTime]="ef"
+                             [owlDateTimeTrigger]="ef"
+                             [max]="today"
+                             formControlName="counterDropDate"
+                             class="form-control date-readonly"
+                             id="counterDropDate" readonly>
+                      <owl-date-time #ef [pickerType]="'calendar'"></owl-date-time>
+                      <div class="text-danger position-absolute mb-1"
+                           *ngIf="!cancellationForm.controls['counterDropDate'].valid && cancellationForm.controls['counterDropDate'].touched">
+                        <div *ngIf="cancellationForm.controls['counterDropDate'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <br>
+              <fieldset>
+                <legend>{{'CLIENT' | translate }}</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="customer-name">{{'CLIENT_NAME' | translate }} : <span
+                        class="text-danger">*</span></label>
+                      <input class="form-control" formControlName="clientName" id="customer-name">
+                      <div class="text-danger"
+                           *ngIf="!cancellationForm.controls['clientName'].valid && cancellationForm.controls['clientName'].touched">
+                        <div *ngIf="cancellationForm.controls['clientName'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="consumption-address">{{'CONSUMPTION_ADDRESS' | translate }} : <span
+                        class="text-danger">*</span></label>
+                      <textarea class="form-control" formControlName="consumptionAdresse"
+                                id="consumption-address" rows="3"></textarea>
+                      <div class="text-danger"
+                           *ngIf="!cancellationForm.controls['clientName'].valid && cancellationForm.controls['clientName'].touched">
+                        <div *ngIf="cancellationForm.controls['clientName'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>
+                      <input class="form-control" formControlName="landline" id="gsm">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="mobile">{{'PORTABLE' | translate }} : <span class="text-danger">*</span></label>
+                      <input class="form-control" formControlName="cellphone" id="mobile">
+                      <div class="text-danger"
+                           *ngIf="!cancellationForm.controls['cellphone'].valid && cancellationForm.controls['cellphone'].touched">
+                        <div *ngIf="cancellationForm.controls['cellphone'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="function">{{'FUNCTION' | translate }} : </label>
+                      <input class="form-control" formControlName="function" id="function">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="location">{{'WORKPLACE' | translate }} : </label>
+                      <input class="form-control" formControlName="placeOfWork" id="location">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="address">{{'MAILING_ADDRESS' | translate }} : </label>
+                      <textarea id="address" rows="3" class="form-control"
+                                formControlName="correspondenceAdresse"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+              </fieldset>
+              <div class="form-actions bottom right">
+                <button class="btn btn-outline-primary"
+                        [disabled]="cancellationForm.invalid" type="submit">{{'SAVE' | translate }}</button>
+              </div>
+            </form>
+          </div>
         </div>
-    </section>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
 </div>
