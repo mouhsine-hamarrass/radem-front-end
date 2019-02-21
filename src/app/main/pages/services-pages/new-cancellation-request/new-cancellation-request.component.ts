@@ -4,114 +4,128 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {ContractsService} from '../../../services/contracts.service';
 import {Router} from '@angular/router';
+import {ContractAttachModel} from '../../../models/contract-attach.model';
+import {AuthHelper} from '../../../../core/services/security/auth.helper';
+import {User} from '../../../models/user.model';
 
 @Component({
-    selector: 'app-new-cancellation-request',
-    templateUrl: './new-cancellation-request.component.html',
-    styleUrls: ['./new-cancellation-request.component.scss']
+  selector: 'app-new-cancellation-request',
+  templateUrl: './new-cancellation-request.component.html',
+  styleUrls: ['./new-cancellation-request.component.scss']
 })
 export class NewCancellationRequestComponent implements OnInit {
-    private req: any;
-    subscriptions = [];
-    cancellationForm: FormGroup;
+  user: User;
+  req: any;
+  subscriptions = [];
+  cancellationForm: FormGroup;
+  clientContracts: Array<ContractAttachModel>;
+  today: any = moment();
 
-    constructor(
-        private myServices: ServicesService,
-        private contracts: ContractsService,
-        private formBuilder: FormBuilder,
-        private router: Router) {
-        this.cancellationForm = this.formBuilder.group({
-            'firstAndLastName': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'cin': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'delivered': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'at': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'clientName': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'consumptionAdresse': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'correspondenceAdresse': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'landline': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'cellphone': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'function': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'placeOfWork': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'water': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'electricity': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'counterDropDate': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'waterPolice': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'electricityPolice': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'waterTourne': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'electricityTourne': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-        });
+  constructor(
+    private services: ServicesService,
+    private contracts: ContractsService,
+    private formBuilder: FormBuilder,
+    private router: Router) {
+    this.cancellationForm = this.formBuilder.group({
+      'firstAndLastName': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'cin': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'delivered': [this.today, Validators.compose(
+        [
+          Validators.required
+        ])],
+      'at': [this.today, Validators.compose(
+        [
+          Validators.required
+        ])],
+      'clientName': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'consumptionAdresse': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'correspondenceAdresse': [''],
+      'landline': [''],
+      'cellphone': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'function': [''],
+      'placeOfWork': [''],
+      'counterDropDate': [this.today, Validators.compose(
+        [
+          Validators.required
+        ])],
+      'policeType': ['WATER'],
+      'waterPolice': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'electricityPolice': [''],
+      'typeDemandeur': ['client'],
+      'waterTourne': [null],
+      'electricityTourne': [null],
+    });
+  }
+
+  ngOnInit() {
+    this.getClientAttachedContracts();
+    if (localStorage.getItem(AuthHelper.USER_ID)) {
+      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
+    this.services.getUser(this.user.id).subscribe(response => {
+      this.cancellationForm.controls['clientName'].setValue(response.data.lastname + ' ' + response.data.firstname);
+      this.cancellationForm.controls['consumptionAdresse'].setValue(response.data.address);
+      this.cancellationForm.controls['cellphone'].setValue(response.data.phone);
+    });
+    this.subscriptions = (JSON.parse(localStorage.getItem('user'))).subscriptions;
+    console.log(this.subscriptions);
+  }
 
-    ngOnInit() {
-        this.myServices.getUser(1).subscribe(response => {
-            this.cancellationForm.controls['clientName'].setValue(response.data.lastname + ' ' + response.data.firstname);
-            this.cancellationForm.controls['consumptionAdresse'].setValue(response.data.address);
-            this.cancellationForm.controls['cellphone'].setValue(response.data.phone);
-        });
-        this.subscriptions = (JSON.parse(localStorage.getItem('user'))).subscriptions;
-        console.log(this.subscriptions);
+  switchContractType(type) {
+    if (type) {
+      if (type === 'WATER') {
+        this.cancellationForm.controls['waterPolice'].setValidators([Validators.required]);
+
+        this.cancellationForm.controls['electricityPolice'].clearValidators();
+        this.cancellationForm.controls['electricityPolice'].updateValueAndValidity();
+
+      } else {
+        this.cancellationForm.controls['electricityPolice'].setValidators([Validators.required]);
+
+        this.cancellationForm.controls['waterPolice'].clearValidators();
+        this.cancellationForm.controls['waterPolice'].updateValueAndValidity();
+      }
     }
+  }
 
-    print() {
-        let popupWin, __HEAD;
-        __HEAD = document.querySelector('head').innerHTML;
-        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-        popupWin.document.open();
-        popupWin.document.write(`
+  getClientAttachedContracts() {
+    this.services.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+    }, err => {
+      console.log(err)
+    });
+  }
+
+  filterContract(filterType): ContractAttachModel[] {
+    if (this.clientContracts) {
+      return this.clientContracts.filter(i => i.typeNetwork === filterType);
+    }
+  }
+
+  print() {
+    let popupWin, __HEAD;
+    __HEAD = document.querySelector('head').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
         <html>
           <head>${__HEAD}
           <style>
@@ -296,38 +310,16 @@ export class NewCancellationRequestComponent implements OnInit {
         </div>
         </body>
         </html>`
-        );
-        popupWin.document.close();
-    }
+    );
+    popupWin.document.close();
+  }
 
-    save() {
-        this.req = {
-            requestNumber: Math.floor(Math.random() * 100000),
-            counterDropDate: this.cancellationForm.controls['counterDropDate'].value,
-            subscriptions: [],
-            applicantType: 'CLIENT',
-            client: JSON.parse(localStorage.getItem('user'))
-        };
-        if (this.cancellationForm.controls.water.value) {
-            this.req.subscriptions.push(this.cancellationForm.controls['waterPolice'].value);
-        }
-        if (this.cancellationForm.controls.electricity.value) {
-            this.req.subscriptions.push(this.cancellationForm.controls['electricityPolice'].value);
-        }
-        this.myServices.saveTerminationRequest(this.req).subscribe(response => {
-            console.log(response);
-            this.print();
-            this.router.navigate(['/services/cancellation-requests'])
-        }, err => {
-        });
-        console.log(this.req);
-    }
+  save(formData) {
+      this.services.saveTerminationRequest(formData).subscribe(response => {
+        // this.print();
+        // this.router.navigate(['/services/cancellation-requests'])
+      }, err => {
+      });
+  }
 
-    waterSubscriptions(): any[] {
-        return this.subscriptions.filter(subscription => subscription.type === 'Eau');
-    }
-
-    electricitySubscriptions(): any[] {
-        return this.subscriptions.filter(subscription => subscription.type === 'Electricite');
-    }
 }

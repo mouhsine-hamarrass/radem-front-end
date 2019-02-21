@@ -223,7 +223,7 @@ export class ServicesService {
   }
 
   saveTerminationRequest(request: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/termination_requests/save`, request, {headers: headers});
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/termination_requests/save`, request, {headers: headers});
   }
 
   // subscription request
