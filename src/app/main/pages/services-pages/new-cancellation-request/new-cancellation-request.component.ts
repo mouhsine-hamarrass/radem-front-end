@@ -317,7 +317,7 @@ export class NewCancellationRequestComponent implements OnInit {
   save(formData) {
       this.services.saveTerminationRequest(formData).subscribe(response => {
         // this.print();
-        this.router.navigate(['/services/cancellation-requests'])
+        // this.router.navigate(['/services/cancellation-requests'])
       }, err => {
       });
   }
