@@ -10,22 +10,22 @@ headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 @Injectable()
 export class HomeService {
-    private urlApi: string;
+  private urlApi: string;
 
-    constructor(private httpClient: HttpClient) {
-        this.urlApi = environment.apiConfig.apiUrl;
-    }
+  constructor(private httpClient: HttpClient) {
+    this.urlApi = environment.apiConfig.apiUrl;
+  }
 
-    getAlertNotificationByUserId(idUser: number): Observable<Response<any>> {
-        return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/find/${idUser}`, {headers: headers});
-    }
+  getAlertNotificationByUserId(idUser: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/alerts/find/${idUser}`, {headers: headers});
+  }
 
-    getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
-        return this.httpClient.get<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications?page=${page}&size=${pageSize}`);
-    }
+  getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
+    return this.httpClient.get<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications?page=${page}&size=${pageSize}`);
+  }
 
-    readAlertNotification(id: number): Observable<Response<any>> {
-        return this.httpClient.put<Response<any>>(`${this.urlApi}/alerts/notifications/${id}/read`, {});
-    }
+  readAlertNotification(id: number): Observable<Response<any>> {
+    return this.httpClient.put<Response<any>>(`${this.urlApi}/alerts/notifications/${id}/read`, {});
+  }
 
 }

@@ -180,14 +180,7 @@ export class ContractsPageComponent implements OnInit {
           // this.contractsServices.getSoldeByNumContract(numContract).subscribe(responseSolde => {
           this.contract = responseContract.data;
           this.counter = responseCounter.data;
-          if (this.contract) {
-            this.contract.dateSubscription =
-              moment(new Date(this.contract.dateSubscription)).format(environment.defaultDateFormatNoTime);
-            this.contract.dateEffectSubscription =
-              moment(new Date(this.contract.dateEffectSubscription)).format(environment.defaultDateFormatNoTime);
-            this.contract.dateEndSubscription =
-              moment(new Date(this.contract.dateEndSubscription)).format(environment.defaultDateFormatNoTime);
-          }
+
           /*
           this.solde = {
               soldeExigible: responseSolde.data['soldeExigible'] || 0,

@@ -152,17 +152,17 @@
               <br/>
               <div class="row">
                 <div class="col-md-6">
-                  <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateSubscription}}
+                  <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateSubscription | date: 'dd-M-yyyy'}}
                   </p>
                 </div>
                 <div class="col-md-6" *ngIf="contract?.dateEndSubscription">
-                  <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateEndSubscription}}
+                  <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateEndSubscription | date: 'dd-M-yyyy'}}
                   </p>
                 </div>
               </div>
               <div class="row" *ngIf="contract?.dateEffectSubscription">
                 <div class="col-md-6">
-                  <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffectSubscription}}
+                  <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffectSubscription | date: 'dd-M-yyyy'}}
                   </p>
                 </div>
               </div>
