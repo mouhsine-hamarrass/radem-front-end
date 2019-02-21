@@ -6,6 +6,23 @@ fieldset.scheduler-border {
   font-weight: normal !important;
 }
 
+.pure-checkbox input[type="checkbox"]:indeterminate + label:after {
+  content: '';
+  width: 8px;
+  height: 2px;
+  position: absolute;
+  z-index: 99999;
+  background-color: white;
+  right: 15px;
+  left: 5px;
+  top: -1px;
+  -webkit-transform: rotate(0deg) scale(1);
+  -webkit-transform: scale(1);
+  margin-top: 0;
+  border: 0;
+}
+
+
 legend.scheduler-border {
   font-size: 1.2em !important;
   font-weight: bold !important;

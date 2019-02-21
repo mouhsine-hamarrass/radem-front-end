@@ -218,7 +218,7 @@ export class ServicesService {
 
   // subscription request
   saveSubscriptionRequest(request: any): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/subscription_requests/save`, request, {headers: headers});
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/subscription-requests/save`, request, {headers: headers});
   }
 
   getSubscriptionRequests(page: number, pageSize: number): Observable<Response<any>> {
