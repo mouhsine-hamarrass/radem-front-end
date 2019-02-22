@@ -11,39 +11,41 @@ import {ConsumptionComponent} from './consumption/consumption.component';
 import {RegulationComponent} from './regulation/regulation.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {DynamicContentPagesRoutingModule} from './dynamic-content-pages-routing.module';
-import { AdviceComponent } from './advice/advice.component';
+import {AdviceComponent} from './advice/advice.component';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        DynamicContentPagesRoutingModule,
-        TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        SharedModule
-    ],
-    declarations: [
-        DashboardComponent,
-        SubscriptionRequestComponent,
-        CancellationRequestComponent,
-        AutoReportComponent,
-        ClaimRequestComponent,
-        ContractComponent,
-        UnpaidComponent,
-        ConsumptionComponent,
-        RegulationComponent,
-        AdviceComponent
-    ]
+  imports: [
+    CommonModule,
+    DynamicContentPagesRoutingModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    NgxPermissionsModule.forChild(),
+    SharedModule
+  ],
+  declarations: [
+    DashboardComponent,
+    SubscriptionRequestComponent,
+    CancellationRequestComponent,
+    AutoReportComponent,
+    ClaimRequestComponent,
+    ContractComponent,
+    UnpaidComponent,
+    ConsumptionComponent,
+    RegulationComponent,
+    AdviceComponent
+  ]
 })
 export class DynamicContentPagesModule {
-    constructor(private translate: TranslateService) {
-        this.translate.use(localStorage['language']);
-    }
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage['language']);
+  }
 }

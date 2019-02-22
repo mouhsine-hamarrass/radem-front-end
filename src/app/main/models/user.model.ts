@@ -10,7 +10,7 @@ export class User extends CustomUser {
   enabled: boolean;
   phone: string;
   profile: any;
-  profileType: number;
+  profileType: string;
   authorities: any;
   createdDate: string;
   clientNo: string

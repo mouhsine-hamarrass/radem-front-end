@@ -1,0 +1,31 @@
+#unauthorizedPage {
+  text-align: center;
+  padding: 10%;
+  font: 20px Helvetica, Arial, sans-serif;
+  background-color: #FBFBFB;
+  color: #333;
+  height: 100vh;
+  article {
+    display: block;
+    text-align: left;
+    max-width: 650px;
+    margin: 0 auto;
+    h1 {
+      font-size: 50px;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #333;
+      text-decoration: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
+}
