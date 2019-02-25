@@ -11,29 +11,31 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
 import {ConsumptionsTableComponent} from './consumptions-table/consumptions-table.component';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ConsumptionsPageRoutingModule,
-        AngularFontAwesomeModule,
-        SharedModule,
-        BsDropdownModule,
-        ComponentsModule,
-        TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-    ],
-    declarations: [ConsumptionsPageComponent, ConsumptionsTableComponent],
-    providers: [AdminService],
-    exports: [ConsumptionsTableComponent]
+  imports: [
+    CommonModule,
+    ConsumptionsPageRoutingModule,
+    AngularFontAwesomeModule,
+    SharedModule,
+    BsDropdownModule,
+    ComponentsModule,
+    NgxPermissionsModule.forChild(),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+  ],
+  declarations: [ConsumptionsPageComponent, ConsumptionsTableComponent],
+  providers: [AdminService],
+  exports: [ConsumptionsTableComponent]
 })
 export class ConsumptionsPageModule {
-    constructor(private translate: TranslateService) {
-        this.translate.use(localStorage['language']);
-    }
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage['language']);
+  }
 }

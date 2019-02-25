@@ -30,10 +30,8 @@ export enum UserAccountType {
 
 
 export enum ProfileTypeEnum {
-  ROOT = 1,
-  ADMIN = 2,
-  AGENT = 3,
-  CLIENT = 4
+  ADMIN = 'ADMIN',
+  CLIENT = 'CLIENT'
 }
 
 

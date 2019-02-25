@@ -10,88 +10,140 @@ import {UnpaidComponent} from './unpaid/unpaid.component';
 import {RegulationComponent} from './regulation/regulation.component';
 import {ConsumptionComponent} from './consumption/consumption.component';
 import {AdviceComponent} from './advice/advice.component';
+import {NgxPermissionsGuard} from 'ngx-permissions';
+import {ProfileTypeEnum} from '../../../shared/models/user.model';
 
 const routes: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: 'home',
-                component: DashboardComponent,
-                data: {
-                    title: 'tableau de bord'
-                }
-            },
-            {
-                path: 'subscription-requests',
-                component: SubscriptionRequestComponent,
-                data: {
-                    title: 'Demandes d\'abonnements'
-                }
-            },
-            {
-                path: 'cancellation-requests',
-                component: CancellationRequestComponent,
-                data: {
-                    title: 'Demandes de résiliation'
-                }
-            },
-            {
-                path: 'auto-reports',
-                component: AutoReportComponent,
-                data: {
-                    title: 'Auto relève'
-                }
-            },
-            {
-                path: 'claim-requests',
-                component: ClaimRequestComponent,
-                data: {
-                    title: 'Demandes de réclamation'
-                }
-            },
-            {
-                path: 'contracts',
-                component: ContractComponent,
-                data: {
-                    title: 'Contrat'
-                }
-            },
-            {
-                path: 'unpaid',
-                component: UnpaidComponent,
-                data: {
-                    title: 'Impayés'
-                }
-            },
-            {
-                path: 'settlements',
-                component: RegulationComponent,
-                data: {
-                    title: 'Règlement'
-                }
-            },
-            {
-                path: 'consumptions',
-                component: ConsumptionComponent,
-                data: {
-                    title: 'Consumption'
-                }
-            },
-            {
-                path: 'advice',
-                component: AdviceComponent,
-                data: {
-                    title: 'Advice'
-                }
-            }
-        ]
-    }
+  {
+    path: '',
+    children: [
+      {
+        path: 'home',
+        component: DashboardComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'tableau de bord',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'subscription-requests',
+        component: SubscriptionRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes d\'abonnements',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'cancellation-requests',
+        component: CancellationRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes de résiliation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'auto-reports',
+        component: AutoReportComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Auto relève',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'claim-requests',
+        component: ClaimRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes de réclamation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'contracts',
+        component: ContractComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Contrat',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'unpaid',
+        component: UnpaidComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Impayés',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'settlements',
+        component: RegulationComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Règlement',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'consumptions',
+        component: ConsumptionComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Consumption',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'advice',
+        component: AdviceComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Advice',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      }
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 
 export class DynamicContentPagesRoutingModule {

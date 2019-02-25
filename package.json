@@ -48,7 +48,7 @@
     "ng5-auto-complete": "0.0.8",
     "ngx-bootstrap": "^2.0.5",
     "ngx-moment": "^3.1.0",
-    "ngx-permissions": "^5.0.0",
+    "ngx-permissions": "^4.0.0",
     "ngx-quill": "^3.4.0",
     "ngx-toastr": "^8.10.2",
     "ngx-toggle": "^1.0.1",

@@ -66,6 +66,7 @@ export class AlertComponent implements OnInit {
   }
 
   createAlert() {
+    /*
     this.isSubmitted = true;
     this.alert = new AlertModel(
       null,
@@ -80,9 +81,11 @@ export class AlertComponent implements OnInit {
     }, err => {
       this.refreshAlerts.emit(false);
     });
+    */
   }
 
   saveAlert() {
+    /*
     this.isSubmitted = true;
     this.alert = new AlertModel(
       this.alertId,
@@ -97,5 +100,6 @@ export class AlertComponent implements OnInit {
     }, err => {
       this.refreshAlerts.emit(false);
     });
+    */
   }
 }

@@ -34,7 +34,28 @@
 }
 
 
-
+.notifications-list {
+  .dropdown-item {
+    width: 280px;
+    .badge {
+      font-weight: bold;
+      color: #FFFFFF;
+      font-size: 10.7px;
+    }
+    .notif-type {
+      margin-bottom: 5px;
+      padding: 6px 10px;
+      border-radius: 50px;
+    }
+    .notif-descr {
+      display: block;
+      white-space: pre-line;
+    }
+  }
+  .dropdown-divider {
+    border-color: #ececec;
+  }
+}
 
 
 /*

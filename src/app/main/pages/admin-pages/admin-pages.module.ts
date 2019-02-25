@@ -32,73 +32,75 @@ import {SharedModule} from '../../../shared/shared.module';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
 import {DynamicContentComponent} from './dynamic-content/dynamic-content.component';
-import { RequestsCancellationComponent } from './requests-cancellation/requests-cancellation.component';
-import { RequestsSubscriptionComponent } from './requests-subscription/requests-subscription.component';
-import { RequestsRefundComponent } from './requests-refund/requests-refund.component';
-import { RequestCancellationDetailComponent } from './request-cancellation-detail/request-cancellation-detail.component';
-import { RequestSubscriptionDetailComponent } from './request-subscription-detail/request-subscription-detail.component';
-import { RequestRefundDetailComponent } from './request-refund-detail/request-refund-detail.component';
+import {RequestsCancellationComponent} from './requests-cancellation/requests-cancellation.component';
+import {RequestsSubscriptionComponent} from './requests-subscription/requests-subscription.component';
+import {RequestsRefundComponent} from './requests-refund/requests-refund.component';
+import {RequestCancellationDetailComponent} from './request-cancellation-detail/request-cancellation-detail.component';
+import {RequestSubscriptionDetailComponent} from './request-subscription-detail/request-subscription-detail.component';
+import {RequestRefundDetailComponent} from './request-refund-detail/request-refund-detail.component';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
-    imports: [
-        NguiAutoCompleteModule,
-        CommonModule,
-        AdminPagesRoutingModule,
-        ArchwizardModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ChecklistModule,
-        NgxToggleModule,
-        TabsModule.forRoot(),
-        TranslateModule,
-        QuillModule,
-        ComponentsModule,
-        BsDropdownModule,
-        TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        SharedModule
-    ],
-    exports: [
-        TranslateModule
-    ],
-    declarations: [
-        AdminDashboardComponent,
-        CancellationRequestComponent,
-        UserComponent,
-        UsersComponent,
-        ProfileComponent,
-        ProfilesComponent,
-        SubscriptionDetailComponent,
-        AlertsComponent,
-        SettingsComponent,
-        AdvicesComponent,
-        ServicesComponent,
-        ServiceFormComponent,
-        AlertNotificationComponent,
-        AlertComponent,
-        AlertsComponent,
-        AlertNotificationsComponent,
-        ComplaintComponent,
-        ComplaintsComponent,
-        DynamicContentComponent,
-        RequestsCancellationComponent,
-        RequestsSubscriptionComponent,
-        RequestsRefundComponent,
-        RequestCancellationDetailComponent,
-        RequestSubscriptionDetailComponent,
-        RequestRefundDetailComponent
-    ],
-    providers: [
-        AdminService
-    ]
+  imports: [
+    NguiAutoCompleteModule,
+    CommonModule,
+    AdminPagesRoutingModule,
+    ArchwizardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ChecklistModule,
+    NgxToggleModule,
+    TabsModule.forRoot(),
+    TranslateModule,
+    QuillModule,
+    ComponentsModule,
+    BsDropdownModule,
+    NgxPermissionsModule.forChild(),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    SharedModule
+  ],
+  exports: [
+    TranslateModule
+  ],
+  declarations: [
+    AdminDashboardComponent,
+    CancellationRequestComponent,
+    UserComponent,
+    UsersComponent,
+    ProfileComponent,
+    ProfilesComponent,
+    SubscriptionDetailComponent,
+    AlertsComponent,
+    SettingsComponent,
+    AdvicesComponent,
+    ServicesComponent,
+    ServiceFormComponent,
+    AlertNotificationComponent,
+    AlertComponent,
+    AlertsComponent,
+    AlertNotificationsComponent,
+    ComplaintComponent,
+    ComplaintsComponent,
+    DynamicContentComponent,
+    RequestsCancellationComponent,
+    RequestsSubscriptionComponent,
+    RequestsRefundComponent,
+    RequestCancellationDetailComponent,
+    RequestSubscriptionDetailComponent,
+    RequestRefundDetailComponent
+  ],
+  providers: [
+    AdminService
+  ]
 })
 export class AdminPagesModule {
-    constructor(private translate: TranslateService) {
-        this.translate.use(localStorage['language']);
-    }
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage['language']);
+  }
 }

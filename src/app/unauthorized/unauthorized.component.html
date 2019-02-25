@@ -1,0 +1,16 @@
+<div id="unauthorizedPage">
+  <article>
+    <h1>{{'UNAUTHORIZED_TO_ACCESS_THIS_PAGE' | translate}}</h1>
+    <p>{{'UNAUTHORIZED_TO_ACCESS_THIS_PAGE_DETAILS' | translate}}</p>
+    <p>{{'UNAUTHORIZED_SORRY' | translate}}</p>
+    <p id="signature">&mdash; <a href="mailto:maintenance@radem.ma" class="text-info">maintenance@radem.ma</a></p>
+    <p class="text-right">
+      <!--
+      <button class="btn btn-lg btn-outline-info"
+              (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; {{'REFRESH' | translate}}</button>
+              -->
+      <button class="btn btn-lg btn-outline-warning"
+              (click)="logout()"><i class="fa fa-user-times"></i>&nbsp; {{'logout' | translate}}</button>
+    </p>
+  </article>
+
