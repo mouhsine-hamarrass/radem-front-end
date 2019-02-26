@@ -18,14 +18,33 @@
             <div id="what-is" class="">
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <div class="table-responsive mx-auto">
-                            <div class="row justify-content-between">
-                                <div class="col-12">
-                                    <div class="float-left">
-                                        <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                                    </div>
-                                </div>
-                            </div>
+                      <div class="card-text">
+
+                      <div class="col-12">
+                        <div class="row">
+                          <label class="col-form-label">{{'CONTRACT' | translate }} <span
+                            class="danger">*</span>:</label>
+                          <div class="col-3">
+                            <select type="text" class="custom-select" #s
+                                    (change)="setContract(s.value)">
+                              <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                              <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                                {{contract.contractNo}}
+                                ({{contract.type}})
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                        <div class="table-responsive mt-2">
+                            <!--<div class="row justify-content-between">-->
+                                <!--<div class="col-12">-->
+                                    <!--<div class="float-left">-->
+                                        <!--<app-filter (onfilterChanged)="pageFilter($event)"></app-filter>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <table class="table">
                                 <thead class="table-light">
                                 <tr>
@@ -63,6 +82,7 @@
                                             [totalPages]="totalPages"
                                             (onpageChanged)="pageChanged($event)"></app-pagination>
                         </div>
+                      </div>
                     </div>
                 </div>
                 <!--/ What is-->

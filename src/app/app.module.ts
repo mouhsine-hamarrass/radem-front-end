@@ -46,7 +46,7 @@ import { HomeComponent } from './home/home.component';
     RegisterSuccesComponent,
     TermOfUseComponent,
     OnlinePaymentComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

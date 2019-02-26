@@ -50,7 +50,7 @@ export class CancellationRequestsComponent implements OnInit {
                 this.numberOfItems = response.data.numberOfElements;
             }, err => {
             });
-    }
+    }z
 
     pageChanged(page: number): void {
         this.page = page;

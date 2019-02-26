@@ -20,6 +20,8 @@ import {ComponentsModule} from '../../../shared/components/components.module';
 import {SharedModule} from '../../../shared/shared.module';
 import {HttpClient} from '@angular/common/http';
 import { AutoReportsComponent } from './auto-reports/auto-reports.component';
+import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
+import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
 
 @NgModule({
     imports: [
@@ -45,6 +47,8 @@ import { AutoReportsComponent } from './auto-reports/auto-reports.component';
         CancellationRequestComponent,
         CancellationRequestsComponent,
         NewCancellationRequestComponent,
+        NewRefundRequestComponent,
+        NewEmbranchementRequestComponent,
         // OnlinePaymentComponent,
         ClaimRequestsComponent,
         ClaimDetailComponent,

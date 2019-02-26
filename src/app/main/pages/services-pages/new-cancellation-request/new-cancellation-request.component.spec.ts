@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewCancellationRequestComponent } from './new-cancellation-request.component';
 
-describe('NewCancellationRequestComponent', () => {
+describe('NewRefundRequestComponent', () => {
   let component: NewCancellationRequestComponent;
   let fixture: ComponentFixture<NewCancellationRequestComponent>;
 
