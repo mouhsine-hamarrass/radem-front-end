@@ -47,7 +47,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     CancellationRequestComponent,
     CancellationRequestsComponent,
     NewCancellationRequestComponent,
-    // OnlinePaymentComponent,
+    OnlinePaymentComponent,
     ClaimRequestsComponent,
     ClaimDetailComponent,
     PrintableCancellationComponent,
