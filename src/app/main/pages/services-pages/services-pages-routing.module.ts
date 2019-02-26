@@ -115,15 +115,14 @@ const routes: Routes = [
           }
         }
       },
-      /*
       {
-          path: 'online-payment',
-          component: OnlinePaymentComponent,
-          data: {
-              title: 'Paiement en ligne'
-          }
+        path: 'payment',
+        component: OnlinePaymentComponent,
+        data: {
+          title: 'Paiement en ligne',
+          data: []
+        }
       },
-      */
       {
         path: 'auto-reports',
         component: AutoReportsComponent,

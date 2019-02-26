@@ -70,9 +70,10 @@ export class NavbarComponent implements OnInit {
       default:
         break;
     }
+    this.alerts.splice($index, 1);
     this.homeService.readAlertNotification(notification.id).subscribe(response => {
-      this.alerts.splice($index, 1);
-    }, err => {});
+    }, err => {
+    });
   }
 
   public logout() {

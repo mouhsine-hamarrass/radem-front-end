@@ -1,5 +1,6 @@
 export interface InvoiceInfosModel {
   id?: number;
+  contractNo?: string;
   invoiceNo?: string;
   year?: number;
   month?: number;

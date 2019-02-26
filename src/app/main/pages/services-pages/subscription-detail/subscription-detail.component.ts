@@ -59,8 +59,10 @@ export class SubscriptionDetailComponent implements OnInit, AfterViewInit {
 
           setTimeout(() => {
             const stepsIndicator = document.querySelector('.steps-indicator li[step-symbol="' + this.selectedStep + '"]');
-            stepsIndicator.setAttribute('class', 'done');
-          }, 200)
+            if (stepsIndicator) {
+              stepsIndicator.setAttribute('class', 'done');
+            }
+          }, 500)
 
         }
       }, error => {

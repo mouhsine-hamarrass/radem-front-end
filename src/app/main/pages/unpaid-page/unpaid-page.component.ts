@@ -8,6 +8,9 @@ import {ContractAttachModel} from '../../models/contract-attach.model';
 import {ServicesService} from '../../services/services.service';
 import {UnpaidModel} from '../../models/unpaid.model';
 import * as $ from 'jquery/dist/jquery.min.js';
+import {Router} from '@angular/router';
+import {DataService} from '../../../shared/services/data.service';
+import {InvoiceInfosModel} from '../../models/invoice-infos.model';
 
 @Component({
   selector: 'app-unpaid',
@@ -16,7 +19,10 @@ import * as $ from 'jquery/dist/jquery.min.js';
 })
 export class UnpaidPageComponent implements OnInit {
   contractsBills: Array<UnpaidModel> = [];
-  selectedBills = [];
+  selectedBills = {
+    total: 0,
+    invoices: []
+  };
   total: number;
   totalUnpaid: number;
 
@@ -39,6 +45,8 @@ export class UnpaidPageComponent implements OnInit {
   constructor(
     private contractServices: ContractsService,
     private commonService: CommonService,
+    private dataService: DataService,
+    private router: Router,
     private services: ServicesService) {
     this.dropdownSettings = this.commonService.initMultiSelect('Filtrer les contrats', true, '', 1);
     this.total = 0;
@@ -187,16 +195,9 @@ export class UnpaidPageComponent implements OnInit {
         this.totalBillsExigible += bill.exigible ? bill.balance : 0;
       })
     });
-    /*
-    this.checkboxes.forEach((element) => {
-        if (element.nativeElement.getAttribute('data-type') === 'true') {
-            element.nativeElement.indeterminate = true
-        }
-    });
-    */
   }
 
-  calcTotal(balance, operation): void {
+  calcTotal(bill, balance, operation): void {
     if (operation === 'add') {
       this.total += parseFloat(balance)
     } else {
@@ -211,17 +212,16 @@ export class UnpaidPageComponent implements OnInit {
       this.checkboxes.forEach((element) => {
         if (element.nativeElement.getAttribute('data-type') !== 'true') {
           element.nativeElement.checked = $event.currentTarget.checked;
-          if (operation === 'add') {
-            const total = element.nativeElement.getAttribute('data-value');
-            if (total) {
-              this.calcTotal(total, operation);
-            }
-          }
         }
       });
       contractsBills.forEach((contract) => {
         contract.invoices.forEach((bill) => {
-          bill.checked = $event.currentTarget.checked
+          bill.checked = $event.currentTarget.checked;
+          this.addBill(contract, bill, bill.checked);
+          if (operation === 'add') {
+            bill.contractNo = contract.contractNo;
+            this.calcTotal(bill, bill.balance, operation);
+          }
         });
       });
     }
@@ -250,17 +250,10 @@ export class UnpaidPageComponent implements OnInit {
       }
       contract.invoices.forEach((bill) => {
         if (!bill.exigible) {
-          if (bill.checked) {
-            if (operation === 'minus') {
-              this.calcTotal(bill.balance, operation);
-            }
-          } else {
-            if (operation === 'add') {
-              this.calcTotal(bill.balance, operation);
-            }
-          }
+          this.calcTotal(bill, bill.balance, operation);
           bill.checked = $event.currentTarget.checked;
         }
+        this.addBill(contract, bill, bill.checked);
       });
     }
   }
@@ -289,8 +282,20 @@ export class UnpaidPageComponent implements OnInit {
       $('#head-' + contract.contactNo).prop('indeterminate', false);
       $('#head-' + contract.contactNo).prop('checked', false);
     }
+    this.addBill(contract, bill, bill.checked);
     if (!bill.exigible) {
-      this.calcTotal(parseFloat(bill.balance), operation);
+      this.calcTotal(bill, parseFloat(bill.balance), operation);
+    }
+  }
+
+  addBill(contract, bill, checked) {
+    bill.contractNo = contract.contactNo;
+    if (bill.exigible || checked) {
+      this.selectedBills.total += bill.balance;
+      this.selectedBills.invoices.push(bill)
+    } else {
+      this.selectedBills.total -= bill.balance;
+      this.selectedBills.invoices.splice(this.selectedBills.invoices.indexOf(bill), 1);
     }
   }
 
@@ -306,24 +311,11 @@ export class UnpaidPageComponent implements OnInit {
     this.getAllUnpaidBills();
   }
 
-  addBill(event, bill: any): void {
-    if (event.target.checked) {
-      this.total += parseFloat(bill.balance);
-      this.selectedBills.push(bill);
-    } else {
-      this.total -= parseFloat(bill.balance);
-      this.selectedBills.splice(this.selectedBills.indexOf(bill), 1);
-    }
-  }
-
   submit() {
-    if (this.selectedBills.length !== 0) {
+    if (this.selectedBills.invoices.length !== 0) {
+      this.dataService.set('selectedBills', this.selectedBills);
+      this.router.navigate(['/services/payment']);
     }
-  }
-
-  cancel() {
-    this.total = 0;
-    this.selectedBills = [];
   }
 
   test() {

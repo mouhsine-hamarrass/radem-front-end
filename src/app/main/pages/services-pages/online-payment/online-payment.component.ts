@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from '../../../../shared/services/data.service';
 
 @Component({
   selector: 'app-online-payment',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OnlinePaymentComponent implements OnInit {
 
-  constructor() { }
+  selectedBills;
+
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit() {
+    this.getBillsToPay();
+  }
+
+  getBillsToPay() {
+    this.selectedBills = this.dataService.get('selectedBills');
   }
 
 }
