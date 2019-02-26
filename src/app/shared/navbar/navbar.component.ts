@@ -39,26 +39,41 @@ export class NavbarComponent implements OnInit {
     this.href = this.router.url;
     this.href = this.href.substr(1, this.href.length - 1);
     if (this.user && this.user.id && this.href !== 'admin') {
-      // this.getNotifications();
+      this.getNotifications();
     }
   }
 
   getNotifications() {
     this.homeService.getAlertsNotification(0, 10).subscribe(response => {
       if (response && response.data) {
-        this.alerts = response.data;
+        this.alerts = response.data['content'];
       }
     }, err => {
     });
   }
 
 
-  readNotification(id, $index) {
-    this.homeService.readAlertNotification(id).subscribe(response => {
-      this.alerts.splice($index, 1);
+  detailNotification(notification: AlertNotificationModel, $index) {
+    switch (notification.alert.type) {
+      case 'ABONNEMENT':
+        this.router.navigate(['/services/subscription-detail/', notification.target]);
+        break;
+      case 'RESILIATION':
+        this.router.navigate(['/services/cancellation-request/', notification.target]);
+        break;
+      case 'REMBOURSEMENT':
+        this.router.navigate(['/services/subscription-detail/', notification.target]);
+        break;
+      case 'BRANCHEMENT':
+        this.router.navigate(['/services/subscription-detail/', notification.target]);
+        break;
+      default:
+        break;
+    }
+    this.alerts.splice($index, 1);
+    this.homeService.readAlertNotification(notification.id).subscribe(response => {
     }, err => {
-
-    })
+    });
   }
 
   public logout() {

@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '../../core/models/response.model';
 import {AlertNotificationModel} from '../models/alert-notification.model';
+import * as moment from 'moment';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -21,7 +22,10 @@ export class HomeService {
   }
 
   getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
-    return this.httpClient.get<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications?page=${page}&size=${pageSize}`);
+    return this.httpClient.post<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications/unread?page=${page}&size=${pageSize}`, {
+      dateStart: moment(),
+      dateEnd: moment().subtract(5, 'days'),
+    });
   }
 
   readAlertNotification(id: number): Observable<Response<any>> {

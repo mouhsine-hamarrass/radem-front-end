@@ -23,10 +23,12 @@ import {ADVICE_ROUTES} from './routes/advice-page.routes';
 import {DYNAMIC_CONTENT_PAGES_ROUTES} from './routes/dynamic-content-pages.routes';
 import {ALERT_NOTIFICATIONS_ROUTES} from './routes/alert-notifications-page.routes';
 import {HomeComponent} from './home/home.component';
+import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
+    {path: 'unauthorized', component: UnauthorizedComponent},
     {path: 'checkProfile', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'recover-password', component: RecoverPasswordComponent},

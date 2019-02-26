@@ -280,6 +280,42 @@
                 <!--</div>-->
 
                 <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>
+                      <input class="form-control" formControlName="landline" id="gsm">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="mobile">{{'PORTABLE' | translate }} : <span class="text-danger">*</span></label>
+                      <input class="form-control" formControlName="cellphone" id="mobile">
+                      <div class="text-danger"
+                           *ngIf="!cancellationForm.controls['cellphone'].valid && cancellationForm.controls['cellphone'].touched">
+                        <div *ngIf="cancellationForm.controls['cellphone'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="function">{{'FUNCTION' | translate }} : </label>
+                      <input class="form-control" formControlName="function" id="function">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="location">{{'WORKPLACE' | translate }} : </label>
+                      <input class="form-control" formControlName="placeOfWork" id="location">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
                   <!--<div class="col-md-6"></div>-->
                   <div class="col-md-6">
                     <div class="form-group">

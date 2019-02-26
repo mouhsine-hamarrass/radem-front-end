@@ -12,6 +12,8 @@ import {SubscriptionDetailComponent} from './subscription-detail/subscription-de
 import {AutoReportsComponent} from './auto-reports/auto-reports.component';
 import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
 import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
+import {ProfileTypeEnum} from '../../../shared/models/user.model';
+import {NgxPermissionsGuard} from 'ngx-permissions';
 
 const routes: Routes = [
     {
@@ -112,12 +114,145 @@ const routes: Routes = [
                 }
             },
         ]
-    }
+    },
+  {
+    path: '',
+    children: [
+      {
+        path: 'new-claim-request',
+        component: ClaimRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Nouvelle demande de réclamation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'claim-requests',
+        component: ClaimRequestsComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes de réclamation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'claim-request/:id',
+        component: ClaimDetailComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes de réclamation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'subscription-requests',
+        component: SubscriptionRequestsComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes d\'abonnements',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'cancellation-requests',
+        component: CancellationRequestsComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes de résiliation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'new-cancellation-request',
+        component: NewCancellationRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Nouvelle demande de résiliation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'new-subscription-request',
+        component: NewSubscriptionRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Nouvelle demande d\'abonnement',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'cancellation-request/:id',
+        component: CancellationRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demande de résiliation',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'payment',
+        component: OnlinePaymentComponent,
+        data: {
+          title: 'Paiement en ligne',
+          data: []
+        }
+      },
+      {
+        path: 'auto-reports',
+        component: AutoReportsComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Auto relève',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'subscription-detail/:id',
+        component: SubscriptionDetailComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demande d\'abonnement',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 
 export class ServicesPagesRoutingModule {

@@ -29,6 +29,8 @@ export class ContractsPageComponent implements OnInit {
   attachContractRequest: any;
 
   formLinkContract: FormGroup;
+  formCancelContract: FormGroup;
+  formRefundContract: FormGroup;
 
   values: any;
   solde: any;
@@ -52,6 +54,7 @@ export class ContractsPageComponent implements OnInit {
   itemsPerPage: number;
   sort: any;
   filter: any;
+  today: any = moment();
 
   private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
 
@@ -69,6 +72,14 @@ export class ContractsPageComponent implements OnInit {
       numeroContrat: ['', Validators.required],
       numeroFacture: ['', Validators.required],
       month: ['', Validators.required]
+    });
+
+    this.formCancelContract = this.formBuilder.group({
+      dateDepot: [this.today, Validators.required]
+    });
+
+    this.formRefundContract = this.formBuilder.group({
+      solde: ['', Validators.required]
     });
   }
 
@@ -112,6 +123,16 @@ export class ContractsPageComponent implements OnInit {
     this.modalRef = this.modalService.show(template, this.modalOptions);
   }
 
+  openModalCancelContract(template: TemplateRef<any>, contractNo) {
+    this.modalRef = this.modalService.show(template, this.modalOptions);
+    this.modalRef.content = contractNo;
+  }
+
+  openModalRefundContract(template: TemplateRef<any>, contractNo) {
+    this.modalRef = this.modalService.show(template, this.modalOptions);
+    this.modalRef.content = contractNo;
+  }
+
   closeModal() {
     this.formLinkContract.reset();
     this.modalRef.hide();
@@ -139,7 +160,7 @@ export class ContractsPageComponent implements OnInit {
     });
   }
 
-  unLinkMyContract(contractNo) {
+  detachContract(contractNo) {
     swal({
       title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_CONTINUE'),
       text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
@@ -161,6 +182,10 @@ export class ContractsPageComponent implements OnInit {
     });
   }
 
+  cancelMyContract(formData) {
+
+  }
+
   pageChanged(page: number): void {
     this.page = page;
     this.getContractList();
@@ -172,6 +197,12 @@ export class ContractsPageComponent implements OnInit {
     this.page = 1;
     this.getContractList();
   }
+
+  reset(): void {
+    this.formLinkContract.reset();
+    this.formCancelContract.reset();
+  }
+
 
   openContractDetails(template: TemplateRef<any>, numContract: string) {
     if (numContract) {

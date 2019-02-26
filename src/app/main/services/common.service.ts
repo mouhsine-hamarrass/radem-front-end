@@ -8,6 +8,7 @@ import {AuthHelper} from '../../core/services/security/auth.helper';
 import {NgxPermissionsService, NgxRolesService} from 'ngx-permissions';
 import {DataService} from '../../shared/services/data.service';
 import {environment} from '../../../environments/environment';
+import {ProfileTypeEnum, UserAccountType} from '../../shared/models/user.model';
 
 @Injectable()
 export class CommonService {
@@ -42,7 +43,7 @@ export class CommonService {
   }
 
   public initMultiSelect(text?, enableSearchFilter?, groupBy?, badgeShowLimit?, disabled?, searchPlaceholderText?, selectAllText?,
-                     unSelectAllText?, classes?) {
+                         unSelectAllText?, classes?) {
     return {
       text: text || 'Sélectionner une valeur',
       enableSearchFilter: enableSearchFilter || true,
@@ -59,10 +60,11 @@ export class CommonService {
 
 
   public permission(authorities) {
+    this.rolesService.addRole(authorities.category, authorities['permissions']);
+    this.permissionsService.loadPermissions(authorities['permissions']);
+
     this.dataService.set('permissions', JSON.stringify(this.permissionsService.getPermissions()));
     this.dataService.set('roles', JSON.stringify(this.rolesService.getRoles()));
-    // console.log('Roles: ', this.rolesService.getRoles());
-    // console.log('Permissions: ', this.permissionsService.getPermissions());
   }
 
   public loadPermissions(): void {

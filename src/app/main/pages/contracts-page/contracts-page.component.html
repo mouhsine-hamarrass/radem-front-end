@@ -37,7 +37,7 @@
                   <th scope="col">{{'CONSUMPTION_ADDRESS' | translate }}</th>
                   <th scope="col">{{'USAGE' | translate }}</th>
                   <th scope="col">{{'COMMENT' | translate }}</th>
-                  <th scope="col" width="140">{{'ACTIONS' | translate }}</th>
+                  <th scope="col" width="240">{{'ACTIONS' | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -67,15 +67,18 @@
                               placement="top">{{contract.comment | truncate: [60]}}</button>
                     </td>
                     <td>
-                      <i class="fa fa-list-alt cursor-pointer"
+                      <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
                          tooltip="Détails"
                          (click)="openContractDetails(detailSubscription, contract.contractNo)"></i>
-                      <i class="fa fa-unlink cursor-pointer pull-left"
+                      <i class="fa fa-unlink cursor-pointer pl-1 text-warning"
                          tooltip="Détachement"
-                         (click)="unLinkMyContract(contract.contractNo)"></i>
-                      <i class="fa fa-unlink cursor-pointer pull-right"
+                         (click)="detachContract(contract.contractNo)"></i>
+                      <i class="fa fa-ban cursor-pointer pl-1 text-danger"
                          tooltip="Résiliation"
-                         (click)="unLinkMyContract(contract.contractNo)"></i>
+                         (click)="openModalCancelContract(cancelContract, contract.contractNo)"></i>
+                      <i class="fa fa-money cursor-pointer pl-1 text-primary"
+                         tooltip="Remboursement"
+                         (click)="openModalRefundContract(refundContract, contract.contractNo)"></i>
                     </td>
                   </tr>
                 </ng-template>
@@ -156,13 +159,15 @@
                   </p>
                 </div>
                 <div class="col-md-6" *ngIf="contract?.dateEndSubscription">
-                  <p><b>{{'SUBSCRIPTION_END_DATE' | translate}} : </b>{{contract?.dateEndSubscription | date: 'dd-M-yyyy'}}
+                  <p><b>{{'SUBSCRIPTION_END_DATE' | translate}}
+                    : </b>{{contract?.dateEndSubscription | date: 'dd-M-yyyy'}}
                   </p>
                 </div>
               </div>
               <div class="row" *ngIf="contract?.dateEffectSubscription">
                 <div class="col-md-6">
-                  <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}} : </b>{{contract?.dateEffectSubscription | date: 'dd-M-yyyy'}}
+                  <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}}
+                    : </b>{{contract?.dateEffectSubscription | date: 'dd-M-yyyy'}}
                   </p>
                 </div>
               </div>
@@ -296,6 +301,76 @@
   <div class="modal-footer">
     <button type="submit" class="btn btn btn-outline-primary" (click)="linkMyContract(formLinkContract.value);"
             [disabled]="formLinkContract.invalid"> {{'LINK_CONTRACT' | translate}}
+    </button>
+    <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #cancelContract>
+  <div class="modal-header bg-radem">
+    <h4 class="modal-title pull-left">
+      {{'CANCEL_CONTRACT' | translate}} N: {{modalRef.content}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form role="form" novalidate [formGroup]="formCancelContract">
+      <div class="form-group">
+        <label for="dateDepot" class="control-label">{{'DATE_DEPOT_COUNTER' | translate}}<span
+          class="danger">*</span></label>
+        <input [owlDateTime]="sd"
+               [owlDateTimeTrigger]="sd"
+               [min]="today"
+               formControlName="dateDepot"
+               class="form-control date-readonly"
+               id="dateDepot" readonly>
+        <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
+        <div class="text-danger position-absolute mb-1"
+             *ngIf="!formCancelContract.controls['dateDepot'].valid && formCancelContract.controls['dateDepot'].touched">
+          <div *ngIf="formCancelContract.controls['dateDepot'].errors.required">
+            {{'FIELD_REQUIRED' | translate}}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn btn-outline-primary" (click)="cancelMyContract(formCancelContract.value);"
+            [disabled]="formLinkContract.invalid"> {{'CONFIRM' | translate}}
+    </button>
+    <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #refundContract>
+  <div class="modal-header bg-radem">
+    <h4 class="modal-title pull-left">
+      {{'REFUND_CONTRACT' | translate}} N: {{modalRef.content}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form role="form" novalidate [formGroup]="formRefundContract">
+      <div class="form-group">
+        <label for="solde" class="control-label">{{'SOLDE' | translate}}<span
+          class="danger">*</span></label>
+        <input formControlName="solde" id="solde" class="form-control required"/>
+        <div class="text-danger"
+             *ngIf="!formRefundContract.controls['solde'].valid && formRefundContract.controls['solde'].touched">
+          <div *ngIf="formRefundContract.controls['solde'].errors.required">
+            {{'FIELD_REQUIRED' | translate}}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn btn-outline-primary" (click)="cancelMyContract(formRefundContract.value);"
+            [disabled]="formRefundContract.invalid"> {{'CONFIRM' | translate}}
     </button>
     <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
     </button>

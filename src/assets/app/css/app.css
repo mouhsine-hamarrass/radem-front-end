@@ -84,3 +84,8 @@ aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
 .date-readonly {
   background-color: #FFFFFF !important;
 }
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1090;
+}

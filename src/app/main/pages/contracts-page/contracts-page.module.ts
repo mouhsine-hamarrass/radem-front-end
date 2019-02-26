@@ -11,33 +11,35 @@ import {SharedModule} from '../../../shared/shared.module';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        BsDropdownModule,
-        TooltipModule,
-        TabsModule,
-        ContractsPageRoutingModule,
-        ChartsModule,
-        ComponentsModule,
-        TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        SharedModule
-    ],
-    declarations: [ContractsPageComponent],
-    providers: [
-        ContractsService
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    BsDropdownModule,
+    TooltipModule,
+    TabsModule,
+    ContractsPageRoutingModule,
+    ChartsModule,
+    ComponentsModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    NgxPermissionsModule.forChild(),
+    SharedModule
+  ],
+  declarations: [ContractsPageComponent],
+  providers: [
+    ContractsService
+  ]
 })
 export class ContractsPageModule {
-    constructor(private translate: TranslateService) {
-        this.translate.use(localStorage['language']);
-    }
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage['language']);
+  }
 }

@@ -24,55 +24,29 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem(AuthHelper.USER_ID)) {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-      let index: any = null;
-
-      switch (this.user.profile.id) {
-        case ProfileTypeEnum.ROOT:
-          this.user.profileType = ProfileTypeEnum.ROOT;
-          localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(this.user));
-          /*
-          index = _.findIndex(this.user.authorities, function (o: any) {
-            return o.category === 'ADMINISTRATION';
-          });
-          */
-          this.commonService.permission(this.user.authorities[index]);
-          this.router.navigate(['admin']);
-          break;
+      const index: any = null;
+      const authorities = {
+        permissions: [],
+        roles: [],
+        category: null
+      };
+      switch (this.user.profile.title) {
         case ProfileTypeEnum.ADMIN:
           this.user.profileType = ProfileTypeEnum.ADMIN;
-          localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(this.user));
-          /*
-          index = _.findIndex(this.user.authorities, function (o: any) {
-            return o.category === 'ADMINISTRATION';
-          });
-          */
-          this.commonService.permission(this.user.authorities[index]);
-          this.router.navigate(['admin']);
-          break;
-        case ProfileTypeEnum.AGENT:
-          this.user.profileType = ProfileTypeEnum.AGENT;
-          localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(this.user));
-          /*
-          index = _.findIndex(this.user.authorities, function (o: any) {
-            return o.category === 'AGENT';
-          });
-          */
-          this.commonService.permission(this.user.authorities[index]);
           this.router.navigate(['admin']);
           break;
         case ProfileTypeEnum.CLIENT:
           this.user.profileType = ProfileTypeEnum.CLIENT;
-          localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(this.user));
-          /*
-          index = _.findIndex(this.user.authorities, function (o: any) {
-            return o.category === 'CLIENT';
-          });
-          */
-          this.commonService.permission(this.user.authorities[index]);
           this.router.navigate(['/home']);
           break;
         default:
       }
+      authorities.permissions = this.user.authorities;
+      authorities.category = this.user.profile.title;
+      authorities.roles.push(this.user.profile.title);
+      localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(this.user));
+
+      this.commonService.permission(authorities);
     } else {
       this.router.navigate(['/login']);
     }

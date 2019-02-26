@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ConsumptionsPageComponent} from './consumptions-page.component';
+import {NgxPermissionsGuard} from 'ngx-permissions';
+import {ProfileTypeEnum} from '../../../shared/models/user.model';
 
 const routes: Routes = [
   {
@@ -9,8 +11,13 @@ const routes: Routes = [
       {
         path: '',
         component: ConsumptionsPageComponent,
+        // canActivate: [NgxPermissionsGuard],
         data: {
-          title: 'Consommation Page'
+          title: 'Consommation Page',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
         },
       }
     ]
