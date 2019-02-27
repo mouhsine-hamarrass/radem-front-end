@@ -28,8 +28,9 @@ import {RegisterSuccesComponent} from './register-succes/register-succes.compone
 import {RecoverPasswordService} from './main/services/recover-password.service';
 import {ToastrModule} from 'ngx-toastr';
 import {TermOfUseComponent} from './term-of-use/term-of-use.component';
+import {OnlinePaymentComponent} from './main/pages/services-pages/online-payment/online-payment.component';
 import { HomeComponent } from './home/home.component';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     RegisterSuccesComponent,
     TermOfUseComponent,
     HomeComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    OnlinePaymentComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

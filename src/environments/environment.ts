@@ -4,7 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://192.168.100.14:8085/radem-ael-api';
+const server = 'http://192.168.100.4:8085/radem-ael-api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
 const shopurl_ = 'http://212.83.140.195:4040';

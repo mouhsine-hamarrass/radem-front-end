@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubscriptionDetailComponent } from './subscription-detail.component';
+import { NewRefundRequestComponent } from './new-refund-request.component';
 
-describe('CancellationDetailComponent', () => {
-  let component: SubscriptionDetailComponent;
-  let fixture: ComponentFixture<SubscriptionDetailComponent>;
+describe('NewRefundRequestComponent', () => {
+  let component: NewRefundRequestComponent;
+  let fixture: ComponentFixture<NewRefundRequestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubscriptionDetailComponent ]
+      declarations: [ NewRefundRequestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubscriptionDetailComponent);
+    fixture = TestBed.createComponent(NewRefundRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

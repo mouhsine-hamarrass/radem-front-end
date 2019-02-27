@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewSubscriptionRequestComponent } from './new-subscription-request.component';
 
-describe('NewSubscriptionRequestComponent', () => {
+describe('NewRefundRequestComponent', () => {
   let component: NewSubscriptionRequestComponent;
   let fixture: ComponentFixture<NewSubscriptionRequestComponent>;
 

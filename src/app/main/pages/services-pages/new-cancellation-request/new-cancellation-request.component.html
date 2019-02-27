@@ -18,97 +18,97 @@
           <div class="card-body">
             <form class="form" [formGroup]="cancellationForm"
                   (ngSubmit)="save(cancellationForm.value)" novalidate>
-              <fieldset>
-                <legend>{{'APPLICANT' | translate }}</legend>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="fullname">
-                        {{'LASTNAME_AND_FIRSTNAME' | translate }} : <span class="text-danger">*</span></label>
-                      <input class="form-control" formControlName="firstAndLastName" id="fullname">
-                      <div class="text-danger"
-                           *ngIf="!cancellationForm.controls['firstAndLastName'].valid && cancellationForm.controls['firstAndLastName'].touched">
-                        <div *ngIf="cancellationForm.controls['firstAndLastName'].errors.required">
-                          {{'FIELD_REQUIRED' | translate}}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <!--<fieldset>-->
+                <!--<legend>{{'APPLICANT' | translate }}</legend>-->
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="fullname">-->
+                        <!--{{'LASTNAME_AND_FIRSTNAME' | translate }} : <span class="text-danger">*</span></label>-->
+                      <!--<input class="form-control" formControlName="firstAndLastName" id="fullname">-->
+                      <!--<div class="text-danger"-->
+                           <!--*ngIf="!cancellationForm.controls['firstAndLastName'].valid && cancellationForm.controls['firstAndLastName'].touched">-->
+                        <!--<div *ngIf="cancellationForm.controls['firstAndLastName'].errors.required">-->
+                          <!--{{'FIELD_REQUIRED' | translate}}-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="card-id">{{'CIN' | translate }} : <span class="text-danger">*</span></label>
-                      <input class="form-control" formControlName="cin" id="card-id">
-                      <div class="text-danger"
-                           *ngIf="!cancellationForm.controls['cin'].valid && cancellationForm.controls['cin'].touched">
-                        <div *ngIf="cancellationForm.controls['cin'].errors.required">
-                          {{'FIELD_REQUIRED' | translate}}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="card-id">{{'CIN' | translate }} : <span class="text-danger">*</span></label>-->
+                      <!--<input class="form-control" formControlName="cin" id="card-id">-->
+                      <!--<div class="text-danger"-->
+                           <!--*ngIf="!cancellationForm.controls['cin'].valid && cancellationForm.controls['cin'].touched">-->
+                        <!--<div *ngIf="cancellationForm.controls['cin'].errors.required">-->
+                          <!--{{'FIELD_REQUIRED' | translate}}-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="delivered">
-                        {{'ISSUED_ON' | translate }} : </label>
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="delivered">-->
+                        <!--{{'ISSUED_ON' | translate }} : </label>-->
 
-                      <input [owlDateTime]="sd"
-                             [owlDateTimeTrigger]="sd"
-                             [max]="today"
-                             formControlName="delivered"
-                             class="form-control date-readonly"
-                             id="delivered" readonly>
-                      <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
-                      <div class="text-danger position-absolute mb-1"
-                           *ngIf="!cancellationForm.controls['delivered'].valid && cancellationForm.controls['delivered'].touched">
-                        <div *ngIf="cancellationForm.controls['delivered'].errors.required">
-                          {{'FIELD_REQUIRED' | translate}}
-                        </div>
-                      </div>
+                      <!--<input [owlDateTime]="sd"-->
+                             <!--[owlDateTimeTrigger]="sd"-->
+                             <!--[max]="today"-->
+                             <!--formControlName="delivered"-->
+                             <!--class="form-control date-readonly"-->
+                             <!--id="delivered" readonly>-->
+                      <!--<owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>-->
+                      <!--<div class="text-danger position-absolute mb-1"-->
+                           <!--*ngIf="!cancellationForm.controls['delivered'].valid && cancellationForm.controls['delivered'].touched">-->
+                        <!--<div *ngIf="cancellationForm.controls['delivered'].errors.required">-->
+                          <!--{{'FIELD_REQUIRED' | translate}}-->
+                        <!--</div>-->
+                      <!--</div>-->
 
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="at">{{'AT' | translate }} : </label>
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="at">{{'AT' | translate }} : </label>-->
 
-                      <input [owlDateTime]="ed"
-                             [owlDateTimeTrigger]="ed"
-                             [max]="today"
-                             formControlName="at"
-                             class="form-control date-readonly"
-                             id="at" readonly>
-                      <owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>
-                      <div class="text-danger position-absolute mb-1"
-                           *ngIf="!cancellationForm.controls['at'].valid && cancellationForm.controls['at'].touched">
-                        <div *ngIf="cancellationForm.controls['at'].errors.required">
-                          {{'FIELD_REQUIRED' | translate}}
-                        </div>
-                      </div>
+                      <!--<input [owlDateTime]="ed"-->
+                             <!--[owlDateTimeTrigger]="ed"-->
+                             <!--[max]="today"-->
+                             <!--formControlName="at"-->
+                             <!--class="form-control date-readonly"-->
+                             <!--id="at" readonly>-->
+                      <!--<owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>-->
+                      <!--<div class="text-danger position-absolute mb-1"-->
+                           <!--*ngIf="!cancellationForm.controls['at'].valid && cancellationForm.controls['at'].touched">-->
+                        <!--<div *ngIf="cancellationForm.controls['at'].errors.required">-->
+                          <!--{{'FIELD_REQUIRED' | translate}}-->
+                        <!--</div>-->
+                      <!--</div>-->
 
-                    </div>
-                  </div>
-                </div>
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="requestType">{{'REQUEST_TYPE' | translate }} : </label>
-                      <select id="requestType" class="form-control" formControlName="typeDemandeur">
-                        <option value="client">{{'CLIENT' | translate }}</option>
-                        <option value="procuration">{{'PROXY' | translate}}</option>
-                        <option value="letter">{{'LETTER_N°' | translate}}</option>
-                        <option value="succession">{{'SUCCESSION' | translate}}</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="requestType">{{'REQUEST_TYPE' | translate }} : </label>-->
+                      <!--<select id="requestType" class="form-control" formControlName="typeDemandeur">-->
+                        <!--<option value="client">{{'CLIENT' | translate }}</option>-->
+                        <!--<option value="procuration">{{'PROXY' | translate}}</option>-->
+                        <!--<option value="letter">{{'LETTER_N°' | translate}}</option>-->
+                        <!--<option value="succession">{{'SUCCESSION' | translate}}</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
 
-              </fieldset>
+              <!--</fieldset>-->
               <br>
               <fieldset>
                 <legend>{{'SUBSCRIPTION_POLICIES' | translate }}</legend>
@@ -209,7 +209,9 @@
                 </div>
               </fieldset>
               <br>
-              <fieldset>
+
+     <div *ngIf="cancellationForm.controls['waterPolice'].value || cancellationForm.controls['electricityPolice'].value">
+         <fieldset>
                 <legend>{{'CLIENT' | translate }}</legend>
                 <div class="row">
                   <div class="col-md-6">
@@ -240,6 +242,42 @@
                     </div>
                   </div>
                 </div>
+
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="gsm">{{'FIXED_TELEPHONE_NUMBER' | translate }} : </label>-->
+                      <!--<input class="form-control" formControlName="landline" id="gsm">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="mobile">{{'PORTABLE' | translate }} : <span class="text-danger">*</span></label>-->
+                      <!--<input class="form-control" formControlName="cellphone" id="mobile">-->
+                      <!--<div class="text-danger"-->
+                           <!--*ngIf="!cancellationForm.controls['cellphone'].valid && cancellationForm.controls['cellphone'].touched">-->
+                        <!--<div *ngIf="cancellationForm.controls['cellphone'].errors.required">-->
+                          <!--{{'FIELD_REQUIRED' | translate}}-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="function">{{'FUNCTION' | translate }} : </label>-->
+                      <!--<input class="form-control" formControlName="function" id="function">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label for="location">{{'WORKPLACE' | translate }} : </label>-->
+                      <!--<input class="form-control" formControlName="placeOfWork" id="location">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
 
                 <div class="row">
                   <div class="col-md-6">
@@ -278,6 +316,7 @@
                 </div>
 
                 <div class="row">
+                  <!--<div class="col-md-6"></div>-->
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="address">{{'MAILING_ADDRESS' | translate }} : </label>
@@ -288,6 +327,8 @@
                 </div>
 
               </fieldset>
+</div>
+
               <div class="form-actions bottom right">
                 <button class="btn btn-outline-primary"
                         [disabled]="cancellationForm.invalid" type="submit">{{'SAVE' | translate }}</button>

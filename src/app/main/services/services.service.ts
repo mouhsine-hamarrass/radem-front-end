@@ -5,15 +5,14 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from 'environments/environment';
 import {ComplaintModel} from '../models/complaint.model';
 import {ContractAttachModel} from '../models/contract-attach.model';
-import {CounterModel} from '../models/counter.model';
 import {LastIndexNextVisitModel} from '../models/last-index-next-visit.model';
 import {LastInvoiceModel} from '../models/last-invoice.model';
 import {LastPaymentModel} from '../models/last-payment.model';
 import 'rxjs/add/observable/of';
-import * as _ from 'underscore';
 import {StatusModel} from '../models/status.model';
 import {SubscriptionRequestModel} from '../models/subscription-request.model';
 import {FeedbackModel} from '../models/feedback.model';
+import {CancellationRequestModel} from '../models/cancellation-request.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -206,8 +205,24 @@ export class ServicesService {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/subscriptions`);
   }
 
-  getTerminationRequests(): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`);
+  // getTerminationRequests(): Observable<Response<Array<any>>> {
+  //   return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`);
+  // }
+
+ //Mouhsine
+
+  getTerminationRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>
+    (`${this.urlApi}/termination-requests/${contractNo}?page=${page}&size=${pageSize}`);
+  }
+
+  getTerminationDetails(requestNo: string): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/termination-request/details/${requestNo}`);
+  }
+
+  getTerminationStatus(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination-request-status/all`);
+
   }
 
   getPageableTerminationRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {
@@ -225,7 +240,9 @@ export class ServicesService {
   saveTerminationRequest(request: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/termination_requests/save`, request, {headers: headers});
   }
-
+  saveRefundRequest(request: any): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/Refund-requests/save`, request, {headers: headers});
+  }
   // subscription request
   saveSubscriptionRequest(request: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/subscription-requests/save`, request, {headers: headers});

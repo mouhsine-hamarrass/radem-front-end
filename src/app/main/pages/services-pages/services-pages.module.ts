@@ -19,45 +19,45 @@ import {ArchwizardModule} from 'angular-archwizard';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {SharedModule} from '../../../shared/shared.module';
 import {HttpClient} from '@angular/common/http';
-import {AutoReportsComponent} from './auto-reports/auto-reports.component';
-import {NgxPermissionsModule} from 'ngx-permissions';
+import { AutoReportsComponent } from './auto-reports/auto-reports.component';
+import {CancellationDetailComponent} from './cancellation-detail/cancellation-detail.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ServicesPagesRoutingModule,
-    ArchwizardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    ComponentsModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    NgxPermissionsModule.forChild(),
-    SharedModule
-  ],
-  declarations: [
-    ClaimRequestComponent,
-    SubscriptionRequestsComponent,
-    CancellationRequestComponent,
-    CancellationRequestsComponent,
-    NewCancellationRequestComponent,
-    OnlinePaymentComponent,
-    ClaimRequestsComponent,
-    ClaimDetailComponent,
-    PrintableCancellationComponent,
-    NewSubscriptionRequestComponent,
-    SubscriptionDetailComponent,
-    AutoReportsComponent,
-  ]
+    imports: [
+        CommonModule,
+        ServicesPagesRoutingModule,
+        ArchwizardModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        ComponentsModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        SharedModule
+    ],
+    declarations: [
+        ClaimRequestComponent,
+        SubscriptionRequestsComponent,
+        CancellationRequestComponent,
+        CancellationRequestsComponent,
+        NewCancellationRequestComponent,
+        // OnlinePaymentComponent,
+        ClaimRequestsComponent,
+        ClaimDetailComponent,
+        CancellationDetailComponent,
+        PrintableCancellationComponent,
+        NewSubscriptionRequestComponent,
+        SubscriptionDetailComponent,
+        AutoReportsComponent,
+    ]
 })
 export class ServicesPagesModule {
-  constructor(private translate: TranslateService) {
-    this.translate.use(localStorage['language']);
-  }
+    constructor(private translate: TranslateService) {
+        this.translate.use(localStorage['language']);
+    }
 }

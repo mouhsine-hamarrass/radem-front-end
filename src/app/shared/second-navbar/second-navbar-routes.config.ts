@@ -45,7 +45,31 @@ export const ROUTES: RouteInfo[] = [
                 isNavHeader: false,
                 submenu: []
             },
-            {
+
+          {
+            path:  '/services/embranchement-requests',
+            title: 'Demandes de branchement',
+            icon: '',
+            clazz: 'menu-item',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            isNavHeader: false,
+            submenu: []
+          },
+
+          {
+            path: '/services/refund-requests',
+            title: 'Demandes de remboursement',
+            icon: '',
+            clazz: 'menu-item',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            isNavHeader: false,
+            submenu: []
+          },
+          {
                 path: '/services/auto-reports',
                 title: 'Auto relève',
                 icon: '',
@@ -56,6 +80,7 @@ export const ROUTES: RouteInfo[] = [
                 isNavHeader: false,
                 submenu: []
             }
+
         ]
     },
     {
