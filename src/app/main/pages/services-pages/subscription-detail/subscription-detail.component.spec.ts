@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubscriptionDetailComponent } from './subscription-detail.component';
 
-describe('SubscriptionDetailComponent', () => {
+describe('CancellationDetailComponent', () => {
   let component: SubscriptionDetailComponent;
   let fixture: ComponentFixture<SubscriptionDetailComponent>;
 

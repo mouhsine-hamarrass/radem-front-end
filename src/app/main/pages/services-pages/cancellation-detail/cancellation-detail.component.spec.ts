@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubscriptionDetailComponent } from './subscription-detail.component';
+import { CancellationDetailComponent } from './cancellation-detail.component';
 
 describe('CancellationDetailComponent', () => {
-  let component: SubscriptionDetailComponent;
-  let fixture: ComponentFixture<SubscriptionDetailComponent>;
+  let component: CancellationDetailComponent;
+  let fixture: ComponentFixture<CancellationDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubscriptionDetailComponent ]
+      declarations: [ CancellationDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubscriptionDetailComponent);
+    fixture = TestBed.createComponent(CancellationDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

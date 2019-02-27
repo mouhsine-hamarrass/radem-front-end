@@ -1,43 +1,132 @@
+
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'Requests_for_termination' | translate}}</h3>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'Requests_for_termination' | translate}}</h3>
+    </div>
+    <div class="col-md-6 col-12 text-right container-btn-new-subscription-request">
+      <a routerLink="/services/new-cancellation-request" class="btn btn-primary btn-new-cancellation">
+        <i class="fa fa-plus"></i> {{'New_request_for_cancellation' | translate}}</a>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="mb-0">
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="card-text">
+              <div class="col-12">
+                <div class="row">
+                  <label class="col-form-label">{{'CONTRACT' | translate }} <span
+                    class="danger">*</span>:</label>
+                  <div class="col-3">
+                    <select type="text" class="custom-select" #s
+                            (change)="setContract(s.value)">
+                      <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                      <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                        {{contract.contractNo}}
+                        ({{contract.type}})
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive mt-2">
+                <table class="table">
+                  <thead class="table-light">
+                  <tr>
+                    <th scope="col">{{'REQUEST_NUMBER' | translate }}</th>
+                    <th scope="col">{{'CREATED_ON' | translate }}</th>
+                    <th scope="col">{{'TYPE' | translate }}</th>
+                    <th scope="col">{{'Status' | translate }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <app-data-not-available
+                    *ngIf="!cancellationtionRequests || cancellationtionRequests.length == 0; else dataAvailable" [colSpan]="4">
+                  </app-data-not-available>
+
+                  <ng-template #dataAvailable>
+                    <tr *ngFor="let request of cancellationtionRequests">
+                      <td><a [routerLink]="['/services/cancellation-detail/', request.requestNo]"><b>{{request.requestNo}}</b></a></td>
+                      <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
+                      <td>{{request.contract | translate }}</td>
+                      <td>
+                         <app-badge [status]="request.status.status"></app-badge>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  </tbody>
+                </table>
+                <app-pagination [showPagination]="totalPages > 1"
+                                [numberOfItems]="numberOfItems"
+                                [itemsPerPage]="itemsPerPage"
+                                [totalItems]="totalElements"
+                                [totalPages]="totalPages"
+                                (onpageChanged)="pageChanged($event)"></app-pagination>
+              </div>
+            </div>
+          </div>
         </div>
-      <div class="col-md-6 col-12 text-right container-btn-new-cancellation">
-        <a routerLink="/services/new-cancellation-request" class="btn btn-primary btn-new-cancellation">
-          <i class="fa fa-plus"></i> {{'New_request_for_cancellation' | translate}}</a>
+        <!--/ What is-->
       </div>
     </div>
+  </section>
 </div>
 
-<div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <div id="what-is" class="">
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                      <div class="card-text">
 
-                      <div class="col-12">
-                        <div class="row">
-                          <label class="col-form-label">{{'CONTRACT' | translate }} <span
-                            class="danger">*</span>:</label>
-                          <div class="col-3">
-                            <select type="text" class="custom-select" #s
-                                    (change)="setContract(s.value)">
-                              <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                              <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                                {{contract.contractNo}}
-                                ({{contract.type}})
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
 
-                        <div class="table-responsive mt-2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;Tooltip Starts&ndash;&gt;-->
+<!--<div class="card-header content-header back col-12">-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-6 col-12">-->
+            <!--<h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'Requests_for_termination' | translate}}</h3>-->
+        <!--</div>-->
+      <!--<div class="col-md-6 col-12 text-right container-btn-new-cancellation">-->
+        <!--<a routerLink="/services/new-cancellation-request" class="btn btn-primary btn-new-cancellation">-->
+          <!--<i class="fa fa-plus"></i> {{'New_request_for_cancellation' | translate}}</a>-->
+      <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="content-body">-->
+    <!--<section class="row">-->
+        <!--<div class="col-sm-12">-->
+            <!--&lt;!&ndash; What is&ndash;&gt;-->
+            <!--<div id="what-is" class="">-->
+                <!--<div class="card-content collapse show">-->
+                    <!--<div class="card-body">-->
+                        <!--<div class="table-responsive mx-auto">-->
                             <!--<div class="row justify-content-between">-->
                                 <!--<div class="col-12">-->
                                     <!--<div class="float-left">-->
@@ -45,48 +134,47 @@
                                     <!--</div>-->
                                 <!--</div>-->
                             <!--</div>-->
-                            <table class="table">
-                                <thead class="table-light">
-                                <tr>
-                                    <th scope="col">{{'REQUEST_NUMBER' | translate }}
-                                    </th>
-                                    <th scope="col">{{'SUBSCRIPTION_POLICIES' | translate }}</th>
-                                    <th scope="col">{{'CREATED_ON' | translate }}</th>
-                                    <th scope="col">{{'Status' | translate }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <app-data-not-available
-                                        *ngIf="!cancellationRequests || cancellationRequests.length == 0; else dataAvailable"
-                                        [colSpan]="4"></app-data-not-available>
+                            <!--<table class="table">-->
+                                <!--<thead class="table-light">-->
+                                <!--<tr>-->
+                                    <!--<th scope="col">{{'REQUEST_NUMBER' | translate }}-->
+                                    <!--</th>-->
+                                    <!--<th scope="col">{{'SUBSCRIPTION_POLICIES' | translate }}</th>-->
+                                    <!--<th scope="col">{{'CREATED_ON' | translate }}</th>-->
+                                    <!--<th scope="col">{{'Status' | translate }}</th>-->
+                                <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                <!--<app-data-not-available-->
+                                        <!--*ngIf="!cancellationRequests || cancellationRequests.length == 0; else dataAvailable"-->
+                                        <!--[colSpan]="4"></app-data-not-available>-->
 
-                                <ng-template #dataAvailable>
-                                    <tr *ngFor="let request of cancellationRequests">
-                                        <td>
-                                            <a [routerLink]="['/services/cancellation-request/', request.id]"><b>{{request.requestNumber}}</b></a>
-                                        </td>
-                                        <td>{{request.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? ''
-                                            : ','}}
-                                            {{request.subscriptions[1]?.subscription}}
-                                        </td>
-                                        <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
-                                        <td><app-badge [status]="request.status"></app-badge></td>
-                                    </tr>
-                                </ng-template>
-                                </tbody>
-                            </table>
-                            <app-pagination [showPagination]="totalPages > 1"
-                                            [numberOfItems]="numberOfItems"
-                                            [itemsPerPage]="itemsPerPage"
-                                            [totalItems]="totalElements"
-                                            [totalPages]="totalPages"
-                                            (onpageChanged)="pageChanged($event)"></app-pagination>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                <!--/ What is-->
-            </div>
-        </div>
-    </section>
-</div>
+                                <!--<ng-template #dataAvailable>-->
+                                    <!--<tr *ngFor="let request of cancellationRequests">-->
+                                        <!--<td>-->
+                                            <!--<a [routerLink]="['/services/cancellation-request/', request.id]"><b>{{request.requestNumber}}</b></a>-->
+                                        <!--</td>-->
+                                        <!--<td>{{request.subscriptions[0]?.subscription}} {{!request.subscriptions[1] ? ''-->
+                                            <!--: ','}}-->
+                                            <!--{{request.subscriptions[1]?.subscription}}-->
+                                        <!--</td>-->
+                                        <!--<td>{{request.createdAt | date:'dd-M-yyyy'}}</td>-->
+                                        <!--<td><app-badge [status]="request.status"></app-badge></td>-->
+                                    <!--</tr>-->
+                                <!--</ng-template>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                            <!--<app-pagination [showPagination]="totalPages > 1"-->
+                                            <!--[numberOfItems]="numberOfItems"-->
+                                            <!--[itemsPerPage]="itemsPerPage"-->
+                                            <!--[totalItems]="totalElements"-->
+                                            <!--[totalPages]="totalPages"-->
+                                            <!--(onpageChanged)="pageChanged($event)"></app-pagination>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;/ What is&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+<!--</div>-->
