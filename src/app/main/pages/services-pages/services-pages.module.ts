@@ -46,7 +46,7 @@ import {CancellationDetailComponent} from './cancellation-detail/cancellation-de
         CancellationRequestComponent,
         CancellationRequestsComponent,
         NewCancellationRequestComponent,
-        // OnlinePaymentComponent,
+        OnlinePaymentComponent,
         ClaimRequestsComponent,
         ClaimDetailComponent,
         CancellationDetailComponent,
