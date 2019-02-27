@@ -174,6 +174,15 @@ export class UnpaidPageComponent implements OnInit {
     this.contractServices.getPageableUnpaidBills(this.page, this.pageSize, contracts)
       .subscribe(response => {
         this.contractsBills = response.data['content'];
+        _.each(this.contractsBills, (contract) => {
+          if (contract.invoices) {
+            _.each(contract.invoices, (invoice) => {
+              if (invoice.exigible) {
+                this.addBill(contract, invoice, true);
+              }
+            });
+          }
+        });
         this.calcUnpaidBills();
         this.totalElements = response.data['totalElements'];
         this.totalPages = response.data['totalPages'];
@@ -190,16 +199,18 @@ export class UnpaidPageComponent implements OnInit {
     this.totalBillsExigible = 0;
     this.contractsBills.map((contract) => {
       contract.invoices.map((bill, index) => {
-        this.totalUnpaid += bill.balance;
-        this.total += bill.exigible ? bill.balance : 0;
-        this.totalBillsExigible += bill.exigible ? bill.balance : 0;
+        this.totalUnpaid += parseFloat(bill.balance);
+        this.total += bill.exigible ? parseFloat(bill.balance) : 0;
+        this.totalBillsExigible += bill.exigible ? parseFloat(bill.balance) : 0;
       })
     });
   }
 
   calcTotal(bill, balance, operation): void {
     if (operation === 'add') {
-      this.total += parseFloat(balance)
+      if (!bill.exigible) {
+      this.total += parseFloat(balance);
+      }
     } else {
       this.total -= parseFloat(balance)
     }

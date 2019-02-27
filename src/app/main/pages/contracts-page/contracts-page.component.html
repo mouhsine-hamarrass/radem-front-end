@@ -74,10 +74,10 @@
                          tooltip="Détachement"
                          (click)="detachContract(contract.contractNo)"></i>
                       <i class="fa fa-ban cursor-pointer pl-1 text-danger"
-                         tooltip="Résiliation"
+                         tooltip="Résiliation"  *ngIf="true"
                          (click)="openModalCancelContract(cancelContract, contract.contractNo)"></i>
                       <i class="fa fa-money cursor-pointer pl-1 text-primary"
-                         tooltip="Remboursement"
+                         tooltip="Remboursement" *ngIf="true"
                          (click)="openModalRefundContract(refundContract, contract.contractNo)"></i>
                     </td>
                   </tr>
@@ -310,7 +310,7 @@
 <ng-template #cancelContract>
   <div class="modal-header bg-radem">
     <h4 class="modal-title pull-left">
-      {{'CANCEL_CONTRACT' | translate}} N: {{modalRef.content}}</h4>
+      {{'CANCEL_CONTRACT' | translate}} {{modalRef.content}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
       <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
     </button>
@@ -348,7 +348,7 @@
 <ng-template #refundContract>
   <div class="modal-header bg-radem">
     <h4 class="modal-title pull-left">
-      {{'REFUND_CONTRACT' | translate}} N: {{modalRef.content}}</h4>
+      {{'REFUND_CONTRACT' | translate}} {{modalRef.content}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
       <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
     </button>

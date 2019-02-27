@@ -2,10 +2,10 @@ export interface InvoiceInfosModel {
   id?: number;
   contractNo?: string;
   invoiceNo?: string;
-  year?: number;
-  month?: number;
-  balance?: number;
-  amount?: number;
+  year?: string;
+  month?: string;
+  balance?: string;
+  amount?: string;
   exigible?: boolean;
   checked?: boolean;
 }

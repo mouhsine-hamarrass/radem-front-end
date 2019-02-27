@@ -65,7 +65,7 @@
                   [colSpan]="5"></app-data-not-available>
                 <ng-template #dataAvailable2>
                   <tr *ngFor="let consumption of consumptionsHistoryCurrentYear" class="text-center">
-                    <td>{{consumption.releveDate}}</td>
+                    <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>
                     <td>{{consumption.meterNo}}</td>
                     <td>{{consumption.index}}</td>
                     <td>{{consumption.volume}}
