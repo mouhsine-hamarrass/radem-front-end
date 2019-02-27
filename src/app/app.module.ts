@@ -48,7 +48,6 @@ import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
     TermOfUseComponent,
     HomeComponent,
     UnauthorizedComponent,
-    OnlinePaymentComponent,
     HomeComponent,
   ],
   imports: [
