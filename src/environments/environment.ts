@@ -7,6 +7,8 @@ import {HttpHeaders} from '@angular/common/http';
 const server = 'http://192.168.100.14:8085/radem-ael-api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
+const shopurl_ = 'http://212.83.140.195:4040';
+
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
@@ -27,7 +29,7 @@ export const environment = {
     apiEnv: 'dev',
     timeExpired: 1200,
     credentials: {
-      clientId: 'yelansari',
+      clientId: 'client@valueit.ma',
       clientSecret: 'admin'
     },
     apiUrls: [
@@ -41,5 +43,15 @@ export const environment = {
     authScheme: AuthScheme.BEARER,
     errorHandler: ErrorHandlerTypes.SIMPLE,
     loggerService: LoggerTypes.CONSOLE
-  }
+  },
+
+  shopurl: shopurl_,
+  clientId: '600000941',
+  failUrl : shopurl_ + '/Ok-Fail.php',
+  transactionType : 'PreAuth',
+  callbackUrl : shopurl_ + '/callback.php',
+  currency : '504',
+  okUrl:  'http://212.83.140.195:4041/home',
+  sendDataUrl: shopurl_ + '/2.SendData.php'
+
 };
