@@ -12,103 +12,129 @@ import {AutoReportsComponent} from './auto-reports/auto-reports.component';
 import {CancellationRequestComponent} from './cancellation-request/cancellation-request.component';
 import {CancellationDetailComponent} from './cancellation-detail/cancellation-detail.component';
 import {OnlinePaymentComponent} from './online-payment/online-payment.component';
+import {RefundRequestsComponent} from './refund-requests/refund-requests.component';
+import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
+import {RefundDetailComponent} from './refund-detail/refund-detail.component';
 
 
 const routes: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: 'new-claim-request',
-                component: ClaimRequestComponent,
-                data: {
-                    title: 'Nouvelle demande de réclamation'
-                }
-            },
-            {
-                path: 'claim-requests',
-                component: ClaimRequestsComponent,
-                data: {
-                    title: 'Demandes de réclamation'
-                }
-            },
-            {
-                path: 'claim-request/:id',
-                component: ClaimDetailComponent,
-                data: {
-                    title: 'Demandes de réclamation'
-                }
-            },
-            {
-                path: 'subscription-requests',
-                component: SubscriptionRequestsComponent,
-                data: {
-                    title: 'Demandes d\'abonnements'
-                }
-            },
-            {
-                path: 'cancellation-detail/:id',
-                component: CancellationDetailComponent,
-                data: {
-                    title: 'Demandes de résiliation'
-                }
-            },
-          {
-                path: 'cancellation-requests',
-                component: CancellationRequestsComponent,
-                data: {
-                    title: 'Demandes de résiliation'
-                }
-            },
-            {
-                path: 'new-cancellation-request',
-                component: NewCancellationRequestComponent,
-                data: {
-                    title: 'Nouvelle demande de résiliation'
-                }
-            },
-            {
-                path: 'new-subscription-request',
-                component: NewSubscriptionRequestComponent,
-                data: {
-                    title: 'Nouvelle demande d\'abonnement'
-                }
-            },
-            {
-                path: 'cancellation-request/:id',
-                component: CancellationRequestComponent,
-                data: {
-                    title: 'Demande de résiliation'
-                }
-            },
-            {
-                path: 'payment',
-                component: OnlinePaymentComponent,
-                data: {
-                    title: 'Paiement en ligne'
-                }
-            },
-            {
-                path: 'auto-reports',
-                component: AutoReportsComponent,
-                data: {
-                    title: 'Auto relève'
-                }
-            },
-            {
-                path: 'subscription-detail/:id',
-                component: SubscriptionDetailComponent,
-                data: {
-                    title: 'Demande d\'abonnement'
-                }
-            },
-        ]
-    }
+  {
+    path: '',
+    children: [
+      {
+        path: 'new-claim-request',
+        component: ClaimRequestComponent,
+        data: {
+          title: 'Nouvelle demande de réclamation'
+        }
+      },
+      {
+        path: 'claim-requests',
+        component: ClaimRequestsComponent,
+        data: {
+          title: 'Demandes de réclamation'
+        }
+      },
+      {
+        path: 'claim-request/:id',
+        component: ClaimDetailComponent,
+        data: {
+          title: 'Demandes de réclamation'
+        }
+      },
+      {
+        path: 'subscription-requests',
+        component: SubscriptionRequestsComponent,
+        data: {
+          title: 'Demandes d\'abonnements'
+        }
+      },
+      {
+        path: 'cancellation-detail/:id',
+        component: CancellationDetailComponent,
+        data: {
+          title: 'Demandes de résiliation'
+        }
+      },
+      {
+        path: 'cancellation-requests',
+        component: CancellationRequestsComponent,
+        data: {
+          title: 'Demandes de résiliation'
+        }
+      },
+      {
+        path: 'new-cancellation-request',
+        component: NewCancellationRequestComponent,
+        data: {
+          title: 'Nouvelle demande de résiliation'
+        }
+      },
+      {
+        path: 'new-subscription-request',
+        component: NewSubscriptionRequestComponent,
+        data: {
+          title: 'Nouvelle demande d\'abonnement'
+        }
+      },
+      {
+        path: 'cancellation-request/:id',
+        component: CancellationRequestComponent,
+        data: {
+          title: 'Demande de résiliation'
+        }
+      },
+      {
+        path: 'payment',
+        component: OnlinePaymentComponent,
+        data: {
+          title: 'Paiement en ligne'
+        }
+      },
+      {
+        path: 'auto-reports',
+        component: AutoReportsComponent,
+        data: {
+          title: 'Auto relève'
+        }
+      },
+      {
+        path: 'subscription-detail/:id',
+        component: SubscriptionDetailComponent,
+        data: {
+          title: 'Demande d\'abonnement'
+        }
+      },
+
+      {
+        path: 'refund-requests',
+        component: RefundRequestsComponent,
+        data: {
+          title: 'Demande de remboursement'
+        }
+      },
+      {
+        path: 'new-refund-request',
+        component: NewRefundRequestComponent,
+        data: {
+          title: 'Nouvelle demande de remboursement'
+        }
+      },
+
+      {
+        path: 'refund-detail/:id',
+        component: RefundDetailComponent,
+        data: {
+          title: 'Nouvelle demande de remboursement'
+        }
+      }
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 
 export class ServicesPagesRoutingModule {
