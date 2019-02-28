@@ -2,7 +2,7 @@
 <div class="content-header back col-12 mb-1 mt-1">
   <div class="row">
     <div class="col-md-6 col-12">
-      <h3 class="content-header-title">{{'Subscription' | translate}}</h3>
+      <h3 class="content-header-title">{{'REFUND' | translate}}</h3>
     </div>
   </div>
 </div>
@@ -13,7 +13,7 @@
       <!-- What is-->
       <div id="what-is" class="card mb-0">
         <div class="card-header">
-          <h4 class="card-title">{{'subscription_request' | translate }} N° {{RefundDetails?.requestNo}}</h4>
+          <h4 class="card-title">{{'Requests_for_refund' | translate }} N° {{RefundDetails?.requestNo}}</h4>
           <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
           <div class="heading-elements">
             <ul class="list-inline">
@@ -47,17 +47,9 @@
                               <td>{{'CONTRACT_NUMBER' | translate }} :</td>
                               <td>{{RefundDetails?.contract}}</td>
                             </tr>
-                            <tr [hidden]="!RefundDetails?.predecessor">
-                              <td>{{'PREDECESSOR' | translate }} :</td>
-                              <td>{{RefundDetails?.predecessor}}</td>
-                            </tr>
-                            <tr [hidden]="!RefundDetails?.predecessor">
-                              <td>{{'OLD_CONTRACT_NUMBER' | translate }} :</td>
-                              <td>{{RefundDetails?.oldSubscription}}</td>
-                            </tr>
                             <tr>
                               <td>{{'TYPE' | translate }} :</td>
-                              <td>{{RefundDetails?.subscriptionType | translate}}</td>
+                              <td>{{RefundDetails?.description}}</td>
                             </tr>
                           </table>
                         </div>

@@ -221,7 +221,6 @@ export class ServicesService {
 
   getTerminationStatus(): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination-request-status/all`);
-
   }
 
   //Mouhsine refund
@@ -233,6 +232,21 @@ export class ServicesService {
 
   getRefundDetails(requestNo: string): Observable<Response<any>> {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/refund-request/details/${requestNo}`);
+  }
+
+  //mouhsine embranchment
+
+  getEmbranchmentRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>
+    (`${this.urlApi}/connection-requests/${contractNo}?page=${page}&size=${pageSize}`);
+  }
+
+  getEmbranchmentDetails(requestNo: string): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/connection-request/details/${requestNo}`);
+  }
+
+  getEmbranchmentStatus(): Observable<Response<Array<any>>> {
+    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/connection-request-status/all`);
   }
 
   getPageableTerminationRequests(page: number, pageSize: number, filter?: any, sort?: any): Observable<Response<any>> {

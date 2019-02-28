@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {User} from '../../../models/user.model';
 import {StatusModel} from '../../../models/status.model';
 import {BsModalService} from 'ngx-bootstrap';
@@ -7,6 +7,7 @@ import {ServicesService} from '../../../services/services.service';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {environment} from '../../../../../environments/environment';
 import {FeedbackModel} from '../../../models/feedback.model';
+import {RefundRequestModel} from '../../../models/refund-request.model';
 
 @Component({
   selector: 'app-refund-detail',
@@ -14,11 +15,11 @@ import {FeedbackModel} from '../../../models/feedback.model';
   styleUrls: ['./refund-detail.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class RefundDetailComponent implements OnInit {
+export class RefundDetailComponent implements OnInit, AfterViewInit {
 
   public user: User;
   RefundStatus: Array<StatusModel> = [{id: 1, status: '', stepOrder: 1}];
-  RefundDetails: any;
+  RefundDetails: RefundRequestModel;
   selectedStep: number;
   agentAvatar;
   userComment = '';

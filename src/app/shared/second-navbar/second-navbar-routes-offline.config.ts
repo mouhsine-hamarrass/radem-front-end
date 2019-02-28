@@ -115,7 +115,7 @@ export const ROUTES_OFFLINE: RouteInfo[] = [
   },
   {
     path: mainRoute + '/settlements',
-    title: 'Mes réglements',
+    title: 'Mes règlements',
     icon: '',
     clazz: 'nav-item',
     badge: '',

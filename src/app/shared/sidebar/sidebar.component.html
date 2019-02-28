@@ -9,7 +9,7 @@
                 [routerLinkActiveOptions]="{exact: true}">
                 <a [routerLink]="menuItem.clazz === 'nav-item' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader">
                     <i [ngClass]="[menuItem.icon]"></i>
-                    <span class="menu-title">{{menuItem.title}}</span>
+                    <span class="menu-title" >{{menuItem.title}}</span>
                     <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
                 </a>
                 <a [href]="[menuItem.path]" target="_blank" *ngIf="menuItem.isExternalLink  && !menuItem.isNavHeader">
@@ -26,7 +26,7 @@
                     <li *ngFor="let menuSubItem of menuItem.submenu" [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.clazz]">
                         <a [routerLink]="menuSubItem.submenu.length > 0 ? null : [menuSubItem.path]" *ngIf="!menuSubItem.isExternalLink && !menuItem.isNavHeader; else externalSubLinkBlock">
                             <i [ngClass]="[menuSubItem.icon]"></i>
-                            <span class="menu-title">{{menuSubItem.title}}</span>
+                            <span class="menu-title" >{{menuSubItem.title}}</span>
                             <span *ngIf="menuSubItem.badge != '' " [ngClass]="[menuSubItem.badgeClass]">{{menuSubItem.badge}}</span>
                         </a>
                         <ng-template #externalSubLinkBlock>
