@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../../shared/services/data.service';
 import {environment} from '../../../../../environments/environment';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
-import {UserDetails} from '../../../../shared/models/user.model';
+import {User} from '../../../models/user.model';
 
 @Component({
   selector: 'app-online-payment',
@@ -12,7 +12,7 @@ import {UserDetails} from '../../../../shared/models/user.model';
 export class OnlinePaymentComponent implements OnInit {
 
   selectedBills;
-  user: UserDetails;
+  user: User;
   shopUrl = environment.shopurl;
   sendDataUrl = environment.sendDataUrl;
   clientId = environment.clientId;

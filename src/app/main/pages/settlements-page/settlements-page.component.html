@@ -124,7 +124,7 @@
                       <td>{{settlement.month}} - {{settlement.year}}</td>
                       <td>{{settlement.typeNetwork}}</td>
                       <td>{{settlement.paymentDate | date:'dd-MM-yyyy'}}</td>
-                      <td>{{settlement.amount}}</td>
+                      <td>{{settlement.amount | numeral}}</td>
                       <td>{{settlement.paymentMode}}</td>
                     </tr>
                   </ng-template>
