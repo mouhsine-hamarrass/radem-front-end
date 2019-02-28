@@ -1,0 +1,128 @@
+<!--Tooltip Starts-->
+<div class="content-header back col-12 mb-1 mt-1">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title">{{'Subscription' | translate}}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card mb-0">
+        <div class="card-header">
+          <h4 class="card-title">{{'subscription_request' | translate }} N° {{RefundDetails?.requestNo}}</h4>
+          <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+          <div class="heading-elements">
+            <ul class="list-inline">
+              <li>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="card-text">
+              <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
+                         [navigationMode]="'free'" [defaultStepIndex]="0">
+                <aw-wizard-step *ngFor="let wizard of RefundStatus"
+                                [stepTitle]="wizard.status"
+                                [stepId]="RefundDetails?.status?.stepOrder"
+                                [navigationSymbol]="{ symbol: wizard.stepOrder }"
+                >
+                </aw-wizard-step>
+              </aw-wizard>
+
+              <div class="col-12">
+                <div class="row" id="cards">
+                  <fieldset class="col-7 scheduler-border">
+                    <legend class="scheduler-border"><b>{{'INFORMATIONS' | translate }} :</b></legend>
+                    <div style="padding-left: 20px;padding-bottom: 10px;">
+                      <div class="row">
+                        <div style="padding-left: 10px;">
+                          <table>
+                            <tr>
+                              <td>{{'CONTRACT_NUMBER' | translate }} :</td>
+                              <td>{{RefundDetails?.contract}}</td>
+                            </tr>
+                            <tr [hidden]="!RefundDetails?.predecessor">
+                              <td>{{'PREDECESSOR' | translate }} :</td>
+                              <td>{{RefundDetails?.predecessor}}</td>
+                            </tr>
+                            <tr [hidden]="!RefundDetails?.predecessor">
+                              <td>{{'OLD_CONTRACT_NUMBER' | translate }} :</td>
+                              <td>{{RefundDetails?.oldSubscription}}</td>
+                            </tr>
+                            <tr>
+                              <td>{{'TYPE' | translate }} :</td>
+                              <td>{{RefundDetails?.subscriptionType | translate}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset class="col-4 scheduler-border" id="divDate">
+                    <legend class="scheduler-border">
+                      <b>{{'DATES' | translate }} :</b>
+                    </legend>
+                    <div style="padding-left: 20px;">
+                      <table>
+                        <tr>
+                          <td>{{'DATE_OF-CREATION' | translate }} :</td>
+                          <td>{{RefundDetails?.createdAt | date:'dd-M-yyyy'}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{'DATE_OF_MODIFICATION' | translate }} :</td>
+                          <td>{{RefundDetails?.modifiedAt | date:'dd-M-yyyy'}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+
+                </div>
+                <div class="row" id="cards2">
+                  <fieldset class="col-7 scheduler-border">
+                    <legend class="scheduler-border">
+                      <b>{{'COMMENTS' | translate }}</b>
+                    </legend>
+                    <div id="commDiv">
+
+                      <ng-container *ngFor="let feedback of RefundDetails?.feedbacks">
+                        <div *ngIf="feedback.isPublic" class="media mb-2">
+                          <img [src]="feedback.isRademResponse ? agentAvatar : user.avatar"
+                               [alt]="feedback.senderName" class="mr-1 rounded-circle"
+                               height="40" width="40">
+                          <div class="media-body">
+                            <h6 class="mt-0 font-weight-bold">{{feedback.senderName}}</h6>
+                            <p>{{feedback.message}}</p>
+                            <div class="col-13 pull-right text-right" id="divDateComm">
+                              <i>le {{feedback.sendingDate | date:'dd-M-yyyy'}}.</i>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+
+                    </div>
+                    <div class="px-2 pt-2 pb-1">
+                      <div class="row">
+                        <input type="text" class="col-10 form-control" [(ngModel)]="userComment"
+                               placeholder="{{'LEAVE_A_COMMENT' | translate }} ..."/>
+                        <button class="btn btn btn-outline-primary ml-1"
+                                [disabled]="userComment === '' "
+                                (click)="postFeedBack()">{{'SEND' | translate }}</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,13 +1,9 @@
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {SharedModule} from './shared/shared.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import {AppComponent} from './app.component';
 import {BoxedLayoutComponent} from './layouts/boxed-layout/boxed-layout.component';
-
 import {MaintenanceComponent} from './maintenance/maintenance.component';
-import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import {createTranslateLoader} from './app.translate.factory';
 import {CoreModule} from './core/core.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -28,9 +24,9 @@ import {RegisterSuccesComponent} from './register-succes/register-succes.compone
 import {RecoverPasswordService} from './main/services/recover-password.service';
 import {ToastrModule} from 'ngx-toastr';
 import {TermOfUseComponent} from './term-of-use/term-of-use.component';
-import {OnlinePaymentComponent} from './main/pages/services-pages/online-payment/online-payment.component';
 import { HomeComponent } from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
+
 
 @NgModule({
   declarations: [

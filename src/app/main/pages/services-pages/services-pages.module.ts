@@ -21,6 +21,9 @@ import {SharedModule} from '../../../shared/shared.module';
 import {HttpClient} from '@angular/common/http';
 import { AutoReportsComponent } from './auto-reports/auto-reports.component';
 import {CancellationDetailComponent} from './cancellation-detail/cancellation-detail.component';
+import {RefundRequestsComponent} from './refund-requests/refund-requests.component';
+import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
+import {RefundDetailComponent} from './refund-detail/refund-detail.component';
 
 @NgModule({
     imports: [
@@ -43,11 +46,14 @@ import {CancellationDetailComponent} from './cancellation-detail/cancellation-de
     declarations: [
         ClaimRequestComponent,
         SubscriptionRequestsComponent,
+        RefundRequestsComponent,
         CancellationRequestComponent,
         CancellationRequestsComponent,
         NewCancellationRequestComponent,
         OnlinePaymentComponent,
         ClaimRequestsComponent,
+        NewRefundRequestComponent,
+        RefundDetailComponent,
         ClaimDetailComponent,
         CancellationDetailComponent,
         PrintableCancellationComponent,

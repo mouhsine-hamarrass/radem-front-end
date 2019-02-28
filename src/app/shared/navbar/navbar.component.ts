@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/services/cancellation-detail/', notification.target]);
         break;
       case 'REMBOURSEMENT':
-        this.router.navigate(['/services/subscription-detail/', notification.target]);
+        this.router.navigate(['/services/refund-detail/', notification.target]);
         break;
       case 'BRANCHEMENT':
         this.router.navigate(['/services/subscription-detail/', notification.target]);
