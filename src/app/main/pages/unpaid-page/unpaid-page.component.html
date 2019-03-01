@@ -147,9 +147,9 @@
                               [totalPages]="totalPages"
                               (onpageChanged)="pageChanged($event)"></app-pagination>
 
-              <div class="col-md-12 text-right mt-1">
+              <div class="col-md-12 text-right">
                 <div class="row">
-                  <div class="form-group">
+                  <div class="form-group ">
                     <label>Total des impayés :</label>
                     <span class=" font-weight-bold text-danger">{{totalUnpaid | numeral}} DH</span>
                   </div>
@@ -162,11 +162,11 @@
                   </div>
                 </div>
               </div>
-
-              <div class="row col-md-12 text-right">
-                <input class="btn btn btn-outline-secondary mb-2" type="button" (click)="submit()"
+              <div class="pull-right">
+                <input class="btn btn btn-outline-secondary mb-2"  type="button" (click)="submit()"
                        value="Régler vos factures">
               </div>
+
             </div>
           </div>
         </div>

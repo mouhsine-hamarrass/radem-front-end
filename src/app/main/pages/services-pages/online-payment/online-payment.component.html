@@ -34,7 +34,7 @@
                 <tr *ngFor="let invoice of selectedBills.invoices">
                   <td>{{invoice.contractNo}}</td>
                   <td>{{invoice.invoiceNo}}</td>
-                  <td>{{invoice.amount}}</td>
+                  <td>{{invoice.amount | numeral}}</td>
                 </tr>
               </ng-template>
               </tbody>
@@ -44,9 +44,10 @@
         </div>
         <!--/ What is-->
 
-        <div class="pull-right">
+  <!--<div class="row"></div>-->
+        <div class="col-md-12 text-right">
 
-          <form class="row col-md-12 text-right pull-right" #form ngNoForm action="{{sendDataUrl}}" method="post">
+          <form #form ngNoForm action="{{sendDataUrl}}" method="post">
 
 
             <input class="btn btn btn-outline-secondary mb-2" type="submit"

@@ -10,7 +10,7 @@ import {UnpaidModel} from '../../models/unpaid.model';
 import * as $ from 'jquery/dist/jquery.min.js';
 import {Router} from '@angular/router';
 import {DataService} from '../../../shared/services/data.service';
-import {InvoiceInfosModel} from '../../models/invoice-infos.model';
+
 
 @Component({
   selector: 'app-unpaid',

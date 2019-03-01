@@ -41,7 +41,7 @@
                   <tr>
                     <th scope="col">{{'REQUEST_NUMBER' | translate }}</th>
                     <th scope="col">{{'CREATED_ON' | translate }}</th>
-                    <th scope="col">{{'TYPE' | translate }}</th>
+                    <!--<th scope="col">{{'TYPE' | translate }}</th>-->
                     <th scope="col">{{'Status' | translate }}</th>
                   </tr>
                   </thead>
@@ -54,7 +54,7 @@
                       <td><a
                         [routerLink]="['/services/refund-detail/', request.requestNo]"><b>{{request.requestNo}}</b></a>
                       <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
-                      <td>{{request.networkType}}</td>
+                      <!--<td>{{request.networkType}}</td>-->
                       <td>
                         <app-badge [status]="request.status.status"></app-badge>
                       </td>
