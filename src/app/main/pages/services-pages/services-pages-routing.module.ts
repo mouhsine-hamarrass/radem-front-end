@@ -15,6 +15,9 @@ import {OnlinePaymentComponent} from './online-payment/online-payment.component'
 import {RefundRequestsComponent} from './refund-requests/refund-requests.component';
 import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
 import {RefundDetailComponent} from './refund-detail/refund-detail.component';
+import {EmbranchmentRequestsComponent} from './embranchment-requests/embranchment-requests.component';
+import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
+import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-detail.component';
 
 
 const routes: Routes = [
@@ -126,6 +129,28 @@ const routes: Routes = [
         component: RefundDetailComponent,
         data: {
           title: 'Nouvelle demande de remboursement'
+        }
+      },
+
+      {
+        path: 'embranchement-requests',
+        component: EmbranchmentRequestsComponent,
+        data: {
+          title: 'Demande de branchement'
+        }
+      },
+      {
+        path: 'new-embranchement-request',
+        component: NewEmbranchementRequestComponent,
+        data: {
+          title: 'Nouvelle demande de branchement'
+        }
+      },
+      {
+        path: 'embranchment-detail/:id',
+        component: EmbranchmentDetailComponent,
+        data: {
+          title: 'demande de remboursement'
         }
       }
     ]

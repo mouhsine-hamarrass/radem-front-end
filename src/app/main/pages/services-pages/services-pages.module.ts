@@ -24,6 +24,9 @@ import {CancellationDetailComponent} from './cancellation-detail/cancellation-de
 import {RefundRequestsComponent} from './refund-requests/refund-requests.component';
 import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
 import {RefundDetailComponent} from './refund-detail/refund-detail.component';
+import {EmbranchmentRequestsComponent} from './embranchment-requests/embranchment-requests.component';
+import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
+import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-detail.component';
 
 @NgModule({
     imports: [
@@ -55,11 +58,14 @@ import {RefundDetailComponent} from './refund-detail/refund-detail.component';
         NewRefundRequestComponent,
         RefundDetailComponent,
         ClaimDetailComponent,
+        EmbranchmentRequestsComponent,
         CancellationDetailComponent,
         PrintableCancellationComponent,
         NewSubscriptionRequestComponent,
         SubscriptionDetailComponent,
         AutoReportsComponent,
+        NewEmbranchementRequestComponent,
+        EmbranchmentDetailComponent
     ]
 })
 export class ServicesPagesModule {

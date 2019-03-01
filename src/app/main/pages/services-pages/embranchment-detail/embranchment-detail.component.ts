@@ -1,25 +1,25 @@
-import {Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, EventEmitter} from '@angular/core';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {ServicesService} from '../../../services/services.service';
-import {StatusModel} from '../../../models/status.model';
-import {ActivatedRoute} from '@angular/router';
-import {SubscriptionRequestModel} from '../../../models/subscription-request.model';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {User} from '../../../models/user.model';
+import {StatusModel} from '../../../models/status.model';
+import {BsModalService} from 'ngx-bootstrap';
+import {ActivatedRoute} from '@angular/router';
+import {ServicesService} from '../../../services/services.service';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {environment} from '../../../../../environments/environment';
 import {FeedbackModel} from '../../../models/feedback.model';
+import {EmbranchmentRequestModel} from '../../../models/embranchment-request.model';
 
 @Component({
-  selector: 'app-subscription-detail',
-  templateUrl: './subscription-detail.component.html',
-  styleUrls: ['./subscription-detail.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-embranchment-detail',
+  templateUrl: './embranchment-detail.component.html',
+  styleUrls: ['./embranchment-detail.component.scss']
 })
-export class SubscriptionDetailComponent implements OnInit, AfterViewInit {
+export class EmbranchmentDetailComponent implements OnInit, AfterViewInit {
+
 
   public user: User;
-  subscriptionStatus: Array<StatusModel> = [{id: 1, status: '', stepOrder: 1}];
-  subscriptionDetails: SubscriptionRequestModel;
+  embranchmentStatus: Array<StatusModel> = [{id: 1, status: '', stepOrder: 1}];
+  embranchmentDetails: EmbranchmentRequestModel;
   selectedStep: number;
   agentAvatar;
   userComment = '';
@@ -41,18 +41,18 @@ export class SubscriptionDetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Force another change detection in order to fix the ngFor error
     this._changeDetectionRef.detectChanges();
-    this.getSubscriptionStatus();
-    this.getSubscriptionDetail();
+    this.getEmbranchmentStatus();
+    this.getEmbranchmentDetail();
   }
 
-  getSubscriptionDetail() {
+  getEmbranchmentDetail() {
     const requestNo: string = this.route.snapshot.paramMap.get('id');
     if (requestNo !== null) {
-      this.services.getSubscriptionDetails(requestNo).subscribe(response => {
+      this.services.getEmbranchmentDetails(requestNo).subscribe(response => {
         if (response.data) {
-          this.subscriptionDetails = response.data;
-          this.subscriptionDetails.feedbacks = this.subscriptionDetails.feedbacks.reverse();
-          this.selectedStep = this.subscriptionDetails.status.stepOrder;
+          this.embranchmentDetails = response.data;
+          this.embranchmentDetails.feedbacks = this.embranchmentDetails.feedbacks.reverse();
+          this.selectedStep = this.embranchmentDetails.status.stepOrder;
 
           setTimeout(() => {
             const stepsIndicator = document.querySelector('.steps-indicator li[step-symbol="' + this.selectedStep + '"]');
@@ -68,10 +68,10 @@ export class SubscriptionDetailComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getSubscriptionStatus() {
-    this.services.getSubscriptionStatus().subscribe(response => {
+  getEmbranchmentStatus() {
+    this.services.getEmbranchmentStatus().subscribe(response => {
       if (response.data) {
-        this.subscriptionStatus = response.data;
+        this.embranchmentStatus = response.data;
       }
     }, error => {
       console.log(error)
@@ -86,10 +86,10 @@ export class SubscriptionDetailComponent implements OnInit, AfterViewInit {
       sender: this.user.username,
       sendingDate: new Date()
     };
-    this.services.saveFeedback(this.subscriptionDetails.id, feedback).subscribe(response => {
+    this.services.saveFeedback(this.embranchmentDetails.id, feedback).subscribe(response => {
       if (response.data) {
         this.userComment = '';
-        this.getSubscriptionDetail();
+        this.getEmbranchmentDetail();
       }
     }, error => {
       console.log(error)

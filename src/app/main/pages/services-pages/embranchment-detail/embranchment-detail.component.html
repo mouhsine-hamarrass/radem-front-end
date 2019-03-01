@@ -1,8 +1,7 @@
-<!--Tooltip Starts-->
 <div class="content-header back col-12 mb-1 mt-1">
   <div class="row">
     <div class="col-md-6 col-12">
-      <h3 class="content-header-title">{{'Subscription' | translate}}</h3>
+      <h3 class="content-header-title">{{'EMBRANCHMENT' | translate}}</h3>
     </div>
   </div>
 </div>
@@ -13,7 +12,7 @@
       <!-- What is-->
       <div id="what-is" class="card mb-0">
         <div class="card-header">
-          <h4 class="card-title">{{'subscription_request' | translate }} N° {{subscriptionDetails?.requestNo}}</h4>
+          <h4 class="card-title">{{'Request_for_embranchment' | translate }} N° {{embranchmentDetails?.requestNo}}</h4>
           <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
           <div class="heading-elements">
             <ul class="list-inline">
@@ -27,9 +26,9 @@
             <div class="card-text">
               <aw-wizard #wizard class="custom-css" [navBarLayout]="'large-empty-symbols'"
                          [navigationMode]="'free'" [defaultStepIndex]="0">
-                <aw-wizard-step *ngFor="let wizard of subscriptionStatus"
+                <aw-wizard-step *ngFor="let wizard of embranchmentStatus"
                                 [stepTitle]="wizard.status"
-                                [stepId]="subscriptionDetails?.status?.stepOrder"
+                                [stepId]="embranchmentDetails?.status?.stepOrder"
                                 [navigationSymbol]="{ symbol: wizard.stepOrder }"
                 >
                 </aw-wizard-step>
@@ -45,19 +44,11 @@
                           <table>
                             <tr>
                               <td>{{'CONTRACT_NUMBER' | translate }} :</td>
-                              <td>{{subscriptionDetails?.contract}}</td>
-                            </tr>
-                            <tr [hidden]="!subscriptionDetails?.predecessor">
-                              <td>{{'PREDECESSOR' | translate }} :</td>
-                              <td>{{subscriptionDetails?.predecessor}}</td>
-                            </tr>
-                            <tr [hidden]="!subscriptionDetails?.predecessor">
-                              <td>{{'OLD_CONTRACT_NUMBER' | translate }} :</td>
-                              <td>{{subscriptionDetails?.oldSubscription}}</td>
+                              <td>{{embranchmentDetails?.contract}}</td>
                             </tr>
                             <tr>
-                              <td>{{'TYPE' | translate }} :</td>
-                              <td>{{subscriptionDetails?.subscriptionType | translate}}</td>
+                              <td>{{'DESCRIPTION' | translate }} :</td>
+                              <td>{{embranchmentDetails?.description}}</td>
                             </tr>
                           </table>
                         </div>
@@ -72,11 +63,11 @@
                       <table>
                         <tr>
                           <td>{{'DATE_OF-CREATION' | translate }} :</td>
-                          <td>{{subscriptionDetails?.createdAt | date:'dd-M-yyyy'}}</td>
+                          <td>{{embranchmentDetails?.createdAt | date:'dd-M-yyyy'}}</td>
                         </tr>
                         <tr>
                           <td>{{'DATE_OF_MODIFICATION' | translate }} :</td>
-                          <td>{{subscriptionDetails?.modifiedAt | date:'dd-M-yyyy'}}</td>
+                          <td>{{embranchmentDetails?.modifiedAt | date:'dd-M-yyyy'}}</td>
                         </tr>
                       </table>
                     </div>
@@ -89,7 +80,7 @@
                     </legend>
                     <div id="commDiv">
 
-                      <ng-container *ngFor="let feedback of subscriptionDetails?.feedbacks">
+                      <ng-container *ngFor="let feedback of embranchmentDetails?.feedbacks">
                         <div *ngIf="feedback.isPublic" class="media mb-2">
                           <img [src]="feedback.isRademResponse ? agentAvatar : user.avatar"
                                [alt]="feedback.senderName" class="mr-1 rounded-circle"

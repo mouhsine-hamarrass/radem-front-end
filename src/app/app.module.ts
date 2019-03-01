@@ -27,7 +27,6 @@ import {TermOfUseComponent} from './term-of-use/term-of-use.component';
 import { HomeComponent } from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +44,7 @@ import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
     HomeComponent,
     UnauthorizedComponent,
     HomeComponent,
+
   ],
   imports: [
     BrowserModule,
