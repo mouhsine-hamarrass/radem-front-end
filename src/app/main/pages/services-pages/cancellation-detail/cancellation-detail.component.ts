@@ -53,7 +53,7 @@ export class CancellationDetailComponent implements OnInit, AfterViewInit {
   getTerminationDetail() {
     const requestNo: string = this.route.snapshot.paramMap.get('id');
     if (requestNo !== null) {
-      this.services.getTerminationDetails(requestNo).subscribe(response => { debugger
+      this.services.getTerminationDetails(requestNo).subscribe(response => {
         if (response.data) {
           this.terminationDetails = response.data;
           this.terminationDetails.feedbacks = this.terminationDetails.feedbacks.reverse();
@@ -74,7 +74,7 @@ export class CancellationDetailComponent implements OnInit, AfterViewInit {
   }
 
   getTerminationStatus() {
-    this.services.getTerminationStatus().subscribe(response => {debugger
+    this.services.getTerminationStatus().subscribe(response => {
       if (response.data) {
         this.terminationStatus = response.data;
       }

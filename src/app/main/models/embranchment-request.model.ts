@@ -13,6 +13,7 @@ export class EmbranchmentRequestModel {
   contract?: string;
   feedbacks?: Array<FeedbackModel>;
   networkType?: string;
+  description?: string;
   status?: StatusModel;
   @ViewChild(WizardComponent)
   public wizard: WizardComponent;

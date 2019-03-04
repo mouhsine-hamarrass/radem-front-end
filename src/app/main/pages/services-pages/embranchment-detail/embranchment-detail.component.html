@@ -40,18 +40,34 @@
                     <legend class="scheduler-border"><b>{{'INFORMATIONS' | translate }} :</b></legend>
                     <div style="padding-left: 20px;padding-bottom: 10px;">
                       <div class="row">
-                        <div style="padding-left: 10px;">
-                          <table>
-                            <tr>
-                              <td>{{'CONTRACT_NUMBER' | translate }} :</td>
-                              <td>{{embranchmentDetails?.contract}}</td>
-                            </tr>
-                            <tr>
-                              <td>{{'DESCRIPTION' | translate }} :</td>
-                              <td>{{embranchmentDetails?.description}}</td>
-                            </tr>
-                          </table>
+
+                        <div class="col-md-12">
+                          <div class="row">
+                              <div class="col-md-12"><strong>{{'CONTRACT_NUMBER' | translate }} : </strong>
+                                &nbsp;&nbsp;
+                                {{embranchmentDetails?.contract}}
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12"><strong>{{'DESCRIPTION' | translate }} : </strong>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              {{embranchmentDetails?.description}}
+                            </div>
+                          </div>
                         </div>
+                        <!--<div style="padding-left: 10px;">-->
+                          <!---->
+                          <!--<table>-->
+                            <!--<tr>-->
+                              <!--<td></td>-->
+                              <!--<td></td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                              <!--<td></td>-->
+                              <!--<td></td>-->
+                            <!--</tr>-->
+                          <!--</table>-->
+                        <!--</div>-->
                       </div>
                     </div>
                   </fieldset>

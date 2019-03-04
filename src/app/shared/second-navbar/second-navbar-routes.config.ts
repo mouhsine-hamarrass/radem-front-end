@@ -118,7 +118,7 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/settlements',
-        title: 'Mes réglements',
+        title: 'Mes règlements',
         icon: '',
         clazz: 'nav-item',
         badge: '',

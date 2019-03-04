@@ -141,7 +141,7 @@
   "DATE_OF_MODIFICATION": "Date de modification",
   "DATES": "Dates",
   "DATE": "Date",
-  "INDEX_VISIT": "Index & Visite",
+  "INDEX_VISIT": "Index et Visite",
   "LAST_MODIFICATION": "Dernière modification",
   "MODIFICATION": "Modification",
   "CHOOSE_AN_AGENT": "Choisissez un agent",
@@ -195,7 +195,7 @@
   "CONSUMPTION": "Consommation",
   "NEXT_SHIFT_THE": "Prochaine relève le",
   "LATEST_SHIFTS": "Dernieres relèves",
-  "LATEST_BILL": "Dernières factures",
+  "LATEST_BILL": "Dernière facture en montant et en valeur",
   "CONSUMPTION_HISTORY": "Historique de consommation",
   "CHOOSE_A_CONTRACT": "Choisissez un contrat",
   "PERIOD_OF": "Période du",
@@ -253,7 +253,7 @@
   "SERVER_DOWN": "Serveur non disponible",
   "REQUEST_NUMBER": "Nº de demande",
   "TOTAL_BALANCE": "Solde total",
-  "UNPAID_BALANCE": "Solde Impayé",
+  "UNPAID_BALANCE": "Montant du a la RADEM par le contrat",
   "BALANCE_DUE": "Solde exigible",
   "BALANCE": "Solde",
   "DATE_OF_REMOVAL_OF_THE_COUNTER": "Date dépose du compteur",
@@ -313,7 +313,7 @@
   "SUBSCRIBER": "Abonné",
   "NO_SPEAKER_IS_ASSIGNED_FOR_THE_MOMENT": "Aucun Intervenant n'est affecté pour le moment",
   "LAST_CONSUMPTION": "Dérnière consommation",
-  "LAST_PAYMENT": "Dernier paiement",
+  "LAST_PAYMENT": "Détail dernier paiement",
   "CONSUMPTION": "Consommation",
   "LAST_INVOICE": "Dérnière facture",
   "BILL_TO_PAY": "Facture à payer",
@@ -457,5 +457,6 @@
   "CLAIM_SUCCESSFULLY_ADDED": "Réclamation ajoutée avec succes",
   "CHECK_YOUR_INBOX": "Vérifier votre boite de réception !",
   "SEE_YOU_SOON": "À bientôt",
-  "cancellation_request": "Demande de résiliation relative au contrat"
+  "cancellation_request": "Demande de résiliation relative au contrat",
+  "Cancellation": "Résiliation"
 }
