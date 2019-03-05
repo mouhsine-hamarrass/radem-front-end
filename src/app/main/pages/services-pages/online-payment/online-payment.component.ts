@@ -5,6 +5,9 @@ import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {User} from '../../../models/user.model';
 import {ServicesService} from '../../../services/services.service';
 import {LightTransactionSummary} from '../../../models/lightTransactionSummary';
+import {InvoiceModel, TransactionSummaryModel} from '../../../models/transactionSummary.model';
+import {SubscriptionReqModel} from '../../../models/subscriptionReq.model';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-online-payment',
@@ -13,11 +16,15 @@ import {LightTransactionSummary} from '../../../models/lightTransactionSummary';
 })
 export class OnlinePaymentComponent implements OnInit {
 
+
   selectedBills;
   transactionSummary: LightTransactionSummary;
   user: User;
   sendDataUrl = environment.sendDataUrl;
   hash: string;
+  transactionSummaryModel: TransactionSummaryModel;
+  invoicesModel: Array<InvoiceModel>;
+
 
   constructor(private dataService: DataService, private services: ServicesService) {
   }
@@ -34,18 +41,24 @@ export class OnlinePaymentComponent implements OnInit {
 
       this.transactionSummary = response.data;
 
+      this.transactionSummaryModel = new TransactionSummaryModel(
+        this.transactionSummary.oid,
+        this.selectedBills.total,
+        this.selectedBills.invoices)
+
     }, err => {
       console.log(err)
     });
-    console.log(this.selectedBills.invoices);
+
   }
 
 
+
   submit() {
+    console.log(this.transactionSummaryModel);
     this.services
-      .sendTransactionSummary(this.selectedBills.invoices)
+      .sendTransactionSummary(this.transactionSummaryModel)
       .subscribe(response => {
-        this.ngOnInit();
       });
 
   }
