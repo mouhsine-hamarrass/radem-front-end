@@ -14,6 +14,7 @@ import {SubscriptionRequestModel} from '../models/subscription-request.model';
 import {FeedbackModel} from '../models/feedback.model';
 import {CancellationRequestModel} from '../models/cancellation-request.model';
 import {LightTransactionSummary} from '../models/lightTransactionSummary';
+import {TransactionSummaryModel} from '../models/transactionSummary.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -250,8 +251,8 @@ export class ServicesService {
   }
 
 
-  sendTransactionSummary(httprequest: any): Observable<Response<String>> {
-    return this.httpClient.post<Response<any>>(`${this.urlApi}/payments/generateHash`, httprequest);
+  sendTransactionSummary(transactionSummary: TransactionSummaryModel): Observable<Response<String>> {
+    return this.httpClient.post<Response<any>>(`${this.urlApi}/payments/prePayment`, transactionSummary);
   }
 
   getEmbranchmentDetails(requestNo: string): Observable<Response<any>> {

@@ -1,32 +1,40 @@
 
-class InvoiceModel {
+export class InvoiceModel {
 
   id?: number;
   amount?: number;
   monthInvoice?: string;
   yearInvoice?: string;
   invoiceNo?: string;
+
+
+  constructor(
+    amount: number,
+    month: string,
+    year: string,
+    invoiceNo: string) {
+
+    this.amount = amount;
+    this.monthInvoice = month;
+    this.yearInvoice = year;
+    this.invoiceNo = invoiceNo;
+  }
 }
 
 export class TransactionSummaryModel {
   id?: number;
   trxNumber?: string;
   totalAmount?: number;
-  operartionDate?: Date;
   invoices?: Array<InvoiceModel>;
 
 
-  constructor(id: number,
+  constructor(
               trxNumber: string,
               totalAmount: number,
-              operartionDate: Date,
-              isRademResponse: boolean,
-               invoices: Array<InvoiceModel> ) {
+              invoices: Array<InvoiceModel> ) {
 
-    this.id = id;
     this.trxNumber = trxNumber;
     this.totalAmount = totalAmount;
-    this.operartionDate = operartionDate;
     this.invoices = invoices;
   }
 }
