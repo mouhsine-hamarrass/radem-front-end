@@ -32,9 +32,6 @@ export class CancellationRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
-      if (this.clientContracts.length) {
-        // this.setReportContract(this.clientContracts[0].contractNo);
-      }
     }, err => {
       console.log(err)
     });
@@ -44,7 +41,6 @@ export class CancellationRequestsComponent implements OnInit {
     this.services.getTerminationRequests(contractNo, this.page, this.pageSize)
       .subscribe(response => {
         this.cancellationtionRequests = response.data['content'];
-        console.log(response.data);
         this.totalElements = response.data['totalElements'];
         this.totalPages = response.data['totalPages'];
         this.itemsPerPage = response.data['size'];

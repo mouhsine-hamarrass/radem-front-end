@@ -209,7 +209,7 @@ export class UnpaidPageComponent implements OnInit {
   calcTotal(bill, balance, operation): void {
     if (operation === 'add') {
       if (!bill.exigible) {
-      this.total += parseFloat(balance);
+        this.total += parseFloat(balance);
       }
     } else {
       this.total -= parseFloat(balance)

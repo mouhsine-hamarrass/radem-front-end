@@ -4,7 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://192.168.100.4:8085/radem-ael-api';
+const server = 'http://192.168.100.23:8085/radem-ael-api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
 const shopurl_ = 'http://212.83.140.195:4040';
@@ -52,6 +52,6 @@ export const environment = {
   callbackUrl : shopurl_ + '/callback.php',
   currency : '504',
   okUrl:  'http://212.83.140.195:4041/home',
-  sendDataUrl: shopurl_ + '/2.SendData.php'
+  sendDataUrl: 'https://testpayment.cmi.co.ma/fim/est3Dgate'
 
 };

@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {DataService} from '../../../../shared/services/data.service';
 import {environment} from '../../../../../environments/environment';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {User} from '../../../models/user.model';
+import {ServicesService} from '../../../services/services.service';
+import {LightTransactionSummary} from '../../../models/lightTransactionSummary';
 
 @Component({
   selector: 'app-online-payment',
@@ -12,17 +14,12 @@ import {User} from '../../../models/user.model';
 export class OnlinePaymentComponent implements OnInit {
 
   selectedBills;
+  transactionSummary: LightTransactionSummary;
   user: User;
-  shopUrl = environment.shopurl;
   sendDataUrl = environment.sendDataUrl;
-  clientId = environment.clientId;
-  failUrl = environment.failUrl;
-  transactionType = environment.transactionType;
-  callbackUrl = environment.callbackUrl;
-  currency = environment.currency;
-  okUrl = environment.okUrl;
+  hash: string;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private services: ServicesService) {
   }
 
   ngOnInit() {
@@ -32,6 +29,25 @@ export class OnlinePaymentComponent implements OnInit {
     }
 
     this.getBillsToPay();
+
+    this.services.getTransactionSammury(this.selectedBills.total).subscribe(response => {
+
+      this.transactionSummary = response.data;
+
+    }, err => {
+      console.log(err)
+    });
+    console.log(this.selectedBills.invoices);
+  }
+
+
+  submit() {
+    this.services
+      .sendTransactionSummary(this.selectedBills.invoices)
+      .subscribe(response => {
+        this.ngOnInit();
+      });
+
   }
 
 
