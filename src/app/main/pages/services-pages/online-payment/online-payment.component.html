@@ -47,34 +47,34 @@
   <!--<div class="row"></div>-->
         <div class="col-md-12 text-right">
 
-          <form #form ngNoForm action="{{sendDataUrl}}" method="post">
+          <form #form ngNoForm action="{{sendDataUrl}}" method="post" >
 
 
-            <input class="btn btn btn-outline-secondary mb-2" type="submit"
-                   value="Procéder au paiement" />
+            <input class="btn btn btn-outline-secondary mb-2" type="submit"  (click)="submit()"
+                   value=" Procéder au paiement" />
 
 
-            <input type="hidden" name="clientid" value="{{clientId}}">
-            <input type="hidden" name="amount" value="{{selectedBills.total}}">
-            <input type="hidden" name="okUrl" value="{{okUrl}}">
-            <input type="hidden" name="failUrl" value="{{failUrl}}">
-            <input type="hidden" name="TranType" value="{{transactionType}}">
-            <input type="hidden" name="callbackUrl" value="{{callbackUrl}}">
-            <input type="hidden" name="shopurl" value="{{shopUrl}}">
-            <input type="hidden" name="currency" value="{{currency}}">
-            <input type="hidden" name="rnd" value=""> <!-- TODO -->
-            <input type="hidden" name="storetype" value="3D_PAY_HOSTING">
-            <input type="hidden" name="hashAlgorithm" value="ver3">
-            <input type="hidden" name="lang" value="fr">
-            <input type="hidden" name="refreshtime" value="5">
+            <input type="hidden" name="clientid" value="{{transactionSummary?.clientId}}">
+            <input type="hidden" name="amount" value="{{selectedBills?.total}}">
+            <input type="hidden" name="okUrl" value="{{transactionSummary?.okUrl}}">
+            <input type="hidden" name="failUrl" value="{{transactionSummary?.failUrl}}">
+            <input type="hidden" name="TranType" value="{{transactionSummary?.tranType}}">
+            <input type="hidden" name="callbackUrl" value="{{transactionSummary?.callbackUrl}}">
+            <input type="hidden" name="shopurl" value="{{transactionSummary?.shopUrl}}">
+            <input type="hidden" name="currency" value="{{transactionSummary?.currency}}">
+            <input type="hidden" name="rnd" value="{{transactionSummary?.rnd}}"> <!-- TODO -->
+            <input type="hidden" name="storetype" value="{{transactionSummary?.stereotype}}">
+            <input type="hidden" name="hashAlgorithm" value="{{transactionSummary?.hashAlgorithm}}">
+            <input type="hidden" name="lang" value="{{transactionSummary?.lang}}">
+            <input type="hidden" name="refreshtime" value="{{transactionSummary?.refreshTime}}">
             <input type="hidden" name="BillToName" value="{{user?.firstname + ' ' + user?.lastname}}">
-            <input type="hidden" name="BillToCompany" value="RADEM">
             <input type="hidden" name="BillToStreet1" value="{{user?.address}}">
-            <input type="hidden" name="BillToCountry" value="504">
             <input type="hidden" name="email" value="{{user?.email}}">
             <input type="hidden" name="tel" value="{{user?.phone}}">
-            <input type="hidden" name="encoding" value="UTF-8">
-            <input type="hidden" name="oid" value=""> <!-- TODO La valeur du param?tre oid doit ?tre unique par transaction -->
+            <input type="hidden" name="encoding" value="{{transactionSummary?.encoding}}">
+            <input type="hidden" name="oid" value="{{transactionSummary?.oid}}">
+            <input type="hidden" name="hash" value="{{transactionSummary?.hash}}">
+            <!-- TODO La valeur du param?tre oid doit ?tre unique par transaction -->
 
           </form>
 

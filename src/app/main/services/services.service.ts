@@ -13,6 +13,7 @@ import {StatusModel} from '../models/status.model';
 import {SubscriptionRequestModel} from '../models/subscription-request.model';
 import {FeedbackModel} from '../models/feedback.model';
 import {CancellationRequestModel} from '../models/cancellation-request.model';
+import {LightTransactionSummary} from '../models/lightTransactionSummary';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -239,6 +240,18 @@ export class ServicesService {
   getEmbranchmentRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>
     (`${this.urlApi}/connection-requests/${contractNo}?page=${page}&size=${pageSize}`);
+  }
+
+  //Mouhsine Transaction Salary
+
+  getTransactionSammury(amount: number): Observable<Response<LightTransactionSummary>> {
+    return this.httpClient.post<Response<any>>(`${this.urlApi}/payments/transactionSummary`, amount);
+
+  }
+
+
+  sendTransactionSummary(httprequest: any): Observable<Response<String>> {
+    return this.httpClient.post<Response<any>>(`${this.urlApi}/payments/generateHash`, httprequest);
   }
 
   getEmbranchmentDetails(requestNo: string): Observable<Response<any>> {
