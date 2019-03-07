@@ -7,10 +7,10 @@ import {AdminService} from '../../services/admin.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {ProfileService} from '../../services/profile.service';
-import {AccountComponent} from './account/account.component';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
+import {SharedModule} from '../../../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -21,6 +21,7 @@ import {HttpClient} from '@angular/common/http';
         BsDatepickerModule,
         ReactiveFormsModule,
         BsDropdownModule,
+        SharedModule,
         ComponentsModule,
         TranslateModule.forChild({
             loader: {
@@ -31,7 +32,7 @@ import {HttpClient} from '@angular/common/http';
         }),
     ],
     declarations: [
-        AccountComponent,
+
     ],
     providers: [
         AdminService,

@@ -3,7 +3,6 @@ import {ROUTES} from './sidebar-routes.config';
 import {Router, ActivatedRoute} from '@angular/router';
 import {User} from '../../main/models/user.model';
 import {AuthHelper} from '../../core/services/security/auth.helper';
-import {environment} from '../../../environments/environment';
 import * as _ from 'underscore';
 
 declare var $: any;
@@ -34,7 +33,6 @@ export class SidebarComponent implements OnInit {
     }
     const withoutMenus = ['settings', 'requests', 'services', 'complaints', 'alerts'];
     const menuTrim = [];
-
     this.menuItems = ROUTES.filter(menuItem => menuItem);
 
     if (!this.user.requestsFollow) {

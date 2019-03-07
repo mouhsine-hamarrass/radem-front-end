@@ -366,10 +366,7 @@ export class AdminService {
     return this.httpClient.get<Response<AlertModel>>(`${this.apiUrl}/alerts/${idAlert}`, {headers: this.headers});
   }
 
-  saveAlertNotification(alertNotification
-                          :
-                          AlertNotificationModel
-  ):
+  saveAlertNotification(alertNotification: AlertNotificationModel):
     Observable<Response<AlertNotificationModel>> {
     return this.httpClient.post<Response<AlertNotificationModel>>(`${this.apiUrl}/alerts/notifications`,
       alertNotification, {headers: this.headers});
@@ -383,12 +380,7 @@ export class AdminService {
     return this.httpClient.put<Response<any>>(`${this.apiUrl}/alerts/notifications/${id}/hide`, {headers: this.headers});
   }
 
-  getPageableAlertNotifications(page
-                                  :
-                                  number, pageSize
-                                  :
-                                  number, filter ?: any, sort ?: any
-  ):
+  getPageableAlertNotifications(page: number, pageSize: number, filter ?: any, sort ?: any):
     Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`,
       {

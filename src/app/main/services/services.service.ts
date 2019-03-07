@@ -12,7 +12,6 @@ import 'rxjs/add/observable/of';
 import {StatusModel} from '../models/status.model';
 import {SubscriptionRequestModel} from '../models/subscription-request.model';
 import {FeedbackModel} from '../models/feedback.model';
-import {CancellationRequestModel} from '../models/cancellation-request.model';
 import {LightTransactionSummary} from '../models/lightTransactionSummary';
 import {TransactionSummaryModel} from '../models/transactionSummary.model';
 

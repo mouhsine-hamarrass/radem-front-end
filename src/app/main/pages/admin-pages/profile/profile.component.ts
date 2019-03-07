@@ -54,16 +54,16 @@ export class ProfileComponent implements OnInit {
     if (id !== null) {
       this.adminService.getProfile(id).subscribe(response => {
         this.profile = response.data;
-        this.loadProfile();
+        // this.loadProfile();
       });
     }
   }
 
-  loadProfile() {
-    this.title.setValue(this.profile.title);
-    this.description.setValue(this.profile.description);
-    this.selectedAuthorities = this.profile.authoritiesIds;
-  }
+  // loadProfile() {
+  //   this.title.setValue(this.profile.title);
+  //   this.description.setValue(this.profile.description);
+  //   this.selectedAuthorities = this.profile.authoritiesIds;
+  // }
 
 
   getAllAuthoritiesByCategory() {

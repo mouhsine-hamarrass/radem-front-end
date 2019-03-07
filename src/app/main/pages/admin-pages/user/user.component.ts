@@ -45,7 +45,7 @@ export class UserComponent implements OnInit {
         this.modalForm = this.frmBuilder.group({
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
-            username: ['', Validators.required],
+            // username: ['', Validators.required],
             serviceId: [''],
             email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
             password: ['', Validators.required],
@@ -69,7 +69,7 @@ export class UserComponent implements OnInit {
     }
 
     get username() {
-        return this.modalForm.get('username');
+        return this.modalForm.get('email');
     }
 
     get email() {
@@ -88,9 +88,9 @@ export class UserComponent implements OnInit {
         return this.modalForm.get('profileId');
     }
 
-    get serviceId() {
-        return this.modalForm.get('serviceId');
-    }
+    // get serviceId() {
+    //     return this.modalForm.get('serviceId');
+    // }
 
     get avatar() {
         return this.modalForm.get('avatar');
@@ -172,7 +172,7 @@ export class UserComponent implements OnInit {
     ngOnInit() {
         this.modalForm.controls.enabled.setValue(true);
         this.getProfiles();
-        this.getServices();
+        // this.getServices();
         this.getUser();
     }
 

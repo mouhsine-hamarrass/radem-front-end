@@ -47,6 +47,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {AccountComponent} from '../main/pages/account-pages/account/account.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
         SortTableDirective,
         SortableColumnComponent,
         FilterColumnComponent,
+        AccountComponent,
         FilterTableDirective
     ],
     imports: [
@@ -119,6 +121,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
         ComponentsModule,
         SortTableDirective,
         FilterTableDirective,
+        AccountComponent,
         SortableColumnComponent,
         FilterColumnComponent,
         OwlDateTimeModule,
