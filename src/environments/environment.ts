@@ -23,7 +23,7 @@ export const environment = {
   defaultDateFormat: 'DD-MM-YYYY HH:mm',
   defaultDateFormatNoTime: 'DD-MM-YYYY',
   defaultAvatar: './assets/images/img.jpg',
-  // tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:max-line-lengthng
   emailPattern: '^([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$',
   apiConfig: {
     apiEnv: 'dev',
