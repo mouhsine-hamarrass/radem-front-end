@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injectable, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProfileService} from '../../../services/profile.service';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -14,6 +14,8 @@ import {TranslateService} from '@ngx-translate/core';
     templateUrl: './account.component.html',
     styleUrls: ['./account.component.scss']
 })
+
+@Injectable()
 export class AccountComponent implements OnInit {
 
     @ViewChild('img') img: ElementRef;
@@ -40,6 +42,7 @@ export class AccountComponent implements OnInit {
     }
 
     ngOnInit() {
+
         const user: User = this.authHelper.getLoggedUserInfo();
         this.profileService.getUser(user.id).subscribe(response => {
             this.user = response.data;
@@ -51,6 +54,7 @@ export class AccountComponent implements OnInit {
             this.profileForm.controls.username.setValue(this.user.username);
             this.profileForm.controls.password.setValue('');
             this.result64 = this.user.avatar;
+            console.log(this.user);
         }, err => {
         });
     }

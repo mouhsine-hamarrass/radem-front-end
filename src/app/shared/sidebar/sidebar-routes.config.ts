@@ -62,6 +62,7 @@ export const ROUTES: RouteInfo[] = [
     id: 'advices',
     submenu: []
   },
+
   {
     path: '/admin/services',
     title: 'Services',

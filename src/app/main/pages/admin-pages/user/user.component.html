@@ -18,7 +18,7 @@
                     </div>
                     <form [formGroup]="modalForm" (ngSubmit)='saveUser(modalForm)' novalidate>
                         <tabset [justified]="true">
-                            <tab heading="Profile" class="active">
+                            <tab heading="Profil" class="active">
                                 <div class="container-fluid">
                                     <div class="form-group row required">
                                         <label for="firstname" class="col-sm-3 col-form-label">{{'FIRST_NAME' |
@@ -55,24 +55,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row required">
-                                        <label for="username" class="col-sm-3 col-form-label">{{'USERNAME' |
-                                            translate}}</label>
-                                        <div class="col-sm-9">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   id="username"
-                                                   placeholder="Nom de l'utilisateur"
-                                                   formControlName="username"
-                                                   required>
-                                            <div class="text-danger"
-                                                 *ngIf="!modalForm.controls['username'].valid && modalForm.controls['username'].touched">
-                                                <div *ngIf="modalForm.controls['username'].errors.required">
-                                                    {{'THE_USERNAME_IS_REQUIRED' | translate}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--<div class="form-group row required">-->
+                                        <!--<label for="username" class="col-sm-3 col-form-label">{{'USERNAME' |-->
+                                            <!--translate}}</label>-->
+                                        <!--<div class="col-sm-9">-->
+                                            <!--<input type="text"-->
+                                                   <!--class="form-control"-->
+                                                   <!--id="username"-->
+                                                   <!--placeholder="Nom de l'utilisateur"-->
+                                                   <!--formControlName="username"-->
+                                                   <!--required>-->
+                                            <!--<div class="text-danger"-->
+                                                 <!--*ngIf="!modalForm.controls['username'].valid && modalForm.controls['username'].touched">-->
+                                                <!--<div *ngIf="modalForm.controls['username'].errors.required">-->
+                                                    <!--{{'THE_USERNAME_IS_REQUIRED' | translate}}-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                     <div class="form-group row required">
                                         <label for="email" class="col-sm-3 col-form-label">{{'MAIL' |
                                             translate}}</label>
@@ -170,21 +170,21 @@
                                     <div class="card my-0">
                                         <div class="card-body">
                                             <h5 class="text-muted">{{'TYPE_OF_ACCOUNT' | translate}}</h5><br/>
-                                            <div class="form-group row required">
-                                                <label for="service" class="col-sm-3 col-form-label">{{'SERVICE' |
-                                                    translate}}</label>
-                                                <div class="col-sm-9">
-                                                    <select id='service'
-                                                            class="form-control"
-                                                            formControlName="serviceId"
-                                                            required>
-                                                        <option value="">{{'SELECT_VALUE' | translate}}</option>
-                                                        <option *ngFor="let service of listServices"
-                                                                value="{{service.id}}">{{service.name}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <!--<div class="form-group row required">-->
+                                                <!--<label for="service" class="col-sm-3 col-form-label">{{'SERVICE' |-->
+                                                    <!--translate}}</label>-->
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<select id='service'-->
+                                                            <!--class="form-control"-->
+                                                            <!--formControlName="serviceId"-->
+                                                            <!--required>-->
+                                                        <!--<option value="">{{'SELECT_VALUE' | translate}}</option>-->
+                                                        <!--<option *ngFor="let service of listServices"-->
+                                                                <!--value="{{service.id}}">{{service.name}}-->
+                                                        <!--</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
                                             <div class="form-group row required">
                                                 <label for="profilType" class="col-sm-3 col-form-label">{{'PROFIL' |
                                                     translate}}</label>
@@ -202,8 +202,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="enabled" class="col-sm-3 col-form-label">{{'ACTIVATE_THE_ACCOUNT'
-                                                    | translate}}</label>
+                                                <!--<label for="enabled" class="col-sm-3 col-form-label">{{'ACTIVATE_THE_ACCOUNT'-->
+                                                    <!--| translate}}</label>-->
                                                 <div class="col-sm-9">
                                                     <div class="form-check">
                                                         <input type="checkbox" class="form-check-input" id="enabled"
@@ -218,23 +218,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-muted text-left">{{'ACCESS_RIGHTS' |
-                                                translate}}</h5>
-                                            <div class="row">
-                                                <div *ngFor="let authority of authorities"
-                                                     class="col-md-6 float-left text-left">
-                                                    <label>
-                                                        <input type="checkbox" name="{{authority.id}}"
-                                                               class="form-group"
-                                                               [(checklist)]="selectedAuthorities"
-                                                               [checklistValue]="authority.id">
-                                                        {{authority.name}}</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--<div class="card">-->
+                                        <!--<div class="card-body">-->
+                                            <!--<h5 class="card-title text-muted text-left">{{'ACCESS_RIGHTS' |-->
+                                                <!--translate}}</h5>-->
+                                            <!--<div class="row">-->
+                                                <!--<div *ngFor="let authority of authorities"-->
+                                                     <!--class="col-md-6 float-left text-left">-->
+                                                    <!--<label>-->
+                                                        <!--<input type="checkbox" name="{{authority.id}}"-->
+                                                               <!--class="form-group"-->
+                                                               <!--[(checklist)]="selectedAuthorities"-->
+                                                               <!--[checklistValue]="authority.id">-->
+                                                        <!--{{authority.name}}</label>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                 </div>
                             </tab>
                         </tabset>

@@ -21,7 +21,8 @@ import {RequestSubscriptionDetailComponent} from './request-subscription-detail/
 import {RequestCancellationDetailComponent} from './request-cancellation-detail/request-cancellation-detail.component';
 import {RequestRefundDetailComponent} from './request-refund-detail/request-refund-detail.component';
 import {ProfileTypeEnum} from '../../../shared/models/user.model';
-import {NgxPermissionsGuard} from 'ngx-permissions';
+
+import {AccountComponent} from '../account-pages/account/account.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,18 @@ const routes: Routes = [
         // canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Tableau de bord',
+          permissions: {
+            only: [ProfileTypeEnum.ADMIN],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'account/profile',
+        component: AccountComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Mon profil',
           permissions: {
             only: [ProfileTypeEnum.ADMIN],
             redirectTo: 'unauthorized'

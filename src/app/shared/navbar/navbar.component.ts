@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OAuthService} from '../../core/services/security/oauth.service';
 import {UtilsService} from '../../main/services/utils.service';
 import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../main/models/user.model';
 import {environment} from '../../../environments/environment';
 import {AuthHelper} from '../../core/services/security/auth.helper';
@@ -16,7 +16,7 @@ import {AlertNotificationModel} from '../../main/models/alert-notification.model
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit{
   public user: User;
   public applogo: string;
   public href: string;
@@ -27,8 +27,14 @@ export class NavbarComponent implements OnInit {
               private homeService: HomeService,
               private toastrService: ToastrService,
               private translate: TranslateService,
-              private router: Router) {
+              private router: Router,
+              private  activatedRoute: ActivatedRoute) {
   }
+
+  ngAfterViewInit(): void {
+
+  }
+
 
   ngOnInit() {
     this.applogo = environment.appLogo;
@@ -36,14 +42,16 @@ export class NavbarComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
       this.user.avatar = this.user.avatar || environment.defaultAvatar;
     }
+
     this.href = this.router.url;
-    this.href = this.href.substr(1, this.href.length - 1);
-    if (this.user && this.user.id && this.href !== 'admin') {
-      this.getNotifications();
+    this.href = this.href.substr(1,5);
+    if (this.user &&  this.user.id && this.href !== 'admin'){
+        this.getNotifications();
     }
   }
 
   getNotifications() {
+
     this.homeService.getAlertsNotification(0, 10).subscribe(response => {
       if (response && response.data) {
         this.alerts = response.data['content'];
@@ -81,4 +89,7 @@ export class NavbarComponent implements OnInit {
     this.toastrService.success(this.translate.instant('SEE_YOU_SOON'), '', {timeOut: 1000});
     this.router.navigate(['/login']);
   }
+
+
+
 }

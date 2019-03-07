@@ -40,6 +40,10 @@ import {RequestSubscriptionDetailComponent} from './request-subscription-detail/
 import {RequestRefundDetailComponent} from './request-refund-detail/request-refund-detail.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
 
+
+
+
+
 @NgModule({
   imports: [
     NguiAutoCompleteModule,
@@ -50,6 +54,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     ReactiveFormsModule,
     ChecklistModule,
     NgxToggleModule,
+    SharedModule,
     TabsModule.forRoot(),
     TranslateModule,
     QuillModule,

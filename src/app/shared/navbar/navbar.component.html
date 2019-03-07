@@ -40,15 +40,16 @@
             </a>
           </li>
         </ul>
-        <ul class="nav navbar-nav float-right float-sm-left">
+        <ul  class="nav navbar-nav float-right float-sm-left" >
           <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
               *ngIf="user && href !== 'admin'">
-            <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link"
+            <a href="javascript:;"  class="dropdown-toggle nav-link dropdown-user-link"
                id="dropdownNotifications"
                ngbDropdownToggle>
               <i class="fa fa-2x fa-bell-o"></i>
             </a>
-            <div ngbDropdownMenu aria-labelledby="dropdownNotifications" class="notifications-list">
+
+            <div  ngbDropdownMenu aria-labelledby="dropdownNotifications" class="notifications-list" >
               <div *ngIf="alerts.length; else noNotifications">
                 <div *ngFor="let notification of alerts; let i = index">
                   <a class="dropdown-item"
@@ -64,11 +65,6 @@
                   </a>
                   <div class="dropdown-divider"></div>
                 </div>
-                <!--
-                  <div>
-                      <span class="dropdown-item"><a routerLink="/alerts">Afficher toutes les notifications.</a></span>
-                  </div>
-                 -->
               </div>
               <ng-template #noNotifications>
                 <span class="dropdown-item">Vous avez {{alerts.length}} notification.</span>
@@ -85,9 +81,15 @@
               <span class="user-name">{{user?.firstname + ' ' + user?.lastname}}</span>
             </a>
             <div ngbDropdownMenu aria-labelledby="dropdownUser">
-              <a class="dropdown-item" routerLink="/account/profile">
+              <a class="dropdown-item" routerLink="/admin/account/profile" *ngIf="user.admin; else show">
                 <i class="ft-user"></i> Mon profil
               </a>
+              <ng-template #show>
+                <a class="dropdown-item" routerLink="/account/profile">
+                  <i class="ft-user"></i> Mon profil
+                </a>
+              </ng-template>
+
               <a class="dropdown-item" routerLink="/admin"
                  *ngIf="user.admin">
                 <i class="ft-settings"></i> Administration

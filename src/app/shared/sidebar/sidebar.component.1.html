@@ -10,7 +10,7 @@
         <a href="#{{menuItem.id}}" data-toggle="collapse" aria-expanded="true" [class]="menuItem.submenu.length > 0 ? 'dropdown-toggle' : ''"
            *ngIf="!menuItem.isExternalLink && !menuItem.isNavHeader">
           <i [ngClass]="[menuItem.icon]"></i>
-          <span class="menu-title">{{menuItem.title}}</span>
+          <span class="menu-title">{{menuItem.title}}</span>-
         </a>
         <a [href]="[menuItem.path]" target="_blank" *ngIf="menuItem.isExternalLink  && !menuItem.isNavHeader">
           <i [ngClass]="[menuItem.icon]"></i>

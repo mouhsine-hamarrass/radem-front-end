@@ -1,12 +1,8 @@
 import {Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, EventEmitter} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {WizardComponent, WizardState} from 'angular-archwizard';
-import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {ServicesService} from '../../../services/services.service';
 import {StatusModel} from '../../../models/status.model';
 import {ActivatedRoute} from '@angular/router';
-import {SubscriptionRequestModel} from '../../../models/subscription-request.model';
 import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {environment} from '../../../../../environments/environment';
