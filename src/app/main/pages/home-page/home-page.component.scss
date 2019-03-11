@@ -14,25 +14,55 @@
 
 .sub-header {
   padding: 0;
+
   .sub-title, .icon, .contract-dropdown {
     font-size: 1.1rem !important;
   }
   .content-header {
+
     .contract-dropdown {
       height: calc(2.3rem);
-      margin-top: 4px;
+      margin-top: -15px;
     }
+
+    .align-items-center{
+      width: 99.7%;
+      margin: 0 auto;
+      }
     .has-border {
       border-right: 1px solid #d3d3d3;
       line-height: 40.5px;
-      height: 40.5px;
+      height: 70.5px;
       overflow: hidden;
+      label{
+        text-transform: uppercase;
+      }
+
+      h6{
+        font-size: .9rem !important;
+        margin-top: -9px;
+      }
+      select{
+        font-size: .9rem !important;
+      }
+    }
+    .has-border:last-child{
+         border-right: 0px solid #d3d3d3;
     }
     .sub-title, .icon, .contract-dropdown {
-      font-size: 1.2rem;
+      font-size: .9rem;
       color: #2c5599;
+
     }
     .status {
+      label{
+         text-transform: uppercase;
+         margin-bottom: .5rem !important;
+       }
+      h6{
+        font-size: .9rem !important;
+        margin-top: -9px;
+      }
       .icon {
         font-size: 0.8rem;
       }
@@ -130,6 +160,9 @@
       font-size: 1rem !important;
     }
   }
+   .has-border{
+         border-bottom: 1px solid #d3d3d3;
+}  
 }
 
 @media only screen and (max-width: 768px) {
@@ -141,5 +174,14 @@
     .sub-title, .icon, .contract-dropdown {
       font-size: 16px !important;
     }
+
+
   }
+  .has-border{
+        border-bottom: 1px solid #d3d3d3;
+  }
+}
+
+label.Cap{
+  text-transform:capitalize !important;
 }
