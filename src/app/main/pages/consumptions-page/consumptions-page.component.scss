@@ -62,4 +62,14 @@ img {
 
 
 
+//hide charts from mobile
+
+@media only screen and (max-width: 900px) {
+  .charts{
+    display: none;
+  }
+}
+
+
+
 

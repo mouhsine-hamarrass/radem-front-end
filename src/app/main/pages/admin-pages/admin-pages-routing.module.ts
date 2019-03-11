@@ -43,7 +43,6 @@ const routes: Routes = [
       {
         path: 'account/profile',
         component: AccountComponent,
-        // canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Mon profil',
           permissions: {

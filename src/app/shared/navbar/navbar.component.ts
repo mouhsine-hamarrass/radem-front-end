@@ -16,7 +16,7 @@ import {AlertNotificationModel} from '../../main/models/alert-notification.model
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit, AfterViewInit{
+export class NavbarComponent implements OnInit, AfterViewInit {
   public user: User;
   public applogo: string;
   public href: string;
@@ -42,12 +42,17 @@ export class NavbarComponent implements OnInit, AfterViewInit{
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
       this.user.avatar = this.user.avatar || environment.defaultAvatar;
     }
-
     this.href = this.router.url;
-    this.href = this.href.substr(1,5);
-    if (this.user &&  this.user.id && this.href !== 'admin'){
-        this.getNotifications();
-    }
+    this.href = this.href.substr(1, 5);
+    console.log('Mouhsinestarte');
+    console.log(this.user);
+    console.log(this.href !== 'admin');
+    // console.log(!this.user.admin);
+    console.log(this.href);
+    console.log('Mouhsinefin');
+    if (this.user && this.user.id && this.href !== 'admin' && !this.user.admin) {
+      this.getNotifications();
+     }
   }
 
   getNotifications() {
@@ -89,7 +94,6 @@ export class NavbarComponent implements OnInit, AfterViewInit{
     this.toastrService.success(this.translate.instant('SEE_YOU_SOON'), '', {timeOut: 1000});
     this.router.navigate(['/login']);
   }
-
 
 
 }
