@@ -16,6 +16,7 @@ import {ContractAttachModel} from '../../models/contract-attach.model';
 import {ContractModel} from '../../models/contract.model';
 import {ConsumptionHistoryModel} from '../../models/consumptionHistory.model';
 import {ConsumptionReportModel} from '../../models/consumptionReport.model';
+import {any} from 'codelyzer/util/function';
 
 @Component({
   selector: 'app-consumption-page',
@@ -32,6 +33,7 @@ export class ConsumptionsPageComponent implements OnInit {
   consumptionsHistory: Array<ConsumptionHistoryModel> = [];
   consumptionsHistoryCurrentYear: Array<ConsumptionHistoryModel> = [];
   consumptionsReport: Array<ConsumptionReportModel> = [];
+  legth: any;
 
   today: any = moment();
   minDate: any = moment().subtract(5, 'years');
@@ -43,19 +45,22 @@ export class ConsumptionsPageComponent implements OnInit {
   totalPages: number;
   itemsPerPage: number;
 
+
   public chartType = 'bar';
-  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   currentYear = moment().format('YYYY');
   lastYear = moment().subtract(1, 'years').format('YYYY');
   public chartDataSetsVolume: Array<any> = [
-    {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.currentYear.toString()},
-    {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.lastYear.toString()}
+    {data: [], label: this.currentYear.toString()},
+    {data: [], label: this.lastYear.toString()}
   ];
   public chartDataSetsInvoice: Array<any> = [
-    {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.currentYear.toString()},
-    {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.lastYear.toString()}
+    {data: [], label: this.currentYear.toString()},
+    {data: [], label: this.lastYear.toString()}
   ];
+
   public chartOptionsEau: any = {
+
     title: {
       display: true,
       text: 'Volume'
@@ -127,6 +132,7 @@ export class ConsumptionsPageComponent implements OnInit {
     this.FactBar1,
     this.FactBar2
   ];
+
 
   constructor(
     private contractServices: ContractsService,
@@ -201,7 +207,16 @@ export class ConsumptionsPageComponent implements OnInit {
   getConsumptionHistoryCurrentYear(contractNo) {
     this.adminService.getPageableHistoryConsumptionsCurrentYear(contractNo)
       .subscribe(response => {
+
         this.consumptionsHistoryCurrentYear = response.data;
+        console.log('mosibastart   ');
+        console.log(contractNo);
+        console.log(this.consumptionsHistoryCurrentYear.length);
+        console.log(this.chart1);
+        console.log(this.chart2);
+        console.log(this.consumptionsHistoryCurrentYear.length !== 0);
+        console.log('mosibaEnd');
+
       }, err => console.log(err));
   }
 
@@ -218,6 +233,15 @@ export class ConsumptionsPageComponent implements OnInit {
   }
 
   getConsumptionReport(contractNo) {
+  this.chartDataSetsVolume= [
+      {data: [], label: this.currentYear.toString()},
+      {data: [], label: this.lastYear.toString()}
+    ];
+  this.chartDataSetsInvoice = [
+      {data: [], label: this.currentYear.toString()},
+      {data: [], label: this.lastYear.toString()}
+    ];
+
     this.adminService.getConsumptionReport(contractNo).subscribe(response => {
       this.consumptionsReport = response.data;
       _.each(this.consumptionsReport, (consumption, i) => {
@@ -231,13 +255,11 @@ export class ConsumptionsPageComponent implements OnInit {
           this.chartDataSetsInvoice[i].label = consumption.year;
           this.chartDataSetsInvoice[i].data[j] = amount ? parseFloat(amount) : 0;
         });
-
       });
-      console.log(this.chartDataSetsVolume);
-      console.log(this.chartDataSetsInvoice);
 
       this.chart1.ngOnChanges({});
       this.chart2.ngOnChanges({});
+
     }, error => {
       console.log(error)
     })
@@ -248,8 +270,8 @@ export class ConsumptionsPageComponent implements OnInit {
   }
 
   setReportContract(contractNo: string) {
-    this.getConsumptionReport(contractNo);
     this.getConsumptionHistoryCurrentYear(contractNo);
+    this.getConsumptionReport(contractNo);
   }
 
   downloadXlsConsumptions() {
@@ -266,6 +288,7 @@ export class ConsumptionsPageComponent implements OnInit {
   }
 
   downloadPdfConsumptions() {
+
     const contract = this.historyForm.controls['contract'].value;
     const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
     const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
