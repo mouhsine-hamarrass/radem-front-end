@@ -26,7 +26,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {TermOfUseComponent} from './term-of-use/term-of-use.component';
 import {HomeComponent } from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
-
+import { PaymentSuccessComponent } from './main/pages/services-pages/payment-success/payment-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +43,7 @@ import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
     TermOfUseComponent,
     HomeComponent,
     UnauthorizedComponent,
-    HomeComponent,
-
+    HomeComponent
   ],
   imports: [
     BrowserModule,

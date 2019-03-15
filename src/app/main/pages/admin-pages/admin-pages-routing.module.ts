@@ -23,6 +23,7 @@ import {RequestRefundDetailComponent} from './request-refund-detail/request-refu
 import {ProfileTypeEnum} from '../../../shared/models/user.model';
 
 import {AccountComponent} from '../account-pages/account/account.component';
+import {TransactionsComponent} from './transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -310,6 +311,18 @@ const routes: Routes = [
         component: AlertNotificationsComponent,
         data: {
           title: 'Liste des alertes',
+          permissions: {
+            only: [ProfileTypeEnum.ADMIN],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'transactions-list',
+        // canActivate: [NgxPermissionsGuard],
+        component: TransactionsComponent,
+        data: {
+          title: 'Liste des transactions',
           permissions: {
             only: [ProfileTypeEnum.ADMIN],
             redirectTo: 'unauthorized'

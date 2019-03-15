@@ -14,7 +14,7 @@
  -->
 <div class="row align-items-center" *ngIf="showPagination">
   <div class="col-xs-6 col-6">
-    <strong *ngIf="totalPages">{{'Affichès' | translate}} {{numberOfItems + ' / ' + totalItems}} {{'entrées' | translate}}</strong>
+    <strong *ngIf="totalPages">{{'DISPLAYED' | translate}} {{numberOfItems + ' / ' + totalItems}} {{'ENTRIES' | translate}}</strong>
   </div>
   <div class="col-xs-6 col-6 doNotPrint">
     <pagination [totalItems]="totalItems"

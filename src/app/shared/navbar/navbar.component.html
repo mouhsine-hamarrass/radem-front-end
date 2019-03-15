@@ -86,7 +86,7 @@
               </a>
               <ng-template #show>
                 <a class="dropdown-item" routerLink="/account/profile">
-                  <i class="ft-user"></i> Mon profil
+                  <i class="ft-user"></i> {{'MY_PROFIL' | translate}}
                 </a>
               </ng-template>
 
@@ -95,19 +95,19 @@
                 <i class="ft-settings"></i> Administration
               </a>
               <a class="dropdown-item" (click)="logout()">
-                <i class="ft-power"></i> Déconnexion
+                <i class="ft-power"></i> {{'SIGNOUT' | translate}}
               </a>
             </div>
           </li>
           <ng-template #noUserTemplate>
             <li class="nav-item">
               <a class="nav-link" routerLink="/login">
-                Se connecter
+                {{'SIGNIN' | translate}}
               </a>
             </li>
             <li class="nav-item">
               <a class="btn btn-primary btn-subscribe" routerLink="/register">
-                Inscription
+                {{'SIGNUP' | translate}}
               </a>
             </li>
           </ng-template>

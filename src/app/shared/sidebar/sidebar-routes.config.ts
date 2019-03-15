@@ -49,6 +49,17 @@ export const ROUTES: RouteInfo[] = [
     isNavHeader: false,
     id: 'settings',
     submenu: []
+  },  {
+    path: '/admin/transactions-list',
+    title: 'Transactions',
+    icon: 'icon-calculator',
+    clazz: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    id: 'trans',
+    submenu: []
   },
   {
     path: '/admin/advices',
