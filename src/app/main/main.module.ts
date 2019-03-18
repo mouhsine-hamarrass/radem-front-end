@@ -22,6 +22,7 @@ import {DynamicContentPagesModule} from './pages/dynamic-content-pages/dynamic-c
 import {AlertNotificationsPageModule} from './pages/alert-notifications-page/alert-notifications-page.module';
 import {CommonService} from './services/common.service';
 import {NgxPermissionsService} from 'ngx-permissions';
+import {PaymentSuccessComponent} from './pages/services-pages/payment-success/payment-success.component';
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import {NgxPermissionsService} from 'ngx-permissions';
         AdvicePageModule,
         AlertNotificationsPageModule,
         DynamicContentPagesModule,
+
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

@@ -22,7 +22,7 @@
             &nbsp;
             <label class="Cap">
               <i class="fa fa-list-ul icon "></i>&nbsp;
-              Liste des contrats
+              {{"CONTRACT_LISTS" | translate}}
             </label>
             <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
                     (change)="setContract(selectedContract)">
@@ -40,7 +40,7 @@
           <div class="col-md-2 has-border" [hidden]="!clientDetails">
             <label class="Cap">
               <i class="fa fa-user icon"></i>&nbsp;
-              Raison sociale
+              {{"COMPANY_NAME" | translate}}
             </label>
             <h6 class="sub-title" tooltip="">
               {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
@@ -53,7 +53,7 @@
           <div class="col-md-4 has-border" [hidden]="!clientDetails">
             <label class="Cap">
               <i class="fa fa-map-marker icon"></i>&nbsp;
-              Adresse
+              {{"ADDRESS" | translate}}
             </label>
             <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
           </div>
@@ -69,7 +69,7 @@
             </div> -->
             <label class="Cap" >
               <i class="fa fa-circle-o-notch icon"></i>&nbsp;
-              Statut
+              {{"CONTRACT STATUS" | translate}}
             </label>
             <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
           </div>

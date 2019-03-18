@@ -85,6 +85,20 @@ export enum ApplicantType {
   LETTER = 'LETTER'
 }
 
+
+export enum TransStatusEnum {
+  CREATED = 'CREATED',
+  CMI_REJECTED = 'CMI_REJECTED',
+  WATERP_REJECTED = 'WATERP_REJECTED',
+  AEL_REJECTED = 'AEL_REJECTED',
+  VALIDATED= 'VALIDATED',
+  NOT_VALIDATED = 'NOT_VALIDATED',
+  SUSPENDED = 'SUSPENDED'
+}
+
+
+
+
 export enum TerminationRequestStatus {
   CREATED = 'CREATED',
   RECEIVED = 'RECEIVED',

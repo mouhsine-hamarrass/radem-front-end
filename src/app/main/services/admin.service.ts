@@ -17,6 +17,7 @@ import {ContractAttachModel} from '../models/contract-attach.model';
 import {CounterModel} from '../models/counter.model';
 import {SettlementModel} from '../models/settlement.model';
 import {ConsumptionReportModel} from '../models/consumptionReport.model';
+import {TransactionModel} from '../models/Transaction.model';
 
 
 @Injectable()
@@ -440,6 +441,7 @@ export class AdminService {
       });
   }
 
+
   dropProfile(idProfile: number) {
     return this.httpClient.post(`${this.apiUrl}/profiles/${idProfile}/delete`, null, {headers: this.headers});
   }
@@ -451,7 +453,15 @@ export class AdminService {
   getProfile(idProfile: string): Observable<Response<Profile>> {
     return this.httpClient.get<Response<Profile>>(`${this.apiUrl}/profiles/${idProfile}/find`, {headers: this.headers});
   }
+//Transactions creees par EL KASSMI
 
+  getPageableListTransactions(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
+    return this.httpClient.post<Response<any>>(`${this.apiUrl}/payments/transactions-list?page=${page}&size=${pageSize}`,
+      {
+        filter,
+        sort
+      });
+  }
 // Users
   getListUser(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}`,

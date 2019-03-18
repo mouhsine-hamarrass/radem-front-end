@@ -83,7 +83,7 @@ export class ProfilesComponent implements OnInit {
                         this.toastrService.success(this.translate.instant('THE_PROFILE_HAS_BEEN_DELETED'), this.translate.instant('DELETE_!'));
                     });
                 } else {
-                    this.toastrService.error(this.translate.instant('THE_PROFILE_CAN_NOT_BE_DELETED'), this.translate.instant('PREVIOUSLY_USED_PROFILE'));
+                  this.toastrService.error(this.translate.instant('THE_PROFILE_CAN_NOT_BE_DELETED'), this.translate.instant('PREVIOUSLY_USED_PROFILE'));
                 }
             }
         });

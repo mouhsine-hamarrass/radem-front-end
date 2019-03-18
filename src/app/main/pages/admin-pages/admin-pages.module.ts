@@ -39,6 +39,7 @@ import {RequestCancellationDetailComponent} from './request-cancellation-detail/
 import {RequestSubscriptionDetailComponent} from './request-subscription-detail/request-subscription-detail.component';
 import {RequestRefundDetailComponent} from './request-refund-detail/request-refund-detail.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {TransactionsComponent} from './transactions/transactions.component';
 
 
 
@@ -87,9 +88,9 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     ServicesComponent,
     ServiceFormComponent,
     AlertNotificationComponent,
+    AlertNotificationsComponent,
     AlertComponent,
     AlertsComponent,
-    AlertNotificationsComponent,
     ComplaintComponent,
     ComplaintsComponent,
     DynamicContentComponent,
@@ -98,7 +99,8 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     RequestsRefundComponent,
     RequestCancellationDetailComponent,
     RequestSubscriptionDetailComponent,
-    RequestRefundDetailComponent
+    RequestRefundDetailComponent,
+    TransactionsComponent
   ],
   providers: [
     AdminService
