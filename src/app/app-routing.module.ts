@@ -26,7 +26,7 @@ import {HomeComponent} from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 
 const appRoutes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
     {path: 'unauthorized', component: UnauthorizedComponent},
     {path: 'checkProfile', component: HomeComponent},
@@ -36,7 +36,6 @@ const appRoutes: Routes = [
     {path: 'enable-account', component: EnableAccountComponent},
     {path: 'register-succes', component: RegisterSuccesComponent},
     {path: 'term-of-use', component: TermOfUseComponent},
-    {path: '', component: LoginComponent, canActivate: [LoginGuard]},
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES, canActivate: [LoginGuard]},
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES, canActivate: [LoginGuard]},

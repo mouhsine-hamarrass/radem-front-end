@@ -40,7 +40,7 @@ export class LoginComponent extends UIFormComponent implements OnInit {
 
   ngOnInit() {
     // reset login status
-    this.authService.logout();
+     this.authService.logout();
   }
 
   isLoginEnable() {
