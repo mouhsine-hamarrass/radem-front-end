@@ -105,12 +105,12 @@ export class UsersComponent implements OnInit {
 
     dropUser(idUser): void {
         swal({
-            title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_CONTINUE'),
+            title: this.translate.instant('ARE_YOU_SURE_YOU_WANT_TO_DELETE_USER'),
             text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: this.translate.instant('YES_I_AM_SURE')
         }).then((result) => {
             if (result.value) {

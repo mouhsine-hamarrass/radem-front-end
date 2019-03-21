@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
   formProfile;
   FormGroup;
   isSubmitted = false;
-  private translate: TranslateService;
 
   constructor(
     private utilsService: UtilsService,
@@ -28,7 +27,8 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private translate: TranslateService
   ) {
     this.formProfile = this.formBuilder.group({
       title: ['', Validators.required],

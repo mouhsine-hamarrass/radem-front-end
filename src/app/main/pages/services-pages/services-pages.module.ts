@@ -28,7 +28,7 @@ import {EmbranchmentRequestsComponent} from './embranchment-requests/embranchmen
 import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
 import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-detail.component';
 import {PaymentSuccessComponent} from './payment-success/payment-success.component';
-
+import { PaymentFailComponent } from './payment-fail/payment-fail.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -67,7 +67,8 @@ import {PaymentSuccessComponent} from './payment-success/payment-success.compone
         AutoReportsComponent,
         NewEmbranchementRequestComponent,
         EmbranchmentDetailComponent,
-        PaymentSuccessComponent
+        PaymentSuccessComponent,
+        PaymentFailComponent
     ]
 })
 export class ServicesPagesModule {

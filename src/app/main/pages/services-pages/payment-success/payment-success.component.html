@@ -13,12 +13,24 @@
       <!-- What is-->
       <div id="what-is" class="card mb-0">
         <div class="card-header">
-          <h4 class="card-title">{{'PAYMENT_SUCCEES' | translate }}</h4>
+          {{'STATUS_CMI' | translate }}
         </div>
         <div class="card-content">
           <div class="card-body">
 
-             Your payement has succeeded
+
+              <div class="lessons-list">
+                <div class="alert alert-success text-center" role="alert">
+                  <br><div class="fa icon-check fa-5x" ></div><br><br>
+                  <h4 class="alert-heading">Paiement Effectué</h4>
+                  <p>Le paiement s'est bien déroulé votre numéro de transaction est {{oid}}.<br>
+                    pour toute question ou information aditionnelle, prière de prendre contact avec notre département commercial par email ({{emailRadem}})
+                    ou par téléphone {{Tel}}
+                  </p>
+                  <hr>
+                  <p class="mb-0">Veuillez cliquer sur le lien pour revenir à la page d'<a href="{{home}}">accueil </a> </p>
+                </div>
+              </div>
 
 
 

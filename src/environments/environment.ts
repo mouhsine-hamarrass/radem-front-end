@@ -13,6 +13,9 @@ let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 export const environment = {
+  emailRadem : 'info@radem.ma',
+  Home : server,
+  Tel : '05355-21801',
   appName: 'RADEM-AEL',
   appLogo: './assets/images/logo.png',
   production: false,

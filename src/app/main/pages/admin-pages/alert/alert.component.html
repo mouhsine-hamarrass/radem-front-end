@@ -18,6 +18,19 @@
                 </div>
             </div>
         </div>
+
+     <div class="form-group">
+            <label for="type" class="control-label">{{'TYPE' | translate}}<span class="danger">*</span> </label>
+            <input formControlName="type" id="type" name="name" type="text" placeholder="{{'TYPE' | translate}}"
+                   class="form-control required">
+            <div class="text-danger"
+                 *ngIf="!formAlert.controls['type'].valid && formAlert.controls['type'].touched">
+                <div *ngIf="formAlert.controls['type'].errors.required">
+                    {{'The_alert_type_is_mandatory' | translate}}
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="instructions" class="control-label">Instructions <span class="danger">*</span></label>
             <textarea rows="3" formControlName="instructions" id="instructions" name="name"

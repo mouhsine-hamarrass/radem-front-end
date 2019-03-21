@@ -21,11 +21,11 @@ export class ProfilesComponent implements OnInit {
     itemsPerPage: number;
     sort: any;
     filter: any;
-    private translate: TranslateService;
 
     constructor(
         private adminService: AdminService,
-        private toastrService: ToastrService) {
+        private toastrService: ToastrService,
+        private translate: TranslateService) {
     }
 
     ngOnInit() {
@@ -67,12 +67,12 @@ export class ProfilesComponent implements OnInit {
 
     dropProfile(idProfile: number) {
         swal({
-            title: this.translate.instant('ARE_YOU_SURE'),
+            title: this.translate.instant('ARE_YOU_SURE_TO_DELETE_PROFILE'),
             text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             cancelButtonText: this.translate.instant('CANCEL'),
             confirmButtonText: this.translate.instant('YES_DELETE')
         }).then((result) => {

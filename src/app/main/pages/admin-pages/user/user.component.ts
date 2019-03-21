@@ -45,7 +45,7 @@ export class UserComponent implements OnInit {
         this.modalForm = this.frmBuilder.group({
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
-            // username: ['', Validators.required],
+            username: [''],
             serviceId: [''],
             email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
             password: ['', Validators.required],
@@ -156,8 +156,8 @@ export class UserComponent implements OnInit {
     loadProfile(data) {
         this.modalForm.controls.firstname.setValue(data.firstname);
         this.modalForm.controls.lastname.setValue(data.lastname);
-        this.modalForm.controls.username.setValue(data.username);
         this.modalForm.controls.email.setValue(data.email);
+        this.modalForm.controls.username.setValue(data.username);
         this.modalForm.controls.profileId.setValue(data.profileId);
         this.modalForm.controls.serviceId.setValue(data.serviceId);
         this.getAuthorities(data.profileId, data.excludedAuthoritiesIds);

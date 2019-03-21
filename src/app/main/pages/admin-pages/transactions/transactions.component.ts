@@ -28,7 +28,7 @@ export class TransactionsComponent implements OnInit {
 
   constructor(private adminService: AdminService,
               private toastrService: ToastrService,
-              ) {
+  ) {
 
   }
 
@@ -70,28 +70,5 @@ export class TransactionsComponent implements OnInit {
     this.getTrans();
   }
 
-/*
-  dropTrans(idTransaction: number) {
-    swal({
-      title: this.translate.instant('ARE_YOU_SURE'),
-      text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: this.translate.instant('CANCEL'),
-      confirmButtonText: this.translate.instant('YES_DELETE')
-    }).then((result) => {
-      if (result.value) {
-        if (this.transactions.find(transaction => transaction.id === idTransaction).users === 0) {
-          this.adminService.dropTrans(idTransaction).subscribe(response => {
-            this.transactions.splice(this.transactions.indexOf(this.transactions.find(transaction => transaction.id === idTransaction)), 1);
-            this.toastrService.success(this.translate.instant('THE_TRANSACT_HAS_BEEN_DELETED'), this.translate.instant('DELETE_!'));
-          });
-        } else {
-          this.toastrService.error(this.translate.instant('THE_TRANSACT_CAN_NOT_BE_DELETED"'), this.translate.instant('PREVIOUSLY_USED_TRANSACT'));
-        }
-      }
-    });
-  }*/
+
 }

@@ -31,6 +31,11 @@
                             <span filterable-column="title" filter-type="text"
                                  filter-placeholder="{{'DESIGNATION' | translate }}"></span>
                         </th>
+                      <th scope="col">{{'TYPE' | translate }}
+                            <span sortable-column="type"></span>
+                            <span filterable-column="type" filter-type="text"
+                                 filter-placeholder="{{'TYPE' | translate }}"></span>
+                        </th>
                         <th scope="col">{{'INSTRUCTIONS' | translate }}
                             <span sortable-column="instructions"></span>
                             <span filterable-column="instructions" filter-type="text"
@@ -46,6 +51,7 @@
                     <ng-template #dataAvailable>
                         <tr *ngFor="let alert of alerts">
                             <td>{{alert.title}}</td>
+                            <td>{{alert.type}}</td>
                             <td>{{alert.instructions}}</td>
                             <td>
                                 <ul class="list-unstyled list-inline text-center nomargin">

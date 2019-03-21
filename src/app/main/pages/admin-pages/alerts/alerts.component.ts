@@ -27,13 +27,13 @@ export class AlertsComponent implements OnInit {
     alertId: number;
 
     modalRef: BsModalRef;
-    private translate: TranslateService;
 
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-md'};
 
     constructor(private adminService: AdminService,
                 private toastrService: ToastrService,
-                private modalService: BsModalService) {
+                private modalService: BsModalService,
+                private translate: TranslateService) {
     }
 
     ngOnInit() {
@@ -76,7 +76,7 @@ export class AlertsComponent implements OnInit {
 
     dropAlert(alertId: number) {
         swal({
-            title: this.translate.instant('ARE_YOU_SURE'),
+            title: this.translate.instant('ARE_YOU_SURE_TO_DELETE_ALERT'),
             text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
@@ -90,7 +90,6 @@ export class AlertsComponent implements OnInit {
                     this.alerts.splice(this.alerts.indexOf(this.alerts.find(alert => alert.id === alertId)), 1);
                     this.toastrService.success(this.translate.instant('THE_ALERT_HAS_BEEN_REMOVED'), this.translate.instant('DELETE_!'));
                 }, err => {
-                    this.toastrService.error(this.translate.instant('THE_ALERT_CAN_NOT_BE_DELETED'), this.translate.instant('THE_ALERT_IS_ALREADY_IN_USE'));
                 });
             }
         });
