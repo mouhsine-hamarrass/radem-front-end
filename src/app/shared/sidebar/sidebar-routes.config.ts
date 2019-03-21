@@ -51,7 +51,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },  {
     path: '/admin/transactions-list',
-    title: 'Transactions',
+    title: 'Journal de transactions',
     icon: 'icon-calculator',
     clazz: 'nav-item',
     badge: '',

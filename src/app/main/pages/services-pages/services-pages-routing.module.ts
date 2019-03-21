@@ -19,7 +19,7 @@ import {EmbranchmentRequestsComponent} from './embranchment-requests/embranchmen
 import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
 import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-detail.component';
 import {PaymentSuccessComponent} from './payment-success/payment-success.component';
-
+import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 
 const routes: Routes = [
   {
@@ -155,10 +155,17 @@ const routes: Routes = [
         }
       },
       {
-        path: 'paiement/reussi',
+        path: 'paiement/success/:id',
         component: PaymentSuccessComponent,
         data: {
-          title: 'paiement réussi'
+          title: 'paiement reussi'
+        }
+      },
+      {
+        path: 'paiement/fail/:id',
+        component: PaymentFailComponent,
+        data: {
+          title: 'paiement echoue'
         }
       }
     ]

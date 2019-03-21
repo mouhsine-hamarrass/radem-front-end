@@ -48,14 +48,16 @@
 
             <th scope="col">{{'OPERATION_DATE' | translate }}
               <span sortable-column="operartionDate"></span>
-              <span filterable-column="operartionDate" filter-type="text"
+              <span filterable-column="operartionDate" filter-type="date"
                     filter-placeholder="{{'OPERATION_DATE' | translate }}"></span>
             </th>
 
 
             <th scope="col">{{'STATUS' | translate }}
-              <span sortable-column="status"></span>
-              <span filterable-column="status" filter-type="text"
+              <span sortable-column="status" filter-type="select"
+                    [sort-direction]="statusTrx"></span>
+              <span filterable-column="status" filter-type="select"
+                    [filter-select-data]="statusTrx"
                     filter-placeholder="{{'STATUS' | translate }}"></span>
             </th>
 
@@ -73,7 +75,7 @@
               <td>{{transaction.trxNumber}}</td>
               <td>{{transaction.clientName}}</td>
               <td>{{transaction.totalAmount}}</td>
-              <td>{{transaction.operartionDate | date:'d MM y'}}</td>
+              <td>{{transaction.operartionDate | date}}</td>
               <td>{{transaction.status}}</td>
             </tr>
           </ng-template>

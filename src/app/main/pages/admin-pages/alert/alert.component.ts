@@ -35,6 +35,7 @@ export class AlertComponent implements OnInit {
               private toastrService: ToastrService) {
     this.formAlert = this.formBuilder.group({
       title: ['', Validators.required],
+      type: ['', Validators.required],
       instructions: ['', Validators.required],
     });
   }
@@ -47,6 +48,9 @@ export class AlertComponent implements OnInit {
     return this.formAlert.get('instructions');
   }
 
+  get type() {
+    return this.formAlert.get('type');
+  }
   ngOnInit() {
     this.getAlert();
   }
@@ -62,15 +66,17 @@ export class AlertComponent implements OnInit {
 
   loadAlert() {
     this.title.setValue(this.alert.title);
+    this.type.setValue(this.alert.type);
     this.instructions.setValue(this.alert.instructions);
   }
 
   createAlert() {
-    /*
+
     this.isSubmitted = true;
     this.alert = new AlertModel(
       null,
       this.formAlert.controls.title.value,
+      this.formAlert.controls.type.value,
       this.formAlert.controls.instructions.value
     );
 
@@ -81,15 +87,16 @@ export class AlertComponent implements OnInit {
     }, err => {
       this.refreshAlerts.emit(false);
     });
-    */
+
   }
 
   saveAlert() {
-    /*
+
     this.isSubmitted = true;
     this.alert = new AlertModel(
       this.alertId,
       this.formAlert.controls.title.value,
+      this.formAlert.controls.type.value,
       this.formAlert.controls.instructions.value
     );
 
@@ -100,6 +107,6 @@ export class AlertComponent implements OnInit {
     }, err => {
       this.refreshAlerts.emit(false);
     });
-    */
+
   }
 }

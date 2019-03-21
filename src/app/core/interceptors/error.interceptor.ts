@@ -57,10 +57,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                   });
                 });
               } else {
-                this.translate.get(response.error.message).subscribe(msg => {
+                /*this.translate.get(response.error.message).subscribe(msg => {
                   this.toastr.error(msg, '', {
                     timeOut: 3000,
                   });
+                });*/
+                this.toastr.error(this.translate.instant(response.error.message), '', {
+                  timeOut: 3000,
                 });
               }
             } else if (response.status === 0) { // Server down

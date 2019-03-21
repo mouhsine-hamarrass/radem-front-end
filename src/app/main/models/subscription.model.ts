@@ -5,7 +5,6 @@ export class SubscriptionModel {
     description?: string;
     tournee?: string;
     type?: string;
-
     createdAt?: string;
     requestNumber?: string;
     status?: string;

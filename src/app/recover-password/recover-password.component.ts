@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {RecoverPasswordService} from '../main/services/recover-password.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
+import {message} from '../shared/components/ui-elements/validate';
 
 @Component({
   selector: 'app-recover-password',
@@ -13,9 +15,10 @@ export class RecoverPasswordComponent implements OnInit {
   recoverPasswordForm = new FormGroup({
     email: new FormControl('')
   });
-  message;
+  message = '';
 
   constructor(
+    private router: Router,
     private recoverPasswordServices: RecoverPasswordService
   ) {
   }
@@ -25,11 +28,12 @@ export class RecoverPasswordComponent implements OnInit {
 
   reset() {
     this.recoverPasswordServices.sendToken(this.recoverPasswordForm.controls.email.value).subscribe(response => {
-        this.message = this.translate.instant('CHECK_YOUR_INBOX');
+        this.message = 'MSG_SENT';
       },
       err => {
         console.log(err);
       });
+
   }
 
 }

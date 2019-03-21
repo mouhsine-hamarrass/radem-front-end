@@ -43,7 +43,7 @@ import { PaymentSuccessComponent } from './main/pages/services-pages/payment-suc
     TermOfUseComponent,
     HomeComponent,
     UnauthorizedComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

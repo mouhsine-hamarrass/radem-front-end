@@ -406,12 +406,9 @@ export class AdminService {
     return this.httpClient.get<Response<AlertNotificationModel>>(`${this.apiUrl}/alerts/notifications/${id}`, {headers: this.headers});
   }
 
-  createAlert(alert
-                :
-                AlertModel
-  ):
+  createAlert(alert: AlertModel):
     Observable<Response<AlertModel>> {
-    return this.httpClient.post<Response<AlertModel>>(`${this.apiUrl}/alerts`, alert, {headers: this.headers});
+    return this.httpClient.post<Response<AlertModel>>(`${this.apiUrl}/alerts/create`, alert, {headers: this.headers});
   }
 
   saveAlert(alertId
@@ -462,6 +459,13 @@ export class AdminService {
         sort
       });
   }
+
+  getTransactionDetails(id: string):
+    Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.apiUrl}/payments/transaction/${id}`, {headers: this.headers});
+  }
+
+
 // Users
   getListUser(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}`,
@@ -480,6 +484,8 @@ export class AdminService {
   }
 
   createUser(user: User): Observable<Response<User>> {
+    user.username = user.email;
+
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/save`, user, {headers: this.headers});
   }
 
@@ -492,6 +498,7 @@ export class AdminService {
   }
 
   editUser(user: User): Observable<Response<User>> {
+    user.username = user.email;
     return this.httpClient.post<Response<User>>(`${this.apiUrl}/users/edit`, user, {headers: this.headers});
   }
 

@@ -23,7 +23,7 @@
                 </div>
                 <div class="float-right m-2">
                   <button type="button" class="btn btn-success"
-                          routerLink="/admin/user"> {{'nouveau' | translate}} </button>
+                          routerLink="/admin/user"> {{'NEW_' | translate}} </button>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@
                       onColor="primary"
                       onText="{{'ACTIVATED' | translate}}"
                       offColor="secondary"
-                      offText="'DISABLED' | translate"
+                      offText="{{'DISABLED' | translate}}"
                       [size]="'sm'"
                       [(value)]="user.enabled"
                       (click)="changeEnabled($event, user)">
