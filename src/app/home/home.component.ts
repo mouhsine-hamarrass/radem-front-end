@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
       authorities.roles.push(this.user.profile.title);
       localStorage.setItem(AuthHelper.USER_ID, JSON.stringify(this.user));
 
-      this.commonService.permission(authorities);
+      // this.commonService.permission(authorities);
     } else {
       this.router.navigate(['/login']);
     }
