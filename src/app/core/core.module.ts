@@ -14,6 +14,8 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {SharedModule} from '../shared/shared.module';
+import {AdminGuard} from './guards/admin.guard';
+import {ClientGuard} from './guards/client.guard';
 
 
 @NgModule(<NgModule>{
@@ -27,6 +29,8 @@ import {SharedModule} from '../shared/shared.module';
     AuthGuard,
     LoginGuard,
     AuthHelper,
+    AdminGuard,
+    ClientGuard,
     {provide: ErrorHandler, useFactory: errorHandlerFactory},
     {provide: 'AuthService', useFactory: authFactory, deps: [HttpClient, AuthHelper]},
     {provide: 'LoggerService', useFactory: loggerFactory},
