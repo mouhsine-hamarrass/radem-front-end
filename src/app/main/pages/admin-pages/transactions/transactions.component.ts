@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {TransactionSummaryModel} from '../../../models/transactionSummary.model';
 import {TerminationRequestStatus, TransStatusEnum} from '../../../../shared/models/user.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-transactions',
@@ -44,6 +45,12 @@ export class TransactionsComponent implements OnInit {
 
   onFiltred(filter: any): void {
     this.filter = filter;
+    const createDate = moment(this.filter.operationDate, 'MM/DD/YYYY');
+    if (createDate.isValid()) {
+      this.filter.operationDate = moment(this.filter.operationDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
+    } else {
+      this.filter.operationDate = null;
+    }
     this.getTrans();
   }
 

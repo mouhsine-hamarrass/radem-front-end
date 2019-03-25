@@ -173,6 +173,7 @@ export class UnpaidPageComponent implements OnInit {
   }
 
   getAllUnpaidBills() {
+    this.selectedBills.invoices = [];
     this.total = 0;
     this.totalUnpaid = 0;
     const contracts = _.pluck(this.selectedContract, 'id');
@@ -193,25 +194,25 @@ export class UnpaidPageComponent implements OnInit {
         this.totalPages = response.data['totalPages'];
         this.itemsPerPage = response.data['size'];
         this.numberOfItems = response.data['numberOfElements'];
-        console.log(this.contractsBills);
       }, err => {
       });
+
   }
 
   calcUnpaidBills(): void {
     this.totalUnpaid = 0;
-    this.total = 0;
+    // this.total = 0;
     this.totalBillsExigible = 0;
     this.contractsBills.map((contract) => {
       contract.invoices.map((bill, index) => {
         this.totalUnpaid += parseFloat(bill.balance);
-        this.total += bill.exigible ? parseFloat(bill.balance) : 0;
+        // this.total += bill.exigible ? parseFloat(bill.balance) : 0;
         this.totalBillsExigible += bill.exigible ? parseFloat(bill.balance) : 0;
       })
     });
   }
 
-  calcTotal(bill, balance, operation): void {
+  /*calcTotal(bill, balance, operation): void {
     if (operation === 'add') {
       if (!bill.exigible) {
         this.total += parseFloat(balance);
@@ -219,7 +220,7 @@ export class UnpaidPageComponent implements OnInit {
     } else {
       this.total -= parseFloat(balance)
     }
-  }
+  }*/
 
   toggleCheckAll($event, contractsBills) {
     if (contractsBills && contractsBills.length) {
@@ -235,7 +236,7 @@ export class UnpaidPageComponent implements OnInit {
         contract.invoices.forEach((bill) => {
           bill.checked = $event.currentTarget.checked;
           this.addBill(contract, bill, bill.checked);
-          this.calcTotal(bill, bill.balance, operation);
+          // this.calcTotal(bill, bill.balance, operation);
 
         });
       });
@@ -265,7 +266,7 @@ export class UnpaidPageComponent implements OnInit {
       }
       contract.invoices.forEach((bill) => {
         if (!bill.exigible) {
-          this.calcTotal(bill, bill.balance, operation);
+          // this.calcTotal(bill, bill.balance, operation);
           bill.checked = $event.currentTarget.checked;
         }
         this.addBill(contract, bill, bill.checked);
@@ -299,14 +300,14 @@ export class UnpaidPageComponent implements OnInit {
     }
     this.addBill(contract, bill, bill.checked);
     if (!bill.exigible) {
-      this.calcTotal(bill, parseFloat(bill.balance), operation);
+      // this.calcTotal(bill, parseFloat(bill.balance), operation);
     }
   }
 
   addBill(contract, bill, checked) {
     bill.contractNo = contract.contactNo;
     if (bill.exigible || checked) {
-      this.selectedBills.total += bill.balance;
+      // this.selectedBills.total += bill.balance;
       let exists = false;
       for (let i = 0; i < this.selectedBills.invoices.length; i++) {
         if (bill.invoiceNo === this.selectedBills.invoices[i].invoiceNo) {
@@ -317,9 +318,19 @@ export class UnpaidPageComponent implements OnInit {
         this.selectedBills.invoices.push(bill);
       }
     } else {
-      this.selectedBills.total -= bill.balance;
+      // this.selectedBills.total -= bill.balance;
       this.selectedBills.invoices.splice(this.selectedBills.invoices.indexOf(bill), 1);
     }
+    this.total = this.getTotalAmount();
+  }
+
+  private getTotalAmount() {
+    console.log(this.selectedBills.invoices);
+    return this.selectedBills.invoices
+      .map(invoice => invoice.balance)
+      .reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+      });
   }
 
   pageChanged(page: number): void {

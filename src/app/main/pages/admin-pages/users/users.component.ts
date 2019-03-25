@@ -44,6 +44,16 @@ export class UsersComponent implements OnInit {
 
     onFiltred(filter: any): void {
         this.filter = filter;
+        const createDate = moment(this.filter.createdDate, 'MM/DD/YYYY');
+        if (createDate.isValid()) {
+          this.filter.createdDate = moment(this.filter.createdDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
+        } else {
+          this.filter.createdDate = null;
+        }
+        /* let tmp = moment('03-25-2019', 'MM-DD-YYYY');
+        console.log(tmp);
+        tmp = tmp.format('MM-DD-YYYY');
+        console.log(tmp);*/
         this.listUsers();
     }
 
@@ -109,8 +119,8 @@ export class UsersComponent implements OnInit {
             text: this.translate.instant('THIS_ACTION_IS_IRREVERSIBLE'),
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
             confirmButtonText: this.translate.instant('YES_I_AM_SURE')
         }).then((result) => {
             if (result.value) {
