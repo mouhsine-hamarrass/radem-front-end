@@ -14,12 +14,12 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class ProfileComponent implements OnInit {
 
+  FormGroup;
+  isSubmitted = false;
   authorities: any;
   selectedAuthorities: any = [];
   profile: Profile = {};
   formProfile;
-  FormGroup;
-  isSubmitted = false;
 
   constructor(
     private utilsService: UtilsService,

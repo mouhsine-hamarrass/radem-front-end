@@ -23,6 +23,7 @@ export class OnlinePaymentComponent implements OnInit {
   hash: string;
   transactionSummaryModel: TransactionSummaryModel;
   invoicesModel: Array<InvoiceModel>;
+  totalAmount: number;
 
   constructor(private dataService: DataService, private services: ServicesService) {
   }
@@ -34,14 +35,17 @@ export class OnlinePaymentComponent implements OnInit {
     }
 
     this.getBillsToPay();
+    this.totalAmount = parseFloat(this.getTotalAmount());
+    //this.totalAmount = this.totalAmount | number:'1.2-2'; // .toFixed(2);
+    console.log(this.totalAmount);
 
-    this.services.getTransactionSammury(this.selectedBills.total).subscribe(response => {
+    this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
 
       this.transactionSummary = response.data;
 
       this.transactionSummaryModel = new TransactionSummaryModel(
         this.transactionSummary.oid,
-        this.selectedBills.total,
+        this.totalAmount,
         this.selectedBills.invoices)
 
     }, err => {
@@ -67,7 +71,16 @@ export class OnlinePaymentComponent implements OnInit {
 
 
   getBillsToPay() {
+    // debugger;
     this.selectedBills = this.dataService.get('selectedBills');
+  }
+
+  getTotalAmount() {
+    return this.selectedBills.invoices
+      .map(invoice => invoice.amount)
+      .reduce((a, b) => {
+      return parseFloat(a) + parseFloat(b);
+    });
   }
 
 }

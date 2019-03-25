@@ -23,9 +23,14 @@ export class UnpaidPageComponent implements OnInit {
     total: 0,
     invoices: []
   };
+
+  // total amount that customer should pay
   total: number;
+
+  // total of all invoices
   totalUnpaid: number;
 
+  // total of exigible bills (checked first)
   totalBillsExigible = 0;
 
   user: User;
@@ -226,13 +231,12 @@ export class UnpaidPageComponent implements OnInit {
         }
       });
       contractsBills.forEach((contract) => {
+
         contract.invoices.forEach((bill) => {
           bill.checked = $event.currentTarget.checked;
           this.addBill(contract, bill, bill.checked);
-          if (operation === 'add') {
-            bill.contractNo = contract.contractNo;
-            this.calcTotal(bill, bill.balance, operation);
-          }
+          this.calcTotal(bill, bill.balance, operation);
+
         });
       });
     }
@@ -303,7 +307,15 @@ export class UnpaidPageComponent implements OnInit {
     bill.contractNo = contract.contactNo;
     if (bill.exigible || checked) {
       this.selectedBills.total += bill.balance;
-      this.selectedBills.invoices.push(bill)
+      let exists = false;
+      for (let i = 0; i < this.selectedBills.invoices.length; i++) {
+        if (bill.invoiceNo === this.selectedBills.invoices[i].invoiceNo) {
+          exists = true;
+        }
+      }
+      if (!exists) {
+        this.selectedBills.invoices.push(bill);
+      }
     } else {
       this.selectedBills.total -= bill.balance;
       this.selectedBills.invoices.splice(this.selectedBills.invoices.indexOf(bill), 1);
@@ -324,6 +336,7 @@ export class UnpaidPageComponent implements OnInit {
 
   submit() {
     if (this.selectedBills.invoices.length !== 0) {
+      // debugger;
       this.dataService.set('selectedBills', this.selectedBills);
       this.router.navigate(['/services/payment']);
     }
