@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {Response} from '../../core/models/response.model';
 import {Observable} from 'rxjs/Observable';
 import {environment} from 'environments/environment';
@@ -14,6 +14,10 @@ import {SubscriptionRequestModel} from '../models/subscription-request.model';
 import {FeedbackModel} from '../models/feedback.model';
 import {LightTransactionSummary} from '../models/lightTransactionSummary';
 import {TransactionSummaryModel} from '../models/transactionSummary.model';
+import {FormGroup} from '@angular/forms';
+import {UserDetails} from '../../shared/models/user.model';
+import {User} from '../models/user.model';
+import {HttpParam} from '../../core/models/http-param';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -210,7 +214,7 @@ export class ServicesService {
   //   return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/termination_requests`);
   // }
 
- //Mouhsine termination
+  //Mouhsine termination
   getTerminationRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>
     (`${this.urlApi}/termination-requests/${contractNo}?page=${page}&size=${pageSize}`);
@@ -235,7 +239,47 @@ export class ServicesService {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/refund-request/details/${requestNo}`);
   }
 
-  //mouhsine embranchment
+  redirectToCmi(transactionSummary: LightTransactionSummary, user: User, amount: number) {
+    const params: Array<HttpParam> = [
+      {name: 'clientid', value: transactionSummary.clientId},
+      {name: 'amount', value: amount + ''},
+      {name: 'okUrl', value: transactionSummary.okUrl},
+      {name: 'failUrl', value: transactionSummary.failUrl},
+      {name: 'TranType', value: transactionSummary.tranType},
+      {name: 'callbackUrl', value: transactionSummary.callbackUrl},
+      {name: 'shopurl', value: transactionSummary.shopUrl},
+      {name: 'currency', value: transactionSummary.currency},
+      {name: 'rnd', value: transactionSummary.rnd},
+      {name: 'storetype', value: transactionSummary.stereotype},
+      {name: 'hashAlgorithm', value: transactionSummary.hashAlgorithm},
+      {name: 'lang', value: transactionSummary.lang},
+      {name: 'refreshtime', value: transactionSummary.refreshTime},
+      {name: 'BillToName', value: user.firstname + ' ' + user.lastname},
+      {name: 'BillToStreet1', value: user.address},
+      {name: 'email', value: user.email},
+      {name: 'tel', value: user.phone},
+      {name: 'encoding', value: transactionSummary.encoding},
+      {name: 'oid', value: transactionSummary.oid},
+      {name: 'hash', value: transactionSummary.hash}
+    ];
+
+    const cmiForm = document.createElement('form');
+    // cmiForm.target = '_blank';
+    cmiForm.method = 'POST';
+    cmiForm.action = environment.sendDataUrl;
+    params.forEach(param => {
+      const mapInput = document.createElement('input');
+      mapInput.type = 'hidden';
+      mapInput.name = param.name;
+      mapInput.setAttribute('value', param.value);
+      cmiForm.appendChild(mapInput);
+    });
+    document.body.appendChild(cmiForm);
+    cmiForm.submit();
+  }
+
+
+  // mouhsine embranchment
 
   getEmbranchmentRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<any>>> {
     return this.httpClient.get<Response<Array<any>>>
@@ -250,8 +294,8 @@ export class ServicesService {
   }
 
 
-  sendTransactionSummary(transactionSummary: TransactionSummaryModel): Observable<Response<String>> {
-    return this.httpClient.post<Response<any>>(`${this.urlApi}/payments/prePayment`, transactionSummary);
+  sendTransactionSummary(transactionSummary: TransactionSummaryModel): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/payments/prePayment`, transactionSummary);
   }
 
   getEmbranchmentDetails(requestNo: string): Observable<Response<any>> {
@@ -277,9 +321,11 @@ export class ServicesService {
   saveTerminationRequest(request: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/termination_requests/save`, request, {headers: headers});
   }
+
   saveRefundRequest(request: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/Refund-requests/save`, request, {headers: headers});
   }
+
   // subscription request
   saveSubscriptionRequest(request: any): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/argis/subscription-requests/save`, request, {headers: headers});

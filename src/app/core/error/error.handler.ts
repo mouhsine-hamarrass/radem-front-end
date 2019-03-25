@@ -19,7 +19,7 @@ export class SimpleErrorHandler implements ErrorHandler {
       if (error.status === 0 || error.status === 401 || error.status === 403 || error === 'UNAUTHORIZED') {
          console.log('... the authentication session has expired or the user is not authorised!');
          // AuthHelper.clearCookies();
-         location.href = location.pathname + '#/login';
+         // location.href = location.pathname + '/login';
          return;
       }
 

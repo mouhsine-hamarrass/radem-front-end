@@ -4,7 +4,7 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://212.83.140.195:8085/radem-ael-api';
+const server = 'http://192.201.20.109/radem-ael-api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
 
 
@@ -12,6 +12,9 @@ let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 export const environment = {
+  emailRadem : 'info@radem.ma',
+  Home : 'http://192.201.20.109:8085/home',
+  Tel : '05355-21801',
   appName: 'RADEM-AEL',
   appLogo: './assets/images/logo.png',
   production: true,
@@ -28,8 +31,8 @@ export const environment = {
     apiEnv: 'prod',
     timeExpired: 1200,
     credentials: {
-      clientId: 'yelansari',
-      clientSecret: 'admin'
+      clientId: '',
+      clientSecret: ''
     },
     apiUrls: [
       {id: 'About_SERVICE_URL', url: server + '/', requireAuthBefore: false},
@@ -42,5 +45,7 @@ export const environment = {
     authScheme: AuthScheme.BEARER,
     errorHandler: ErrorHandlerTypes.SIMPLE,
     loggerService: LoggerTypes.CONSOLE
-  }
+  },
+  sendDataUrl: 'https://testpayment.cmi.co.ma/fim/est3Dgate'
+
 };

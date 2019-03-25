@@ -13,9 +13,9 @@ let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 export const environment = {
-  emailRadem : 'info@radem.ma',
-  Home : server,
-  Tel : '05355-21801',
+  emailRadem: 'info@radem.ma',
+  Home: 'http://localhost:4200/home',
+  Tel: '05355-21801',
   appName: 'RADEM-AEL',
   appLogo: './assets/images/logo.png',
   production: false,
@@ -50,11 +50,11 @@ export const environment = {
 
   shopurl: shopurl_,
   clientId: '600000941',
-  failUrl : shopurl_ + '/Ok-Fail.php',
-  transactionType : 'PreAuth',
-  callbackUrl : shopurl_ + '/callback.php',
-  currency : '504',
-  okUrl:  'http://212.83.140.195:4041/home',
+  failUrl: shopurl_ + '/Ok-Fail.php',
+  transactionType: 'PreAuth',
+  callbackUrl: shopurl_ + '/callback.php',
+  currency: '504',
+  okUrl: 'http://212.83.140.195:4041/home',
   sendDataUrl: 'https://testpayment.cmi.co.ma/fim/est3Dgate'
 
 };
