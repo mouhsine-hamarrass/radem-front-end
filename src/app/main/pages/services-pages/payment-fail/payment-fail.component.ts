@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-payment-fail',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-fail.component.scss']
 })
 export class PaymentFailComponent implements OnInit {
+
+  home = environment.Home;
+  emailRadem = environment.emailRadem;
+  Tel = environment.Tel;
 
   constructor() { }
 
