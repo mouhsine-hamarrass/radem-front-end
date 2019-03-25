@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
     id: 'users',
     submenu: []
   },
-  {
+  /**{
     path: '/admin/profiles',
     title: 'Profils',
     icon: 'icon-graduation',
@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
     isNavHeader: false,
     id: 'profiles',
     submenu: []
-  },
+  },*/
   {
     path: '/admin/alerts',
     title: 'Alertes',

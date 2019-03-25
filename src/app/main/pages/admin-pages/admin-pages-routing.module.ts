@@ -173,7 +173,7 @@ const routes: Routes = [
           }
         }
       },
-      {
+      /**{
         path: 'profiles',
         // canActivate: [NgxPermissionsGuard],
         component: ProfilesComponent,
@@ -208,7 +208,7 @@ const routes: Routes = [
             redirectTo: 'unauthorized'
           }
         }
-      },
+      },*/
       {
         path: 'users',
         // canActivate: [NgxPermissionsGuard],

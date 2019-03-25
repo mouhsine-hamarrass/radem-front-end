@@ -1,31 +1,31 @@
 
 export class ColumnFiltersModel {
-  firstName: string = '';
-  lastName: string = '';
-  username: string = '';
-  service: string = '';
-  email: string = '';
+  firstName = '';
+  lastName = '';
+  username = '';
+  service = '';
+  email = '';
   profile: any = null;
   enabled: boolean = null;
-  title: string = '';
-  requestNumber: string = '';
-  lastname: string = '';
-  description: string = '';
-  createdAt: string = '';
-  type: string = '';
-  name: string = '';
-  domain: string = '';
+  title = '';
+  requestNumber = '';
+  lastname  = '';
+  description = '';
+  createdAt = '';
+  type = '';
+  name = '';
+  domain = '';
   status: string = null;
-  messageDate : string = '';
-  createdDate: string;
+  messageDate  = '';
+  createdDate = '';
   unitType: string = null;
   parent: number = null;
   agent: number = null;
-  code: string = '';
-  trxNumber: string = '';
-  clientName: string = '';
-  instructions: string = '';
+  code = '';
+  trxNumber = '';
+  clientName = '';
+  instructions = '';
   totalAmount: number = null;
-  operartionDate: string = '';
+  operationDate = '';
 
 }

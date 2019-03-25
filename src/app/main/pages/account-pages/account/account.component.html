@@ -12,23 +12,23 @@
         <div class="col-sm-12">
             <!-- What is-->
             <form class="form" [formGroup]="profileForm" novalidate>
-                <div id="what-is" class="mb-0">
-                    <div class="card-header">
-                        <div class="heading-elements">
-                            <div class="card card-photo">
-                                <img [src]="result64 || defaultAvatar" id="img" #img>
-                                <div class="overlay text-center">
-                                    <label for="photo">
-                                        <a class="text-white">{{'MODIFY' | translate}}</a>
-                                        <input type="file" id="photo" class="form-control" formControlName="avatar"
-                                               (change)="onFileChange($event)" accept="image/*"
-                                               #fileInput>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  <br/>
+               <div id="what-is" class="mb-0">
+                 <!-- <div class="card-header">
+                     <div class="heading-elements">
+                         <div class="card card-photo">
+                             <img [src]="result64 || defaultAvatar" id="img" #img>
+                             <div class="overlay text-center">
+                                 <label for="photo">
+                                     <a class="text-white">{{'MODIFY' | translate}}</a>
+                                     <input type="file" id="photo" class="form-control" formControlName="avatar"
+                                            (change)="onFileChange($event)" accept="image/*"
+                                            #fileInput>
+                                 </label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+               <br/>-->
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <div class="row col-12">

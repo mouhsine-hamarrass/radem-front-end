@@ -39,7 +39,7 @@ export class OnlinePaymentComponent implements OnInit {
     //this.totalAmount = this.totalAmount | number:'1.2-2'; // .toFixed(2);
     console.log(this.totalAmount);
 
-    this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
+      this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
 
       this.transactionSummary = response.data;
 
@@ -61,7 +61,7 @@ export class OnlinePaymentComponent implements OnInit {
       .sendTransactionSummary(this.transactionSummaryModel)
       .subscribe(response => {
         if (response && !isNaN(response.data)) {
-          this.services.redirectToCmi(this.transactionSummary, this.user, this.selectedBills && this.selectedBills.total);
+          this.services.redirectToCmi(this.transactionSummary, this.user, this.totalAmount);
         } else {
           console.log(this.transactionSummaryModel);
         }
@@ -73,11 +73,12 @@ export class OnlinePaymentComponent implements OnInit {
   getBillsToPay() {
     // debugger;
     this.selectedBills = this.dataService.get('selectedBills');
+    this.totalAmount = this.dataService.get('total');
   }
 
   getTotalAmount() {
     return this.selectedBills.invoices
-      .map(invoice => invoice.amount)
+      .map(invoice => invoice.balance)
       .reduce((a, b) => {
       return parseFloat(a) + parseFloat(b);
     });
