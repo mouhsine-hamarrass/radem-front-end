@@ -16,7 +16,6 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class OnlinePaymentComponent implements OnInit {
 
-
   selectedBills;
   transactionSummary: LightTransactionSummary;
   user: User;
@@ -25,7 +24,6 @@ export class OnlinePaymentComponent implements OnInit {
   transactionSummaryModel: TransactionSummaryModel;
   invoicesModel: Array<InvoiceModel>;
   totalAmount: number;
-
 
   constructor(private dataService: DataService, private services: ServicesService) {
   }
@@ -57,12 +55,16 @@ export class OnlinePaymentComponent implements OnInit {
   }
 
 
-
   submit() {
     console.log(this.transactionSummaryModel);
     this.services
       .sendTransactionSummary(this.transactionSummaryModel)
       .subscribe(response => {
+        if (response && !isNaN(response.data)) {
+          this.services.redirectToCmi(this.transactionSummary, this.user, this.selectedBills && this.selectedBills.total);
+        } else {
+          console.log(this.transactionSummaryModel);
+        }
       });
 
   }
