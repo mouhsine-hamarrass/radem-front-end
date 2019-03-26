@@ -468,6 +468,7 @@ export class AdminService {
 
 // Users
   getListUser(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
+    if (filter) {filter.createdDate = '2019-03-25'};
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/users/paged-list?page=${page}&size=${pageSize}`,
       {
         filter,
