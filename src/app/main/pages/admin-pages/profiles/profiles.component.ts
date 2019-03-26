@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Profile} from '../../../models/profile.model';
 import swal from 'sweetalert2';
 import {AdminService} from '../../../services/admin.service';
 import {ToastrService} from 'ngx-toastr';

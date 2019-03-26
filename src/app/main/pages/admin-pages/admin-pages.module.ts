@@ -40,6 +40,8 @@ import {RequestSubscriptionDetailComponent} from './request-subscription-detail/
 import {RequestRefundDetailComponent} from './request-refund-detail/request-refund-detail.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {TransactionsComponent} from './transactions/transactions.component';
+import {ProfileComponent} from './profile/profile.component';
+import {ProfilesComponent} from './profiles/profiles.component';
 
 
 
