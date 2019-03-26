@@ -53,7 +53,7 @@
                          formControlName="endDate"
                          class="form-control date-readonly"
                          id="endDate" readonly>
-                  <owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>
+                  <owl-date-time #ed [pickerType]="'calendar'" [startAt]="ed.getValidDate"></owl-date-time>
                   <div class="text-danger position-absolute mb-1"
                        *ngIf="!contractForm.controls['endDate'].valid && contractForm.controls['endDate'].touched">
                     <div *ngIf="contractForm.controls['endDate'].errors.required">

@@ -494,5 +494,7 @@
   "AEL_REJECTED" : "rejeté par l'agence",
   "VALIDATED" : "Validé",
   "NOT_VALIDATED" : "Non validé",
-  "SUSPENDED" : "suspendu"
+  "SUSPENDED" : "suspendu",
+  "MODIFIED_RELEVE" : "Votre relève est ajoutée",
+  "releves_cannot_save" : "Impossibe d'enregistrer cette relève"
 }

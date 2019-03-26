@@ -18,6 +18,7 @@ import {FormGroup} from '@angular/forms';
 import {UserDetails} from '../../shared/models/user.model';
 import {User} from '../models/user.model';
 import {HttpParam} from '../../core/models/http-param';
+import {ReleveModel} from '../models/releve.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -432,4 +433,12 @@ export class ServicesService {
     });
     return this.httpClient.request(req);
   }
+
+  autoMeterRead(releve: ReleveModel): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/releve/meterRead`, releve, {headers: headers})
+  }
+  loadMeter(contractNo: string): Observable<Response<ReleveModel>> {
+    return this.httpClient.get<Response<ReleveModel>>(`${this.urlApi}/releve/${contractNo}`, {headers: headers});
+  }
+
 }

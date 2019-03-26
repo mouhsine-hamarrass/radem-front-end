@@ -8,8 +8,8 @@ import {ArchwizardModule} from 'angular-archwizard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserComponent} from './user/user.component';
 import {UsersComponent} from './users/users.component';
-//import {ProfileComponent} from './profile/profile.component';
-//import {ProfilesComponent} from './profiles/profiles.component';
+import {ProfileComponent} from './profile/profile.component';
+import {ProfilesComponent} from './profiles/profiles.component';
 import {ChecklistModule} from 'angular-checklist';
 import {NgxToggleModule} from 'ngx-toggle';
 import {BsDropdownModule, TabsModule} from 'ngx-bootstrap';
@@ -79,8 +79,8 @@ import {TransactionsComponent} from './transactions/transactions.component';
     CancellationRequestComponent,
     UserComponent,
     UsersComponent,
-    // ProfileComponent,
-    // ProfilesComponent,
+    ProfileComponent,
+    ProfilesComponent,
     SubscriptionDetailComponent,
     AlertsComponent,
     SettingsComponent,
