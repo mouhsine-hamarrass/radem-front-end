@@ -489,10 +489,10 @@
   "commons.entity_in_use": "Cette alerte est déjà utilisée",
   "users.duplicate_username": "Ce nom d'utisateur existe déjà",
   "users_duplicate_username": "Ce nom d'utisateur existe déjà",
-  "CMI_REJECTED": "rejeté par CMI",
+  "CMI_REJECTED": "Rejeté par CMI",
   "WATERP_REJECTED" : "Rejeté par WATERP",
-  "AEL_REJECTED" : "rejeté par l'agence",
+  "AEL_REJECTED" : "Rejeté par l'agence",
   "VALIDATED" : "Validé",
   "NOT_VALIDATED" : "Non validé",
-  "SUSPENDED" : "suspendu"
+  "SUSPENDED" : "Suspendu"
 }
