@@ -24,7 +24,7 @@
                             <div class="form-group">
                               <label for="comtract">Contrat:<span class="danger">*</span></label>
                                 <select formControlName="contract" id="comtract" type="text" class="form-control contract-dropdown"
-                                      (change)="getReleve()">
+                                      (change)="getReleve()" required="required">
                                 <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
                                 <option *ngFor="let contract of clientContracts" value="{{contract?.contractNo}}">
                                   {{contract?.contractNo}}
@@ -51,7 +51,7 @@
                                        formControlName="checkDate"
                                        class="form-control date-readonly"
                                        id="checkDate" readonly />
-                                <owl-date-time #ed [pickerType]="'calendar'"></owl-date-time>
+                                <owl-date-time #ed [pickerType]="'calendar'" required></owl-date-time>
                                 <div class="text-danger position-absolute mb-1"
                                      *ngIf="!reportForm.controls['checkDate'].valid && reportForm.controls['checkDate'].touched">
                                   <div *ngIf="reportForm.controls['checkDate'].errors.required">
@@ -63,7 +63,7 @@
 
                             <div class="form-group">
                               <label for="index">Indice:<span class="danger">*</span></label>
-                              <input class="form-control required" id="index" formControlName="index" type="text">
+                              <input class="form-control required" id="index" formControlName="index" type="text" required="required">
                             </div>
                             <div class="text-danger"
                                  *ngIf="!reportForm.controls['index'].valid && reportForm.controls['index'].touched">
@@ -71,14 +71,13 @@
                                 {{'FIELD_REQUIRED' | translate}}
                               </div>
                             </div>
-                            <button type="submit" class="btn btn btn-outline-primary" (click)="saveReleve()"
-                                    [disabled]="reportForm.invalid">
+                            <button type="submit" class="btn btn btn-outline-primary" (click)="saveReleve()" [disabled]="!reportForm.controls">
                               {{'SAVE' | translate}}
                             </button>
                           </form>
                         </div>
                         <div class="col-4" style="background-color: #ffffff;">
-                          <img src="./assets/images/bg-counter.png" alt="rep" class="">
+                          <img src="./assets/images/bg-counter.png" alt="rep" class="img-responsive">
                         </div>
                       </div>
                     </div>

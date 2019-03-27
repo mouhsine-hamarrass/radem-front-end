@@ -74,7 +74,7 @@ export class AutoReportsComponent implements OnInit {
 
   loadReleve() {
     if (this.releve) {
-      this.today = this.releve.dateReading;
+      //this.today = this.releve.dateReading;
       this.id.setValue(this.releve.id);
       this.contract.setValue(this.releve.contractNo);
 
@@ -109,12 +109,16 @@ export class AutoReportsComponent implements OnInit {
       this.reportForm.controls.index.value,
       this.reportForm.controls.checkDate.value,
       this.reportForm.controls.contract.value);
+    if (this.releve.contractNo && this.releve.dateReading && this.releve.indexValue) {
+      this.services.autoMeterRead(this.releve).subscribe(response => {
+        this.toastrService.success(this.translate.instant('MODIFIED_RELEVE'), '');
+      }, error1 => {
+        console.log(error1)
+      });
+    } else {
+      this.toastrService.error(this.translate.instant('ERROR_FORM'), '');
+    }
 
-    this.services.autoMeterRead(this.releve).subscribe(response => {
-      this.toastrService.success(this.translate.instant('MODIFIED_RELEVE'), '');
-    }, error1 => {
-      console.log(error1)
-    });
 
   }
 }

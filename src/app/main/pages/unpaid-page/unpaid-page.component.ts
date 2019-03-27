@@ -80,7 +80,7 @@ export class UnpaidPageComponent implements OnInit {
 
   getAllUnpaidBills() {
     this.selectedBills.invoices = [];
-    this.total = 0;
+    this.total = 0.0;
     this.totalUnpaid = 0;
     const contracts = _.pluck(this.selectedContract, 'id');
     this.contractServices.getPageableUnpaidBills(this.page, this.pageSize, contracts)
@@ -227,7 +227,7 @@ export class UnpaidPageComponent implements OnInit {
       // this.selectedBills.total -= bill.balance;
       this.selectedBills.invoices.splice(this.selectedBills.invoices.indexOf(bill), 1);
     }
-    this.total = this.getTotalAmount();
+    this.total = parseFloat((Math.round(this.getTotalAmount() * 100) / 100).toFixed(2));
   }
 
   private getTotalAmount() {
