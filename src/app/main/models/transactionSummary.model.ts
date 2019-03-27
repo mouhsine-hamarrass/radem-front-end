@@ -24,13 +24,13 @@ export class InvoiceModel {
 export class TransactionSummaryModel {
   id?: number;
   trxNumber?: string;
-  totalAmount?: number;
+  totalAmount?: string;
   invoices?: Array<InvoiceModel>;
 
 
   constructor(
               trxNumber: string,
-              totalAmount: number,
+              totalAmount: string,
               invoices: Array<InvoiceModel> ) {
 
     this.trxNumber = trxNumber;

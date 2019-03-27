@@ -39,13 +39,13 @@ export class OnlinePaymentComponent implements OnInit {
     //this.totalAmount = this.totalAmount | number:'1.2-2'; // .toFixed(2);
     console.log(this.totalAmount);
 
-      this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
+    this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
 
       this.transactionSummary = response.data;
 
       this.transactionSummaryModel = new TransactionSummaryModel(
         this.transactionSummary.oid,
-        this.totalAmount,
+        this.transactionSummary.amount,
         this.selectedBills.invoices)
 
     }, err => {
@@ -57,15 +57,20 @@ export class OnlinePaymentComponent implements OnInit {
 
   submit() {
     console.log(this.transactionSummaryModel);
-    this.services
-      .sendTransactionSummary(this.transactionSummaryModel)
-      .subscribe(response => {
-        if (response && !isNaN(response.data)) {
-          this.services.redirectToCmi(this.transactionSummary, this.user, this.totalAmount);
-        } else {
-          console.log(this.transactionSummaryModel);
-        }
-      });
+
+    debugger;
+    if (this.transactionSummaryModel) {
+      this.services
+        .sendTransactionSummary(this.transactionSummaryModel)
+        .subscribe(response => {
+          if (response && !isNaN(response.data)) {
+            this.services.redirectToCmi(this.transactionSummary, this.user);
+          } else {
+            console.log(this.transactionSummaryModel);
+          }
+        });
+
+    }
 
   }
 
@@ -80,8 +85,8 @@ export class OnlinePaymentComponent implements OnInit {
     return this.selectedBills.invoices
       .map(invoice => invoice.balance)
       .reduce((a, b) => {
-      return parseFloat(a) + parseFloat(b);
-    });
+        return parseFloat(a) + parseFloat(b);
+      });
   }
 
 }

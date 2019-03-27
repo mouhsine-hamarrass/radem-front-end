@@ -49,9 +49,9 @@
                   <tr *ngFor="let contract of contracts" class="text-center">
                     <td class="text-left">
                       <span class="network-icon"
-                            [ngClass]="contract.typeNetwork === 'EAU BT' ? 'water' : 'electricity'">
+                            [ngClass]="contract.typeNetwork.includes('EAU') ? 'water' : 'electricity'">
                       <i class="fa fa-2x text-white"
-                         [ngClass]="contract.typeNetwork === 'EAU BT' ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
+                         [ngClass]="contract.typeNetwork.includes('EAU') ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
                      </span>&nbsp;
                       <b>{{contract.contractNo}}</b>
                     </td>

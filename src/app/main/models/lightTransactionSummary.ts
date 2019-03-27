@@ -48,5 +48,7 @@ export class LightTransactionSummary {
 
   encoding?: string;
 
+  amount?: string;
+
 
 }

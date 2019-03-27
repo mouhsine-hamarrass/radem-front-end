@@ -4,5 +4,5 @@ export interface LastInvoiceModel {
     year?: string;
     value?: string;
     consumption?: string;
-    type_network?: string;
+    typeNetwork?: string;
 }

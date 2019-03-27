@@ -496,5 +496,7 @@
   "NOT_VALIDATED" : "Non validé",
   "MODIFIED_RELEVE" : "Votre relève est ajoutée",
   "releves_cannot_save" : "Impossibe d'enregistrer cette relève",
-  "SUSPENDED" : "Suspendu"
+  "SUSPENDED" : "Suspendu",
+  "ERROR_FORM" : "Remlissez le formulaire "
+
 }
