@@ -22,7 +22,7 @@
                           <form class="form" [formGroup]="reportForm" novalidate>
 
                             <div class="form-group">
-                              <label for="comtract">Contrat:<span class="danger">*</span></label>
+                              <label for="comtract">{{'CONTRACT_NUMBER' | translate}}<span class="danger">*</span></label>
                                 <select formControlName="contract" id="comtract" type="text" class="form-control contract-dropdown"
                                       (change)="getReleve()" required="required">
                                 <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="form-group">
-                              <label class="col-form-label">periode <span class="danger">*</span> :</label>
+                              <label class="col-form-label">{{'CHECK_DATE' | translate}} <span class="danger">*</span> :</label>
 
 
 
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="form-group">
-                              <label for="index">Indice:<span class="danger">*</span></label>
+                              <label for="index">{{'INDEX' | translate}}<span class="danger">*</span></label>
                               <input class="form-control required" id="index" formControlName="index" type="text" required="required">
                             </div>
                             <div class="text-danger"

@@ -339,7 +339,7 @@
   "NEXT_VISITE": "Prochaine visite",
   "COUNTER_NUMBER": "N° compteur",
   "DATE_OF_REPORTS": "Date de relève",
-  "INDEX": "Index",
+  "INDEX": "Indice",
   "Volume": "Volume",
   "NOTATION_RELEVANCE": "Annoation de relève",
   "INDEX_TYPE": "Type d'index",
@@ -497,6 +497,7 @@
   "MODIFIED_RELEVE" : "Votre relève est ajoutée",
   "releves_cannot_save" : "Impossibe d'enregistrer cette relève",
   "SUSPENDED" : "Suspendu",
-  "ERROR_FORM" : "Remlissez le formulaire "
+  "ERROR_FORM" : "Remlissez le formulaire",
+  "CHECK_DATE" : "Date relève"
 
 }
