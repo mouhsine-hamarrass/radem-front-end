@@ -11,17 +11,18 @@ export class AdminGuard implements CanActivate {
   private user: User;
 
   constructor(private router: Router) {
+  }
+
+  canActivate(next: ActivatedRouteSnapshot,
+              state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+
+    if (this.user && this.user.profile) {
+      if (this.user.profile.title !== ProfileTypeEnum.ADMIN) {
+        this.router.navigate(['/home']);
+      }
     }
-
-    canActivate(next: ActivatedRouteSnapshot,
-                state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-
-        if (this.user.profile.title !== ProfileTypeEnum.ADMIN) {
-            this.router.navigate(['/home']);
-        }
-
-        return true;
-    }
+    return true;
+  }
 }

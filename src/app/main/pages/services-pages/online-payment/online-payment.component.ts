@@ -8,6 +8,7 @@ import {LightTransactionSummary} from '../../../models/lightTransactionSummary';
 import {InvoiceModel, TransactionSummaryModel} from '../../../models/transactionSummary.model';
 import {SubscriptionReqModel} from '../../../models/subscriptionReq.model';
 import {forEach} from '@angular/router/src/utils/collection';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-online-payment',
@@ -25,7 +26,7 @@ export class OnlinePaymentComponent implements OnInit {
   invoicesModel: Array<InvoiceModel>;
   totalAmount: number;
 
-  constructor(private dataService: DataService, private services: ServicesService) {
+  constructor(private dataService: DataService, private services: ServicesService, private router: Router) {
   }
 
   ngOnInit() {
@@ -34,15 +35,20 @@ export class OnlinePaymentComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
 
-    this.getBillsToPay();
-    this.totalAmount = parseFloat(this.getTotalAmount());
-    //this.totalAmount = this.totalAmount | number:'1.2-2'; // .toFixed(2);
-    console.log(this.totalAmount);
+    const bool = this.getBillsToPay();
+    if (!bool) {
+      return;
+    }
+    console.log('jhvsqvhsq hvbsqvjqsvq vqvhqvdq');
 
     this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
 
       this.transactionSummary = response.data;
 
+      this.transactionSummary.amount = parseFloat(this.transactionSummary.amount).toFixed(2);
+
+      console.log(this.transactionSummary.amount);
+      debugger;
       this.transactionSummaryModel = new TransactionSummaryModel(
         this.transactionSummary.oid,
         this.transactionSummary.amount,
@@ -57,8 +63,8 @@ export class OnlinePaymentComponent implements OnInit {
 
   submit() {
     console.log(this.transactionSummaryModel);
+    this.dataService.clear('selectedBills');
 
-    debugger;
     if (this.transactionSummaryModel) {
       this.services
         .sendTransactionSummary(this.transactionSummaryModel)
@@ -75,10 +81,15 @@ export class OnlinePaymentComponent implements OnInit {
   }
 
 
-  getBillsToPay() {
+  getBillsToPay(): boolean {
     // debugger;
     this.selectedBills = this.dataService.get('selectedBills');
-    this.totalAmount = this.dataService.get('total');
+    if (!this.selectedBills) {
+      this.router.navigate(['unpaid']);
+      return false;
+    }
+    this.totalAmount = parseFloat(this.getTotalAmount().toFixed(2));
+    return true;
   }
 
   getTotalAmount() {

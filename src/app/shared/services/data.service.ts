@@ -7,7 +7,11 @@ export class DataService {
   }
 
   get(key) {
-    return JSON.parse(localStorage.getItem(key));
+    const value = localStorage.getItem(key);
+    if (value === undefined || value === null || value === '' || value === 'undefined') {
+      return null;
+    }
+    return JSON.parse(value);
   }
 
   set(key, value) {

@@ -11,17 +11,18 @@ export class ClientGuard implements CanActivate {
   private user: User;
 
   constructor(private router: Router) {
+  }
+
+  canActivate(next: ActivatedRouteSnapshot,
+              state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+
+    if (this.user && this.user.profile) {
+      if (this.user.profile.title !== ProfileTypeEnum.CLIENT) {
+        this.router.navigate(['/admin']);
+      }
     }
-
-    canActivate(next: ActivatedRouteSnapshot,
-                state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-
-        if (this.user.profile.title !== ProfileTypeEnum.CLIENT) {
-          this.router.navigate(['/admin']);
-        }
-
-        return true;
-    }
+    return true;
+  }
 }
