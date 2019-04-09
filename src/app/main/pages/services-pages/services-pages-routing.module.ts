@@ -20,6 +20,7 @@ import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-
 import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-detail.component';
 import {PaymentSuccessComponent} from './payment-success/payment-success.component';
 import {PaymentFailComponent} from './payment-fail/payment-fail.component';
+import {PaymentStatusComponent} from './payment-status/payment-status.component';
 
 const routes: Routes = [
   {
@@ -167,7 +168,15 @@ const routes: Routes = [
         data: {
           title: 'paiement echoue'
         }
+      },
+      {
+        path: 'payment/status/:id',
+        component: PaymentStatusComponent,
+        data: {
+          title: 'etat paiement'
+        }
       }
+
     ]
   }
 ];

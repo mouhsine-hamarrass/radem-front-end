@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import {ReleveModel} from '../../../models/releve.model';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {of} from 'rxjs/observable/of';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-auto-reports',
@@ -34,7 +36,6 @@ export class AutoReportsComponent implements OnInit {
       index: ['', [Validators.required]]
     });
   }
-
   ngOnInit() {
     this.getClientAttachedContracts();
 
@@ -117,7 +118,7 @@ export class AutoReportsComponent implements OnInit {
     } else {
       this.toastrService.error(this.translate.instant('ERROR_FORM'), '');
     }
-
-
   }
+
+
 }

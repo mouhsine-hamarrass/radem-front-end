@@ -336,7 +336,7 @@
   "COUNTER_GAUGE": "Calibre de compteur",
   "PAYMENT_METHOD": "Mode de paiement",
   "LAST_INDEX": "Dernier index",
-  "LAST_INDEX_DATE": "Dernier index",
+  "LAST_INDEX_DATE": "Date dernier index",
   "NEXT_VISITE": "Prochaine visite",
   "COUNTER_NUMBER": "N° compteur",
   "DATE_OF_REPORTS": "Date de relève",
@@ -502,6 +502,7 @@
   "CHECK_DATE" : "Date relève",
   "fill_form" : "Veuillez remplir l'indice de votre compteur !",
   "PAYMENT-FAIL" : "Votre paiement a échoué",
+  "PAYMENT-NOT-EXISTED" : "cette transaction n'existe pas",
   "BIG-VALUE" : "Vous devez introduire une grande valeur",
   "PAYMENT_SUCCEED" : "Paiement Effectué",
   "PAYMENT_HAS_BEEN_SUCCEED" : "Le paiement s'est bien déroulé votre numéro de transaction est "
