@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import {ReleveModel} from '../../../models/releve.model';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {of} from 'rxjs/observable/of';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-auto-reports',
@@ -31,10 +33,9 @@ export class AutoReportsComponent implements OnInit {
       id: [''],
       contract: ['', Validators.required],
       checkDate: ['', Validators.required],
-      index: ['', Validators.required]
+      index: ['', [Validators.required]]
     });
   }
-
   ngOnInit() {
     this.getClientAttachedContracts();
 
@@ -74,14 +75,14 @@ export class AutoReportsComponent implements OnInit {
 
   loadReleve() {
     if (this.releve) {
-      //this.today = this.releve.dateReading;
+      // this.today = this.releve.dateReading;
       this.id.setValue(this.releve.id);
       this.contract.setValue(this.releve.contractNo);
 
       this.index.setValue(this.releve.indexValue);
+      this.index.setValidators([Validators.min(this.index.value), Validators.required]);
 
       this.checkDate.setValue(new Date(this.releve.dateReading));
-
 
     } else {
       this.id.setValue(null);
@@ -103,7 +104,6 @@ export class AutoReportsComponent implements OnInit {
 
 
   saveReleve() {
-    console.log(2);
     this.releve = new ReleveModel(
       this.reportForm.controls.id.value,
       this.reportForm.controls.index.value,
@@ -118,7 +118,7 @@ export class AutoReportsComponent implements OnInit {
     } else {
       this.toastrService.error(this.translate.instant('ERROR_FORM'), '');
     }
-
-
   }
+
+
 }

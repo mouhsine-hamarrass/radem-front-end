@@ -11,7 +11,7 @@
   <section class="row">
     <div class="col-sm-12">
       <!-- What is-->
-      <div id="what-is" class="card mb-0">
+      <div id="what-is" class="card mb-0 content-body">
         <div class="card-header">
           {{'STATUS_CMI' | translate }}
         </div>
@@ -22,13 +22,11 @@
               <div class="lessons-list">
                 <div class="alert alert-success text-center" role="alert">
                   <br><div class="fa icon-check fa-5x" ></div><br><br>
-                  <h4 class="alert-heading">Paiement Effectué</h4>
-                  <p>Le paiement s'est bien déroulé votre numéro de transaction est {{oid}}.<br>
-                    pour toute question ou information aditionnelle, prière de prendre contact avec notre département commercial par email ({{emailRadem}})
-                    ou par téléphone {{Tel}}
+                  <h4 class="alert-heading">{{'PAYMENT_SUCCEED' | translate}}</h4>
+                  <p>{{'PAYMENT_HAS_BEEN_SUCCEED' | translate}} {{oid}}.<br>
+                    {{'EMAIL_TEXT_INFO' | translate }}  ({{emailRadem}})
+                    {{'OR_TEL' | translate }} {{Tel}}
                   </p>
-                  <hr>
-                  <p class="mb-0">Veuillez cliquer sur le lien pour revenir à la page d'<a href="{{home}}">accueil </a> </p>
                 </div>
               </div>
 

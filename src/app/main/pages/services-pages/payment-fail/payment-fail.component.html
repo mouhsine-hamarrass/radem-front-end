@@ -11,7 +11,7 @@
   <section class="row">
     <div class="col-sm-12">
       <!-- What is-->
-      <div id="what-is" class="card mb-0">
+      <div id="what-is" class="card mb-0 content-body">
         <div class="card-header">
           {{'STATUS_CMI' | translate }}
         </div>
@@ -19,25 +19,20 @@
           <div class="card-body">
 
 
-            <div class="card-content">
-              <div class="card-body">
-                <div class="alert alert-danger text-center" role="alert">
-                  <br>
-                  <div class="fa fa-times fa-5x"></div>
-                  <h4 class="alert-heading">Votre paiement a échoué</h4>
-                  <p><br>
-                    {{'EMAIL_TEXT_INFO' | translate }} ({{emailRadem}})
-                    {{'OR_TEL' | translate }}  {{Tel}}
-                  </p>
-                  <hr>
-                  <p class="mb-0">Veuillez cliquer sur le lien pour revenir à la page d'<a href="{{home}}"
-                                                                                           class="card-link">accueil </a>
-                  </p>
-                </div>
-              </div>
-            </div>
 
-
+<div class="card-content">
+  <div class="card-body">
+    <div class="alert alert-danger text-center" role="alert">
+      <br><div class="fa fa-times fa-5x" ></div>
+      <h4 class="alert-heading">
+        {{'PAYMENT-FAIL' | translate }}</h4>
+      <p><br>
+        {{'EMAIL_TEXT_INFO' | translate }} ({{emailRadem}})
+        {{'OR_TEL' | translate }}  {{Tel}}
+      </p>
+       </div>
+  </div>
+</div>
           </div>
         </div>
         <!--/ What is-->

@@ -69,6 +69,7 @@
   "MY_UNPAID": "Mes impayés",
   "Subscription": "Abonnement",
   "HOME": "Accueil",
+  "home": "accueil",
   "Consult_your_requests": "Consulter vos demandes",
   "Consult_your_request": "Consulter votre demande",
   "New_subscription_request": "Nouvelle demande d'abonnement",
@@ -334,8 +335,8 @@
   "DATE_FILING": "Date de dépose",
   "COUNTER_GAUGE": "Calibre de compteur",
   "PAYMENT_METHOD": "Mode de paiement",
-  "LAST_INDEX": "Dérnier index",
-  "LAST_INDEX_DATE": "Dérnier index",
+  "LAST_INDEX": "Dernier index",
+  "LAST_INDEX_DATE": "Date dernier index",
   "NEXT_VISITE": "Prochaine visite",
   "COUNTER_NUMBER": "N° compteur",
   "DATE_OF_REPORTS": "Date de relève",
@@ -497,7 +498,13 @@
   "MODIFIED_RELEVE" : "Votre relève est ajoutée",
   "releves_cannot_save" : "Impossibe d'enregistrer cette relève",
   "SUSPENDED" : "Suspendu",
-  "ERROR_FORM" : "Remlissez le formulaire",
-  "CHECK_DATE" : "Date relève"
+  "ERROR_FORM" : "Remplissez le formulaire",
+  "CHECK_DATE" : "Date relève",
+  "fill_form" : "Veuillez remplir l'indice de votre compteur !",
+  "PAYMENT-FAIL" : "Votre paiement a échoué",
+  "PAYMENT-NOT-EXISTED" : "cette transaction n'existe pas",
+  "BIG-VALUE" : "Vous devez introduire une grande valeur",
+  "PAYMENT_SUCCEED" : "Paiement Effectué",
+  "PAYMENT_HAS_BEEN_SUCCEED" : "Le paiement s'est bien déroulé votre numéro de transaction est "
 
 }

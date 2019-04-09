@@ -3,5 +3,5 @@ export interface TransactionModel {
   clientName: string;
   totalAmount: number;
   operartionDate: Date;
-  status: String;
+  status: string;
 }

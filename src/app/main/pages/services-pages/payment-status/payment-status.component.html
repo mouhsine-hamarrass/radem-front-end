@@ -1,0 +1,102 @@
+<!--Tooltip Starts-->
+<div class="card-header content-header back col-12">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'PAYMENT' | translate }}
+      </h3>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="content-body">
+    <section class="row">
+      <div class="col-sm-12">
+        <!-- What is-->
+        <div id="what-is" class="card mb-0 content-body">
+          <div class="card-header">
+            {{'STATUS_CMI' | translate }}
+          </div>
+
+
+
+
+
+
+          <ng-container *ngIf="!transaction?.status; then TransNotExisted else TransError"></ng-container>
+
+          <ng-template #TransNotExisted>
+            <div class="card-content">
+              <div class="card-body">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="alert alert-danger text-center" role="alert">
+                      <br>
+                      <div class="fa fa-times fa-5x"></div>
+                      <h4 class="alert-heading">
+                        {{'PAYMENT-NOT-EXISTED' | translate }}</h4>
+                      <p><br>
+                        {{'EMAIL_TEXT_INFO' | translate }} ({{emailRadem}})
+                        {{'OR_TEL' | translate }}  {{Tel}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template #TransError>
+
+
+            <div class="card-content"  *ngIf="transaction?.status ==='VALIDATED'">
+              <div class="card-body">
+                <div class="lessons-list">
+                  <div class="alert alert-success text-center" role="alert">
+                    <br>
+                    <div class="fa icon-check fa-5x"></div>
+                    <br><br>
+                    <h4 class="alert-heading">{{'PAYMENT_SUCCEED' | translate}}</h4>
+                    <p>{{'PAYMENT_HAS_BEEN_SUCCEED' | translate}} {{oid}}.<br>
+                      {{'EMAIL_TEXT_INFO' | translate }}  ({{emailRadem}})
+                      {{'OR_TEL' | translate }} {{Tel}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card-content"  *ngIf="transaction?.status !=='VALIDATED'">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="alert alert-danger text-center" role="alert">
+                      <br>
+                      <div class="fa fa-times fa-5x"></div>
+                      <h4 class="alert-heading">
+                        {{'PAYMENT-FAIL' | translate }}</h4>
+                      <p><br>
+                        {{'EMAIL_TEXT_INFO' | translate }} ({{emailRadem}})
+                        {{'OR_TEL' | translate }}  {{Tel}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </ng-template>
+
+
+
+
+
+
+          <!--/ What is-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
