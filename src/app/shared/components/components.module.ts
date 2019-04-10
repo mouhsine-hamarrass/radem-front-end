@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+// import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {SpinnerService} from './spinner/spinner.service';
 import {DataNotAvailableComponent} from './tables/data-not-available/data-not-available.component';
@@ -31,7 +31,7 @@ import {MultiLevelTreeTableComponent} from './tables/multi-level-tree-table/mult
     }),
   ],
   exports: [
-    PageNotFoundComponent,
+    // PageNotFoundComponent,
     SpinnerComponent,
     DataNotAvailableComponent,
     FilterComponent,
@@ -41,7 +41,7 @@ import {MultiLevelTreeTableComponent} from './tables/multi-level-tree-table/mult
     MultiLevelTreeTableComponent
   ],
   declarations: [
-    PageNotFoundComponent,
+    // PageNotFoundComponent,
     SpinnerComponent,
     DataNotAvailableComponent,
     FilterComponent,

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {LoggerService} from '../../../core/services/logging/logger.service';
+import {LoggerService} from '../core/services/logging/logger.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,8 +7,8 @@ import {LoggerService} from '../../../core/services/logging/logger.service';
   styleUrls: ['./page-not-found.component.css']
 })
 export class PageNotFoundComponent implements OnInit {
-   title = 'Page not found';
-   message = 'Sorry, This page is not available';
+   title = 'This page isn\'t available';
+   message = 'The link you followed may be broken, or the page may have been removed.';
 
    constructor(@Inject('LoggerService') private loggerService: LoggerService) { }
 
