@@ -18,10 +18,6 @@
           </div>
 
 
-
-
-
-
           <ng-container *ngIf="!transaction?.status; then TransNotExisted else TransError"></ng-container>
 
           <ng-template #TransNotExisted>
@@ -86,6 +82,8 @@
               </div>
               </div>
             </div>
+
+
           </ng-template>
 
 

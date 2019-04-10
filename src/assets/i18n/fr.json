@@ -505,6 +505,9 @@
   "PAYMENT-NOT-EXISTED" : "cette transaction n'existe pas",
   "BIG-VALUE" : "Vous devez introduire une grande valeur",
   "PAYMENT_SUCCEED" : "Paiement Effectué",
-  "PAYMENT_HAS_BEEN_SUCCEED" : "Le paiement s'est bien déroulé votre numéro de transaction est "
+  "PAYMENT_HAS_BEEN_SUCCEED" : "Le paiement s'est bien déroulé votre numéro de transaction est ",
+  "NOT_FOUND" : "Page Web inaccessible.",
+  "NOT_FOUND_BROKEN" : "Ce lien est détruit, ou la page n'existe plus."
+
 
 }
