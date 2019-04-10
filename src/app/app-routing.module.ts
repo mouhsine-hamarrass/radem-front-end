@@ -24,6 +24,8 @@ import {DYNAMIC_CONTENT_PAGES_ROUTES} from './routes/dynamic-content-pages.route
 import {ALERT_NOTIFICATIONS_ROUTES} from './routes/alert-notifications-page.routes';
 import {HomeComponent} from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ALERT_NOTIFICATIONS_ROUTES, canActivate: [LoginGuard]},
     {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
+    {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
