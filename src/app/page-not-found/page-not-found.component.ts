@@ -7,8 +7,6 @@ import {LoggerService} from '../core/services/logging/logger.service';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent implements OnInit {
-   title = 'This page isn\'t available';
-   message = 'Le lien que vous avez suivi peut être brisé ou la page peut avoir été supprimée.';
 
    constructor(@Inject('LoggerService') private loggerService: LoggerService) { }
 

@@ -1,18 +1,19 @@
-<div class="container content-body">
-  <div>
-    <app-navbar></app-navbar>
-    <app-second-navbar></app-second-navbar>
-    <div class="text-center">
+<div class="container container-login">
+  <div class="auth-container">
+<app-navbar></app-navbar>
+<app-second-navbar></app-second-navbar>
+<div class="content-mybody row">
+  <div class="container text-center">
+    <h2>{{"NOT_FOUND" | translate}}</h2>
+    <img alt="Page not found" class="img-responsive" src="./assets/images/404-Page-Not-Found.png">
+    <br>
+    <h5>{{"NOT_FOUND_BROKEN" | translate}}</h5>
 
-      <img alt="Page not found" class="img-responsive" src="./assets/images/404-Page-Not-Found.png" height="240"
-           class="text-center">
-      <br>  <h5>{{message}}</h5>
-    </div>
-
-    <app-footer></app-footer>
   </div>
 </div>
-
+<app-footer></app-footer>
+  </div>
+</div>
 <!--
  Name: Page not found component
  Description: Display a custom page not found,
