@@ -13,7 +13,7 @@
       <!-- What is-->
       <div id="what-is" class="card mb-0">
         <div class="card-header">
-          <h4 class="card-title">{{'TOTAL_AMOUNT' | translate }}: {{totalAmount?.toFixed(2)}} DH</h4>
+          <h4 class="card-title">{{'TOTAL_AMOUNT' | translate }}: {{totalAmount}} DH</h4>
         </div>
         <div class="card-content">
           <div class="card-body">
@@ -46,10 +46,10 @@
 
         <div class="col-md-12 text-right">
 
-            <div class="pull-right">
-              <input class="btn btn btn-outline-secondary mb-2"  type="button" (click)="submit()"
-                     value="Procéder au paiement">
-            </div>
+          <div class="pull-right">
+            <input class="btn btn btn-outline-secondary mb-2" type="button" (click)="submit()"
+                   value="Procéder au paiement">
+          </div>
 
         </div>
 
