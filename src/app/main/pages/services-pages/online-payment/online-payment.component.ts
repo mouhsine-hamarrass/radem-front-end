@@ -24,7 +24,7 @@ export class OnlinePaymentComponent implements OnInit {
   hash: string;
   transactionSummaryModel: TransactionSummaryModel;
   invoicesModel: Array<InvoiceModel>;
-  totalAmount: number;
+  totalAmount: string;
 
   constructor(private dataService: DataService, private services: ServicesService, private router: Router) {
   }
@@ -41,17 +41,17 @@ export class OnlinePaymentComponent implements OnInit {
     }
     console.log('jhvsqvhsq hvbsqvjqsvq vqvhqvdq');
 
-    this.services.getTransactionSammury(this.totalAmount).subscribe(response => {
+    this.services.getTransactionSammury(parseFloat(this.totalAmount).toFixed(2)).subscribe(response => {
 
       this.transactionSummary = response.data;
 
-      this.transactionSummary.amount = parseFloat(this.transactionSummary.amount).toFixed(2);
+      //debugger;
+      //this.transactionSummary.amount = parseFloat(this.transactionSummary.amount).toFixed(2);
 
       console.log(this.transactionSummary.amount);
-      debugger;
-      this.transactionSummaryModel = new TransactionSummaryModel(
+            this.transactionSummaryModel = new TransactionSummaryModel(
         this.transactionSummary.oid,
-        this.transactionSummary.amount,
+        parseFloat(this.totalAmount).toFixed(2),
         this.selectedBills.invoices)
 
     }, err => {
@@ -70,7 +70,7 @@ export class OnlinePaymentComponent implements OnInit {
         .sendTransactionSummary(this.transactionSummaryModel)
         .subscribe(response => {
           if (response && !isNaN(response.data)) {
-            this.services.redirectToCmi(this.transactionSummary, this.user);
+            this.services.redirectToCmi(this.transactionSummary, parseFloat(this.totalAmount).toFixed(2), this.user);
           } else {
             console.log(this.transactionSummaryModel);
           }
@@ -88,7 +88,7 @@ export class OnlinePaymentComponent implements OnInit {
       this.router.navigate(['unpaid']);
       return false;
     }
-    this.totalAmount = parseFloat(this.getTotalAmount().toFixed(2));
+    this.totalAmount = this.getTotalAmount();
     return true;
   }
 

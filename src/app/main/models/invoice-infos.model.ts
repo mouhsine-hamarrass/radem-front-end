@@ -6,6 +6,7 @@ export interface InvoiceInfosModel {
   month?: string;
   balance?: string;
   amount?: string;
+  stamp?: string;
   exigible?: boolean;
   checked?: boolean;
 }
