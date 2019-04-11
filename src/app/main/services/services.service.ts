@@ -240,11 +240,10 @@ export class ServicesService {
     return this.httpClient.get<Response<any>>(`${this.urlApi}/refund-request/details/${requestNo}`);
   }
 
-  redirectToCmi(transactionSummary: LightTransactionSummary, user: User) {
-    debugger;
+  redirectToCmi(transactionSummary: LightTransactionSummary, amount: string, user: User) {
     const params: Array<HttpParam> = [
       {name: 'clientid', value: transactionSummary.clientId},
-      {name: 'amount', value: transactionSummary.amount},
+      {name: 'amount', value: amount},
       {name: 'okUrl', value: transactionSummary.okUrl},
       {name: 'failUrl', value: transactionSummary.failUrl},
       {name: 'TranType', value: transactionSummary.tranType},
@@ -290,14 +289,13 @@ export class ServicesService {
 
   //Mouhsine Transaction Salary
 
-  getTransactionSammury(amount: number): Observable<Response<LightTransactionSummary>> {
+  getTransactionSammury(amount: string): Observable<Response<LightTransactionSummary>> {
     return this.httpClient.post<Response<LightTransactionSummary>>(`${this.urlApi}/payments/transactionSummary`, amount);
 
   }
 
 
   sendTransactionSummary(transactionSummary: TransactionSummaryModel): Observable<Response<number>> {
-    debugger;
 
     return this.httpClient.post<Response<number>>(`${this.urlApi}/payments/prePayment`, transactionSummary);
   }

@@ -6,18 +6,21 @@ export class InvoiceModel {
   monthInvoice?: string;
   yearInvoice?: string;
   invoiceNo?: string;
+  stamp?: string;
 
 
   constructor(
     amount: number,
     month: string,
     year: string,
-    invoiceNo: string) {
+    invoiceNo: string,
+    stamp: string) {
 
     this.amount = amount;
     this.monthInvoice = month;
     this.yearInvoice = year;
     this.invoiceNo = invoiceNo;
+    this.stamp = stamp;
   }
 }
 
