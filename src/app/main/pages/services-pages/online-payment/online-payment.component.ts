@@ -25,6 +25,7 @@ export class OnlinePaymentComponent implements OnInit {
   transactionSummaryModel: TransactionSummaryModel;
   invoicesModel: Array<InvoiceModel>;
   totalAmount: string;
+  showTotalAmount: string;
 
   constructor(private dataService: DataService, private services: ServicesService, private router: Router) {
   }
@@ -89,6 +90,7 @@ export class OnlinePaymentComponent implements OnInit {
       return false;
     }
     this.totalAmount = this.getTotalAmount();
+    this.showTotalAmount = parseFloat(this.totalAmount).toFixed(2);
     return true;
   }
 
