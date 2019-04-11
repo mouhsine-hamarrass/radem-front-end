@@ -115,17 +115,17 @@
                     <tr *ngFor="let settlement of settlements">
                       <td class="text-left">
                       <span class="network-icon"
-                            [ngClass]="settlement.typeNetwork === 'EAU BT' ? 'water' : 'electricity'">
+                            [ngClass]="settlement?.typeNetwork === 'EAU BT' ? 'water' : 'electricity'">
                       <i class="fa fa-2x text-white"
-                         [ngClass]="settlement.typeNetwork === 'EAU BT' ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
+                         [ngClass]="settlement?.typeNetwork === 'EAU BT' ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
                      </span>&nbsp;
-                        <b>{{settlement.invoiceNo}}</b>
+                        <b>{{settlement?.invoiceNo}}</b>
                       </td>
-                      <td>{{settlement.month}} - {{settlement.year}}</td>
-                      <td>{{settlement.typeNetwork}}</td>
-                      <td>{{settlement.paymentDate | date:'dd-MM-yyyy'}}</td>
-                      <td>{{settlement.amount | numeral}}</td>
-                      <td>{{settlement.paymentMode}}</td>
+                      <td>{{settlement?.month}} - {{settlement?.year}}</td>
+                      <td>{{settlement?.typeNetwork}}</td>
+                      <td>{{settlement?.paymentDate | date:'dd-MM-yyyy'}}</td>
+                      <td>{{settlement?.amount | numeral}}</td>
+                      <td>{{settlement?.paymentMode}}</td>
                     </tr>
                   </ng-template>
                   </tbody>
