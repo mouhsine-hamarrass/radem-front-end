@@ -28,6 +28,7 @@ import {HomeComponent } from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
     UnauthorizedComponent,
     HomeComponent,
     PageNotFoundComponent,
+
   ],
   exports: [
   PageNotFoundComponent,
