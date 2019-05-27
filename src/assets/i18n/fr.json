@@ -507,7 +507,8 @@
   "PAYMENT_SUCCEED" : "Paiement Effectué",
   "PAYMENT_HAS_BEEN_SUCCEED" : "Le paiement s'est bien déroulé votre numéro de transaction est ",
   "NOT_FOUND" : "Page Web inaccessible.",
-  "NOT_FOUND_BROKEN" : "Ce lien est détruit, ou la page n'existe plus."
+  "NOT_FOUND_BROKEN" : "Ce lien est détruit, ou la page n'existe plus.",
+  "SUBSCRIPTION_DONE": "Votre demande d'abonnement a été effectuée"
 
 
 }

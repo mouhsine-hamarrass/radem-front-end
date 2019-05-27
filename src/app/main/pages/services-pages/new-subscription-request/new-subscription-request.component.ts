@@ -3,6 +3,8 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {ServicesService} from '../../../services/services.service';
 import {SubscriptionReqModel} from '../../../models/subscriptionReq.model';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-subscription-request',
@@ -14,6 +16,8 @@ export class NewSubscriptionRequestComponent implements OnInit {
 
   constructor(private servicesService: ServicesService,
               private router: Router,
+              private toastrService: ToastrService,
+              private translate: TranslateService,
               private formBuilder: FormBuilder) {
     this.subscriptionForm = this.formBuilder.group({
       'firstAndLastName': ['', Validators.compose(
@@ -119,7 +123,9 @@ export class NewSubscriptionRequestComponent implements OnInit {
 
     this.servicesService.saveSubscriptionRequest(subscriptionReq).subscribe(response => {
       console.log(response);
-      this.router.navigate(['/services'])
+      this.toastrService.success(this.translate.instant('SUBSCRIPTION_DONE'), '');
+      this.router.navigate(['/services/subscription-requests']);
+
     }, err => {
       console.log(err);
     });

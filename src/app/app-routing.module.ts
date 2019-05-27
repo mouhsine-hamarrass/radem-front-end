@@ -49,7 +49,7 @@ const appRoutes: Routes = [
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
     {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ALERT_NOTIFICATIONS_ROUTES, canActivate: [LoginGuard]},
     {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
-    {path: '**', component: PageNotFoundComponent},
+    {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
