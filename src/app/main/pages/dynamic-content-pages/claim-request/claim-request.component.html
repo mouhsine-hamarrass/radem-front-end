@@ -18,7 +18,6 @@
             <div class="container">
               <form [formGroup]="contact" (ngSubmit)="addClaim()">
                 <div class="form">
-                  <h3>Service Réclamation</h3>
                   <h4>Veuillez remplir vos coordonnées et taper votre réclamation</h4>
                   <fieldset>
                     <input placeholder="Votre Nom et Prénom" type="text" tabindex="1" required autofocus
@@ -32,7 +31,8 @@
                            formControlName="phone" [ngClass]="{invalid: contact.invalid}">
                   </fieldset>
                   <fieldset>
-                    <input placeholder="Votre Adresse" type="text" tabindex="4" required formControlName="address">
+                    <input readonly id="address" placeholder="spécifiez votre position par un click sur la map"
+                           type="text" tabindex="4" required formControlName="address">
                   </fieldset>
                   <p>Réclamation liée à:</p>
                   <fieldset class="radio_group">
@@ -66,8 +66,6 @@
                   <fieldset>
                     <button class="submit">Enregistrer</button>
                   </fieldset>
-                  <p class="copyright">Copyright&copy; <a href="http://www.radem.ma" target="_blank"
-                                                          title="RADEM">RADEM</a></p>
                 </div>
               </form>
             </div>

@@ -7,7 +7,8 @@ import {ServicesService} from '../../../services/services.service';
 
 declare let L;
 
-const portailUrl = 'http://portailsig.radem.ma/server/rest/services/Reclamation_clients/FeatureServer/0';
+// const portailUrl = 'http://portailsig.radem.ma/server/rest/services/Reclamation_clients/FeatureServer/0';
+const portailUrl = 'https://portailsig.radem.ma/server/rest/services/Gestion_Reclamation_clients/FeatureServer/0';
 
 @Component({
   selector: 'app-claim-request',
