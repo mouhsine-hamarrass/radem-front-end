@@ -27,7 +27,9 @@
                     </option>
                   </select>
                 </div>
-                <label class="col-form-label">{{'PERIOD_OF' | translate}} <span class="danger">*</span> :</label>
+                 <!--
+                  <label class="col-form-label">{{'PERIOD_OF' | translate}} <span class="danger">*</span> :</label>
+
                 <div class="col-auto">
                   <input [owlDateTime]="sd"
                          [owlDateTimeTrigger]="sd"
@@ -44,6 +46,7 @@
                     </div>
                   </div>
                 </div>
+
                 <label class="col-form-label">{{'THE' | translate}} <span class="danger">*</span></label>
                 <div class="col-auto">
                   <input [owlDateTime]="ed"
@@ -61,28 +64,38 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="col-auto float-right row">
                   <button type="button" class="btn btn btn-outline-primary"
                           (click)="getSettlements()" [disabled]="contractForm.invalid">
                     <i class="fa fa-search"></i>
                   </button>
-                  &nbsp;
+                 &nbsp;
                   <div class="btn-group" dropdown>
                     <button dropdownToggle
                             class="btn btn btn-outline-primary dropdown-toggle download"
                             type="button"><i
                       class="fa fa-download"></i></button>
 
-                    <div aria-labelledby="dropdownUser" class="dropdown-menu">
-                      <a class="dropdown-item" (click)="downloadPdfSettlements()">
-                        <i class="fa fa-file-pdf-o"></i> {{'PDF_FORMAT' | translate}}
-                      </a>
-                      <!--<a class="dropdown-item" (click)="downloadXlsSettlements()">
+                      <div aria-labelledby="dropdownUser" class="dropdown-menu">
+                          <a class="dropdown-item" (click)="downloadPdfSettlements()">
+                              <i class="fa fa-file-pdf-o"></i> {{'PDF_FORMAT' | translate}}
+                          </a>
+
+                      <a class="dropdown-item" (click)="downloadXlsSettlements()">
                         <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
-                      </a>-->
+                      </a>
+
                     </div>
                   </div>
                 </div>
+          -->
+
+                  <div class="col-auto float-right row">
+                      <button type="button" class="btn btn btn-outline-primary"
+                              (click)="getSettlements()" [disabled]="contractForm.invalid">
+                          <i class="fa fa-search"></i>
+                      </button></div>
               </div>
               <div class="table-responsive mx-auto">
                 <div class="row justify-content-between">
@@ -97,37 +110,40 @@
                        filterable-table (filtred)="onFiltred($event)">
                   <thead class="table-light">
                   <tr>
-                    <th scope="col" width="150">{{'BILL_NUMBER' | translate }}</th>
-                    <th scope="col">{{'BILLIN_PERIOD' | translate }}</th>
-                    <th scope="col">{{'TYPE_OF_NETWORK' | translate }}</th>
-                    <th scope="col">{{'SETTLEMENT_DATE' | translate }}</th>
-                    <th scope="col">{{'AMOUNT_IN_DH_TTC' | translate }}</th>
-                    <th scope="col">{{'SETTLEMENT_MODE' | translate }}</th>
+                    <th scope="col" width="150">{{'BILL_RECU' | translate }}</th>
+                    <th scope="col">{{'DATE_OF_RECEIPT' | translate }}</th>
+                    <th scope="col">{{'TOTAL_AMOUNT' | translate }}</th>
+                    <th scope="col">{{'NUMBER_OF_CONTRACT' | translate }}</th>
+                    <th scope="col">{{'PAYMENT_MODE' | translate }}</th>
+                    <th scope="col">{{'SETTLEMENT_ACTION' | translate }}</th>
                   </tr>
                   </thead>
                   <tbody>
 
-                  <app-data-not-available
-                    *ngIf="!settlements || settlements.length == 0; else dataAvailable"
-                    [colSpan]="6"></app-data-not-available>
 
-                  <ng-template #dataAvailable>
-                    <tr *ngFor="let settlement of settlements">
-                      <td class="text-left">
-                      <span class="network-icon"
-                            [ngClass]="settlement?.typeNetwork === 'EAU BT' ? 'water' : 'electricity'">
-                      <i class="fa fa-2x text-white"
-                         [ngClass]="settlement?.typeNetwork === 'EAU BT' ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
-                     </span>&nbsp;
-                        <b>{{settlement?.invoiceNo}}</b>
-                      </td>
-                      <td>{{settlement?.month}} - {{settlement?.year}}</td>
-                      <td>{{settlement?.typeNetwork}}</td>
-                      <td>{{settlement?.paymentDate | date:'dd-MM-yyyy'}}</td>
-                      <td>{{settlement?.amount | numeral}}</td>
-                      <td>{{settlement?.paymentMode}}</td>
-                    </tr>
-                  </ng-template>
+
+                  <app-data-not-available
+                      *ngIf="!pieces || pieces.length == 0; else dataAvailable"
+                      [colSpan]="6"></app-data-not-available>
+
+                    <ng-template #dataAvailable>
+                    <tr *ngFor="let piece of pieces">
+
+                        <td>{{piece?.receiptNo}}</td>
+                        <td>{{piece?.receiptDate | date:'dd-MM-yyyy'}}</td>
+                        <td>{{piece?.totalAmount}}</td>
+                        <td>{{piece?.numberOfContracts}}</td>
+                        <td>{{piece?.paymentMode}}</td>
+                        <td>
+                          <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                               tooltip="Détails"
+                               (click)="openReceiptDetails(detailReceipt, piece?.receiptNo)"></i>
+                        </td>
+                      </tr>
+
+                    </ng-template>
+
+
                   </tbody>
                 </table>
               </div>
@@ -145,3 +161,72 @@
     </div>
   </section>
 </div>
+
+
+<ng-template #detailReceipt>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">{{'RECEIPT_DETAILS' | translate}} N°: {{piece?.receiptNo}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="table-responsive mx-auto">
+    <div class="row justify-content-between">
+      <div class="col-12">
+        <div class="float-left">
+          <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+        </div>
+      </div>
+    </div>
+    <table class="table"
+           sortable-table (sorted)="onSorted($event)"
+           filterable-table (filtred)="onFiltred($event)">
+      <thead class="table-light">
+      <tr>
+        <th scope="col" width="150">{{'CONTRACT_NO' | translate }}</th>
+        <th scope="col">{{'BILL_NUMBER' | translate }}</th>
+        <th scope="col">{{'BILLIN_PERIOD' | translate }}</th>
+        <th scope="col">{{'SETTLEMENT_AMOUNT' | translate }}</th>
+
+      </tr>
+      </thead>
+      <tbody>
+
+
+
+
+        <app-data-not-available
+          *ngIf="!piecesDetail || piecesDetail.length == 0; else dataAvailable"
+          [colSpan]="6"></app-data-not-available>
+
+        <ng-template #dataAvailable>
+        <tr *ngFor="let pieceDetail of piecesDetail">
+
+            <td>{{pieceDetail?.contractNo}}</td>
+            <td>{{pieceDetail?.invoiceNo}}</td>
+            <td>{{pieceDetail?.month}} - {{pieceDetail?.year}}</td>
+            <td>{{pieceDetail?.amount}}</td>
+
+
+        </ng-template>
+
+
+      </tbody>
+    </table>
+  </div>
+  <app-pagination [showPagination]="totalPages > 1"
+                  [numberOfItems]="numberOfItems"
+                  [itemsPerPage]="itemsPerPage"
+                  [totalItems]="totalElements"
+                  [totalPages]="totalPages"
+                  (onpageChanged)="pageDetailChanged($event)"></app-pagination>
+
+  <div class="modal-footer modal-radem">
+
+    <button type="button" class="btn btn-light pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">Fermer</span>
+    </button>
+  </div>
+
+
+</ng-template>
