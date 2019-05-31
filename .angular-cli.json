@@ -31,9 +31,12 @@
         "../node_modules/ngx-toastr/toastr.css",
         "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
         "assets/app/vendors/css/googleapis-fonts/main-fonts.css",
-        "assets/app/css/app.css"
+        "assets/app/css/app.css",
+        "assets/leaflet/leaflet.css"
       ],
       "scripts": [
+        "assets/leaflet/leaflet.js",
+        "assets/leaflet/esri-leaflet.js",
         "assets/app/vendors/js/vendors.min.js",
         "assets/app/vendors/js/ui/prism.min.js",
         "assets/app/js/core/app-menu.js",

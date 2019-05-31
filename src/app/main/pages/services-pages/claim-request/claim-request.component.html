@@ -1,67 +1,76 @@
 <!--Tooltip Starts-->
-<div class="content-header back col-12 mb-1 mt-1">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title">{{'CLAIMS' | translate }}</h3>
-        </div>
+<div class="card-header content-header back col-12">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'CLAIMS' | translate }}</h3>
     </div>
+  </div>
 </div>
-
-<div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <div id="what-is" class="card mb-0">
-                <div class="card-header">
-                    <h4 class="card-title">{{'NEW_REQUEST' | translate }}</h4>
-                    <a class="heading-elements-toggle">
-                        <i class="fa fa-ellipsis-v font-medium-3"></i>
-                    </a>
-                    <div class="heading-elements">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <form class="form" [formGroup]="complaintForm"
-                              (ngSubmit)="save()" novalidate>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="feedback">{{'Number_Request' | translate }} : </label>
-                                    <input formControlName="numero" readonly class="form-control" id="feedback"
-                                           value="{{reqNumber}}">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="feedback">{{'OBJECT' | translate }} : </label>
-                                    {{'login.placeholders.username' | translate }}
-                                    <select formControlName="objet" class="form-control">
-                                        <option *ngFor="let object of objects" value="{{object}}">
-                                            {{object | translate}}
-                                        </option>
-                                    </select>
-                                    <div class="text-danger"
-                                         *ngIf="!complaintForm.controls['objet'].valid && complaintForm.controls['objet'].touched">
-                                        <div *ngIf="complaintForm.controls['objet'].errors.required">
-                                            {{'FIELD_REQUIRED' | translate}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">{{'DESCRIPTION' | translate }}: </label>
-                                <textarea formControlName="description" class="form-control"
-                                          id="description" rows="5"></textarea>
-                            </div>
-                            <div class="form-actions my-2">
-                                <button class="btn btn btn-outline-primary pull-right"
-                                        [disabled]="complaintForm.invalid" type="submit">
-                                    {{'SAVE' | translate }}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!--/ What is-->
-            </div>
+<div class="container">
+  <form [formGroup]="contact" (ngSubmit)="addClaim()">
+    <div class="form">
+      <h3>Service Réclamation</h3>
+      <h4>Veuillez remplir vos coordonnées et taper votre réclamation</h4>
+      <fieldset>
+        <input placeholder="Votre Nom et Prénom" type="text" tabindex="1" required autofocus formControlName="fullName">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Votre Adresse Email" type="email" tabindex="2" required formControlName="email">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Votre Téléphone" type="tel" pattern="[0-9]{10}" tabindex="3" required
+               formControlName="phone" [ngClass]="{invalid: contact.invalid}">
+      </fieldset>
+      <fieldset>
+        <input id="address" placeholder="Votre Adresse" type="text" tabindex="4" required formControlName="address">
+      </fieldset>
+      <p>Réclamation liée à:</p>
+      <fieldset class="radio_group">
+        <div class="radio_item">
+          <input [(ngModel)]="flag" type="radio" id="eau" checked formControlName="claimType" value="001">
+          <label for="eau">Eau</label>
         </div>
-    </section>
+        <div class="radio_item">
+          <input [(ngModel)]="flag" type="radio" id="elec" formControlName="claimType" value="002">
+          <label for="elec">Electricité</label>
+        </div>
+        <div class="radio_item">
+          <input [(ngModel)]="flag" type="radio" id="assain" formControlName="claimType" value="003">
+          <label for="assain">Assainissement</label>
+        </div>
+        <!-- Contrat si l'utitlisateur est connecté -->
+        <div class="radio_item">
+          <input [(ngModel)]="flag" type="radio" id="contact" formControlName="claimType" value="004">
+          <label for="contact">Contrat</label>
+        </div>
+        <div *ngIf="flag === '004'">
+          <select type="text" class="form-control contract-dropdown contract-dropdown_map" formControlName="contractId">
+            <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+            <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+              {{contract.contractNo}}
+              ({{contract.type}})
+            </option>
+          </select>
+        </div>
+        <!-- fin if -->
+      </fieldset>
+      <fieldset>
+        <label>Joindre photo : </label>
+        <input type="file" accept="image/png, image/jpeg" (change)="onFileChanged($event)">
+      </fieldset>
+      <fieldset>
+        <textarea placeholder="Tapper votre réclamation ici...." tabindex="5" required
+                  formControlName="claimText"></textarea>
+      </fieldset>
+      <fieldset>
+        <button class="submit" >Enregistrer</button>
+      </fieldset>
+      <p class="copyright">Copyright&copy; <a href="http://www.radem.ma" target="_blank" title="RADEM">RADEM</a></p>
+    </div>
+  </form>
+</div>
+<div class="map-wrapper">
+  <div id="map">
+
+  </div>
 </div>

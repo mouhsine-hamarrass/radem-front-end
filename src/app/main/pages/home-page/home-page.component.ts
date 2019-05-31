@@ -77,6 +77,7 @@ export class HomePageComponent implements OnInit {
 
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
+      debugger;
       this.clientContracts = response.data;
       if (this.clientContracts.length) {
         this.selectedContract = this.clientContracts[0].contractNo;
