@@ -10,6 +10,7 @@
 <div class="content-body" id="table">
   <section class="row">
     <div class="col-sm-12">
+      <p>Message from parent: {{Contractsettlement}}</p>
       <!-- What is-->
       <div id="what-is" class="mb-0">
         <div class="card-content collapse show">
@@ -18,7 +19,7 @@
               <div class="row form-group col-lg-12 col-md-12 col-sm-12 ">
                 <label class="col-form-label">{{'CONTRACT' | translate}}<span class="danger">*</span>:</label>
                 <div class="col-auto">
-                  <select formControlName="contract" type="text" class="custom-select" #t
+                  <select formControlName="contract" type="text" class="custom-select"  #t
                           (change)="setContract(t.value)">
                     <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
                     <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
@@ -89,13 +90,14 @@
                     </div>
                   </div>
                 </div>
-          -->
+
 
                   <div class="col-auto float-right row">
                       <button type="button" class="btn btn btn-outline-primary"
                               (click)="getSettlements()" [disabled]="contractForm.invalid">
                           <i class="fa fa-search"></i>
                       </button></div>
+                       -->
               </div>
               <div class="table-responsive mx-auto">
                 <div class="row justify-content-between">
@@ -147,6 +149,7 @@
                   </tbody>
                 </table>
               </div>
+              <br>  <br>
               <app-pagination [showPagination]="totalPages > 1"
                               [numberOfItems]="numberOfItems"
                               [itemsPerPage]="itemsPerPage"
@@ -165,10 +168,13 @@
 
 <ng-template #detailReceipt>
   <div class="modal-header modal-radem">
-    <h4 class="modal-title pull-left">{{'RECEIPT_DETAILS' | translate}} N°: {{piece?.receiptNo}}</h4>
+    <h4 class="modal-title pull-left">{{'RECEIPT_DETAILS' | translate}} N°:<span class="Bold_txt"> {{piece}} </span></h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
+  </div>
+  <div class="modal-body modal-radem">
+    <h3 class="Bold_txt modal-title pull-left">{{'INVOICE_LIST'| translate}}</h3>
   </div>
   <div class="table-responsive mx-auto">
     <div class="row justify-content-between">
@@ -214,13 +220,15 @@
       </tbody>
     </table>
   </div>
-  <app-pagination [showPagination]="totalPages > 1"
-                  [numberOfItems]="numberOfItems"
-                  [itemsPerPage]="itemsPerPage"
-                  [totalItems]="totalElements"
-                  [totalPages]="totalPages"
-                  (onpageChanged)="pageDetailChanged($event)"></app-pagination>
-
+  <div class="modal-body modal-radem">
+      <app-pagination [showPagination]="totalPages > 1"
+                      [numberOfItems]="numberOfItems"
+                      [itemsPerPage]="itemsPerPage"
+                      [totalItems]="totalElements"
+                      [totalPages]="totalPages"
+                      (onpageChanged)="pageDetailChanged($event)">
+      </app-pagination>
+  </div>
   <div class="modal-footer modal-radem">
 
     <button type="button" class="btn btn-light pull-right" aria-label="Close" (click)="modalRef.hide()">

@@ -516,6 +516,9 @@
   "PAYMENT_MODE":"Mode de règlement",
   "SETTLEMENT_ACTION":"Action",
   "SETTLEMENT_AMOUNT" :"Montant",
-  "RECEIPT_DETAILS" :"Détails reçu"
+  "RECEIPT_DETAILS" :"Détails reçu",
+  "INVOICE_LIST" :"La liste des factures",
+  "Facturation_Consum" : "Facturation"
+
 
 }

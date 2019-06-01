@@ -16,7 +16,7 @@
             <div class="row">
               <label class="col-form-label">{{'CONTRACT' | translate }} <span
                 class="danger">*</span>:</label>
-              <div class="col-3">
+              <div class="col-auto">
                 <select type="text" class="custom-select" #s
                         (change)="setReportContract(s.value)">
                   <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
@@ -26,18 +26,34 @@
                   </option>
                 </select>
               </div>
+
+              <div class="alignRadio col col-lg-2">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="volume" name="consum" (click)="setRadio('volume')" checked >
+                  <label class="custom-control-label" for="volume">{{'Volume' | translate}}</label>
+                </div>
+              </div>
+
+              <div class="alignRadio col col-lg-2">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="facturation" name="consum" (click)="setRadio('facturation')">
+                  <label class="custom-control-label" for="facturation">{{'Facturation_Consum' | translate}}</label>
+                </div>
+              </div>
+
             </div>
           </div>
-          <div class="col-12 mt-1">
-            <div class="row charts">
-              <div class="col-6 col-sm-6">
+
+          <div  class="col-16">
+            <div class="row">
+              <div *ngIf="isSelected('volume')" class="col-sm-7">
                 <canvas baseChart #chart1="base-chart" [chartType]="chartType" [datasets]="chartDataSetsVolume"
                         [labels]="chartLabels"
                         [colors]="chartColorsEau"
                         [options]="chartOptionsEau" [legend]="true">
                 </canvas>
               </div>
-              <div class="col-6 col-sm-6">
+             <div *ngIf="isSelected('facturation')" class="col-sm-7">
                 <canvas baseChart #chart2="base-chart" [chartType]="chartType" [datasets]="chartDataSetsInvoice"
                         [labels]="chartLabels"
                         [colors]="chartColorsFact"

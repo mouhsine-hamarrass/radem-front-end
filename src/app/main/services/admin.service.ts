@@ -181,6 +181,12 @@ export class AdminService {
         return this.httpClient.get<Response<Array<PieceModel>>>(`${this.apiUrl}/contracts/${contractNo}/receipts?page=${page}&size=${pageSize}`);
     }
 
+    getPieceSettlements(contractNo: string, page: number, pageSize: number):
+        Observable<Response<PieceModel>> {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.get<Response<PieceModel>>(`${this.apiUrl}/contracts/${contractNo}/receipts`);
+    }
+
     getPageableDetailSettlements(ReceiptNo: string, page: number, pageSize: number):
         Observable<Response<Array<PieceDetailModel>>> {
         // tslint:disable-next-line:max-line-length

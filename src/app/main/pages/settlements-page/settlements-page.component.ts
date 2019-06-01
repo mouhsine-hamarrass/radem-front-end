@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit, TemplateRef, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AdminService} from '../../services/admin.service';
 import {UtilsService} from '../../services/utils.service';
@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PieceModel} from '../../models/piece.model';
 import {PieceDetailModel} from '../../models/pieceDetail.model';
+import {SendContractModel} from '../../models/SendContract.model';
 
 @Component({
     selector: 'app-settlements',
@@ -21,7 +22,6 @@ export class SettlementsPageComponent implements OnInit {
     public user: User;
     clientContracts: Array<ContractAttachModel>;
     public pieces: Array<PieceModel>;
-    public piece: PieceModel;
     public piecesDetail: Array<PieceDetailModel>;
     public contractId: any;
     public date: Date;
@@ -32,7 +32,12 @@ export class SettlementsPageComponent implements OnInit {
     today: any = moment();
     minDate: any = moment().subtract(5, 'years');
 
+    piece: string;
+
+    @Input() Contractsettlement: string;
+
     page = 1;
+    page2 = 1;
     pageSize = 0;
     totalElements: number;
     totalPages: number;
@@ -59,11 +64,13 @@ export class SettlementsPageComponent implements OnInit {
         });
     }
 
+
     ngOnInit() {
         if (localStorage.getItem(AuthHelper.USER_ID)) {
             this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
         }
         this.getClientAttachedContracts();
+
     }
 
     getClientAttachedContracts() {
@@ -108,9 +115,10 @@ export class SettlementsPageComponent implements OnInit {
         this.getSettlements();
     }
 
-    pageDetailChanged(page: string): void {
-        console.log(page);
-        this.adminService.getPageableDetailSettlements(page, this.page, this.pageSize).subscribe(responseDetailSettlements => {
+    pageDetailChanged(page: number): void {
+        this.page2 = page;
+        // tslint:disable-next-line:max-line-length
+        this.adminService.getPageableDetailSettlements(this.piece, this.page2, this.pageSize).subscribe(responseDetailSettlements => {
             // this.piece = responseDetailSettlements.data;
             this.piecesDetail = responseDetailSettlements.data['content'];
             this.totalElements = responseDetailSettlements.data['totalElements'];
@@ -118,7 +126,7 @@ export class SettlementsPageComponent implements OnInit {
             this.itemsPerPage = responseDetailSettlements.data['size'];
             this.numberOfItems = responseDetailSettlements.data['numberOfElements'];
 
-            this.modalRef = this.modalService.show('5', this.config);
+         //   this.modalRef = this.modalService.show('5', this.config);
             // }, error => console.log(error));
         }, err => console.log(err));
     }
@@ -140,6 +148,7 @@ export class SettlementsPageComponent implements OnInit {
 
     setContract(id: any) {
         this.contractId = id;
+        this.getSettlements();
     }
 
     getConsumptionReport() {
@@ -176,9 +185,8 @@ export class SettlementsPageComponent implements OnInit {
 
     openReceiptDetails(template: TemplateRef<any>, ReceiptNum: string) {
         if (ReceiptNum) {
-
             this.adminService.getPageableDetailSettlements(ReceiptNum, this.page, this.pageSize).subscribe(responseDetailSettlements => {
-                // this.piece = responseDetailSettlements.data;
+
                 this.piecesDetail = responseDetailSettlements.data['content'];
                 this.totalElements = responseDetailSettlements.data['totalElements'];
                 this.totalPages = responseDetailSettlements.data['totalPages'];
@@ -188,7 +196,10 @@ export class SettlementsPageComponent implements OnInit {
                 this.modalRef = this.modalService.show(template, this.config);
                 // }, error => console.log(error));
             }, err => console.log(err));
-
+            this.piece = ReceiptNum;
         }
+
+
+
     }
 }
