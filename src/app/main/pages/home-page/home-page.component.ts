@@ -48,7 +48,6 @@ export class HomePageComponent implements OnInit {
     formLinkContract: FormGroup;
     private modalOptions = <ModalOptions>{backdrop: true, ignoreBackdropClick: false, class: 'modal-lg'};
 
-
     constructor(
         private contractServices: ContractsService,
         private adminServices: AdminService,
