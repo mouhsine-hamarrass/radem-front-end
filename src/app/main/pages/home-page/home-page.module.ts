@@ -15,29 +15,31 @@ import {createTranslateLoader} from '../../../app.translate.factory';
 import {ConsumptionsPageModule} from '../consumptions-page/consumptions-page.module';
 import {FormsModule} from '@angular/forms';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {SettlementsPageModule} from '../settlements-page/settlements-page.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ChartsModule,
-    BsDropdownModule,
-    BsDatepickerModule,
-    HomePageRoutingModule,
-    PipesModule,
-    UnpaidPageModule,
-    ConsumptionsPageModule,
-    SharedModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    NgxPermissionsModule.forChild()
+    imports: [
+        CommonModule,
+        FormsModule,
+        ChartsModule,
+        BsDropdownModule,
+        BsDatepickerModule,
+        HomePageRoutingModule,
+        PipesModule,
+        UnpaidPageModule,
+        ConsumptionsPageModule,
+        SharedModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        NgxPermissionsModule.forChild(),
+        SettlementsPageModule
 
-  ],
+    ],
   declarations: [HomePageComponent],
   providers: [
     HomeService,

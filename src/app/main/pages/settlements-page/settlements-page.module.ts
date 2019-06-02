@@ -29,6 +29,10 @@ import {HttpClient} from '@angular/common/http';
         }),
         SharedModule
     ],
+    exports: [
+        SettlementsPageComponent,
+        SettlementsPageComponent
+    ],
     declarations: [
         SettlementsPageComponent
     ]
