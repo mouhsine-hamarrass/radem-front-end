@@ -508,7 +508,17 @@
   "PAYMENT_HAS_BEEN_SUCCEED" : "Le paiement s'est bien déroulé votre numéro de transaction est ",
   "NOT_FOUND" : "Page Web inaccessible.",
   "NOT_FOUND_BROKEN" : "Ce lien est détruit, ou la page n'existe plus.",
-  "SUBSCRIPTION_DONE": "Votre demande d'abonnement a été effectuée"
+  "SUBSCRIPTION_DONE": "Votre demande d'abonnement a été effectuée",
+  "BILL_RECU" : "N° de reçu",
+  "DATE_OF_RECEIPT" :"Date de reçu",
+  "TOTAL_AMOUNT" :"Montant total",
+  "NUMBER_OF_CONTRACT":"Nombre de contrats",
+  "PAYMENT_MODE":"Mode de règlement",
+  "SETTLEMENT_ACTION":"Action",
+  "SETTLEMENT_AMOUNT" :"Montant",
+  "RECEIPT_DETAILS" :"Détails reçu",
+  "INVOICE_LIST" :"La liste des factures",
+  "Facturation_Consum" : "Facturation"
 
 
 }
