@@ -13,6 +13,7 @@ import {PieceModel} from '../../models/piece.model';
 import {PieceDetailModel} from '../../models/pieceDetail.model';
 import {SendContractModel} from '../../models/SendContract.model';
 import {debug} from 'util';
+import {Setting} from '../../models/setting.model';
 
 @Component({
   selector: 'app-settlements',
@@ -52,6 +53,7 @@ export class SettlementsPageComponent implements OnInit {
   numberOfItems2: number;
   itemsPerPage2: number;
 
+  advices: Setting;
   sort: any;
   filter: any;
   config = {
@@ -78,6 +80,7 @@ export class SettlementsPageComponent implements OnInit {
     if (localStorage.getItem(AuthHelper.USER_ID)) {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
+    this.getAdvice();
     this.getClientAttachedContracts();
 
   }
@@ -105,7 +108,6 @@ export class SettlementsPageComponent implements OnInit {
   }
 
   getSettlements() {
-    debugger;
     let contract = this.contractForm.controls['contract'].value;
     if (contract === undefined) {
       contract = this.clientContracts[0].contractNo;
@@ -219,6 +221,14 @@ export class SettlementsPageComponent implements OnInit {
       this.piece = ReceiptNum;
     }
 
+  }
 
+  getAdvice() {
+    this.adminService.getAdvices().subscribe(
+        response => {
+          this.advices = response.data;
+        }, err => {
+          console.log(err)
+        });
   }
 }

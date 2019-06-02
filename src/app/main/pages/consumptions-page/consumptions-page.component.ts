@@ -34,6 +34,7 @@ export class ConsumptionsPageComponent implements OnInit {
     consumptionsHistoryCurrentYear: Array<ConsumptionHistoryModel> = [];
     consumptionsReport: Array<ConsumptionReportModel> = [];
     legth: any;
+    selectedContract: string;
 
     today: any = moment();
     minDate: any = moment().subtract(5, 'years');
@@ -179,7 +180,8 @@ export class ConsumptionsPageComponent implements OnInit {
         this.services.clientAttachedContracts().subscribe(response => {
             this.clientContracts = response.data;
             if (this.clientContracts.length) {
-                // this.setReportContract(this.clientContracts[0].contractNo);
+                 this.selectedContract = this.clientContracts[0].contractNo;
+                 this.setReportContract(this.clientContracts[0].contractNo);
             }
         }, err => {
             console.log(err)

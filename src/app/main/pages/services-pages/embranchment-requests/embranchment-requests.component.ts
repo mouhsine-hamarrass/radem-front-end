@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {EmbranchmentRequestModel} from '../../../models/embranchment-request.model';
+import {Setting} from '../../../models/setting.model';
+import {AdminService} from '../../../services/admin.service';
 
 @Component({
   selector: 'app-embranchment-requests',
@@ -21,12 +23,14 @@ export class EmbranchmentRequestsComponent implements OnInit {
   embranchmentRequests: Array<EmbranchmentRequestModel>;
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
+  advices: Setting;
 
-
-  constructor(private services: ServicesService) {
+  constructor(private services: ServicesService,
+              private adminService: AdminService) {
   }
 
   ngOnInit() {
+    this.getAdvice();
     this.getClientAttachedContracts();
   }
 
@@ -59,5 +63,14 @@ export class EmbranchmentRequestsComponent implements OnInit {
   pageChanged(page: number): void {
     this.page = page;
     this.getEmbranchments(this.contractNo);
+  }
+
+  getAdvice() {
+    this.adminService.getAdvices().subscribe(
+        response => {
+          this.advices = response.data;
+        }, err => {
+          console.log(err)
+        });
   }
 }
