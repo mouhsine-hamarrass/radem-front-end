@@ -19,8 +19,8 @@
               <div class="row form-group col-lg-12 col-md-12 col-sm-12 ">
                 <label class="col-form-label">{{'CONTRACT' | translate}}<span class="danger">*</span>:</label>
                 <div class="col-auto">
-                  <select formControlName="contract" type="text" class="custom-select"  #t
-                          (change)="setContract(t.value)">
+                  <select formControlName="contract" type="text" class="custom-select"
+                          (change)="setContract(selectedContract)" [(ngModel)]="selectedContract">
                     <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
                     <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
                       {{contract.contractNo}}
@@ -150,12 +150,12 @@
                 </table>
               </div>
               <br>  <br>
-             <!-- <app-pagination [showPagination]="totalPages > 1"
+              <app-pagination [showPagination]="totalPages > 1"
                               [numberOfItems]="numberOfItems"
                               [itemsPerPage]="itemsPerPage"
                               [totalItems]="totalElements"
                               [totalPages]="totalPages"
-                              (onpageChanged)="pageChanged($event)"></app-pagination>-->
+                              (onpageChanged)="pageChanged($event)"></app-pagination>
             </div>
           </form>
         </div>
@@ -198,9 +198,6 @@
       </thead>
       <tbody>
 
-
-
-
         <app-data-not-available
           *ngIf="!piecesDetail || piecesDetail.length == 0; else dataAvailable"
           [colSpan]="6"></app-data-not-available>
@@ -221,11 +218,11 @@
     </table>
   </div>
   <div class="modal-body modal-radem">
-      <app-pagination [showPagination]="totalPages > 1"
-                      [numberOfItems]="numberOfItems"
-                      [itemsPerPage]="itemsPerPage"
-                      [totalItems]="totalElements"
-                      [totalPages]="totalPages"
+      <app-pagination [showPagination]="totalPages2 > 1"
+                      [numberOfItems]="numberOfItems2"
+                      [itemsPerPage]="itemsPerPage2"
+                      [totalItems]="totalElements2"
+                      [totalPages]="totalPages2"
                       (onpageChanged)="pageDetailChanged($event)">
       </app-pagination>
   </div>
