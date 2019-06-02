@@ -77,6 +77,18 @@
       </div>
     </div>
   </section>
+  <div class="content">
+    <div class="deck card-deck-outline">
+      <div class="deck-body">
+        <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
+        <div class="card-deck-content">
+          <div class="card-body">
+            <div [innerHTML]="advices?.value || '' | safeHtml"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {CancellationRequestModel} from '../../../models/cancellation-request.model';
+import {AdminService} from '../../../services/admin.service';
+import {Setting} from '../../../models/setting.model';
 
 @Component({
     selector: 'app-cancellation-requests',
@@ -20,11 +22,14 @@ export class CancellationRequestsComponent implements OnInit {
   cancellationtionRequests: Array<any>;
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
+  advices: Setting;
 
-  constructor(private services: ServicesService) {
+  constructor(private services: ServicesService,
+              private adminService: AdminService) {
   }
 
   ngOnInit() {
+    this.getAdvice();
     this.getClientAttachedContracts();
   }
 
@@ -61,7 +66,14 @@ export class CancellationRequestsComponent implements OnInit {
 
   }
 
-
+  getAdvice() {
+    this.adminService.getAdvices().subscribe(
+        response => {
+          this.advices = response.data;
+        }, err => {
+          console.log(err)
+        });
+  }
 
 }
 
