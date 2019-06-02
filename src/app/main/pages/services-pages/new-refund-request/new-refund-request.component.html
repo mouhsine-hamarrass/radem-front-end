@@ -18,30 +18,25 @@
               <div class="row">
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
                   <label>{{'CONTRACTS' | translate }}: <span class="text-danger">*</span></label>
-                  <select type="text" class="custom-select" #s
-                          (change)="setContract(s.value)">
-                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                    <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                      {{contract.contractNo}}
-                      ({{contract.type}})
-                    </option>
-                  </select>
-                  <div class="text-danger"
-                       *ngIf="!refundForm.controls['firstAndLastName'].valid && refundForm.controls['firstAndLastName'].touched">
-                    <div *ngIf="refundForm.controls['firstAndLastName'].errors.required">
-                      {{'FIELD_REQUIRED' | translate}}
-                    </div>
+                  <div class="multicheckbox">
+                    <angular2-multiselect [data]="ccc"
+                                          [(ngModel)]="sss"
+                                          [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          [ngModelOptions]="{standalone: true}">
+                    </angular2-multiselect>
                   </div>
                 </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="profession">{{'CIN' | translate }}: <span
+                  <label for="mailingAddress">{{'mailingAddress' | translate }}: <span
                     class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="profession"
-                         formControlName="profession">
+                  <input type="text" class="form-control" id="mailingAddress"
+                         formControlName="mailingAddress">
                   <div class="text-danger"
-                       *ngIf="!refundForm.controls['profession'].valid && refundForm.controls['profession'].touched">
-                    <div *ngIf="refundForm.controls['profession'].errors.required">
+                       *ngIf="!refundForm.controls['mailingAddress'].valid && refundForm.controls['mailingAddress'].touched">
+                    <div *ngIf="refundForm.controls['mailingAddress'].errors.required">
                       {{'FIELD_REQUIRED' | translate}}
                     </div>
                   </div>
@@ -49,14 +44,103 @@
               </div>
               <div class="row">
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="workplace">{{'CLIENT' | translate }} : </label>
-                  <input type="text" class="form-control" id="workplace"
-                         formControlName="workingPlace">
+                  <label for="email">{{'Email' | translate }}: </label>
+                  <input type="text" class="form-control" id="email"
+                         formControlName="email">
+                  <div class="text-danger"
+                       *ngIf="!refundForm.controls['email'].valid && refundForm.controls['email'].touched">
+                    <div *ngIf="refundForm.controls['email'].errors.required">
+                      {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="address_of_the_workplace">{{'SOLDE' | translate }}: </label>
-                  <input type="text" class="form-control" id="address_of_the_workplace"
-                         formControlName="addressOfWork">
+                  <label for="homePhonenumber">{{'homePhonenumber' | translate }}: <span
+                    class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="homePhonenumber"
+                         formControlName="homePhonenumber">
+                  <div class="text-danger"
+                       *ngIf="!refundForm.controls['homePhonenumber'].valid && refundForm.controls['homePhonenumber'].touched">
+                    <div *ngIf="refundForm.controls['homePhonenumber'].errors.required">
+                      {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <label for="cellphone">{{'cellphone' | translate }}: <span
+                    class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="cellphone"
+                         formControlName="cellphone">
+                  <div class="text-danger"
+                       *ngIf="!refundForm.controls['cellphone'].valid && refundForm.controls['cellphone'].touched">
+                    <div *ngIf="refundForm.controls['cellphone'].errors.required">
+                      {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <label for="Procuration"> Procuration : </label>
+                  <input [(ngModel)]="flagProcuration" type="checkbox" formControlName="Procuration" value="Procuration"
+                         id="Procuration">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <div *ngIf="flagProcuration">
+                    <label for="firstName">{{'firstName' | translate }} : </label>
+                    <input type="text" class="form-control" id="firstName"
+                           formControlName="firstName">
+                    <div class="text-danger"
+                         *ngIf="!refundForm.controls['firstName'].valid && refundForm.controls['firstName'].touched">
+                      <div *ngIf="refundForm.controls['firstName'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                      </div>
+                    </div>
+                    <label for="lastName">{{'lastName' | translate }} : </label>
+                    <input type="text" class="form-control" id="lastName"
+                           formControlName="lastName">
+                    <div class="text-danger"
+                         *ngIf="!refundForm.controls['lastName'].valid && refundForm.controls['lastName'].touched">
+                      <div *ngIf="refundForm.controls['lastName'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                      </div>
+                    </div>
+                    <label for="lastName">{{'cin' | translate }} : </label>
+                    <input type="text" class="form-control" id="cin"
+                           formControlName="cin">
+                    <div class="text-danger"
+                         *ngIf="!refundForm.controls['cin'].valid && refundForm.controls['cin'].touched">
+                      <div *ngIf="refundForm.controls['cin'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <label for="bank_file"> Mode de remboursement : </label><br>
+                  <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
+                         value="CHECK"> Chèque
+                  <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
+                         value="BANK_TRANSFER">
+                  Virement bancaire
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
+                    <label for="bank_file"> joindre un chèque barré ou attestation de RIB BANCAIRE : </label>
+                    <input type="file" id="bank_file" (change)="selectFile($event)">
+                  </div>
                 </div>
               </div>
               <button class="btn btn btn-outline-primary pull-right"

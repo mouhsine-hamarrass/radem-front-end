@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Response} from '../../core/models/response.model';
 import {Observable} from 'rxjs/Observable';
 import {environment} from 'environments/environment';
@@ -14,11 +14,11 @@ import {SubscriptionRequestModel} from '../models/subscription-request.model';
 import {FeedbackModel} from '../models/feedback.model';
 import {LightTransactionSummary} from '../models/lightTransactionSummary';
 import {TransactionSummaryModel} from '../models/transactionSummary.model';
-import {FormGroup} from '@angular/forms';
-import {UserDetails} from '../../shared/models/user.model';
 import {User} from '../models/user.model';
 import {HttpParam} from '../../core/models/http-param';
 import {ReleveModel} from '../models/releve.model';
+import {ContractRefund} from '../models/contract-refund.model';
+import {NewRefundRequestModel} from '../models/new-refund-request.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -438,8 +438,32 @@ export class ServicesService {
   autoMeterRead(releve: ReleveModel): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/releve/meterRead`, releve, {headers: headers})
   }
+
   loadMeter(contractNo: string): Observable<Response<ReleveModel>> {
     return this.httpClient.get<Response<ReleveModel>>(`${this.urlApi}/releve/${contractNo}`, {headers: headers});
+  }
+
+  // abd
+  getRefundedContracts(contracts: Array<string>): Observable<Response<Array<ContractRefund>>> {
+    return this.httpClient.post<Response<Array<ContractRefund>>>(`${this.urlApi}/contracts/refunded`, contracts, {headers: headers})
+  }
+
+  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+    formdata.append('files', file);
+    const url = `${this.urlApi}/attachments/upload`;
+    const req = new HttpRequest('POST', url, formdata, {
+      reportProgress: true,
+      responseType: 'text',
+    });
+    const req2 = req.clone({
+
+    });
+    return this.httpClient.request(req2);
+  }
+
+  saveNewRefundRequest(newModel: NewRefundRequestModel): Observable<Response<number>> {
+    return this.httpClient.post<Response<number>>(`${this.urlApi}/refund-request/save`, newModel, {headers: headers})
   }
 
 }

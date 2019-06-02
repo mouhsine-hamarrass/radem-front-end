@@ -32,6 +32,7 @@ export class RefundRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
+      this.contractNo = this.clientContracts[1].contractNo;
       if (this.clientContracts.length) {
         // this.setReportContract(this.clientContracts[0].contractNo);
       }
