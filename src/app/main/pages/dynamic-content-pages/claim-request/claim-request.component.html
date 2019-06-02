@@ -1,23 +1,85 @@
 <div class="card-header content-header back col-12">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{dynamic?.title}}</h3>
-        </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{dynamic?.title}}</h3>
     </div>
+  </div>
 </div>
 <div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <!-- Conseil et économie d'énergie-->
-            <div class="mb-0">
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                        <div [innerHTML]="dynamic?.content | safeHtml"></div>
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <!-- Conseil et économie d'énergie-->
+      <div class="mb-0">
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <!--<div [innerHTML]="dynamic?.content | safeHtml"></div>-->
+
+            <div class="container">
+              <form [formGroup]="contact" (ngSubmit)="addClaim()">
+                <div class="form">
+                  <h4>Veuillez remplir vos coordonnées et taper votre réclamation</h4>
+                  <fieldset>
+                    <input placeholder="Votre Nom et Prénom" type="text" tabindex="1" required autofocus
+                           formControlName="fullName">
+                  </fieldset>
+                  <fieldset>
+                    <input placeholder="Votre Adresse Email" type="email" tabindex="2" required formControlName="email">
+                  </fieldset>
+                  <fieldset>
+                    <input placeholder="Votre Téléphone" type="tel" pattern="[0-9]{10}" tabindex="3" required
+                           formControlName="phone" [ngClass]="{invalid: contact.invalid}">
+                  </fieldset>
+                  <fieldset>
+                    <input readonly id="address" placeholder="spécifiez votre position par un click sur la map"
+                           type="text" tabindex="4" required formControlName="address">
+                  </fieldset>
+                  <p>Réclamation liée à:</p>
+                  <fieldset class="radio_group">
+                    <div class="radio_item">
+                      <input type="radio" id="eau" checked formControlName="claimType" value="001">
+                      <label for="eau">Eau</label>
                     </div>
+                    <div class="radio_item">
+                      <input type="radio" id="elec" formControlName="claimType" value="002">
+                      <label for="elec">Electricité</label>
+                    </div>
+                    <div class="radio_item">
+                      <input type="radio" id="assain" formControlName="claimType" value="003">
+                      <label for="assain">Assainissement</label>
+                    </div>
+                    <!-- Contrat si l'utitlisateur est connecté -->
+                    <!--<div class="radio_item">
+                      <input type="radio" id="contact" formControlName="claimType" value="004">
+                      <label for="contact">Contrat</label>
+                    </div>-->
+                    <!-- fin if -->
+                  </fieldset>
+                  <fieldset>
+                    <label>Joindre photo : </label>
+                    <input type="file" accept="image/png, image/jpeg" (change)="onFileChanged($event)">
+                  </fieldset>
+                  <fieldset>
+        <textarea placeholder="Tapper votre réclamation ici...." tabindex="5" required
+                  formControlName="claimText"></textarea>
+                  </fieldset>
+                  <fieldset>
+                    <button class="submit">Enregistrer</button>
+                  </fieldset>
                 </div>
+              </form>
             </div>
-            <!--/ Conseil et économie d'énergie-->
+            <div class="map-wrapper">
+              <div id="map">
+
+              </div>
+            </div>
+
+
+          </div>
         </div>
-    </section>
+      </div>
+      <!--/ Conseil et économie d'énergie-->
+    </div>
+  </section>
 </div>
