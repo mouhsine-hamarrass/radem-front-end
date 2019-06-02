@@ -39,7 +39,6 @@ export class NewRefundRequestComponent implements OnInit {
   attachments: any = [];
 
 
-
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
               private router: Router,
@@ -75,7 +74,8 @@ export class NewRefundRequestComponent implements OnInit {
         ])],
       'email': ['', Validators.compose(
         [
-          Validators.required
+          Validators.required,
+          Validators.email
         ])],
       'cin': ['', Validators.compose(
         [
@@ -85,13 +85,24 @@ export class NewRefundRequestComponent implements OnInit {
         [
           Validators.required
         ])],
-      'ModeRemboursement': [''],
+      'ModeRemboursement': ['CHECK'],
+      'bank_file': [''],
       'Procuration': ['']
     });
   }
 
   ngOnInit() {
     this.getClientAttachedContracts();
+    this.setProcurationValidators();
+    this.flagModeRemboursement = 'CHECK';
+    // this.refundForm.get('ModeRemboursement').setValue('CHECK');
+
+    const user: User = this.authHelper.getLoggedUserInfo();
+    this.refundForm.get('email').setValue(user.email);
+    this.refundForm.get('cellphone').setValue(user.phone);
+    this.refundForm.get('mailingAddress').setValue(user.address);
+    this.refundForm.get('firstName').setValue(user.firstname);
+    this.refundForm.get('lastName').setValue(user.lastname);
   }
 
   selectFile(event: any, input?: any) {
@@ -119,6 +130,12 @@ export class NewRefundRequestComponent implements OnInit {
       });
     });
     this.selectedFiles = undefined;
+  }
+
+  onCloseMultiSelect(item: any) {
+    this.getRefundedContracts();
+    this.onItemSelect(item);
+    this.OnItemDeSelect(item);
   }
 
   onItemSelect(item: any) {
@@ -151,6 +168,52 @@ export class NewRefundRequestComponent implements OnInit {
       }
     });
     console.log(this.ccc);
+  }
+
+  setPaymentModeValidators() {
+    const bankfileControl = this.refundForm.get('bank_file');
+
+    this.refundForm.get('ModeRemboursement').valueChanges
+      .subscribe(Mode => {
+        if (Mode === 'CHECK') {
+          bankfileControl.setValidators(null);
+        }
+
+        if (Mode === 'BANK_TRANSFER') {
+          bankfileControl.setValidators([Validators.required]);
+        }
+
+        bankfileControl.updateValueAndValidity();
+      });
+  }
+
+  setProcurationValidators() {
+
+    const firstNameControl = this.refundForm.get('firstName');
+    const lastNameControl = this.refundForm.get('lastName');
+    const cinControl = this.refundForm.get('cin');
+
+    this.refundForm.get('Procuration').valueChanges
+      .subscribe(userinfos => {
+
+        if (userinfos) {
+          firstNameControl.setValidators([Validators.required]);
+
+          lastNameControl.setValidators([Validators.required]);
+          cinControl.setValidators([Validators.required]);
+        }
+
+        if (!userinfos) {
+          firstNameControl.setValidators(null);
+          lastNameControl.setValidators(null);
+          cinControl.setValidators(null);
+        }
+
+        firstNameControl.updateValueAndValidity();
+        lastNameControl.updateValueAndValidity();
+        cinControl.updateValueAndValidity();
+      });
+
   }
 
   getRefundedContracts() {
@@ -236,27 +299,9 @@ export class NewRefundRequestComponent implements OnInit {
         cancelButtonText: 'Non, Merci'
       }).then((result) => {
         if (result.value) {
-          Swal(
-            'Telechargement en cours :)',
-            'A bientot',
-            'success'
-          ).then(result2 => {
-            if (result2.value) {
-              this.router.navigate(['/services/refund-requests']);
-            }
-          })
-          // For more information about handling dismissals please visit
-          // https://sweetalert2.github.io/#handling-dismissals
+          this.router.navigate(['/services/refund-requests']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal(
-            'Telechargement apres :(',
-            'A bientot',
-            'error'
-          ).then(result2 => {
-            if (result2.value) {
-              this.router.navigate(['/services/refund-requests']);
-            }
-          })
+          this.router.navigate(['/services/refund-requests']);
         }
       })
       // this.router.navigate(['/services'])

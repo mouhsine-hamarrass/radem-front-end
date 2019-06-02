@@ -94,7 +94,7 @@
   "FIRST_NAME": "Prénom",
   "LASTNAME_AND_FIRSTNAME": "Nom et Prénom",
   "PHONE": "Telephone",
-  "MAIL": "Email",
+  "MAIL": "Mail",
   "USERNAME": "Nom d'utilisateur",
   "ADDRESS": "Adresse",
   "SAVE": "Enregistrer",
@@ -519,9 +519,16 @@
   "RECEIPT_DETAILS" :"Détails reçu",
   "INVOICE_LIST" :"La liste des factures",
   "Facturation_Consum" : "Facturation",
-  "Correspondence_Address": "Adresse de correspondence",
-  "CHECK": "Chèque",
-  "BANK_TRANSFER": "Virement bancaire"
+  "MAILING_ADDRESS" : "Adresse de correspondance",
+  "HOME_PHONE_NUMBER" : "Téléphone fixe",
+  "CELL_PHONE" : "Téléphone mobile",
+  "PROCUROR_FIRSTNAME" : "Nom procureur",
+  "PROCUROR_LASTNAME" : "Prenom procureur",
+  "PROCUROR_CIN" : "CIN procureur",
+  "PAYMENT_MODE" : "Mode de remboursement",
+  "BANK_TRANSFER" : "Virement bancaire",
+  "CHECK" : "Chèque",
+  "JOIN_FILE" : "Joindre un chèque barré ou attestation de RIB BANCAIRE"
 
 
 }

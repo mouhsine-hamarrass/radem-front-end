@@ -15,23 +15,33 @@
           <div class="card-body">
             <form role="form" [formGroup]="refundForm"
                   (ngSubmit)="saveRequest(refundForm.value)" novalidate>
+
               <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label>{{'CONTRACTS' | translate }} <span class="text-danger">*</span></label>
+                </div>
+
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label>{{'CONTRACTS' | translate }}: <span class="text-danger">*</span></label>
                   <div class="multicheckbox">
                     <angular2-multiselect [data]="ccc"
                                           [(ngModel)]="sss"
                                           [settings]="settings"
                                           (onSelect)="onItemSelect($event)"
                                           (onDeSelect)="OnItemDeSelect($event)"
+                                          (onClose)="onCloseMultiSelect($event)"
                                           [ngModelOptions]="{standalone: true}">
                     </angular2-multiselect>
                   </div>
                 </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label for="mailingAddress">{{'MAILING_ADDRESS' | translate }} <span
+                    class="text-danger">*</span></label>
+                </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="mailingAddress">{{'mailingAddress' | translate }}: <span
-                    class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="mailingAddress"
                          formControlName="mailingAddress">
                   <div class="text-danger"
@@ -42,9 +52,13 @@
                   </div>
                 </div>
               </div>
+
               <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label for="email">{{'MAIL' | translate }} <span class="text-danger">*</span></label>
+                </div>
+
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="email">{{'Email' | translate }}: </label>
                   <input type="text" class="form-control" id="email"
                          formControlName="email">
                   <div class="text-danger"
@@ -54,9 +68,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="homePhonenumber">{{'homePhonenumber' | translate }}: <span
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label for="homePhonenumber">{{'HOME_PHONE_NUMBER' | translate }} <span
                     class="text-danger">*</span></label>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
                   <input type="text" class="form-control" id="homePhonenumber"
                          formControlName="homePhonenumber">
                   <div class="text-danger"
@@ -67,10 +87,14 @@
                   </div>
                 </div>
               </div>
+
               <div class="row">
-                <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="cellphone">{{'cellphone' | translate }}: <span
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label for="cellphone">{{'CELL_PHONE' | translate }} <span
                     class="text-danger">*</span></label>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
                   <input type="text" class="form-control" id="cellphone"
                          formControlName="cellphone">
                   <div class="text-danger"
@@ -80,22 +104,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-lg-6 col-md-12 col-sm-12">
-
-                </div>
               </div>
 
-              <div class="row">
-                <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="Procuration"> Procuration : </label>
-                  <input [(ngModel)]="flagProcuration" type="checkbox" formControlName="Procuration" value="Procuration"
-                         id="Procuration">
+              <div class="row" style=" margin-top: 11px;">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                  <label for="Procuration"> Procuration ? </label>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12" style="margin-top: 6px; margin-bottom: 0px; position: relative; margin-left: inherit;">
+                  <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <input [(ngModel)]="flagProcuration" type="checkbox" formControlName="Procuration"
+                           value="Procuration"
+                           id="Procuration" (change)="setProcurationValidators()">
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <div *ngIf="flagProcuration">
-                    <label for="firstName">{{'firstName' | translate }} : </label>
+              <div *ngIf="flagProcuration">
+                <div class="row">
+                  <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                    <label for="firstName">{{'PROCUROR_FIRSTNAME' | translate }} <span class="text-danger">*</span></label>
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12 col-sm-12">
                     <input type="text" class="form-control" id="firstName"
                            formControlName="firstName">
                     <div class="text-danger"
@@ -104,7 +134,16 @@
                         {{'FIELD_REQUIRED' | translate}}
                       </div>
                     </div>
-                    <label for="lastName">{{'lastName' | translate }} : </label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                    <label for="lastName">{{'PROCUROR_LASTNAME' | translate }} <span
+                      class="text-danger">*</span></label>
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12 col-sm-12">
                     <input type="text" class="form-control" id="lastName"
                            formControlName="lastName">
                     <div class="text-danger"
@@ -113,7 +152,15 @@
                         {{'FIELD_REQUIRED' | translate}}
                       </div>
                     </div>
-                    <label for="lastName">{{'cin' | translate }} : </label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                    <label for="lastName">{{'PROCUROR_CIN' | translate }} <span class="text-danger">*</span></label>
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12 col-sm-12">
                     <input type="text" class="form-control" id="cin"
                            formControlName="cin">
                     <div class="text-danger"
@@ -124,28 +171,59 @@
                     </div>
                   </div>
                 </div>
+
               </div>
-              <div class="row">
-                <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <label for="bank_file"> Mode de remboursement : </label><br>
-                  <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
-                         value="CHECK"> Chèque
-                  <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
-                         value="BANK_TRANSFER">
-                  Virement bancaire
+
+              <div class="row" style="margin-top: 11px;">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label for="bank_file">{{'PAYMENT_MODE' | translate }} <span class="text-danger">*</span></label><br>
                 </div>
-              </div>
-              <div class="row">
+
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
-                    <label for="bank_file"> joindre un chèque barré ou attestation de RIB BANCAIRE : </label>
-                    <input type="file" id="bank_file" (change)="selectFile($event)">
+                  <div class="row" style=" margin-bottom: -19px;">
+                    <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                      <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
+                             value="CHECK" (change)="setPaymentModeValidators()"> {{'CHECK' | translate }}
+                    </div>
+                    <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                      <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
+                             value="BANK_TRANSFER" (change)="setPaymentModeValidators()"> {{'BANK_TRANSFER' | translate }}
+                    </div>
                   </div>
                 </div>
               </div>
-              <button class="btn btn btn-outline-primary pull-right"
-                      [disabled]="refundForm.invalid" type="submit">{{'SAVE' | translate }}
-              </button>
+
+              <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
+                    <label for="bank_file"> {{'JOIN_FILE' | translate }}  <span class="text-danger">*</span></label>
+                    <input type="file" id="bank_file" (change)="selectFile($event)" formControlName="bank_file">
+                    <div class="text-danger"
+                         *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
+                      <div *ngIf="refundForm.controls['bank_file'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <button class="btn btn btn-outline-primary pull-right"
+                          [disabled]="refundForm.invalid" type="submit">{{'SAVE' | translate }}
+                  </button>
+                </div>
+              </div>
+
             </form>
           </div>
         </div>
