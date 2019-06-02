@@ -518,7 +518,10 @@
   "SETTLEMENT_AMOUNT" :"Montant",
   "RECEIPT_DETAILS" :"Détails reçu",
   "INVOICE_LIST" :"La liste des factures",
-  "Facturation_Consum" : "Facturation"
+  "Facturation_Consum" : "Facturation",
+  "Correspondence_Address": "Adresse de correspondence",
+  "CHECK": "Chèque",
+  "BANK_TRANSFER": "Virement bancaire"
 
 
 }

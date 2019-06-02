@@ -19,6 +19,7 @@ import {HttpParam} from '../../core/models/http-param';
 import {ReleveModel} from '../models/releve.model';
 import {ContractRefund} from '../models/contract-refund.model';
 import {NewRefundRequestModel} from '../models/new-refund-request.model';
+import {SimpleRefundModel} from '../models/simpleRefund.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -231,8 +232,8 @@ export class ServicesService {
 
   //Mouhsine refund
 
-  getRefundRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>
+  getRefundRequests(contractNo: string, page: number, pageSize: number): Observable<Response<Array<SimpleRefundModel>>> {
+    return this.httpClient.get<Response<Array<SimpleRefundModel>>>
     (`${this.urlApi}/refund-requests/${contractNo}?page=${page}&size=${pageSize}`);
   }
 
