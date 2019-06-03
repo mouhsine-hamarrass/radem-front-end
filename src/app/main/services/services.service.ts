@@ -199,6 +199,10 @@ export class ServicesService {
     return this.httpClient.get<Response<Array<StatusModel>>>(`${this.urlApi}/subscription-request-status/all`);
   }
 
+  getRefundStatus(): Observable<Response<Array<StatusModel>>> {
+    return this.httpClient.get<Response<Array<StatusModel>>>(`${this.urlApi}/refund-request-status/all`);
+  }
+
   saveFeedback(requestId: number, feedback: FeedbackModel): Observable<Response<number>> {
     return this.httpClient.post<Response<number>>(`${this.urlApi}/requests/${requestId}/feedback/submit`, feedback, {headers: headers});
   }

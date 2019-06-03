@@ -25,7 +25,7 @@
                     class="danger">*</span>:</label>
                   <div class="col-3">
                     <select type="text" class="custom-select" #s
-                            (change)="setContract(s.value)">
+                            (change)="setContract(s.value)" [(ngModel)]="selectedContract">
                       <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
                       <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
                         {{contract.contractNo}}
@@ -40,7 +40,7 @@
                   <thead class="table-light">
                     <tr>
                       <th scope="col">{{'REQUEST_NUMBER' | translate }}</th>
-                      <th scope="col">{{'PAYMENT_MODE' | translate }}</th>
+                      <th scope="col">{{'REFUND_MODE' | translate }}</th>
                       <th scope="col">{{'CONTRACTS' | translate }}</th>
                       <th scope="col">{{'Correspondence_Address' | translate }}</th>
                       <th scope="col">{{'STATUS' | translate }}</th>
@@ -54,7 +54,7 @@
                       [colSpan]="4"></app-data-not-available>
                     <ng-template #dataAvailable>
                       <tr *ngFor="let request of refundRequests">
-                        <td>{{request?.requestNo}}</td>
+                        <td><a [routerLink]="['/services/refund-detail/', request.requestNo]"><b>{{request.requestNo}}</b></a></td>
                         <td>{{request?.modePayment | translate }} </td>
                         <td>
                           <span class="badge badge-primary" *ngFor="let c of request?.contractNbrs">{{c}}</span>
@@ -68,8 +68,6 @@
                              tooltip="Résiliation"></i>
                           <i class="far fa-file-pdf-o cursor-pointer pl-1 text-danger"
                              tooltip="Détachement"></i>
-                          <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
-                             tooltip="Détails"></i>
                         </td>
                       </tr>
                     </ng-template>

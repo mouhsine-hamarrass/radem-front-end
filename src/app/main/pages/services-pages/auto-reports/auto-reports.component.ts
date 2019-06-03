@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AdminService} from '../../../services/admin.service';
 import {ServicesService} from '../../../services/services.service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
@@ -7,9 +7,8 @@ import * as moment from 'moment';
 import {ReleveModel} from '../../../models/releve.model';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import {of} from 'rxjs/observable/of';
-import {map} from 'rxjs/operators';
 import {Setting} from '../../../models/setting.model';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-auto-reports',
@@ -24,11 +23,13 @@ export class AutoReportsComponent implements OnInit {
   minDate: any = moment().subtract(5, 'years');
   releve: ReleveModel;
   advices: Setting;
+
   constructor(private adminService: AdminService,
               private services: ServicesService,
               private formBuilder: FormBuilder,
               private toastrService: ToastrService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private elementRef: ElementRef) {
     this.today = moment();
     this.reportForm = this.formBuilder.group({
       id: [''],
@@ -37,6 +38,7 @@ export class AutoReportsComponent implements OnInit {
       index: ['', [Validators.required]]
     });
   }
+
   ngOnInit() {
     this.getAdvice();
     this.getClientAttachedContracts();
@@ -46,6 +48,21 @@ export class AutoReportsComponent implements OnInit {
   setContract(id: any) {
     this.contractId = id;
   }
+
+
+  public generatePDF() {
+    debugger;
+
+    let doc = new jsPDF('p', 'px', 'a4');
+    let options = {
+      pagesplit: true
+    };
+    doc.fromHTML(this.elementRef.nativeElement, 10, 10, options, () => {
+      doc.autoPrint();
+      doc.save('Test.pdf');
+    });
+  }
+
 
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
@@ -121,13 +138,14 @@ export class AutoReportsComponent implements OnInit {
       this.toastrService.error(this.translate.instant('ERROR_FORM'), '');
     }
   }
+
   getAdvice() {
     this.adminService.getAdvices().subscribe(
-        response => {
-          this.advices = response.data;
-        }, err => {
-          console.log(err)
-        });
+      response => {
+        this.advices = response.data;
+      }, err => {
+        console.log(err)
+      });
   }
 
 }

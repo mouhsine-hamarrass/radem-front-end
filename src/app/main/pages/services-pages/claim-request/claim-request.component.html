@@ -44,8 +44,9 @@
           <input [(ngModel)]="flag" type="radio" id="contact" formControlName="claimType" value="004">
           <label for="contact">Contrat</label>
         </div>
+
         <div *ngIf="flag === '004'">
-          <select type="text" class="form-control contract-dropdown contract-dropdown_map" formControlName="contractId">
+          <select type="text" class="form-control contract-dropdown contract-dropdown_map">
             <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
             <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
               {{contract.contractNo}}

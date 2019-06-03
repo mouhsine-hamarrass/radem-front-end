@@ -22,6 +22,7 @@ export class CancellationRequestsComponent implements OnInit {
   cancellationtionRequests: Array<any>;
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
+  selectedContract: string;
   advices: Setting;
 
   constructor(private services: ServicesService,
@@ -37,6 +38,10 @@ export class CancellationRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
+      if (this.clientContracts.length) {
+        this.selectedContract = this.clientContracts[0].contractNo;
+        this.setContract(this.clientContracts[0].contractNo);
+      }
     }, err => {
       console.log(err)
     });

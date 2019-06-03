@@ -23,7 +23,7 @@ export class ClaimRequestComponent implements OnInit {
   public contact: FormGroup; // Formulaire du Réclamation
   public flag: string;
   clientContracts: Array<ContractAttachModel>;
-  selectedContract: string;
+  selectedContract: ContractAttachModel;
 
   constructor(private formBuilder: FormBuilder,
               private services: ServicesService) {
@@ -68,6 +68,10 @@ export class ClaimRequestComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
+      if (this.clientContracts.length) {
+        debugger;
+        this.selectedContract = this.clientContracts[0];
+      }
     }, err => {
       console.log(err)
     });
