@@ -21,53 +21,52 @@ import {AdvicePageModule} from './pages/advice-page/advice-page.module';
 import {DynamicContentPagesModule} from './pages/dynamic-content-pages/dynamic-content-pages.module';
 import {AlertNotificationsPageModule} from './pages/alert-notifications-page/alert-notifications-page.module';
 import {CommonService} from './services/common.service';
-import {NgxPermissionsService} from 'ngx-permissions';
-import {PaymentSuccessComponent} from './pages/services-pages/payment-success/payment-success.component';
+import {TooltipModule} from 'ngx-bootstrap';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        AdminPagesModule,
-        BrowserAnimationsModule,
-        ConsumptionsPageModule,
-        ContractsPageModule,
-        HomePageModule,
-        ServicesPagesModule,
-        SettlementsPageModule,
-        UnpaidPageModule,
-        DirectivesModule,
-        AdvicePageModule,
-        AlertNotificationsPageModule,
-        DynamicContentPagesModule,
+  imports: [
+    CommonModule,
+    AdminPagesModule,
+    BrowserAnimationsModule,
+    ConsumptionsPageModule,
+    ContractsPageModule,
+    HomePageModule,
+    ServicesPagesModule,
+    SettlementsPageModule,
+    UnpaidPageModule,
+    DirectivesModule,
+    AdvicePageModule,
+    AlertNotificationsPageModule,
+    DynamicContentPagesModule,
 
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-    ],
-    providers: [
-        ServicesService,
-        UtilsService,
-        ComplaintService,
-        CommonService,
-        {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
-    ],
-    declarations: [],
-    exports: [
-        AdminPagesModule,
-        ConsumptionsPageModule,
-        ContractsPageModule,
-        HomePageModule,
-        ServicesPagesModule,
-        SettlementsPageModule,
-        UnpaidPageModule,
-        AdvicePageModule,
-        AlertNotificationsPageModule,
-        DynamicContentPagesModule
-    ]
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+  ],
+  providers: [
+    ServicesService,
+    UtilsService,
+    ComplaintService,
+    CommonService,
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
+  ],
+  declarations: [],
+  exports: [
+    AdminPagesModule,
+    ConsumptionsPageModule,
+    ContractsPageModule,
+    HomePageModule,
+    ServicesPagesModule,
+    SettlementsPageModule,
+    UnpaidPageModule,
+    AdvicePageModule,
+    AlertNotificationsPageModule,
+    DynamicContentPagesModule
+  ]
 })
 export class MainModule {
 }
