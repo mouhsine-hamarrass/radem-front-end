@@ -24,6 +24,7 @@ export class EmbranchmentRequestsComponent implements OnInit {
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
   advices: Setting;
+  selectedContract: string;
 
   constructor(private services: ServicesService,
               private adminService: AdminService) {
@@ -38,6 +39,11 @@ export class EmbranchmentRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
+      if (this.clientContracts.length) {
+        this.selectedContract = this.clientContracts[0].contractNo;
+        this.setContract(this.clientContracts[0].contractNo);
+      }
+
     }, err => {
       console.log(err)
     });
@@ -67,10 +73,10 @@ export class EmbranchmentRequestsComponent implements OnInit {
 
   getAdvice() {
     this.adminService.getAdvices().subscribe(
-        response => {
-          this.advices = response.data;
-        }, err => {
-          console.log(err)
-        });
+      response => {
+        this.advices = response.data;
+      }, err => {
+        console.log(err)
+      });
   }
 }

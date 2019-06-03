@@ -61,7 +61,7 @@ export class UnpaidPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem(AuthHelper.USER_ID)) {
+        if (localStorage.getItem(AuthHelper.USER_ID)) {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
     this.getClientAttachedContracts();
@@ -70,6 +70,11 @@ export class UnpaidPageComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
+      if (this.clientContracts.length) {
+        debugger;
+        this.selectedContract.push(this.clientContracts[0]);
+        this.getAllUnpaidBills();
+      }
       _.each(this.clientContracts, (element: any) => {
         _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
       });
@@ -82,7 +87,8 @@ export class UnpaidPageComponent implements OnInit {
     this.selectedBills.invoices = [];
     this.total = 0.0;
     this.totalUnpaid = 0;
-    const contracts = _.pluck(this.selectedContract, 'id');
+    const contracts = _.pluck(this.selectedContract, 'contractNo');
+    debugger;
     this.contractServices.getPageableUnpaidBills(this.page, this.pageSize, contracts)
       .subscribe(response => {
         this.contractsBills = response.data['content'];

@@ -70,7 +70,7 @@ export class RefundDetailComponent implements OnInit, AfterViewInit {
   }
 
   getSubscriptionStatus() {
-    this.services.getSubscriptionStatus().subscribe(response => {
+    this.services.getRefundStatus().subscribe(response => {
       if (response.data) {
         this.RefundStatus = response.data;
       }

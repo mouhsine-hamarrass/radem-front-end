@@ -23,7 +23,7 @@ export class NewRefundRequestComponent implements OnInit {
 
   refundForm: FormGroup;
   clientContracts: Array<ContractAttachModel>;
-  contractNo: string
+  contractNo: string;
   public flagModeRemboursement = '';
   public flagProcuration = '';
 
@@ -57,6 +57,10 @@ export class NewRefundRequestComponent implements OnInit {
     };
     this.refundForm = this.formBuilder.group({
       'firstName': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'contracts': ['', Validators.compose(
         [
           Validators.required
         ])],
@@ -135,7 +139,7 @@ export class NewRefundRequestComponent implements OnInit {
   onCloseMultiSelect(item: any) {
     this.getRefundedContracts();
     this.onItemSelect(item);
-    this.OnItemDeSelect(item);
+    this.onItemDeSelect(item);
   }
 
   onItemSelect(item: any) {
@@ -154,7 +158,7 @@ export class NewRefundRequestComponent implements OnInit {
     console.log(this.ccc);
   }
 
-  OnItemDeSelect(item: any) {
+  onItemDeSelect(item: any) {
     console.log(item.tourNo);
     this.selectedNumber--;
     const iii: Array<ContractRefund> = this.ccc;
@@ -283,7 +287,7 @@ export class NewRefundRequestComponent implements OnInit {
       this.mmm.push(value.id);
     });
     newRefundrequest.attachmentIds = this.mmm;
-    this.ccc.forEach(value => {
+    this.sss.forEach(value => {
       this.nnn.push(value.contractNo);
     });
     newRefundrequest.contractNbrs = this.nnn;
