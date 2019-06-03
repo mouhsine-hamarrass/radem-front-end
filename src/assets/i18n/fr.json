@@ -522,5 +522,8 @@
   "BANK_TRANSFER": "Virement bancaire",
   "CHECK": "Chèque",
   "JOIN_FILE": "Joindre un chèque barré ou attestation de RIB BANCAIRE",
-  "Correspondence_Address": "Adresse de correspondance"
+  "Correspondence_Address": "Adresse de correspondance",
+  "EMAIL_ADDRESS": "L'dresse email",
+  "CONTRACTS_NUMBER": "Nº de contrats"
+
 }

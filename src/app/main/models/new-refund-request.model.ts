@@ -10,4 +10,5 @@ export class NewRefundRequestModel {
   applicant?: ApplicantModel = new ApplicantModel();
   contractNbrs?: Array<string>;
   attachmentIds?: Array<number>;
+  tour?: string;
 }
