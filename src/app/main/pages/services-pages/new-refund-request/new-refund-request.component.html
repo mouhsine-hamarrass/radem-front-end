@@ -201,7 +201,7 @@
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
                   <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
                     <label for="bank_file"> {{'JOIN_FILE' | translate }}  <span class="text-danger">*</span></label>
-                    <input type="file" id="bank_file" (change)="selectFile($event)" formControlName="bank_file">
+                    <input type="file" id="bank_file" accept=".doc,.docx,.xml,.pdf,.jpg,.png" (change)="selectFile($event)" formControlName="bank_file">
                     <div class="text-danger"
                          *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
                       <div *ngIf="refundForm.controls['bank_file'].errors.required">

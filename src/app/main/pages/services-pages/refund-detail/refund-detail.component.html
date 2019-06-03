@@ -44,12 +44,49 @@
                         <div style="padding-left: 10px;">
                           <table>
                             <tr>
-                              <td>{{'CONTRACT_NUMBER' | translate }} :</td>
-                              <td>{{RefundDetails?.contract}}</td>
+                              <td>{{'CONTRACTS_NUMBER' | translate }}</td>
+                              <td> : </td>
+                              <td><span class="badge badge-primary" *ngFor="let c of RefundDetails?.contracts">{{c}}</span></td>
                             </tr>
                             <tr>
-                              <td>{{'TYPE' | translate }} :</td>
-                              <td>{{RefundDetails?.description}}</td>
+                              <td>{{'HOME_PHONE_NUMBER' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.fixPhone}}</td>
+                            </tr>
+                            <tr>
+                              <td>{{'CELL_PHONE' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.phone}}</td>
+                            </tr>
+                            <tr>
+                              <td>{{'EMAIL_ADDRESS' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.mail}}</td>
+                            </tr>
+                            <tr>
+                              <td>{{'MAILING_ADDRESS' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.mailingAddress}}</td>
+                            </tr>
+                            <tr>
+                              <td>{{'REFUND_MODE' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.requestPaymentMode | translate}}</td>
+                            </tr>
+                            <tr *ngIf="RefundDetails?.procuration==true">
+                              <td>{{'PROCUROR_CIN' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.procuratorCin}}</td>
+                            </tr>
+                            <tr *ngIf="RefundDetails?.procuration==true">
+                              <td>{{'PROCUROR_LASTNAME' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.procuratorFirstname}}</td>
+                            </tr>
+                            <tr *ngIf="RefundDetails?.procuration==true">
+                              <td>{{'PROCUROR_FIRSTNAME' | translate }} </td>
+                              <td> : </td>
+                              <td>{{RefundDetails?.procuratorLastname}}</td>
                             </tr>
                           </table>
                         </div>

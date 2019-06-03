@@ -30,11 +30,13 @@ import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-de
 import {PaymentSuccessComponent} from './payment-success/payment-success.component';
 import { PaymentFailComponent } from './payment-fail/payment-fail.component';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
+import {TooltipModule} from 'ngx-bootstrap';
 @NgModule({
     imports: [
         CommonModule,
         ServicesPagesRoutingModule,
         ArchwizardModule,
+        TooltipModule,
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
