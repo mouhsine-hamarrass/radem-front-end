@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <div class="multicheckbox" >
+                  <div class="multicheckbox">
                     <angular2-multiselect [data]="ccc"
                                           [(ngModel)]="sss"
                                           [settings]="settings"
@@ -111,7 +111,8 @@
                   <label for="Procuration"> Procuration ? </label>
                 </div>
 
-                <div class="form-group col-lg-6 col-md-12 col-sm-12" style="margin-top: 6px; margin-bottom: 0px; position: relative; margin-left: inherit;">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12"
+                     style="margin-top: 6px; margin-bottom: 0px; position: relative; margin-left: inherit;">
                   <div class="form-group col-lg-6 col-md-12 col-sm-12">
                     <input [(ngModel)]="flagProcuration" type="checkbox" formControlName="Procuration"
                            value="Procuration"
@@ -122,7 +123,8 @@
               <div *ngIf="flagProcuration">
                 <div class="row">
                   <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
-                    <label for="firstName">{{'PROCUROR_FIRSTNAME' | translate }} <span class="text-danger">*</span></label>
+                    <label for="firstName">{{'PROCUROR_FIRSTNAME' | translate }} <span
+                      class="text-danger">*</span></label>
                   </div>
 
                   <div class="form-group col-lg-6 col-md-12 col-sm-12">
@@ -187,7 +189,8 @@
                     </div>
                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                       <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
-                             value="BANK_TRANSFER" (change)="setPaymentModeValidators()"> {{'BANK_TRANSFER' | translate }}
+                             value="BANK_TRANSFER"
+                             (change)="setPaymentModeValidators()"> {{'BANK_TRANSFER' | translate }}
                     </div>
                   </div>
                 </div>
@@ -200,8 +203,14 @@
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
                   <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
-                    <label for="bank_file"> {{'JOIN_FILE' | translate }}  <span class="text-danger">*</span></label>
-                    <input type="file" id="bank_file" (change)="selectFile($event)" formControlName="bank_file">
+
+
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="bank_file" (change)="selectFile($event)"
+                             formControlName="bank_file" lang="zn">
+                      <label class="custom-file-label" lang="zn" for="bank_file"> {{'JOIN_FILE' | translate }}  <span class="text-danger">*</span></label>
+                    </div>
+
                     <div class="text-danger"
                          *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
                       <div *ngIf="refundForm.controls['bank_file'].errors.required">

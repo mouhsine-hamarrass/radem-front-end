@@ -19,7 +19,7 @@ import {ArchwizardModule} from 'angular-archwizard';
 import {ComponentsModule} from '../../../shared/components/components.module';
 import {SharedModule} from '../../../shared/shared.module';
 import {HttpClient} from '@angular/common/http';
-import { AutoReportsComponent } from './auto-reports/auto-reports.component';
+import {AutoReportsComponent} from './auto-reports/auto-reports.component';
 import {CancellationDetailComponent} from './cancellation-detail/cancellation-detail.component';
 import {RefundRequestsComponent} from './refund-requests/refund-requests.component';
 import {NewRefundRequestComponent} from './new-refund-request/new-refund-request.component';
@@ -28,53 +28,56 @@ import {EmbranchmentRequestsComponent} from './embranchment-requests/embranchmen
 import {NewEmbranchementRequestComponent} from './new-embranchement-request/new-embranchement-request.component';
 import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-detail.component';
 import {PaymentSuccessComponent} from './payment-success/payment-success.component';
-import { PaymentFailComponent } from './payment-fail/payment-fail.component';
-import { PaymentStatusComponent } from './payment-status/payment-status.component';
+import {PaymentFailComponent} from './payment-fail/payment-fail.component';
+import {PaymentStatusComponent} from './payment-status/payment-status.component';
+import {TooltipModule} from 'ngx-bootstrap';
+
 @NgModule({
-    imports: [
-        CommonModule,
-        ServicesPagesRoutingModule,
-        ArchwizardModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        ComponentsModule,
-        TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        SharedModule
-    ],
-    declarations: [
-        ClaimRequestComponent,
-        SubscriptionRequestsComponent,
-        RefundRequestsComponent,
-        CancellationRequestComponent,
-        CancellationRequestsComponent,
-        NewCancellationRequestComponent,
-        OnlinePaymentComponent,
-        ClaimRequestsComponent,
-        NewRefundRequestComponent,
-        RefundDetailComponent,
-        ClaimDetailComponent,
-        EmbranchmentRequestsComponent,
-        CancellationDetailComponent,
-        PrintableCancellationComponent,
-        NewSubscriptionRequestComponent,
-        SubscriptionDetailComponent,
-        AutoReportsComponent,
-        NewEmbranchementRequestComponent,
-        EmbranchmentDetailComponent,
-        PaymentSuccessComponent,
-        PaymentFailComponent,
-        PaymentStatusComponent
-    ]
+  imports: [
+    CommonModule,
+    ServicesPagesRoutingModule,
+    ArchwizardModule,
+    FormsModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    ComponentsModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    SharedModule
+  ],
+  declarations: [
+    ClaimRequestComponent,
+    SubscriptionRequestsComponent,
+    RefundRequestsComponent,
+    CancellationRequestComponent,
+    CancellationRequestsComponent,
+    NewCancellationRequestComponent,
+    OnlinePaymentComponent,
+    ClaimRequestsComponent,
+    NewRefundRequestComponent,
+    RefundDetailComponent,
+    ClaimDetailComponent,
+    EmbranchmentRequestsComponent,
+    CancellationDetailComponent,
+    PrintableCancellationComponent,
+    NewSubscriptionRequestComponent,
+    SubscriptionDetailComponent,
+    AutoReportsComponent,
+    NewEmbranchementRequestComponent,
+    EmbranchmentDetailComponent,
+    PaymentSuccessComponent,
+    PaymentFailComponent,
+    PaymentStatusComponent
+  ]
 })
 export class ServicesPagesModule {
-    constructor(private translate: TranslateService) {
-        this.translate.use(localStorage['language']);
-    }
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage['language']);
+  }
 }
