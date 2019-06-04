@@ -21,6 +21,7 @@ import {EmbranchmentDetailComponent} from './embranchment-detail/embranchment-de
 import {PaymentSuccessComponent} from './payment-success/payment-success.component';
 import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 import {PaymentStatusComponent} from './payment-status/payment-status.component';
+import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.component';
 
 const routes: Routes = [
   {
@@ -167,6 +168,13 @@ const routes: Routes = [
         component: PaymentFailComponent,
         data: {
           title: 'paiement echoue'
+        }
+      },
+      {
+        path: 'new-refund-detail',
+        component: NewRefundDetailComponent,
+        data: {
+          title: 'Demande de remboursement'
         }
       },
       {

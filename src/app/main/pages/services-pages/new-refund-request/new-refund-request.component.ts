@@ -267,14 +267,14 @@ export class NewRefundRequestComponent implements OnInit {
 
     }
 
-  saveRequest(formData): void {
-    const user: User = this.authHelper.getLoggedUserInfo();
+    saveRequest(formData): void {
+        const user: User = this.authHelper.getLoggedUserInfo();
 
-    const newRefundrequest: NewRefundRequestModel = formData;
-    newRefundrequest.mail = formData.email;
-    newRefundrequest.mailingAddress = formData.mailingAddress;
-    newRefundrequest.cellphone = formData.cellphone;
-    newRefundrequest.fixphone = formData.homePhonenumber;
+        const newRefundrequest: NewRefundRequestModel = formData;
+        newRefundrequest.mail = formData.email;
+        newRefundrequest.mailingAddress = formData.mailingAddress;
+        newRefundrequest.cellphone = formData.cellphone;
+        newRefundrequest.fixphone = formData.homePhonenumber;
 
         newRefundrequest.paymentMode = formData.ModeRemboursement;
         newRefundrequest.procuration = Boolean(this.flagProcuration);
@@ -293,20 +293,24 @@ export class NewRefundRequestComponent implements OnInit {
 
         this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
             console.log(response);
-            Swal({
-                title: 'Merci pour votre Collaboration',
-                text: 'votre demande de remboursement a été envoyé avec succès',
-                type: 'success',
-                showCancelButton: true,
-                confirmButtonText: 'Voulez-vous Telecharger le PDF',
-                cancelButtonText: 'Non, Merci'
-            }).then((result) => {
-                if (result.value) {
-                    this.router.navigate(['/services/refund-requests']);
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    this.router.navigate(['/services/refund-requests']);
-                }
-            })
+            if (response && response.data) {
+                this.router.navigate(['/services/new-refund-detail/' + response.data]);
+            }
+
+            /* Swal({
+                 title: 'Merci pour votre Collaboration',
+                 text: 'votre demande de remboursement a été envoyé avec succès',
+                 type: 'success',
+                 showCancelButton: true,
+                 confirmButtonText: 'Voulez-vous Telecharger le PDF',
+                 cancelButtonText: 'Non, Merci'
+             }).then((result) => {
+                 if (result.value) {
+                     this.router.navigate(['/services/refund-requests']);
+                 } else if (result.dismiss === Swal.DismissReason.cancel) {
+                     this.router.navigate(['/services/refund-requests']);
+                 }
+             })*/
             // this.router.navigate(['/services'])
         }, err => {
             console.log(err);
