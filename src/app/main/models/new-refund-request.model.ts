@@ -1,5 +1,3 @@
-import {ApplicantModel} from './applicant.model';
-
 export class NewRefundRequestModel {
   id?: number;
   procuration?: boolean;
@@ -7,7 +5,10 @@ export class NewRefundRequestModel {
   procuratorLastname?: string;
   procuratorFirstname?: string;
   paymentMode?: string;
-  applicant?: ApplicantModel = new ApplicantModel();
+  cellphone?: string;
+  fixphone?: string;
+  mail?: string;
+  mailingAddress?: string;
   contractNbrs?: Array<string>;
   attachmentIds?: Array<number>;
   tour?: string;
