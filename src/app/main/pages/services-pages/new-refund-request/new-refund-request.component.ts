@@ -267,19 +267,14 @@ export class NewRefundRequestComponent implements OnInit {
 
     }
 
-    saveRequest(formData): void {
-        debugger;
+  saveRequest(formData): void {
+    const user: User = this.authHelper.getLoggedUserInfo();
 
-        const user: User = this.authHelper.getLoggedUserInfo();
-
-        const newRefundrequest: NewRefundRequestModel = formData;
-        newRefundrequest.applicant = new ApplicantModel();
-        newRefundrequest.applicant.mail = formData.email;
-        newRefundrequest.applicant.address = formData.mailingAddress;
-        newRefundrequest.applicant.firstname = user.firstname;
-        newRefundrequest.applicant.lastname = user.lastname;
-        newRefundrequest.applicant.phone = formData.cellphone;
-        newRefundrequest.applicant.fixPhone = formData.homePhonenumber;
+    const newRefundrequest: NewRefundRequestModel = formData;
+    newRefundrequest.mail = formData.email;
+    newRefundrequest.mailingAddress = formData.mailingAddress;
+    newRefundrequest.cellphone = formData.cellphone;
+    newRefundrequest.fixphone = formData.homePhonenumber;
 
         newRefundrequest.paymentMode = formData.ModeRemboursement;
         newRefundrequest.procuration = Boolean(this.flagProcuration);
