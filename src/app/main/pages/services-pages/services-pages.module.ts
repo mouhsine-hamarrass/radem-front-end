@@ -31,6 +31,7 @@ import {PaymentSuccessComponent} from './payment-success/payment-success.compone
 import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 import {PaymentStatusComponent} from './payment-status/payment-status.component';
 import {TooltipModule} from 'ngx-bootstrap';
+import { NewRefundDetailComponent } from './new-refund-detail/new-refund-detail.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import {TooltipModule} from 'ngx-bootstrap';
     EmbranchmentDetailComponent,
     PaymentSuccessComponent,
     PaymentFailComponent,
-    PaymentStatusComponent
+    PaymentStatusComponent,
+    NewRefundDetailComponent
   ]
 })
 export class ServicesPagesModule {

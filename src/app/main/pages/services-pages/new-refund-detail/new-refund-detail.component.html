@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="modal-body col-10">
+        <div class="row">
+          <div class="col-md-6 col-6">
+              <a class="logoSize" routerLink="/home" style=" padding-top: 7px;">
+                <img alt="stack admin logo" src="assets/app/images/logo/radem-logo-ico.png" class="brand-logo"
+                     id="stackLogo" >
+
+                <img alt="stack admin logo" src="assets/app/images/logo/radem-logo.png" class="logoSize"
+                     id="stackLogo-text" >
+              </a>
+          </div>
+          <div class="col-md-6 col-6">
+           <table class="borderDiv">
+             <tbody >
+                <tr>
+                  <td>Numero de remboursement</td>
+                  <td> 12563999 </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <td>Tournee</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <td>Contrats</td>
+                  <td></td>
+                </tr>
+             </tbody>
+           </table>
+          </div>
+        </div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="txtCenter modal-body col-10">
+      <h1>طلـــب التعويــض</h1>
+      <h1>DEMANDE DE REMBOURSEMENT</h1>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="txtCenter modal-body col-8">
+      <table class="tableD">
+        <tbody >
+        <tr>
+
+            <td><h4><li><b> Nom et prénom</b> </li></h4></td>
+            <td><h4><b>:</b> </h4></td>
+        </tr>
+        <tr>
+            <td><h4><li><b> Adresse </b> </li> </h4></td>
+            <td><h4><b>:</b> {{RefundDetails?.mailingAddress}} </h4></td>
+        </tr>
+        <tr>
+            <td><h4><li><b> Téléphone fixe </b> </li></h4></td>
+            <td><h4><b>:</b> {{RefundDetails?.fixPhone}} </h4></td>
+        </tr>
+        <tr>
+          <td><h4><li><b> Téléphone portable  </b></li></h4></td>
+          <td><h4><b>:</b> {{RefundDetails?.phone}} </h4></td>
+        </tr>
+        <tr>
+          <td><h4><li><b> Mode de remboursement  </b> </li></h4></td>
+          <td><h4><b>:</b> {{RefundDetails?.requestPaymentMode | translate}}</h4></td>
+        </tr>
+        <tr *ngIf="RefundDetails?.procuration==true">
+            <td>{{'PROCUROR_CIN' | translate }} </td>
+            <td>{{RefundDetails?.procuratorCin}}</td>
+        </tr>
+        <tr *ngIf="RefundDetails?.procuration==true">
+            <td>{{'PROCUROR_LASTNAME' | translate }} </td>
+            <td>{{RefundDetails?.procuratorFirstname}}</td>
+        </tr>
+        <tr *ngIf="RefundDetails?.procuration==true">
+            <td>{{'PROCUROR_FIRSTNAME' | translate }} </td>
+            <td>{{RefundDetails?.procuratorLastname}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
