@@ -86,11 +86,20 @@ export class SettlementsPageComponent implements OnInit {
   }
 
   getClientAttachedContracts() {
+    debugger;
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts.length) {
         this.selectedContract = this.clientContracts[0].contractNo;
-        this.setContract(this.clientContracts[0].contractNo);
+        const clientContractsNo = [];
+        this.clientContracts.forEach(function (value) {
+          clientContractsNo.push(value.contractNo);
+        });
+        const savedContractNo = localStorage.getItem('SELECTED_CONTRACT');
+        if (savedContractNo && clientContractsNo.includes(savedContractNo)) {
+          this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
+        }
+        this.setContract(this.selectedContract);
       }
     }, err => {
       console.log(err)
@@ -163,6 +172,7 @@ export class SettlementsPageComponent implements OnInit {
   }
 
   setContract(id: any) {
+    localStorage.setItem('SELECTED_CONTRACT', id);
     this.page = 1;
     this.pageSize = 0;
 

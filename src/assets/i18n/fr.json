@@ -395,7 +395,6 @@
   "USAGE": "Usage",
   "CREATED_AT": "Fait le",
   "DELETE": "Supprimer",
-  "EDIT": "Éditer",
   "ACTIVATED": "Activé",
   "DISABLED": "Désactivé",
   "ACCOUNT_RECOVERY": "Récupération de compte",
@@ -498,7 +497,7 @@
   "fill_form": "Veuillez remplir l'indice de votre compteur !",
   "PAYMENT-FAIL": "Votre paiement a échoué",
   "PAYMENT-NOT-EXISTED": "cette transaction n'existe pas",
-  "BIG-VALUE": "Vous devez introduire une grande valeur",
+  "BIG-VALUE": "Le nouveau indice doit être plus grand que ",
   "PAYMENT_SUCCEED": "Paiement Effectué",
   "PAYMENT_HAS_BEEN_SUCCEED": "Le paiement s'est bien déroulé votre numéro de transaction est ",
   "NOT_FOUND": "Page Web inaccessible.",
@@ -521,9 +520,11 @@
   "REFUND_MODE": "Mode de remboursement",
   "BANK_TRANSFER": "Virement bancaire",
   "CHECK": "Chèque",
-  "JOIN_FILE": "Joindre un chèque barré ou attestation de RIB BANCAIRE",
+  "EDIT": "Modifier",
+  "JOIN_FILE": "Chèque barré / Attestation de RIB BANCAIRE",
   "Correspondence_Address": "Adresse de correspondance",
-  "EMAIL_ADDRESS": "L'dresse email",
-  "CONTRACTS_NUMBER": "Nº de contrats"
-
+  "EMAIL_ADDRESS": "Email",
+  "CONTRACTS_NUMBER": "Nº de contrats",
+  "file-payload-too-large": "La taille de la pièce jointe ne doit pas dépasser ",
+  "new-refund-error": "Veuilez vérifier le formulaire"
 }

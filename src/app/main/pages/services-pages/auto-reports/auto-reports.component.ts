@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {Setting} from '../../../models/setting.model';
 import * as jsPDF from 'jspdf';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-auto-reports',
@@ -19,6 +20,7 @@ export class AutoReportsComponent implements OnInit {
   public reportForm: FormGroup;
   clientContracts: Array<ContractAttachModel>;
   public contractId: any;
+  public selectedContract: string;
   today: any = moment();
   minDate: any = moment().subtract(5, 'years');
   releve: ReleveModel;
@@ -46,7 +48,9 @@ export class AutoReportsComponent implements OnInit {
   }
 
   setContract(id: any) {
+    localStorage.setItem('SELECTED_CONTRACT', id);
     this.contractId = id;
+    this.getReleve();
   }
 
 
@@ -67,8 +71,15 @@ export class AutoReportsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
-      if (this.clientContracts.length) {
-        this.setContract(this.clientContracts[0].contractNo);
+      if (this.clientContracts && this.clientContracts.length) {
+        this.contractId = this.clientContracts[0].contractNo;
+        const clientContractsNo = _.pluck(this.clientContracts, 'contractNo');
+        const savedContractNo = localStorage.getItem('SELECTED_CONTRACT');
+        if (savedContractNo && clientContractsNo.includes(savedContractNo)) {
+          this.contractId = localStorage.getItem('SELECTED_CONTRACT');
+        }
+        this.setContract(this.contractId);
+
       }
     }, err => {
       console.log(err)
@@ -113,14 +124,13 @@ export class AutoReportsComponent implements OnInit {
   }
 
   getReleve() {
-    if (this.contract !== null) {
-      this.services.loadMeter(this.contract.value).subscribe(response => {
+    if (this.contractId) {
+      this.services.loadMeter(this.contractId).subscribe(response => {
         this.releve = response.data;
         this.loadReleve();
       });
     }
   }
-
 
   saveReleve() {
     this.releve = new ReleveModel(

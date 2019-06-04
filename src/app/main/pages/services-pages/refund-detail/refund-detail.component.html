@@ -46,7 +46,8 @@
                             <tr>
                               <td>{{'CONTRACTS_NUMBER' | translate }}</td>
                               <td> : </td>
-                              <td><span class="badge badge-primary" *ngFor="let c of RefundDetails?.contracts">{{c}}</span></td>
+                              <td><span *ngFor="let c of RefundDetails?.contracts"><span class="badge badge-primary">{{c}}</span>&nbsp;</span></td>
+
                             </tr>
                             <tr>
                               <td>{{'HOME_PHONE_NUMBER' | translate }} </td>
@@ -120,15 +121,15 @@
                     <div id="commDiv">
 
                       <ng-container *ngFor="let feedback of RefundDetails?.feedbacks">
-                        <div *ngIf="feedback.isPublic" class="media mb-2">
-                          <img [src]="feedback.isRademResponse ? agentAvatar : user.avatar"
-                               [alt]="feedback.senderName" class="mr-1 rounded-circle"
+                        <div *ngIf="feedback?.isPublic" class="media mb-2">
+                          <img [src]="feedback?.isRademResponse ? agentAvatar : user?.avatar"
+                               [alt]="feedback?.senderName" class="mr-1 rounded-circle"
                                height="40" width="40">
                           <div class="media-body">
-                            <h6 class="mt-0 font-weight-bold">{{feedback.senderName}}</h6>
-                            <p>{{feedback.message}}</p>
+                            <h6 class="mt-0 font-weight-bold">{{feedback?.senderName}}</h6>
+                            <p>{{feedback?.message}}</p>
                             <div class="col-13 pull-right text-right" id="divDateComm">
-                              <i>le {{feedback.sendingDate | date:'dd-M-yyyy'}}.</i>
+                              <i>le {{feedback?.sendingDate | date:'dd-M-yyyy'}}.</i>
                             </div>
                           </div>
                         </div>
