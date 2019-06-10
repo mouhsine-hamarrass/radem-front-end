@@ -22,12 +22,11 @@
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
                   <div class="multicheckbox">
-                    <angular2-multiselect [data]="ccc"
-                                          [(ngModel)]="sss"
+                    <angular2-multiselect [data]="contractRefunds"
+                                          [(ngModel)]="selectedRefContrcats"
                                           [settings]="settings"
                                           (onSelect)="onItemSelect($event)"
                                           (onDeSelect)="onItemDeSelect($event)"
-                                          (onClose)="onCloseMultiSelect($event)"
                                           formControlName="contracts">
                     </angular2-multiselect>
                   </div>

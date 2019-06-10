@@ -67,8 +67,9 @@
                           <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
                              tooltip="Détails" [routerLink]="['/services/refund-detail/', request?.requestNo]"></i>
                           <i  *ngIf="request?.status?.stepOrder === 1"  class="fa fa-edit cursor-pointer pl-1 text-warning"
-                             tooltip="Modifer"></i>
-                          <i class="fa fa-file-pdf-o pl-1 text-info" tooltip="Imprimer" aria-hidden="true"></i>
+                             tooltip="Modifer" [routerLink]="['/services/edit-refund-request/', request?.requestNo]"></i>
+                          <i class="fa fa-file-pdf-o cursor-pointer pl-1 text-info"
+                             [routerLink]="['/services/new-refund-details/', request?.requestNo]" tooltip="Imprimer"></i>
                         </td>
                       </tr>
                     </ng-template>

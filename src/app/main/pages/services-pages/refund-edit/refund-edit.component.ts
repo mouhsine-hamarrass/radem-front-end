@@ -12,7 +12,6 @@ import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import {StatusModel} from '../../../models/status.model';
 import {RefundRequestModel} from '../../../models/refund-request.model';
 
 
@@ -29,13 +28,11 @@ export class RefundEditComponent implements OnInit {
   public flagModeRemboursement = '';
   public flagProcuration = '';
 
-  RefundStatus: Array<StatusModel> = [{id: 1, status: '', stepOrder: 1}];
   RefundDetails: RefundRequestModel;
-  selectedStep: number;
 
-  ccc: Array<ContractRefund> = [];
+  contractRefunds: Array<ContractRefund> = [];
   ddd: any = {};
-  sss: any = [];
+  selectedRefContrcats: any = [];
   clientContractsNo: Array<string> = [];
   settings = {};
   selectedNumber = 0;
@@ -43,7 +40,6 @@ export class RefundEditComponent implements OnInit {
   nnn: Array<string> = [];
   mmm: Array<number> = [];
   attachments: any = [];
-
 
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
@@ -108,7 +104,6 @@ export class RefundEditComponent implements OnInit {
     this.getClientAttachedContracts();
     this.setProcurationValidators();
     this.flagModeRemboursement = 'CHECK';
-    // this.refundForm.get('ModeRemboursement').setValue('CHECK');
 
     const user: User = this.authHelper.getLoggedUserInfo();
     this.refundForm.get('email').setValue(user.email);
@@ -146,56 +141,48 @@ export class RefundEditComponent implements OnInit {
     this.selectedFiles = undefined;
   }
 
-  onCloseMultiSelect(item: any) {
-    this.getRefundedContracts();
-    this.onItemSelect(item);
-    this.onItemDeSelect(item);
-  }
-
   onItemSelect(item: any) {
-    console.log(item.tourNo);
     this.selectedNumber++;
-    const iii: Array<ContractRefund> = this.ccc;
-    this.ccc = [];
+    const iii: Array<ContractRefund> = this.contractRefunds;
+    this.contractRefunds = [];
     iii.forEach(value => {
       if (value.tourNo === item.tourNo) {
-        this.ccc.push(value);
+        this.contractRefunds.push(value);
       }
       if (this.selectedNumber === 0) {
         this.getRefundedContracts();
       }
     });
-    console.log(this.ccc);
   }
 
   onItemDeSelect(item: any) {
-    console.log(item.tourNo);
     this.selectedNumber--;
-    const iii: Array<ContractRefund> = this.ccc;
-    this.ccc = [];
+    const iii: Array<ContractRefund> = this.contractRefunds;
+    this.contractRefunds = [];
     iii.forEach(value => {
       if (value.tourNo === item.tourNo) {
-        this.ccc.push(value);
+        this.contractRefunds.push(value);
       }
       if (this.selectedNumber === 0) {
         this.getRefundedContracts();
       }
     });
-    console.log(this.ccc);
   }
 
   getRefundDetail() {
     const requestNo: string = this.route.snapshot.paramMap.get('requestNo');
     if (requestNo !== null) {
       this.servicesService.getRefundDetails(requestNo).subscribe(response => {
-        if (response.data) {
+        if (response && response.data) {
           this.RefundDetails = response.data;
-          this.RefundDetails.feedbacks = this.RefundDetails.feedbacks.reverse();
-          this.selectedStep = this.RefundDetails.status.stepOrder;
+        } else {
+          // TODO: no data found
         }
       }, error => {
         console.log(error);
       })
+    } else {
+      // TODO: request no not found
     }
   }
 
@@ -247,8 +234,8 @@ export class RefundEditComponent implements OnInit {
 
   getRefundedContracts() {
     this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
-      this.ccc = response.data;
-      _.each(this.ccc, (element: any) => {
+      this.contractRefunds = response.data;
+      _.each(this.contractRefunds, (element: any) => {
         _.extend(element, {
           id: element.contractNo,
           tourNo: element.tourNo,
@@ -310,7 +297,7 @@ export class RefundEditComponent implements OnInit {
       this.mmm.push(value.id);
     });
     newRefundrequest.attachmentIds = this.mmm;
-    this.sss.forEach(value => {
+    this.selectedRefContrcats.forEach(value => {
       this.nnn.push(value.contractNo);
       newRefundrequest.tour = value.tourNo;
     });
@@ -324,20 +311,6 @@ export class RefundEditComponent implements OnInit {
         this.router.navigate(['/services/new-refund-details/' + response.data]);
 
       }
-      /*      Swal({
-              title: 'Merci pour votre Collaboration',
-              text: 'votre demande de remboursement a été envoyé avec succès',
-              type: 'success',
-              showCancelButton: true,
-              confirmButtonText: 'Voulez-vous Telecharger le PDF',
-              cancelButtonText: 'Non, Merci'
-            }).then((result) => {
-              if (result.value) {
-              } else if (result.dismiss === Swal.DismissReason.cancel) {
-                this.router.navigate(['/services/refund-requests']);
-              }
-            })*/
-      // this.router.navigate(['/services'])
     }, err => {
       console.log(err);
       this.toastrService.error(this.translate.instant('new-refund-error'));
@@ -348,7 +321,6 @@ export class RefundEditComponent implements OnInit {
 
   setContract(contractNo: string) {
     this.contractNo = contractNo;
-    // this.getRefunds(this.contractNo);
   }
 
 }

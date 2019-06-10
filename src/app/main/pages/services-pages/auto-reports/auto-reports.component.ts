@@ -8,7 +8,6 @@ import {ReleveModel} from '../../../models/releve.model';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {Setting} from '../../../models/setting.model';
-import * as jsPDF from 'jspdf';
 import * as _ from 'underscore';
 
 @Component({
@@ -30,8 +29,7 @@ export class AutoReportsComponent implements OnInit {
               private services: ServicesService,
               private formBuilder: FormBuilder,
               private toastrService: ToastrService,
-              private translate: TranslateService,
-              private elementRef: ElementRef) {
+              private translate: TranslateService) {
     this.today = moment();
     this.reportForm = this.formBuilder.group({
       id: [''],
@@ -52,21 +50,6 @@ export class AutoReportsComponent implements OnInit {
     this.contractId = id;
     this.getReleve();
   }
-
-
-  public generatePDF() {
-    debugger;
-
-    let doc = new jsPDF('p', 'px', 'a4');
-    let options = {
-      pagesplit: true
-    };
-    doc.fromHTML(this.elementRef.nativeElement, 10, 10, options, () => {
-      doc.autoPrint();
-      doc.save('Test.pdf');
-    });
-  }
-
 
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {

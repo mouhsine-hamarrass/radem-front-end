@@ -196,29 +196,25 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
 
+              <div class="row" *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label class="control-label" lang="fr" for="bank_file"> {{'JOIN_FILE' | translate }}
+                    <span
+                      class="text-danger">*</span>
+                  </label>
                 </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
-
-                    <div class="input-group">
-
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="bank_file" (change)="selectFile($event)"
-                               formControlName="bank_file" lang="fr">
-                        <label class="custom-file-label" lang="fr" for="bank_file"> {{'JOIN_FILE' | translate }}  <span
-                          class="text-danger">*</span></label>
-                      </div>
-                    </div>
-
-                    <div class="text-danger"
-                         *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
-                      <div *ngIf="refundForm.controls['bank_file'].errors.required">
-                        {{'FIELD_REQUIRED' | translate}}
-                      </div>
+                  <input lang="fr" type="file" id="bank_file" name="bank_file" class="form-control"
+                         formControlName="bank_file" (change)="selectFile($event)">
+                  <small class="text-muted">{{'la-taille-du-fichier-ne-doit-pas-depasser' | translate}}: 32MB
+                  </small>
+                  <br>
+                  <div class="text-danger"
+                       *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
+                    <div *ngIf="refundForm.controls['bank_file'].errors.required">
+                      {{'FIELD_REQUIRED' | translate}}
                     </div>
                   </div>
                 </div>
