@@ -467,8 +467,8 @@ export class ServicesService {
     return this.httpClient.request(req2);
   }
 
-  saveNewRefundRequest(newModel: NewRefundRequestModel): Observable<Response<number>> {
-    return this.httpClient.post<Response<number>>(`${this.urlApi}/refund-request/save`, newModel, {headers: headers})
+  saveNewRefundRequest(newModel: NewRefundRequestModel): Observable<Response<string>> {
+    return this.httpClient.post<Response<string>>(`${this.urlApi}/refund-request/save`, newModel, {headers: headers})
   }
 
 }

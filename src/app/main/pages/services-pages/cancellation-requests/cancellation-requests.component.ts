@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
-import {CancellationRequestModel} from '../../../models/cancellation-request.model';
 import {AdminService} from '../../../services/admin.service';
 import {Setting} from '../../../models/setting.model';
 
 @Component({
-    selector: 'app-cancellation-requests',
-    templateUrl: './cancellation-requests.component.html',
-    styleUrls: ['./cancellation-requests.component.scss']
+  selector: 'app-cancellation-requests',
+  templateUrl: './cancellation-requests.component.html',
+  styleUrls: ['./cancellation-requests.component.scss']
 })
 export class CancellationRequestsComponent implements OnInit {
   page = 1;
@@ -38,9 +37,18 @@ export class CancellationRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
-      if (this.clientContracts.length) {
+      if (this.clientContracts && this.clientContracts.length) {
         this.selectedContract = this.clientContracts[0].contractNo;
-        this.setContract(this.clientContracts[0].contractNo);
+        const clientContractsNo = [];
+        this.clientContracts.forEach(function (value) {
+          clientContractsNo.push(value.contractNo);
+        });
+        const savedContractNo = localStorage.getItem('SELECTED_CONTRACT');
+        if (savedContractNo && clientContractsNo.includes(savedContractNo)) {
+          this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
+        }
+        this.setContract(this.selectedContract);
+
       }
     }, err => {
       console.log(err)
@@ -61,6 +69,7 @@ export class CancellationRequestsComponent implements OnInit {
 
 
   setContract(contractNo: string) {
+    localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.contractNo = contractNo;
     this.getTerminations(this.contractNo);
   }
@@ -73,31 +82,14 @@ export class CancellationRequestsComponent implements OnInit {
 
   getAdvice() {
     this.adminService.getAdvices().subscribe(
-        response => {
-          this.advices = response.data;
-        }, err => {
-          console.log(err)
-        });
+      response => {
+        this.advices = response.data;
+      }, err => {
+        console.log(err)
+      });
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //     cancellationRequests: Array<any> = [];

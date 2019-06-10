@@ -30,6 +30,7 @@ import {TooltipModule} from 'ngx-bootstrap';
     BrowserAnimationsModule,
     ConsumptionsPageModule,
     ContractsPageModule,
+    TooltipModule,
     HomePageModule,
     ServicesPagesModule,
     SettlementsPageModule,

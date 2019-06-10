@@ -16,311 +16,319 @@ import {ContractAttachModel} from '../../models/contract-attach.model';
 import {ContractModel} from '../../models/contract.model';
 import {ConsumptionHistoryModel} from '../../models/consumptionHistory.model';
 import {ConsumptionReportModel} from '../../models/consumptionReport.model';
-import {any} from 'codelyzer/util/function';
 
 @Component({
-    selector: 'app-consumption-page',
-    templateUrl: './consumptions-page.component.html',
-    styleUrls: ['./consumptions-page.component.scss']
+  selector: 'app-consumption-page',
+  templateUrl: './consumptions-page.component.html',
+  styleUrls: ['./consumptions-page.component.scss']
 })
 export class ConsumptionsPageComponent implements OnInit {
-    @ViewChild('chart1') chart1: BaseChartDirective;
-    @ViewChild('chart2') chart2: BaseChartDirective;
-    public user: User;
-    clientContracts: Array<ContractAttachModel>;
-    contracts: Array<ContractModel>;
-    historyForm: FormGroup;
-    consumptionsHistory: Array<ConsumptionHistoryModel> = [];
-    consumptionsHistoryCurrentYear: Array<ConsumptionHistoryModel> = [];
-    consumptionsReport: Array<ConsumptionReportModel> = [];
-    legth: any;
-    selectedContract: string;
+  @ViewChild('chart1') chart1: BaseChartDirective;
+  @ViewChild('chart2') chart2: BaseChartDirective;
+  public user: User;
+  clientContracts: Array<ContractAttachModel>;
+  contracts: Array<ContractModel>;
+  historyForm: FormGroup;
+  consumptionsHistory: Array<ConsumptionHistoryModel> = [];
+  consumptionsHistoryCurrentYear: Array<ConsumptionHistoryModel> = [];
+  consumptionsReport: Array<ConsumptionReportModel> = [];
+  legth: any;
+  selectedContract: string;
 
-    today: any = moment();
-    minDate: any = moment().subtract(5, 'years');
-    selectedLink: any = 'volume';
-    page = 1;
-    pageSize = 0;
-    numberOfItems: number;
-    totalElements: number;
-    totalPages: number;
-    itemsPerPage: number;
+  today: any = moment();
+  minDate: any = moment().subtract(5, 'years');
+  selectedLink: any = 'volume';
+  page = 1;
+  pageSize = 0;
+  numberOfItems: number;
+  totalElements: number;
+  totalPages: number;
+  itemsPerPage: number;
 
 
-    public chartType = 'bar';
-    public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    currentYear = moment().format('YYYY');
-    lastYear = moment().subtract(1, 'years').format('YYYY');
-    public chartDataSetsVolume: Array<any> = [
-        {data: [], label: this.currentYear.toString()},
-        {data: [], label: this.lastYear.toString()}
-    ];
-    public chartDataSetsInvoice: Array<any> = [
-        {data: [], label: this.currentYear.toString()},
-        {data: [], label: this.lastYear.toString()}
-    ];
+  public chartType = 'bar';
+  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  currentYear = moment().format('YYYY');
+  lastYear = moment().subtract(1, 'years').format('YYYY');
+  public chartDataSetsVolume: Array<any> = [
+    {data: [], label: this.currentYear.toString()},
+    {data: [], label: this.lastYear.toString()}
+  ];
+  public chartDataSetsInvoice: Array<any> = [
+    {data: [], label: this.currentYear.toString()},
+    {data: [], label: this.lastYear.toString()}
+  ];
 
-    public chartOptionsEau: any = {
+  public chartOptionsEau: any = {
 
-        title: {
-            display: true,
-            text: 'Volume'
-        },
-        responsive: true,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+    title: {
+      display: true,
+      text: 'Volume'
+    },
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
         }
-    };
-    public chartOptionsFact: any = {
-        title: {
-            display: true,
-            text: 'Facturation en DH'
-        },
-        responsive: true,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+      }]
+    }
+  };
+  public chartOptionsFact: any = {
+    title: {
+      display: true,
+      text: 'Facturation en DH'
+    },
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
         }
-    };
-    private WaterBar1: Color = {
-        backgroundColor: 'rgba(151,187,205, 1)',
-        borderWidth: 1,
-        borderColor: 'rgba(151,187,205,1)',
-        pointBackgroundColor: 'rgba(151,187,205,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(220,220,220,1)'
-    };
-    private WaterBar2: Color = {
-        backgroundColor: 'rgba(180, 228, 250, 1)',
-        borderWidth: 1,
-        borderColor: 'rgba(180, 228, 250,1)',
-        pointBackgroundColor: 'rgba(180, 228, 250,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(151,187,205,1)'
-    };
-    public chartColorsEau: Array<any> = [
-        this.WaterBar1,
-        this.WaterBar2
+      }]
+    }
+  };
+  private WaterBar1: Color = {
+    backgroundColor: 'rgba(151,187,205, 1)',
+    borderWidth: 1,
+    borderColor: 'rgba(151,187,205,1)',
+    pointBackgroundColor: 'rgba(151,187,205,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(220,220,220,1)'
+  };
+  private WaterBar2: Color = {
+    backgroundColor: 'rgba(180, 228, 250, 1)',
+    borderWidth: 1,
+    borderColor: 'rgba(180, 228, 250,1)',
+    pointBackgroundColor: 'rgba(180, 228, 250,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(151,187,205,1)'
+  };
+  public chartColorsEau: Array<any> = [
+    this.WaterBar1,
+    this.WaterBar2
+  ];
+  private FactBar1: Color = {
+    backgroundColor: 'rgba(102,205,170, 1)',
+    borderWidth: 1,
+    borderColor: 'rgba(102,205,170, 1)',
+    pointBackgroundColor: 'rgba(231, 76, 60,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(231, 76, 60, 1)'
+  };
+  private FactBar2: Color = {
+    backgroundColor: 'rgba(163,225,204, 1)',
+    borderWidth: 1,
+    borderColor: 'rgba(163,225,204, 1)',
+    pointBackgroundColor: 'rgba(151,187,205,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(151,187,205,1)'
+  };
+  public chartColorsFact: Array<any> = [
+    this.FactBar1,
+    this.FactBar2
+  ];
+
+
+  constructor(
+    private contractServices: ContractsService,
+    private adminService: AdminService,
+    private utilsService: UtilsService,
+    private formBuilder: FormBuilder,
+    private services: ServicesService) {
+    this.historyForm = this.formBuilder.group({
+      contract: ['', Validators.required],
+      startDate: [this.today, Validators.required],
+      endDate: [this.today, Validators.required]
+    });
+  }
+
+  ngOnInit() {
+    if (localStorage.getItem(AuthHelper.USER_ID)) {
+      this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+    }
+    this.getClientAttachedContracts();
+  }
+
+
+  refresh_chart() {
+    /*
+    setTimeout(() => {
+      this.chartDataSetsVolume = [
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.currentYear.toString()},
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.lastYear.toString()}
+      ];
+      this.chartDataSetsInvoice = [
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.currentYear.toString()},
+        {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.lastYear.toString()}
+      ];
+      this.chart.ngOnDestroy();
+      this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
+      if (this.chart && this.chart.chart && this.chart.chart.config) {
+        this.chart.chart.update();
+      }
+    }, 100);
+    */
+  }
+
+  getClientAttachedContracts() {
+    this.services.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+      if (this.clientContracts.length) {
+        this.selectedContract = this.clientContracts[0].contractNo;
+        const clientContractsNo = [];
+        this.clientContracts.forEach(function (value) {
+          clientContractsNo.push(value.contractNo);
+        });
+        const savedContractNo = localStorage.getItem('SELECTED_CONTRACT');
+        if (savedContractNo && clientContractsNo.includes(savedContractNo)) {
+          this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
+        }
+        this.setReportContract(this.selectedContract);
+      }
+    }, err => {
+      console.log(err)
+    });
+  }
+
+  getConsumptionHistory() {
+    const contract = this.historyForm.controls['contract'].value;
+    const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
+    const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
+    this.adminService.getPageableHistoryConsumptions(contract,
+      startDate,
+      endDate,
+      this.page,
+      this.pageSize)
+      .subscribe(response => {
+        this.consumptionsHistory = response.data['content'];
+        this.totalElements = response.data['totalElements'];
+        this.totalPages = response.data['totalPages'];
+        this.itemsPerPage = response.data['size'];
+        this.numberOfItems = response.data['numberOfElements'];
+      }, err => console.log(err));
+  }
+
+  getConsumptionHistoryCurrentYear(contractNo) {
+    this.adminService.getPageableHistoryConsumptionsCurrentYear(contractNo)
+      .subscribe(response => {
+
+        this.consumptionsHistoryCurrentYear = response.data;
+        console.log('mosibastart   ');
+        console.log(contractNo);
+        console.log(this.consumptionsHistoryCurrentYear.length);
+        console.log(this.chart1);
+        console.log(this.chart2);
+        console.log(this.consumptionsHistoryCurrentYear.length !== 0);
+        console.log('mosibaEnd');
+
+      }, err => console.log(err));
+  }
+
+  pageChanged(pageNo: number) {
+    this.page = pageNo;
+    this.getConsumptionHistory();
+  }
+
+  pageFilter(pageSize: number): void {
+    this.pageSize = pageSize;
+    this.itemsPerPage = pageSize;
+    this.page = 1;
+    this.getConsumptionHistory();
+  }
+
+  getConsumptionReport(contractNo) {
+    this.chartDataSetsInvoice = [
+      {data: [], label: this.currentYear.toString()},
+      {data: [], label: this.lastYear.toString()}
     ];
-    private FactBar1: Color = {
-        backgroundColor: 'rgba(102,205,170, 1)',
-        borderWidth: 1,
-        borderColor: 'rgba(102,205,170, 1)',
-        pointBackgroundColor: 'rgba(231, 76, 60,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(231, 76, 60, 1)'
-    };
-    private FactBar2: Color = {
-        backgroundColor: 'rgba(163,225,204, 1)',
-        borderWidth: 1,
-        borderColor: 'rgba(163,225,204, 1)',
-        pointBackgroundColor: 'rgba(151,187,205,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(151,187,205,1)'
-    };
-    public chartColorsFact: Array<any> = [
-        this.FactBar1,
-        this.FactBar2
+    this.chartDataSetsVolume = [
+      {data: [], label: this.currentYear.toString()},
+      {data: [], label: this.lastYear.toString()}
     ];
 
 
-    constructor(
-        private contractServices: ContractsService,
-        private adminService: AdminService,
-        private utilsService: UtilsService,
-        private formBuilder: FormBuilder,
-        private services: ServicesService) {
-        this.historyForm = this.formBuilder.group({
-            contract: ['', Validators.required],
-            startDate: [this.today, Validators.required],
-            endDate: [this.today, Validators.required]
+    this.adminService.getConsumptionReport(contractNo).subscribe(response => {
+      this.consumptionsReport = response.data;
+      _.each(this.consumptionsReport, (consumption, i) => {
+
+        _.each(consumption.volumes, (volume, j) => {
+          this.chartDataSetsVolume[i].label = consumption.year;
+          this.chartDataSetsVolume[i].data[j] = volume ? parseFloat(volume) : 0;
         });
-    }
 
-    ngOnInit() {
-        if (localStorage.getItem(AuthHelper.USER_ID)) {
-            this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
-        }
-        this.getClientAttachedContracts();
-    }
-
-
-    refresh_chart() {
-        /*
-        setTimeout(() => {
-          this.chartDataSetsVolume = [
-            {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.currentYear.toString()},
-            {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.lastYear.toString()}
-          ];
-          this.chartDataSetsInvoice = [
-            {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.currentYear.toString()},
-            {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.lastYear.toString()}
-          ];
-          this.chart.ngOnDestroy();
-          this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
-          if (this.chart && this.chart.chart && this.chart.chart.config) {
-            this.chart.chart.update();
-          }
-        }, 100);
-        */
-    }
-
-    getClientAttachedContracts() {
-        this.services.clientAttachedContracts().subscribe(response => {
-            this.clientContracts = response.data;
-            if (this.clientContracts.length) {
-                 this.selectedContract = this.clientContracts[0].contractNo;
-                 this.setReportContract(this.clientContracts[0].contractNo);
-            }
-        }, err => {
-            console.log(err)
+        _.each(consumption.amounts, (amount, j) => {
+          this.chartDataSetsInvoice[i].label = consumption.year;
+          this.chartDataSetsInvoice[i].data[j] = amount ? parseFloat(amount) : 0;
         });
+      });
+
+
+      if (this.isSelected('volume')) {
+        this.chart1.ngOnChanges({});
+      }
+      if (this.isSelected('facturation')) {
+        this.chart2.ngOnChanges({});
+      }
+    }, error => {
+      console.log(error)
+    })
+  }
+
+  setHistoryContract() {
+    this.getConsumptionHistory();
+  }
+
+  setReportContract(contractNo: string) {
+    localStorage.setItem('SELECTED_CONTRACT', contractNo);
+    this.getConsumptionHistoryCurrentYear(contractNo);
+    this.getConsumptionReport(contractNo);
+  }
+
+  downloadXlsConsumptions() {
+    const contract = this.historyForm.controls['contract'].value;
+    const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
+    const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
+    this.services.downloadXlsConsumptions(contract, startDate, endDate).subscribe((response) => {
+      if (response && response['body']) {
+        const file = new FileModel('mes-consommations.xls', CommonUtil._arrayBufferToBase64(response['body']));
+
+        CommonUtil.downloadFile(file);
+      }
+    });
+  }
+
+  downloadPdfConsumptions() {
+
+    const contract = this.historyForm.controls['contract'].value;
+    const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
+    const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
+    this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
+      if (response && response['body']) {
+        const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+
+        CommonUtil.downloadFile(file);
+      }
+    });
+  }
+
+
+  setRadio(e: string): void {
+
+    this.selectedLink = e;
+
+  }
+
+  isSelected(name: string): boolean {
+
+    if (!this.selectedLink) {
+      return false;
     }
 
-    getConsumptionHistory() {
-        const contract = this.historyForm.controls['contract'].value;
-        const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
-        const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
-        this.adminService.getPageableHistoryConsumptions(contract,
-            startDate,
-            endDate,
-            this.page,
-            this.pageSize)
-            .subscribe(response => {
-                this.consumptionsHistory = response.data['content'];
-                this.totalElements = response.data['totalElements'];
-                this.totalPages = response.data['totalPages'];
-                this.itemsPerPage = response.data['size'];
-                this.numberOfItems = response.data['numberOfElements'];
-            }, err => console.log(err));
-    }
-
-    getConsumptionHistoryCurrentYear(contractNo) {
-        this.adminService.getPageableHistoryConsumptionsCurrentYear(contractNo)
-            .subscribe(response => {
-
-                this.consumptionsHistoryCurrentYear = response.data;
-                console.log('mosibastart   ');
-                console.log(contractNo);
-                console.log(this.consumptionsHistoryCurrentYear.length);
-                console.log(this.chart1);
-                console.log(this.chart2);
-                console.log(this.consumptionsHistoryCurrentYear.length !== 0);
-                console.log('mosibaEnd');
-
-            }, err => console.log(err));
-    }
-
-    pageChanged(pageNo: number) {
-        this.page = pageNo;
-        this.getConsumptionHistory();
-    }
-
-    pageFilter(pageSize: number): void {
-        this.pageSize = pageSize;
-        this.itemsPerPage = pageSize;
-        this.page = 1;
-        this.getConsumptionHistory();
-    }
-
-    getConsumptionReport(contractNo) {
-        this.chartDataSetsInvoice = [
-            {data: [], label: this.currentYear.toString()},
-            {data: [], label: this.lastYear.toString()}
-        ];
-        this.chartDataSetsVolume = [
-            {data: [], label: this.currentYear.toString()},
-            {data: [], label: this.lastYear.toString()}
-        ];
-
-
-        this.adminService.getConsumptionReport(contractNo).subscribe(response => {
-            this.consumptionsReport = response.data;
-            _.each(this.consumptionsReport, (consumption, i) => {
-
-                _.each(consumption.volumes, (volume, j) => {
-                    this.chartDataSetsVolume[i].label = consumption.year;
-                    this.chartDataSetsVolume[i].data[j] = volume ? parseFloat(volume) : 0;
-                });
-
-                _.each(consumption.amounts, (amount, j) => {
-                    this.chartDataSetsInvoice[i].label = consumption.year;
-                    this.chartDataSetsInvoice[i].data[j] = amount ? parseFloat(amount) : 0;
-                });
-            });
-
-
-            if (this.isSelected('volume')) {
-                this.chart1.ngOnChanges({});
-            }
-            if (this.isSelected('facturation')) {
-                this.chart2.ngOnChanges({});
-            }
-        }, error => {
-            console.log(error)
-        })
-    }
-
-    setHistoryContract() {
-        this.getConsumptionHistory();
-    }
-
-    setReportContract(contractNo: string) {
-        this.getConsumptionHistoryCurrentYear(contractNo);
-        this.getConsumptionReport(contractNo);
-    }
-
-    downloadXlsConsumptions() {
-        const contract = this.historyForm.controls['contract'].value;
-        const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
-        const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
-        this.services.downloadXlsConsumptions(contract, startDate, endDate).subscribe((response) => {
-            if (response && response['body']) {
-                const file = new FileModel('mes-consommations.xls', CommonUtil._arrayBufferToBase64(response['body']));
-
-                CommonUtil.downloadFile(file);
-            }
-        });
-    }
-
-    downloadPdfConsumptions() {
-
-        const contract = this.historyForm.controls['contract'].value;
-        const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
-        const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
-        this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
-            if (response && response['body']) {
-                const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
-
-                CommonUtil.downloadFile(file);
-            }
-        });
-    }
-
-
-    setRadio(e: string): void {
-
-        this.selectedLink = e;
-
-    }
-
-    isSelected(name: string): boolean {
-
-        if (!this.selectedLink) {
-            return false;
-        }
-
-        return (name === this.selectedLink);
-    }
+    return (name === this.selectedLink);
+  }
 }

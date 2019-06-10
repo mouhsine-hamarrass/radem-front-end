@@ -39,9 +39,18 @@ export class EmbranchmentRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
-      if (this.clientContracts.length) {
+      if (this.clientContracts && this.clientContracts.length) {
         this.selectedContract = this.clientContracts[0].contractNo;
-        this.setContract(this.clientContracts[0].contractNo);
+        const clientContractsNo = [];
+        this.clientContracts.forEach(function (value) {
+          clientContractsNo.push(value.contractNo);
+        });
+        const savedContractNo = localStorage.getItem('SELECTED_CONTRACT');
+        if (savedContractNo && clientContractsNo.includes(savedContractNo)) {
+          this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
+        }
+        this.setContract(this.selectedContract);
+
       }
 
     }, err => {
@@ -62,6 +71,7 @@ export class EmbranchmentRequestsComponent implements OnInit {
   }
 
   setContract(contractNo: string) {
+    localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.contractNo = contractNo;
     this.getEmbranchments(this.contractNo);
   }

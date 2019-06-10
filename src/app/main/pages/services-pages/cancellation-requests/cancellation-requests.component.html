@@ -44,6 +44,7 @@
                     <th scope="col">{{'CREATED_ON' | translate }}</th>
                     <th scope="col">{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }}</th>
                     <th scope="col">{{'Status' | translate }}</th>
+                    <th scope="col" width="240">{{'ACTIONS' | translate }}</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -53,11 +54,15 @@
 
                   <ng-template #dataAvailable>
                     <tr *ngFor="let request of cancellationtionRequests">
-                      <td><a [routerLink]="['/services/cancellation-detail/', request.requestNo]"><b>{{request.requestNo}}</b></a></td>
-                      <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
-                      <td>{{request.counterRemovalDate | date:'dd-M-yyyy'}}</td>
+                      <td><b>{{request?.requestNo}}</b></td>
+                      <td>{{request?.createdAt | date:'dd-M-yyyy'}}</td>
+                      <td>{{request?.counterRemovalDate | date:'dd-M-yyyy'}}</td>
                       <td>
-                         <app-badge [status]="request.status.status"></app-badge>
+                         <app-badge [status]="request?.status?.status"></app-badge>
+                      </td>
+                      <td>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                           tooltip="Détails" [routerLink]="['/services/cancellation-detail/', request?.requestNo]"></i>
                       </td>
                     </tr>
                   </ng-template>

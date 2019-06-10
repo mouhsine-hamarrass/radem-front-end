@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
             {
                 path: '/services/subscription-requests',
-                title: 'Demandes d\'abonnements',
+                title: 'Suivi Demandes d\'abonnements',
                 icon: '',
                 clazz: 'menu-item',
                 badge: '',
@@ -36,7 +36,7 @@ export const ROUTES: RouteInfo[] = [
             },
             {
                 path: '/services/cancellation-requests',
-                title: 'Demandes de résiliation',
+                title: 'Suivi Demandes de résiliation',
                 icon: '',
                 clazz: 'menu-item',
                 badge: '',
@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
 
           {
             path:  '/services/embranchement-requests',
-            title: 'Demandes de branchement',
+            title: 'Suivi Demandes de branchement',
             icon: '',
             clazz: 'menu-item',
             badge: '',
@@ -60,7 +60,7 @@ export const ROUTES: RouteInfo[] = [
 
           {
             path: '/services/refund-requests',
-            title: 'Demandes de remboursement',
+            title: 'Suivi Demandes de remboursement',
             icon: '',
             clazz: 'menu-item',
             badge: '',
@@ -71,7 +71,7 @@ export const ROUTES: RouteInfo[] = [
           },
           {
                 path: '/services/auto-reports',
-                title: 'Auto relève',
+                title: 'Suivi Auto relève',
                 icon: '',
                 clazz: 'menu-item',
                 badge: '',

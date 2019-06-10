@@ -28,76 +28,76 @@
                     </option>
                   </select>
                 </div>
-                 <!--
-                  <label class="col-form-label">{{'PERIOD_OF' | translate}} <span class="danger">*</span> :</label>
+                <!--
+                 <label class="col-form-label">{{'PERIOD_OF' | translate}} <span class="danger">*</span> :</label>
 
-                <div class="col-auto">
-                  <input [owlDateTime]="sd"
-                         [owlDateTimeTrigger]="sd"
-                         [min]="minDate"
-                         [max]="today"
-                         formControlName="startDate"
-                         class="form-control date-readonly"
-                         id="startDate" readonly>
-                  <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
-                  <div class="text-danger position-absolute mb-1"
-                       *ngIf="!contractForm.controls['startDate'].valid && contractForm.controls['startDate'].touched">
-                    <div *ngIf="contractForm.controls['startDate'].errors.required">
-                      {{'FIELD_REQUIRED' | translate}}
-                    </div>
-                  </div>
-                </div>
+               <div class="col-auto">
+                 <input [owlDateTime]="sd"
+                        [owlDateTimeTrigger]="sd"
+                        [min]="minDate"
+                        [max]="today"
+                        formControlName="startDate"
+                        class="form-control date-readonly"
+                        id="startDate" readonly>
+                 <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
+                 <div class="text-danger position-absolute mb-1"
+                      *ngIf="!contractForm.controls['startDate'].valid && contractForm.controls['startDate'].touched">
+                   <div *ngIf="contractForm.controls['startDate'].errors.required">
+                     {{'FIELD_REQUIRED' | translate}}
+                   </div>
+                 </div>
+               </div>
 
-                <label class="col-form-label">{{'THE' | translate}} <span class="danger">*</span></label>
-                <div class="col-auto">
-                  <input [owlDateTime]="ed"
-                         [owlDateTimeTrigger]="ed"
-                         [min]="minDate"
-                         [max]="today"
-                         formControlName="endDate"
-                         class="form-control date-readonly"
-                         id="endDate" readonly>
-                  <owl-date-time #ed [pickerType]="'calendar'" [startAt]="ed.getValidDate"></owl-date-time>
-                  <div class="text-danger position-absolute mb-1"
-                       *ngIf="!contractForm.controls['endDate'].valid && contractForm.controls['endDate'].touched">
-                    <div *ngIf="contractForm.controls['endDate'].errors.required">
-                      {{'FIELD_REQUIRED' | translate}}
-                    </div>
-                  </div>
-                </div>
+               <label class="col-form-label">{{'THE' | translate}} <span class="danger">*</span></label>
+               <div class="col-auto">
+                 <input [owlDateTime]="ed"
+                        [owlDateTimeTrigger]="ed"
+                        [min]="minDate"
+                        [max]="today"
+                        formControlName="endDate"
+                        class="form-control date-readonly"
+                        id="endDate" readonly>
+                 <owl-date-time #ed [pickerType]="'calendar'" [startAt]="ed.getValidDate"></owl-date-time>
+                 <div class="text-danger position-absolute mb-1"
+                      *ngIf="!contractForm.controls['endDate'].valid && contractForm.controls['endDate'].touched">
+                   <div *ngIf="contractForm.controls['endDate'].errors.required">
+                     {{'FIELD_REQUIRED' | translate}}
+                   </div>
+                 </div>
+               </div>
 
-                <div class="col-auto float-right row">
-                  <button type="button" class="btn btn btn-outline-primary"
-                          (click)="getSettlements()" [disabled]="contractForm.invalid">
-                    <i class="fa fa-search"></i>
-                  </button>
-                 &nbsp;
-                  <div class="btn-group" dropdown>
-                    <button dropdownToggle
-                            class="btn btn btn-outline-primary dropdown-toggle download"
-                            type="button"><i
-                      class="fa fa-download"></i></button>
+               <div class="col-auto float-right row">
+                 <button type="button" class="btn btn btn-outline-primary"
+                         (click)="getSettlements()" [disabled]="contractForm.invalid">
+                   <i class="fa fa-search"></i>
+                 </button>
+                &nbsp;
+                 <div class="btn-group" dropdown>
+                   <button dropdownToggle
+                           class="btn btn btn-outline-primary dropdown-toggle download"
+                           type="button"><i
+                     class="fa fa-download"></i></button>
 
-                      <div aria-labelledby="dropdownUser" class="dropdown-menu">
-                          <a class="dropdown-item" (click)="downloadPdfSettlements()">
-                              <i class="fa fa-file-pdf-o"></i> {{'PDF_FORMAT' | translate}}
-                          </a>
+                     <div aria-labelledby="dropdownUser" class="dropdown-menu">
+                         <a class="dropdown-item" (click)="downloadPdfSettlements()">
+                             <i class="fa fa-file-pdf-o"></i> {{'PDF_FORMAT' | translate}}
+                         </a>
 
-                      <a class="dropdown-item" (click)="downloadXlsSettlements()">
-                        <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
-                      </a>
+                     <a class="dropdown-item" (click)="downloadXlsSettlements()">
+                       <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
+                     </a>
 
-                    </div>
-                  </div>
-                </div>
+                   </div>
+                 </div>
+               </div>
 
 
-                  <div class="col-auto float-right row">
-                      <button type="button" class="btn btn btn-outline-primary"
-                              (click)="getSettlements()" [disabled]="contractForm.invalid">
-                          <i class="fa fa-search"></i>
-                      </button></div>
-                       -->
+                 <div class="col-auto float-right row">
+                     <button type="button" class="btn btn btn-outline-primary"
+                             (click)="getSettlements()" [disabled]="contractForm.invalid">
+                         <i class="fa fa-search"></i>
+                     </button></div>
+                      -->
               </div>
               <div class="table-responsive mx-auto">
                 <div class="row justify-content-between">
@@ -123,33 +123,32 @@
                   <tbody>
 
 
-
                   <app-data-not-available
-                      *ngIf="!pieces || pieces.length == 0; else dataAvailable"
-                      [colSpan]="6"></app-data-not-available>
+                    *ngIf="!pieces || pieces.length == 0; else dataAvailable"
+                    [colSpan]="6"></app-data-not-available>
 
-                    <ng-template #dataAvailable>
+                  <ng-template #dataAvailable>
                     <tr *ngFor="let piece of pieces">
 
-                        <td>{{piece?.receiptNo}}</td>
-                        <td>{{piece?.receiptDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{piece?.totalAmount | numeral}}</td>
-                        <td>{{piece?.numberOfContracts}}</td>
-                        <td>{{piece?.paymentMode}}</td>
-                        <td>
-                          <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
-                               tooltip="Détails"
-                               (click)="openReceiptDetails(detailReceipt, piece?.receiptNo)"></i>
-                        </td>
-                      </tr>
+                      <td>{{piece?.receiptNo}}</td>
+                      <td>{{piece?.receiptDate | date:'dd-MM-yyyy'}}</td>
+                      <td>{{piece?.totalAmount | numeral}}</td>
+                      <td>{{piece?.numberOfContracts}}</td>
+                      <td>{{piece?.paymentMode}}</td>
+                      <td>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                           tooltip="Détails"
+                           (click)="openReceiptDetails(detailReceipt, piece?.receiptNo)"></i>
+                      </td>
+                    </tr>
 
-                    </ng-template>
+                  </ng-template>
 
 
                   </tbody>
                 </table>
               </div>
-              <br>  <br>
+              <br> <br>
               <app-pagination [showPagination]="totalPages > 1"
                               [numberOfItems]="numberOfItems"
                               [itemsPerPage]="itemsPerPage"
@@ -157,11 +156,22 @@
                               [totalPages]="totalPages"
                               (onpageChanged)="pageChanged($event)"></app-pagination>
             </div>
+
+            <div style="color: #B6D2B8; margin: 14px;" class="alert alert-info">
+              <a style="color: #1976d2;" href="http://www.radem.ma/contact/nos-agences" target="_blank">
+                <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                Localiser en quelques clics votre agence RADEM la plus proche de chez vous
+              </a>
+            </div>
+
           </form>
         </div>
+
       </div>
       <!--/ What is-->
+
     </div>
+
   </section>
   <div class="content">
     <div class="deck card-deck-outline">
@@ -175,12 +185,14 @@
       </div>
     </div>
   </div>
+
 </div>
 
 
 <ng-template #detailReceipt>
   <div class="modal-header modal-radem">
-    <h4 class="modal-title pull-left">{{'RECEIPT_DETAILS' | translate}} N°:<span class="Bold_txt"> {{piece}} </span></h4>
+    <h4 class="modal-title pull-left">{{'RECEIPT_DETAILS' | translate}} N°:<span class="Bold_txt"> {{piece}} </span>
+    </h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -210,33 +222,33 @@
       </thead>
       <tbody>
 
-        <app-data-not-available
-          *ngIf="!piecesDetail || piecesDetail.length == 0; else dataAvailable"
-          [colSpan]="6"></app-data-not-available>
+      <app-data-not-available
+        *ngIf="!piecesDetail || piecesDetail.length == 0; else dataAvailable"
+        [colSpan]="6"></app-data-not-available>
 
-        <ng-template #dataAvailable>
+      <ng-template #dataAvailable>
         <tr *ngFor="let pieceDetail of piecesDetail">
 
-            <td>{{pieceDetail?.contractNo}}</td>
-            <td>{{pieceDetail?.invoiceNo}}</td>
-            <td>{{pieceDetail?.month}} - {{pieceDetail?.year}}</td>
-            <td>{{pieceDetail?.amount}}</td>
+          <td>{{pieceDetail?.contractNo}}</td>
+          <td>{{pieceDetail?.invoiceNo}}</td>
+          <td>{{pieceDetail?.month}} - {{pieceDetail?.year}}</td>
+          <td>{{pieceDetail?.amount}}</td>
 
 
-        </ng-template>
+      </ng-template>
 
 
       </tbody>
     </table>
   </div>
   <div class="modal-body modal-radem">
-      <app-pagination [showPagination]="totalPages2 > 1"
-                      [numberOfItems]="numberOfItems2"
-                      [itemsPerPage]="itemsPerPage2"
-                      [totalItems]="totalElements2"
-                      [totalPages]="totalPages2"
-                      (onpageChanged)="pageDetailChanged($event)">
-      </app-pagination>
+    <app-pagination [showPagination]="totalPages2 > 1"
+                    [numberOfItems]="numberOfItems2"
+                    [itemsPerPage]="itemsPerPage2"
+                    [totalItems]="totalElements2"
+                    [totalPages]="totalPages2"
+                    (onpageChanged)="pageDetailChanged($event)">
+    </app-pagination>
   </div>
   <div class="modal-footer modal-radem">
 

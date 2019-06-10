@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ServicesService} from '../../../services/services.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {CommonService} from '../../../services/common.service';
 import * as _ from 'underscore';
@@ -12,14 +12,15 @@ import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {RefundRequestModel} from '../../../models/refund-request.model';
 
 
 @Component({
-  selector: 'app-new-refund-request',
-  templateUrl: './new-refund-request.component.html',
-  styleUrls: ['./new-refund-request.component.scss']
+  selector: 'app-refund-edit',
+  templateUrl: './refund-edit.component.html',
+  styleUrls: ['./refund-edit.component.scss']
 })
-export class NewRefundRequestComponent implements OnInit {
+export class RefundEditComponent implements OnInit {
 
   refundForm: FormGroup;
   clientContracts: Array<ContractAttachModel>;
@@ -27,9 +28,11 @@ export class NewRefundRequestComponent implements OnInit {
   public flagModeRemboursement = '';
   public flagProcuration = '';
 
-  ccc: Array<ContractRefund> = [];
+  RefundDetails: RefundRequestModel;
+
+  contractRefunds: Array<ContractRefund> = [];
   ddd: any = {};
-  sss: any = [];
+  selectedRefContrcats: any = [];
   clientContractsNo: Array<string> = [];
   settings = {};
   selectedNumber = 0;
@@ -38,12 +41,12 @@ export class NewRefundRequestComponent implements OnInit {
   mmm: Array<number> = [];
   attachments: any = [];
 
-
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
               private router: Router,
               private authHelper: AuthHelper,
               private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
               private toastrService: ToastrService,
               private translate: TranslateService) {
     this.settings = {
@@ -101,7 +104,6 @@ export class NewRefundRequestComponent implements OnInit {
     this.getClientAttachedContracts();
     this.setProcurationValidators();
     this.flagModeRemboursement = 'CHECK';
-    // this.refundForm.get('ModeRemboursement').setValue('CHECK');
 
     const user: User = this.authHelper.getLoggedUserInfo();
     this.refundForm.get('email').setValue(user.email);
@@ -139,42 +141,49 @@ export class NewRefundRequestComponent implements OnInit {
     this.selectedFiles = undefined;
   }
 
-  onCloseMultiSelect(item: any) {
-    this.getRefundedContracts();
-    this.onItemSelect(item);
-    this.onItemDeSelect(item);
-  }
-
   onItemSelect(item: any) {
-    console.log(item.tourNo);
     this.selectedNumber++;
-    const iii: Array<ContractRefund> = this.ccc;
-    this.ccc = [];
+    const iii: Array<ContractRefund> = this.contractRefunds;
+    this.contractRefunds = [];
     iii.forEach(value => {
       if (value.tourNo === item.tourNo) {
-        this.ccc.push(value);
+        this.contractRefunds.push(value);
       }
       if (this.selectedNumber === 0) {
         this.getRefundedContracts();
       }
     });
-    console.log(this.ccc);
   }
 
   onItemDeSelect(item: any) {
-    console.log(item.tourNo);
     this.selectedNumber--;
-    const iii: Array<ContractRefund> = this.ccc;
-    this.ccc = [];
+    const iii: Array<ContractRefund> = this.contractRefunds;
+    this.contractRefunds = [];
     iii.forEach(value => {
       if (value.tourNo === item.tourNo) {
-        this.ccc.push(value);
+        this.contractRefunds.push(value);
       }
       if (this.selectedNumber === 0) {
         this.getRefundedContracts();
       }
     });
-    console.log(this.ccc);
+  }
+
+  getRefundDetail() {
+    const requestNo: string = this.route.snapshot.paramMap.get('requestNo');
+    if (requestNo !== null) {
+      this.servicesService.getRefundDetails(requestNo).subscribe(response => {
+        if (response && response.data) {
+          this.RefundDetails = response.data;
+        } else {
+          // TODO: no data found
+        }
+      }, error => {
+        console.log(error);
+      })
+    } else {
+      // TODO: request no not found
+    }
   }
 
   setPaymentModeValidators() {
@@ -200,75 +209,75 @@ export class NewRefundRequestComponent implements OnInit {
     const lastNameControl = this.refundForm.get('lastName');
     const cinControl = this.refundForm.get('cin');
 
-        this.refundForm.get('Procuration').valueChanges
-            .subscribe(userinfos => {
+    this.refundForm.get('Procuration').valueChanges
+      .subscribe(userinfos => {
 
-                if (userinfos) {
-                    firstNameControl.setValidators([Validators.required]);
+        if (userinfos) {
+          firstNameControl.setValidators([Validators.required]);
 
-                    lastNameControl.setValidators([Validators.required]);
-                    cinControl.setValidators([Validators.required]);
-                }
+          lastNameControl.setValidators([Validators.required]);
+          cinControl.setValidators([Validators.required]);
+        }
 
-                if (!userinfos) {
-                    firstNameControl.setValidators(null);
-                    lastNameControl.setValidators(null);
-                    cinControl.setValidators(null);
-                }
+        if (!userinfos) {
+          firstNameControl.setValidators(null);
+          lastNameControl.setValidators(null);
+          cinControl.setValidators(null);
+        }
 
-                firstNameControl.updateValueAndValidity();
-                lastNameControl.updateValueAndValidity();
-                cinControl.updateValueAndValidity();
-            });
+        firstNameControl.updateValueAndValidity();
+        lastNameControl.updateValueAndValidity();
+        cinControl.updateValueAndValidity();
+      });
 
-    }
+  }
 
-    getRefundedContracts() {
-        this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
-            this.ccc = response.data;
-            _.each(this.ccc, (element: any) => {
-                _.extend(element, {
-                    id: element.contractNo,
-                    tourNo: element.tourNo,
-                    itemName: `${element.contractNo} - (${element.consumptionAddress})`
-                });
-            });
-        }, err => {
-            console.log(err)
+  getRefundedContracts() {
+    this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
+      this.contractRefunds = response.data;
+      _.each(this.contractRefunds, (element: any) => {
+        _.extend(element, {
+          id: element.contractNo,
+          tourNo: element.tourNo,
+          itemName: `${element.contractNo} - (${element.consumptionAddress})`
         });
-    }
+      });
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getClientAttachedContracts() {
-        this.servicesService.clientAttachedContracts().subscribe(response => {
-            this.clientContracts = response.data;
-            _.each(this.clientContracts, (element: any) => {
-                this.clientContractsNo.push(element.contractNo);
-            });
-            console.log(this.clientContractsNo);
-            this.getRefundedContracts();
-        }, err => {
-            console.log(err)
-        });
-    }
+  getClientAttachedContracts() {
+    this.servicesService.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+      _.each(this.clientContracts, (element: any) => {
+        this.clientContractsNo.push(element.contractNo);
+      });
+      console.log(this.clientContractsNo);
+      this.getRefundedContracts();
+    }, err => {
+      console.log(err)
+    });
+  }
 
   changeSuccessor($event) {
     if ($event.target.checked) {
       this.refundForm.controls['successor'].setValidators([Validators.required]);
       this.refundForm.controls['contract'].setValidators([Validators.required]);
 
-        } else {
+    } else {
 
-            this.refundForm.controls['successor'].clearValidators();
-            this.refundForm.controls['successor'].updateValueAndValidity();
+      this.refundForm.controls['successor'].clearValidators();
+      this.refundForm.controls['successor'].updateValueAndValidity();
 
-            this.refundForm.controls['contract'].clearValidators();
-            this.refundForm.controls['contract'].updateValueAndValidity();
+      this.refundForm.controls['contract'].clearValidators();
+      this.refundForm.controls['contract'].updateValueAndValidity();
 
-            this.refundForm.controls['oldWaterSubscription'].clearValidators();
-            this.refundForm.controls['oldWaterSubscription'].updateValueAndValidity();
-        }
-
+      this.refundForm.controls['oldWaterSubscription'].clearValidators();
+      this.refundForm.controls['oldWaterSubscription'].updateValueAndValidity();
     }
+
+  }
 
   saveRequest(formData): void {
     const user: User = this.authHelper.getLoggedUserInfo();
@@ -288,7 +297,7 @@ export class NewRefundRequestComponent implements OnInit {
       this.mmm.push(value.id);
     });
     newRefundrequest.attachmentIds = this.mmm;
-    this.sss.forEach(value => {
+    this.selectedRefContrcats.forEach(value => {
       this.nnn.push(value.contractNo);
       newRefundrequest.tour = value.tourNo;
     });
@@ -302,20 +311,6 @@ export class NewRefundRequestComponent implements OnInit {
         this.router.navigate(['/services/new-refund-details/' + response.data]);
 
       }
-      /*      Swal({
-              title: 'Merci pour votre Collaboration',
-              text: 'votre demande de remboursement a été envoyé avec succès',
-              type: 'success',
-              showCancelButton: true,
-              confirmButtonText: 'Voulez-vous Telecharger le PDF',
-              cancelButtonText: 'Non, Merci'
-            }).then((result) => {
-              if (result.value) {
-              } else if (result.dismiss === Swal.DismissReason.cancel) {
-                this.router.navigate(['/services/refund-requests']);
-              }
-            })*/
-      // this.router.navigate(['/services'])
     }, err => {
       console.log(err);
       this.toastrService.error(this.translate.instant('new-refund-error'));
@@ -326,7 +321,6 @@ export class NewRefundRequestComponent implements OnInit {
 
   setContract(contractNo: string) {
     this.contractNo = contractNo;
-    // this.getRefunds(this.contractNo);
   }
 
 }

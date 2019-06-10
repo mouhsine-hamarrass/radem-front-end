@@ -4,6 +4,8 @@ import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {SubscriptionRequestModel} from '../../../models/subscription-request.model';
 import {Setting} from '../../../models/setting.model';
 import {AdminService} from '../../../services/admin.service';
+import _ = require('underscore');
+import {c} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-subscription-requests',
@@ -39,9 +41,15 @@ export class SubscriptionRequestsComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
-      if (this.clientContracts.length) {
+      if (this.clientContracts && this.clientContracts.length) {
         this.selectedContract = this.clientContracts[0].contractNo;
-        this.setContract(this.clientContracts[0].contractNo);
+        const clientContractsNo = _.pluck(this.clientContracts, 'contractNo');
+        const savedContractNo = localStorage.getItem('SELECTED_CONTRACT');
+        if (savedContractNo && clientContractsNo.includes(savedContractNo)) {
+          this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
+        }
+        this.setContract(this.selectedContract);
+
       }
     }, err => {
       console.log(err)
@@ -62,12 +70,13 @@ export class SubscriptionRequestsComponent implements OnInit {
 
   setContract(contractNo: string) {
     this.contractNo = contractNo;
-    this.getSubscriptions(this.contractNo);
+    localStorage.setItem('SELECTED_CONTRACT', contractNo);
+    this.getSubscriptions(this.selectedContract);
   }
 
   pageChanged(page: number): void {
     this.page = page;
-    this.getSubscriptions(this.contractNo);
+    this.getSubscriptions(this.selectedContract);
   }
 
   getAdvice() {

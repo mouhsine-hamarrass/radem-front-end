@@ -41,9 +41,9 @@ export class OAuthService implements AuthService {
             id: 1,
             username: environment.apiConfig.credentials.clientId,
             password: environment.apiConfig.credentials.clientSecret,
-            firstname: 'Younes',
-            lastname: 'EL ANSARI',
-            email: 'elansariyounes@gmail.com'
+            firstname: '',
+            lastname: '',
+            email: ''
           }
         };
       }

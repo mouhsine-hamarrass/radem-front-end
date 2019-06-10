@@ -61,7 +61,7 @@ export class UnpaidPageComponent implements OnInit {
   }
 
   ngOnInit() {
-        if (localStorage.getItem(AuthHelper.USER_ID)) {
+    if (localStorage.getItem(AuthHelper.USER_ID)) {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
     this.getClientAttachedContracts();
@@ -70,9 +70,16 @@ export class UnpaidPageComponent implements OnInit {
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
-      if (this.clientContracts.length) {
-        debugger;
-        this.selectedContract.push(this.clientContracts[0]);
+      if (this.clientContracts && this.clientContracts.length) {
+        for (const value of this.clientContracts) {
+          debugger;
+          if (value.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
+            this.selectedContract.push(value);
+          }
+        }
+        if (!this.selectedContract || this.clientContracts.length < 1) {
+          this.selectedContract.push(this.clientContracts[0]);
+        }
         this.getAllUnpaidBills();
       }
       _.each(this.clientContracts, (element: any) => {

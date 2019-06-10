@@ -25,7 +25,7 @@
               {{"CONTRACT_LISTS" | translate}}
             </label>
             <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
-                    (change)="setContract(selectedContract)">
+                    (ngModelChange)="setContract(selectedContract)">
               <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
               <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
                 {{contract.contractNo}}
@@ -42,7 +42,7 @@
               <i class="fa fa-user icon"></i>&nbsp;
               {{"COMPANY_NAME" | translate}}
             </label>
-            <h6 class="sub-title" tooltip="">
+            <h6 class="sub-title" tooltip="Nom">
               {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
             </h6>
           </div>

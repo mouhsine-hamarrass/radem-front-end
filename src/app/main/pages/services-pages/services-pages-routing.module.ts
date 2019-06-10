@@ -22,6 +22,7 @@ import {PaymentSuccessComponent} from './payment-success/payment-success.compone
 import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 import {PaymentStatusComponent} from './payment-status/payment-status.component';
 import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.component';
+import {RefundEditComponent} from './refund-edit/refund-edit.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,13 @@ const routes: Routes = [
         component: ClaimRequestComponent,
         data: {
           title: 'Nouvelle demande de réclamation'
+        }
+      },
+      {
+        path: 'edit-refund-request/:requestNo',
+        component: RefundEditComponent,
+        data: {
+          title: 'Modifier la demande de remboursement'
         }
       },
       {
@@ -171,7 +179,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'new-refund-detail',
+        path: 'new-refund-details/:requestNo',
         component: NewRefundDetailComponent,
         data: {
           title: 'Demande de remboursement'

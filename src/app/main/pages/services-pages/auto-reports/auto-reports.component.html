@@ -1,117 +1,114 @@
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'AUTO_RELIEVING' | translate }}</h3>
-        </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'AUTO_RELIEVING' | translate }}</h3>
     </div>
+  </div>
 </div>
 <div class="content-body" id="indexx">
-  <div>
-    <button (click)="generatePDF()" >Generer</button>
-  </div>
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <div id="what-is" class="card mb-0 content-body">
-              <div class="alert alert-info" style="background-color: #eef0f3 !important; border-color: #eef0f3 !important;">
-                {{'fill_form' | translate}}
-              </div>
-              <fieldset class="scheduler-border">
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-6">
-                          <form class="form" [formGroup]="reportForm" (ngSubmit)="saveReleve()" novalidate>
 
-                            <div class="form-group">
-                              <label for="comtract">{{'CONTRACT_NUMBER' | translate}}<span class="danger">*</span></label>
-                                <select formControlName="contract" id="comtract" type="text" class="form-control contract-dropdown"
-                                      (change)="getReleve()" required="required">
-                                <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                                <option *ngFor="let contract of clientContracts" value="{{contract?.contractNo}}">
-                                  {{contract?.contractNo}}
-                                  ({{contract?.type}})
-                                </option>
-                              </select>
-                              <div class="text-danger"
-                                   *ngIf="!reportForm.controls['contract'].valid && reportForm.controls['contract'].touched">
-                                <div *ngIf="reportForm.controls['contract'].errors.required">
-                                  {{'FIELD_REQUIRED' | translate}}
-                                </div>
-                              </div>
-                            </div>
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="card mb-0 content-body">
+        <div class="alert alert-info" style="background-color: #eef0f3 !important; border-color: #eef0f3 !important;">
+          {{'fill_form' | translate}}
+        </div>
+        <fieldset class="scheduler-border">
+          <div class="card-content collapse show">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <form class="form" [formGroup]="reportForm" (ngSubmit)="saveReleve()" novalidate>
 
-                            <div class="form-group">
-                              <label class="col-form-label">{{'CHECK_DATE' | translate}} <span class="danger">*</span> :</label>
-
-
-
-                              <div class="form-group">
-                                <input [owlDateTime]="ed"
-                                       [owlDateTimeTrigger]="ed"
-                                       [max]="today"
-                                       formControlName="checkDate"
-                                       class="form-control date-readonly"
-                                       id="checkDate" readonly />
-                                <owl-date-time #ed [pickerType]="'calendar'" required></owl-date-time>
-                                <div class="text-danger position-absolute mb-1"
-                                     *ngIf="!reportForm.controls['checkDate'].valid && reportForm.controls['checkDate'].touched">
-                                  <div *ngIf="reportForm.controls['checkDate'].errors.required">
-                                    {{'FIELD_REQUIRED' | translate}}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label for="index">{{'INDEX' | translate}}<span class="danger">*</span></label>
-                              <input class="form-control required" id="index" formControlName="index" type="number">
-
-                              <div class="text-danger"
-                                   *ngIf="!reportForm.controls['index'].valid && reportForm.controls['index'].touched">
-                                <div *ngIf="reportForm.controls['index'].errors.required">
-                                  {{'FIELD_REQUIRED' | translate}}
-                                </div>
-                                <div *ngIf="reportForm.controls['index'].errors">
-                                  {{'BIG-VALUE' | translate}}
-                                </div>
-                              </div>
-
-                            </div>
-
-
-
-
-                            <div class="form-group ">
-                              <button type="submit" class="btn btn btn-outline-primary" [disabled]="reportForm.invalid">
-                                {{'SAVE' | translate}}
-                              </button>
-                            </div>
-
-                          </form>
-                        </div>
-                        <div class="col-4" style="background-color: #ffffff;" class="img-responsive">
-                          <img src="./assets/images/bg-counter.png" alt="rep">
+                    <div class="form-group">
+                      <label for="comtract">{{'CONTRACT_NUMBER' | translate}}<span class="danger">*</span></label>
+                      <select formControlName="contract" id="comtract" type="text"
+                              class="form-control contract-dropdown"
+                              #s (change)="setContract(s.value)" [(ngModel)]="contractId" required="required">
+                        <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                        <option *ngFor="let contract of clientContracts" value="{{contract?.contractNo}}">
+                          {{contract?.contractNo}}
+                          ({{contract?.type}})
+                        </option>
+                      </select>
+                      <div class="text-danger"
+                           *ngIf="!reportForm.controls['contract'].valid && reportForm.controls['contract'].touched">
+                        <div *ngIf="reportForm.controls['contract'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
                         </div>
                       </div>
+                    </div>
 
-                      <div class="content">
-                        <div class="deck card-deck-outline">
-                          <div class="deck-body">
-                            <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
-                            <div class="card-deck-content">
-                              <div class="card-body">
-                                <div [innerHTML]="advices?.value || '' | safeHtml"></div>
-                              </div>
-                            </div>
+                    <div class="form-group">
+                      <label class="col-form-label">{{'CHECK_DATE' | translate}} <span class="danger">*</span> :</label>
+
+
+                      <div class="form-group">
+                        <input [owlDateTime]="ed"
+                               [owlDateTimeTrigger]="ed"
+                               [max]="today"
+                               formControlName="checkDate"
+                               class="form-control date-readonly"
+                               id="checkDate" readonly/>
+                        <owl-date-time #ed [pickerType]="'calendar'" required></owl-date-time>
+                        <div class="text-danger position-absolute mb-1"
+                             *ngIf="!reportForm.controls['checkDate'].valid && reportForm.controls['checkDate'].touched">
+                          <div *ngIf="reportForm.controls['checkDate'].errors.required">
+                            {{'FIELD_REQUIRED' | translate}}
                           </div>
                         </div>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label for="index">{{'INDEX' | translate}}<span class="danger">*</span></label>
+                      <input class="form-control required" id="index" formControlName="index" type="number">
+
+                      <div class="text-danger"
+                           *ngIf="!reportForm.controls['index'].valid && reportForm.controls['index'].touched">
+                        <div *ngIf="reportForm.controls['index'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                        <div *ngIf="reportForm.controls['index'].errors">
+                          {{'BIG-VALUE' | translate}} {{reportForm.controls.index.value}}
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    <div class="form-group ">
+                      <button type="submit" class="btn btn btn-outline-primary" [disabled]="reportForm.invalid">
+                        {{'SAVE' | translate}}
+                      </button>
+                    </div>
+
+                  </form>
                 </div>
-              </fieldset>
-                <!--/ What is-->
+                <div class="col-4" style="background-color: #ffffff;" class="img-responsive">
+                  <img src="./assets/images/bg-counter.png" alt="rep">
+                </div>
+              </div>
+
+              <div class="content">
+                <div class="deck card-deck-outline">
+                  <div class="deck-body">
+                    <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
+                    <div class="card-deck-content">
+                      <div class="card-body">
+                        <div [innerHTML]="advices?.value || '' | safeHtml"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-    </section>
+          </div>
+        </fieldset>
+        <!--/ What is-->
+      </div>
+    </div>
+  </section>
 </div>
