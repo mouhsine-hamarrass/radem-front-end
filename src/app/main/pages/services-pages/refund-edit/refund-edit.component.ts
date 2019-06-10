@@ -31,8 +31,9 @@ export class RefundEditComponent implements OnInit {
   RefundDetails: RefundRequestModel;
 
   contractRefunds: Array<ContractRefund> = [];
+  contractRefund: Array<ContractRefund> = [];
   ddd: any = {};
-  selectedRefContrcats: any = [];
+  selectedRefContrcats: Array<ContractRefund> = [];
   clientContractsNo: Array<string> = [];
   settings = {};
   selectedNumber = 0;
@@ -40,6 +41,8 @@ export class RefundEditComponent implements OnInit {
   nnn: Array<string> = [];
   mmm: Array<number> = [];
   attachments: any = [];
+  tourn = 0;
+  requestNo: string;
 
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
@@ -101,16 +104,8 @@ export class RefundEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getClientAttachedContracts();
-    this.setProcurationValidators();
-    this.flagModeRemboursement = 'CHECK';
-
-    const user: User = this.authHelper.getLoggedUserInfo();
-    this.refundForm.get('email').setValue(user.email);
-    this.refundForm.get('cellphone').setValue(user.phone);
-    this.refundForm.get('mailingAddress').setValue(user.address);
-    this.refundForm.get('firstName').setValue(user.firstname);
-    this.refundForm.get('lastName').setValue(user.lastname);
+    this.requestNo = this.route.snapshot.paramMap.get('requestNo');
+    this.getRefundDetail();
   }
 
   selectFile(event: any, input?: any) {
@@ -169,12 +164,67 @@ export class RefundEditComponent implements OnInit {
     });
   }
 
+  getRefundedContracts2(contractsNbr: Array<string>) {
+    this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
+      this.contractRefunds = response.data;
+      const newContractRefunds: Array<ContractRefund> = [];
+      _.each(this.contractRefunds, (element: any) => {
+        _.each(contractsNbr, (value: any) => {
+          if (_.isEqual(value, element.contractNo)) {
+            _.extend(element, {
+              id: element.contractNo,
+              tourNo: element.tourNo,
+              itemName: `${element.contractNo} - (${element.consumptionAddress})`
+            });
+            this.tourn = element.tourNo;
+            this.selectedRefContrcats.push(element);
+          }
+          if (_.isEqual(this.tourn, element.tourNo)) {
+            _.extend(element, {
+              id: element.contractNo,
+              tourNo: element.tourNo,
+              itemName: `${element.contractNo} - (${element.consumptionAddress})`
+            });
+            newContractRefunds.push(element);
+          }
+        });
+        this.contractRefunds = newContractRefunds;
+      });
+    }, err => {
+      console.log(err)
+    });
+  }
+
+  getClientAttachedContracts2(contractsNbr: Array<string>) {
+    this.servicesService.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+      _.each(this.clientContracts, (element: any) => {
+        this.clientContractsNo.push(element.contractNo);
+      });
+      console.log(this.clientContractsNo);
+      this.getRefundedContracts2(contractsNbr);
+    }, err => {
+      console.log(err)
+    });
+  }
+
   getRefundDetail() {
     const requestNo: string = this.route.snapshot.paramMap.get('requestNo');
     if (requestNo !== null) {
       this.servicesService.getRefundDetails(requestNo).subscribe(response => {
         if (response && response.data) {
           this.RefundDetails = response.data;
+          this.refundForm.get('email').setValue(this.RefundDetails.mail);
+          this.refundForm.get('cellphone').setValue(this.RefundDetails.phone);
+          this.refundForm.get('mailingAddress').setValue(this.RefundDetails.mailingAddress);
+          this.refundForm.get('firstName').setValue(this.RefundDetails.procuratorFirstname);
+          this.refundForm.get('lastName').setValue(this.RefundDetails.procuratorLastname);
+          this.refundForm.get('homePhonenumber').setValue(this.RefundDetails.fixPhone);
+          this.refundForm.get('cin').setValue(this.RefundDetails.procuratorCin);
+          this.refundForm.get('ModeRemboursement').setValue(this.RefundDetails.requestPaymentMode);
+          this.refundForm.get('Procuration').setValue(this.RefundDetails.procuration);
+          this.flagModeRemboursement = this.RefundDetails.requestPaymentMode;
+          this.getClientAttachedContracts2(this.RefundDetails.contracts);
         } else {
           // TODO: no data found
         }
@@ -258,25 +308,6 @@ export class RefundEditComponent implements OnInit {
     }, err => {
       console.log(err)
     });
-  }
-
-  changeSuccessor($event) {
-    if ($event.target.checked) {
-      this.refundForm.controls['successor'].setValidators([Validators.required]);
-      this.refundForm.controls['contract'].setValidators([Validators.required]);
-
-    } else {
-
-      this.refundForm.controls['successor'].clearValidators();
-      this.refundForm.controls['successor'].updateValueAndValidity();
-
-      this.refundForm.controls['contract'].clearValidators();
-      this.refundForm.controls['contract'].updateValueAndValidity();
-
-      this.refundForm.controls['oldWaterSubscription'].clearValidators();
-      this.refundForm.controls['oldWaterSubscription'].updateValueAndValidity();
-    }
-
   }
 
   saveRequest(formData): void {
