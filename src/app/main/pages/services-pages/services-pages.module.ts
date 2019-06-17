@@ -33,10 +33,12 @@ import {PaymentStatusComponent} from './payment-status/payment-status.component'
 import {TooltipModule} from 'ngx-bootstrap';
 import {RefundEditComponent} from './refund-edit/refund-edit.component';
 import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.component';
+import {NgxPrintModule} from 'ngx-print';
 
 @NgModule({
   imports: [
     CommonModule,
+    NgxPrintModule,
     ServicesPagesRoutingModule,
     ArchwizardModule,
     FormsModule,
