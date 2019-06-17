@@ -13,6 +13,9 @@ import {AuthHelper} from '../../../../core/services/security/auth.helper';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {RefundRequestModel} from '../../../models/refund-request.model';
+import {FileModel} from '../../../../core/models/file.model';
+import {CommonUtil} from '../../../../core/helpers/common.util';
+import {Attachment} from '../../../models/attachment.model';
 
 
 @Component({
@@ -43,6 +46,10 @@ export class RefundEditComponent implements OnInit {
   attachments: any = [];
   tourn = 0;
   requestNo: string;
+  attachedFileInfos: Attachment;
+  requestId: number;
+  uploadattachments: any = [];
+  flagAttachments = false;
 
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
@@ -119,12 +126,14 @@ export class RefundEditComponent implements OnInit {
         if (event instanceof HttpResponse) {
           if (event.body) {
             const response = JSON.parse(<string>event.body);
-            this.attachments.push({
+            this.uploadattachments.push({
               id: response['data'][0],
               size: file.size,
               name: file.name
             });
-            console.log(this.attachments);
+            console.log('attachment');
+            console.log(this.uploadattachments);
+            console.log('attachment');
           }
         }
       }, (err) => {
@@ -134,6 +143,21 @@ export class RefundEditComponent implements OnInit {
       });
     });
     this.selectedFiles = undefined;
+  }
+
+  download(event: any) {
+    event.preventDefault();
+    this.servicesService.getRefundRequestAttachedFileInfos(this.attachments).subscribe(value => {
+      this.attachedFileInfos = value.data;
+    });
+    this.servicesService.downloadRefundRequestAttachedFile(this.attachments).subscribe(value => {
+      if (value && value['body']) {
+        const file = new FileModel(this.attachedFileInfos.name + '.'
+          + this.attachedFileInfos.extension, CommonUtil._arrayBufferToBase64(value['body']));
+
+        CommonUtil.downloadFile(file);
+      }
+    });
   }
 
   onItemSelect(item: any) {
@@ -178,6 +202,7 @@ export class RefundEditComponent implements OnInit {
             });
             this.tourn = element.tourNo;
             this.selectedRefContrcats.push(element);
+            this.selectedNumber++;
           }
           if (_.isEqual(this.tourn, element.tourNo)) {
             _.extend(element, {
@@ -185,7 +210,9 @@ export class RefundEditComponent implements OnInit {
               tourNo: element.tourNo,
               itemName: `${element.contractNo} - (${element.consumptionAddress})`
             });
-            newContractRefunds.push(element);
+            if (!newContractRefunds.includes(element)) {
+              newContractRefunds.push(element);
+            }
           }
         });
         this.contractRefunds = newContractRefunds;
@@ -224,6 +251,14 @@ export class RefundEditComponent implements OnInit {
           this.refundForm.get('ModeRemboursement').setValue(this.RefundDetails.requestPaymentMode);
           this.refundForm.get('Procuration').setValue(this.RefundDetails.procuration);
           this.flagModeRemboursement = this.RefundDetails.requestPaymentMode;
+          this.attachments = this.RefundDetails.attachments;
+
+          _.each(this.attachments, (response: any) => {
+            if (response !== null) {
+              this.flagAttachments = true;
+            }
+          });
+          this.requestId = this.RefundDetails.id;
           this.getClientAttachedContracts2(this.RefundDetails.contracts);
         } else {
           // TODO: no data found
@@ -310,10 +345,12 @@ export class RefundEditComponent implements OnInit {
     });
   }
 
-  saveRequest(formData): void {
+  updateRequest(formData): void {
     const user: User = this.authHelper.getLoggedUserInfo();
 
     const newRefundrequest: NewRefundRequestModel = formData;
+    newRefundrequest.id = this.requestId;
+
     newRefundrequest.mail = formData.email;
     newRefundrequest.mailingAddress = formData.mailingAddress;
     newRefundrequest.cellphone = formData.cellphone;
@@ -324,16 +361,21 @@ export class RefundEditComponent implements OnInit {
     newRefundrequest.procuratorCin = formData.cin;
     newRefundrequest.procuratorFirstname = formData.firstName;
     newRefundrequest.procuratorLastname = formData.lastName;
-    this.attachments.forEach(value => {
+
+    this.mmm = [];
+    this.nnn = [];
+    this.uploadattachments.forEach(value => {
       this.mmm.push(value.id);
     });
     newRefundrequest.attachmentIds = this.mmm;
+
     this.selectedRefContrcats.forEach(value => {
       this.nnn.push(value.contractNo);
       newRefundrequest.tour = value.tourNo;
     });
     newRefundrequest.contractNbrs = this.nnn;
 
+    debugger;
     this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
 
       console.log(response);

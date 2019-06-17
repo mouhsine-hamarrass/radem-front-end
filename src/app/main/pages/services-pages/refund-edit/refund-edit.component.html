@@ -14,7 +14,7 @@
         <div class="card-content collapse show">
           <div class="card-body">
             <form role="form" [formGroup]="refundForm"
-                  (ngSubmit)="saveRequest(refundForm.value)" novalidate>
+                  (ngSubmit)="updateRequest(refundForm.value)" novalidate>
 
               <div class="row">
                 <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
@@ -196,7 +196,7 @@
               </div>
 
               <div class="row" *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
-                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12">
                   <label class="control-label" lang="fr" for="bank_file"> {{'JOIN_FILE' | translate }}
                     <span
                       class="text-danger">*</span>
@@ -204,16 +204,31 @@
                 </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <input lang="fr" type="file" id="bank_file" name="bank_file" class="form-control"
-                         formControlName="bank_file" (change)="selectFile($event)">
-                  <small class="text-muted">{{'la-taille-du-fichier-ne-doit-pas-depasser' | translate}}: 32MB
-                  </small>
-                  <br>
-                  <div class="text-danger"
-                       *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
-                    <div *ngIf="refundForm.controls['bank_file'].errors.required">
-                      {{'FIELD_REQUIRED' | translate}}
+                  <div class="row">
+                    <div class="form-group col-lg-5 col-md-12 col-sm-12" *ngIf="flagAttachments === true">
+                      <label>Fichier courant</label>
+                      <a class="btn btn-primary arrow-circle-down"
+                         (click)="download($event)"
+                         style="color: #fff">
+                        Telecharger le fichier</a>
                     </div>
+                    <div class="form-group col-lg-7 col-md-12 col-sm-12">
+                      <label>Ajouter un autre</label>
+                      <input lang="fr" type="file" id="bank_file" name="bank_file" class="form-control"
+                             formControlName="bank_file" (change)="selectFile($event)">
+                      <small class="text-muted">{{'la-taille-du-fichier-ne-doit-pas-depasser' | translate}}: 32MB
+                      </small>
+                      <br>
+                      <div class="text-danger"
+                           *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
+                        <div *ngIf="refundForm.controls['bank_file'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention !</strong> L'ajout d'un nouveau fichier écrase l'ancien.
                   </div>
                 </div>
               </div>
