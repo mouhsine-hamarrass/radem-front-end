@@ -3,8 +3,8 @@ import {ServicesService} from '../../../services/services.service';
 import {RefundRequestModel} from '../../../models/refund-request.model';
 import {ActivatedRoute} from '@angular/router';
 import * as JsPDF from 'jspdf';
-import * as _ from 'underscore';
-import {TranslateService} from '@ngx-translate/core';
+import * as printJS from 'print-js';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-new-refund-detail',
@@ -24,10 +24,28 @@ export class NewRefundDetailComponent implements OnInit {
     this.getRefundDetail();
   }
 
+  public captureScreen() {
+    debugger;
+    var data = document.getElementById('toPrint');
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new JsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('MYPdf.pdf'); // Generated PDF
+    });
+  }
+
   public generatePDF() {
 
     const doc = new JsPDF('p', 'px', 'a4');
-   
+
     const source = window.document.getElementById('toPrint');
 
     const options = {

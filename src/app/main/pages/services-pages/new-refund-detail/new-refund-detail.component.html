@@ -25,8 +25,8 @@
               <th></th>
             </tr>
             <tr>
-              <td>Tournee</td>
-              <td></td>
+              <td>Tournée</td>
+              <td> {{refundRequest?.tour}} </td>
             </tr>
             <tr>
               <th></th>
@@ -34,7 +34,7 @@
             </tr>
             <tr>
               <td>Contrats</td>
-              <td></td>
+              <td><b *ngFor="let ctr of refundRequest?.contracts">{{ctr}}</b></td>
             </tr>
             </tbody>
           </table>
@@ -69,7 +69,7 @@
           <tr>
             <td>
               <h4>
-                <li><b> Nom et prénom</b></li>
+                <b> Nom et prénom</b>
               </h4>
             </td>
             <td><h4><b>:</b></h4></td>
@@ -77,7 +77,7 @@
           <tr>
             <td>
               <h4>
-                <li><b> Adresse </b></li>
+                <b> Adresse </b>
               </h4>
             </td>
             <td><h4><b>:</b> {{refundRequest?.mailingAddress}} </h4></td>
@@ -85,7 +85,7 @@
           <tr>
             <td>
               <h4>
-                <li><b> Téléphone fixe </b></li>
+                <b> Téléphone fixe </b>
               </h4>
             </td>
             <td><h4><b>:</b> {{refundRequest?.fixPhone}} </h4></td>
@@ -93,7 +93,7 @@
           <tr>
             <td>
               <h4>
-                <li><b> Téléphone portable </b></li>
+                <b> Téléphone portable </b>
               </h4>
             </td>
             <td><h4><b>:</b> {{refundRequest?.phone}} </h4></td>
@@ -101,22 +101,46 @@
           <tr>
             <td>
               <h4>
-                <li><b> Mode de remboursement </b></li>
+                <b> Mode de remboursement </b>
               </h4>
             </td>
             <td><h4><b>:</b> {{refundRequest?.requestPaymentMode | translate}}</h4></td>
           </tr>
           <tr *ngIf="refundRequest?.procuration==true">
-            <td>{{'PROCUROR_CIN' | translate }} </td>
-            <td>{{refundRequest?.procuratorCin}}</td>
+            <td>
+              <h4>
+                <b>{{'PROCUROR_LASTNAME' | translate }}</b>
+              </h4>
+            </td>
+            <td>
+              <h4>
+                <b>{{refundRequest?.procuratorLastname}}</b>
+              </h4>
+            </td>
           </tr>
           <tr *ngIf="refundRequest?.procuration==true">
-            <td>{{'PROCUROR_LASTNAME' | translate }} </td>
-            <td>{{refundRequest?.procuratorFirstname}}</td>
+            <td>
+              <h4>
+                <b>{{'PROCUROR_FIRSTNAME' | translate }} </b>
+              </h4>
+            </td>
+            <td>
+              <h4>
+                <b>{{refundRequest?.procuratorFirstname}}</b>
+              </h4>
+            </td>
           </tr>
           <tr *ngIf="refundRequest?.procuration==true">
-            <td>{{'PROCUROR_FIRSTNAME' | translate }} </td>
-            <td>{{refundRequest?.procuratorLastname}}</td>
+            <td>
+              <h4>
+                <b>{{'PROCUROR_CIN' | translate }}</b>
+              </h4>
+            </td>
+            <td>
+              <h4>
+                <b>{{refundRequest?.procuratorCin}}</b>
+              </h4>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -129,13 +153,15 @@
 
         </div>
 
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-          <button class="btn btn btn-outline-primary pull-right"
-                  (click)="generatePDF()" type="submit">{{'PRINT' | translate }}
-          </button>
-        </div>
+
       </div>
 
     </div>
   </div>
+</div>
+
+
+<div class="form-group col-lg-6 col-md-12 col-sm-12">
+  <button class="btn btn btn-outline-primary pull-right" [useExistingCss]="true"
+         formtarget="_parent" printSectionId="toPrint" ngxPrint>{{'PRINT' | translate }}</button>
 </div>

@@ -15,6 +15,7 @@ export class RefundRequestModel {
     phone?: string;
     fixPhone?: string;
     mail?: string;
+    tour?: string;
     mailingAddress?: string;
     procuration?: boolean;
     procuratorCin?: string;
