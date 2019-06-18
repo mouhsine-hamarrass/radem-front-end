@@ -51,23 +51,23 @@
 
             <div  ngbDropdownMenu aria-labelledby="dropdownNotifications" class="notifications-list" >
               <div *ngIf="alerts.length; else noNotifications">
-                <div *ngFor="let notification of alerts; let i = index">
+                <div *ngFor="let notification of alerts; let i = index" [ngClass]="{'bg-unread' : notification?.status === 'UNREAD'}">
                   <a class="dropdown-item"
                      (click)="detailNotification(notification, i)">
                     <b class="notif-type badge"
                        [ngClass]="{
-                          'badge-success' : notification.alert.type === 'ABONNEMENT',
-                          'badge-danger' : notification.alert.type === 'RESILIATION',
-                          'badge-info' : notification.alert.type === 'REMBOURSEMENT',
-                          'badge-primary' : notification.alert.type === 'BRANCHEMENT'
-                          }">{{notification.alert.type}}</b>
-                    <span class="notif-descr">{{notification.description}}</span>
+                          'badge-success' : notification?.alert?.id == 1,
+                          'badge-danger' : notification?.alert?.id == 2,
+                          'badge-info' : notification?.alert?.id == 3,
+                          'badge-primary' : notification?.alert?.id >= 4
+                          }">{{notification?.alert?.type}}</b>
+                    <span class="notif-descr">{{notification?.description}}</span>
                   </a>
                   <div class="dropdown-divider"></div>
                 </div>
               </div>
               <ng-template #noNotifications>
-                <span class="dropdown-item">Vous avez {{alerts.length}} notification.</span>
+                <span class="dropdown-item">Vous avez {{alerts?.length}} notification.</span>
               </ng-template>
             </div>
           </li>
@@ -81,7 +81,7 @@
               <span class="user-name">{{user?.firstname + ' ' + user?.lastname}}</span>
             </a>
             <div ngbDropdownMenu aria-labelledby="dropdownUser">
-              <a class="dropdown-item" routerLink="/admin/account/profile" *ngIf="user.admin; else show">
+              <a class="dropdown-item" routerLink="/admin/account/profile" *ngIf="user?.admin; else show">
                 <i class="ft-user"></i> Mon profil
               </a>
               <ng-template #show>

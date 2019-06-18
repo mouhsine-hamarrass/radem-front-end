@@ -9,6 +9,7 @@ import {AuthHelper} from '../../core/services/security/auth.helper';
 import {HomeService} from '../../main/services/home.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AlertNotificationModel} from '../../main/models/alert-notification.model';
+import {AlertNotificationStatus} from '../models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -47,7 +48,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
     if (this.user && this.user.id && this.href !== 'admin' && !this.user.admin) {
       this.getNotifications();
-     }
+    }
   }
 
   getNotifications() {
@@ -59,7 +60,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     }, err => {
     });
   }
-
 
   detailNotification(notification: AlertNotificationModel, $index) {
     switch (notification.alert.type) {
@@ -78,8 +78,12 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
-    this.alerts.splice($index, 1);
     this.homeService.readAlertNotification(notification.id).subscribe(response => {
+      if (response && response.data) {
+        this.alerts.splice($index, 1);
+        this.alerts.push(response.data);
+      }
+
     }, err => {
     });
   }

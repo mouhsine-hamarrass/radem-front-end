@@ -4,8 +4,7 @@ import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {SubscriptionRequestModel} from '../../../models/subscription-request.model';
 import {Setting} from '../../../models/setting.model';
 import {AdminService} from '../../../services/admin.service';
-import _ = require('underscore');
-import {c} from '@angular/core/src/render3';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-subscription-requests',
