@@ -27,15 +27,14 @@ export class NewRefundRequestComponent implements OnInit {
   public flagModeRemboursement = '';
   public flagProcuration = '';
 
-  ccc: Array<ContractRefund> = [];
-  ddd: any = {};
-  sss: any = [];
+  contractRefunds: Array<ContractRefund> = [];
+  selectedRefContrcats: any = [];
   clientContractsNo: Array<string> = [];
   settings = {};
   selectedNumber = 0;
   selectedFiles: FileList;
-  nnn: Array<string> = [];
-  mmm: Array<number> = [];
+  contractNbrs: Array<string> = [];
+  attachmentIds: Array<number> = [];
   attachments: any = [];
 
 
@@ -148,33 +147,33 @@ export class NewRefundRequestComponent implements OnInit {
   onItemSelect(item: any) {
     console.log(item.tourNo);
     this.selectedNumber++;
-    const iii: Array<ContractRefund> = this.ccc;
-    this.ccc = [];
+    const iii: Array<ContractRefund> = this.contractRefunds;
+    this.contractRefunds = [];
     iii.forEach(value => {
       if (value.tourNo === item.tourNo) {
-        this.ccc.push(value);
+        this.contractRefunds.push(value);
       }
       if (this.selectedNumber === 0) {
         this.getRefundedContracts();
       }
     });
-    console.log(this.ccc);
+    console.log(this.contractRefunds);
   }
 
   onItemDeSelect(item: any) {
     console.log(item.tourNo);
     this.selectedNumber--;
-    const iii: Array<ContractRefund> = this.ccc;
-    this.ccc = [];
+    const iii: Array<ContractRefund> = this.contractRefunds;
+    this.contractRefunds = [];
     iii.forEach(value => {
       if (value.tourNo === item.tourNo) {
-        this.ccc.push(value);
+        this.contractRefunds.push(value);
       }
       if (this.selectedNumber === 0) {
         this.getRefundedContracts();
       }
     });
-    console.log(this.ccc);
+    console.log(this.contractRefunds);
   }
 
   setPaymentModeValidators() {
@@ -225,8 +224,8 @@ export class NewRefundRequestComponent implements OnInit {
 
     getRefundedContracts() {
         this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
-            this.ccc = response.data;
-            _.each(this.ccc, (element: any) => {
+            this.contractRefunds = response.data;
+            _.each(this.contractRefunds, (element: any) => {
                 _.extend(element, {
                     id: element.contractNo,
                     tourNo: element.tourNo,
@@ -285,14 +284,14 @@ export class NewRefundRequestComponent implements OnInit {
     newRefundrequest.procuratorFirstname = formData.firstName;
     newRefundrequest.procuratorLastname = formData.lastName;
     this.attachments.forEach(value => {
-      this.mmm.push(value.id);
+      this.attachmentIds.push(value.id);
     });
-    newRefundrequest.attachmentIds = this.mmm;
-    this.sss.forEach(value => {
-      this.nnn.push(value.contractNo);
+    newRefundrequest.attachmentIds = this.attachmentIds;
+    this.selectedRefContrcats.forEach(value => {
+      this.contractNbrs.push(value.contractNo);
       newRefundrequest.tour = value.tourNo;
     });
-    newRefundrequest.contractNbrs = this.nnn;
+    newRefundrequest.contractNbrs = this.contractNbrs;
 
     this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
 

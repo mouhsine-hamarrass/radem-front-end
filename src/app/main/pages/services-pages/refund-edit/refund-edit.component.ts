@@ -35,14 +35,13 @@ export class RefundEditComponent implements OnInit {
 
   contractRefunds: Array<ContractRefund> = [];
   contractRefund: Array<ContractRefund> = [];
-  ddd: any = {};
   selectedRefContrcats: Array<ContractRefund> = [];
   clientContractsNo: Array<string> = [];
   settings = {};
   selectedNumber = 0;
   selectedFiles: FileList;
-  nnn: Array<string> = [];
-  mmm: Array<number> = [];
+  contractNbrs: Array<string> = [];
+  attachmentIds: Array<number> = [];
   attachments: any = [];
   tourn = 0;
   requestNo: string;
@@ -75,10 +74,7 @@ export class RefundEditComponent implements OnInit {
         [
           Validators.required
         ])],
-      'contracts': ['', Validators.compose(
-        [
-          Validators.required
-        ])],
+      'contracts': [''],
       'lastName': ['', Validators.compose(
         [
           Validators.required
@@ -113,6 +109,8 @@ export class RefundEditComponent implements OnInit {
   ngOnInit() {
     this.requestNo = this.route.snapshot.paramMap.get('requestNo');
     this.getRefundDetail();
+    this.setProcurationValidators();
+
   }
 
   selectFile(event: any, input?: any) {
@@ -126,14 +124,12 @@ export class RefundEditComponent implements OnInit {
         if (event instanceof HttpResponse) {
           if (event.body) {
             const response = JSON.parse(<string>event.body);
+            this.uploadattachments = [];
             this.uploadattachments.push({
               id: response['data'][0],
               size: file.size,
               name: file.name
             });
-            console.log('attachment');
-            console.log(this.uploadattachments);
-            console.log('attachment');
           }
         }
       }, (err) => {
@@ -204,7 +200,7 @@ export class RefundEditComponent implements OnInit {
             this.selectedRefContrcats.push(element);
             this.selectedNumber++;
           }
-          if (_.isEqual(this.tourn, element.tourNo)) {
+          if (_.isEqual(this.tourn, element.tourNo) || _.isEqual(this.contractRefunds[0].tourNo, element.tourNo)) {
             _.extend(element, {
               id: element.contractNo,
               tourNo: element.tourNo,
@@ -252,7 +248,7 @@ export class RefundEditComponent implements OnInit {
           this.refundForm.get('Procuration').setValue(this.RefundDetails.procuration);
           this.flagModeRemboursement = this.RefundDetails.requestPaymentMode;
           this.attachments = this.RefundDetails.attachments;
-
+          this.uploadattachments = this.attachments;
           _.each(this.attachments, (response: any) => {
             if (response !== null) {
               this.flagAttachments = true;
@@ -269,23 +265,6 @@ export class RefundEditComponent implements OnInit {
     } else {
       // TODO: request no not found
     }
-  }
-
-  setPaymentModeValidators() {
-    const bankfileControl = this.refundForm.get('bank_file');
-
-    this.refundForm.get('ModeRemboursement').valueChanges
-      .subscribe(Mode => {
-        if (Mode === 'CHECK') {
-          bankfileControl.setValidators(null);
-        }
-
-        if (Mode === 'BANK_TRANSFER') {
-          bankfileControl.setValidators([Validators.required]);
-        }
-
-        bankfileControl.updateValueAndValidity();
-      });
   }
 
   setProcurationValidators() {
@@ -346,6 +325,11 @@ export class RefundEditComponent implements OnInit {
   }
 
   updateRequest(formData): void {
+    if (Array.isArray(this.selectedRefContrcats) && !this.selectedRefContrcats.length) {
+      this.toastrService.error('le champs contracts est obligatoire', '');
+      return;
+    }
+
     const user: User = this.authHelper.getLoggedUserInfo();
 
     const newRefundrequest: NewRefundRequestModel = formData;
@@ -362,20 +346,24 @@ export class RefundEditComponent implements OnInit {
     newRefundrequest.procuratorFirstname = formData.firstName;
     newRefundrequest.procuratorLastname = formData.lastName;
 
-    this.mmm = [];
-    this.nnn = [];
+    this.attachmentIds = [];
+    this.contractNbrs = [];
     this.uploadattachments.forEach(value => {
-      this.mmm.push(value.id);
+      if (value && value.id) {
+        this.attachmentIds.push(value.id);
+      } else {
+        this.attachmentIds.push(value);
+      }
     });
-    newRefundrequest.attachmentIds = this.mmm;
+
+    newRefundrequest.attachmentIds = this.attachmentIds;
 
     this.selectedRefContrcats.forEach(value => {
-      this.nnn.push(value.contractNo);
+      this.contractNbrs.push(value.contractNo);
       newRefundrequest.tour = value.tourNo;
     });
-    newRefundrequest.contractNbrs = this.nnn;
+    newRefundrequest.contractNbrs = this.contractNbrs;
 
-    debugger;
     this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
 
       console.log(response);
