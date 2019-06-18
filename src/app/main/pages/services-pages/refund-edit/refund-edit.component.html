@@ -1,8 +1,9 @@
 <div class="card-header content-header back col-12">
   <div class="row">
-    <div class="col-md-6 col-12">
+    <div class="col-md-8 col-12">
       <h3 class="content-header-title"><i class="fa fa-bookmark"
-                                          style="color: #2c5599;"></i> {{'New_refund_request' | translate }}</h3>
+                                          style="color: #2c5599;"></i> {{'Edit_refund_request' | translate }}
+        {{requestNo}}</h3>
     </div>
   </div>
 </div>
@@ -13,7 +14,7 @@
         <div class="card-content collapse show">
           <div class="card-body">
             <form role="form" [formGroup]="refundForm"
-                  (ngSubmit)="saveRequest(refundForm.value)" novalidate>
+                  (ngSubmit)="updateRequest(refundForm.value)" novalidate>
 
               <div class="row">
                 <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
@@ -183,41 +184,50 @@
                   <div class="row" style=" margin-bottom: -19px;">
                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                       <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
-                             value="CHECK" (change)="setPaymentModeValidators()"> {{'CHECK' | translate }}
+                             value="CHECK"> {{'CHECK' | translate }}
                     </div>
                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                       <input [(ngModel)]="flagModeRemboursement" type="radio" formControlName="ModeRemboursement"
-                             value="BANK_TRANSFER"
-                             (change)="setPaymentModeValidators()"> {{'BANK_TRANSFER' | translate }}
+                             value="BANK_TRANSFER"> {{'BANK_TRANSFER' | translate }}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
-
+              <div class="row" *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                  <label class="control-label" lang="fr" for="bank_file"> {{'JOIN_FILE' | translate }}
+                    <span
+                      class="text-danger">*</span>
+                  </label>
                 </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                  <div *ngIf="flagModeRemboursement === 'BANK_TRANSFER'">
-
-                    <div class="input-group">
-
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="bank_file" (change)="selectFile($event)"
-                               formControlName="bank_file" lang="fr">
-                        <label class="custom-file-label" lang="fr" for="bank_file"> {{'JOIN_FILE' | translate }}  <span
-                          class="text-danger">*</span></label>
+                  <div class="row">
+                    <div class="form-group col-lg-5 col-md-12 col-sm-12" *ngIf="flagAttachments === true">
+                      <label>Fichier courant</label>
+                      <a class="btn btn-primary arrow-circle-down"
+                         (click)="download($event)"
+                         style="color: #fff">
+                        Telecharger le fichier</a>
+                    </div>
+                    <div class="form-group col-lg-7 col-md-12 col-sm-12">
+                      <label>Ajouter un fichier</label>
+                      <input lang="fr" type="file" id="bank_file" name="bank_file" class="form-control"
+                             formControlName="bank_file" (change)="selectFile($event)">
+                      <small class="text-muted">{{'la-taille-du-fichier-ne-doit-pas-depasser' | translate}}: 32MB
+                      </small>
+                      <br>
+                      <div class="text-danger"
+                           *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
+                        <div *ngIf="refundForm.controls['bank_file'].errors.required">
+                          {{'FIELD_REQUIRED' | translate}}
+                        </div>
                       </div>
                     </div>
-
-                    <div class="text-danger"
-                         *ngIf="!refundForm.controls['bank_file'].valid && refundForm.controls['bank_file'].touched">
-                      <div *ngIf="refundForm.controls['bank_file'].errors.required">
-                        {{'FIELD_REQUIRED' | translate}}
-                      </div>
-                    </div>
+                  </div>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention !</strong> L'ajout d'un nouveau fichier écrase l'ancien.
                   </div>
                 </div>
               </div>

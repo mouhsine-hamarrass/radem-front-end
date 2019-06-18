@@ -20,6 +20,7 @@ import {ReleveModel} from '../models/releve.model';
 import {ContractRefund} from '../models/contract-refund.model';
 import {NewRefundRequestModel} from '../models/new-refund-request.model';
 import {SimpleRefundModel} from '../models/simpleRefund.model';
+import {Attachment} from '../models/attachment.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -469,6 +470,18 @@ export class ServicesService {
 
   saveNewRefundRequest(newModel: NewRefundRequestModel): Observable<Response<string>> {
     return this.httpClient.post<Response<string>>(`${this.urlApi}/refund-request/save`, newModel, {headers: headers})
+  }
+
+  downloadRefundRequestAttachedFile(attachments: Array<number>) {
+    const url = `${this.urlApi}/attachments/download/${attachments[0]}`;
+    const req = new HttpRequest('GET', url, {}, {
+      responseType: 'arraybuffer',
+    });
+    return this.httpClient.request(req);
+  }
+
+  getRefundRequestAttachedFileInfos(attachmentId: Array<number>): Observable<Response<Attachment>> {
+    return this.httpClient.get<Response<Attachment>>(`${this.urlApi}/attachments/${attachmentId[0]}`, {headers: headers})
   }
 
 }
