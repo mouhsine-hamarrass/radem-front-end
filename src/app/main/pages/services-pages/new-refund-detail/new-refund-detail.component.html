@@ -1,4 +1,4 @@
-<div class="container" id="toPrint">
+<div class="container" id="toPrint" >
   <div class="row">
     <div class="col">
     </div>
@@ -6,10 +6,10 @@
       <div class="row">
         <div class="col-md-6 col-6">
           <a class="logoSize" routerLink="/home" style=" padding-top: 7px;">
-            <img alt="stack admin logo" src="assets/app/images/logo/radem-logo-ico.png" class="brand-logo"
-                 id="stackLogo">
+            <img alt="stack admin logo" src="../../assets/app/images/logo/radem-logo-ico.png" class="brand-logo"
+                 id="stackLogo" style=" width: 50px;height: 70px;">
 
-            <img alt="stack admin logo" src="assets/app/images/logo/radem-logo.png" class="logoSize"
+            <img alt="stack admin logo" src="../../assets/app/images/logo/radem-logo.png" class="logoSize"
                  id="stackLogo-text">
           </a>
         </div>
@@ -17,7 +17,7 @@
           <table class="borderDiv">
             <tbody>
             <tr>
-              <td>Numéro de remboursement</td>
+              <td><b>Numéro de remboursement</b></td>
               <td> {{refundRequest?.requestNo}} </td>
             </tr>
             <tr>
@@ -25,16 +25,16 @@
               <th></th>
             </tr>
             <tr>
-              <td>Tournee</td>
-              <td></td>
+              <td><b>Tournée</b></td>
+              <td> {{refundRequest?.tour}} </td>
             </tr>
             <tr>
               <th></th>
               <th></th>
             </tr>
             <tr>
-              <td>Contrats</td>
-              <td></td>
+              <td><b>Contrats</b></td>
+              <td><span style="margin-right: 5px;: 10px" class="badge badge-primary" *ngFor="let ctr of refundRequest?.contracts">{{ctr}}</span></td>
             </tr>
             </tbody>
           </table>
@@ -59,64 +59,99 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" >
     <div class="row">
       <div class="col">
       </div>
-      <div class="txtCenter modal-body col-8">
+      <div class="txtCenter modal-body col-12">
         <table class="tableD">
           <tbody>
           <tr>
             <td>
               <h4>
-                <li><b> Nom et prénom</b></li>
+               <li>Nom et prénom</li>
               </h4>
             </td>
-            <td><h4><b>:</b></h4></td>
+            <td><h4 *ngIf="refundRequest?.procuratorLastname==null && refundRequest?.procuratorFirstname == null">:
+            ...................................................................................................</h4>
+              <h4 *ngIf="refundRequest?.procuratorLastname!=null || refundRequest?.procuratorFirstname != null">:
+                {{refundRequest?.procuratorFirstname}} {{refundRequest?.procuratorFirstname}}</h4></td>
           </tr>
           <tr>
             <td>
               <h4>
-                <li><b> Adresse </b></li>
+                <li>Adresse</li>
               </h4>
             </td>
-            <td><h4><b>:</b> {{refundRequest?.mailingAddress}} </h4></td>
+            <td><h4 *ngIf="refundRequest?.mailingAddress==null">:
+              ...................................................................................................</h4>
+              <h4 *ngIf="refundRequest?.mailingAddress!=null"> : {{refundRequest?.mailingAddress}} </h4></td>
           </tr>
           <tr>
             <td>
               <h4>
-                <li><b> Téléphone fixe </b></li>
+                <li>Téléphone fixe</li>
               </h4>
             </td>
-            <td><h4><b>:</b> {{refundRequest?.fixPhone}} </h4></td>
+            <td><h4 *ngIf="refundRequest?.fixPhone==null">:
+              ...................................................................................................</h4>
+              <h4 *ngIf="refundRequest?.fixPhone!=null">: {{refundRequest?.fixPhone}} </h4></td>
           </tr>
           <tr>
             <td>
               <h4>
-                <li><b> Téléphone portable </b></li>
+               <li>Téléphone portable</li>
               </h4>
             </td>
-            <td><h4><b>:</b> {{refundRequest?.phone}} </h4></td>
+            <td><h4 *ngIf="refundRequest?.phone==null">:
+              ...................................................................................................</h4>
+              <h4 *ngIf="refundRequest?.phone!=null">: {{refundRequest?.phone}} </h4></td>
           </tr>
           <tr>
             <td>
               <h4>
-                <li><b> Mode de remboursement </b></li>
+                <li>Mode de remboursement</li>
               </h4>
             </td>
-            <td><h4><b>:</b> {{refundRequest?.requestPaymentMode | translate}}</h4></td>
+            <td><h4 *ngIf="refundRequest?.requestPaymentMode==null">:
+              ...................................................................................................</h4>
+              <h4 *ngIf="refundRequest?.requestPaymentMode!=null">: {{refundRequest?.requestPaymentMode | translate}}</h4></td>
           </tr>
           <tr *ngIf="refundRequest?.procuration==true">
-            <td>{{'PROCUROR_CIN' | translate }} </td>
-            <td>{{refundRequest?.procuratorCin}}</td>
+            <td>
+              <h4>
+                <li>{{'PROCUROR_LASTNAME' | translate }}</li>
+              </h4>
+            </td>
+            <td>
+              <h4>
+                {{refundRequest?.procuratorLastname}}
+              </h4>
+            </td>
           </tr>
           <tr *ngIf="refundRequest?.procuration==true">
-            <td>{{'PROCUROR_LASTNAME' | translate }} </td>
-            <td>{{refundRequest?.procuratorFirstname}}</td>
+            <td>
+              <h4>
+                <li>{{'PROCUROR_FIRSTNAME' | translate }} </li>
+              </h4>
+            </td>
+            <td>
+              <h4>
+               {{refundRequest?.procuratorFirstname}}
+              </h4>
+            </td>
           </tr>
           <tr *ngIf="refundRequest?.procuration==true">
-            <td>{{'PROCUROR_FIRSTNAME' | translate }} </td>
-            <td>{{refundRequest?.procuratorLastname}}</td>
+            <td>
+              <h4>
+                <li>{{'PROCUROR_CIN' | translate }}</li>
+              </h4>
+            </td>
+            <td>
+              <h4>
+                {{refundRequest?.procuratorCin}}
+              </h4>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -129,13 +164,20 @@
 
         </div>
 
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-          <button class="btn btn btn-outline-primary pull-right"
-                  (click)="generatePDF()" type="submit">{{'PRINT' | translate }}
-          </button>
-        </div>
+
       </div>
 
     </div>
   </div>
+</div>
+
+
+<div class="form-group col-lg-6 col-md-12 col-sm-12">
+<!--  <button styleSheetFile="new-refund-detail.component.scss"
+          class="btn btn btn-outline-primary pull-right" [useExistingCss]="true"
+         formtarget="_parent" printSectionId="toPrint" ngxPrint>{{'PRINT' | translate }}</button>-->
+
+  <button
+          (click)="printComponent('toPrint');"
+          class="btn btn btn-outline-primary pull-right">{{'PRINT' | translate }}</button>
 </div>
