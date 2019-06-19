@@ -49,6 +49,7 @@ export class RefundEditComponent implements OnInit {
   requestId: number;
   uploadattachments: any = [];
   flagAttachments = false;
+  curentTourNo: string;
 
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
@@ -187,6 +188,8 @@ export class RefundEditComponent implements OnInit {
   getRefundedContracts2(contractsNbr: Array<string>) {
     this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
       this.contractRefunds = response.data;
+      this.curentTourNo = this.contractRefunds.find( v =>
+        v.contractNo === contractsNbr[0]).tourNo;
       const newContractRefunds: Array<ContractRefund> = [];
       _.each(this.contractRefunds, (element: any) => {
         _.each(contractsNbr, (value: any) => {
@@ -200,7 +203,7 @@ export class RefundEditComponent implements OnInit {
             this.selectedRefContrcats.push(element);
             this.selectedNumber++;
           }
-          if (_.isEqual(this.tourn, element.tourNo) || _.isEqual(this.contractRefunds[0].tourNo, element.tourNo)) {
+          if (_.isEqual(this.tourn, element.tourNo) || _.isEqual(this.curentTourNo, element.tourNo)) {
             _.extend(element, {
               id: element.contractNo,
               tourNo: element.tourNo,
