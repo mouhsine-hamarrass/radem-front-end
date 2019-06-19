@@ -22,7 +22,7 @@ export class HomeService {
   }
 
   getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
-    return this.httpClient.post<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications/unread?page=${page}&size=${pageSize}`, {
+    return this.httpClient.post<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`, {
       dateStart: moment(),
       dateEnd: moment().subtract(5, 'days'),
     });
