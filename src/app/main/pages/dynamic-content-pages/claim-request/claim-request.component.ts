@@ -9,7 +9,6 @@ import * as _ from 'underscore';
 
 declare let L;
 
-// const portailUrl = 'http://portailsig.radem.ma/server/rest/services/Reclamation_clients/FeatureServer/0';
 const portailUrl = 'https://portailsig.radem.ma/server/rest/services/Gestion_Reclamation_clients/FeatureServer/0';
 
 @Component({
@@ -69,25 +68,11 @@ export class ClaimRequestComponent implements OnInit {
     this.featureLayer = L.esri.featureLayer({
       url: portailUrl,
     });
-    // Ajouter le Pointeur de Position sur la Carte
-    /*map.on('click', (e) => {
-      if (typeof (this.myMarker) === 'undefined') {
-        this.myMarker = L.marker(e.latlng, {draggable: true}).addTo(map);
-        this.myMarker.bindPopup(e.latlng.lat + ', ' + e.latlng.lng);
-      } else {
-        this.myMarker.setLatLng(e.latlng);
-        this.myMarker.bindPopup(e.latlng.lat + ', ' + e.latlng.lng).update();
-        (document.getElementById('address') as HTMLInputElement).value = String(e.latlng.lat + ', ' + e.latlng.lng);
-      }
-    });*/
     // Ajouer le Marker
     const Marker = L.marker([33.8935200, -5.5472700], {
       draggable: true,
       icon: this.Icon
     }).addTo(map);
-    /*Marker.on('dragend', function () {
-      // (document.getElementById('address') as HTMLInputElement).value = String(Marker.getLatLng().lat + ', ' + Marker.getLatLng().lng);
-    });*/
 
     this.myMarker = Marker;
   }
@@ -95,7 +80,6 @@ export class ClaimRequestComponent implements OnInit {
   // Soumettre la Réclamation au Serveur
   addClaim() {
     // Vérifier Si la Posiontion est Pricisée
-    console.log(this.myMarker.getLatLng().lng + ' - ' + this.myMarker.getLatLng().lat + ' - ' + this.contact.get('address').value);
     if (this.myMarker.getLatLng().lat === 33.89352 && _.isEqual(this.myMarker.getLatLng().lng, -5.54727)) {
       Swal({
         type: 'warning',
