@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {addAttachment} from '@esri/arcgis-rest-feature-service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {ServicesService} from '../../../services/services.service';
+import * as _ from 'underscore';
+
 
 declare let L;
 
@@ -24,6 +26,16 @@ export class ClaimRequestComponent implements OnInit {
   public flag: string;
   clientContracts: Array<ContractAttachModel>;
   selectedContract: ContractAttachModel;
+  // Icon du Marker
+  Icon = L.icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
   constructor(private formBuilder: FormBuilder,
               private services: ServicesService) {
@@ -44,7 +56,7 @@ export class ClaimRequestComponent implements OnInit {
     this.getClientAttachedContracts()
 
     const map = L.map('map').setView([33.8935200, -5.5472700], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     // Service Arcgis pour la gestion des Réclamation
@@ -52,7 +64,7 @@ export class ClaimRequestComponent implements OnInit {
       url: portailUrl,
     });
     // Ajouter le Pointeur de Position sur la Carte
-    map.on('click', (e) => {
+    /*map.on('click', (e) => {
       if (typeof (this.myMarker) === 'undefined') {
         this.myMarker = L.marker(e.latlng, {draggable: true}).addTo(map);
         this.myMarker.bindPopup(e.latlng.lat + ', ' + e.latlng.lng);
@@ -62,14 +74,20 @@ export class ClaimRequestComponent implements OnInit {
         this.myMarker.bindPopup(e.latlng.lat + ', ' + e.latlng.lng).update();
         (document.getElementById('address') as HTMLInputElement).value = String(e.latlng.lat + ', ' + e.latlng.lng);
       }
-    });
+    });*/
+    // Ajouer le Marker
+    const Marker = L.marker([33.8935200, -5.5472700], {
+      draggable: true,
+      icon: this.Icon
+    }).addTo(map);
+
+    this.myMarker = Marker;
   }
 
   getClientAttachedContracts() {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts.length) {
-        debugger;
         this.selectedContract = this.clientContracts[0];
       }
     }, err => {
@@ -80,7 +98,8 @@ export class ClaimRequestComponent implements OnInit {
   // Soumettre la Réclamation au Serveur
   addClaim() {
     // Vérifier Si la Posiontion est Pricisée
-    if (!this.myMarker) {
+    console.log(this.myMarker.getLatLng().lng + ' - ' + this.myMarker.getLatLng().lat + ' - ' + this.contact.get('address').value);
+    if (this.myMarker.getLatLng().lat === 33.89352 && _.isEqual(this.myMarker.getLatLng().lng, -5.54727)) {
       Swal({
         type: 'warning',
         title: 'Position non Pricisé',
@@ -97,6 +116,7 @@ export class ClaimRequestComponent implements OnInit {
         'TÉL': this.contact.get('phone').value,
         'TYPE_RECLAMATION': this.contact.get('claimType').value,
         'DÉTAILS_RECLAMATION': this.contact.get('claimText').value,
+        'ADRESSE': this.contact.get('address').value,
         'STATUT': null,
         'COMMENTAIRE': null,
         'CONTRAT': this.contact.get('contractId').value // inserer le num contrat si l'utilisateur est connecté
@@ -106,10 +126,10 @@ export class ClaimRequestComponent implements OnInit {
         'coordinates': [this.myMarker.getLatLng().lng, this.myMarker.getLatLng().lat]
       }
     };
+    debugger;
     console.log(this.contact.get('contractId').value);
     // Soumetre la Réclamation et recuperation du mun du Réclamation pour le suivi
     this.featureLayer.addFeature(geojsonFeature, (error, response) => {
-      debugger;
       if (error) {
         console.log(error);
         Swal({
