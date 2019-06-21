@@ -1,4 +1,4 @@
-<!-- fixed-top-->
+  <!-- fixed-top-->
 <nav id="stackNav" #stackNav
      class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-light navbar-border">
   <div class="navbar-wrapper">
@@ -40,26 +40,27 @@
             </a>
           </li>
         </ul>
-        <ul  class="nav navbar-nav float-right float-sm-left" >
+        <ul class="nav navbar-nav float-right float-sm-left">
           <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
               *ngIf="user && href !== 'admin'">
-            <a href="javascript:;"  class="dropdown-toggle nav-link dropdown-user-link"
+            <a href="javascript:;" class="dropdown-toggle nav-link dropdown-user-link"
                id="dropdownNotifications"
                ngbDropdownToggle>
               <i class="fa fa-2x fa-bell-o"></i>
             </a>
 
-            <div  ngbDropdownMenu aria-labelledby="dropdownNotifications" class="notifications-list" >
+            <div ngbDropdownMenu aria-labelledby="dropdownNotifications" class="notifications-list">
               <div *ngIf="alerts.length; else noNotifications">
-                <div *ngFor="let notification of alerts; let i = index" [ngClass]="{'bg-unread' : notification?.status === 'UNREAD'}">
+                <div *ngFor="let notification of alerts; let i = index"
+                     [ngClass]="{'bg-unread' : notification?.status === 'UNREAD'}">
                   <a class="dropdown-item"
                      (click)="detailNotification(notification, i)">
                     <b class="notif-type badge"
                        [ngClass]="{
-                          'badge-success' : notification?.alert?.id == 1,
-                          'badge-danger' : notification?.alert?.id == 2,
-                          'badge-info' : notification?.alert?.id == 3,
-                          'badge-primary' : notification?.alert?.id >= 4
+                          'badge-success' : (notification?.alert?.type | uppercase) === 'ABONNEMENT',
+                          'badge-danger' : (notification?.alert?.type | uppercase) === 'RESILIATION',
+                          'badge-info' : (notification?.alert?.type | uppercase) === 'REMBOURSEMENT',
+                          'badge-primary' : (notification?.alert?.type | uppercase) === 'BRANCHEMENT'
                           }">{{notification?.alert?.type}}</b>
                     <span class="notif-descr">{{notification?.description}}</span>
                   </a>

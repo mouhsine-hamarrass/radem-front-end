@@ -147,7 +147,7 @@ export class RefundEditComponent implements OnInit {
     this.servicesService.getRefundRequestAttachedFileInfos(this.attachments).subscribe(value => {
       this.attachedFileInfos = value.data;
     });
-    this.servicesService.downloadRefundRequestAttachedFile(this.attachments).subscribe(value => {
+    this.servicesService.downloadAttachmentById(this.attachments[0]).subscribe(value => {
       if (value && value['body']) {
         const file = new FileModel(this.attachedFileInfos.name + '.'
           + this.attachedFileInfos.extension, CommonUtil._arrayBufferToBase64(value['body']));

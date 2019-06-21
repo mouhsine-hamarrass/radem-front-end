@@ -1,4 +1,4 @@
-.borderDiv{
+.borderDiv {
   width: 100%;
   max-width: 100%;
   margin-bottom: 2rem;
@@ -6,7 +6,7 @@
   border-collapse: separate;
 }
 
-.borderDiv tr td{
+.borderDiv tr td {
   border: 1px solid #ccc !important;
   padding: 0.01em 16px;
 
@@ -18,7 +18,7 @@
 }
 
 
-.txtCenter h1{
+.txtCenter h1 {
   text-align: center;
 }
 
@@ -26,27 +26,42 @@
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
-  background-color: transparent; }
+  background-color: transparent;
+}
+
 .tableD th,
 .tableD td {
   padding: 0.35rem;
   vertical-align: top;
   color: #000000;
-  border-top: 0px solid #98A4B8; }
+  border-top: 0px solid #98A4B8;
+}
+
 .tableD thead th {
   vertical-align: bottom;
-  border-bottom: 0px solid #98A4B8; }
+  border-bottom: 0px solid #98A4B8;
+}
+
 .tableD tbody + tbody {
-  border-top: 0px solid #98A4B8; }
+  border-top: 0px solid #98A4B8;
+}
+
 .tableD .tableD {
-  background-color: #F5F7FA; }
+  background-color: #F5F7FA;
+}
 
 
-.logoSize{
+.logoSize {
   width: 130px;
   height: 50px;
   margin-top: 20px;
+}
 
+.btn-print {
+  float: right !important;
+  position: relative;
+  right: 104px;
+  top: -22px;
 }
 
 
