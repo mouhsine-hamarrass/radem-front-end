@@ -6,6 +6,9 @@ import * as JsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {UserDetails} from '../../../../shared/models/user.model';
+import {User} from '../../../models/user.model';
+import {AuthHelper} from '../../../../core/services/security/auth.helper';
 
 @Component({
   selector: 'app-new-refund-detail',
@@ -16,6 +19,7 @@ export class NewRefundDetailComponent implements OnInit {
 
   refundRequest: RefundRequestModel;
   notFound: boolean;
+  user: User;
 
   constructor(private services: ServicesService,
               private route: ActivatedRoute,
@@ -25,6 +29,7 @@ export class NewRefundDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     this.getRefundDetail();
   }
 

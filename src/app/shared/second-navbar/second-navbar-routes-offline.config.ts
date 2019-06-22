@@ -57,7 +57,7 @@ export const ROUTES_OFFLINE: RouteInfo[] = [
         submenu: []
       },
       {
-        path: mainRoute + '/remboursement-requests',
+        path: mainRoute + '/refund-requests',
         title: 'Suivi Demandes de remboursement',
         icon: '',
         clazz: 'menu-item',

@@ -16,6 +16,9 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {InvoicesComponent} from './invoices/invoices.component';
+import {RefundRequestComponent} from './refund-request/refund-request.component';
+import {EmbranchmentRequestComponent} from './embranchment-request/embranchment-request.component';
 
 @NgModule({
   imports: [
@@ -36,6 +39,9 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     SubscriptionRequestComponent,
     CancellationRequestComponent,
     AutoReportComponent,
+    InvoicesComponent,
+    RefundRequestComponent,
+    EmbranchmentRequestComponent,
     ClaimRequestComponent,
     ContractComponent,
     UnpaidComponent,
