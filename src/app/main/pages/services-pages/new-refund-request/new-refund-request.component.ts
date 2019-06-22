@@ -232,6 +232,7 @@ export class NewRefundRequestComponent implements OnInit {
                     itemName: `${element.contractNo} - (${element.consumptionAddress})`
                 });
             });
+            debugger;
         }, err => {
             console.log(err)
         });

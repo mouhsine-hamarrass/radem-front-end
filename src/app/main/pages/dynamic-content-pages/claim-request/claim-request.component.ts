@@ -4,11 +4,11 @@ import {AdminService} from '../../../services/admin.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {addAttachment} from '@esri/arcgis-rest-feature-service';
 import Swal from 'sweetalert2';
+import * as _ from 'underscore';
 
 
 declare let L;
 
-// const portailUrl = 'http://portailsig.radem.ma/server/rest/services/Reclamation_clients/FeatureServer/0';
 const portailUrl = 'https://portailsig.radem.ma/server/rest/services/Gestion_Reclamation_clients/FeatureServer/0';
 
 @Component({
@@ -23,6 +23,19 @@ export class ClaimRequestComponent implements OnInit {
   private featureLayer; // Service ArcGis
   public attachment: any; // photo attachée
   public contact: FormGroup; // Formulaire du Réclamation
+  // Icon du Marker
+  Icon = L.icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+  lat: string;
+  lng: string;
+
   constructor(private adminServices: AdminService,
               private formBuilder: FormBuilder) {
     // Formulaire du Réclamation : Champs et Validation
@@ -48,30 +61,26 @@ export class ClaimRequestComponent implements OnInit {
     );
 
     const map = L.map('map').setView([33.8935200, -5.5472700], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     // Service Arcgis pour la gestion des Réclamation
     this.featureLayer = L.esri.featureLayer({
       url: portailUrl,
     });
-    // Ajouter le Pointeur de Position sur la Carte
-    map.on('click', (e) => {
-      if (typeof (this.myMarker) === 'undefined') {
-        this.myMarker = L.marker(e.latlng, {draggable: true}).addTo(map);
-        this.myMarker.bindPopup(e.latlng.lat + ', ' + e.latlng.lng);
-      } else {
-        this.myMarker.setLatLng(e.latlng);
-        this.myMarker.bindPopup(e.latlng.lat + ', ' + e.latlng.lng).update();
-        (document.getElementById('address') as HTMLInputElement).value = String(e.latlng.lat + ', ' + e.latlng.lng);
-      }
-    });
+    // Ajouer le Marker
+    const Marker = L.marker([33.8935200, -5.5472700], {
+      draggable: true,
+      icon: this.Icon
+    }).addTo(map);
+
+    this.myMarker = Marker;
   }
 
   // Soumettre la Réclamation au Serveur
   addClaim() {
     // Vérifier Si la Posiontion est Pricisée
-    if (!this.myMarker) {
+    if (this.myMarker.getLatLng().lat === 33.89352 && _.isEqual(this.myMarker.getLatLng().lng, -5.54727)) {
       Swal({
         type: 'warning',
         title: 'Position non Pricisé',
