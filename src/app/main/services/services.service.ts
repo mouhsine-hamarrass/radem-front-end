@@ -462,9 +462,7 @@ export class ServicesService {
       reportProgress: true,
       responseType: 'text',
     });
-    const req2 = req.clone({
-
-    });
+    const req2 = req.clone({});
     return this.httpClient.request(req2);
   }
 
@@ -472,8 +470,12 @@ export class ServicesService {
     return this.httpClient.post<Response<string>>(`${this.urlApi}/refund-request/save`, newModel, {headers: headers})
   }
 
-  downloadRefundRequestAttachedFile(attachments: Array<number>) {
-    const url = `${this.urlApi}/attachments/download/${attachments[0]}`;
+  getAttachment(id: number): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/attachments/${id}`);
+  }
+
+  downloadAttachmentById(attachmentId: number) {
+    const url = `${this.urlApi}/attachments/download/${attachmentId}`;
     const req = new HttpRequest('GET', url, {}, {
       responseType: 'arraybuffer',
     });

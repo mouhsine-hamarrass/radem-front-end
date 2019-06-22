@@ -62,26 +62,28 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   detailNotification(notification: AlertNotificationModel, $index) {
-    switch (notification.alert.type) {
-      case 'ABONNEMENT':
-        this.router.navigate(['/services/subscription-detail/', notification.target]);
-        break;
-      case 'RESILIATION':
-        this.router.navigate(['/services/cancellation-detail/', notification.target]);
-        break;
-      case 'REMBOURSEMENT':
-        this.router.navigate(['/services/refund-detail/', notification.target]);
-        break;
-      case 'BRANCHEMENT':
-        this.router.navigate(['/services/embranchment-detail/', notification.target]);
-        break;
-      default:
-        break;
+    if (notification && notification.alert && notification.alert.type) {
+
+      switch (notification.alert.type.toUpperCase()) {
+        case 'ABONNEMENT':
+          this.router.navigate(['/services/subscription-detail/', notification.target]);
+          break;
+        case 'RESILIATION':
+          this.router.navigate(['/services/cancellation-detail/', notification.target]);
+          break;
+        case 'REMBOURSEMENT':
+          this.router.navigate(['/services/refund-detail/', notification.target]);
+          break;
+        case 'BRANCHEMENT':
+          this.router.navigate(['/services/embranchment-detail/', notification.target]);
+          break;
+        default:
+          break;
+      }
     }
     this.homeService.readAlertNotification(notification.id).subscribe(response => {
       if (response && response.data) {
-        this.alerts.splice($index, 1);
-        this.alerts.push(response.data);
+        this.alerts.splice($index, 1, response.data);
       }
 
     }, err => {

@@ -16,6 +16,9 @@ import {RegistrationQuestionModel} from '../models/registration-question.model';
 import {ConsumptionReportModel} from '../models/consumptionReport.model';
 import {PieceModel} from '../models/piece.model';
 import {PieceDetailModel} from '../models/pieceDetail.model';
+import {InvoiceModel} from '../models/invoice.model';
+import {InvoiceDetailsModel} from '../models/invoice-details.model';
+import {InvoiceHistoryModel} from '../models/invoice-history.model';
 
 
 @Injectable()
@@ -187,6 +190,25 @@ export class AdminService {
     Observable<Response<Array<PieceDetailModel>>> {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.get<Response<Array<PieceDetailModel>>>(`${this.apiUrl}/contracts/receipts/${ReceiptNo}?page=${page}&size=${pageSize}`);
+  }
+
+  getInvoices(contractNo: string, page: number, pageSize: number):
+    Observable<Response<Array<InvoiceModel>>> {
+    return this.httpClient.get<Response<Array<InvoiceModel>>>(`${this.apiUrl}/invoices/${contractNo}?page=${page}&size=${pageSize}`);
+  }
+
+  getInvoiceDetails(contractNo: string, invoiceNo, page: number, pageSize: number):
+    Observable<Response<Array<InvoiceDetailsModel>>> {
+    return this.httpClient.get<Response<Array<InvoiceDetailsModel>>>(
+      `${this.apiUrl}/invoices/${contractNo}/details/${invoiceNo}?page=${page}&size=${pageSize}`
+    );
+  }
+
+  getInvoiceHistory(contractNo: string, page: number, pageSize: number):
+    Observable<Response<Array<InvoiceHistoryModel>>> {
+    return this.httpClient.get<Response<Array<InvoiceHistoryModel>>>(
+      `${this.apiUrl}/invoices/${contractNo}/history?page=${page}&size=${pageSize}`
+    );
   }
 
   getPageableHistoryConsumptions(contractNo: string, dateStart: any, dateEnd: any, page: number, pageSize: number):

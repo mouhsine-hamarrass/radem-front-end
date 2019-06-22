@@ -1,0 +1,272 @@
+<!--Tooltip Starts-->
+<div class="card-header content-header back col-12">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'MY_INVOICES' | translate}}</h3>
+    </div>
+  </div>
+</div>
+<div class="content-body" id="table">
+  <section class="row">
+    <div class="col-sm-12">
+      <!-- What is-->
+      <div id="what-is" class="mb-0">
+        <div class="card-content collapse show">
+          <form class="" [formGroup]="contractForm">
+            <div class="card-body">
+              <div class="row form-group col-lg-12 col-md-12 col-sm-12 ">
+                <label class="col-form-label">{{'CONTRACT' | translate}}<span class="danger">*</span>:</label>
+                <div class="col-auto">
+                  <select formControlName="contract" type="text" class="custom-select"
+                          (change)="setContract(selectedContract)" [(ngModel)]="selectedContract">
+                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                    <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                      {{contract.contractNo}}
+                      ({{contract.type}})
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="table-responsive mx-auto">
+                <div class="row justify-content-between">
+                  <div class="col-12">
+                    <div class="float-left">
+                      <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                    </div>
+                  </div>
+                </div>
+                <table class="table"
+                       sortable-table (sorted)="onSorted($event)"
+                       filterable-table (filtred)="onFiltred($event)">
+                  <thead class="table-light">
+                  <tr>
+
+                    <th scope="col">{{'INVOICE_NO' | translate }}</th>
+                    <th scope="col">{{'INVOICE_TYPE' | translate }}</th>
+                    <th scope="col">{{'YEAR_MONTH' | translate }}</th>
+                    <th scope="col">{{'INVOICE_AMOUNT' | translate }}</th>
+                    <th scope="col">{{'INVOICE_VOL_CONS' | translate }}</th>
+                    <th scope="col">{{'INVOICE_VOL_FACT' | translate }}</th>
+                    <th scope="col">{{'INVOICE_DATE_EMISSION' | translate }}</th>
+                    <th scope="col">{{'INVOICE_DATE_EXIGIBLE' | translate }}</th>
+                    <th scope="col">{{'INVOICE_STATUS' | translate }}</th>
+                    <th scope="col">{{'INVOICE_ACTION' | translate }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <app-data-not-available
+                    *ngIf="!invoices || invoices.length == 0; else dataAvailable"
+                    [colSpan]="6"></app-data-not-available>
+
+                  <ng-template #dataAvailable>
+                    <tr *ngFor="let inv of invoices">
+                      <td>{{inv?.invNo}}</td>
+                      <td>{{inv?.invType}}</td>
+                      <td>{{inv?.year}}-{{inv?.month}}</td>
+                      <td>{{inv?.amount| numeral}}</td>
+                      <td>{{inv?.consumedVol}}</td>
+                      <td>{{inv?.invoicedVol}}</td>
+                      <td>{{inv?.invEmitDate | date:'dd-MM-yyyy'}}</td>
+                      <td>{{inv?.invExigDate | date:'dd-MM-yyyy'}}</td>
+                      <td>{{inv?.status}}</td>
+                      <td>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                           tooltip="Détails"
+                           (click)="openInvoiceDetails(detailInvoice, inv)"></i>
+                        <i class="fa fa-file-pdf-o cursor-pointer pl-1 text-info"
+                           (click)="downloadInvoicePdf(inv?.fileId)" tooltip="Télécharger duplicata"></i>
+                      </td>
+                    </tr>
+
+                  </ng-template>
+
+                  </tbody>
+                </table>
+              </div>
+              <br> <br>
+              <app-pagination [showPagination]="totalPages > 1"
+                              [numberOfItems]="numberOfItems"
+                              [itemsPerPage]="itemsPerPage"
+                              [totalItems]="totalElements"
+                              [totalPages]="totalPages"
+                              (onpageChanged)="pageChanged($event)"></app-pagination>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+      <!--/ What is-->
+
+    </div>
+
+  </section>
+
+</div>
+
+<ng-template #detailInvoice>
+  <div class="modal-header modal-radem">
+    <h4 class="modal-title pull-left">{{'INVOICE_DETAILS' | translate}} N°: {{invoice?.invNo}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <tabset>
+      <tab heading="{{'INFORMATIONS' | translate}}">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
+            </h4>
+          </div>
+          <div class="card-content">
+
+            <div class="table-responsive mx-auto">
+              <div class="row justify-content-between">
+                <div class="col-12">
+                  <div class="float-left">
+                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                  </div>
+                </div>
+              </div>
+              <table class="table"
+                     sortable-table (sorted)="onSorted($event)"
+                     filterable-table (filtred)="onFiltred($event)">
+                <thead class="table-light">
+                <tr>
+
+                  <th scope="col">{{'ORDRE_INVOICE' | translate }}</th>
+                  <th scope="col">{{'CATEGORY_INVOICE' | translate }}</th>
+                  <th scope="col">{{'TRANCHE' | translate }}</th>
+                  <th scope="col">{{'PRODUCT' | translate }}</th>
+                  <th scope="col">{{'ROYALITIES' | translate }}</th>
+                  <th scope="col">{{'TYPE_ROYALITIES' | translate }}</th>
+                  <th scope="col">{{'TVA' | translate }}</th>
+                  <th scope="col">{{'AMOUNT_PROX_UNIT_HT' | translate }}</th>
+                  <th scope="col">{{'INVOICE_DATE_EMISSION' | translate }}</th>
+                  <th scope="col">{{'INVOICE_DATE_EXIGIBLE' | translate }}</th>
+                  <th scope="col">{{'AMOUNT_HT' | translate }}</th>
+                  <th scope="col">{{'AMOUNT_TVA' | translate }}</th>
+                  <th scope="col">{{'AMOUNT_TTC' | translate }}</th>
+                  <th scope="col">{{'QUANTITY' | translate }}</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <app-data-not-available
+                  *ngIf="!detailsInvoice || detailsInvoice.length == 0; else dataAvailable"
+                  [colSpan]="6"></app-data-not-available>
+
+                <ng-template #dataAvailable>
+                  <tr *ngFor="let detail of detailsInvoice">
+                    <td>{{detail?.orderDetails}}</td>
+                    <td>{{detail?.category}}</td>
+                    <td>{{detail?.tranche}}</td>
+                    <td>{{detail?.product}}</td>
+                    <td>{{detail?.royalties}}</td>
+                    <td>{{detail?.royaltiesType}}</td>
+                    <td>{{detail?.tva | numeral}}</td>
+                    <td>{{detail?.htAmountProx}}</td>
+                    <td>{{detail?.invEmitDate | date:'dd-MM-yyyy'}}</td>
+                    <td>{{detail?.invExigDate | date:'dd-MM-yyyy'}}</td>
+                    <td>{{detail?.htAmount | numeral}}</td>
+                    <td>{{detail?.tvaAmount | numeral}}</td>
+                    <td>{{detail?.ttcAmount | numeral}}</td>
+                    <td>{{detail?.quantity}}</td>
+
+                </ng-template>
+
+
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-body modal-radem">
+              <app-pagination [showPagination]="totalPagesDetails > 1"
+                              [numberOfItems]="numberOfItemsDetails"
+                              [itemsPerPage]="itemsPerPageDetails"
+                              [totalItems]="totalElementsDetails"
+                              [totalPages]="totalPagesDetails"
+                              (onpageChanged)="pageDetailsChanged($event)">
+              </app-pagination>
+            </div>
+
+
+          </div>
+        </div>
+      </tab>
+      <tab heading="{{'CONSUMPTION_HISTORY' | translate}}" *ngIf="invoices">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              <i class="fa fa-tachometer"></i>&nbsp;Historique
+            </h4>
+          </div>
+          <div class="card-content">
+            <div class="table-responsive mx-auto">
+              <div class="row justify-content-between">
+                <div class="col-12">
+                  <div class="float-left">
+                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                  </div>
+                </div>
+              </div>
+              <table class="table"
+                     sortable-table (sorted)="onSorted($event)"
+                     filterable-table (filtred)="onFiltred($event)">
+                <thead class="table-light">
+                <tr>
+                  <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
+                  <th scope="col">{{'COUNTER_GAUGE' | translate }}</th>
+                  <th scope="col">{{'INDEX' | translate }}</th>
+                  <th scope="col">{{'PRODUCT' | translate }}</th>
+                  <th scope="col">{{'INVOICE_VOL_CONS' | translate }}</th>
+                  <th scope="col">{{'INVOICE_VOL_FACT' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <app-data-not-available
+                  *ngIf="!historiesInvoice || historiesInvoice.length == 0; else dataAvailable"
+                  [colSpan]="6"></app-data-not-available>
+
+                <ng-template #dataAvailable>
+                  <tr *ngFor="let history of historiesInvoice">
+                    <td>{{history?.counterNo}}</td>
+                    <td>{{history?.caliber}}</td>
+                    <td>{{history?.index}}</td>
+                    <td>{{history?.product}}</td>
+                    <td>{{history?.consumedVolume}}</td>
+                    <td>{{history?.invoicedVolume}}</td>
+                </ng-template>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-body modal-radem">
+              <app-pagination [showPagination]="totalPagesHistory > 1"
+                              [numberOfItems]="numberOfItemsHistory"
+                              [itemsPerPage]="itemsPerPageHistory"
+                              [totalItems]="totalElementsHistory"
+                              [totalPages]="totalPagesHistory"
+                              (onpageChanged)="pageHistoryChanged($event)">
+              </app-pagination>
+            </div>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+
+  <div class="modal-footer modal-radem">
+
+    <button type="button" class="btn btn-light pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">Fermer</span>
+    </button>
+  </div>
+
+</ng-template>
+

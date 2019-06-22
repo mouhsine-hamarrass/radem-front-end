@@ -22,10 +22,15 @@ export class HomeService {
   }
 
   getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
-    return this.httpClient.post<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`, {
-      dateStart: moment(),
-      dateEnd: moment().subtract(5, 'days'),
-    });
+    debugger;
+    return this.httpClient.post<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`,
+      {
+        'filter': {
+          dateStart: moment(),
+          dateEnd: moment().subtract(5, 'days'),
+        },
+        'sort': null
+      });
   }
 
   readAlertNotification(id: number): Observable<Response<any>> {

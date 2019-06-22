@@ -211,7 +211,6 @@ export class ContractsPageComponent implements OnInit {
           // this.contractsServices.getSoldeByNumContract(numContract).subscribe(responseSolde => {
           this.contract = responseContract.data;
           this.counter = responseCounter.data;
-
           /*
           this.solde = {
               soldeExigible: responseSolde.data['soldeExigible'] || 0,

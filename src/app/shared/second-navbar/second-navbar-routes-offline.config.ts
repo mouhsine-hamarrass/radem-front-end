@@ -103,6 +103,17 @@ export const ROUTES_OFFLINE: RouteInfo[] = [
     submenu: []
   },
   {
+    path: mainRoute + '/invoices',
+    title: 'Mes factures',
+    icon: '',
+    clazz: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: []
+  },
+  {
     path: mainRoute + '/unpaid',
     title: 'Mes impayés',
     icon: '',

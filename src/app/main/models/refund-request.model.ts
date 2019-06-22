@@ -13,6 +13,7 @@ export class RefundRequestModel {
   description?: string;
   feedbacks?: Array<FeedbackModel>;
   requestNo?: string;
+  tour?: string;
   phone?: string;
   fixPhone?: string;
   mail?: string;

@@ -74,11 +74,11 @@
                          tooltip="Détachement"
                          (click)="detachContract(contract.contractNo)"></i>
                       <!--<i class="fa fa-ban cursor-pointer pl-1 text-danger"-->
-                         <!--tooltip="Résiliation"  *ngIf="true"-->
-                         <!--(click)="openModalCancelContract(cancelContract, contract.contractNo)"></i>-->
+                      <!--tooltip="Résiliation"  *ngIf="true"-->
+                      <!--(click)="openModalCancelContract(cancelContract, contract.contractNo)"></i>-->
                       <!--<i class="fa fa-money cursor-pointer pl-1 text-primary"-->
-                         <!--tooltip="Remboursement" *ngIf="true"-->
-                         <!--(click)="openModalRefundContract(refundContract, contract.contractNo)"></i>-->
+                      <!--tooltip="Remboursement" *ngIf="true"-->
+                      <!--(click)="openModalRefundContract(refundContract, contract.contractNo)"></i>-->
                     </td>
                   </tr>
                 </ng-template>
@@ -111,7 +111,7 @@
       <tab heading="{{'INFORMATIONS' | translate}}">
         <div class="card">
           <div class="card-header"
-               [ngClass]="contract?.typeContrat === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
+               [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
             <h4>
               <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
             </h4>
@@ -178,8 +178,8 @@
       <tab heading="{{'COUNTER' | translate}}" *ngIf="counter">
         <div class="card">
           <div class="card-header"
-               [ngClass]="subscription[0]?.type === 'eau' ? 'text-primary border-water' : 'text-warning border-electricity'">
-            <h4>
+               [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
+          <h4>
               <i class="fa fa-tachometer"></i>&nbsp;Dossier compteur
             </h4>
           </div>

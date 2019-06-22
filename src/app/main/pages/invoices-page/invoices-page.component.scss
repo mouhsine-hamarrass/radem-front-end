@@ -1,0 +1,139 @@
+.table th, .table td {
+  padding: 0.75rem 1rem !important;
+}
+
+.network-icon {
+  display: inline-block;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  line-height: 26px;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+
+  i {
+    font-size: 1.25em;
+  }
+}
+
+.table-responsive {
+  margin-top: 15px;
+}
+
+table th, table td {
+  padding: 0.5rem 1.5rem !important;
+}
+
+.water {
+  background-color: #2d91c7;
+}
+
+.undifined {
+  background-color: #000000;
+}
+
+.fa-2x {
+  font-size: 1.4em;
+}
+
+.electricity {
+  background-color: #de3a42;
+}
+
+table {
+  text-align: center;
+}
+
+.container-btn-actions{
+  margin-top: 40px;
+}
+
+.card-header{
+  padding: 0.8rem;
+  margin-bottom: 0;
+  background-color: #eef0f3;
+  border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
+  h3{
+    margin-top: 8px;
+  }
+}
+
+/*
+  Code par Rachid EL KADDOURI
+  -- Responsive Design
+ */
+@media only screen and (max-width: 768px){
+  .container-btn-actions{
+    margin-top: 5px;
+  }
+}
+
+.custom-width {
+  max-width: 1050px !important;
+  width: 1050px !important;
+}
+
+.Bold_txt{
+  font-weight: bold;
+}
+
+.content-body {
+  .content {
+    padding: 15px;
+    .deck.solde:after {
+      background-image: url("../../../../assets/images/money.png");
+    }
+
+    .deck:after {
+
+      background-repeat: no-repeat;
+      background-size: 29%;
+      background-position: right bottom;
+      opacity: 0.34;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      width: 95%;
+      margin: 16px auto;
+    }
+
+    .deck {
+      display: block;
+      min-height: 200px;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      margin-bottom: 15px;
+      .deck-body {
+        padding: 15px;
+        .title {
+          font-weight: bold;
+          font-size: 1.3rem;
+        }
+        .value {
+          font-weight: bold;
+          font-size: 2.7rem;
+        }
+      }
+    }
+    .card-deck-outline:after {
+      background-image: url("../../../../assets/images/idea.png");
+      background-size: 12%;
+      width: 90%;
+      margin: 40px auto;
+    }
+    .card-deck-outline {
+      border: 1px solid #204072;
+      border-radius: 5px;
+      margin: 15px 0;
+      max-height: 400px;
+      overflow-y: scroll;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      .deck-body {
+        padding: 15px;
+      }
+    }
+  }
+}

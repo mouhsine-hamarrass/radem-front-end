@@ -25,36 +25,39 @@ import {ALERT_NOTIFICATIONS_ROUTES} from './routes/alert-notifications-page.rout
 import {HomeComponent} from './home/home.component';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {INVOICE_PAGE_ROUTES} from './routes/invoices-page.routes';
 
 
 const appRoutes: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'login', component: LoginComponent},
-    {path: 'unauthorized', component: UnauthorizedComponent},
-    {path: 'checkProfile', component: HomeComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'recover-password', component: RecoverPasswordComponent},
-    {path: 'reset-password', component: ResetPasswordComponent},
-    {path: 'enable-account', component: EnableAccountComponent},
-    {path: 'register-succes', component: RegisterSuccesComponent},
-    {path: 'term-of-use', component: TermOfUseComponent},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICES_PAGES_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: DYNAMIC_CONTENT_PAGES_ROUTES},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACTS_PAGE_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SETTLEMENTS_PAGES_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGE_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ALERT_NOTIFICATIONS_ROUTES, canActivate: [LoginGuard]},
-    {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
-    {path: '**', component: PageNotFoundComponent}
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'unauthorized', component: UnauthorizedComponent},
+  {path: 'checkProfile', component: HomeComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'recover-password', component: RecoverPasswordComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'enable-account', component: EnableAccountComponent},
+  {path: 'register-succes', component: RegisterSuccesComponent},
+  {path: 'term-of-use', component: TermOfUseComponent},
+  {path: 'not-found', component: PageNotFoundComponent},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICES_PAGES_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: DYNAMIC_CONTENT_PAGES_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONTRACTS_PAGE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SETTLEMENTS_PAGES_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: INVOICE_PAGE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ALERT_NOTIFICATIONS_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: TwoColumnsLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule {
