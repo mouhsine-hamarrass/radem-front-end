@@ -142,6 +142,7 @@ export class InvoicesPageComponent implements OnInit {
         this.totalPages = response.data['totalPages'];
         this.itemsPerPage = response.data['size'];
         this.numberOfItems = response.data['numberOfElements'];
+        this.page = 1;
       }, err => {
       });
     /*this.invoices = [
@@ -161,6 +162,7 @@ export class InvoicesPageComponent implements OnInit {
           this.totalPagesDetails = response.data['totalPages'];
           this.itemsPerPageDetails = response.data['size'];
           this.numberOfItemsDetails = response.data['numberOfElements'];
+          this.pageDetails = 1;
 
         }, err => console.log(err));
     }
@@ -176,6 +178,7 @@ export class InvoicesPageComponent implements OnInit {
           this.totalPagesHistory = response.data['totalPages'];
           this.itemsPerPageHistory = response.data['size'];
           this.numberOfItemsHistory = response.data['numberOfElements'];
+          this.pageHistory = 1;
 
         }, err => console.log(err));
     }
@@ -228,6 +231,7 @@ export class InvoicesPageComponent implements OnInit {
           this.totalPagesDetails = response.data['totalPages'];
           this.itemsPerPageDetails = response.data['size'];
           this.numberOfItemsDetails = response.data['numberOfElements'];
+          this.pageDetails = 1;
         }
         this.pageHistoryChanged(this.pageHistory);
 

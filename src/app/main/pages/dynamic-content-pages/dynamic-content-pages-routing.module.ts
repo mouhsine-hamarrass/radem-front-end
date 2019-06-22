@@ -12,6 +12,9 @@ import {ConsumptionComponent} from './consumption/consumption.component';
 import {AdviceComponent} from './advice/advice.component';
 import {NgxPermissionsGuard} from 'ngx-permissions';
 import {ProfileTypeEnum} from '../../../shared/models/user.model';
+import {InvoicesComponent} from './invoices/invoices.component';
+import {RefundRequestComponent} from './refund-request/refund-request.component';
+import {EmbranchmentRequestComponent} from './embranchment-request/embranchment-request.component';
 
 const routes: Routes = [
   {
@@ -54,6 +57,25 @@ const routes: Routes = [
         }
       },
       {
+        path: 'embranchement-requests',
+        component: EmbranchmentRequestComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Demandes de branchement',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'refund-requests',
+        component: RefundRequestComponent,
+        data: {
+          title: 'Demandes de remboursement'
+        }
+      },
+      {
         path: 'auto-reports',
         component: AutoReportComponent,
         // canActivate: [NgxPermissionsGuard],
@@ -83,6 +105,18 @@ const routes: Routes = [
         // canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Contrat',
+          permissions: {
+            only: [ProfileTypeEnum.CLIENT],
+            redirectTo: 'unauthorized'
+          }
+        }
+      },
+      {
+        path: 'invoices',
+        component: InvoicesComponent,
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Factures',
           permissions: {
             only: [ProfileTypeEnum.CLIENT],
             redirectTo: 'unauthorized'

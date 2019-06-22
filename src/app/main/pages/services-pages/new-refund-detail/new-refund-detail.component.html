@@ -21,7 +21,10 @@
             <tbody>
             <tr>
               <td><b>Numéro de remboursement</b></td>
-              <td> {{refundRequest?.requestNo}} </td>
+              <td>
+                <h4 *ngIf="refundRequest?.requestNo==null">............</h4>
+                <h4 *ngIf="refundRequest?.requestNo!=null"> {{refundRequest?.requestNo}} </h4>
+              </td>
             </tr>
             <tr>
               <th></th>
@@ -29,7 +32,10 @@
             </tr>
             <tr>
               <td><b>Tournée</b></td>
-              <td> {{refundRequest?.tour}} </td>
+              <td>
+                <h4 *ngIf="refundRequest?.tour==null">............</h4>
+                <h4 *ngIf="refundRequest?.tour!=null">{{refundRequest?.tour}} </h4>
+              </td>
             </tr>
             <tr>
               <th></th>
@@ -37,8 +43,11 @@
             </tr>
             <tr>
               <td><b>Contrats</b></td>
-              <td><span style="margin-right: 5px;: 10px" class="badge badge-primary"
-                        *ngFor="let ctr of refundRequest?.contracts">{{ctr}}</span></td>
+              <td>
+                <h4 *ngIf="refundRequest?.contracts==null || refundRequest?.contracts.length < 1">............</h4>
+                <span style="margin-right: 5px;: 10px" class="badge badge-primary"
+                      *ngFor="let ctr of refundRequest?.contracts">{{ctr}}</span>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -76,10 +85,10 @@
                 <li>Nom et prénom</li>
               </h4>
             </td>
-            <td><h4 *ngIf="refundRequest?.procuratorLastname==null && refundRequest?.procuratorFirstname == null">:
+            <td><h4 *ngIf="user?.lastname==null && user?.firstname == null">:
               ...................................................................................................</h4>
-              <h4 *ngIf="refundRequest?.procuratorLastname!=null || refundRequest?.procuratorFirstname != null">:
-                {{refundRequest?.procuratorFirstname}} {{refundRequest?.procuratorFirstname}}</h4></td>
+              <h4 *ngIf="user?.lastname!=null || user?.firstname != null">:
+                {{user?.lastname}} {{user?.firstname}}</h4></td>
           </tr>
           <tr>
             <td>
@@ -89,7 +98,8 @@
             </td>
             <td><h4 *ngIf="refundRequest?.mailingAddress==null">:
               ...................................................................................................</h4>
-              <h4 *ngIf="refundRequest?.mailingAddress!=null"> : {{refundRequest?.mailingAddress}} </h4></td>
+              <h4 *ngIf="refundRequest?.mailingAddress!=null"> : {{refundRequest?.mailingAddress}} </h4>
+            </td>
           </tr>
           <tr>
             <td>

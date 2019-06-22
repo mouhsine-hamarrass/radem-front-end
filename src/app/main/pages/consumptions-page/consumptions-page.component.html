@@ -29,14 +29,16 @@
 
               <div class="alignRadio col col-lg-2">
                 <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="volume" name="consum" (click)="setRadio('volume')" checked >
+                  <input type="radio" class="custom-control-input" id="volume" name="consum"
+                         (click)="setRadio('volume')" checked>
                   <label class="custom-control-label" for="volume">{{'Volume' | translate}}</label>
                 </div>
               </div>
 
               <div class="alignRadio col col-lg-2">
                 <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="facturation" name="consum" (click)="setRadio('facturation')">
+                  <input type="radio" class="custom-control-input" id="facturation" name="consum"
+                         (click)="setRadio('facturation')">
                   <label class="custom-control-label" for="facturation">{{'Facturation_Consum' | translate}}</label>
                 </div>
               </div>
@@ -44,7 +46,7 @@
             </div>
           </div>
 
-          <div  class="col-16">
+          <div class="col-16">
             <div class="row">
               <div *ngIf="isSelected('volume')" class="col-sm-7">
                 <canvas baseChart #chart1="base-chart" [chartType]="chartType" [datasets]="chartDataSetsVolume"
@@ -53,7 +55,7 @@
                         [options]="chartOptionsEau" [legend]="true">
                 </canvas>
               </div>
-             <div *ngIf="isSelected('facturation')" class="col-sm-7">
+              <div *ngIf="isSelected('facturation')" class="col-sm-7">
                 <canvas baseChart #chart2="base-chart" [chartType]="chartType" [datasets]="chartDataSetsInvoice"
                         [labels]="chartLabels"
                         [colors]="chartColorsFact"
@@ -85,7 +87,8 @@
                     <td>{{consumption.meterNo}}</td>
                     <td>{{consumption.index}}</td>
                     <td>{{consumption.volume}}
-                      <ng-container *ngIf="consumption.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
+                      <ng-container
+                        *ngIf="consumption.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
                       <ng-template #waterOutput>m3<sup></sup></ng-template>
                       <ng-template #electOutput>KW</ng-template>
                     </td>
@@ -166,16 +169,15 @@
                   <i class="fa fa-search"></i></button>
                 &nbsp;
                 <div class="btn-group" dropdown>
-                  <button id="button-basic" dropdownToggle type="button"
+                  <!--<button id="button-basic" dropdownToggle type="button"
                           [disabled]="historyForm.invalid"
                           class="btn btn btn-outline-primary dropdown-toggle download"
                           aria-controls="dropdown-basic"><i class="fa fa-download"></i>
-                  </button>
-                  <div aria-labelledby="dropdownUser"
-                       class="dropdown-menu">
-                    <a class="dropdown-item" (click)="downloadPdfConsumptions()">
-                      <i class="fa fa-file-pdf-o"></i> {{'PDF_FORMAT' | translate }}
-                    </a>
+                  </button>-->
+                  <div>
+                    <button class="btn btn btn-outline-primary" (click)="downloadPdfConsumptions()">
+                      <i class="fa fa-download "></i>{{'PDF_DOWNLOAD' | translate }}
+                    </button>
                     <!--<a class="dropdown-item" (click)="downloadXlsConsumptions()">
                       <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
                     </a>-->
@@ -196,15 +198,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <app-data-not-available *ngIf="!consumptionsHistory || consumptionsHistory.length == 0; else dataAvailable"
-                                        [colSpan]="5"></app-data-not-available>
+                <app-data-not-available
+                  *ngIf="!consumptionsHistory || consumptionsHistory.length == 0; else dataAvailable"
+                  [colSpan]="5"></app-data-not-available>
                 <ng-template #dataAvailable>
                   <tr *ngFor="let consumption of consumptionsHistory" class="text-center">
                     <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>
                     <td>{{consumption.meterNo}}</td>
                     <td>{{consumption.index}}</td>
                     <td>{{consumption.volume}}
-                      <ng-container *ngIf="consumption.typeNetwork === 'EAU'; then waterOutput else electOutput"></ng-container>
+                      <ng-container
+                        *ngIf="consumption.typeNetwork === 'EAU'; then waterOutput else electOutput"></ng-container>
                       <ng-template #waterOutput>m3<sup></sup></ng-template>
                       <ng-template #electOutput>KW</ng-template>
                     </td>
