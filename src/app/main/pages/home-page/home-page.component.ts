@@ -81,7 +81,6 @@ export class HomePageComponent implements OnInit {
   }
 
   getClientAttachedContracts() {
-    debugger;
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts.length) {
@@ -134,7 +133,6 @@ export class HomePageComponent implements OnInit {
 
 
   setContract(contractNo: string) {
-    debugger;
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.getClientDetailsByContract(contractNo);
     this.getUnpaidBalanceByContract(contractNo);

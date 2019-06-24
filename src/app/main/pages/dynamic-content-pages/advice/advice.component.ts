@@ -15,7 +15,6 @@ export class AdviceComponent implements OnInit {
     }
 
     ngOnInit() {
-      debugger;
         this.adminServices.getDynamicContent('conseil').subscribe(
             response => {
                 this.dynamic = response.data;

@@ -4,16 +4,16 @@ import {ErrorHandlerTypes} from 'app/core/factories/error-handler.type';
 import {LoggerTypes} from 'app/core/factories/logger.type';
 import {HttpHeaders} from '@angular/common/http';
 
-const server = 'http://192.201.20.109/radem-ael-api';
+// 192.201.20.109
+const server = 'http://81.192.89.117/radem-ael-api';
 const jsonServer = 'https://my-json-server.typicode.com/senyou/jsonserver';
-
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
 export const environment = {
   emailRadem : 'info@radem.ma',
-  Home : 'http://192.201.20.109:8085/home',
+  Home : 'http://81.192.89.117:8085/home',
   Tel : '05355-21801',
   appName: 'RADEM-AEL',
   appLogo: './assets/images/logo.png',

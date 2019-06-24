@@ -46,7 +46,6 @@ export class AlertNotificationsComponent implements OnInit {
     }
 
     getAlertNotifications() {
-      debugger;
         this.adminService.getPageableAlertNotifications(this.page, this.pageSize, this.filter, this.sort)
             .subscribe(response => {
                 this.alertNotifications = response.data.content;

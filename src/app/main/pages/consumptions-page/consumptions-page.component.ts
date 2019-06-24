@@ -16,6 +16,8 @@ import {ContractAttachModel} from '../../models/contract-attach.model';
 import {ContractModel} from '../../models/contract.model';
 import {ConsumptionHistoryModel} from '../../models/consumptionHistory.model';
 import {ConsumptionReportModel} from '../../models/consumptionReport.model';
+import {ToastrService} from 'ngx-toastr';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-consumption-page',
@@ -139,6 +141,7 @@ export class ConsumptionsPageComponent implements OnInit {
     private adminService: AdminService,
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
     private services: ServicesService) {
     this.historyForm = this.formBuilder.group({
       contract: ['', Validators.required],
@@ -275,7 +278,6 @@ export class ConsumptionsPageComponent implements OnInit {
         this.chart2.ngOnChanges({});
       }
     }, error => {
-      console.log(error)
     })
   }
 
@@ -307,13 +309,19 @@ export class ConsumptionsPageComponent implements OnInit {
     const contract = this.historyForm.controls['contract'].value;
     const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
     const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
-    this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
-      if (response && response['body']) {
-        const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+    if (contract && startDate && endDate) {
+      this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
+        if (response && response['body']) {
+          const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
 
-        CommonUtil.downloadFile(file);
-      }
-    });
+          CommonUtil.downloadFile(file);
+        }
+      }, error => {
+      });
+    } else {
+      this.toastrService.warning('Veuillez remplir tous les champs', '');
+    }
+
   }
 
 
