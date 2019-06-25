@@ -6,7 +6,7 @@ import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {CommonService} from '../../../services/common.service';
 import * as _ from 'underscore';
 import {ContractRefund} from '../../../models/contract-refund.model';
-import {HttpResponse} from '@angular/common/http';
+import {HttpHeaderResponse, HttpResponse} from '@angular/common/http';
 import {NewRefundRequestModel} from '../../../models/new-refund-request.model';
 import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
@@ -118,6 +118,10 @@ export class NewRefundRequestComponent implements OnInit {
   upload() {
     _.each(this.selectedFiles, (file) => {
       this.servicesService.pushFileToStorage(file).subscribe(event => {
+        if (event && event instanceof HttpHeaderResponse && event.status === 400) {
+          this.toastrService.error(this.translate.instant('file-not-uploaded'));
+          return;
+        }
         if (event instanceof HttpResponse) {
           if (event.body) {
             const response = JSON.parse(<string>event.body);

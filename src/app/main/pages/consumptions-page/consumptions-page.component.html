@@ -118,7 +118,7 @@
               <label class="col-form-label">{{'CONTRACT' | translate }} <span
                 class="danger">*</span>:</label>
               <div class="col-3">
-                <select formControlName="contract" type="text" class="custom-select"
+                <select [(ngModel)]="selectedContract" formControlName="contract" type="text" class="custom-select"
                         (change)="setHistoryContract()">
                   <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
                   <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">

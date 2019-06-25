@@ -226,7 +226,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <div  *ngIf="flagAttachments === true" class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Attention !</strong> L'ajout d'un nouveau fichier écrase l'ancien.
                   </div>
                 </div>
