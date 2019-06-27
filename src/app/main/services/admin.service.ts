@@ -407,7 +407,6 @@ export class AdminService {
 
   getPageableAlertNotifications(page: number, pageSize: number, filter ?: any, sort ?: any):
     Observable<Response<any>> {
-    debugger;
 
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`,
       {

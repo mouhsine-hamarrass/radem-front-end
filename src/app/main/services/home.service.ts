@@ -22,7 +22,6 @@ export class HomeService {
   }
 
   getAlertsNotification(page: number, pageSize: number): Observable<Response<Array<AlertNotificationModel>>> {
-    debugger;
     return this.httpClient.post<Response<Array<AlertNotificationModel>>>(`${this.urlApi}/alerts/notifications/paged-list?page=${page}&size=${pageSize}`,
       {
         'filter': {

@@ -34,7 +34,7 @@ export class InvoicesPageComponent implements OnInit {
   config = {
     backdrop: true,
     ignoreBackdropClick: false,
-    class: 'modal-lg'
+    class: 'modal-xl'
   };
 
   page = 1;

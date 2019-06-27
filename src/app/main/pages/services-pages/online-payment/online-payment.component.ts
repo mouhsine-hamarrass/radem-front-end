@@ -46,7 +46,6 @@ export class OnlinePaymentComponent implements OnInit {
 
       this.transactionSummary = response.data;
 
-      //debugger;
       //this.transactionSummary.amount = parseFloat(this.transactionSummary.amount).toFixed(2);
 
       console.log(this.transactionSummary.amount);
@@ -83,7 +82,6 @@ export class OnlinePaymentComponent implements OnInit {
 
 
   getBillsToPay(): boolean {
-    // debugger;
     this.selectedBills = this.dataService.get('selectedBills');
     if (!this.selectedBills) {
       this.router.navigate(['unpaid']);

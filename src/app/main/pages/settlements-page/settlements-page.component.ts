@@ -86,7 +86,6 @@ export class SettlementsPageComponent implements OnInit {
   }
 
   getClientAttachedContracts() {
-    debugger;
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts.length) {

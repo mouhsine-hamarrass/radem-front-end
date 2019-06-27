@@ -16,6 +16,9 @@ import {ContractAttachModel} from '../../models/contract-attach.model';
 import {ContractModel} from '../../models/contract.model';
 import {ConsumptionHistoryModel} from '../../models/consumptionHistory.model';
 import {ConsumptionReportModel} from '../../models/consumptionReport.model';
+import {ToastrService} from 'ngx-toastr';
+import {HttpHeaderResponse, HttpResponse} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-consumption-page',
@@ -139,7 +142,9 @@ export class ConsumptionsPageComponent implements OnInit {
     private adminService: AdminService,
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
-    private services: ServicesService) {
+    private toastrService: ToastrService,
+    private services: ServicesService,
+    private translate: TranslateService) {
     this.historyForm = this.formBuilder.group({
       contract: ['', Validators.required],
       startDate: [this.today, Validators.required],
@@ -275,7 +280,6 @@ export class ConsumptionsPageComponent implements OnInit {
         this.chart2.ngOnChanges({});
       }
     }, error => {
-      console.log(error)
     })
   }
 
@@ -307,13 +311,22 @@ export class ConsumptionsPageComponent implements OnInit {
     const contract = this.historyForm.controls['contract'].value;
     const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
     const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
-    this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
-      if (response && response['body']) {
-        const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+    if (contract && startDate && endDate) {
+      this.services.downloadPdfConsumptions(contract, startDate, endDate).subscribe((response) => {
+        if (response && response instanceof HttpResponse && response.status === 204) {
+          this.toastrService.info(this.translate.instant('no-content-to-download'));
+          return;
+        }
+        if (response && response['body']) {
+          const file = new FileModel('mes-consommations.pdf', CommonUtil._arrayBufferToBase64(response['body']));
+          CommonUtil.downloadFile(file);
+        }
+      }, error => {
+      });
+    } else {
+      this.toastrService.warning('Veuillez remplir tous les champs', '');
+    }
 
-        CommonUtil.downloadFile(file);
-      }
-    });
   }
 
 

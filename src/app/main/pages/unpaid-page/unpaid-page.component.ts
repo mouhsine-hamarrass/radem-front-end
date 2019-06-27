@@ -72,7 +72,6 @@ export class UnpaidPageComponent implements OnInit {
       this.clientContracts = response.data;
       if (this.clientContracts && this.clientContracts.length) {
         for (const value of this.clientContracts) {
-          debugger;
           if (value.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
             this.selectedContract.push(value);
           }
@@ -95,7 +94,6 @@ export class UnpaidPageComponent implements OnInit {
     this.total = 0.0;
     this.totalUnpaid = 0;
     const contracts = _.pluck(this.selectedContract, 'contractNo');
-    debugger;
     this.contractServices.getPageableUnpaidBills(this.page, this.pageSize, contracts)
       .subscribe(response => {
         this.contractsBills = response.data['content'];
@@ -266,7 +264,6 @@ export class UnpaidPageComponent implements OnInit {
 
   submit() {
     if (this.selectedBills.invoices.length !== 0) {
-      // debugger;
       this.dataService.set('selectedBills', this.selectedBills);
       this.router.navigate(['/services/payment']);
     }
