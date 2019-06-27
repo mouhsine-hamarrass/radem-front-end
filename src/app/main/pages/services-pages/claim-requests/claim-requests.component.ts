@@ -71,7 +71,8 @@ export class ClaimRequestsComponent implements OnInit {
         this.reclamationCollection = response;
         this.showPagination = true;
         this.selectedReclamation = this.reclamationCollection[0];
-        this.myMarker = this.myMarker.setLatLng([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]]);
+        this.myMarker = this.myMarker
+          .setLatLng([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]]);
       }
       // console.log(response);
     });
@@ -87,7 +88,7 @@ export class ClaimRequestsComponent implements OnInit {
 
     // Ajouer le Marker
     this.myMarker = L.marker([33.8935200, -5.5472700], {
-      draggable: true,
+      draggable: false,
       icon: this.Icon
     }).addTo(map);
   }
@@ -130,7 +131,7 @@ export class ClaimRequestsComponent implements OnInit {
                  number
   ) {
     return new Promise(function (resolve, reject) {
-      var query = L.esri.query({
+      const query = L.esri.query({
         url: messageUrl
       });
       query.where(`ID_RECLAMATION=${idReclamation}`).orderBy('OBJECTID', 'DESC');
@@ -146,7 +147,7 @@ export class ClaimRequestsComponent implements OnInit {
   }
 
   sendMessage() {
-    var geojsonFeature = {
+    const geojsonFeature = {
       'type': 'Feature',
       'properties': {
         'ID_RECLAMATION': this.selectedReclamation.properties.OBJECTID,
@@ -206,10 +207,12 @@ export class ClaimRequestsComponent implements OnInit {
 
   loadFeatures() {
     return new Promise(function (resolve, reject) {
-      var query = L.esri.query({
+      const query = L.esri.query({
         url: portailUrl
       });
-      query.where('1=1').orderBy('CREATED_DATE', 'ASC'); // query.where("CONTRAT = contrat").orderBy('CREATED_DATE', 'ASC'); // Cas de plusieurs contrats // query.where("CONTRAT IN (*contrat_1,..)").orderBy('CREATED_DATE', 'ASC');
+      // query.where("CONTRAT = contrat").orderBy('CREATED_DATE', 'ASC');
+      // Cas de plusieurs contrats // query.where("CONTRAT IN (*contrat_1,..)").orderBy('CREATED_DATE', 'ASC');
+      query.where('1=1').orderBy('CREATED_DATE', 'ASC');
       query.run(function (error, featureCollection, response) {
         if (error) {
           reject(error);
@@ -233,13 +236,17 @@ export class ClaimRequestsComponent implements OnInit {
   }
 
   focusReclamation(reclamation) {
-    debugger;
     this.selectedReclamation = reclamation;
     this.myMarker.setLatLng([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]]);
     this.loadMessages(this.selectedReclamation.properties.OBJECTID).then(response => {
       // console.log(response);
       this.messages = response;
     });
+    const map = L.map('map')
+      .setView([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]], 11);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; <a href="https://www.radem.ma">RADEM</a> Copyrights'
+    }).addTo(map);
   }
 
   decodeType(type) {

@@ -112,7 +112,8 @@ export class ComplaintsComponent implements OnInit {
         this.showPagination = true;
         this.reclamationCollection = response;
         this.selectedReclamation = this.reclamationCollection[0];
-        this.myMarker = L.marker([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]]).addTo(map);
+        this.myMarker = L.marker([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]])
+          .addTo(map);
       }
       console.log(response);
     });
@@ -135,7 +136,7 @@ export class ComplaintsComponent implements OnInit {
 
     // Ajouer le Marker
     this.myMarker = L.marker([33.8935200, -5.5472700], {
-      draggable: true,
+      draggable: false,
       icon: this.Icon
     }).addTo(map);
   }
@@ -220,7 +221,7 @@ export class ComplaintsComponent implements OnInit {
     return new Promise(function (resolve, reject) {
       const query = L.esri.query({
         url: portailUrl
-      })
+      });
       query.where('1=1').orderBy('CREATED_DATE', 'ASC');
       query.run(function (error, featureCollection, response) {
         if (error) {
@@ -236,7 +237,7 @@ export class ComplaintsComponent implements OnInit {
     return new Promise(function (resolve, reject) {
       const query = L.esri.query({
         url: portailUrl
-      })
+      });
       query.where('1=1');
       query.count(function (error, count, response) {
         if (error) {
@@ -252,13 +253,13 @@ export class ComplaintsComponent implements OnInit {
     return new Promise(function (resolve, reject) {
       const query = L.esri.query({
         url: portailUrl
-      })
+      });
       const now = new Date();
       const dd = now.getDate();
-      const mm = now.getMonth() + 1
+      const mm = now.getMonth() + 1;
       const yyyy = now.getFullYear();
       const today = `${yyyy}-${mm}-${dd}`;
-      query.where(`CREATED_DATE between date'${today} 00:00:00' and date'${today} 23:59:59'`)
+      query.where(`CREATED_DATE between date'${today} 00:00:00' and date'${today} 23:59:59'`);
       query.count(function (error, count, response) {
         if (error) {
           reject(error);
@@ -288,6 +289,11 @@ export class ComplaintsComponent implements OnInit {
       console.log(response);
       this.messages = response
     });
+    const map = L.map('map')
+      .setView([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]], 11);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; <a href="https://www.radem.ma">RADEM</a> Copyrights'
+    }).addTo(map);
   }
 
   nextStatus(reclamation) {
