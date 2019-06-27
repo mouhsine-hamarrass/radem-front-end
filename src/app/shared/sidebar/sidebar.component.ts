@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     if (localStorage.getItem(AuthHelper.USER_ID)) {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
-    const withoutMenus = ['settings', 'requests', 'services', 'complaints', 'alerts'];
+    const withoutMenus = ['settings', 'requests', 'services', 'alerts'];
     const menuTrim = [];
     this.menuItems = ROUTES.filter(menuItem => menuItem);
 

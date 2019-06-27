@@ -51,7 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           } else {
             if (response.status === 403 || response.status === 404 || response.status === 400 || response.status === 500) {
               if (typeof response.error === 'string') {
-                this.translate.get(JSON.parse(response.error).message).subscribe(msg => {
+                this.translate.get(this.translate.instant(JSON.parse(response.error).message)).subscribe(msg => {
                   this.toastr.error(msg, '', {
                     timeOut: 3000,
                   });

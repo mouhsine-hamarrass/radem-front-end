@@ -59,8 +59,6 @@ export class InvoicesPageComponent implements OnInit {
   itemsPerPageHistory: number;
 
   invoice: InvoiceModel;
-  invoiceDetail: InvoiceDetailsModel;
-  invoiceHistory: InvoiceHistoryModel;
 
   public invoices: Array<InvoiceModel>;
   public detailsInvoice: Array<InvoiceDetailsModel>;
@@ -89,6 +87,7 @@ export class InvoicesPageComponent implements OnInit {
   }
 
   getClientAttachedContracts() {
+    debugger;
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts.length) {
@@ -102,6 +101,7 @@ export class InvoicesPageComponent implements OnInit {
           this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
         }
         this.setContract(this.selectedContract);
+        this.getInvoices();
       }
     }, err => {
       console.log(err)
@@ -131,11 +131,7 @@ export class InvoicesPageComponent implements OnInit {
   }
 
   getInvoices() {
-    let contract = this.contractForm.controls['contract'].value;
-    if (contract === undefined && this.clientContracts) {
-      contract = this.clientContracts[0].contractNo;
-    }
-    this.adminService.getInvoices(contract, this.page, this.pageSize)
+    this.adminService.getInvoices(this.selectedContract, this.page, this.pageSize)
       .subscribe(response => {
         this.invoices = response.data['content'];
         this.totalElements = response.data['totalElements'];
@@ -145,11 +141,6 @@ export class InvoicesPageComponent implements OnInit {
         this.page = 1;
       }, err => {
       });
-    /*this.invoices = [
-      new InvoiceModel('EAU', '0000001', '2019', '03', '00000001', '33.4',
-        '23423', '14555', '04/03/2019', '04/06/2019', 'Impayée',
-        30)
-    ];*/
   }
 
   pageDetailsChanged(page: number): void {
@@ -198,23 +189,19 @@ export class InvoicesPageComponent implements OnInit {
       return;
     }
     this.services.getAttachment(fileId).subscribe((response) => {
-        if (response) {
-          if (response.status === 'NO_CONTENT') {
-            this.toastrService.warning('Aucun fichier disponible', '');
-          } else if (response.data) {
-            this.services.downloadAttachmentById(fileId).subscribe((res) => {
-              if (res && res['body']) {
-                let title = '';
-                if (response.data.extension && response.data.name) {
-                  title = response.data.name.split('.', 1) + '.' + response.data.extension;
-                } else {
-                  title = 'facture_' + fileId + '.pdf';
-                }
-                const file = new FileModel(title, CommonUtil._arrayBufferToBase64(res['body']));
-                CommonUtil.downloadFile(file);
+        if (response && response.data) {
+          this.services.downloadAttachmentById(fileId).subscribe((res) => {
+            if (res && res['body']) {
+              let title = '';
+              if (response.data.extension && response.data.name) {
+                title = response.data.name.split('.', 1) + '.' + response.data.extension;
+              } else {
+                title = 'facture_' + fileId + '.pdf';
               }
-            });
-          }
+              const file = new FileModel(title, CommonUtil._arrayBufferToBase64(res['body']));
+              CommonUtil.downloadFile(file);
+            }
+          });
         }
       }
     );

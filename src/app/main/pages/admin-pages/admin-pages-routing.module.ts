@@ -101,8 +101,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'complaints/:id',
-        // canActivate: [NgxPermissionsGuard],
+        path: 'complaints',
         component: ComplaintComponent,
         data: {
           title: 'Réclamation',

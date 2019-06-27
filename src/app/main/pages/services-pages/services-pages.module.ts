@@ -34,13 +34,15 @@ import {TooltipModule} from 'ngx-bootstrap';
 import {RefundEditComponent} from './refund-edit/refund-edit.component';
 import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.component';
 import {NgxPrintModule} from 'ngx-print';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 @NgModule({
   imports: [
     CommonModule,
     NgxPrintModule,
     ServicesPagesRoutingModule,
-    ArchwizardModule,
+    ArchwizardModule, NgxPaginationModule,
     FormsModule,
     TooltipModule,
     ReactiveFormsModule,

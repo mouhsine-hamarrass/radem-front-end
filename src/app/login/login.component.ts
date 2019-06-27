@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, Renderer2} from '@angular/core';
 import {Mode} from '../core/models/mode.enum';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../core/services/security/auth.service';
@@ -28,10 +28,13 @@ export class LoginComponent extends UIFormComponent implements OnInit {
               private router: Router,
               private translate: TranslateService,
               private toastrService: ToastrService,
+              private renderer: Renderer2, private elRef: ElementRef,
               @Inject('AuthService') private authService: AuthService,
               validation: ValidationService,
               fb: FormBuilder) {
     super(validation);
+    this.renderer.setStyle(document.body, 'margin-left', '30px');
+    this.renderer.setStyle(document.body, 'margin-right', '30px');
     this.userForm = fb.group({
       username: '',
       password: ''
@@ -40,7 +43,7 @@ export class LoginComponent extends UIFormComponent implements OnInit {
 
   ngOnInit() {
     // reset login status
-     this.authService.logout();
+    this.authService.logout();
   }
 
   isLoginEnable() {

@@ -40,6 +40,7 @@ const appRoutes: Routes = [
   {path: 'register-succes', component: RegisterSuccesComponent},
   {path: 'term-of-use', component: TermOfUseComponent},
   {path: 'not-found', component: PageNotFoundComponent},
+  // {path: 'login', component: BoxedLayoutComponent, data: {title: ''}, children: LOGIN_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: HOME_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: CONSUMPTION_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ACCOUNT_PAGES_ROUTES, canActivate: [LoginGuard]},

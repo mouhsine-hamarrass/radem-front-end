@@ -1,63 +1,196 @@
-<!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'CLAIMS' | translate }}</h3>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'MY_CLAIMS' | translate}}</h3>
+    </div>
+    <div class="col-md-6 col-12 text-right container-btn-new-claim">
+      <a routerLink="/services/new-claim-request" class="btn btn-primary add-claim-btn">
+        <i class="fa fa-plus"></i> {{'NEW_REQUEST' | translate}}</a>
+    </div>
+  </div>
+</div>
+<div class="content-body" id="table">
+  <section class="row">
+    <div class="col-md-8">
+      <div id="what-is" class="mb-0">
+        <div class="card-content collapse show">
+          <form class="" [formGroup]="contractForm">
+            <div class="card-body">
+              <div class="row form-group col-lg-12 col-md-12 col-sm-12 ">
+                <label class="col-form-label">{{'CONTRACT' | translate}}<span class="danger">*</span>:</label>
+                <div class="col-auto">
+                  <select formControlName="contract" type="text" class="custom-select"
+                          (change)="setContract(selectedContract)" [(ngModel)]="selectedContract">
+                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                    <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                      {{contract.contractNo}}
+                      ({{contract.type}})
+                    </option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="table-responsive mx-auto">
+                <table class="table col-lg-7">
+                  <thead class="table-light">
+                  <tr>
+                    <th scope="col">{{'OBJECT' | translate }}</th>
+                    <th scope="col">{{'DATE_OF_CREATION' | translate }}</th>
+                    <th scope="col">{{'STATUS' | translate }}</th>
+                    <th scope="col">{{'TYPE_POSITION' | translate }}</th>
+                    <th scope="col">{{'Actions' | translate }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <app-data-not-available
+                    *ngIf="!reclamationCollection || reclamationCollection.length == 0; else dataAvailable"
+                    [colSpan]="6"></app-data-not-available>
+
+                  <ng-template #dataAvailable>
+                    <tr
+                      *ngFor="let claim of reclamationCollection  | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+
+                      <td class="cursor-pointer">
+                        <h6 (click)="detailReclamtion(claim)"><a class="alert-link">#{{ claim.properties.OBJECTID}}</a>
+                          <span
+                            *ngIf="claim.properties.DETAILS_RECLAMATION"> : {{claim.properties.DETAILS_RECLAMATION }}</span>
+                        </h6>
+                        <span class="claimant"
+                              *ngIf="claim.properties.NOM_PRENOM"> Reclamée par : {{ claim.properties.NOM_PRENOM }}</span>
+                        <span class="claimant"
+                              *ngIf="!claim.properties.NOM_PRENOM"> Reclamée par : Non spécifié</span>
+                      </td>
+
+                      <td><span>{{ claim.properties.CREATED_DATE | date: 'dd/MM/yyyy' }}</span>
+                      </td>
+
+                      <td>
+                        <span *ngIf="claim.properties.STATUT">{{ claim.properties.STATUT}}</span>
+
+                        <span *ngIf="!claim.properties.STATUT">Non spécifié</span>
+                      </td>
+
+                      <td class="object-td">
+                        <h6>Type :
+                          <span
+                            *ngIf="claim?.properties?.TYPE_RECLAMATION">{{decodeType(claim?.properties?.TYPE_RECLAMATION)}}</span>
+                          <span *ngIf="!claim?.properties?.TYPE_RECLAMATION">Non spécifié</span>
+                        </h6>
+                        <span class="claimant"
+                              *ngIf="claim.geometry.coordinates && claim.geometry.coordinates.length"> Position :
+                          {{ claim?.geometry?.coordinates[1]?.toFixed(3) + ' , ' + claim?.geometry?.coordinates[0]?.toFixed(3) }}</span>
+                        <span class="claimant"
+                              *ngIf="!claim?.geometry?.coordinates || !claim?.geometry?.coordinates.length"> Position :
+                          Non spécifié</span>
+                      </td>
+
+                      <td>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 fa-comment"
+                           (click)="toggleSidePanel(true, claim)" tooltip="Répondre"
+                        ></i>
+
+                        <i class="fa fa-list-alt cursor-pointer pl-1 fa-trash"
+                           (click)="deleteFeature(claim)" tooltip="Supprimer"
+                        ></i>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+          <div *ngIf="showPagination">
+            <pagination-template #p="paginationApi" (pageChange)="currentPage = $event">
+              <div>
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="p.isFirstPage()">
+                    <a (click)="p.previous()"><i class="page-link">Précédent</i></a>
+                  </li>
+
+                  <li (click)="p.setCurrent(page.value)" *ngFor="let page of p.pages" class="page-link">
+                    <a>{{ page.label }}</a>
+                  </li>
+
+                  <li class="page-item" [class.disabled]="p.isLastPage()">
+                    <a (click)="p.next()"><i class="page-link">Suivant</i></a>
+                  </li>
+                </ul>
+                <div style="float: right; margin-right: 60px !important;">
+                  <select class="form-control kt-font-brand" style="width: 60px;float: left;"
+                          [(ngModel)]="itemsPerPage">
+                    <option [ngValue]="10" selected>10</option>
+                    <option [ngValue]="20">20</option>
+                    <option [ngValue]="30">30</option>
+                  </select>
+                  <span style="position: relative;left: 5px; top: 15px">
+                      Total de {{ p.getTotalItems() }} réclamations
+                    </span>
+                </div>
+              </div>
+            </pagination-template>
+          </div>
         </div>
-      <div class="col-md-6 col-12 text-right container-btn-new-claim">
-        <a routerLink="/services/new-claim-request" class="btn btn-primary btn-new-claim">
-          <i class="fa fa-plus"></i> {{'NEW_REQUEST' | translate}}</a>
+
+      </div>
+
+    </div>
+
+    <!--/ What is-->
+    <div class="col-md-4">
+      <div>
+        <div class="alert alert-dark">
+          <h3>
+            Réclamantion: #{{ selectedReclamation.properties.OBJECTID || '-' }}
+          </h3>
+        </div>
+        <div>
+          <div id="map" style="height: 35vh"></div>
+
+          <div>
+            <table class="table">
+              <tr>
+                <td> Nom et Prénom:</td>
+                <td>{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</td>
+              </tr>
+              <tr>
+                <td> Contrat:</td>
+                <td> {{ selectedReclamation.properties.CONTRAT || '-' }}</td>
+              </tr>
+              <tr>
+                <td> Description:</td>
+                <td> {{ selectedReclamation.properties.DETAILS_RECLAMATION || '-' }}</td>
+              </tr>
+
+              <tr>
+                <td>Email:</td>
+                <td> {{ selectedReclamation.properties.EMAIL || '-' }}</td>
+              </tr>
+              <tr>
+                <td> Téléphone:</td>
+                <td> {{ selectedReclamation.properties.TEL || '-' }}</td>
+              </tr>
+
+            </table>
+            <div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-</div>
-<div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- What is-->
-            <div id="what-is" class="mb-0">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="row justify-content-between">
-                            <div class="col-12">
-                                <div class="float-left">
-                                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                                </div>
-                            </div>
-                        </div>
-                        <table class="table">
-                            <thead class="table-light">
-                            <tr>
-                                <th scope="col">{{'CLAIM_NUMBER' | translate }}</th>
-                                <th scope="col">{{'OBJECT' | translate }}</th>
-                                <th scope="col">{{'CREATED_ON' | translate }}</th>
-                                <th scope="col">{{'STATUS' | translate }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <app-data-not-available *ngIf="!complaints || complaints.length == 0; else dataAvailable"
-                                                    [colSpan]="4"></app-data-not-available>
+  </section>
 
-                            <ng-template #dataAvailable>
-                                <tr *ngFor="let complaint of complaints">
-                                    <td><a [routerLink]="['/services/claim-request/', complaint.id]"><b>{{complaint.claimNumber}}</b></a>
-                                    </td>
-                                    <td>{{complaint.object}}</td>
-                                    <td>{{complaint.createdDate | date:'dd-M-yyyy'}}</td>
-                                    <td><app-badge [status]="complaint.status"></app-badge></td>
-                                </tr>
-                            </ng-template>
-                            </tbody>
-                        </table>
-                        <app-pagination [showPagination]="totalPages > 1"
-                                        [numberOfItems]="numberOfItems"
-                                        [itemsPerPage]="itemsPerPage"
-                                        [totalItems]="totalElements"
-                                        [totalPages]="totalPages"
-                                        (onpageChanged)="pageChanged($event)"></app-pagination>
-                    </div>
-                </div>
-                <!--/ What is-->
-            </div>
-        </div>
-    </section>
 </div>
+
+
+
+
+
+
+
+
+
