@@ -1,23 +1,25 @@
-<nav aria-label="breadcrumb">
+<!--<nav aria-label="breadcrumb">
   <ul class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a>
     </li>
     <li class="breadcrumb-item active" aria-current="page">{{'List_of_alerts' | translate}}</li>
   </ul>
-</nav>
-<div class="container-fluid">
-  <div class="card">
-
-    <div class="card-header">
-      <h4 class="card-title text-muted pull-left">{{'List_of_alerts' | translate}}</h4>
-      <a class="pull-right">
-        <i (click)="showAlertForm(alertForm, null)">
-          <button type="button" class="btn btn-success">
-            {{'ADD_NEW_ALERT' | translate}} </button>
-        </i>
-      </a>
+</nav>-->
+<div class="card-header content-header back col-12">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'List_of_alerts' | translate}}</h3>
     </div>
-    <div class="card-body">
+    <div class="col-md-6 col-12 text-right">
+      <a (click)="showAlertForm(alertForm, null)" class="btn btn-primary add-claim-btn">
+        <i class="fa fa-plus"></i> {{'ADD_NEW_ALERT' | translate}}</a>
+    </div>
+  </div>
+</div>
+  <div class="container-fluid" style="margin-top: 20px;">
+  <div>
+    <div>
       <div class=" table-responsive">
         <div class="row">
           <div class="col-12">

@@ -1,16 +1,18 @@
-<div class="container container-login">
-  <div class="auth-container">
-<app-navbar></app-navbar>
-<app-second-navbar></app-second-navbar>
-<div class="content-mybody row">
-  <div class="container text-center">
-    <h2>{{"NOT_FOUND" | translate}}</h2>
-    <img alt="Page not found" class="img-responsive" src="./assets/images/404-Page-Not-Found.png">
-    <br>
-    <h5>{{"NOT_FOUND_BROKEN" | translate}}</h5>
+<div>
+  <div>
+    <app-navbar></app-navbar>
+    <app-second-navbar></app-second-navbar>
+<!--    <app-second-navbar *ngIf="(user && !user.admin) || !user"></app-second-navbar>-->
+<!--    <app-sidebar *ngIf="user && user.admin"></app-sidebar>-->
+    <div class="content-mybody row">
+      <div class="container text-center">
+        <h2>{{"NOT_FOUND" | translate}}</h2>
+        <img alt="Page not found" class="img-responsive" src="./assets/images/404-Page-Not-Found.png">
+        <br>
+        <h5>{{"NOT_FOUND_BROKEN" | translate}}</h5>
 
-  </div>
-</div>
+      </div>
+    </div>
     <app-footer></app-footer>
 
   </div>

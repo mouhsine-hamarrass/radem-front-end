@@ -1,21 +1,18 @@
 <div id="add-users">
-    <nav aria-label="breadcrumb" class="doNotPrint">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' |
-                translate}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{'USER_MANAGEMENT' | translate}}</li>
-        </ul>
-    </nav>
+
+  <div class="card-header content-header back col-12">
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <h4 class="content-header-title" *ngIf="!user?.id">{{'ADD_A_NEW_USER' | translate}}</h4>
+        <h4 class="content-header-title" *ngIf="user?.id">{{'EDIT_USER' | translate}} :
+          {{user.firstname}} {{user.lastname}}</h4>
+      </div>
+    </div>
+  </div>
     <div class="container-fluid">
-        <div class="spacer"></div>
-        <div class="card">
-            <div class="card-body">
+        <div>
+            <div>
                 <section>
-                    <div class="doNotPrint">
-                        <h4 class="card-title text-muted" *ngIf="!user?.id">{{'ADD_A_NEW_USER' | translate}}</h4>
-                        <h4 class="card-title text-muted" *ngIf="user?.id">{{'EDIT_USER' | translate}} :
-                            {{user.username}}</h4>
-                    </div>
                     <form [formGroup]="modalForm" (ngSubmit)='saveUser(modalForm)' novalidate>
                         <tabset [justified]="true">
                             <tab heading="Profil" class="active">

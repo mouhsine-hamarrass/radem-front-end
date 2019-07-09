@@ -154,24 +154,23 @@
             <table class="table">
               <tr>
                 <td> Nom et Prénom:</td>
-                <td>{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</td>
+                <td>{{ selectedReclamation?.properties?.NOM_PRENOM || '-' }}</td>
               </tr>
               <tr>
                 <td> Contrat:</td>
-                <td> {{ selectedReclamation.properties.CONTRAT || '-' }}</td>
+                <td> {{ selectedReclamation?.properties?.CONTRAT || '-' }}</td>
               </tr>
               <tr>
                 <td> Description:</td>
-                <td> {{ selectedReclamation.properties.DETAILS_RECLAMATION || '-' }}</td>
+                <td> {{ selectedReclamation?.properties?.DETAILS_RECLAMATION || '-' }}</td>
               </tr>
-
               <tr>
                 <td>Email:</td>
-                <td> {{ selectedReclamation.properties.EMAIL || '-' }}</td>
+                <td> {{ selectedReclamation?.properties?.EMAIL || '-' }}</td>
               </tr>
               <tr>
-                <td> Téléphone:</td>
-                <td> {{ selectedReclamation.properties.TEL || '-' }}</td>
+                <td>Téléphone:</td>
+                <td> {{ selectedReclamation?.properties?.TEL || '-' }}</td>
               </tr>
 
             </table>

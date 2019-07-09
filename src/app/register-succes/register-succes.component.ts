@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'app-register-succes',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterSuccesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private renderer: Renderer2) {
+  }
 
   ngOnInit() {
+    this.renderer.setStyle(document.body, 'margin-left', '30px');
+    this.renderer.setStyle(document.body, 'margin-right', '30px');
   }
 
 }

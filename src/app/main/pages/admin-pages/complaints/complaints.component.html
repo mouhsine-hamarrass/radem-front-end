@@ -5,183 +5,183 @@
                                           style="color: #2c5599;"></i> Dérnières Réclamations</h3>
     </div>
   </div>
+</div>
 
+<div class="content-body" id="table">
+  <section class="row">
+    <div class="col-md-8">
+      <div id="what-is" class="mb-0">
+        <div class="card-content collapse show">
+          <form class="">
+            <div class="card-body">
 
-  <div class="content-body" id="table">
-    <section class="row">
-      <div class="col-md-8">
-        <div id="what-is" class="mb-0">
-          <div class="card-content collapse show">
-            <form class="">
-              <div class="card-body">
-
-                <div class="row">
-                  <div class="col-6" style="padding: 7px 40px 25px 40px;">
-                    <label style="font-size: 4.5rem;font-weight: 500;margin-right: 6px;">{{ totalCount }}</label>
-                    <span>Total Réclamations</span>
-                  </div>
-
-                  <div class="col-6" style="padding: 7px 40px 25px 40px;">
-                    <label style="font-size: 4.5rem;font-weight: 500;margin-right: 6px;">{{ todayCount }}</label>
-                    <span>Aujourd'hui</span>
-                  </div>
-
+              <div class="row">
+                <div class="col-6" style="padding: 7px 40px 25px 40px;">
+                  <label style="font-size: 4.5rem;font-weight: 500;margin-right: 6px;">{{ totalCount }}</label>
+                  <span>Total Réclamations</span>
                 </div>
 
-
-                <div class="table-responsive mx-auto">
-                  <table class="table col-lg-7">
-                    <thead class="table-light">
-                    <tr>
-                      <th scope="col">{{'OBJECT' | translate }}</th>
-                      <th scope="col">{{'DATE_OF_CREATION' | translate }}</th>
-                      <th scope="col">{{'STATUS' | translate }}</th>
-                      <th scope="col">{{'TYPE_POSITION' | translate }}</th>
-                      <th scope="col">{{'Actions' | translate }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <app-data-not-available
-                      *ngIf="!reclamationCollection || reclamationCollection.length == 0; else dataAvailable"
-                      [colSpan]="6"></app-data-not-available>
-
-                    <ng-template #dataAvailable>
-                      <tr
-                        *ngFor="let claim of reclamationCollection  | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-
-                        <td class="cursor-pointer">
-                          <h6 (click)="detailReclamtion(claim)"><a
-                            class="alert-link">#{{ claim.properties.OBJECTID}}</a>
-                            <span
-                              *ngIf="claim.properties.DETAILS_RECLAMATION"> : {{claim.properties.DETAILS_RECLAMATION }}</span>
-                          </h6>
-                          <span class="claimant"
-                                *ngIf="claim.properties.NOM_PRENOM"> Reclamée par : {{ claim.properties.NOM_PRENOM }}</span>
-                          <span class="claimant"
-                                *ngIf="!claim.properties.NOM_PRENOM"> Reclamée par : Non spécifié</span>
-                        </td>
-
-                        <td><span>{{ claim.properties.CREATED_DATE | date: 'dd/MM/yyyy' }}</span>
-                        </td>
-
-                        <td>
-                          <span *ngIf="claim.properties.STATUT">{{ claim.properties.STATUT}}</span>
-
-                          <span *ngIf="!claim.properties.STATUT">Non spécifié</span>
-                        </td>
-
-                        <td class="object-td">
-                          <h6>Type :
-                            <span
-                              *ngIf="claim?.properties?.TYPE_RECLAMATION">{{decodeType(claim?.properties?.TYPE_RECLAMATION)}}</span>
-                            <span *ngIf="!claim?.properties?.TYPE_RECLAMATION">Non spécifié</span>
-                          </h6>
-                          <span class="claimant"
-                                *ngIf="claim.geometry.coordinates && claim.geometry.coordinates.length"> Position :
-                            {{ claim?.geometry?.coordinates[1]?.toFixed(3) + ' , ' + claim?.geometry?.coordinates[0]?.toFixed(3) }}</span>
-                          <span class="claimant"
-                                *ngIf="!claim?.geometry?.coordinates || !claim?.geometry?.coordinates.length"> Position :
-                          Non spécifié</span>
-                        </td>
-
-                        <td>
-                          <i class="fa fa-list-alt cursor-pointer pl-1 fa-comment"
-                             (click)="toggleSidePanel(true, claim)" tooltip="Répondre"></i>
-                          <i class="fa fa-list-alt cursor-pointer pl-1 fa-edit"
-                             (click)="nextStatus(claim)" tooltip="Modifier l'Etat"></i>
-                          <i class="fa fa-list-alt cursor-pointer pl-1 fa-trash"
-                             (click)="deleteFeature(claim)" tooltip="Supprimer"></i>
-                        </td>
-                      </tr>
-                    </ng-template>
-                    </tbody>
-                  </table>
+                <div class="col-6" style="padding: 7px 40px 25px 40px;">
+                  <label style="font-size: 4.5rem;font-weight: 500;margin-right: 6px;">{{ todayCount }}</label>
+                  <span>Aujourd'hui</span>
                 </div>
+
               </div>
-            </form>
-            <div *ngIf="showPagination">
-              <pagination-template #p="paginationApi" (pageChange)="currentPage = $event">
-                <div>
-                  <ul class="pagination">
-                    <li class="page-item" [class.disabled]="p.isFirstPage()">
-                      <a (click)="p.previous()"><i class="page-link">Précédent</i></a>
-                    </li>
 
-                    <li (click)="p.setCurrent(page.value)" *ngFor="let page of p.pages" class="page-link">
-                      <a>{{ page.label }}</a>
-                    </li>
 
-                    <li class="page-item" [class.disabled]="p.isLastPage()">
-                      <a (click)="p.next()"><i class="page-link">Suivant</i></a>
-                    </li>
-                  </ul>
-                  <div style="float: right; margin-right: 60px !important;">
-                    <select class="form-control kt-font-brand" style="width: 60px;float: left;"
-                            [(ngModel)]="itemsPerPage">
-                      <option [ngValue]="10" selected>10</option>
-                      <option [ngValue]="20">20</option>
-                      <option [ngValue]="30">30</option>
-                    </select>
-                    <span style="position: relative;left: 5px; top: 15px">
+              <div class="table-responsive mx-auto">
+                <table class="table col-lg-7">
+                  <thead class="table-light">
+                  <tr>
+                    <th scope="col">{{'OBJECT' | translate }}</th>
+                    <th scope="col">{{'DATE_OF_CREATION' | translate }}</th>
+                    <th scope="col">{{'STATUS' | translate }}</th>
+                    <th scope="col">{{'TYPE_POSITION' | translate }}</th>
+                    <th scope="col">{{'Actions' | translate }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <app-data-not-available
+                    *ngIf="!reclamationCollection || reclamationCollection.length == 0; else dataAvailable"
+                    [colSpan]="6"></app-data-not-available>
+
+                  <ng-template #dataAvailable>
+                    <tr
+                      *ngFor="let claim of reclamationCollection  | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+
+                      <td class="cursor-pointer">
+                        <h6 (click)="detailReclamtion(claim)"><a
+                          class="alert-link">#{{ claim.properties.OBJECTID}}</a>
+                          <span
+                            *ngIf="claim.properties.DETAILS_RECLAMATION"> : {{claim.properties.DETAILS_RECLAMATION }}</span>
+                        </h6>
+                        <span class="claimant"
+                              *ngIf="claim.properties.NOM_PRENOM"> Reclamée par : {{ claim.properties.NOM_PRENOM }}</span>
+                        <span class="claimant"
+                              *ngIf="!claim.properties.NOM_PRENOM"> Reclamée par : Non spécifié</span>
+                      </td>
+
+                      <td><span>{{ claim.properties.CREATED_DATE | date: 'dd/MM/yyyy' }}</span>
+                      </td>
+
+                      <td>
+                        <span *ngIf="claim.properties.STATUT">{{ claim.properties.STATUT}}</span>
+
+                        <span *ngIf="!claim.properties.STATUT">Non spécifié</span>
+                      </td>
+
+                      <td class="object-td">
+                        <h6>Type :
+                          <span
+                            *ngIf="claim?.properties?.TYPE_RECLAMATION">{{decodeType(claim?.properties?.TYPE_RECLAMATION)}}</span>
+                          <span *ngIf="!claim?.properties?.TYPE_RECLAMATION">Non spécifié</span>
+                        </h6>
+                        <span class="claimant"
+                              *ngIf="claim.geometry.coordinates && claim.geometry.coordinates.length"> Position :
+                          {{ claim?.geometry?.coordinates[1]?.toFixed(3) + ' , ' + claim?.geometry?.coordinates[0]?.toFixed(3) }}</span>
+                        <span class="claimant"
+                              *ngIf="!claim?.geometry?.coordinates || !claim?.geometry?.coordinates.length"> Position :
+                          Non spécifié</span>
+                      </td>
+
+                      <td>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 fa-comment"
+                           (click)="toggleSidePanel(true, claim)" tooltip="Répondre"></i>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 fa-edit"
+                           (click)="nextStatus(claim)" tooltip="Modifier l'Etat"></i>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 fa-trash"
+                           (click)="deleteFeature(claim)" tooltip="Supprimer"></i>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+          <div *ngIf="showPagination">
+            <pagination-template #p="paginationApi" (pageChange)="currentPage = $event">
+              <div>
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="p.isFirstPage()">
+                    <a (click)="p.previous()"><i class="page-link">Précédent</i></a>
+                  </li>
+
+                  <li (click)="p.setCurrent(page.value)" *ngFor="let page of p.pages" class="page-link">
+                    <a>{{ page.label }}</a>
+                  </li>
+
+                  <li class="page-item" [class.disabled]="p.isLastPage()">
+                    <a (click)="p.next()"><i class="page-link">Suivant</i></a>
+                  </li>
+                </ul>
+                <div style="float: right; margin-right: 60px !important;">
+                  <select class="form-control kt-font-brand" style="width: 60px;float: left;"
+                          [(ngModel)]="itemsPerPage">
+                    <option [ngValue]="10" selected>10</option>
+                    <option [ngValue]="20">20</option>
+                    <option [ngValue]="30">30</option>
+                  </select>
+                  <span style="position: relative;left: 5px; top: 15px">
                       Total de {{ p.getTotalItems() }} réclamations
                     </span>
-                  </div>
                 </div>
-              </pagination-template>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!--/ What is-->
-      <div class="col-md-4">
-        <div>
-          <div class="alert alert-dark">
-            <h3>
-              Réclamantion: #{{ selectedReclamation.properties.OBJECTID || '-' }}
-            </h3>
-          </div>
-          <div>
-            <div id="map" style="height: 35vh"></div>
-
-            <div>
-              <table class="table" style="text-align: left;">
-                <tr>
-                  <td> Nom et Prénom:</td>
-                  <td>{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</td>
-                </tr>
-                <tr>
-                  <td> Contrat:</td>
-                  <td> {{ selectedReclamation.properties.CONTRAT || '-' }}</td>
-                </tr>
-                <tr>
-                  <td> Description:</td>
-                  <td> {{ selectedReclamation.properties.DETAILS_RECLAMATION || '-' }}</td>
-                </tr>
-
-                <tr>
-                  <td>Email:</td>
-                  <td> {{ selectedReclamation.properties.EMAIL || '-' }}</td>
-                </tr>
-                <tr>
-                  <td> Téléphone:</td>
-                  <td> {{ selectedReclamation.properties.TEL || '-' }}</td>
-                </tr>
-
-              </table>
-              <div>
-
               </div>
+            </pagination-template>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--/ What is-->
+    <div class="col-md-4">
+      <div>
+        <div class="alert alert-dark">
+          <h3>
+            Réclamantion: #{{ selectedReclamation.properties.OBJECTID || '-' }}
+          </h3>
+        </div>
+        <div>
+          <div id="map" style="height: 35vh"></div>
+
+          <div>
+            <table class="table" style="text-align: left;">
+              <tr>
+                <td> Nom et Prénom:</td>
+                <td>{{ selectedReclamation?.properties?.NOM_PRENOM || '-' }}</td>
+              </tr>
+              <tr>
+                <td> Contrat:</td>
+                <td> {{ selectedReclamation?.properties?.CONTRAT || '-' }}</td>
+              </tr>
+              <tr>
+                <td> Description:</td>
+                <td> {{ selectedReclamation?.properties?.DETAILS_RECLAMATION || '-' }}</td>
+              </tr>
+
+              <tr>
+                <td>Email:</td>
+                <td> {{ selectedReclamation?.properties?.EMAIL || '-' }}</td>
+              </tr>
+              <tr>
+                <td> Téléphone:</td>
+                <td> {{ selectedReclamation?.properties?.TEL || '-' }}</td>
+              </tr>
+
+            </table>
+            <div>
+
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </div>
+</div>
 
 
 

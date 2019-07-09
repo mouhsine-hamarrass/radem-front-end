@@ -28,7 +28,7 @@ export class LoginComponent extends UIFormComponent implements OnInit {
               private router: Router,
               private translate: TranslateService,
               private toastrService: ToastrService,
-              private renderer: Renderer2, private elRef: ElementRef,
+              private renderer: Renderer2,
               @Inject('AuthService') private authService: AuthService,
               validation: ValidationService,
               fb: FormBuilder) {

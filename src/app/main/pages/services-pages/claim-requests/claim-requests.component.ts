@@ -20,7 +20,7 @@ export class ClaimRequestsComponent implements OnInit {
   public contractForm: FormGroup;
   public currentPage = 1;
 
-  private showPagination = false;
+  public showPagination = false;
   page = 1;
   pageSize = 0;
   totalElements: number;
@@ -49,7 +49,11 @@ export class ClaimRequestsComponent implements OnInit {
   public selectedReclamation = {
     'properties': {
       'OBJECTID': 0,
-      'NOM_PRENOM': ''
+      'NOM_PRENOM': '',
+      'CONTRAT': '',
+      'TEL': '',
+      'EMAIL': '',
+      'DETAILS_RECLAMATION': ''
     },
     'geometry': {
       'coordinates': []

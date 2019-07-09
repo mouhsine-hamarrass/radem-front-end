@@ -5,17 +5,24 @@
   "menu": {
     "admin": "Admin"
   },
+  "clients": {
+    "not-found": "Utilisateur non trouvé"
+  },
   "users": {
     "permission_not_granted": "Permission non accordée",
     "your-account-is-disabled": "Votre compte est désactivé, merci de l'activer",
     "username-or-password-is-incorrect": "L'email ou le mot de passe sont incorrect",
-    "no_user_with_given_token": "Votre compte à été déjà activé ou ce token est invalid. "
+    "no_user_with_given_token": "Le jeton d'authentifaction est invalid",
+    "email-is-missing": "L'email est obligatoire"
   },
   "validations": {
     "required": {
       "username": "Identifiant est obligatoire",
       "password": "Le mot de passe est obligatoire"
     }
+  },
+  "mails": {
+    "an-error-occurred-while-sending-the-mail": "Email de confiramtion non envoyé, Veuillez réessayer s'il vous plaît"
   },
   "prev": "Précédent",
   "next": "Suivant",
@@ -31,6 +38,7 @@
     "error-no-token-sent": "Token non envoyé depuis le service lors de l'authentification",
     "error-user-unauthorized": "L'utilisateur n'est pas autorisé"
   },
+  "Access is denied": "Accès non autorisé",
   "PASSWORD": "Mot de passe",
   "QUALITY_OF_ALIMENTATION": "Qualité d'alimentation",
   "INTERVENTION_NOT_CARRIED_OUT": "Intervention non réalisée",
@@ -100,6 +108,7 @@
   "ALERT": "Alert",
   "CLAIMS": "Réclamations",
   "MY_CLAIMS": "Mes réclamations",
+  "INVOICE_CONSUMPTION": "Consommation: ",
   "CLAIM": "Réclamation",
   "MY_CLAIM": "Ma réclamation",
   "Advice_and_energy_saving": "Conseil et économie d'énergie",
@@ -248,13 +257,13 @@
   "CONTRACT_ATTACHED": "Votre contrat a été attacher.",
   "CONTRACT_UNATTACHED": "Votre contrat n'a pas été attacher.",
   "CONTRACT_ATTACHABLE": "Contrat attaché avec succès.",
-  "CONTRACT_UNATTACHABLE": "Votre ne pouvez pas attacher cette contrat",
+  "CONTRACT_UNATTACHABLE": "Votre ne pouvez pas attacher cet contrat",
   "contractserp": {
-    "erp_contract_not_found": "Cette contrat n'exisit pas",
-    "contract_not_attachable": "Votre ne pouvez pas attacher cette contrat"
+    "erp_contract_not_found": "Cet contrat n'exisit pas",
+    "contract_not_attachable": "Votre ne pouvez pas attacher cet contrat"
   },
   "contracts": {
-    "contract_already_attached_to_this_client": "Cette contrat à dejà ete attachee a ce client"
+    "contract_already_attached_to_this_client": "Ce contrat à dejà ete attachee a ce client"
   },
   "UNAUTHORIZED_TO_ACCESS_THIS_PAGE": "Vous n'avez pas l'autorization d'acceder à cette page.",
   "UNAUTHORIZED_TO_ACCESS_THIS_PAGE_DETAILS": "Veuillez remonter cette erreur a votre superviseur",
@@ -391,9 +400,9 @@
   "HOLDER": "Titulaire",
   "AUTO_RELIEVING": "Auto relève",
   "YOUR_ACCOUNT_HAS_BEEN_ACTIVATED_SUCCESSFULLY!": "Votre compte a été activé avec succès !",
-  "contract already affected to this client": "Cette contrat il est déjà affecter à ce client",
-  "contract not found": "Cette contrat n'exisit pas",
-  "cannot attach contract": "Vous ne pouvez pas attacher ce contrat",
+  "contract already affected to this client": "Cet contrat il est déjà affecter à ce client",
+  "contract not found": "Cet contrat n'exisit pas",
+  "cannot attach contract": "Vous ne pouvez pas attacher cet contrat",
   "LOG_IN": "Se connecter",
   "LOG_IN2": "Connexion",
   "FORGOT_YOUR_PASSWORD_?": "Mot de passe oublié ?",
@@ -534,6 +543,8 @@
   "BANK_TRANSFER": "Virement bancaire",
   "CHECK": "Chèque",
   "EDIT": "Modifier",
+  "COMPLETE_THE_FORM": "Veuillez compléter le fomulaire",
+  "PASSWORD_AND_CONFIRMED_PASSWORD_MUST_BE_UNIQUE": "Les deux champs doivent êtres identiques",
   "PRINT": "Imprimer",
   "JOIN_FILE": "Chèque barré / Attestation de RIB BANCAIRE",
   "Correspondence_Address": "Adresse",
@@ -558,5 +569,6 @@
   "TVA": "TVA",
   "AMOUNT_PROX_UNIT_HT": "Montant prox unitaire HT",
   "AMOUNT_TVA": "Montant TVA",
-  "AMOUNT_TTC": "Montant TTC"
+  "AMOUNT_TTC": "Montant TTC",
+  "DYANMIC_CONTENT": "Contenu dynamique"
 }

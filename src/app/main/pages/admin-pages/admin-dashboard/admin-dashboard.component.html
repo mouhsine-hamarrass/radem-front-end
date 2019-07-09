@@ -1,43 +1,43 @@
-<nav aria-label="breadcrumb">
-  <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{'DASHBOARD' | translate}}</li>
-  </ul>
-</nav>
-<div class="container-fluid">
+<div class="card-header content-header back col-12">
   <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-6 col-4">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body">
-            <div class="text-center">
-              <h3>{{alertsCount}}</h3>
-              <p class="text-muted">{{'ALERTS' | translate}}</p>
-            </div>
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'ADMINISTRATION' | translate}}</h3>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-6 col-4">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="text-center">
+            <h3>{{alertsCount > 0 ? alertsCount : '-'}}</h3>
+            <p class="text-muted">{{'ALERTS' | translate}}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-4">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body">
-            <div class="text-center">
-              <h3>{{requestsCount}}</h3>
-              <p class="text-muted">{{'Requests' | translate}}</p>
-            </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-6 col-4">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="text-center">
+            <h3>{{requestsCount > 0 ? requestsCount : '-'}}</h3>
+            <p class="text-muted">{{'Requests' | translate}}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-4">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body">
-            <div class="text-center">
-              <h3>{{complaintsCount}}</h3>
-              <p class="text-muted">{{'CLAIMS' | translate}}</p>
-            </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-6 col-4">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="text-center">
+            <h3>{{complaintsCount > 0 ? complaintsCount : '-'}}</h3>
+            <p class="text-muted">{{'CLAIMS' | translate}}</p>
           </div>
         </div>
       </div>

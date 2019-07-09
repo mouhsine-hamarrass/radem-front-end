@@ -24,6 +24,7 @@ import {ProfileTypeEnum} from '../../../shared/models/user.model';
 
 import {AccountComponent} from '../account-pages/account/account.component';
 import {TransactionsComponent} from './transactions/transactions.component';
+import {AdminGuard} from '../../../core/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
       {
         path: '',
         component: AdminDashboardComponent,
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         data: {
           title: 'Tableau de bord',
           permissions: {
@@ -43,6 +44,7 @@ const routes: Routes = [
       },
       {
         path: 'account/profile',
+        canActivate: [AdminGuard],
         component: AccountComponent,
         data: {
           title: 'Mon profil',
@@ -52,45 +54,45 @@ const routes: Routes = [
           }
         }
       },
-      {
-        path: 'requests-subscription',
-        component: RequestsSubscriptionComponent,
-        // canActivate: [NgxPermissionsGuard],
-        data: {
-          title: 'Liste des demandes abonnements',
-          permissions: {
-            only: [ProfileTypeEnum.ADMIN],
-            redirectTo: 'unauthorized'
-          }
-        }
-      },
-      {
-        path: 'requests-cancellation',
-        // canActivate: [NgxPermissionsGuard],
-        component: RequestsCancellationComponent,
-        data: {
-          title: 'Liste des demandes résiliations',
-          permissions: {
-            only: [ProfileTypeEnum.ADMIN],
-            redirectTo: 'unauthorized'
-          }
-        }
-      },
-      {
-        path: 'requests-refund',
-        component: RequestsRefundComponent,
-        // canActivate: [NgxPermissionsGuard],
-        data: {
-          title: 'Liste des demandes remboursement',
-          permissions: {
-            only: [ProfileTypeEnum.ADMIN],
-            redirectTo: 'unauthorized'
-          }
-        }
-      },
+      /*      {
+              path: 'requests-subscription',
+              component: RequestsSubscriptionComponent,
+              // canActivate: [NgxPermissionsGuard],
+              data: {
+                title: 'Liste des demandes abonnements',
+                permissions: {
+                  only: [ProfileTypeEnum.ADMIN],
+                  redirectTo: 'unauthorized'
+                }
+              }
+            },
+            {
+              path: 'requests-cancellation',
+              // canActivate: [NgxPermissionsGuard],
+              component: RequestsCancellationComponent,
+              data: {
+                title: 'Liste des demandes résiliations',
+                permissions: {
+                  only: [ProfileTypeEnum.ADMIN],
+                  redirectTo: 'unauthorized'
+                }
+              }
+            },
+            {
+              path: 'requests-refund',
+              component: RequestsRefundComponent,
+              // canActivate: [NgxPermissionsGuard],
+              data: {
+                title: 'Liste des demandes remboursement',
+                permissions: {
+                  only: [ProfileTypeEnum.ADMIN],
+                  redirectTo: 'unauthorized'
+                }
+              }
+            },*/
       {
         path: 'complaints',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: ComplaintsComponent,
         data: {
           title: 'Liste des réclamations',
@@ -100,6 +102,7 @@ const routes: Routes = [
           }
         }
       },
+      /*
       {
         path: 'complaints',
         component: ComplaintComponent,
@@ -147,10 +150,10 @@ const routes: Routes = [
             redirectTo: 'unauthorized'
           }
         }
-      },
+      },*/
       {
         path: 'alert-notifications/:id',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: AlertNotificationComponent,
         data: {
           title: 'Alerte',
@@ -162,7 +165,7 @@ const routes: Routes = [
       },
       {
         path: 'alert-notification',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: AlertNotificationComponent,
         data: {
           title: 'Alerte',
@@ -184,7 +187,7 @@ const routes: Routes = [
           }
         }
       },
-      {
+       {
         path: 'profile',
         // canActivate: [NgxPermissionsGuard],
         component: ProfileComponent,
@@ -196,7 +199,7 @@ const routes: Routes = [
           }
         }
       },
-      {
+       {
         path: 'profiles/:id',
         // canActivate: [NgxPermissionsGuard],
         component: ProfileComponent,
@@ -210,7 +213,7 @@ const routes: Routes = [
       },*/
       {
         path: 'users',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: UsersComponent,
         data: {
           title: 'Utilisateurs',
@@ -222,7 +225,7 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: UserComponent,
         data: {
           title: 'Nouveau utilisateur',
@@ -234,7 +237,7 @@ const routes: Routes = [
       },
       {
         path: 'users/:id',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: UserComponent,
         data: {
           title: 'Editer utilisateur',
@@ -246,7 +249,7 @@ const routes: Routes = [
       },
       {
         path: 'alerts',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: AlertsComponent,
         data: {
           title: 'Liste des alertes',
@@ -256,21 +259,21 @@ const routes: Routes = [
           }
         }
       },
-      {
-        path: 'settings',
-        // canActivate: [NgxPermissionsGuard],
-        component: SettingsComponent,
-        data: {
-          title: 'Parametrage',
-          permissions: {
-            only: [ProfileTypeEnum.ADMIN],
-            redirectTo: 'unauthorized'
-          }
-        }
-      },
+      /*      {
+              path: 'settings',
+              // canActivate: [NgxPermissionsGuard],
+              component: SettingsComponent,
+              data: {
+                title: 'Parametrage',
+                permissions: {
+                  only: [ProfileTypeEnum.ADMIN],
+                  redirectTo: 'unauthorized'
+                }
+              }
+            },*/
       {
         path: 'advices',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: AdvicesComponent,
         data: {
           title: 'Conseil et économie d\'énergie',
@@ -282,7 +285,7 @@ const routes: Routes = [
       },
       {
         path: 'dynamic',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: DynamicContentComponent,
         data: {
           title: 'Contenu dynamique',
@@ -292,33 +295,33 @@ const routes: Routes = [
           }
         }
       },
-      {
-        path: 'services',
-        // canActivate: [NgxPermissionsGuard],
-        component: ServicesComponent,
-        data: {
-          title: 'Services',
-          permissions: {
-            only: [ProfileTypeEnum.ADMIN],
-            redirectTo: 'unauthorized'
-          }
-        }
-      },
-      {
-        path: 'alert-notifications',
-        // canActivate: [NgxPermissionsGuard],
-        component: AlertNotificationsComponent,
-        data: {
-          title: 'Liste des alertes',
-          permissions: {
-            only: [ProfileTypeEnum.ADMIN],
-            redirectTo: 'unauthorized'
-          }
-        }
-      },
+      /*      {
+              path: 'services',
+              // canActivate: [NgxPermissionsGuard],
+              component: ServicesComponent,
+              data: {
+                title: 'Services',
+                permissions: {
+                  only: [ProfileTypeEnum.ADMIN],
+                  redirectTo: 'unauthorized'
+                }
+              }
+            },*/
+      /*      {
+              path: 'alert-notifications',
+              // canActivate: [NgxPermissionsGuard],
+              component: AlertNotificationsComponent,
+              data: {
+                title: 'Liste des alertes',
+                permissions: {
+                  only: [ProfileTypeEnum.ADMIN],
+                  redirectTo: 'unauthorized'
+                }
+              }
+            },*/
       {
         path: 'transactions-list',
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [AdminGuard],
         component: TransactionsComponent,
         data: {
           title: 'Liste des transactions',

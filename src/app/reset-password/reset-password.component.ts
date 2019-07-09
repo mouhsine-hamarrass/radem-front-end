@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import {RecoverPasswordService} from '../main/services/recover-password.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -24,24 +24,32 @@ export class ResetPasswordComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     private translate: TranslateService,
-
+    private renderer: Renderer2
   ) {
   }
 
   ngOnInit() {
+    this.renderer.setStyle(document.body, 'margin-left', '30px');
+    this.renderer.setStyle(document.body, 'margin-right', '30px');
   }
 
   resetPassword() {
-    if (this.resetPasswordForm.controls.newPassword === this.resetPasswordForm.controls.confirmedPassword) {
-          return;     }
-    const token = this.route.snapshot.queryParams.token;
-    this.recoverPasswordServices.resetPassword(token, this.resetPasswordForm.controls.newPassword.value).subscribe(Response => {
-       this.router.navigate(['/login']);
-      this.toastrService.success(this.translate.instant('ACCOUNT_UPDATED'), '');
+    const newPassword = this.resetPasswordForm.controls.newPassword.value;
+    const confirmedPassword = this.resetPasswordForm.controls.confirmedPassword.value;
+    if (newPassword && newPassword === confirmedPassword) {
+      const token = this.route.snapshot.queryParams.token;
+      this.recoverPasswordServices.resetPassword(token, newPassword).subscribe(Response => {
+        this.router.navigate(['/login']);
+        this.toastrService.success(this.translate.instant('ACCOUNT_UPDATED'), '');
 
-    }, err => {
-    });
+      }, err => {
+      });
 
+    } else if (!newPassword || !confirmedPassword) {
+      this.toastrService.error(this.translate.instant('COMPLETE_THE_FORM'));
+    } else if (newPassword !== confirmedPassword) {
+      this.toastrService.error(this.translate.instant('PASSWORD_AND_CONFIRMED_PASSWORD_MUST_BE_UNIQUE'));
+    }
   }
 
 }

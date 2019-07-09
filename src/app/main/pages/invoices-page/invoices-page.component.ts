@@ -29,7 +29,6 @@ export class InvoicesPageComponent implements OnInit {
   public date: Date;
   public contractForm: FormGroup;
 
-  private resp: HttpResponse<any>;
   modalRef: BsModalRef;
   config = {
     backdrop: true,
@@ -51,8 +50,6 @@ export class InvoicesPageComponent implements OnInit {
   numberOfItemsDetails: number;
   itemsPerPageDetails: number;
 
-  pageHistory = 1;
-  pageSizeHistory = 10;
   totalElementsHistory: number;
   totalPagesHistory: number;
   numberOfItemsHistory: number;
@@ -62,7 +59,7 @@ export class InvoicesPageComponent implements OnInit {
 
   public invoices: Array<InvoiceModel>;
   public detailsInvoice: Array<InvoiceDetailsModel>;
-  public historiesInvoice: Array<InvoiceHistoryModel>;
+  public historyInvoice: InvoiceHistoryModel;
 
   sort: any;
   filter: any;
@@ -87,7 +84,6 @@ export class InvoicesPageComponent implements OnInit {
   }
 
   getClientAttachedContracts() {
-    debugger;
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts.length) {
@@ -159,22 +155,6 @@ export class InvoicesPageComponent implements OnInit {
     }
   }
 
-  pageHistoryChanged(page: number): void {
-    this.pageHistory = page;
-    if (this.invoice) {
-      this.adminService.getInvoiceHistory(this.selectedContract, this.pageHistory, this.pageSizeHistory)
-        .subscribe(response => {
-          this.historiesInvoice = response.data['content'];
-          this.totalElementsHistory = response.data['totalElements'];
-          this.totalPagesHistory = response.data['totalPages'];
-          this.itemsPerPageHistory = response.data['size'];
-          this.numberOfItemsHistory = response.data['numberOfElements'];
-          this.pageHistory = 1;
-
-        }, err => console.log(err));
-    }
-  }
-
   setContract(id: any) {
     localStorage.setItem('SELECTED_CONTRACT', id);
     this.page = 1;
@@ -208,10 +188,15 @@ export class InvoicesPageComponent implements OnInit {
   }
 
   openInvoiceDetails(template: TemplateRef<any>, invoice: InvoiceModel) {
+    this.invoice = invoice;
     if (invoice) {
-      this.invoice = invoice;
-      this.adminService.getInvoiceDetails(invoice.ctrNo, invoice.invNo, this.pageDetails, this.pageSizeDetails).subscribe(response => {
 
+      this.adminService.getInvoiceHistory(this.selectedContract, invoice.month, invoice.year)
+        .subscribe(response => {
+          this.historyInvoice = response.data;
+        }, err => console.log(err));
+
+      this.adminService.getInvoiceDetails(invoice.ctrNo, invoice.invNo, this.pageDetails, this.pageSizeDetails).subscribe(response => {
         if (response && response.data) {
           this.detailsInvoice = response.data['content'];
           this.totalElementsDetails = response.data['totalElements'];
@@ -220,8 +205,6 @@ export class InvoicesPageComponent implements OnInit {
           this.numberOfItemsDetails = response.data['numberOfElements'];
           this.pageDetails = 1;
         }
-        this.pageHistoryChanged(this.pageHistory);
-
       }, err => console.log(err));
       this.modalRef = this.modalService.show(template, this.config);
     }

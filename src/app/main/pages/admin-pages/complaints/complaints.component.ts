@@ -27,7 +27,11 @@ export class ComplaintsComponent implements OnInit {
   public selectedReclamation = {
     'properties': {
       'OBJECTID': 0,
-      'NOM_PRENOM': ''
+      'NOM_PRENOM': '',
+      'CONTRAT': '',
+      'TEL': '',
+      'EMAIL': '',
+      'DETAILS_RECLAMATION': ''
     },
     'geometry': {
       'coordinates': []

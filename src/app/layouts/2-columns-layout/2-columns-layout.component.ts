@@ -15,6 +15,7 @@ export class TwoColumnsLayoutComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.renderer.setStyle(document.body, 'margin-left', '30px');
     this.renderer.setStyle(document.body, 'margin-right', '30px');
+
   }
 
   ngOnDestroy() {

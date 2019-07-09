@@ -42,10 +42,6 @@ import {ProfileComponent} from './profile/profile.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
-
-
-
-
 @NgModule({
   imports: [
     NguiAutoCompleteModule,
