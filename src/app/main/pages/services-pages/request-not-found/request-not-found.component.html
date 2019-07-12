@@ -1,0 +1,16 @@
+<div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
+  <div class="app-content center-layout">
+    <div id="notFound">
+      <article>
+        <h1>{{'THE_RESOURCE_IS_UNAVAILABLE' | translate }}.
+        </h1>
+        <p class="text-right">
+          <button class="btn btn-lg btn-outline-info"
+                  (click)="goToRequests()"><i
+            class="fa fa-undo"></i>&nbsp;{{'GO_TO_REQUESTS' | translate }} {{type ? type : ''}}
+          </button>
+        </p>
+      </article>
+    </div>
+  </div>
+</div>

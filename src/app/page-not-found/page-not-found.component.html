@@ -2,30 +2,24 @@
   <div>
     <app-navbar></app-navbar>
     <app-second-navbar></app-second-navbar>
-<!--    <app-second-navbar *ngIf="(user && !user.admin) || !user"></app-second-navbar>-->
-<!--    <app-sidebar *ngIf="user && user.admin"></app-sidebar>-->
-    <div class="content-mybody row">
-      <div class="container text-center">
-        <h2>{{"NOT_FOUND" | translate}}</h2>
-        <img alt="Page not found" class="img-responsive" src="./assets/images/404-Page-Not-Found.png">
-        <br>
-        <h5>{{"NOT_FOUND_BROKEN" | translate}}</h5>
-
+    <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
+      <div class="app-content center-layout">
+        <div id="notFound">
+          <article>
+            <h1>{{'NOT_FOUND_BROKEN' | translate }}.
+            </h1>
+            <p class="text-right">
+              <button class="btn btn-lg btn-outline-info"
+                      (click)="goToHome()"><i
+                class="fa fa-undo"></i>&nbsp;
+                <span *ngIf="user">{{'GO_TO_HOME' | translate }}</span>
+                <span *ngIf="!user">{{'GO_TO_LOGIN' | translate }}</span>
+              </button>
+            </p>
+          </article>
+        </div>
       </div>
     </div>
     <app-footer></app-footer>
-
   </div>
-
 </div>
-
-
-<!--
- Name: Page not found component
- Description: Display a custom page not found,
-              This page is called each time the user navigate to a non existing page
-Input: title: string
-       message: string
-Output: NONE
-
- -->

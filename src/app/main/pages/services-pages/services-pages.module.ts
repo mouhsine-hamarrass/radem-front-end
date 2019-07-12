@@ -35,6 +35,7 @@ import {RefundEditComponent} from './refund-edit/refund-edit.component';
 import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.component';
 import {NgxPrintModule} from 'ngx-print';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {RequestNotFoundComponent} from './request-not-found/request-not-found.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     SharedModule
   ],
   declarations: [
+    RequestNotFoundComponent,
     ClaimRequestComponent,
     SubscriptionRequestsComponent,
     RefundRequestsComponent,

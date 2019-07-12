@@ -252,7 +252,7 @@ export class RefundEditComponent implements OnInit {
   }
 
   getRefundDetail() {
-    const requestNo: string = this.route.snapshot.paramMap.get('requestNo');
+    let requestNo: any = this.route.snapshot.paramMap.get('requestNo');
     if (requestNo !== null) {
       this.servicesService.getRefundDetails(requestNo).subscribe(response => {
         if (response && response.data) {
@@ -281,13 +281,13 @@ export class RefundEditComponent implements OnInit {
           this.requestId = this.RefundDetails.id;
           this.getClientAttachedContracts2(this.RefundDetails.contracts);
         } else {
-          // TODO: no data found
+          this.router.navigate(['/services/refund-requests/request-not-found']);
         }
       }, error => {
         console.log(error);
       })
     } else {
-      // TODO: request no not found
+      this.router.navigate(['/not-found']);
     }
   }
 

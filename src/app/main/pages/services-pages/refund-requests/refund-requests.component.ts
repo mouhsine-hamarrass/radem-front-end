@@ -71,6 +71,9 @@ export class RefundRequestsComponent implements OnInit {
   }
 
   setContract(contractNo: string) {
+    debugger;
+    this.page = 1;
+    this.pageSize = 0;
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.contractNo = contractNo;
     this.getRefunds(this.contractNo);

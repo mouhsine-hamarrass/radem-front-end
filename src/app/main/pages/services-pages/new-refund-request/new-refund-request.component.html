@@ -14,7 +14,7 @@
         <div class="card-content collapse show">
           <div class="card-body">
             <form role="form" [formGroup]="refundForm"
-                  (ngSubmit)="saveRequest(refundForm.value)" novalidate>
+                  (ngSubmit)="saveRequest(refundForm)" novalidate>
 
               <div class="row">
                 <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
@@ -206,7 +206,19 @@
                 </div>
 
                 <div class="form-group col-lg-6 col-md-12 col-sm-12">
+
+
+                  <div>
+                    <div  *ngIf="currentFileUpload" class="progress progress-bar progress-bar-striped"
+                          role="progressbar" data-attr.aria-valuenow="{{progress.percentage}}"
+                         aria-valuemin="0" aria-valuemax="100"
+                         [ngStyle]="{width:progress.percentage+'%'}"
+                         [ngClass]="{'bg-info': progress.percentage < 100 ,'bg-success': progress.percentage >= 100, 'bg-danger': uploadfaild}">
+                      {{progress.percentage}}%
+                    </div>
+                  </div>
                   <input lang="fr" type="file" id="bank_file" name="bank_file" class="form-control"
+                         accept="image/*, application/pdf"
                          formControlName="bank_file" (change)="selectFile($event)">
                   <small class="text-muted">{{'la-taille-du-fichier-ne-doit-pas-depasser' | translate}}: 32MB
                   </small>
