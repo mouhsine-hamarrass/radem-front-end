@@ -113,14 +113,17 @@
                       (click)="changeEnabled($event, user)">
                     </ngx-toggle>
                     <ul class="list-inline list-unstyled text-center">
-                      <li class="list-inline-item">
+                      <li *ngIf="connectedUser.id === user.id" class="badge badge-danger">
+                        {{'ITS_YOU' | translate}}
+                      </li>
+                      <li *ngIf="connectedUser.id !== user.id" class="list-inline-item">
                         <i class="fa fa fa-fw fa-times text-danger actions_icon cursor-pointer"
-                           tooltip="'DELETE' | translate"
+                           tooltip="{{'DELETE' | translate}}"
                            (click)="dropUser(user.id)"></i>
                       </li>
-                      <li class="list-inline-item">
+                      <li *ngIf="connectedUser.id !== user.id" class="list-inline-item">
                         <i class="fa fa-fw fa-pencil text-info actions_icon cursor-pointer"
-                           tooltip="'EDIT' | translate"
+                           tooltip="{{'EDIT' | translate}}"
                            [routerLink]="['/admin/users/', user.id]"></i>
                       </li>
                     </ul>

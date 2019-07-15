@@ -80,13 +80,13 @@ export class NewCancellationRequestComponent implements OnInit {
     if (localStorage.getItem(AuthHelper.USER_ID)) {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
+    if (this.user && this.user.id) {
       this.services.getUser(this.user.id).subscribe(response => {
-      this.cancellationForm.controls['clientName'].setValue(response.data.lastname + ' ' + response.data.firstname);
-      this.cancellationForm.controls['consumptionAdresse'].setValue(response.data.address);
-      this.cancellationForm.controls['cellphone'].setValue(response.data.phone);
-    });
-    this.subscriptions = (JSON.parse(localStorage.getItem('user'))).subscriptions;
-    console.log(this.subscriptions);
+        this.cancellationForm.controls['clientName'].setValue(response.data.lastname + ' ' + response.data.firstname);
+        this.cancellationForm.controls['consumptionAdresse'].setValue(response.data.address);
+        this.cancellationForm.controls['cellphone'].setValue(response.data.phone);
+      });
+    }
   }
 
   switchContractType(type) {
@@ -122,17 +122,14 @@ export class NewCancellationRequestComponent implements OnInit {
 
 
   save(formData) {
-      this.services.saveTerminationRequest(formData).subscribe(response => {
-        // this.print();
-        // this.router.navigate(['/services/cancellation-requests'])
-      }, err => {
-      });
+    this.services.saveTerminationRequest(formData).subscribe(response => {
+      // this.print();
+      // this.router.navigate(['/services/cancellation-requests'])
+    }, err => {
+    });
   }
 
 }
-
-
-
 
 
 //

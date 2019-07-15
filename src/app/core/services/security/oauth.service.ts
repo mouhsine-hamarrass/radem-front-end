@@ -60,6 +60,8 @@ export class OAuthService implements AuthService {
 
   logout() {
     // remove user session info
+    AuthHelper.removeUserInfo();
+    AuthHelper.removeTokenInfo();
     AuthHelper.clearCookies();
   }
 }

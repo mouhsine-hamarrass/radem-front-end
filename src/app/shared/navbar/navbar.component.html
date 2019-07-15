@@ -1,4 +1,4 @@
-  <!-- fixed-top-->
+<!-- fixed-top-->
 <nav id="stackNav" #stackNav
      class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-light navbar-border">
   <div class="navbar-wrapper">
@@ -42,7 +42,7 @@
         </ul>
         <ul class="nav navbar-nav float-right float-sm-left">
           <li class="dropdown dropdown-user nav-item" ngbDropdown placement="bottom-right"
-              *ngIf="user && !user.admin && href !== 'admin'">
+              *ngIf="user && user.profile && user.profile.title !== 'ADMIN' && href !== 'admin'">
             <a href="javascript:" class="dropdown-toggle nav-link dropdown-user-link"
                id="dropdownNotifications"
                ngbDropdownToggle>
@@ -82,7 +82,8 @@
               <span class="user-name">{{user?.firstname + ' ' + user?.lastname}}</span>
             </a>
             <div ngbDropdownMenu aria-labelledby="dropdownUser">
-              <a class="dropdown-item" routerLink="/admin/account/profile" *ngIf="user && user.admin; else show">
+              <a class="dropdown-item" routerLink="/admin/account/profile"
+                 *ngIf="user && user.profile && user.profile.title === 'ADMIN' else show">
                 <i class="ft-user"></i> Mon profil
               </a>
               <ng-template #show>
@@ -91,10 +92,10 @@
                 </a>
               </ng-template>
 
-<!--              <a class="dropdown-item" routerLink="/admin"
-                 *ngIf="user.admin">
-                <i class="ft-settings"></i> Administration
-              </a>-->
+              <!--              <a class="dropdown-item" routerLink="/admin"
+                               *ngIf="user.admin">
+                              <i class="ft-settings"></i> Administration
+                            </a>-->
               <a class="dropdown-item" (click)="logout()">
                 <i class="ft-power"></i> {{'SIGNOUT' | translate}}
               </a>
