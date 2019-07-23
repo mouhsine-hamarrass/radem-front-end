@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'profile',
+        path: 'profile.png',
         component: AccountComponent,
         data: {
           title: 'Mon profil'

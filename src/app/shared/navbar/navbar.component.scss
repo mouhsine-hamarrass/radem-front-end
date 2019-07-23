@@ -1,17 +1,26 @@
+.notification {
+  border-radius: 100%;
+  position: absolute;
+  left: 23px;
+}
+
 #stackNav {
   .navbar-header {
 
   }
+
   .navbar-container {
     .nav {
       .dropdown {
         .avatar {
           width: 35px;
+
           img {
             width: 35px;
             height: 35px;
           }
         }
+
         .user-name {
           margin-bottom: 1rem;
         }
@@ -19,17 +28,19 @@
     }
   }
 }
+
 .text-muted {
   color: #b2b8c3 !important;
 }
 
-.btn-subscribe{
+.btn-subscribe {
   margin-top: 9px;
   padding: 8px;
   background-color: #c53b3b !important;
   border-color: #c53b3b !important;
 }
-.btn-subscribe:hover{
+
+.btn-subscribe:hover {
   background-color: #b33a3a !important;
 }
 
@@ -37,21 +48,25 @@
 .notifications-list {
   .dropdown-item {
     width: 280px;
+
     .badge {
       font-weight: bold;
       color: #FFFFFF;
       font-size: 10.7px;
     }
+
     .notif-type {
       margin-bottom: 5px;
       padding: 6px 10px;
       border-radius: 50px;
     }
+
     .notif-descr {
       display: block;
       white-space: pre-line;
     }
   }
+
   .dropdown-divider {
     border-color: #ececec;
   }
@@ -66,16 +81,16 @@
   Code par Rachid EL KADDOURI
   -- Responsive Design
  */
-@media only screen and (max-width: 768px){
-  .btn-subscribe{
-    margin-left:11px;
+@media only screen and (max-width: 768px) {
+  .btn-subscribe {
+    margin-left: 11px;
   }
 
-  .second-navbar-toggler{
+  .second-navbar-toggler {
     padding: 14px !important;
   }
 
-  .dropdown-menu{
+  .dropdown-menu {
     position: absolute;
   }
 

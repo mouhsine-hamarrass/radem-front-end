@@ -26,7 +26,6 @@ export class AdvicesComponent implements OnInit {
         this.content = this.advicesContent.value;
       }
     }, err => {
-      console.log(err);
     });
   }
 
@@ -35,8 +34,6 @@ export class AdvicesComponent implements OnInit {
     this.adminServices.saveAdvices(this.advicesContent).subscribe(response => {
       this.toastrService.success(this.translate.instant('SUCCESS_MODIFICATION'), '');
     }, err => {
-      this.toastrService.error(this.translate.instant('OOPS_FAILED_CHANGE'), '');
-      console.log(err);
     });
   }
 

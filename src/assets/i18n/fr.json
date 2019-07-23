@@ -8,6 +8,10 @@
   "clients": {
     "not-found": "Utilisateur non trouvé"
   },
+  "configurations": {
+    "not-found": "Configuration non trouvé",
+    "edit-error": "Une erreur rencontrée lors de la modification"
+  },
   "users": {
     "permission_not_granted": "Permission non accordée",
     "your-account-is-disabled": "Votre compte est désactivé, merci de l'activer",
@@ -515,7 +519,12 @@
   "OR_TEL": "ou par téléphone",
   "MSG_SENT": "Un mail de récupération de mot de passe vous a été envoyé",
   "ACCOUNT_UPDATED": "Votre compte a été mis à jour",
-  "commons.entity_in_use": "Cette alerte est déjà utilisée",
+
+  "commons": {
+    "entity_in_use": "Cette alerte est déjà utilisée",
+    "trying-edit-another-entity": "Vous essayez de modifier une autre entité",
+    "missing-key": "Absence de la clé"
+  },
   "users.duplicate_username": "Ce nom d'utisateur existe déjà",
   "users_duplicate_username": "Ce nom d'utisateur existe déjà",
   "CMI_REJECTED": "Rejeté par CMI",

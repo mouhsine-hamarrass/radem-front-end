@@ -47,7 +47,7 @@
                id="dropdownNotifications"
                ngbDropdownToggle>
               <i class="fa fa-2x fa-bell-o"></i>
-              <span id="notificationsBadge" class="badge badge-danger">{{nbrUnreadNotifications}}</span>
+              <span id="notificationsBadge" class="badge badge-danger notification">{{nbrUnreadNotifications}}</span>
             </a>
             <div ngbDropdownMenu aria-labelledby="dropdownNotifications" class="notifications-list">
               <div *ngIf="alerts.length; else noNotifications">

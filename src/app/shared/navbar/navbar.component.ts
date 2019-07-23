@@ -46,7 +46,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     }
     this.href = this.router.url;
     this.href = this.href.substr(1, 5);
-
     if (this.user && this.user.id && this.href !== 'admin' && !this.user.admin) {
       this.getNotifications();
     }
