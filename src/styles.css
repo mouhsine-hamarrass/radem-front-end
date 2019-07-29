@@ -2,3 +2,9 @@
 .container {
   margin: 20px;
 }
+
+@media print {
+  .doNotPrint {
+    display: none !important;
+  }
+}

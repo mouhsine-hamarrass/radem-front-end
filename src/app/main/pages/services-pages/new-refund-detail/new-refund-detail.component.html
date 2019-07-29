@@ -1,7 +1,7 @@
 <div *ngIf="notFound" class="alert alert-warning" role="alert" style="border-radius: 0 !important; text-align: center;">
   Cette demande n'éxiste pas !
 </div>
-<div class="container" id="toPrint">
+<div class="container print" id="print-section">
   <div class="row">
     <div class="col">
     </div>
@@ -189,7 +189,7 @@
 
 <div class="btn-print">
   <button
-    (click)="printComponent('toPrint');"
+    (click)="print()"
     style="float: right !important;"
-    class="btn btn btn-outline-primary ">{{'PRINT' | translate }}</button>
+    class="doNotPrint btn btn btn-outline-primary ">{{'PRINT' | translate }}</button>
 </div>
