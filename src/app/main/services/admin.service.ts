@@ -204,10 +204,10 @@ export class AdminService {
     );
   }
 
-  getInvoiceHistory(contractNo: string, page: number, pageSize: number):
-    Observable<Response<Array<InvoiceHistoryModel>>> {
-    return this.httpClient.get<Response<Array<InvoiceHistoryModel>>>(
-      `${this.apiUrl}/invoices/${contractNo}/history?page=${page}&size=${pageSize}`
+  getInvoiceHistory(contractNo: string, month: string, year: string):
+    Observable<Response<InvoiceHistoryModel>> {
+    return this.httpClient.get<Response<InvoiceHistoryModel>>(
+      `${this.apiUrl}/invoices/${contractNo}/history?month=${month}&year=${year}`
     );
   }
 
@@ -473,7 +473,7 @@ export class AdminService {
     return this.httpClient.get<Response<Profile>>(`${this.apiUrl}/profiles/${idProfile}/find`, {headers: this.headers});
   }
 
-//Transactions creees par EL KASSMI
+// Transactions creees par EL KASSMI
 
   getPageableListTransactions(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/payments/transactions-list?page=${page}&size=${pageSize}`,

@@ -29,7 +29,6 @@ export class InvoicesPageComponent implements OnInit {
   public date: Date;
   public contractForm: FormGroup;
 
-  private resp: HttpResponse<any>;
   modalRef: BsModalRef;
   config = {
     backdrop: true,
@@ -51,20 +50,16 @@ export class InvoicesPageComponent implements OnInit {
   numberOfItemsDetails: number;
   itemsPerPageDetails: number;
 
-  pageHistory = 1;
-  pageSizeHistory = 10;
   totalElementsHistory: number;
   totalPagesHistory: number;
   numberOfItemsHistory: number;
   itemsPerPageHistory: number;
 
   invoice: InvoiceModel;
-  invoiceDetail: InvoiceDetailsModel;
-  invoiceHistory: InvoiceHistoryModel;
 
   public invoices: Array<InvoiceModel>;
   public detailsInvoice: Array<InvoiceDetailsModel>;
-  public historiesInvoice: Array<InvoiceHistoryModel>;
+  public historyInvoice: InvoiceHistoryModel;
 
   sort: any;
   filter: any;
@@ -102,6 +97,7 @@ export class InvoicesPageComponent implements OnInit {
           this.selectedContract = localStorage.getItem('SELECTED_CONTRACT');
         }
         this.setContract(this.selectedContract);
+        this.getInvoices();
       }
     }, err => {
       console.log(err)
@@ -131,11 +127,7 @@ export class InvoicesPageComponent implements OnInit {
   }
 
   getInvoices() {
-    let contract = this.contractForm.controls['contract'].value;
-    if (contract === undefined && this.clientContracts) {
-      contract = this.clientContracts[0].contractNo;
-    }
-    this.adminService.getInvoices(contract, this.page, this.pageSize)
+    this.adminService.getInvoices(this.selectedContract, this.page, this.pageSize)
       .subscribe(response => {
         this.invoices = response.data['content'];
         this.totalElements = response.data['totalElements'];
@@ -145,11 +137,6 @@ export class InvoicesPageComponent implements OnInit {
         this.page = 1;
       }, err => {
       });
-    /*this.invoices = [
-      new InvoiceModel('EAU', '0000001', '2019', '03', '00000001', '33.4',
-        '23423', '14555', '04/03/2019', '04/06/2019', 'Impayée',
-        30)
-    ];*/
   }
 
   pageDetailsChanged(page: number): void {
@@ -163,22 +150,6 @@ export class InvoicesPageComponent implements OnInit {
           this.itemsPerPageDetails = response.data['size'];
           this.numberOfItemsDetails = response.data['numberOfElements'];
           this.pageDetails = 1;
-
-        }, err => console.log(err));
-    }
-  }
-
-  pageHistoryChanged(page: number): void {
-    this.pageHistory = page;
-    if (this.invoice) {
-      this.adminService.getInvoiceHistory(this.selectedContract, this.pageHistory, this.pageSizeHistory)
-        .subscribe(response => {
-          this.historiesInvoice = response.data['content'];
-          this.totalElementsHistory = response.data['totalElements'];
-          this.totalPagesHistory = response.data['totalPages'];
-          this.itemsPerPageHistory = response.data['size'];
-          this.numberOfItemsHistory = response.data['numberOfElements'];
-          this.pageHistory = 1;
 
         }, err => console.log(err));
     }
@@ -198,33 +169,34 @@ export class InvoicesPageComponent implements OnInit {
       return;
     }
     this.services.getAttachment(fileId).subscribe((response) => {
-        if (response) {
-          if (response.status === 'NO_CONTENT') {
-            this.toastrService.warning('Aucun fichier disponible', '');
-          } else if (response.data) {
-            this.services.downloadAttachmentById(fileId).subscribe((res) => {
-              if (res && res['body']) {
-                let title = '';
-                if (response.data.extension && response.data.name) {
-                  title = response.data.name.split('.', 1) + '.' + response.data.extension;
-                } else {
-                  title = 'facture_' + fileId + '.pdf';
-                }
-                const file = new FileModel(title, CommonUtil._arrayBufferToBase64(res['body']));
-                CommonUtil.downloadFile(file);
+        if (response && response.data) {
+          this.services.downloadAttachmentById(fileId).subscribe((res) => {
+            if (res && res['body']) {
+              let title = '';
+              if (response.data.extension && response.data.name) {
+                title = response.data.name.split('.', 1) + '.' + response.data.extension;
+              } else {
+                title = 'facture_' + fileId + '.pdf';
               }
-            });
-          }
+              const file = new FileModel(title, CommonUtil._arrayBufferToBase64(res['body']));
+              CommonUtil.downloadFile(file);
+            }
+          });
         }
       }
     );
   }
 
   openInvoiceDetails(template: TemplateRef<any>, invoice: InvoiceModel) {
+    this.invoice = invoice;
     if (invoice) {
-      this.invoice = invoice;
-      this.adminService.getInvoiceDetails(invoice.ctrNo, invoice.invNo, this.pageDetails, this.pageSizeDetails).subscribe(response => {
 
+      this.adminService.getInvoiceHistory(this.selectedContract, invoice.month, invoice.year)
+        .subscribe(response => {
+          this.historyInvoice = response.data;
+        }, err => console.log(err));
+
+      this.adminService.getInvoiceDetails(invoice.ctrNo, invoice.invNo, this.pageDetails, this.pageSizeDetails).subscribe(response => {
         if (response && response.data) {
           this.detailsInvoice = response.data['content'];
           this.totalElementsDetails = response.data['totalElements'];
@@ -233,8 +205,6 @@ export class InvoicesPageComponent implements OnInit {
           this.numberOfItemsDetails = response.data['numberOfElements'];
           this.pageDetails = 1;
         }
-        this.pageHistoryChanged(this.pageHistory);
-
       }, err => console.log(err));
       this.modalRef = this.modalService.show(template, this.config);
     }

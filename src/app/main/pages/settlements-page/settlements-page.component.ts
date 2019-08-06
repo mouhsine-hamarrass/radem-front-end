@@ -234,10 +234,10 @@ export class SettlementsPageComponent implements OnInit {
 
   getAdvice() {
     this.adminService.getAdvices().subscribe(
-        response => {
-          this.advices = response.data;
-        }, err => {
-          console.log(err)
-        });
+      response => {
+        this.advices = response.data;
+      }, err => {
+        console.log(err)
+      });
   }
 }

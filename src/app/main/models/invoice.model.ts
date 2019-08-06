@@ -6,7 +6,6 @@ export class InvoiceModel {
   month?: string;
   invNo?: string;
   amount?: string;
-  consumedVol?: string;
   invoicedVol?: string;
   invEmitDate?: string;
   invExigDate?: string;
@@ -20,7 +19,6 @@ export class InvoiceModel {
     month: string,
     invNo: string,
     amount: string,
-    consumedVol: string,
     invoicedVol: string,
     invEmitDate: string,
     invExigDate: string,
@@ -33,7 +31,6 @@ export class InvoiceModel {
     this.month = month;
     this.invNo = invNo;
     this.amount = amount;
-    this.consumedVol = consumedVol;
     this.invoicedVol = invoicedVol;
     this.invEmitDate = invEmitDate;
     this.invExigDate = invExigDate;

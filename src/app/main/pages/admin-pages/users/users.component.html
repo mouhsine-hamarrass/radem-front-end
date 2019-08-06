@@ -1,30 +1,41 @@
+<div class="card-header content-header back col-12">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                          style="color: #2c5599;"></i> {{'USERS_LIST' | translate}}</h3>
+    </div>
+    <div class="col-md-6 col-12 text-right">
+      <a routerLink="/admin/user" class="btn btn-primary add-claim-btn">
+        <i class="fa fa-plus"></i> {{'NEW_' | translate}} </a>
+    </div>
+  </div>
+</div>
 <div>
-  <nav aria-label="breadcrumb" class="doNotPrint">
-    <ul class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}
-      </a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{'USERS_LIST' | translate}}</li>
-    </ul>
-  </nav>
+  <!--  <nav aria-label="breadcrumb" class="doNotPrint">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/admin"><i class="icon-settings"></i>{{'ADMINISTRATION' | translate}}
+        </a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{'USERS_LIST' | translate}}</li>
+      </ul>
+    </nav>-->
   <div class="container-fluid">
-    <div class="card">
-      <div class="card-body">
+    <div>
+      <div>
         <section>
           <div class="doNotPrint">
-            <h4 class="card-title text-muted">{{'USERS_LIST' | translate}}</h4>
 
             <div class="clearfix"></div>
-            <div class="row ">
-              <div class="col-12">
-                <div class="float-left m-2">
+            <div class="row">
+              <div class="col-12" style="margin-top: 20px;">
+                <div class="float-left">
                   <form class="form-inline">
                     <app-filter (onfilterChanged)="pageFilter($event)" [showFilter]="true"></app-filter>
                   </form>
                 </div>
-                <div class="float-right m-2">
+                <!--<div class="float-right m-2">
                   <button type="button" class="btn btn-success"
                           routerLink="/admin/user"> {{'NEW_' | translate}} </button>
-                </div>
+                </div>-->
               </div>
             </div>
 
@@ -102,14 +113,17 @@
                       (click)="changeEnabled($event, user)">
                     </ngx-toggle>
                     <ul class="list-inline list-unstyled text-center">
-                      <li class="list-inline-item">
+                      <li *ngIf="connectedUser.id === user.id" class="badge badge-danger">
+                        {{'ITS_YOU' | translate}}
+                      </li>
+                      <li *ngIf="connectedUser.id !== user.id" class="list-inline-item">
                         <i class="fa fa fa-fw fa-times text-danger actions_icon cursor-pointer"
-                           tooltip="'DELETE' | translate"
+                           tooltip="{{'DELETE' | translate}}"
                            (click)="dropUser(user.id)"></i>
                       </li>
-                      <li class="list-inline-item">
+                      <li *ngIf="connectedUser.id !== user.id" class="list-inline-item">
                         <i class="fa fa-fw fa-pencil text-info actions_icon cursor-pointer"
-                           tooltip="'EDIT' | translate"
+                           tooltip="{{'EDIT' | translate}}"
                            [routerLink]="['/admin/users/', user.id]"></i>
                       </li>
                     </ul>

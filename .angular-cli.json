@@ -32,7 +32,8 @@
         "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
         "assets/app/vendors/css/googleapis-fonts/main-fonts.css",
         "assets/app/css/app.css",
-        "assets/leaflet/leaflet.css"
+        "assets/leaflet/leaflet.css",
+        "styles.css"
       ],
       "scripts": [
         "assets/leaflet/leaflet.js",

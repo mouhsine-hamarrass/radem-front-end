@@ -5,16 +5,28 @@
   "menu": {
     "admin": "Admin"
   },
+  "clients": {
+    "not-found": "Utilisateur non trouvé"
+  },
+  "configurations": {
+    "not-found": "Configuration non trouvé",
+    "edit-error": "Une erreur rencontrée lors de la modification"
+  },
   "users": {
+    "permission_not_granted": "Permission non accordée",
     "your-account-is-disabled": "Votre compte est désactivé, merci de l'activer",
     "username-or-password-is-incorrect": "L'email ou le mot de passe sont incorrect",
-    "no_user_with_given_token": "Votre compte à été déjà activé ou ce token est invalid. "
+    "no_user_with_given_token": "Le jeton d'authentifaction est invalid",
+    "email-is-missing": "L'email est obligatoire"
   },
   "validations": {
     "required": {
       "username": "Identifiant est obligatoire",
       "password": "Le mot de passe est obligatoire"
     }
+  },
+  "mails": {
+    "an-error-occurred-while-sending-the-mail": "Email de confiramtion non envoyé, Veuillez réessayer s'il vous plaît"
   },
   "prev": "Précédent",
   "next": "Suivant",
@@ -30,6 +42,7 @@
     "error-no-token-sent": "Token non envoyé depuis le service lors de l'authentification",
     "error-user-unauthorized": "L'utilisateur n'est pas autorisé"
   },
+  "Access is denied": "Accès non autorisé",
   "PASSWORD": "Mot de passe",
   "QUALITY_OF_ALIMENTATION": "Qualité d'alimentation",
   "INTERVENTION_NOT_CARRIED_OUT": "Intervention non réalisée",
@@ -98,6 +111,8 @@
   "ALERTS": "Alerts",
   "ALERT": "Alert",
   "CLAIMS": "Réclamations",
+  "MY_CLAIMS": "Mes réclamations",
+  "INVOICE_CONSUMPTION": "Consommation: ",
   "CLAIM": "Réclamation",
   "MY_CLAIM": "Ma réclamation",
   "Advice_and_energy_saving": "Conseil et économie d'énergie",
@@ -117,6 +132,7 @@
   "Alert_Preview": "Aperçu de l'alerte",
   "The_contract_concerned": "Le contrat concerné",
   "Choose_a_contract": "Choisissez un contrat",
+  "CHOOSE_A_TYPE": "Choisissez un type d'alerte",
   "SELECT_OPTION": "Choisissez une option",
   "VALIDATE": "Valider",
   "List_of_alerts_notifications": "Liste des notifications",
@@ -223,7 +239,11 @@
   "BILLIN_PERIOD": "Période de facturation",
   "SETTLEMENT_DATE": "Date de réglement",
   "no-content-to-download": "Pas de contenu à télécharger",
+  "attachment-not-found": "Attachement non trouvé",
   "file-not-uploaded": "Fichier non téléverser ",
+  "merci-de-remplir-les-champs-obligatoires-dans-le-formulaire": "Merci de remplir les champs obligatoires dans le formulaire",
+  "formulaire-invalide": "Formulaire invalide",
+  "not allwed extention": "Extension du fichier non autorisée",
   "AMOUNT_IN_DH_TTC": "Montant en DH TTC",
   "MODE": "Mode",
   "YEAR": "Année",
@@ -231,24 +251,27 @@
   "MUTATION": "Transfert",
   "NEW": "Nouvelle",
   "NEW_": "Nouveau",
+  "CLAIMANT": "Réclamé par",
+  "DATE_OF_CREATION": "date de création",
+  "POSITION": "Position",
   "YEAR_MONTH": "Année/Mois",
   "SUBSCRIPTION_NUMBER": "Nº d'abonnement",
   "CONTRACT_NUMBER": "Nº de contrat",
   "OLD_CONTRACT_NUMBER": "Ancien Nº de contrat",
   "BILL_NUMBER": "Nº de facture",
   "CONTRACT_STATUS": "État de contrat",
-  "STATUS": "État",
+  "STATUS": "Statut",
   "LINK_CONTRACT": "Attacher un contrat",
   "CONTRACT_ATTACHED": "Votre contrat a été attacher.",
   "CONTRACT_UNATTACHED": "Votre contrat n'a pas été attacher.",
   "CONTRACT_ATTACHABLE": "Contrat attaché avec succès.",
-  "CONTRACT_UNATTACHABLE": "Votre ne pouvez pas attacher cette contrat",
+  "CONTRACT_UNATTACHABLE": "Votre ne pouvez pas attacher cet contrat",
   "contractserp": {
-    "erp_contract_not_found": "Cette contrat n'exisit pas",
-    "contract_not_attachable": "Votre ne pouvez pas attacher cette contrat"
+    "erp_contract_not_found": "Cet contrat n'exisit pas",
+    "contract_not_attachable": "Votre ne pouvez pas attacher cet contrat"
   },
   "contracts": {
-    "contract_already_attached_to_this_client": "Cette contrat à dejà ete attachee a ce client"
+    "contract_already_attached_to_this_client": "Ce contrat à dejà ete attachee a ce client"
   },
   "UNAUTHORIZED_TO_ACCESS_THIS_PAGE": "Vous n'avez pas l'autorization d'acceder à cette page.",
   "UNAUTHORIZED_TO_ACCESS_THIS_PAGE_DETAILS": "Veuillez remonter cette erreur a votre superviseur",
@@ -377,6 +400,7 @@
   "TYPE_OF_BILL": "Type de facture",
   "TYPE_OF_NETWORK": "Type de réseau",
   "TYPE": "Type",
+  "TYPE_POSITION": "Type & Position",
   "REF": "REF",
   "CLAIMER": "Réclamant",
   "CATEGORY": "Catégorie",
@@ -384,9 +408,9 @@
   "HOLDER": "Titulaire",
   "AUTO_RELIEVING": "Auto relève",
   "YOUR_ACCOUNT_HAS_BEEN_ACTIVATED_SUCCESSFULLY!": "Votre compte a été activé avec succès !",
-  "contract already affected to this client": "Cette contrat il est déjà affecter à ce client",
-  "contract not found": "Cette contrat n'exisit pas",
-  "cannot attach contract": "Vous ne pouvez pas attacher ce contrat",
+  "contract already affected to this client": "Cet contrat il est déjà affecter à ce client",
+  "contract not found": "Cet contrat n'exisit pas",
+  "cannot attach contract": "Vous ne pouvez pas attacher cet contrat",
   "LOG_IN": "Se connecter",
   "LOG_IN2": "Connexion",
   "FORGOT_YOUR_PASSWORD_?": "Mot de passe oublié ?",
@@ -428,6 +452,14 @@
   "CHANGING_THE_PASSWORD": "Modifier votre mot de passe",
   "SORRY_NO_DATA_AVAIBELE": "Désolé, aucun résultat n'a été trouvé",
   "ENTRES": "entrées",
+  "ITS_YOU": "Vous",
+  "GO_TO_HOME": "Retourner à la page d'accueil",
+  "GO_TO_REQUESTS": "Mes demandes de",
+  "GO_TO_LOGIN": "Retourner à la page de connexion",
+  "SUSBSCRIPTION": "abonnement",
+  "THE_RESOURCE_IS_UNAVAILABLE": "La demande que vous recherchez est détruit, ou elle n'éxiste plus.",
+  "CANCELLATION": "résiliation",
+  "EMBRANCHEMANT": "branchement",
   "NEW_PASSWORD": "Nouveau mot de passe",
   "YOU_HAVE": "Vous avez",
   "SUCCESSOR_OF": "Successeur de",
@@ -487,7 +519,12 @@
   "OR_TEL": "ou par téléphone",
   "MSG_SENT": "Un mail de récupération de mot de passe vous a été envoyé",
   "ACCOUNT_UPDATED": "Votre compte a été mis à jour",
-  "commons.entity_in_use": "Cette alerte est déjà utilisée",
+
+  "commons": {
+    "entity_in_use": "Cette alerte est déjà utilisée",
+    "trying-edit-another-entity": "Vous essayez de modifier une autre entité",
+    "missing-key": "Absence de la clé"
+  },
   "users.duplicate_username": "Ce nom d'utisateur existe déjà",
   "users_duplicate_username": "Ce nom d'utisateur existe déjà",
   "CMI_REJECTED": "Rejeté par CMI",
@@ -527,6 +564,8 @@
   "BANK_TRANSFER": "Virement bancaire",
   "CHECK": "Chèque",
   "EDIT": "Modifier",
+  "COMPLETE_THE_FORM": "Veuillez compléter le fomulaire",
+  "PASSWORD_AND_CONFIRMED_PASSWORD_MUST_BE_UNIQUE": "Les deux champs doivent êtres identiques",
   "PRINT": "Imprimer",
   "JOIN_FILE": "Chèque barré / Attestation de RIB BANCAIRE",
   "Correspondence_Address": "Adresse",
@@ -534,7 +573,6 @@
   "CONTRACTS_NUMBER": "Nº de contrats",
   "file-payload-too-large": "La taille de la pièce jointe ne doit pas dépasser ",
   "new-refund-error": "Veuilez vérifier le formulaire",
-
   "INVOICE_TYPE": "Type",
   "INVOICE_NO": "N° facture",
   "INVOICE_VOL_CONS": "Volume consommé",
@@ -544,7 +582,6 @@
   "INVOICE_STATUS": "Statut",
   "INVOICE_ACTION": "Actions",
   "HISTORY": "Historique",
-
   "ORDRE_INVOICE": "Orde détail",
   "CATEGORY_INVOICE": "Catégorie",
   "PRODUCT": "Produit",
@@ -553,5 +590,6 @@
   "TVA": "TVA",
   "AMOUNT_PROX_UNIT_HT": "Montant prox unitaire HT",
   "AMOUNT_TVA": "Montant TVA",
-  "AMOUNT_TTC": "Montant TTC"
+  "AMOUNT_TTC": "Montant TTC",
+  "DYANMIC_CONTENT": "Contenu dynamique"
 }

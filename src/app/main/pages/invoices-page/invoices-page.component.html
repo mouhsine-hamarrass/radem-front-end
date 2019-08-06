@@ -46,7 +46,6 @@
                     <th scope="col">{{'INVOICE_TYPE' | translate }}</th>
                     <th scope="col">{{'YEAR_MONTH' | translate }}</th>
                     <th scope="col">{{'INVOICE_AMOUNT' | translate }}</th>
-                    <th scope="col">{{'INVOICE_VOL_CONS' | translate }}</th>
                     <th scope="col">{{'INVOICE_VOL_FACT' | translate }}</th>
                     <th scope="col">{{'INVOICE_DATE_EMISSION' | translate }}</th>
                     <th scope="col">{{'INVOICE_DATE_EXIGIBLE' | translate }}</th>
@@ -66,7 +65,6 @@
                       <td>{{inv?.invType}}</td>
                       <td>{{inv?.year}}-{{inv?.month}}</td>
                       <td>{{inv?.amount| numeral}}</td>
-                      <td>{{inv?.consumedVol}}</td>
                       <td>{{inv?.invoicedVol}}</td>
                       <td>{{inv?.invEmitDate | date:'dd-MM-yyyy'}}</td>
                       <td>{{inv?.invExigDate | date:'dd-MM-yyyy'}}</td>
@@ -107,6 +105,7 @@
 </div>
 
 <ng-template #detailInvoice>
+
   <div class="modal-header modal-radem">
     <h4 class="modal-title pull-left">{{'INVOICE_DETAILS' | translate}} N°: {{invoice?.invNo}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -114,151 +113,122 @@
     </button>
   </div>
   <div class="modal-body">
-    <tabset>
-      <tab heading="{{'INFORMATIONS' | translate}}">
-        <div class="card">
-          <div class="card-header">
-            <h4>
-              <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
-            </h4>
-          </div>
-          <div class="card-content">
 
-            <div class="table-responsive mx-auto">
-              <div class="row justify-content-between">
-                <div class="col-12">
-                  <div class="float-left">
-                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                  </div>
-                </div>
+    <div>
+      <div class="card-header">
+        <h4>
+          <i class="fa fa-tachometer"></i>&nbsp;{{'INVOICE_CONSUMPTION' | translate }} {{invoice?.month}}
+          -{{invoice?.year}}
+        </h4>
+      </div>
+      <table class="col-md-8 mt-1" style="text-align: start; width: 215px;">
+        <tr>
+          <th>{{'COUNTER_NUMBER' | translate }}:</th>
+          <td>{{historyInvoice?.counterNo}} <span *ngIf="!historyInvoice?.counterNo">-</span> </td>
+        </tr>
+        <tr>
+          <th>{{'COUNTER_GAUGE' | translate }}:</th>
+          <td>{{historyInvoice?.caliber}} <span *ngIf="!historyInvoice?.caliber">-</span> </td>
+        </tr>
+        <tr>
+          <th>{{'INDEX' | translate }}:</th>
+          <td>{{historyInvoice?.index}} <span *ngIf="!historyInvoice?.index">-</span></td>
+        </tr>
+
+        <tr>
+          <th>{{'PRODUCT' | translate }}:</th>
+          <td>{{historyInvoice?.product}} <span *ngIf="!historyInvoice?.product">-</span> </td>
+        </tr>
+        <tr>
+          <th>{{'INVOICE_VOL_CONS' | translate }}:</th>
+          <td>{{historyInvoice?.consumedVolume}} <span *ngIf="!historyInvoice?.consumedVolume">-</span> </td>
+        </tr>
+        <tr>
+          <th>{{'INVOICE_VOL_FACT' | translate }}:</th>
+          <td>{{historyInvoice?.invoicedVolume}} <span *ngIf="!historyInvoice?.invoicedVolume">-</span> </td>
+        </tr>
+
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>
+          <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
+        </h4>
+      </div>
+      <div class="card-content">
+
+        <div class="table-responsive mx-auto">
+          <div class="row justify-content-between">
+            <div class="col-12">
+              <div class="float-left">
+                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
               </div>
-              <table class="table"
-                     sortable-table (sorted)="onSorted($event)"
-                     filterable-table (filtred)="onFiltred($event)">
-                <thead class="table-light">
-                <tr>
-
-                  <th scope="col">{{'ORDRE_INVOICE' | translate }}</th>
-                  <th scope="col">{{'CATEGORY_INVOICE' | translate }}</th>
-                  <th scope="col">{{'TRANCHE' | translate }}</th>
-                  <th scope="col">{{'PRODUCT' | translate }}</th>
-                  <th scope="col">{{'ROYALITIES' | translate }}</th>
-                  <th scope="col">{{'TYPE_ROYALITIES' | translate }}</th>
-                  <th scope="col">{{'TVA' | translate }}</th>
-                  <th scope="col">{{'AMOUNT_PROX_UNIT_HT' | translate }}</th>
-                  <th scope="col">{{'INVOICE_DATE_EMISSION' | translate }}</th>
-                  <th scope="col">{{'INVOICE_DATE_EXIGIBLE' | translate }}</th>
-                  <th scope="col">{{'AMOUNT_HT' | translate }}</th>
-                  <th scope="col">{{'AMOUNT_TVA' | translate }}</th>
-                  <th scope="col">{{'AMOUNT_TTC' | translate }}</th>
-                  <th scope="col">{{'QUANTITY' | translate }}</th>
-
-                </tr>
-                </thead>
-                <tbody>
-
-                <app-data-not-available
-                  *ngIf="!detailsInvoice || detailsInvoice.length == 0; else dataAvailable"
-                  [colSpan]="6"></app-data-not-available>
-
-                <ng-template #dataAvailable>
-                  <tr *ngFor="let detail of detailsInvoice">
-                    <td>{{detail?.orderDetails}}</td>
-                    <td>{{detail?.category}}</td>
-                    <td>{{detail?.tranche}}</td>
-                    <td>{{detail?.product}}</td>
-                    <td>{{detail?.royalties}}</td>
-                    <td>{{detail?.royaltiesType}}</td>
-                    <td>{{detail?.tva | numeral}}</td>
-                    <td>{{detail?.htAmountProx}}</td>
-                    <td>{{detail?.invEmitDate | date:'dd-MM-yyyy'}}</td>
-                    <td>{{detail?.invExigDate | date:'dd-MM-yyyy'}}</td>
-                    <td>{{detail?.htAmount | numeral}}</td>
-                    <td>{{detail?.tvaAmount | numeral}}</td>
-                    <td>{{detail?.ttcAmount | numeral}}</td>
-                    <td>{{detail?.quantity}}</td>
-
-                </ng-template>
-
-
-                </tbody>
-              </table>
             </div>
-            <div class="modal-body modal-radem">
-              <app-pagination [showPagination]="totalPagesDetails > 1"
-                              [numberOfItems]="numberOfItemsDetails"
-                              [itemsPerPage]="itemsPerPageDetails"
-                              [totalItems]="totalElementsDetails"
-                              [totalPages]="totalPagesDetails"
-                              (onpageChanged)="pageDetailsChanged($event)">
-              </app-pagination>
-            </div>
-
-
           </div>
+          <table class="table"
+                 sortable-table (sorted)="onSorted($event)"
+                 filterable-table (filtred)="onFiltred($event)">
+            <thead class="table-light">
+            <tr>
+
+              <th scope="col">{{'CATEGORY_INVOICE' | translate }}</th>
+              <th scope="col">{{'TRANCHE' | translate }}</th>
+              <th scope="col">{{'PRODUCT' | translate }}</th>
+              <th scope="col">{{'ROYALITIES' | translate }}</th>
+              <th scope="col">{{'TYPE_ROYALITIES' | translate }}</th>
+              <th scope="col">{{'TVA' | translate }}</th>
+              <th scope="col">{{'AMOUNT_PROX_UNIT_HT' | translate }}</th>
+              <th scope="col">{{'INVOICE_DATE_EMISSION' | translate }}</th>
+              <th scope="col">{{'INVOICE_DATE_EXIGIBLE' | translate }}</th>
+              <th scope="col">{{'AMOUNT_HT' | translate }}</th>
+              <th scope="col">{{'AMOUNT_TVA' | translate }}</th>
+              <th scope="col">{{'AMOUNT_TTC' | translate }}</th>
+              <th scope="col">{{'QUANTITY' | translate }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <app-data-not-available
+              *ngIf="!detailsInvoice || detailsInvoice.length == 0; else dataAvailable"
+              [colSpan]="12"></app-data-not-available>
+
+            <ng-template #dataAvailable>
+              <tr *ngFor="let detail of detailsInvoice">
+                <td>{{detail?.category}}</td>
+                <td>{{detail?.tranche}}</td>
+                <td>{{detail?.product}}</td>
+                <td>{{detail?.royalties}}</td>
+                <td>{{detail?.royaltiesType}}</td>
+                <td>{{detail?.tva}}</td>
+                <td>{{detail?.htAmountProx}}</td>
+                <td>{{detail?.invEmitDate | date:'dd-MM-yyyy'}}</td>
+                <td>{{detail?.invExigDate | date:'dd-MM-yyyy'}}</td>
+                <td>{{detail?.htAmount | numeral}}</td>
+                <td>{{detail?.tvaAmount | numeral}}</td>
+                <td>{{detail?.ttcAmount | numeral}}</td>
+                <td>{{detail?.quantity}}</td>
+
+            </ng-template>
+
+
+            </tbody>
+          </table>
         </div>
-      </tab>
-      <tab heading="{{'CONSUMPTION_HISTORY' | translate}}" *ngIf="invoices">
-        <div class="card">
-          <div class="card-header">
-            <h4>
-              <i class="fa fa-tachometer"></i>&nbsp;Historique
-            </h4>
-          </div>
-          <div class="card-content">
-            <div class="table-responsive mx-auto">
-              <div class="row justify-content-between">
-                <div class="col-12">
-                  <div class="float-left">
-                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                  </div>
-                </div>
-              </div>
-              <table class="table"
-                     sortable-table (sorted)="onSorted($event)"
-                     filterable-table (filtred)="onFiltred($event)">
-                <thead class="table-light">
-                <tr>
-                  <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
-                  <th scope="col">{{'COUNTER_GAUGE' | translate }}</th>
-                  <th scope="col">{{'INDEX' | translate }}</th>
-                  <th scope="col">{{'PRODUCT' | translate }}</th>
-                  <th scope="col">{{'INVOICE_VOL_CONS' | translate }}</th>
-                  <th scope="col">{{'INVOICE_VOL_FACT' | translate }}</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <app-data-not-available
-                  *ngIf="!historiesInvoice || historiesInvoice.length == 0; else dataAvailable"
-                  [colSpan]="6"></app-data-not-available>
-
-                <ng-template #dataAvailable>
-                  <tr *ngFor="let history of historiesInvoice">
-                    <td>{{history?.counterNo}}</td>
-                    <td>{{history?.caliber}}</td>
-                    <td>{{history?.index}}</td>
-                    <td>{{history?.product}}</td>
-                    <td>{{history?.consumedVolume}}</td>
-                    <td>{{history?.invoicedVolume}}</td>
-                </ng-template>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-body modal-radem">
-              <app-pagination [showPagination]="totalPagesHistory > 1"
-                              [numberOfItems]="numberOfItemsHistory"
-                              [itemsPerPage]="itemsPerPageHistory"
-                              [totalItems]="totalElementsHistory"
-                              [totalPages]="totalPagesHistory"
-                              (onpageChanged)="pageHistoryChanged($event)">
-              </app-pagination>
-            </div>
-          </div>
+        <div class="modal-body modal-radem">
+          <app-pagination [showPagination]="totalPagesDetails > 1"
+                          [numberOfItems]="numberOfItemsDetails"
+                          [itemsPerPage]="itemsPerPageDetails"
+                          [totalItems]="totalElementsDetails"
+                          [totalPages]="totalPagesDetails"
+                          (onpageChanged)="pageDetailsChanged($event)">
+          </app-pagination>
         </div>
-      </tab>
-    </tabset>
+
+
+      </div>
+    </div>
   </div>
 
   <div class="modal-footer modal-radem">

@@ -6,7 +6,7 @@ import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {CommonService} from '../../../services/common.service';
 import * as _ from 'underscore';
 import {ContractRefund} from '../../../models/contract-refund.model';
-import {HttpHeaderResponse, HttpResponse} from '@angular/common/http';
+import {HttpEventType, HttpHeaderResponse, HttpResponse} from '@angular/common/http';
 import {NewRefundRequestModel} from '../../../models/new-refund-request.model';
 import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
@@ -26,13 +26,16 @@ export class NewRefundRequestComponent implements OnInit {
   contractNo: string;
   public flagModeRemboursement = '';
   public flagProcuration = '';
+  progress: { percentage: number } = {percentage: 0};
+  uploadfaild = false;
+  currentFileUpload: File;
 
   contractRefunds: Array<ContractRefund> = [];
   selectedRefContrcats: any = [];
   clientContractsNo: Array<string> = [];
   settings = {};
   selectedNumber = 0;
-  selectedFiles: FileList;
+  selectedFile: FileList;
   contractNbrs: Array<string> = [];
   attachmentIds: Array<number> = [];
   attachments: any = [];
@@ -111,18 +114,25 @@ export class NewRefundRequestComponent implements OnInit {
   }
 
   selectFile(event: any, input?: any) {
-    this.selectedFiles = event.target.files;
+    this.selectedFile = event.target.files;
     this.upload();
   }
 
   upload() {
-    _.each(this.selectedFiles, (file) => {
-      this.servicesService.pushFileToStorage(file).subscribe(event => {
+    this.progress.percentage = 0;
+    this.uploadfaild = false;
+    _.each(this.selectedFile, (file) => {
+      this.currentFileUpload = file;
+      this.servicesService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
         if (event && event instanceof HttpHeaderResponse && event.status === 400) {
+          this.progress.percentage = 0;
           this.toastrService.error(this.translate.instant('file-not-uploaded'));
-          return;
+          this.uploadfaild = true;
+          this.selectedFile = null;
         }
-        if (event instanceof HttpResponse) {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
           if (event.body) {
             const response = JSON.parse(<string>event.body);
             this.attachments.push({
@@ -136,10 +146,15 @@ export class NewRefundRequestComponent implements OnInit {
       }, (err) => {
         if (err.status === 413) {
           this.toastrService.error(this.translate.instant('file-payload-too-large') + err.error, '');
+        } else {
+          this.toastrService.error(this.translate.instant('file-not-uploaded'));
         }
+        this.uploadfaild = true;
+
+        this.selectedFile = null;
+
       });
     });
-    this.selectedFiles = undefined;
   }
 
   onCloseMultiSelect(item: any) {
@@ -203,128 +218,121 @@ export class NewRefundRequestComponent implements OnInit {
     const lastNameControl = this.refundForm.get('lastName');
     const cinControl = this.refundForm.get('cin');
 
-        this.refundForm.get('Procuration').valueChanges
-            .subscribe(userinfos => {
+    this.refundForm.get('Procuration').valueChanges
+      .subscribe(userinfos => {
 
-                if (userinfos) {
-                    firstNameControl.setValidators([Validators.required]);
+        if (userinfos) {
+          firstNameControl.setValidators([Validators.required]);
 
-                    lastNameControl.setValidators([Validators.required]);
-                    cinControl.setValidators([Validators.required]);
-                }
+          lastNameControl.setValidators([Validators.required]);
+          cinControl.setValidators([Validators.required]);
+        }
 
-                if (!userinfos) {
-                    firstNameControl.setValidators(null);
-                    lastNameControl.setValidators(null);
-                    cinControl.setValidators(null);
-                }
+        if (!userinfos) {
+          firstNameControl.setValidators(null);
+          lastNameControl.setValidators(null);
+          cinControl.setValidators(null);
+        }
 
-                firstNameControl.updateValueAndValidity();
-                lastNameControl.updateValueAndValidity();
-                cinControl.updateValueAndValidity();
-            });
+        firstNameControl.updateValueAndValidity();
+        lastNameControl.updateValueAndValidity();
+        cinControl.updateValueAndValidity();
+      });
 
-    }
+  }
 
-    getRefundedContracts() {
-        this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
-            this.contractRefunds = response.data;
-            _.each(this.contractRefunds, (element: any) => {
-                _.extend(element, {
-                    id: element.contractNo,
-                    tourNo: element.tourNo,
-                    itemName: `${element.contractNo} - (${element.consumptionAddress})`
-                });
-            });
-        }, err => {
-            console.log(err)
+  getRefundedContracts() {
+    this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
+      this.contractRefunds = response.data;
+      _.each(this.contractRefunds, (element: any) => {
+        _.extend(element, {
+          id: element.contractNo,
+          tourNo: element.tourNo,
+          itemName: `${element.contractNo} - (${element.consumptionAddress})`
         });
-    }
+      });
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getClientAttachedContracts() {
-        this.servicesService.clientAttachedContracts().subscribe(response => {
-            this.clientContracts = response.data;
-            _.each(this.clientContracts, (element: any) => {
-                this.clientContractsNo.push(element.contractNo);
-            });
-            console.log(this.clientContractsNo);
-            this.getRefundedContracts();
-        }, err => {
-            console.log(err)
-        });
-    }
+  getClientAttachedContracts() {
+    this.servicesService.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+      _.each(this.clientContracts, (element: any) => {
+        this.clientContractsNo.push(element.contractNo);
+      });
+      console.log(this.clientContractsNo);
+      this.getRefundedContracts();
+    }, err => {
+      console.log(err)
+    });
+  }
 
   changeSuccessor($event) {
     if ($event.target.checked) {
       this.refundForm.controls['successor'].setValidators([Validators.required]);
       this.refundForm.controls['contract'].setValidators([Validators.required]);
 
-        } else {
+    } else {
 
-            this.refundForm.controls['successor'].clearValidators();
-            this.refundForm.controls['successor'].updateValueAndValidity();
+      this.refundForm.controls['successor'].clearValidators();
+      this.refundForm.controls['successor'].updateValueAndValidity();
 
-            this.refundForm.controls['contract'].clearValidators();
-            this.refundForm.controls['contract'].updateValueAndValidity();
+      this.refundForm.controls['contract'].clearValidators();
+      this.refundForm.controls['contract'].updateValueAndValidity();
 
-            this.refundForm.controls['oldWaterSubscription'].clearValidators();
-            this.refundForm.controls['oldWaterSubscription'].updateValueAndValidity();
-        }
-
+      this.refundForm.controls['oldWaterSubscription'].clearValidators();
+      this.refundForm.controls['oldWaterSubscription'].updateValueAndValidity();
     }
 
-  saveRequest(formData): void {
+  }
+
+  saveRequest(form): void {
     const user: User = this.authHelper.getLoggedUserInfo();
+    debugger;
+    if (form && form.valid && form.value) {
+      const formData = form.value;
+      const newRefundrequest: NewRefundRequestModel = form.value;
+      newRefundrequest.mail = formData.email;
+      newRefundrequest.mailingAddress = formData.mailingAddress;
+      newRefundrequest.cellphone = formData.cellphone;
+      newRefundrequest.fixphone = formData.homePhonenumber;
 
-    const newRefundrequest: NewRefundRequestModel = formData;
-    newRefundrequest.mail = formData.email;
-    newRefundrequest.mailingAddress = formData.mailingAddress;
-    newRefundrequest.cellphone = formData.cellphone;
-    newRefundrequest.fixphone = formData.homePhonenumber;
+      newRefundrequest.paymentMode = formData.ModeRemboursement;
+      newRefundrequest.procuration = Boolean(this.flagProcuration);
+      newRefundrequest.procuratorCin = formData.cin;
+      newRefundrequest.procuratorFirstname = formData.firstName;
+      newRefundrequest.procuratorLastname = formData.lastName;
+      this.attachments.forEach(value => {
+        this.attachmentIds.push(value.id);
+      });
+      newRefundrequest.attachmentIds = this.attachmentIds;
+      this.selectedRefContrcats.forEach(value => {
+        this.contractNbrs.push(value.contractNo);
+        newRefundrequest.tour = value.tourNo;
+      });
+      newRefundrequest.contractNbrs = this.contractNbrs;
 
-    newRefundrequest.paymentMode = formData.ModeRemboursement;
-    newRefundrequest.procuration = Boolean(this.flagProcuration);
-    newRefundrequest.procuratorCin = formData.cin;
-    newRefundrequest.procuratorFirstname = formData.firstName;
-    newRefundrequest.procuratorLastname = formData.lastName;
-    this.attachments.forEach(value => {
-      this.attachmentIds.push(value.id);
-    });
-    newRefundrequest.attachmentIds = this.attachmentIds;
-    this.selectedRefContrcats.forEach(value => {
-      this.contractNbrs.push(value.contractNo);
-      newRefundrequest.tour = value.tourNo;
-    });
-    newRefundrequest.contractNbrs = this.contractNbrs;
+      this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
 
-    this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
+        console.log(response);
 
-      console.log(response);
+        if (response && response.data) {
+          this.router.navigate(['/services/new-refund-details/' + response.data]);
+        }
 
-      if (response && response.data) {
-        this.router.navigate(['/services/new-refund-details/' + response.data]);
+      }, err => {
+        console.log(err);
+        this.toastrService.error(this.translate.instant('new-refund-error'));
 
-      }
-      /*      Swal({
-              title: 'Merci pour votre Collaboration',
-              text: 'votre demande de remboursement a été envoyé avec succès',
-              type: 'success',
-              showCancelButton: true,
-              confirmButtonText: 'Voulez-vous Telecharger le PDF',
-              cancelButtonText: 'Non, Merci'
-            }).then((result) => {
-              if (result.value) {
-              } else if (result.dismiss === Swal.DismissReason.cancel) {
-                this.router.navigate(['/services/refund-requests']);
-              }
-            })*/
-      // this.router.navigate(['/services'])
-    }, err => {
-      console.log(err);
-      this.toastrService.error(this.translate.instant('new-refund-error'));
+      });
+    } else {
+      this.toastrService.error(
+        this.translate.instant('merci-de-remplir-les-champs-obligatoires-dans-le-formulaire'), this.translate.instant('formulaire-invalide')
+      );
+    }
 
-    });
-    console.log(newRefundrequest);
   }
 
   setContract(contractNo: string) {

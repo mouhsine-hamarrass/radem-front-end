@@ -51,7 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           } else {
             if (response.status === 403 || response.status === 404 || response.status === 400 || response.status === 500) {
               if (typeof response.error === 'string') {
-                this.translate.get(JSON.parse(response.error).message).subscribe(msg => {
+                this.translate.get(this.translate.instant(JSON.parse(response.error).message)).subscribe(msg => {
                   this.toastr.error(msg, '', {
                     timeOut: 3000,
                   });
@@ -69,12 +69,12 @@ export class ErrorInterceptor implements HttpInterceptor {
             } else if (response.status === 0) { // Server down
               // TODO only the backend api
               // must handel when the response comes from cmi gateway : do not throw server_down
-
-              this.translate.get('SERVER_DOWN').subscribe(msgError => {
+              this.router.navigate(['/maintenance']);
+             /* this.translate.get('SERVER_DOWN').subscribe(msgError => {
                 this.toastr.error(msgError, '', {
                   timeOut: 3000,
                 });
-              });
+              });*/
               /*
               setTimeout(() => {
                 this.router.navigate(['/maintenance']);

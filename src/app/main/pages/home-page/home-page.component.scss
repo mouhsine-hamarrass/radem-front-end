@@ -3,9 +3,11 @@
   margin-bottom: 0;
   background-color: #eef0f3;
   border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
+
   h3 {
     margin-top: 8px;
   }
+
   h4 {
     padding-left: 20px;
     font-weight: 100;
@@ -18,54 +20,63 @@
   .sub-title, .icon, .contract-dropdown {
     font-size: 1.1rem !important;
   }
-  .content-header {
 
+  .content-header {
     .contract-dropdown {
       height: calc(2.3rem);
       margin-top: -15px;
     }
 
-    .align-items-center{
+    .align-items-center {
       width: 99.7%;
       margin: 0 auto;
-      }
+    }
+
     .has-border {
       border-right: 1px solid #d3d3d3;
       line-height: 40.5px;
       height: 70.5px;
       overflow: hidden;
-      label{
+
+      label {
         text-transform: uppercase;
       }
 
-      h6{
+      h6 {
         font-size: .9rem !important;
         margin-top: -9px;
       }
-      select{
+
+      select {
         font-size: .9rem !important;
       }
     }
-    .has-border:last-child{
-         border-right: 0px solid #d3d3d3;
+
+    .has-border:last-child {
+      border-right: 0px solid #d3d3d3;
     }
+
     .sub-title, .icon, .contract-dropdown {
       font-size: .9rem;
       color: #2c5599;
 
     }
+
     .status {
-      label{
-         text-transform: uppercase;
-         margin-bottom: .5rem !important;
-       }
-      h6{
+      label {
+        text-transform: uppercase;
+        margin-bottom: .5rem !important;
+      }
+
+      h6 {
         font-size: .9rem !important;
         margin-top: -9px;
       }
+
       .icon {
         font-size: 0.8rem;
       }
+
       span {
         font-size: 12px;
         font-weight: bold;
@@ -77,32 +88,40 @@
 .content-body {
   .content {
     padding: 15px;
+
     .deck.solde:after {
       background-image: url("../../../../assets/images/money.png");
     }
+
     .deck.solde {
       background-color: #204072;
     }
+
     .deck.bill:after {
       background-image: url("../../../../assets/images/bill.png");
     }
+
     .deck.bill {
       background-color: #3d9041;
     }
+
     .deck.payment:after {
       background-image: url("../../../../assets/images/debit-card.png");
     }
+
     .deck.payment {
       background-color: #0069b4;
     }
+
     .deck.location:after {
       background-image: url("../../../../assets/images/location.png");
     }
+
     .deck.location {
       background-color: #bb3442;
     }
+
     .deck:after {
-     // content: "";
       background-repeat: no-repeat;
       background-size: 29%;
       background-position: right bottom;
@@ -122,24 +141,29 @@
       border-radius: 5px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       margin-bottom: 15px;
+
       .deck-body {
         padding: 15px;
+
         .title {
           font-weight: bold;
           font-size: 1.3rem;
         }
+
         .value {
           font-weight: bold;
           font-size: 2.7rem;
         }
       }
     }
+
     .card-deck-outline:after {
       background-image: url("../../../../assets/images/idea.png");
       background-size: 12%;
       width: 90%;
       margin: 40px auto;
     }
+
     .card-deck-outline {
       border: 1px solid #204072;
       border-radius: 5px;
@@ -147,6 +171,7 @@
       max-height: 400px;
       overflow-y: scroll;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
       .deck-body {
         padding: 15px;
       }
@@ -160,28 +185,30 @@
       font-size: 1rem !important;
     }
   }
-   .has-border{
-         border-bottom: 1px solid #d3d3d3;
-}  
+  .has-border {
+    border-bottom: 1px solid #d3d3d3;
+  }
 }
 
 @media only screen and (max-width: 768px) {
   .sub-header {
     padding: 15px 0;
+
     .has-border {
       border: none !important;
     }
+
     .sub-title, .icon, .contract-dropdown {
       font-size: 16px !important;
     }
 
 
   }
-  .has-border{
-        border-bottom: 1px solid #d3d3d3;
+  .has-border {
+    border-bottom: 1px solid #d3d3d3;
   }
 }
 
-label.Cap{
-  text-transform:none !important;
+label.Cap {
+  text-transform: none !important;
 }

@@ -10,7 +10,7 @@ import {UserComponent} from './user/user.component';
 import {UsersComponent} from './users/users.component';
 import {ChecklistModule} from 'angular-checklist';
 import {NgxToggleModule} from 'ngx-toggle';
-import {BsDropdownModule, TabsModule} from 'ngx-bootstrap';
+import {BsDropdownModule, TabsModule, TooltipModule} from 'ngx-bootstrap';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SettingsComponent} from './settings/settings.component';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
@@ -40,10 +40,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
 import {TransactionsComponent} from './transactions/transactions.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ProfilesComponent} from './profiles/profiles.component';
-
-
-
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -69,7 +66,9 @@ import {ProfilesComponent} from './profiles/profiles.component';
         deps: [HttpClient]
       }
     }),
-    SharedModule
+    SharedModule,
+    NgxPaginationModule,
+    TooltipModule
   ],
   exports: [
     TranslateModule

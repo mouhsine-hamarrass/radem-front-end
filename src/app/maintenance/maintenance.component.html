@@ -1,29 +1,31 @@
-<div class="container">
-    <app-navbar></app-navbar>
-    <app-second-navbar></app-second-navbar>
-
-    <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
-        <div class="app-content center-layout">
-            <div id="maintenancePage">
-                <article>
-                    <h1>{{'THE_APP_IS_TEMPORARILY_UNAVAILABLE' | translate }}.
-                    </h1>
-                    <p>{{'PLANNED_MAINTENANCE_IS_CURRENTLY_IN_PROGRESS' | translate }}. {{'PLEASE_COME_BACK_SOON' | translate }}.</p>
-                    <p>
-                      {{'WE_APOLOGIZE_FOR_ANY_INCONVENIENCE' | translate }}.
-                    </p>
-                    <p id="signature">&mdash; <a href="mailto:maintenance@labelvie.ma" class="text-info">maintenance@labelvie.ma</a>
-                    </p>
-                    <p class="text-right">
-                        <button class="btn btn-lg btn-outline-info"
-                                (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp;{{'REFRESH' | translate }}
-                        </button>
-                    </p>
-                </article>
-            </div>
-        </div>
+<div>
+  <app-navbar></app-navbar>
+  <app-second-navbar></app-second-navbar>
+<!--  <app-second-navbar *ngIf="(user && !user.admin) || !user"></app-second-navbar>
+  <app-sidebar *ngIf="user && user.admin"></app-sidebar>-->
+  <div class="horizontal-layout horizontal-menu 1-column menu-expanded blank-page blank-page">
+    <div class="app-content center-layout">
+      <div id="maintenancePage">
+        <article>
+          <h1>{{'THE_APP_IS_TEMPORARILY_UNAVAILABLE' | translate }}.
+          </h1>
+          <p>{{'PLANNED_MAINTENANCE_IS_CURRENTLY_IN_PROGRESS' | translate }}. {{'PLEASE_COME_BACK_SOON' | translate }}
+            .</p>
+          <p>
+            {{'WE_APOLOGIZE_FOR_ANY_INCONVENIENCE' | translate }}.
+          </p>
+          <p id="signature">&mdash; <a href="mailto:maintenance@radem.ma" class="text-info">maintenance@radem.ma</a>
+          </p>
+          <p class="text-right">
+            <button class="btn btn-lg btn-outline-info"
+                    (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp;{{'REFRESH' | translate }}
+            </button>
+          </p>
+        </article>
+      </div>
     </div>
+  </div>
 
-    <app-footer></app-footer>
+  <app-footer></app-footer>
 
 </div>

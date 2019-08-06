@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
 import {UserDetails} from '../../../../shared/models/user.model';
 import {User} from '../../../models/user.model';
 import {AuthHelper} from '../../../../core/services/security/auth.helper';
+import {PrintService} from '../../../../shared/services/print.service';
 
 @Component({
   selector: 'app-new-refund-detail',
@@ -25,6 +26,7 @@ export class NewRefundDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private toastrService: ToastrService,
               private router: Router,
+              private printService: PrintService,
               private elementRef: ElementRef) {
   }
 
@@ -82,13 +84,16 @@ export class NewRefundDetailComponent implements OnInit {
   }
 
 
-  printComponent(cmpName) {
+  print(printSection?) {
     if (this.notFound) {
       this.toastrService.warning('Aucun contenu à imprimer', '');
       return;
     }
 
-    const mywindow = window.open();
+    debugger;
+
+    this.printService.print(printSection);
+   /* const mywindow = window.open();
 
     mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="../../assets/app/css/bootstrap.css">');
     mywindow.document.write('<link rel="stylesheet" type="text/css" href="../../assets/app/css/stylePrint.css"></head><body>');
@@ -100,7 +105,7 @@ export class NewRefundDetailComponent implements OnInit {
       mywindow.print();
       mywindow.close();
     }, 1000);
-
+*/
   }
 
 }

@@ -23,6 +23,7 @@ import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 import {PaymentStatusComponent} from './payment-status/payment-status.component';
 import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.component';
 import {RefundEditComponent} from './refund-edit/refund-edit.component';
+import {RequestNotFoundComponent} from './request-not-found/request-not-found.component';
 
 const routes: Routes = [
   {
@@ -190,6 +191,13 @@ const routes: Routes = [
         component: PaymentStatusComponent,
         data: {
           title: 'etat paiement'
+        }
+      },
+      {
+        path: ':type/request-not-found',
+        component: RequestNotFoundComponent,
+        data: {
+          title: 'Demande non trouvée'
         }
       }
 

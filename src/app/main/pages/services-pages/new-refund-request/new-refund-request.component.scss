@@ -1,0 +1,20 @@
+#fileUpload {
+  .btn-files {
+    label {
+      cursor: pointer;
+      line-height: 0;
+    }
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .btn-div {
+    display: block;
+    width: 100%;
+    border: none;
+    pointer-events: none;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    color: #1c2b36;
+  }
+}

@@ -1,6 +1,6 @@
 <body data-open="click" data-col="" class="menu-expanded fixed-navbar">
-<app-navbar></app-navbar>
-<app-second-navbar></app-second-navbar>
+<app-navbar *ngIf="user && !user.admin"></app-navbar>
+<app-second-navbar  *ngIf="user && !user.admin"></app-second-navbar>
 <div class="app-content content">
    <div class="content-wrapper">
       <router-outlet></router-outlet>

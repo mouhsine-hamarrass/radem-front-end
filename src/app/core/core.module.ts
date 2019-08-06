@@ -16,6 +16,7 @@ import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {SharedModule} from '../shared/shared.module';
 import {AdminGuard} from './guards/admin.guard';
 import {ClientGuard} from './guards/client.guard';
+import {AccountGuard} from './guards/account-guard.service';
 
 
 @NgModule(<NgModule>{
@@ -30,6 +31,7 @@ import {ClientGuard} from './guards/client.guard';
     LoginGuard,
     AuthHelper,
     AdminGuard,
+    AccountGuard,
     ClientGuard,
     {provide: ErrorHandler, useFactory: errorHandlerFactory},
     {provide: 'AuthService', useFactory: authFactory, deps: [HttpClient, AuthHelper]},

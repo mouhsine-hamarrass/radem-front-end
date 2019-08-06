@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {AuthHelper} from '../services/security/auth.helper';
 import {User} from '../../main/models/user.model';
 import {ProfileTypeEnum} from '../../shared/models/user.model';
+import {CommonUtil} from '../helpers/common.util';
 
 @Injectable()
 export class ClientGuard implements CanActivate {
@@ -17,11 +18,14 @@ export class ClientGuard implements CanActivate {
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
+    const token = CommonUtil.getCookie(AuthHelper.TOKEN_ID);
 
-    if (this.user && this.user.profile) {
+    if (token && this.user && this.user.profile) {
       if (this.user.profile.title !== ProfileTypeEnum.CLIENT) {
         this.router.navigate(['/admin']);
       }
+    } else {
+      this.router.navigate(['/login']);
     }
     return true;
   }

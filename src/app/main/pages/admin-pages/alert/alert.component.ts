@@ -19,7 +19,7 @@ export class AlertComponent implements OnInit {
   formAlert;
   FormGroup;
   isSubmitted = false;
-
+  alertTypes = ['ABONNEMENT', 'RESILIATION', 'REMBOURSEMENT', 'BRANCHEMENT'];
   @Input() modalRef: BsModalRef;
 
   @Input() alertId: number;
@@ -51,6 +51,7 @@ export class AlertComponent implements OnInit {
   get type() {
     return this.formAlert.get('type');
   }
+
   ngOnInit() {
     this.getAlert();
   }

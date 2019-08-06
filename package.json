@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "ngx-pagination": "^3.2.1",
     "@angular/animations": "^5.2.8",
     "@angular/common": "^5.2.8",
     "@angular/compiler": "^5.2.8",

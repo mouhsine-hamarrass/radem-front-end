@@ -1,31 +1,4 @@
-.btn-new-claim {
+.add-claim-btn {
   border-color: #2c5599 !important;
-  background-color: #2c5599!important;
-  color: #FFFFFF;
-
-}
-.btn-new-claim:hover{
-  border-color: #214479 !important;
-  background-color: #214479!important;
-}
-
-.card-header{
-  padding: 0.8rem;
-  margin-bottom: 0;
-  background-color: #eef0f3;
-  border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;
-  h3{
-    margin-top: 8px;
-  }
-}
-
-
-/*
-  Code par Rachid EL KADDOURI
-  -- Responsive Design
- */
-@media only screen and (max-width: 768px){
-  .container-btn-new-claim{
-    text-align: left !important;
-  }
+  background-color: #2c5599 !important;
 }

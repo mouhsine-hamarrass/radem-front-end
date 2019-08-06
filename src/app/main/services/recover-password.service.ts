@@ -16,8 +16,8 @@ export class RecoverPasswordService {
     this.urlApi = environment.apiConfig.apiUrl;
   }
 
-  sendToken(email: string): Observable<Response<Array<any>>> {
-    return this.httpClient.get<Response<Array<any>>>(`${this.urlApi}/auth/reset?email=${email}`);
+  sendToken(email: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.urlApi}/auth/reset?email=${email}`);
   }
 
   resetPassword(token: string, password: string): Observable<Response<Array<any>>> {

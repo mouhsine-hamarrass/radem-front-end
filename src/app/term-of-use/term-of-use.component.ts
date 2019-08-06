@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'app-term-of-use',
@@ -7,9 +7,13 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class TermOfUseComponent implements OnInit {
   @Input() hideNavigation = false;
-  constructor() { }
+
+  constructor(private renderer: Renderer2) {
+  }
 
   ngOnInit() {
+    this.renderer.setStyle(document.body, 'margin-left', '30px');
+    this.renderer.setStyle(document.body, 'margin-right', '30px');
   }
 
 }

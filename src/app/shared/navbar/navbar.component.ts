@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   public applogo: string;
   public href: string;
   alerts: Array<AlertNotificationModel> = [];
+  nbrUnreadNotifications = 0;
 
   constructor(private oauthService: OAuthService,
               private utilsService: UtilsService,
@@ -45,7 +46,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     }
     this.href = this.router.url;
     this.href = this.href.substr(1, 5);
-
     if (this.user && this.user.id && this.href !== 'admin' && !this.user.admin) {
       this.getNotifications();
     }
@@ -56,6 +56,11 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.homeService.getAlertsNotification(0, 10).subscribe(response => {
       if (response && response.data) {
         this.alerts = response.data['content'];
+        this.alerts.forEach(a => {
+          if (a.status === 'UNREAD') {
+            this.nbrUnreadNotifications += 1;
+          }
+        });
       }
     }, err => {
     });
@@ -84,6 +89,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.homeService.readAlertNotification(notification.id).subscribe(response => {
       if (response && response.data) {
         this.alerts.splice($index, 1, response.data);
+        if (this.nbrUnreadNotifications > 0) {
+          this.nbrUnreadNotifications -= 1;
+        }
       }
 
     }, err => {

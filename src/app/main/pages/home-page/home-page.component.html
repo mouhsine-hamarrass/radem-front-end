@@ -16,73 +16,64 @@
   <div class="col-12 content-header">
     <div class="row align-items-center">
 
-
-          <!-- *T LISTE ******* -->
-          <div class="col-md-3 has-border">
-            &nbsp;
-            <label class="Cap">
-              <i class="fa fa-list-ul icon "></i>&nbsp;
-              {{"CONTRACT_LISTS" | translate}}
-            </label>
-            <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
-                    (ngModelChange)="setContract(selectedContract)">
-              <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-              <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                {{contract.contractNo}}
-                ({{contract.type}})
-              </option>
-            </select>
-          </div>
-          <!-- *T END LISTE ******* -->
-
-
-          <!-- *T RAISON ******* -->
-          <div class="col-md-2 has-border" [hidden]="!clientDetails">
-            <label class="Cap">
-              <i class="fa fa-user icon"></i>&nbsp;
-              {{"COMPANY_NAME" | translate}}
-            </label>
-            <h6 class="sub-title" tooltip="Nom">
-              {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
-            </h6>
-          </div>
-          <!-- *T END RAISON ******* -->
-
-
-          <!-- *T ADDRESS ******* -->
-          <div class="col-md-4 has-border" [hidden]="!clientDetails">
-            <label class="Cap">
-              <i class="fa fa-map-marker icon"></i>&nbsp;
-              {{"ADDRESS" | translate}}
-            </label>
-            <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
-          </div>
-          <!-- *T END ADDRESS ******* -->
-
-          <!-- *T STATUS ******* -->
-          <div class="col-md-3 has-border" [hidden]="!clientDetails">
-            <!-- <div class="status text-left">
-
-               <i class="fa fa-circle icon"
-                  [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
-              <span>{{clientDetails?.contractStatus}}</span>
-            </div> -->
-            <label class="Cap" >
-              <i class="fa fa-circle-o-notch icon"></i>&nbsp;
-              {{"CONTRACT STATUS" | translate}}
-            </label>
-            <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
-          </div>
-        <!-- *T END STATUS ******* -->
-
-
+      <!-- *T LISTE ******* -->
+      <div class="col-md-3 has-border">
+        &nbsp;
+        <label class="Cap">
+          <i class="fa fa-list-ul icon "></i>&nbsp;
+          {{"CONTRACT_LISTS" | translate}}
+        </label>
+        <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
+                (ngModelChange)="setContract(selectedContract)">
+          <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+          <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+            {{contract.contractNo}}
+            ({{contract.type}})
+          </option>
+        </select>
       </div>
+      <!-- *T END LISTE ******* -->
+
+      <!-- *T RAISON ******* -->
+      <div class="col-md-2 has-border" [hidden]="!clientDetails">
+        <label class="Cap">
+          <i class="fa fa-user icon"></i>&nbsp;
+          {{"COMPANY_NAME" | translate}}
+        </label>
+        <h6 class="sub-title" tooltip="Nom">
+          {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
+        </h6>
+      </div>
+      <!-- *T END RAISON ******* -->
+
+      <!-- *T ADDRESS ******* -->
+      <div class="col-md-4 has-border" [hidden]="!clientDetails">
+        <label class="Cap">
+          <i class="fa fa-map-marker icon"></i>&nbsp;
+          {{"ADDRESS" | translate}}
+        </label>
+        <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+      </div>
+      <!-- *T END ADDRESS ******* -->
+
+      <!-- *T STATUS ******* -->
+      <div class="col-md-3 has-border" [hidden]="!clientDetails">
+        <!-- <div class="status text-left">
+
+           <i class="fa fa-circle icon"
+              [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
+          <span>{{clientDetails?.contractStatus}}</span>
+        </div> -->
+        <label class="Cap">
+          <i class="fa fa-circle-o-notch icon"></i>&nbsp;
+          {{"CONTRACT STATUS" | translate}}
+        </label>
+        <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+      </div>
+      <!-- *T END STATUS ******* -->
 
 
-
-
-
-
+    </div>
 
   </div>
 </div>
@@ -120,8 +111,8 @@
               <div class="font-weight-bold font-size-large text-white">
                 {{lastInvoice?.consumption || 0}}
 
-
-                <ng-container *ngIf="lastInvoice?.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
+                <ng-container
+                  *ngIf="lastInvoice?.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
                 <ng-template #waterOutput>m3</ng-template>
                 <ng-template #electOutput>KW</ng-template>
 
@@ -147,7 +138,8 @@
 
               <span class="text-white">{{'DATE' | translate}}</span>
               <div class="font-weight-bold font-size-large text-white">
-                <ng-container *ngIf="lastPayment?.date; then lastPaymentWithDateOutput else lastPaymentWithoutDateOutput"></ng-container>
+                <ng-container
+                  *ngIf="lastPayment?.date; then lastPaymentWithDateOutput else lastPaymentWithoutDateOutput"></ng-container>
                 <ng-template #lastPaymentWithDateOutput>
                   {{lastPayment?.date| date:'dd/MM/yyyy'}}
                 </ng-template>
@@ -172,7 +164,8 @@
 
               <span class="text-white">{{'LAST_INDEX_DATE' | translate}}</span>
               <div class="font-weight-bold font-size-large text-white">
-                <ng-container *ngIf="lastVisitLastIndexDetails?.dateLastIndex; then dateLastIndexWithDateOutput else dateLastIndexWithoutDateOutput"></ng-container>
+                <ng-container
+                  *ngIf="lastVisitLastIndexDetails?.dateLastIndex; then dateLastIndexWithDateOutput else dateLastIndexWithoutDateOutput"></ng-container>
                 <ng-template #dateLastIndexWithDateOutput>
                   {{lastVisitLastIndexDetails?.dateLastIndex| date:'dd/MM/yyyy'}}
                 </ng-template>
@@ -183,7 +176,8 @@
 
               <span class="text-white">{{'NEXT_VISITE' | translate}}</span>
               <div class="font-weight-bold font-size-large text-white">
-                <ng-container *ngIf="lastVisitLastIndexDetails?.dateNextVisit; then dateNextVisitWithDateOutput else dateNextVisitWithoutDateOutput"></ng-container>
+                <ng-container
+                  *ngIf="lastVisitLastIndexDetails?.dateNextVisit; then dateNextVisitWithDateOutput else dateNextVisitWithoutDateOutput"></ng-container>
                 <ng-template #dateNextVisitWithDateOutput>
                   {{lastVisitLastIndexDetails?.dateNextVisit| date:'dd/MM/yyyy'}}
                 </ng-template>
