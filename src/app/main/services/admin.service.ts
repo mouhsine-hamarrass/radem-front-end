@@ -473,7 +473,7 @@ export class AdminService {
     return this.httpClient.get<Response<Profile>>(`${this.apiUrl}/profiles/${idProfile}/find`, {headers: this.headers});
   }
 
-//Transactions creees par EL KASSMI
+// Transactions creees par EL KASSMI
 
   getPageableListTransactions(page: number, pageSize: number, filter ?: any, sort ?: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.apiUrl}/payments/transactions-list?page=${page}&size=${pageSize}`,

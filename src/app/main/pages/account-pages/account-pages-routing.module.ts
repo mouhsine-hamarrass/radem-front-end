@@ -4,7 +4,7 @@ import {AccountComponent} from './account/account.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'account/profile',
     children: [
       {
         path: 'profile.png',

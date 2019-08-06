@@ -17,7 +17,6 @@ export class AccountGuard implements CanActivate {
 
     this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
 
-    debugger;
     if (!this.user || !this.user.profile) {
       this.router.navigate(['/login']);
     }
