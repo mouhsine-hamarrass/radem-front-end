@@ -26,3 +26,37 @@ table {
     font-weight:100;
   }
 }
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.kt-quick-panel {
+  left: -550px;
+  width: 550px !important;
+}
+
+.kt-quick-panel--on {
+  left: 0 !important;
+}
+
+a {
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  background: transparent;
+  opacity: .6;
+}
+pagination-template {
+  width: 100%;
+}
+.info {
+  position: fixed;
+  right: 0;
+  height: 95%;
+}
+
+@import "~assets/style.bundle.css";
+

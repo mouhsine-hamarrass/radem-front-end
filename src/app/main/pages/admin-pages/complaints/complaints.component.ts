@@ -12,9 +12,11 @@ const messageUrl = 'https://portailsig.radem.ma/server/rest/services/message_rec
 })
 export class ComplaintsComponent implements OnInit {
 
+  flag = false;
+
   private myMarker: any;
   public currentPage = 1;
-  public itemsPerPage = 10;
+  public itemsPerPage = 7;
   public totalCount = 0;
   public todayCount = 0;
   public showPanel = false;
@@ -276,6 +278,7 @@ export class ComplaintsComponent implements OnInit {
 
   toggleSidePanel(show: boolean, reclamation?) {
     this.showPanel = show;
+    this.flag = true;
     if (reclamation) {
       this.selectedReclamation = reclamation;
       this.focusReclamation(reclamation);
@@ -283,6 +286,7 @@ export class ComplaintsComponent implements OnInit {
   }
 
   detailReclamtion(reclamation) {
+    console.log(reclamation + 'clicked');
     this.focusReclamation(reclamation);
   }
 
@@ -337,5 +341,8 @@ export class ComplaintsComponent implements OnInit {
         });
       }
     }
+  }
+  hideExecutorDetails() {
+    this.flag = false;
   }
 }

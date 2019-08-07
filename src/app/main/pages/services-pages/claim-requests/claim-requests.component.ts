@@ -26,7 +26,7 @@ export class ClaimRequestsComponent implements OnInit {
   totalElements: number;
   totalPages: number;
   numberOfItems: number;
-  public itemsPerPage = 10;
+  public itemsPerPage = 8;
 
   private myMarker: any;
   public showPanel = false;
@@ -236,6 +236,7 @@ export class ClaimRequestsComponent implements OnInit {
   }
 
   detailReclamtion(reclamation) {
+    console.log('clicked');
     this.focusReclamation(reclamation);
   }
 
@@ -243,7 +244,7 @@ export class ClaimRequestsComponent implements OnInit {
     this.selectedReclamation = reclamation;
     this.myMarker.setLatLng([this.selectedReclamation.geometry.coordinates[1], this.selectedReclamation.geometry.coordinates[0]]);
     this.loadMessages(this.selectedReclamation.properties.OBJECTID).then(response => {
-      // console.log(response);
+      console.log(response);
       this.messages = response;
     });
     const map = L.map('map')
