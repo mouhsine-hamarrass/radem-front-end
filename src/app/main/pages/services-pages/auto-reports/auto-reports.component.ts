@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {Setting} from '../../../models/setting.model';
 import * as _ from 'underscore';
+import {DynamicModel} from '../../../models/dynamic.model';
 
 @Component({
   selector: 'app-auto-reports',
@@ -23,7 +24,7 @@ export class AutoReportsComponent implements OnInit {
   today: any = moment();
   minDate: any = moment().subtract(5, 'years');
   releve: ReleveModel;
-  advices: Setting;
+  dynamic: DynamicModel;
 
   constructor(private adminService: AdminService,
               private services: ServicesService,
@@ -133,9 +134,9 @@ export class AutoReportsComponent implements OnInit {
   }
 
   getAdvice() {
-    this.adminService.getAdvices().subscribe(
+    this.adminService.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
         console.log(err)
       });

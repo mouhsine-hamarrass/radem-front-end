@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {environment} from 'environments/environment';
-import { Observable } from 'rxjs/Observable';
-import { Response } from '../../core/models/response.model';
+import {Observable} from 'rxjs/Observable';
+import {Response} from '../../core/models/response.model';
 import {AlertModel} from '../models/alert.model';
 import {User} from '../models/user.model';
 
@@ -21,8 +21,12 @@ export class ProfileService {
     return this.httpClient.get<Response<User>>(`${this.urlApi}/users/${id}/find`);
   }
 
-  saveProfile(profile: any): Observable<Response<any>>  {
+  saveProfile(profile: any): Observable<Response<any>> {
     return this.httpClient.post<Response<Array<any>>>(`${this.urlApi}/users/save-client-profile`, profile, {headers: headers});
+  }
+
+  verifyPassword(oldPassword: string): Observable<Response<boolean>> {
+    return this.httpClient.post<Response<boolean>>(`${this.urlApi}/users/verify-password`, oldPassword, {headers: headers});
   }
 
   getAlertNotifications(): Observable<Response<Array<AlertModel>>> {

@@ -10,6 +10,7 @@ import {PasswordValidatorDirective} from './password-valid.directive';
 import {DateValidatorDirective} from './date.directive';
 import {ToggleFullScreenDirective} from './toggle-full-screen.directive';
 import {PasswordMatchDirective} from './password-match.directive';
+import {OldPasswordMatchDirective} from './old-password-match.directive';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {PasswordMatchDirective} from './password-match.directive';
     NumericValidatorDirective,
     ToggleFullScreenDirective,
     PasswordMatchDirective,
+    OldPasswordMatchDirective,
     PasswordValidatorDirective
   ],
   declarations: [
@@ -32,6 +34,7 @@ import {PasswordMatchDirective} from './password-match.directive';
     EmailValidatorDirective,
     FocusDirective,
     HexadecimalValidatorDirective,
+    OldPasswordMatchDirective,
     MatchHeightDirective,
     MaxDateTodayValidatorDirective,
     NumericValidatorDirective,

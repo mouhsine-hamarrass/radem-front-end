@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../../../services/services.service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {EmbranchmentRequestModel} from '../../../models/embranchment-request.model';
-import {Setting} from '../../../models/setting.model';
 import {AdminService} from '../../../services/admin.service';
+import {DynamicModel} from '../../../models/dynamic.model';
 
 @Component({
   selector: 'app-embranchment-requests',
@@ -23,7 +23,7 @@ export class EmbranchmentRequestsComponent implements OnInit {
   embranchmentRequests: Array<EmbranchmentRequestModel>;
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
-  advices: Setting;
+  dynamic: DynamicModel;
   selectedContract: string;
 
   constructor(private services: ServicesService,
@@ -82,9 +82,9 @@ export class EmbranchmentRequestsComponent implements OnInit {
   }
 
   getAdvice() {
-    this.adminService.getAdvices().subscribe(
+    this.adminService.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
         console.log(err)
       });

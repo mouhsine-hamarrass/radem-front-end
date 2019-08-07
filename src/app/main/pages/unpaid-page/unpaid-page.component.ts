@@ -10,6 +10,8 @@ import {UnpaidModel} from '../../models/unpaid.model';
 import * as $ from 'jquery/dist/jquery.min.js';
 import {Router} from '@angular/router';
 import {DataService} from '../../../shared/services/data.service';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -23,6 +25,8 @@ export class UnpaidPageComponent implements OnInit {
     total: 0,
     invoices: []
   };
+
+  unpaidBalance = 0;
 
   // total amount that customer should pay
   total: number;
@@ -52,6 +56,8 @@ export class UnpaidPageComponent implements OnInit {
     private commonService: CommonService,
     private dataService: DataService,
     private router: Router,
+    private translate: TranslateService,
+    private toastrService: ToastrService,
     private services: ServicesService) {
     this.dropdownSettings = this.commonService.initMultiSelect('Filtrer les contrats', true, '', 1);
     this.total = 0;
@@ -71,19 +77,35 @@ export class UnpaidPageComponent implements OnInit {
     this.services.clientAttachedContracts().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts && this.clientContracts.length) {
-        for (const value of this.clientContracts) {
+        for (let i = 0; i < this.clientContracts.length; i++) {
+          const contractNo = this.clientContracts[i].contractNo;
+          this.services.getUnpaidBalanceByContractNo(contractNo).subscribe(res => {
+            this.unpaidBalance = res.data;
+            if (response && response.data) {
+              if (res.data <= 0) {
+                this.clientContracts.splice(i, 1);
+              }
+            }
+          }, err => {
+          });
+        }
+        setTimeout(() => {
+          _.each(this.clientContracts, (element: any) => {
+            _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
+          });
+          if (this.selectedContract && this.clientContracts.length > 0) {
+            this.selectedContract.push(this.clientContracts[0]);
+          }
+          this.getAllUnpaidBills();
+        }, 200);
+        /*for (const value of this.clientContracts) {
           if (value.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
             this.selectedContract.push(value);
           }
-        }
-        if (!this.selectedContract || this.clientContracts.length < 1) {
-          this.selectedContract.push(this.clientContracts[0]);
-        }
-        this.getAllUnpaidBills();
+        }*/
+
       }
-      _.each(this.clientContracts, (element: any) => {
-        _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
-      });
+
     }, err => {
       console.log(err)
     });
@@ -100,7 +122,7 @@ export class UnpaidPageComponent implements OnInit {
         _.each(this.contractsBills, (contract) => {
           if (contract.invoices) {
             _.each(contract.invoices, (invoice) => {
-              if (invoice.exigible) {
+              if (invoice.exigible || invoice.balance <= 0) {
                 this.addBill(contract, invoice, true);
               }
             });
@@ -263,6 +285,10 @@ export class UnpaidPageComponent implements OnInit {
   }
 
   submit() {
+    if (this.totalUnpaid <= 0 || this.total <= 0) {
+      this.toastrService.error(this.translate.instant('Le montant à règler doit être positif'), '');
+      return;
+    }
     if (this.selectedBills.invoices.length !== 0) {
       this.dataService.set('selectedBills', this.selectedBills);
       this.router.navigate(['/services/payment']);
@@ -336,4 +362,11 @@ export class UnpaidPageComponent implements OnInit {
     });
   }
 
+  getUnpaidBalanceByContract(contractNo: string) {
+    this.services.getUnpaidBalanceByContractNo(contractNo).subscribe(response => {
+      this.unpaidBalance = response.data;
+    }, err => {
+      console.log(err)
+    });
+  }
 }

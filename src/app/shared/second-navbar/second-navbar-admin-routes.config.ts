@@ -152,7 +152,7 @@ export const ADMIN_ROUTES: RouteInfo[] = [
         submenu: []
       }
     ]
-  },*/
+  },
   {
     path: '/admin/advices',
     title: 'Conseils',
@@ -163,7 +163,7 @@ export const ADMIN_ROUTES: RouteInfo[] = [
     isExternalLink: false,
     isNavHeader: false,
     submenu: []
-  }/*,
+  },
   {
     path: '/admin/alert-notifications',
     title: 'Notifications',

@@ -34,7 +34,8 @@
 
               <div class="table-responsive mx-auto">
                 <table class="table col-lg-12">
-                  <thead class="table-light">
+                  <thead class="table-light"
+                         style="color: #0e1522;background-color: #d1d4d9;border-color: #bfc3ca;">
                   <tr>
                     <th scope="col">{{'OBJECT' | translate }}</th>
                     <th scope="col">{{'DATE_OF_CREATION' | translate }}</th>
@@ -142,7 +143,7 @@
     <!--/ What is-->
     <div class="col-md-4">
       <div>
-        <div class="alert alert-dark">
+        <div class="alert" style="color: #0e1522;background-color: #d1d4d9;border-color: #bfc3ca; margin-top: 5px;">
           <h3>
             Réclamantion: #{{ selectedReclamation.properties.OBJECTID || '-' }}
           </h3>
@@ -214,44 +215,43 @@
             </div>
 
             <div class="kt-chat__right">
-              <a class="fa fa-close" style="font-size:24px" (click)="toggleSidePanel(false)"><i class="flaticon2-delete"></i></a>
+              <a class="fa fa-close" style="font-size:24px" (click)="toggleSidePanel(false)"><i
+                class="flaticon2-delete"></i></a>
             </div>
           </div>
         </div>
 
-        <div class="kt-portlet__body">
-          <perfect-scrollbar style="height: 60vh;; overflow: hidden;" [config]="config">
-            <div class="kt-chat__messages">
-              <div class="kt-chat__message">
-                <div class="kt-chat__user">
-                  <div class="kt-badge kt-badge--brand kt-badge--lg kt-margin-r-10"><i class="la la-user"></i></div>
-                  <a class="kt-chat__username">{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</a>
-                  <span
-                    class="kt-chat__datetime">{{ selectedReclamation.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
-                </div>
-                <div class="kt-chat__text kt-bg-light-success">
-                  {{ selectedReclamation.properties.DETAILS_RECLAMATION || '-' }}
-                </div>
+        <div class="kt-portlet__body" style="overflow-y: scroll; height: 500px;">
+          <div class="kt-chat__messages">
+            <div class="kt-chat__message">
+              <div class="kt-chat__user">
+                <div class="kt-badge kt-badge--brand kt-badge--lg kt-margin-r-10"><i class="la la-user"></i></div>
+                <a class="kt-chat__username">{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</a>
+                <span
+                  class="kt-chat__datetime">{{ selectedReclamation.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
               </div>
-              <div *ngFor="let item of messages" class="kt-chat__message"
-                   [class.kt-chat__message--right]="item.properties.EMITTEUR == 'RADEM'">
-                <div class="kt-chat__user" *ngIf="item.properties.EMITTEUR == 'RADEM'">
-                  <span class="kt-chat__datetime">{{ item.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
-                  <a class="kt-chat__username">{{ item.properties.EMITTEUR }}</a>
-                  <div class="kt-badge kt-badge--success kt-badge--brand kt-badge--lg kt-margin-r-10"><i
-                    class="la la-user"></i></div>
-                </div>
-                <div class="kt-chat__user" *ngIf="item.properties.EMITTEUR !== 'RADEM'">
-                  <div class="kt-badge kt-badge--brand kt-badge--lg kt-margin-r-10"><i class="la la-user"></i></div>
-                  <a class="kt-chat__username">{{ item.properties.EMITTEUR }}</a>
-                  <span class="kt-chat__datetime">{{ item.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
-                </div>
-                <div class="kt-chat__text kt-bg-light-brand">
-                  {{ item.properties.MESSAGE}}
-                </div>
+              <div class="kt-chat__text kt-bg-light-success">
+                {{ selectedReclamation.properties.DETAILS_RECLAMATION || '-' }}
               </div>
             </div>
-          </perfect-scrollbar>
+            <div *ngFor="let item of messages" class="kt-chat__message"
+                 [class.kt-chat__message--right]="item?.properties?.EMITTEUR == 'RADEM'">
+              <div class="kt-chat__user" *ngIf="item?.properties?.EMITTEUR == 'RADEM'">
+                <span class="kt-chat__datetime">{{ item?.properties?.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
+                <a class="kt-chat__username">{{ item?.properties?.EMITTEUR }}</a>
+                <div class="kt-badge kt-badge--success kt-badge--brand kt-badge--lg kt-margin-r-10"><i
+                  class="la la-user"></i></div>
+              </div>
+              <div class="kt-chat__user" *ngIf="item?.properties?.EMITTEUR !== 'RADEM'">
+                <div class="kt-badge kt-badge--brand kt-badge--lg kt-margin-r-10"><i class="la la-user"></i></div>
+                <a class="kt-chat__username">{{ item?.properties?.EMITTEUR }}</a>
+                <span class="kt-chat__datetime">{{ item?.properties?.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
+              </div>
+              <div class="kt-chat__text kt-bg-light-brand">
+                {{ item?.properties?.MESSAGE}}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="kt-portlet__foot">
@@ -267,7 +267,8 @@
               </div>
               <div class="kt_chat__actions">
                 <button type="button" class="btn btn-brand btn-md btn-upper btn-bold kt-chat__reply"
-                        (click)="sendMessage()">répondre</button>
+                        (click)="sendMessage()">répondre
+                </button>
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@ import {AuthHelper} from '../../core/services/security/auth.helper';
 })
 export class DashboardLayoutComponent implements OnInit, OnDestroy {
 
-  private user: User;
+  user: User;
 
   constructor(private renderer: Renderer2, private elRef: ElementRef) {
     this.renderer.setStyle(document.body, 'margin-left', '30px');

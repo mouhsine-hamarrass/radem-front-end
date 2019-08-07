@@ -17,6 +17,7 @@ import {LastInvoiceModel} from '../../models/last-invoice.model';
 import {LastPaymentModel} from '../../models/last-payment.model';
 import {SendContractModel} from '../../models/SendContract.model';
 import {v} from '@angular/core/src/render3';
+import {DynamicModel} from '../../models/dynamic.model';
 
 
 @Component({
@@ -27,17 +28,15 @@ import {v} from '@angular/core/src/render3';
 export class HomePageComponent implements OnInit {
   @ViewChild('contractDropDown') contractDropDown: ElementRef;
   public user: User;
-  advices: Setting;
+  dynamic: DynamicModel;
   clientContracts: Array<ContractAttachModel>;
   clientDetails: any;
-  unpaidBalance = '0.00';
+  unpaidBalance = 0;
   selectedContract: string;
   lastVisitLastIndexDetails: LastIndexNextVisitModel;
   lastInvoice: LastInvoiceModel;
   lastPayment: LastPaymentModel;
   attachContractRequest: any;
-
-  contractSending: SendContractModel;
 
   modalRef: BsModalRef;
   config = {
@@ -184,9 +183,9 @@ export class HomePageComponent implements OnInit {
   }
 
   getAdvice() {
-    this.adminServices.getAdvices().subscribe(
+    this.adminServices.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
         console.log(err)
       });
