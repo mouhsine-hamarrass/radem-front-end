@@ -41,11 +41,7 @@ import {TransactionsComponent} from './transactions/transactions.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 @NgModule({
   imports: [
@@ -73,8 +69,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }),
     SharedModule,
     NgxPaginationModule,
-    TooltipModule,
-    PerfectScrollbarModule
+    TooltipModule
   ],
   exports: [
     TranslateModule
@@ -108,11 +103,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TransactionsComponent
   ],
   providers: [
-    AdminService,
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    AdminService
   ]
 })
 export class AdminPagesModule {

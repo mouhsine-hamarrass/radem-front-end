@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {ServicesService} from '../../../services/services.service';
-import {Setting} from '../../../models/setting.model';
 import {AdminService} from '../../../services/admin.service';
 import {SimpleRefundModel} from '../../../models/simpleRefund.model';
+import {DynamicModel} from '../../../models/dynamic.model';
 
 @Component({
   selector: 'app-refund-request',
@@ -24,7 +24,7 @@ export class RefundRequestsComponent implements OnInit {
   refundRequests: Array<SimpleRefundModel>;
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
-  advices: Setting;
+  dynamic: DynamicModel;
 
   constructor(private services: ServicesService,
               private adminService: AdminService) {
@@ -54,7 +54,6 @@ export class RefundRequestsComponent implements OnInit {
 
       }
     }, err => {
-      console.log(err)
     });
   }
 
@@ -71,7 +70,6 @@ export class RefundRequestsComponent implements OnInit {
   }
 
   setContract(contractNo: string) {
-    debugger;
     this.page = 1;
     this.pageSize = 0;
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
@@ -86,11 +84,10 @@ export class RefundRequestsComponent implements OnInit {
 
 
   getAdvice() {
-    this.adminService.getAdvices().subscribe(
+    this.adminService.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
-        console.log(err)
       });
   }
 

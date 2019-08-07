@@ -26,7 +26,7 @@ export class ClaimRequestsComponent implements OnInit {
   totalElements: number;
   totalPages: number;
   numberOfItems: number;
-  public itemsPerPage = 8;
+  public itemsPerPage = 7;
 
   private myMarker: any;
   public showPanel = false;
@@ -53,6 +53,7 @@ export class ClaimRequestsComponent implements OnInit {
       'CONTRAT': '',
       'TEL': '',
       'EMAIL': '',
+      'CREATED_DATE': '',
       'DETAILS_RECLAMATION': ''
     },
     'geometry': {
@@ -151,6 +152,9 @@ export class ClaimRequestsComponent implements OnInit {
   }
 
   sendMessage() {
+    if (!this.message) {
+      return;
+    }
     const geojsonFeature = {
       'type': 'Feature',
       'properties': {

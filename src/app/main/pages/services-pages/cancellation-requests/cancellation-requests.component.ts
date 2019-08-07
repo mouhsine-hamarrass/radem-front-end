@@ -3,6 +3,7 @@ import {ServicesService} from '../../../services/services.service';
 import {ContractAttachModel} from '../../../models/contract-attach.model';
 import {AdminService} from '../../../services/admin.service';
 import {Setting} from '../../../models/setting.model';
+import {DynamicModel} from '../../../models/dynamic.model';
 
 @Component({
   selector: 'app-cancellation-requests',
@@ -22,7 +23,7 @@ export class CancellationRequestsComponent implements OnInit {
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
   selectedContract: string;
-  advices: Setting;
+  dynamic: DynamicModel;
 
   constructor(private services: ServicesService,
               private adminService: AdminService) {
@@ -81,11 +82,10 @@ export class CancellationRequestsComponent implements OnInit {
   }
 
   getAdvice() {
-    this.adminService.getAdvices().subscribe(
+    this.adminService.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
-        console.log(err)
       });
   }
 

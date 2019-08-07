@@ -270,7 +270,7 @@ const routes: Routes = [
                   redirectTo: 'unauthorized'
                 }
               }
-            },*/
+            },
       {
         path: 'advices',
         canActivate: [AdminGuard],
@@ -282,7 +282,7 @@ const routes: Routes = [
             redirectTo: 'unauthorized'
           }
         }
-      },
+      },*/
       {
         path: 'dynamic',
         canActivate: [AdminGuard],

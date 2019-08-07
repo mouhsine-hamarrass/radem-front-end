@@ -36,11 +36,7 @@ import {NewRefundDetailComponent} from './new-refund-detail/new-refund-detail.co
 import {NgxPrintModule} from 'ngx-print';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {RequestNotFoundComponent} from './request-not-found/request-not-found.component';
-import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 @NgModule({
   imports: [
@@ -61,8 +57,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       }
     }),
     SharedModule,
-    TooltipModule,
-    PerfectScrollbarModule
+    TooltipModule
   ],
   declarations: [
     RequestNotFoundComponent,
@@ -91,12 +86,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NewRefundDetailComponent,
     RefundEditComponent
   ],
-  providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
-  ]
+  providers: []
 })
 export class ServicesPagesModule {
   constructor(private translate: TranslateService) {

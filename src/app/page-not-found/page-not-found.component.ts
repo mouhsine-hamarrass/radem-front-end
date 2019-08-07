@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  private user: User;
+  user: User;
 
   constructor(private renderer: Renderer2,
               private router: Router,

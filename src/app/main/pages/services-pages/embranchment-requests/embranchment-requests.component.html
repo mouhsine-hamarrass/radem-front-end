@@ -6,8 +6,8 @@
                                           style="color: #2c5599;"></i> {{'Request_for_embranchment' | translate}}</h3>
     </div>
     <!--<div class="col-md-6 col-12 text-right container-btn-new-subscription-request">-->
-      <!--<a routerLink="/services/new-embranchement-request" class="btn btn-primary btn-new-subscription-request">-->
-        <!--<i class="fa fa-plus"></i> {{'New_request_for_embranchment' | translate}}</a>-->
+    <!--<a routerLink="/services/new-embranchement-request" class="btn btn-primary btn-new-subscription-request">-->
+    <!--<i class="fa fa-plus"></i> {{'New_request_for_embranchment' | translate}}</a>-->
     <!--</div>-->
   </div>
 </div>
@@ -86,7 +86,7 @@
         <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
         <div class="card-deck-content">
           <div class="card-body">
-            <div [innerHTML]="advices?.value || '' | safeHtml"></div>
+            <div [innerHTML]="dynamic?.content || '' | safeHtml"></div>
           </div>
         </div>
       </div>

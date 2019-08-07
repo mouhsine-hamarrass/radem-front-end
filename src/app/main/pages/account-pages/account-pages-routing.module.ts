@@ -4,10 +4,10 @@ import {AccountComponent} from './account/account.component';
 
 const routes: Routes = [
   {
-    path: 'account/profile',
+    path: '',
     children: [
       {
-        path: 'profile.png',
+        path: 'profile',
         component: AccountComponent,
         data: {
           title: 'Mon profil'

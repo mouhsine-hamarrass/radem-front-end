@@ -116,14 +116,14 @@
                       </tr>
                       <tr *ngFor="let bill of contractBills.invoices; let i = index"
                           class="bills-list"
-                          [ngClass]="bill.exigible ? 'bg-accent-1' : 'bg-accent-3'">
+                          [ngClass]="bill.exigible || bill.balance <= 0 ? 'bg-accent-1' : 'bg-accent-3'">
                         <td>
                           <div class="pure-checkbox">
                             <input type="checkbox" #checkboxes
                                    [id]="'head-' + contractBills.contactNo + '-' + i"
                                    [attr.data-type]="bill.exigible"
-                                   [disabled]="bill.exigible"
-                                   [checked]="bill.exigible || bill.checked"
+                                   [disabled]="bill.exigible || bill.balance <= 0"
+                                   [checked]="bill.exigible || bill.checked || bill.balance <= 0"
                                    [attr.data-value]="bill.balance"
                                    (change)="toggleAddBill($event, bill, contractBills)"/>
                             <label [for]="'head-' + contractBills.contactNo + '-' + i"></label>

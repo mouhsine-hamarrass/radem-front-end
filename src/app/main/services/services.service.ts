@@ -127,8 +127,8 @@ export class ServicesService {
     */
   }
 
-  getUnpaidBalanceByContractNo(contractNo: string): Observable<Response<string>> {
-    return this.httpClient.get<Response<string>>(`${this.urlApi}/contracts/unpaid-balance/${contractNo}`)
+  getUnpaidBalanceByContractNo(contractNo: string): Observable<Response<number>> {
+    return this.httpClient.get<Response<number>>(`${this.urlApi}/contracts/unpaid-balance/${contractNo}`)
     /*
     const mockData = {
         status: '200',

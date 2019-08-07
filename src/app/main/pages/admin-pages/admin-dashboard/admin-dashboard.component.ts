@@ -26,9 +26,6 @@ export class AdminDashboardComponent implements OnInit {
       this.requestsCount = response.data;
     });
 
-    this.adminService.getComplaintsCount().subscribe(response => {
-      this.complaintsCount = response.data;
-    });
     this.getTotalCount().then((count: number) => {
       this.complaintsCount = count;
     });

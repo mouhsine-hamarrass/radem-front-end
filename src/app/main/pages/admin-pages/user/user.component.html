@@ -1,241 +1,218 @@
-<div id="add-users">
+<div class="card-header content-header col-12">
+  <div>
+    <h3 class="content-header-title" *ngIf="edit"><i class="fa fa-bookmark"
+                                                     style="color: #2c5599;"></i> {{'EDIT_USER' | translate}}
+      : {{user?.lastname}} {{user?.firstname}}</h3>
 
-  <div class="card-header content-header back col-12" style="margin-bottom: 22px;">
-    <div class="row">
-      <div class="col-md-6 col-12">
-        <h4 class="content-header-title" *ngIf="!user?.id">{{'ADD_A_NEW_USER' | translate}}</h4>
-        <h4 class="content-header-title" *ngIf="user?.id">{{'EDIT_USER' | translate}} :
-          {{user.firstname}} {{user.lastname}}</h4>
-      </div>
-    </div>
+    <h3 class="content-header-title" *ngIf="!edit"><i class="fa fa-bookmark"
+                                                      style="color: #2c5599;"></i> {{'ADD_A_NEW_USER' | translate}}</h3>
   </div>
+
+</div>
+
+<div id="add-users">
   <div class="container-fluid">
     <div>
-      <div>
+      <div class="card-body">
         <section>
           <form [formGroup]="modalForm" (ngSubmit)='saveUser(modalForm)' novalidate>
-
-
-            <div class="form-group row required">
-              <label for="firstname" class="col-sm-3 col-form-label">{{'FIRST_NAME' |
-                translate}}</label>
-              <div class="col-sm-9">
-                <input type="text"
-                       class="form-control"
-                       id="firstname"
-                       placeholder="Prénom"
-                       formControlName="firstname">
-                <div class="text-danger"
-                     *ngIf="!modalForm.controls['firstname'].valid && modalForm.controls['firstname'].touched">
-                  <div *ngIf="modalForm.controls['firstname'].errors.required">
-                    {{'THE_FIRST_NAME_IS_REQUIRED' | translate}}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row required">
-              <label for="firstname" class="col-sm-3 col-form-label">{{'LAST_NAME' |
-                translate}}</label>
-              <div class="col-sm-9">
-                <input type="text"
-                       class="form-control"
-                       id="lastname"
-                       placeholder="Nom"
-                       formControlName="lastname"
-                       required>
-                <div class="text-danger"
-                     *ngIf="!modalForm.controls['lastname'].valid && modalForm.controls['lastname'].touched">
-                  <div *ngIf="modalForm.controls['lastname'].errors.required">
-                    {{'THE_NAME_IS_REQUIRED' | translate}}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--<div class="form-group row required">-->
-            <!--<label for="username" class="col-sm-3 col-form-label">{{'USERNAME' |-->
-            <!--translate}}</label>-->
-            <!--<div class="col-sm-9">-->
-            <!--<input type="text"-->
-            <!--class="form-control"-->
-            <!--id="username"-->
-            <!--placeholder="Nom de l'utilisateur"-->
-            <!--formControlName="username"-->
-            <!--required>-->
-            <!--<div class="text-danger"-->
-            <!--*ngIf="!modalForm.controls['username'].valid && modalForm.controls['username'].touched">-->
-            <!--<div *ngIf="modalForm.controls['username'].errors.required">-->
-            <!--{{'THE_USERNAME_IS_REQUIRED' | translate}}-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <div class="form-group row required">
-              <label for="email" class="col-sm-3 col-form-label">{{'MAIL' |
-                translate}}</label>
-              <div class="col-sm-9">
-                <input type="email"
-                       class="form-control"
-                       id="email"
-                       placeholder="{{'MAIL' | translate}}"
-                       formControlName="email"
-                       required>
-                <div class="text-danger"
-                     *ngIf="!modalForm.controls['email'].valid && modalForm.controls['email'].touched">
-                  <div *ngIf="modalForm.controls['email'].errors.required">
-                    {{'EMAIL_IS_REQUIRED' | translate}}
-                  </div>
-                  <div *ngIf="modalForm.controls['email'].errors.pattern">
-                    {{'THE_EMAIL_IS_INVALID' | translate}}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row required">
-              <label for="address" class="col-sm-3 col-form-label">
-                {{'ADDRESS' | translate}}</label>
-              <div class="col-sm-9">
-                                         <textarea class="form-control"
-                                                   id="address"
-                                                   rows="4"
-                                                   formControlName="address">
-                                         </textarea>
-              </div>
-            </div>
-
-            <div *ngIf="!user?.id">
-              <div class="form-group row required">
-                <label for="password" class="col-sm-3 col-form-label">{{'PASSWORD' |
-                  translate}}</label>
-                <div class="col-sm-9">
-                  <input type="password"
-                         class="form-control"
-                         id="password"
-                         placeholder="Mot de passe"
-                         formControlName="password"
-                         required>
-                  <div class="text-danger"
-                       *ngIf="!modalForm.controls['password'].valid && modalForm.controls['password'].touched">
-                    <div *ngIf="modalForm.controls['password'].errors.required">
-                      {{'PASSWORD_IS_REQUIRED' | translate}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row required">
-                <label for="passwordConf" class="col-sm-3 col-form-label">
-                  {{'CONFIRM_THE_PASSWORD' | translate}}
-                </label>
-                <div class="col-sm-9">
-                  <input type="password"
-                         class="form-control"
-                         id="passwordConf"
-                         placeholder="Mot de passe"
-                         formControlName="confirmPassword">
-                  <div class="text-danger"
-                       *ngIf="!modalForm.controls['confirmPassword'].valid && modalForm.controls['confirmPassword'].touched">
-                    <div *ngIf="modalForm.controls['confirmPassword'].errors.MatchPassword">
-                      {{'THE_TWO_PASSWORDS_ARE_NOT_IDENTICAL' | translate}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!--<div class="form-group row">
-                <label for="photo" class="col-sm-3 col-form-label">{{'PROFILE_PICTURE' |
-                    translate}}</label>
-                <div class="col-sm-9">
-                    <div class="card card-photo">
-                        <img [src]="result64 || defaultAvatar" id="img" #img>
-                    </div>
-                    <input type="file"
-                           id="photo"
-                           class="form-control"
-                           formControlName="avatar"
-                           (change)="onFileChange($event)"
-                           accept="image/*"
-                           #fileInput>
-                </div>
-            </div>-->
-
-
-            <!--<tab heading="Droits d'accès">
-              <div>
-                <div>
-                  <h5 class="text-muted" style="margin-top: 15px;">{{'TYPE_OF_ACCOUNT' | translate}}</h5><br/>
-                  &lt;!&ndash;<div class="form-group row required">&ndash;&gt;
-                  &lt;!&ndash;<label for="service" class="col-sm-3 col-form-label">{{'SERVICE' |&ndash;&gt;
-                  &lt;!&ndash;translate}}</label>&ndash;&gt;
-                  &lt;!&ndash;<div class="col-sm-9">&ndash;&gt;
-                  &lt;!&ndash;<select id='service'&ndash;&gt;
-                  &lt;!&ndash;class="form-control"&ndash;&gt;
-                  &lt;!&ndash;formControlName="serviceId"&ndash;&gt;
-                  &lt;!&ndash;required>&ndash;&gt;
-                  &lt;!&ndash;<option value="">{{'SELECT_VALUE' | translate}}</option>&ndash;&gt;
-                  &lt;!&ndash;<option *ngFor="let service of listServices"&ndash;&gt;
-                  &lt;!&ndash;value="{{service.id}}">{{service.name}}&ndash;&gt;
-                  &lt;!&ndash;</option>&ndash;&gt;
-                  &lt;!&ndash;</select>&ndash;&gt;
-                  &lt;!&ndash;</div>&ndash;&gt;
-                  &lt;!&ndash;</div>&ndash;&gt;
+            <tabset [justified]="true">
+              <tab heading="Profil" class="active">
+                <div class="container-fluid">
                   <div class="form-group row required">
-                    <label for="profilType" class="col-sm-3 col-form-label">{{'PROFIL' |
-                      translate}}</label>
+                    <label for="firstname" class="col-sm-3 col-form-label">{{'firstname' | translate}}</label>
                     <div class="col-sm-9">
-                      <select id='profilType'
-                              (change)="onProfileChange(profileId)"
-                              class="form-control"
-                              formControlName="profileId"
-                              required>
-                        <option value="">{{'SELECT_VALUE' | translate}}</option>
-                        <option *ngFor="let c of listProfiles"
-                                value="{{c.id}}">{{c.title}}
-                        </option>
-                      </select>
+                      <input type="text"
+                             class="form-control"
+                             id="firstname"
+                             placeholder="{{'prenom' | translate}}"
+                             formControlName="firstname"
+                             #incidentFirstname maxlength="255">
+                      <div *ngIf="firstname.invalid && (firstname.dirty || isSubmitted)" class="text-danger">
+                        <div *ngIf="firstname.errors.required">
+                          {{'le-prenom-est-obligatoire' | translate}}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    &lt;!&ndash;<label for="enabled" class="col-sm-3 col-form-label">{{'ACTIVATE_THE_ACCOUNT'&ndash;&gt;
-                    &lt;!&ndash;| translate}}</label>&ndash;&gt;
+                  <div class="form-group row required">
+                    <label for="firstname" class="col-sm-3 col-form-label">{{'lastname' | translate}}</label>
                     <div class="col-sm-9">
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="enabled"
-                               formControlName="enabled">
-                        <label class="form-check-label" for="enabled">
-                          {{'ACTIVATE_ACCOUNT_OTHERWISE_THE_USER_WILL_NOT_BE_ABLE_TO_ACCESS_HIS_ACCOUNT'
-                          | translate}}
-                        </label>
+                      <input type="text"
+                             class="form-control"
+                             id="lastname"
+                             placeholder="{{'lastname' | translate}}"
+                             formControlName="lastname"
+                             required
+                             #incidentLastname maxlength="255">
+                      <div *ngIf="lastname.invalid && (lastname.dirty || isSubmitted)" class="text-danger">
+                        <div *ngIf="lastname.errors.required">
+                          {{'le-nom-est-obligatoire' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row required">
+                    <label for="phone" class="col-sm-3 col-form-label">{{'PHONE' | translate}}</label>
+                    <div class="col-sm-9">
+                      <input type="tel"
+                             class="form-control"
+                             id="phone"
+                             formControlName="phone"
+                             required
+                             #incidentEmail maxlength="255">
+                      <div *ngIf="phone.invalid && (phone.dirty || isSubmitted)" class="text-danger">
+                        <div *ngIf="phone.errors.required">
+                          {{'tel-est-obligatoire' | translate}}
+                        </div>
+                        <div *ngIf="phone.errors?.pattern">
+                          {{'tel-est-invalide' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row required">
+                    <label for="email" class="col-sm-3 col-form-label">{{'EMAIL_ADDRESS' | translate}}</label>
+                    <div class="col-sm-9">
+                      <input type="email"
+                             class="form-control"
+                             id="email"
+                             placeholder="John@example.com"
+                             formControlName="email"
+                             required
+                             #incidentEmail maxlength="255">
+                      <div *ngIf="email.invalid && (email.dirty || isSubmitted)" class="text-danger">
+                        <div *ngIf="email.errors.required">
+                          {{'l-email-est-obligatoire' | translate}}
+                        </div>
+                        <div *ngIf="email.errors?.pattern">
+                          {{'l-email-est-invalide' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="!edit">
+                    <div class="form-group row required">
+                      <label for="password" class="col-sm-3 col-form-label">{{'PASSWORD' | translate}}</label>
+                      <div class="col-sm-9">
+                        <input type="password"
+                               class="form-control"
+                               id="password"
+                               placeholder="{{'PASSWORD' | translate}}"
+                               formControlName="password"
+                               required
+                               #incidentPassword maxlength="255">
+                        <!--<small class="text-muted block text-right">{{incidentPassword.value.length}} / 255</small> -->
+                        <div *ngIf="password.invalid && (password.dirty || isSubmitted)" class="text-danger">
+                          <div *ngIf="password.errors.required">
+                            {{'le-mot-de-passe-est-obligatoire' | translate}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row required">
+                      <label for="passwordConf"
+                             class="col-sm-3 col-form-label">{{'CONFIRM_THE_PASSWORD' | translate}}</label>
+                      <div class="col-sm-9">
+                        <input type="password"
+                               class="form-control"
+                               id="passwordConf"
+                               placeholder="{{'CONFIRM_THE_PASSWORD' | translate}}"
+                               formControlName="confirmPassword"
+                               #incidentPasswordConf maxlength="255">
+                        <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || isSubmitted)"
+                             class="text-danger">
+                          <div *ngIf="confirmPassword.errors.MatchPassword">
+                            {{'les-deux-mots-de-passes-ne-sont-pas-identiques' | translate}}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </tab>
+              <tab heading="Bio">
+                <div class="container-fluid">
+                  <div class="form-group row">
+                    <label for="photo" class="col-sm-3 col-form-label">{{'PROFILE_PICTURE' | translate}}</label>
+                    <div class="col-sm-9">
+                      <div class="card card-photo">
+                        <img [src]="result64 || defaultAvatar" id="img" #img>
+                      </div>
+                      <input type="file"
+                             id="photo"
+                             class="form-control"
+                             formControlName="avatar"
+                             (change)="onFileChange($event)"
+                             accept="image/gif, image/jpeg, image/png"
+                             #fileInput>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="address" class="col-sm-3 col-form-label">{{'ADDRESS' | translate}}</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control"
+                                id="address"
+                                rows="4"
+                                formControlName="address"
+                                #incidentAdress maxlength="255"></textarea>
 
-                &lt;!&ndash;<div class="card">&ndash;&gt;
-                &lt;!&ndash;<div class="card-body">&ndash;&gt;
-                &lt;!&ndash;<h5 class="card-title text-muted text-left">{{'ACCESS_RIGHTS' |&ndash;&gt;
-                &lt;!&ndash;translate}}</h5>&ndash;&gt;
-                &lt;!&ndash;<div class="row">&ndash;&gt;
-                &lt;!&ndash;<div *ngFor="let authority of authorities"&ndash;&gt;
-                &lt;!&ndash;class="col-md-6 float-left text-left">&ndash;&gt;
-                &lt;!&ndash;<label>&ndash;&gt;
-                &lt;!&ndash;<input type="checkbox" name="{{authority.id}}"&ndash;&gt;
-                &lt;!&ndash;class="form-group"&ndash;&gt;
-                &lt;!&ndash;[(checklist)]="selectedAuthorities"&ndash;&gt;
-                &lt;!&ndash;[checklistValue]="authority.id">&ndash;&gt;
-                &lt;!&ndash;{{authority.name}}</label>&ndash;&gt;
-                &lt;!&ndash;</div>&ndash;&gt;
-                &lt;!&ndash;</div>&ndash;&gt;
-                &lt;!&ndash;</div>&ndash;&gt;
-                &lt;!&ndash;</div>&ndash;&gt;
-              </div>
-            </tab>-->
+                    </div>
+                  </div>
+                </div>
+              </tab>
 
+              <tab heading="Droits d'accès">
+                <div class="container-fluid">
+                  <div>
+                    <div>
+                      <div class="form-group row required">
+                        <label for="profilType"
+                               class="col-sm-3 col-form-label">{{'TYPE_OF_ACCOUNT' | translate}}</label>
+                        <div class="col-sm-9">
+                          <select *ngIf="edit" (change)="onProfileChange(profileId)" class="form-control"
+                                  disabled
+                                  formControlName="profileId"
+                                  id='profilType'
+                                  required>
+                            <option value="">{{'selectionner-une-valeur' | translate}}</option>
+                            <option *ngFor="let c of listProfiles"
+                                    value="{{c.id}}">{{c.title}}
+                            </option>
+                          </select>
+                          <select *ngIf="!edit" (change)="onProfileChange(profileId)" class="form-control"
+                                  formControlName="profileId"
+                                  id='profilType1'
+                                  required>
+                            <option value="">{{'selectionner-une-valeur' | translate}}</option>
+                            <option *ngFor="let c of listProfiles"
+                                    value="{{c.id}}">{{c.title}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="enabled"
+                               class="col-sm-3 col-form-label">{{'ACTIVATE_THE_ACCOUNT' | translate}}</label>
+                        <div class="col-sm-9" style="margin-top: 11px;">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="enabled" formControlName="enabled">
+                            <label class="form-check-label"
+                                   for="enabled">{{'activer-le-compte-sinon-l-utilisateur-ne-sera-pas-en-mesure-d-acceder-a-son-compte' | translate}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tab>
+            </tabset>
             <div class="text-right">
-              <button type="button" class="btn btn-secondary" [routerLink]="['/admin/users']"> {{'CANCEL'
-                | translate}}
-              </button>
-              <button class="btn btn-success" [disabled]="modalForm.invalid">{{'SAVE' | translate}}
-              </button>
+              <button type="button" class="btn btn-secondary"
+                      [routerLink]="['/admin/users']"> {{'annuler' | translate}} </button>
+              <button class="btn btn-success"
+                      [disabled]="modalForm.invalid">{{ user?.id ? 'modifier' : 'enregistrer' | translate}}</button>
             </div>
           </form>
         </section>

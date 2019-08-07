@@ -32,9 +32,9 @@
               </app-data-not-available>
               <ng-template #dataAvailable>
                 <tr *ngFor="let invoice of selectedBills.invoices">
-                  <td>{{invoice.contractNo}}</td>
-                  <td>{{invoice.invoiceNo}}</td>
-                  <td>{{invoice.amount | numeral}}</td>
+                  <td>{{invoice?.contractNo}}</td>
+                  <td>{{invoice?.invoiceNo}}</td>
+                  <td>{{invoice?.amount | numeral}}</td>
                 </tr>
               </ng-template>
               </tbody>

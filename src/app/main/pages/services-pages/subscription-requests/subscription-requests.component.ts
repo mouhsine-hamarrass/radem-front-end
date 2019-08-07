@@ -5,6 +5,7 @@ import {SubscriptionRequestModel} from '../../../models/subscription-request.mod
 import {Setting} from '../../../models/setting.model';
 import {AdminService} from '../../../services/admin.service';
 import * as _ from 'underscore';
+import {DynamicModel} from '../../../models/dynamic.model';
 
 @Component({
   selector: 'app-subscription-requests',
@@ -24,7 +25,7 @@ export class SubscriptionRequestsComponent implements OnInit {
   subscriptionRequests: Array<SubscriptionRequestModel>;
   clientContracts: Array<ContractAttachModel>;
   contractNo: string;
-  advices: Setting;
+  dynamic: DynamicModel;
   selectedContract: string;
 
   constructor(private services: ServicesService,
@@ -79,9 +80,9 @@ export class SubscriptionRequestsComponent implements OnInit {
   }
 
   getAdvice() {
-    this.adminService.getAdvices().subscribe(
+    this.adminService.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
         console.log(err)
       });

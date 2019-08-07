@@ -38,41 +38,41 @@
               <div class="table-responsive mt-2">
                 <table class="table">
                   <thead class="table-light">
-                    <tr>
-                      <th scope="col" style="width: 23%">{{'REQUEST_NUMBER' | translate }}</th>
-                      <th scope="col" style="width: 20%">{{'REFUND_MODE' | translate }}</th>
-                      <th scope="col" style="width: 10%">{{'CONTRACTS' | translate }}</th>
-                      <th scope="col" style="width: 25%">{{'Correspondence_Address' | translate }}</th>
-                      <th scope="col" >{{'STATUS' | translate }}</th>
-                      <th scope="col" style="width: 30%">{{'ACTIONS' | translate }}</th>
-                    </tr>
+                  <tr>
+                    <th scope="col" style="width: 23%">{{'REQUEST_NUMBER' | translate }}</th>
+                    <th scope="col" style="width: 20%">{{'REFUND_MODE' | translate }}</th>
+                    <th scope="col" style="width: 10%">{{'CONTRACTS' | translate }}</th>
+                    <th scope="col" style="width: 25%">{{'Correspondence_Address' | translate }}</th>
+                    <th scope="col">{{'STATUS' | translate }}</th>
+                    <th scope="col" style="width: 30%">{{'ACTIONS' | translate }}</th>
+                  </tr>
                   </thead>
                   <tbody>
 
-                    <app-data-not-available
-                      *ngIf="!refundRequests || refundRequests.length == 0; else dataAvailable"
-                      [colSpan]="4"></app-data-not-available>
-                    <ng-template #dataAvailable>
-                      <tr *ngFor="let request of refundRequests">
-                        <td><b>{{request.requestNo}}</b></td>
-                        <td>{{request?.modePayment | translate }} </td>
-                        <td>
-                          <span class="badge badge-primary" *ngFor="let c of request?.contractNbrs">{{c}}</span>
-                        </td>
-                        <td>{{request?.mailingAddress}}</td>
-                        <td>
-                          <app-badge [status]="request?.status?.status"></app-badge>
-                        </td>
-                        <td>
-                          <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
-                             tooltip="Détails" [routerLink]="['/services/refund-detail/', request?.requestNo]"></i>
-                          <i  *ngIf="request?.status?.stepOrder === 1"  class="fa fa-edit cursor-pointer pl-1 text-warning"
-                             tooltip="Modifer" [routerLink]="['/services/edit-refund-request/', request?.requestNo]"></i>
-                          <i class="fa fa-file-pdf-o cursor-pointer pl-1 text-info"
-                             [routerLink]="['/services/new-refund-details/', request?.requestNo]" tooltip="Imprimer"></i>
-                        </td>
-                      </tr>
-                    </ng-template>
+                  <app-data-not-available
+                    *ngIf="!refundRequests || refundRequests.length == 0; else dataAvailable"
+                    [colSpan]="4"></app-data-not-available>
+                  <ng-template #dataAvailable>
+                    <tr *ngFor="let request of refundRequests">
+                      <td><b>{{request.requestNo}}</b></td>
+                      <td>{{request?.modePayment | translate }} </td>
+                      <td>
+                        <span class="badge badge-primary" *ngFor="let c of request?.contractNbrs">{{c}}</span>
+                      </td>
+                      <td>{{request?.mailingAddress}}</td>
+                      <td>
+                        <app-badge [status]="request?.status?.status"></app-badge>
+                      </td>
+                      <td>
+                        <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                           tooltip="Détails" [routerLink]="['/services/refund-detail/', request?.requestNo]"></i>
+                        <i *ngIf="request?.status?.stepOrder === 1" class="fa fa-edit cursor-pointer pl-1 text-warning"
+                           tooltip="Modifer" [routerLink]="['/services/edit-refund-request/', request?.requestNo]"></i>
+                        <i class="fa fa-file-pdf-o cursor-pointer pl-1 text-info"
+                           [routerLink]="['/services/new-refund-details/', request?.requestNo]" tooltip="Imprimer"></i>
+                      </td>
+                    </tr>
+                  </ng-template>
                   </tbody>
                 </table>
                 <app-pagination [showPagination]="totalPages > 1"
@@ -95,7 +95,7 @@
         <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
         <div class="card-deck-content">
           <div class="card-body">
-            <div [innerHTML]="advices?.value || '' | safeHtml"></div>
+            <div [innerHTML]="dynamic?.content || '' | safeHtml"></div>
           </div>
         </div>
       </div>

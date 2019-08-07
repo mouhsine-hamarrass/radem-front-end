@@ -88,7 +88,7 @@
         <h4 class="card-deck-title mb-0">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
         <div class="card-deck-content">
           <div class="card-body">
-            <div [innerHTML]="advices?.value || '' | safeHtml"></div>
+            <div [innerHTML]="dynamic?.content || '' | safeHtml"></div>
           </div>
         </div>
       </div>

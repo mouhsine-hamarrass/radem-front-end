@@ -33,6 +33,7 @@ export class ComplaintsComponent implements OnInit {
       'CONTRAT': '',
       'TEL': '',
       'EMAIL': '',
+      'CREATED_DATE': '',
       'DETAILS_RECLAMATION': ''
     },
     'geometry': {
@@ -165,6 +166,9 @@ export class ComplaintsComponent implements OnInit {
   }
 
   sendMessage() {
+    if (!this.message) {
+      return;
+    }
     const geojsonFeature = {
       'type': 'Feature',
       'properties': {

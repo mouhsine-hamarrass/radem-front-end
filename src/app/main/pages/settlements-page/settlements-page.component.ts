@@ -14,6 +14,7 @@ import {PieceDetailModel} from '../../models/pieceDetail.model';
 import {SendContractModel} from '../../models/SendContract.model';
 import {debug} from 'util';
 import {Setting} from '../../models/setting.model';
+import {DynamicModel} from '../../models/dynamic.model';
 
 @Component({
   selector: 'app-settlements',
@@ -53,7 +54,7 @@ export class SettlementsPageComponent implements OnInit {
   numberOfItems2: number;
   itemsPerPage2: number;
 
-  advices: Setting;
+  dynamic: DynamicModel;
   sort: any;
   filter: any;
   config = {
@@ -233,9 +234,9 @@ export class SettlementsPageComponent implements OnInit {
   }
 
   getAdvice() {
-    this.adminService.getAdvices().subscribe(
+    this.adminService.getDynamicContent('conseil').subscribe(
       response => {
-        this.advices = response.data;
+        this.dynamic = response.data;
       }, err => {
         console.log(err)
       });
