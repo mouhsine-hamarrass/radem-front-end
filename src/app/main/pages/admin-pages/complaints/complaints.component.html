@@ -30,8 +30,8 @@
 
 
               <div class="table-responsive mx-auto">
-                <table class="table col-lg-7">
-                  <thead class="table-light">
+                <table class="table col-lg-12">
+                  <thead class="table-light" style="color: #0e1522;background-color: #d1d4d9;border-color: #bfc3ca;">
                   <tr>
                     <th scope="col">{{'OBJECT' | translate }}</th>
                     <th scope="col">{{'DATE_OF_CREATION' | translate }}</th>
@@ -68,7 +68,7 @@
                       <td>
                         <span *ngIf="claim.properties.STATUT">{{ claim.properties.STATUT}}</span>
 
-                        <span *ngIf="!claim.properties.STATUT">Non spécifié</span>
+                        <span *ngIf="!claim.properties.STATUT">Sans Statut</span>
                       </td>
 
                       <td class="object-td">
@@ -88,7 +88,7 @@
                       <td>
                         <i class="fa fa-list-alt cursor-pointer pl-1 fa-comment"
                            (click)="toggleSidePanel(true, claim)" tooltip="Répondre"></i>
-                        <i class="fa fa-list-alt cursor-pointer pl-1 fa-edit"
+                        <i class="fa fa-angle-double-right cursor-pointer pl-1 fa-comment" style="font-size:20px;position: relative;top: 2px;"
                            (click)="nextStatus(claim)" tooltip="Modifier l'Etat"></i>
                         <i class="fa fa-list-alt cursor-pointer pl-1 fa-trash"
                            (click)="deleteFeature(claim)" tooltip="Supprimer"></i>
@@ -116,7 +116,7 @@
                     <a (click)="p.next()"><i class="page-link">Suivant</i></a>
                   </li>
                 </ul>
-                <div style="float: right; margin-right: 60px !important;">
+                <!--<div style="float: right; margin-right: 60px !important;">
                   <select class="form-control kt-font-brand" style="width: 60px;float: left;"
                           [(ngModel)]="itemsPerPage">
                     <option [ngValue]="10" selected>10</option>
@@ -126,20 +126,18 @@
                   <span style="position: relative;left: 5px; top: 15px">
                       Total de {{ p.getTotalItems() }} réclamations
                     </span>
-                </div>
+                </div>-->
               </div>
             </pagination-template>
           </div>
         </div>
-
       </div>
-
     </div>
 
     <!--/ What is-->
     <div class="col-md-4">
       <div>
-        <div class="alert alert-dark">
+        <div class="alert" style="color: #0e1522;background-color: #d1d4d9;border-color: #bfc3ca;">
           <h3>
             Réclamantion: #{{ selectedReclamation.properties.OBJECTID || '-' }}
           </h3>
@@ -183,6 +181,93 @@
 
 </div>
 
+
+<!-- quick side panel -->
+<div class="kt-quick-panel" id="kt_quick_panel" [ngClass]="{'kt-quick-panel--on': showPanel}"
+     style="overflow: hidden;opacity: 1;">
+  <div class="kt-quick-panel__content kt-padding-0">
+    <div class="kt-chat">
+      <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+        <div class="kt-portlet__head">
+          <div class="kt-chat__head ">
+            <div class="kt-chat__left">
+              <!--begin:: Aside Mobile Toggle -->
+              <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md kt-hidden-desktop"
+                      id="kt_chat_aside_mobile_toggle">
+                <i class="flaticon2-open-text-book"></i>
+              </button>
+              <!--end:: Aside Mobile Toggle-->
+            </div>
+
+            <div class="kt-chat__center">
+              <div class="kt-chat__label">
+                <a href="#" class="kt-chat__title">{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</a>
+                <span class="kt-chat__status">
+                  <span class="kt-badge kt-badge--dot kt-badge--success"></span> Réclamantion
+                  #{{ selectedReclamation.properties.OBJECTID || '-' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="kt-chat__right">
+              <a class="fa fa-close" style="font-size:24px" (click)="toggleSidePanel(false)"><i class="flaticon2-delete"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="kt-portlet__body">
+          <perfect-scrollbar style="height: 60vh;; overflow: hidden;" [config]="config">
+            <div class="kt-chat__messages">
+              <div class="kt-chat__message">
+                <div class="kt-chat__user">
+                  <div class="kt-badge kt-badge&#45;&#45;brand kt-badge&#45;&#45;lg kt-margin-r-10"><i class="la la-user"></i></div>
+                  <a class="kt-chat__username">{{ selectedReclamation.properties.NOM_PRENOM || '-' }}</a>
+                  <span class="kt-chat__datetime">{{ selectedReclamation.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
+                </div>
+                <div class="kt-chat__text kt-bg-light-success">
+                  {{ selectedReclamation.properties.DETAILS_RECLAMATION || '-' }}
+                </div>
+              </div>
+              <div *ngFor="let item of messages" class="kt-chat__message" [class.kt-chat__message&#45;&#45;right] = "item.properties.EMITTEUR == 'RADEM'" style="margin-left: 300px;">
+                <div class="kt-chat__user" *ngIf="item.properties.EMITTEUR == 'RADEM'">
+                  <span class="kt-chat__datetime">{{ item.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
+                  <a class="kt-chat__username">{{ item.properties.EMITTEUR }}</a>
+                  <div class="kt-badge kt-badge&#45;&#45;success kt-badge&#45;&#45;brand kt-badge&#45;&#45;lg kt-margin-r-10"><i class="la la-user"></i></div>
+                </div>
+                <div class="kt-chat__user" *ngIf="item.properties.EMITTEUR !== 'RADEM'">
+                  <div class="kt-badge kt-badge&#45;&#45;brand kt-badge&#45;&#45;lg kt-margin-r-10"><i class="la la-user"></i></div>
+                  <a class="kt-chat__username">{{ item.properties.EMITTEUR }}</a>
+                  <span class="kt-chat__datetime">{{ item.properties.CREATED_DATE | date: 'dd/MM/yyyy HH:mm'}}</span>
+                </div>
+                <div class="kt-chat__text kt-bg-light-brand" style="margin-left: 60px;">
+                  {{ item.properties.MESSAGE}}
+                </div>
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+
+        <div class="kt-portlet__foot">
+          <div class="kt-chat__input">
+            <div class="kt-chat__editor">
+              <textarea style="height: 50px" placeholder="Type here..." [(ngModel)]="message"></textarea>
+            </div>
+            <div class="kt-chat__toolbar">
+              <div class="kt_chat__tools">
+
+              </div>
+              <div class="kt_chat__actions">
+                <button type="button" class="btn btn-brand btn-md btn-upper btn-bold kt-chat__reply" (click)="sendMessage()">répondre</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showPanel" class="kt-quick-panel-overlay" (click)="toggleSidePanel(false)"></div>
+<!-- end quick side panel -->
 
 
 

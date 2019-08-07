@@ -46,7 +46,8 @@ export class ClaimRequestComponent implements OnInit {
       address: [null, [Validators.required]],
       claimType: ['001', [Validators.required]],
       claimText: [null, [Validators.required]],
-      attachment: null
+      attachment: null,
+      latLng: [null]
     });
   }
 
@@ -75,6 +76,10 @@ export class ClaimRequestComponent implements OnInit {
     }).addTo(map);
 
     this.myMarker = Marker;
+
+    Marker.on('dragend', function() {
+      (document.getElementById('latLng') as HTMLInputElement).value = String(Marker.getLatLng().lat + ', ' + Marker.getLatLng().lng);
+    });
   }
 
   // Soumettre la Réclamation au Serveur
