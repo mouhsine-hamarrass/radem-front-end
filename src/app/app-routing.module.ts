@@ -28,6 +28,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {INVOICE_PAGE_ROUTES} from './routes/invoices-page.routes';
 import {MaintenanceComponent} from './maintenance/maintenance.component';
 import {AccountGuard} from './core/guards/account-guard.service';
+import {SERVICE_APPROACH_ROUTES} from './routes/service-approach-page.routes';
 
 
 const appRoutes: Routes = [
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: INVOICE_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICE_APPROACH_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ALERT_NOTIFICATIONS_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
   {path: '**', component: PageNotFoundComponent}

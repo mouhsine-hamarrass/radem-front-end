@@ -156,5 +156,17 @@ export const ROUTES_OFFLINE: RouteInfo[] = [
     isExternalLink: false,
     isNavHeader: false,
     submenu: []
+  },
+
+  {
+    path: mainRoute + '/service_approach',
+    title: 'Service & Démarche',
+    icon: '',
+    clazz: 'nav-item',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    isNavHeader: false,
+    submenu: []
   }
 ];

@@ -22,6 +22,7 @@ import {DynamicContentPagesModule} from './pages/dynamic-content-pages/dynamic-c
 import {AlertNotificationsPageModule} from './pages/alert-notifications-page/alert-notifications-page.module';
 import {CommonService} from './services/common.service';
 import {TooltipModule} from 'ngx-bootstrap';
+import {ServiceApproachPageModule} from './pages/service-approach-page/service-approach-page.module';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import {TooltipModule} from 'ngx-bootstrap';
     AdvicePageModule,
     AlertNotificationsPageModule,
     DynamicContentPagesModule,
+    ServiceApproachPageModule,
 
     TranslateModule.forRoot({
       loader: {
