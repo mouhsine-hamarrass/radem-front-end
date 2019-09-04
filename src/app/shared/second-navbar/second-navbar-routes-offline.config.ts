@@ -159,7 +159,7 @@ export const ROUTES_OFFLINE: RouteInfo[] = [
   },
 
   {
-    path: mainRoute + '/service_approach',
+    path: mainRoute + '/service-approach',
     title: 'Service & Démarche',
     icon: '',
     clazz: 'nav-item',

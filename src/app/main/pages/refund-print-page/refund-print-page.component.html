@@ -1,0 +1,66 @@
+<div class="container pt-5">
+  <div class="text-center">
+    <h3><u class="text-uppercase">demande de remboursement</u></h3>
+  </div>
+  <div class="text-right pt-5">
+    <p class="text-uppercase">meknès le: {{ date | date : 'dd/MM/yyyy' }}</p>
+  </div>
+  <div class="row">
+    <div class="col-md-10 content">
+      <div>
+        <table>
+          <tbody>
+          <tr>
+            <td>Nom: </td>
+            <td class="text-uppercase">{{ info.info_nom }}  {{ info.info_prenom }}</td>
+          </tr>
+          <tr>
+            <td>Adresse: </td>
+            <td class="text-uppercase">{{ info.info_address }}</td>
+          </tr>
+          <tr>
+            <td>CIN: </td>
+            <td class="text-uppercase">{{ info.info_cin }}</td>
+          </tr>
+          <tr>
+            <td>Tél: </td>
+            <td>{{ info.info_tel }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center pt-5">
+        <p>A MONSIEUR LE DIRECTEUR GENERAL</p>
+        <p>DE LA RADEM-MEKNES</p>
+      </div>
+      <p>Objet : DEMANDE DE REMBOURSEMENT (RDC)</p>
+      <div class="p-5">
+        <div>
+          J’ai l’honneur de solliciter de votre haute bienveillance de bien vouloir m’accorder le remboursement
+          concernant les contrats résiliés :
+        </div>
+        <table class="mt-5">
+          <tbody>
+          <tr *ngIf="info.info_eau" >
+            <td>- Contrat d’eau</td>
+            <td>: {{ info.info_eau }}</td>
+          </tr>
+          <tr *ngIf="info.info_elec">
+            <td>- Contrat d’électricité</td>
+            <td>: {{ info.info_elec }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="mt-5">
+          <p>
+            Dans l’attente d’une suite favorable, Veuillez, agréer, Monsieur le directeur Général, mes salutations
+            distinguées.
+          </p>
+        </div>
+      </div>
+      <div class="signature">
+        <p>Signature du Client</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -175,7 +175,7 @@ export const ROUTES: RouteInfo[] = [
     },
 
     {
-        path: '/service_approach',
+        path: '/service-approach',
         title: 'Service & Démarche',
         icon: '',
         clazz: 'nav-item',

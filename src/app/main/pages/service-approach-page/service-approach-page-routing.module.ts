@@ -14,10 +14,7 @@ const routes: Routes = [
                 // canActivate: [NgxPermissionsGuard],
                 data: {
                     title: 'ServiceApproach Page',
-                    permissions: {
-                        only: [ProfileTypeEnum.CLIENT],
-                        redirectTo: 'unauthorized'
-                    }
+
                 },
             }
         ]
