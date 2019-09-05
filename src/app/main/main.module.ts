@@ -29,9 +29,9 @@ import {CounterPrintPageModule} from './pages/counter-print-page/counter-print-p
 import {ProvisionalCounterPageModule} from './pages/provisional-counter-page/provisional-counter-page.module';
 import {TaxPageModule} from './pages/tax-page/tax-page.module';
 import {TaxPrintPageModule} from './pages/tax-print-page/tax-print-page.module';
-import { TerminationPrintPageComponent } from './pages/termination-print-page/termination-print-page.component';
 import {TerminationPageModule} from './pages/termination-page/termination-page.module';
 import {TerminationPrintPageModule} from './pages/termination-print-page/termination-print-page.module';
+import {HelperService} from './services/helper.service';
 
 @NgModule({
     imports: [
@@ -70,6 +70,7 @@ import {TerminationPrintPageModule} from './pages/termination-print-page/termina
     providers: [
         ServicesService,
         UtilsService,
+        HelperService,
         ComplaintService,
         CommonService,
         {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}

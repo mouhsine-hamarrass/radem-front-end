@@ -6,7 +6,6 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
 import {NgxPermissionsModule} from 'ngx-permissions';
-import {HelperService} from '../../services/helper.service';
 import {RefundPrintPageRoutingModule} from './refund-print-page-routing.module';
 import {RefundPrintPageComponent} from './refund-print-page.component';
 
@@ -27,7 +26,7 @@ import {RefundPrintPageComponent} from './refund-print-page.component';
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [RefundPrintPageComponent]
 })
 export class RefundPrintPageModule {

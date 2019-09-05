@@ -14,7 +14,7 @@ export class TaxPrintPageComponent implements OnInit {
 
     constructor(private router: Router, private helper: HelperService) {
         if (!this.helper.getInfo()) {
-            this.router.navigate(['/tax-page']);
+            this.router.navigate(['/service-approach/tax-page']);
         } else {
             this.info = this.helper.getInfo();
         }
@@ -25,7 +25,7 @@ export class TaxPrintPageComponent implements OnInit {
 
     ngAfterViewInit() {
         if (!this.helper.getInfo()) {
-            this.router.navigate(['/tax-page']);
+            this.router.navigate(['/service-approach/tax-page']);
         } else {
             window.print();
         }

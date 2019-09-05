@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {HelperService} from '../../services/helper.service';
 
 @Component({
@@ -33,6 +33,7 @@ export class RefundRequestPageComponent implements OnInit {
             info_elec: this.elec
         }
         this.helper.setInfo(data);
-        this.router.navigate(['/refund-print']);
+        this.router.navigate(['/service-approach/refund-print']);
     }
 }
+

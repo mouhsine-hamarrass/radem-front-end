@@ -41,6 +41,6 @@ export class TaxPageComponent implements OnInit {
             info_rib: this.rib,
         }
         this.helper.setInfo(data);
-        this.router.navigate(['/tax-print']);
+        this.router.navigate(['/service-approach/tax-print']);
     }
 }

@@ -27,7 +27,7 @@ export class ProvisionalCounterPageComponent implements OnInit {
             info_address: this.address
         }
         this.helper.setInfo(data);
-        this.router.navigate(['/counter-print'])
+        this.router.navigate(['/service-approach/counter-print'])
     }
 
 

@@ -27,7 +27,7 @@ import {HelperService} from '../../services/helper.service';
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [RefundRequestPageComponent]
 })
 export class RefundRequestPageModule {

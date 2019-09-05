@@ -27,7 +27,7 @@ import {TerminationPrintPageComponent} from './termination-print-page.component'
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [TerminationPrintPageComponent]
 })
 export class TerminationPrintPageModule {

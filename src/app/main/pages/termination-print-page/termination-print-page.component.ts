@@ -15,7 +15,7 @@ export class TerminationPrintPageComponent implements OnInit {
 
     constructor(private router: Router, private helper: HelperService) {
         if (!this.helper.getInfo()) {
-            this.router.navigate(['/termination-page']);
+            this.router.navigate(['/service-approach/termination-page']);
         } else {
             this.info = this.helper.getInfo();
         }
@@ -26,7 +26,7 @@ export class TerminationPrintPageComponent implements OnInit {
 
     ngAfterViewInit() {
         if (!this.helper.getInfo()) {
-            this.router.navigate(['/termination-page']);
+            this.router.navigate(['/service-approach/termination-page']);
         } else {
             setTimeout(() => {
                 window.print();

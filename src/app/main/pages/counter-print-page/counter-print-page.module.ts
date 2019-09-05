@@ -27,7 +27,7 @@ import {CounterPrintPageComponent} from './counter-print-page.component';
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [CounterPrintPageComponent]
 })
 export class CounterPrintPageModule {

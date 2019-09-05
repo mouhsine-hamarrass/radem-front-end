@@ -7,42 +7,45 @@
     </div>
 </div>
 <div class="content-body">
-    <section class="row">
-        <div class="col-sm-12">
-            <!-- service & demarche-->
-            <div class="content">
-                <div class="deck card-deck-outline">
-                    <div class="deck-body">
-                        <div class="card-deck-content">
-                            <div class="card-body">
-                                <div [innerHTML]="dynamic?.content || '' | safeHtml"></div>
-                            </div>
+        <section class="row">
+            <div class="col-sm-12">
+                <!-- What is-->
+                <!-- Conseil et économie d'énergie-->
+                <div class="mb-0">
+                    <!--<div class="card-header">
+                        <h4 class="card-title">{{'ADVICE_AND_ENERGY_SAVING' | translate}}</h4>
+                        <a class="heading-elements-toggle">
+                            <i class="fa fa-ellipsis-v font-medium-3"></i>
+                        </a>
+                    </div>-->
+                    <div class="card-content collapse show">
+                        <div class="card-body">
+                            <div [innerHTML]="dynamic?.content || '' | safeHtml"></div>
                         </div>
                     </div>
                 </div>
+                <!--/ Conseil et économie d'énergie-->
             </div>
-            <!-- service & demarche-->
-        </div>
-    </section>
+        </section>
     <div class="container">
         <div class="row">
             <div class="col">
-                <a [routerLink]="['/provisional-counter']" ><h3>compteur-provisoire</h3></a>
+                <button type="button" class="btn btn-secondary bttn" [routerLink]="['/service-approach/provisional-counter']" >Engagement pour compteur provisoire</button>
             </div>
             <div class="col-4"></div>
             <div class="col">
-                <a [routerLink]="['/refund-request-page']"><h3>demande-remboursement</h3></a>
+                <button type="button" class="btn btn-secondary bttn" [routerLink]="['/service-approach/refund-request-page']" >Demande de Remboursement</button>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col">
-                <a [routerLink]="['/tax-page']"><h3>prelevement</h3></a>
+                <button type="button" class="btn btn-secondary bttn" [routerLink]="['/service-approach/tax-page']" >Prélèvement Bancaire</button>
             </div>
             <div class="col-4"></div>
             <div class="col">
-                <a [routerLink]="['/termination-page']"><h3>resiliation</h3></a>
+                <button type="button" class="btn btn-secondary bttn" [routerLink]="['/service-approach/termination-page']" >Demande de Résiliation</button>
             </div>
         </div>
     </div>

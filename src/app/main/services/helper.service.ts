@@ -11,11 +11,11 @@ export class HelperService {
     constructor() {
     }
 
-    setInfo(value: any) {
+    setInfo(value: any) {debugger;
         this.info = value;
     }
 
-    getInfo() {
+    getInfo() {debugger;
         return this.info;
     }
 

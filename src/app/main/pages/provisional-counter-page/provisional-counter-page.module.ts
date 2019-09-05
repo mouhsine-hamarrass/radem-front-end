@@ -27,7 +27,7 @@ import {ProvisionalCounterPageComponent} from './provisional-counter-page.compon
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [ProvisionalCounterPageComponent]
 })
 export class ProvisionalCounterPageModule {

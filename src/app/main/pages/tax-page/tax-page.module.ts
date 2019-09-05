@@ -27,7 +27,7 @@ import {TaxPageComponent} from './tax-page.component';
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [TaxPageComponent]
 })
 export class TaxPageModule {

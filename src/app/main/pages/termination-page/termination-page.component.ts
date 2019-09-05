@@ -54,7 +54,7 @@ export class TerminationPageComponent implements OnInit {
             info_dt_depose: this.dt_depose,
         }
         this.helper.setInfo(data);
-        this.router.navigate(['/termination-print']);
+        this.router.navigate(['/service-approach/termination-print']);
     }
 
 }

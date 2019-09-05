@@ -27,7 +27,7 @@ import {TaxPrintPageComponent} from './tax-print-page.component';
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [TaxPrintPageComponent]
 })
 export class TaxPrintPageModule {

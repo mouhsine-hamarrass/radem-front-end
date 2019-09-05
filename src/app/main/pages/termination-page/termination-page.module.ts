@@ -27,7 +27,7 @@ import {TerminationPageRoutingModule} from './termination-page-routing.module';
             }
         }),
     ],
-    providers: [HelperService],
+    providers: [],
     declarations: [TerminationPageComponent]
 })
 export class TerminationPageModule {

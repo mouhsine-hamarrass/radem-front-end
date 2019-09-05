@@ -13,7 +13,7 @@ export class CounterPrintPageComponent implements OnInit {
 
     constructor(private router: Router, private helper: HelperService) {
         if (!this.helper.getInfo()) {
-            this.router.navigate(['/provisional-counter']);
+            this.router.navigate(['/service-approach/provisional-counter']);
         } else {
             this.info = this.helper.getInfo();
         }
@@ -25,7 +25,7 @@ export class CounterPrintPageComponent implements OnInit {
 
     ngAfterViewInit() {
         if (!this.helper.getInfo()) {
-            this.router.navigate(['/provisional-counter']);
+            this.router.navigate(['/service-approach/provisional-counter']);
         } else {
             window.print();
         }
