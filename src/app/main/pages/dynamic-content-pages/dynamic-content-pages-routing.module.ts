@@ -15,6 +15,7 @@ import {ProfileTypeEnum} from '../../../shared/models/user.model';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {RefundRequestComponent} from './refund-request/refund-request.component';
 import {EmbranchmentRequestComponent} from './embranchment-request/embranchment-request.component';
+import {ServiceApproachPageComponent} from '../service-approach-page/service-approach-page.component';
 
 const routes: Routes = [
   {

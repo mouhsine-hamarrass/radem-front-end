@@ -28,6 +28,15 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {INVOICE_PAGE_ROUTES} from './routes/invoices-page.routes';
 import {MaintenanceComponent} from './maintenance/maintenance.component';
 import {AccountGuard} from './core/guards/account-guard.service';
+import {SERVICE_APPROACH_ROUTES} from './routes/service-approach-page.routes';
+import {REFUND_REQUEST_ROUTES} from './routes/refund-request-page.routes';
+import {REFUND_PRINT_ROUTES} from './routes/refund-print-page.routes';
+import {PROVISIONAL_COUNTER_ROUTES} from './routes/provisional-counter-page.routes';
+import {TAX_ROUTES} from './routes/tax-page.routes';
+import {TERMINATION_ROUTES} from './routes/termination-page.routes';
+import {COUNTER_PRINT_ROUTES} from './routes/counter-print-page.routes';
+import {TAX_PRINT_ROUTES} from './routes/tax-print-page.routes';
+import {TERMINATION_PRINT_ROUTES} from './routes/termination-print-page.routes';
 
 
 const appRoutes: Routes = [
@@ -54,8 +63,17 @@ const appRoutes: Routes = [
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: UNPAID_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: INVOICE_PAGE_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADVICE_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: SERVICE_APPROACH_ROUTES},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ALERT_NOTIFICATIONS_ROUTES, canActivate: [LoginGuard]},
   {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: ADMIN_PAGES_ROUTES, canActivate: [LoginGuard]},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: REFUND_REQUEST_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: REFUND_PRINT_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: PROVISIONAL_COUNTER_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: COUNTER_PRINT_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: TAX_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: TAX_PRINT_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: TERMINATION_ROUTES},
+  {path: '', component: BoxedLayoutComponent, data: {title: ''}, children: TERMINATION_PRINT_ROUTES},
   {path: '**', component: PageNotFoundComponent}
 ];
 

@@ -19,6 +19,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {RefundRequestComponent} from './refund-request/refund-request.component';
 import {EmbranchmentRequestComponent} from './embranchment-request/embranchment-request.component';
+import {ServiceApproachPageComponent} from '../service-approach-page/service-approach-page.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,7 @@ import {EmbranchmentRequestComponent} from './embranchment-request/embranchment-
     UnpaidComponent,
     ConsumptionComponent,
     RegulationComponent,
-    AdviceComponent
+    AdviceComponent,
   ]
 })
 export class DynamicContentPagesModule {

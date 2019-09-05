@@ -1,0 +1,34 @@
+<div class="container pt-5">
+  <div class="text-center">
+    <h2>
+      Engagement pour compteur provisoire
+    </h2>
+  </div>
+  <div class="row pt-5">
+    <div class="col-md-8 m-auto">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="nom">Votre Nom</label>
+            <input type="text" class="form-control" id="nom" placeholder="Votre Nom" [(ngModel)]="nom">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="prenom">Votre Prénom</label>
+            <input type="text" class="form-control" id="prenom" placeholder="Votre Prénom" [(ngModel)]="prenom">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="address">Adresse ou chantier</label>
+          <textarea class="form-control" id="address" rows="3" [(ngModel)]="address"></textarea>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-secondary" (click)="save()" >Imprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
