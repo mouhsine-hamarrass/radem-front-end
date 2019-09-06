@@ -117,13 +117,11 @@ export class SettlementsPageComponent implements OnInit {
   }
 
   getSettlements() {
-    let contract = this.contractForm.controls['contract'].value;
-    if (contract === undefined) {
-      contract = this.clientContracts[0].contractNo;
-    }
+   // let contract = this.contractForm.controls['contract'].value;
+
     // const startDate = moment(new Date(this.contractForm.controls['startDate'].value));
     //  const endDate = moment(new Date(this.contractForm.controls['endDate'].value));
-    this.adminService.getPageableSettlements(contract,
+    this.adminService.getPageableSettlements(this.selectedContract,
       this.page, this.pageSize)
       .subscribe(response => {
         this.pieces = response.data['content'];

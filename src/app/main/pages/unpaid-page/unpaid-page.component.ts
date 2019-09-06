@@ -85,18 +85,19 @@ export class UnpaidPageComponent implements OnInit {
               if (res.data <= 0) {
                 this.clientContracts.splice(i, 1);
               }
+              _.each(this.clientContracts, (element: any) => {
+                _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
+              });
+              if (this.selectedContract && this.clientContracts.length > 0) {
+                this.selectedContract.push(this.clientContracts[0]);
+              }
+              this.getAllUnpaidBills();
             }
           }, err => {
           });
         }
         setTimeout(() => {
-          _.each(this.clientContracts, (element: any) => {
-            _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
-          });
-          if (this.selectedContract && this.clientContracts.length > 0) {
-            this.selectedContract.push(this.clientContracts[0]);
-          }
-          this.getAllUnpaidBills();
+
         }, 200);
         /*for (const value of this.clientContracts) {
           if (value.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
