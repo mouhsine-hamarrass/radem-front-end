@@ -74,7 +74,8 @@ export class UnpaidPageComponent implements OnInit {
   }
 
   getClientAttachedContracts() {
-    this.services.clientAttachedContracts().subscribe(response => {
+    debugger;
+    this.services.clientAttachedContractsPositive().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts && this.clientContracts.length) {
         for (let i = 0; i < this.clientContracts.length; i++) {

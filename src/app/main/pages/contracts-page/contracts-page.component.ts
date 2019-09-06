@@ -109,7 +109,9 @@ export class ContractsPageComponent implements OnInit {
           contract.dateFinAbonnement =
             moment(new Date(contract.dateFinAbonnement)).format(environment.defaultDateFormatNoTime);
         });
+        debugger;
         this.contracts = response.data['content'];
+        console.log(response.data['content']);
         this.totalElements = response.data['totalElements'];
         this.totalPages = response.data['totalPages'];
         this.itemsPerPage = response.data['size'];

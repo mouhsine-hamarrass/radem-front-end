@@ -113,8 +113,8 @@
 
                 <ng-container
                   *ngIf="lastInvoice?.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
-                <ng-template #waterOutput>m3</ng-template>
-                <ng-template #electOutput>KW</ng-template>
+                <ng-template #waterOutput></ng-template>
+                <ng-template #electOutput></ng-template>
 
               </div>
             </div>

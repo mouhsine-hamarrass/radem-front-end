@@ -538,7 +538,7 @@
     "missing-key": "Absence de la clé"
   },
   "users.duplicate_username": "Ce nom d'utisateur existe déjà",
-  "users_duplicate_username": "Ce nom d'utisateur existe déjà",
+  "Email_duplicate_username": "Cet Email existe déjà",
   "CMI_REJECTED": "Rejetée par CMI",
   "WATERP_REJECTED": "Rejetée par WATERP",
   "AEL_REJECTED": "Rejetée par l'agence",

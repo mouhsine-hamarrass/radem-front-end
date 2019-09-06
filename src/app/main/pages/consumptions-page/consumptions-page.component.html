@@ -87,10 +87,6 @@
                     <td>{{consumption.meterNo}}</td>
                     <td>{{consumption.index}}</td>
                     <td>{{consumption.volume}}
-                      <ng-container
-                        *ngIf="consumption.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
-                      <ng-template #waterOutput>m3<sup></sup></ng-template>
-                      <ng-template #electOutput>KW</ng-template>
                     </td>
                     <td>{{consumption.annotationReleve}}</td>
                   </tr>
@@ -207,10 +203,6 @@
                     <td>{{consumption.meterNo}}</td>
                     <td>{{consumption.index}}</td>
                     <td>{{consumption.volume}}
-                      <ng-container
-                        *ngIf="consumption.typeNetwork === 'EAU'; then waterOutput else electOutput"></ng-container>
-                      <ng-template #waterOutput>m3<sup></sup></ng-template>
-                      <ng-template #electOutput>KW</ng-template>
                     </td>
                     <td>{{consumption.annotationReleve}}</td>
                   </tr>
