@@ -200,9 +200,9 @@ export class ClaimRequestsComponent implements OnInit {
               `Réclamation #${reclamation.properties.OBJECTID} a été supprimée`,
               'success'
             );
-            this.loadFeatures().then(response => {
-              if (response) {
-                this.reclamationCollection = response;
+            this.loadFeatures().then(res => {
+              if (res) {
+                this.reclamationCollection = res;
                 this.showPagination = true;
               }
             });

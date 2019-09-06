@@ -47,7 +47,8 @@ export class ClaimRequestComponent implements OnInit {
       claimType: ['001', [Validators.required]],
       claimText: [null, [Validators.required]],
       contractId: [null, [Validators.required]],
-      attachment: null
+      attachment: null,
+      latLng: [null]
     });
   }
 
@@ -68,7 +69,12 @@ export class ClaimRequestComponent implements OnInit {
       icon: this.Icon
     }).addTo(map);
 
+
     this.myMarker = Marker;
+
+    Marker.on('dragend', function () {
+      (document.getElementById('latLng') as HTMLInputElement).value = String(Marker.getLatLng().lat + ', ' + Marker.getLatLng().lng);
+    });
   }
 
   getClientAttachedContracts() {

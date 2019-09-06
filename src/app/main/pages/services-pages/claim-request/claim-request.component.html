@@ -2,7 +2,7 @@
 <div class="card-header content-header back col-12">
   <div class="row">
     <div class="col-md-6 col-12">
-      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'CLAIMS' | translate }}
+      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'NEW_REQUEST' | translate }}
       </h3>
     </div>
   </div>
@@ -22,8 +22,11 @@
                formControlName="phone" [ngClass]="{invalid: contact.invalid}">
       </fieldset>
       <fieldset>
-        <input id="address" placeholder="spécifiez votre position par un click sur la map" type="text"
+        <input id="address" placeholder="Votre adresse" type="text"
                tabindex="4" required formControlName="address">
+      </fieldset>
+      <fieldset>
+        <input id="latLng" placeholder="33.8935200, -5.5472700" type="text" tabindex="5" required formControlName="latLng" readonly>
       </fieldset>
       <p>Réclamation liée à:</p>
       <fieldset class="radio_group">
