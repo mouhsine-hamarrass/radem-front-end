@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 import {TranslateService} from '@ngx-translate/core';
 import {ServicesService} from '../../services/services.service';
 import {CounterModel} from '../../models/counter.model';
+import {ContractAttachModel} from '../../models/contract-attach.model';
 
 
 @Component({
@@ -119,6 +120,9 @@ export class ContractsPageComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+  }
+  setContract(contractNo: string) {
+    localStorage.setItem('SELECTED_CONTRACT', contractNo);
   }
 
   openModalLinkContract(template: TemplateRef<any>) {

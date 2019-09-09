@@ -27,6 +27,7 @@ export class SubscriptionRequestsComponent implements OnInit {
   contractNo: string;
   dynamic: DynamicModel;
   selectedContract: string;
+  private clientDetails: any;
 
   constructor(private services: ServicesService,
               private adminService: AdminService) {
@@ -72,6 +73,12 @@ export class SubscriptionRequestsComponent implements OnInit {
     this.contractNo = contractNo;
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.getSubscriptions(this.selectedContract);
+    this.services.getClientDetailsByContractNo(contractNo).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   pageChanged(page: number): void {

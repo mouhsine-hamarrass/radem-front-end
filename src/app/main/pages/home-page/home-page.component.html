@@ -111,11 +111,6 @@
               <div class="font-weight-bold font-size-large text-white">
                 {{lastInvoice?.consumption || 0}}
 
-                <ng-container
-                  *ngIf="lastInvoice?.typeNetwork.includes('EAU'); then waterOutput else electOutput"></ng-container>
-                <ng-template #waterOutput></ng-template>
-                <ng-template #electOutput></ng-template>
-
               </div>
             </div>
 

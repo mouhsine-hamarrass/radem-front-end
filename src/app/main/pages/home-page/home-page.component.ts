@@ -76,7 +76,7 @@ export class HomePageComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem(AuthHelper.USER_ID));
     }
     this.getAdvice();
-    this.getClientAttachedContracts()
+    this.getClientAttachedContracts();
   }
 
   getClientAttachedContracts() {

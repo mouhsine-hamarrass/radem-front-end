@@ -21,18 +21,69 @@
           <div class="card-body">
             <div class="card-text">
               <div class="col-12">
-                <div class="row">
-                  <label class="col-form-label">{{'CONTRACT' | translate }} <span
-                    class="danger">*</span>:</label>
-                  <div class="col-3">
-                    <select type="text" class="custom-select" #s
-                            (change)="setContract(s.value)" [(ngModel)]="selectedContract">
-                      <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                      <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                        {{contract.contractNo}}
-                        ({{contract.type}})
-                      </option>
-                    </select>
+                <div class="card-header content-header back sub-header row marginVisual">
+                  <div class="col-12 content-header">
+                    <div class="row align-items-center">
+
+                      <!-- *T LISTE ******* -->
+                      <div class="col-md-3 has-border">
+                        &nbsp;
+                        <label class="Cap">
+                          <i class="fa fa-list-ul icon "></i>&nbsp;
+                          {{"CONTRACT_LISTS" | translate}}
+                        </label>
+                        <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
+                                (ngModelChange)="setContract(selectedContract)">
+                          <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                          <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                            {{contract.contractNo}}
+                            ({{contract.type}})
+                          </option>
+                        </select>
+                      </div>
+                      <!-- *T END LISTE ******* -->
+
+                      <!-- *T RAISON ******* -->
+                      <div class="col-md-2 has-border" [hidden]="!clientDetails">
+                        <label class="Cap">
+                          <i class="fa fa-user icon"></i>&nbsp;
+                          {{"COMPANY_NAME" | translate}}
+                        </label>
+                        <h6 class="sub-title" tooltip="Nom">
+                          {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
+                        </h6>
+                      </div>
+                      <!-- *T END RAISON ******* -->
+
+                      <!-- *T ADDRESS ******* -->
+                      <div class="col-md-4 has-border" [hidden]="!clientDetails">
+                        <label class="Cap">
+                          <i class="fa fa-map-marker icon"></i>&nbsp;
+                          {{"ADDRESS" | translate}}
+                        </label>
+                        <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+                      </div>
+                      <!-- *T END ADDRESS ******* -->
+
+                      <!-- *T STATUS ******* -->
+                      <div class="col-md-3 has-border" [hidden]="!clientDetails">
+                        <!-- <div class="status text-left">
+
+                           <i class="fa fa-circle icon"
+                              [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
+                          <span>{{clientDetails?.contractStatus}}</span>
+                        </div> -->
+                        <label class="Cap">
+                          <i class="fa fa-circle-o-notch icon"></i>&nbsp;
+                          {{"CONTRACT STATUS" | translate}}
+                        </label>
+                        <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+                      </div>
+                      <!-- *T END STATUS ******* -->
+
+
+                    </div>
+
                   </div>
                 </div>
               </div>

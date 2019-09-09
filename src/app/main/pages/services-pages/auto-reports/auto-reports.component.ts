@@ -25,6 +25,7 @@ export class AutoReportsComponent implements OnInit {
   minDate: any = moment().subtract(5, 'years');
   releve: ReleveModel;
   dynamic: DynamicModel;
+  private clientDetails: any;
 
   constructor(private adminService: AdminService,
               private services: ServicesService,
@@ -50,6 +51,12 @@ export class AutoReportsComponent implements OnInit {
     localStorage.setItem('SELECTED_CONTRACT', id);
     this.contractId = id;
     this.getReleve();
+    this.services.getClientDetailsByContractNo(id).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   getClientAttachedContracts() {
@@ -117,6 +124,7 @@ export class AutoReportsComponent implements OnInit {
   }
 
   saveReleve() {
+    debugger;
     this.releve = new ReleveModel(
       this.reportForm.controls.id.value,
       this.reportForm.controls.index.value,

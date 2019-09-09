@@ -135,6 +135,7 @@ export class ConsumptionsPageComponent implements OnInit {
     this.FactBar1,
     this.FactBar2
   ];
+  private clientDetails: any;
 
 
   constructor(
@@ -291,6 +292,12 @@ export class ConsumptionsPageComponent implements OnInit {
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.getConsumptionHistoryCurrentYear(contractNo);
     this.getConsumptionReport(contractNo);
+    this.services.getClientDetailsByContractNo(contractNo).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   downloadXlsConsumptions() {

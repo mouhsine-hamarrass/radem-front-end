@@ -19,11 +19,14 @@
         <fieldset class="scheduler-border">
           <div class="card-content collapse show">
             <div class="card-body">
-              <div class="row">
-                <div class="col-6">
-                  <form class="form" [formGroup]="reportForm" (ngSubmit)="saveReleve()" novalidate>
+              <form class="form" [formGroup]="reportForm" (ngSubmit)="saveReleve()" novalidate>
+              <div class="card-header content-header back sub-header row marginVisual">
+                <div class="col-12 content-header">
+                  <div class="row align-items-center">
 
-                    <div class="form-group">
+                    <!-- *T LISTE ******* -->
+                    <div class="col-md-3 has-border">
+                      &nbsp;
                       <label for="comtract">{{'CONTRACT_NUMBER' | translate}}<span class="danger">*</span></label>
                       <select formControlName="contract" id="comtract" type="text"
                               class="form-control contract-dropdown"
@@ -34,6 +37,57 @@
                           ({{contract?.type}})
                         </option>
                       </select>
+                    </div>
+                    <!-- *T END LISTE ******* -->
+
+                    <!-- *T RAISON ******* -->
+                    <div class="col-md-2 has-border" [hidden]="!clientDetails">
+                      <label class="Cap">
+                        <i class="fa fa-user icon"></i>&nbsp;
+                        {{"COMPANY_NAME" | translate}}
+                      </label>
+                      <h6 class="sub-title" tooltip="Nom">
+                        {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
+                      </h6>
+                    </div>
+                    <!-- *T END RAISON ******* -->
+
+                    <!-- *T ADDRESS ******* -->
+                    <div class="col-md-4 has-border" [hidden]="!clientDetails">
+                      <label class="Cap">
+                        <i class="fa fa-map-marker icon"></i>&nbsp;
+                        {{"ADDRESS" | translate}}
+                      </label>
+                      <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+                    </div>
+                    <!-- *T END ADDRESS ******* -->
+
+                    <!-- *T STATUS ******* -->
+                    <div class="col-md-3 has-border" [hidden]="!clientDetails">
+                      <!-- <div class="status text-left">
+
+                         <i class="fa fa-circle icon"
+                            [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
+                        <span>{{clientDetails?.contractStatus}}</span>
+                      </div> -->
+                      <label class="Cap">
+                        <i class="fa fa-circle-o-notch icon"></i>&nbsp;
+                        {{"CONTRACT STATUS" | translate}}
+                      </label>
+                      <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+                    </div>
+                    <!-- *T END STATUS ******* -->
+
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+
+
+                    <div class="form-group">
                       <div class="text-danger"
                            *ngIf="!reportForm.controls['contract'].valid && reportForm.controls['contract'].touched">
                         <div *ngIf="reportForm.controls['contract'].errors.required">
@@ -85,13 +139,13 @@
                       </button>
                     </div>
 
-                  </form>
+
                 </div>
                 <div class="col-4" style="background-color: #ffffff;" class="img-responsive">
                   <img src="./assets/images/bg-counter.png" alt="rep">
                 </div>
               </div>
-
+              </form>
               <div class="content">
                 <div class="deck card-deck-outline">
                   <div class="deck-body">
