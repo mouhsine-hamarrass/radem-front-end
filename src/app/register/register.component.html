@@ -30,7 +30,7 @@
                                                                 <div class="text-danger"
                                                                      *ngIf="!firstStep.controls['lastname'].valid && firstStep.controls['lastname'].touched">
                                                                     <div *ngIf="firstStep.controls['lastname'].errors.required">
-                                                                        {{'FIELD_REQUIRED' | translate}}
+                                                                        {{'FIELD_REQUIRED' | translate}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -46,7 +46,7 @@
                                                                 <div class="text-danger"
                                                                      *ngIf="!firstStep.controls['firstname'].valid && firstStep.controls['firstname'].touched">
                                                                     <div *ngIf="firstStep.controls['firstname'].errors.required">
-                                                                        {{'FIELD_REQUIRED' | translate}}
+                                                                        {{'FIELD_REQUIRED' | translate}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -63,7 +63,7 @@
                                                                 <div class="text-danger"
                                                                      *ngIf="!firstStep.controls['phone'].valid && firstStep.controls['phone'].touched">
                                                                     <div *ngIf="firstStep.controls['phone'].errors.required">
-                                                                        {{'FIELD_REQUIRED' | translate}}
+                                                                        {{'FIELD_REQUIRED' | translate}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -79,7 +79,7 @@
                                                         <div class="text-danger"
                                                              *ngIf="!firstStep.controls['address'].valid && firstStep.controls['address'].touched">
                                                             <div *ngIf="firstStep.controls['address'].errors.required">
-                                                                {{'FIELD_REQUIRED' | translate}}
+                                                                {{'FIELD_REQUIRED' | translate}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -104,15 +104,35 @@
                                                     <div class="form-group">
                                                         <label for="username">{{'MAIL' | translate}} :
                                                             <span class="danger">*</span></label>
-                                                        <input formControlName="username" type="text" id="username"
-                                                               class="form-control required">
+                                                        <div class="row">
+                                                            <div class="col-sm-11">
+                                                                <input formControlName="username" type="text"
+                                                                       id="username" class="form-control required"
+                                                                       (change)="changeText()"/>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <img *ngIf="textUserName == 1"
+                                                                     src="http://www.xiconeditor.com/image/icons/loading.gif"/>
+                                                                <img *ngIf="textUserName == 2"
+                                                                     src="https://img.icons8.com/pastel-glyph/64/000000/checked.png"
+                                                                     width="37px">
+                                                                <img *ngIf="textUserName == 3"
+                                                                     src="https://img.icons8.com/flat_round/64/000000/error--v1.png"
+                                                                     width="37px">
+                                                            </div>
+                                                        </div>
                                                         <div class="text-danger"
                                                              *ngIf="!secondStep.controls['username'].valid && secondStep.controls['username'].touched">
                                                             <div *ngIf="secondStep.controls['username'].errors.required">
-                                                                {{'FIELD_REQUIRED' | translate}}
+                                                                {{'FIELD_REQUIRED' | translate}}
                                                             </div>
                                                             <div *ngIf="secondStep.controls['username'].errors.pattern">
-                                                                {{'THE_EMAIL_IS_INVALID' | translate}}
+                                                                {{'THE_EMAIL_IS_INVALID' | translate}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-danger" *ngIf="textUserName == 3">
+                                                            <div>
+                                                                {{'Email_duplicate_username' | translate}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -127,7 +147,7 @@
                                                                 <div class="text-danger"
                                                                      *ngIf="!secondStep.controls['password'].valid && secondStep.controls['password'].touched">
                                                                     <div *ngIf="secondStep.controls['password'].errors.required">
-                                                                        {{'FIELD_REQUIRED' | translate}}
+                                                                        {{'FIELD_REQUIRED' | translate}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -144,7 +164,7 @@
                                                                      *ngIf="!secondStep.controls['confirmPassword'].valid && secondStep.controls['confirmPassword'].touched">
                                                                     <div *ngIf="secondStep.controls['confirmPassword'].errors.MatchPassword">
                                                                         {{'THE_TWO_PASSWORDS_ARE_NOT_IDENTICAL'
-                                                                        | translate}}
+                                                                        | translate}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -168,7 +188,7 @@
                                                         <div class="text-danger"
                                                              *ngIf="!secondStep.controls['registrationQuestions'].valid && secondStep.controls['registrationQuestions'].touched">
                                                             <div *ngIf="secondStep.controls['registrationQuestions'].errors.required">
-                                                                {{'FIELD_REQUIRED' | translate}}
+                                                                {{'FIELD_REQUIRED' | translate}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -184,7 +204,7 @@
                                                         <div class="text-danger"
                                                              *ngIf="!secondStep.controls['answer'].valid && secondStep.controls['answer'].touched">
                                                             <div *ngIf="secondStep.controls['answer'].errors.required">
-                                                                {{'FIELD_REQUIRED' | translate}}
+                                                                {{'FIELD_REQUIRED' | translate}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -215,7 +235,8 @@
 
                                                 <section>
                                                     <div class="form-group">
-                                                        <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}</label>
+                                                        <label for="numeroContrat"
+                                                               class="control-label">{{'CONTRACT_NUMBER' | translate}}</label>
                                                         <input formControlName="numeroContrat" id="numeroContrat"
                                                                class="form-control required"/>
                                                         <!--
@@ -358,19 +379,22 @@
                                                             <div class="text-muted">{{clientRecap?.address}}</div>
                                                         </div>
 
-                                                        <div class="form-group" *ngIf="clientRecap?.numeroContrat && attachContractRequest.status === 'success'">
+                                                        <div class="form-group"
+                                                             *ngIf="clientRecap?.numeroContrat && attachContractRequest.status === 'success'">
                                                             <label class="font-weight-bold">{{'CONTRACT_NUMBER' |
                                                                 translate}}</label>
                                                             <div class="text-muted">{{clientRecap?.numeroContrat}}</div>
                                                         </div>
 
-                                                        <div class="form-group" *ngIf="clientRecap?.numeroFacture && attachContractRequest.status === 'success'">
+                                                        <div class="form-group"
+                                                             *ngIf="clientRecap?.numeroFacture && attachContractRequest.status === 'success'">
                                                             <label class="font-weight-bold">{{'BILL_NUMBER' |
                                                                 translate}}</label>
                                                             <div class="text-muted">{{clientRecap?.numeroFacture}}</div>
                                                         </div>
 
-                                                        <div class="form-group" *ngIf="clientRecap?.selectedMonth && attachContractRequest.status === 'success'">
+                                                        <div class="form-group"
+                                                             *ngIf="clientRecap?.selectedMonth && attachContractRequest.status === 'success'">
                                                             <label class="font-weight-bold">{{'MONTH' |
                                                                 translate}}</label>
                                                             <div class="text-muted">{{clientRecap?.selectedMonth}}</div>

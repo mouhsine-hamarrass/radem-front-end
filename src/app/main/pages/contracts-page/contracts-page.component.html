@@ -1,378 +1,380 @@
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-  <div class="row">
-    <div class="col-md-6 col-12">
-      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONTRACTS' |
-        translate}}</h3>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONTRACTS' |
+                translate}}</h3>
+        </div>
+        <div class="col-md-6 col-12 text-right">
+            <button class="btn btn-secondary"
+                    (click)="openModalLinkContract(linkContract)"><i class="fa fa-plus"></i>&nbsp;
+                {{'LINK_CONTRACT' | translate}}
+            </button>
+        </div>
     </div>
-    <div class="col-md-6 col-12 text-right">
-      <button class="btn btn-secondary"
-              (click)="openModalLinkContract(linkContract)"><i class="fa fa-plus"></i>&nbsp;
-        {{'LINK_CONTRACT' | translate}}
-      </button>
-    </div>
-  </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- What is-->
-      <div id="what-is" class="mb-0">
-        <div class="card-content">
-          <div class="card-body">
-            <div class="table-responsive">
-              <div class="row justify-content-between">
-                <div class="col-12">
-                  <div class="float-left">
-                    <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                  </div>
-                </div>
-              </div>
-              <table class="table">
-                <thead class="table-light">
-                <tr>
-                  <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate }}</th>
-                  <th scope="col">{{'STATUS' | translate }}</th>
-                  <th scope="col">{{'HOLDER' | translate }}</th>
-                  <th scope="col">{{'CONSUMPTION_ADDRESS' | translate }}</th>
-                  <th scope="col">{{'USAGE' | translate }}</th>
-                  <th scope="col">{{'COMMENT' | translate }}</th>
-                  <th scope="col" width="240">{{'ACTIONS' | translate }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <app-data-not-available
-                  *ngIf="!contracts || contracts.length == 0; else dataAvailable"
-                  [colSpan]="7"></app-data-not-available>
-                <ng-template #dataAvailable>
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <div id="what-is" class="mb-0">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="row justify-content-between">
+                                <div class="col-12">
+                                    <div class="float-left">
+                                        <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col" width="100">{{'CONTRACT_NUMBER' | translate }}</th>
+                                    <th scope="col">{{'STATUS' | translate }}</th>
+                                    <th scope="col">{{'HOLDER' | translate }}</th>
+                                    <th scope="col">{{'CONSUMPTION_ADDRESS' | translate }}</th>
+                                    <th scope="col">{{'USAGE' | translate }}</th>
+                                    <th scope="col">{{'COMMENT' | translate }}</th>
+                                    <th scope="col" width="240">{{'ACTIONS' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <app-data-not-available
+                                        *ngIf="!contracts || contracts.length == 0; else dataAvailable"
+                                        [colSpan]="7"></app-data-not-available>
+                                <ng-template #dataAvailable>
 
-                  <tr *ngFor="let contract of contracts" class="text-center">
-                    <td class="text-left">
-                      <span class="network-icon"
-                            [ngClass]="contract.typeNetwork.includes('EAU') ? 'water' : 'electricity'">
-                      <i class="fa fa-2x text-white"
-                         [ngClass]="contract.typeNetwork.includes('EAU') ? 'fa-tint' : 'fa-bolt'"></i> &nbsp;
-                     </span>&nbsp;
-                      <b>{{contract.contractNo}}</b>
-                    </td>
-                    <td>{{contract.status}}</td>
-                    <td>{{contract.holderLastname}} {{contract.holderFirstname}}</td>
-                    <td>{{contract.addressConsumption}}</td>
-                    <td class="text-left">
-                      <b>{{contract.usage}}</b>
-                    </td>
-                    <td>
-                      <button [tooltip]="contract.comment"
-                              triggers="focus" class="area-btn"
-                              placement="top">{{contract.comment | truncate: [60]}}</button>
-                    </td>
-                    <td>
-                      <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
-                         tooltip="Détails"
-                         (click)="openContractDetails(detailSubscription, contract.contractNo)"></i>
-                      <i class="fa fa-unlink cursor-pointer pl-1 text-warning"
-                         tooltip="Détachement"
-                         (click)="detachContract(contract.contractNo)"></i>
-                      <!--<i class="fa fa-ban cursor-pointer pl-1 text-danger"-->
-                      <!--tooltip="Résiliation"  *ngIf="true"-->
-                      <!--(click)="openModalCancelContract(cancelContract, contract.contractNo)"></i>-->
-                      <!--<i class="fa fa-money cursor-pointer pl-1 text-primary"-->
-                      <!--tooltip="Remboursement" *ngIf="true"-->
-                      <!--(click)="openModalRefundContract(refundContract, contract.contractNo)"></i>-->
-                    </td>
-                  </tr>
-                </ng-template>
-                </tbody>
-              </table>
+                                    <tr *ngFor="let contract of contracts" class="text-center">
+                                        <td class="text-left">
+                                            <span *ngIf="contract.typeNetwork == 'EA'" class="network-icon water"><i
+                                                    class="fa fa-2x text-white fa-tint"></i> &nbsp;</span>
+                                            <span *ngIf="contract.typeNetwork == 'MT'" class="network-icon electricity"><i
+                                                    class="fa fa-2x text-white fa-bolt"></i> &nbsp;</span>
+                                            <span *ngIf="contract.typeNetwork == 'BT'" class="network-icon water"><i
+                                                    class="fa fa-2x text-white fa-bolt"></i> &nbsp;</span>&nbsp;
+                                            <b>{{contract.contractNo}}</b>
+                                        </td>
+                                        <td>{{contract.status}}</td>
+                                        <td>{{contract.holderLastname}} {{contract.holderFirstname}}</td>
+                                        <td>{{contract.addressConsumption}}</td>
+                                        <td class="text-left">
+                                            <b>{{contract.usage}}</b>
+                                        </td>
+                                        <td>
+                                            <button [tooltip]="contract.comment"
+                                                    triggers="focus" class="area-btn"
+                                                    placement="top">{{contract.comment | truncate: [60]}}</button>
+                                        </td>
+                                        <td>
+                                            <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                                               tooltip="Détails"
+                                               (click)="openContractDetails(detailSubscription, contract.contractNo)"></i>
+                                            <i class="fa fa-unlink cursor-pointer pl-1 text-warning"
+                                               tooltip="Détachement"
+                                               (click)="detachContract(contract.contractNo)"></i>
+                                            <!--<i class="fa fa-ban cursor-pointer pl-1 text-danger"-->
+                                            <!--tooltip="Résiliation"  *ngIf="true"-->
+                                            <!--(click)="openModalCancelContract(cancelContract, contract.contractNo)"></i>-->
+                                            <!--<i class="fa fa-money cursor-pointer pl-1 text-primary"-->
+                                            <!--tooltip="Remboursement" *ngIf="true"-->
+                                            <!--(click)="openModalRefundContract(refundContract, contract.contractNo)"></i>-->
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <app-pagination [showPagination]="totalPages > 1"
+                                        [numberOfItems]="numberOfItems"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalElements"
+                                        [totalPages]="totalPages"
+                                        (onpageChanged)="pageChanged($event)"></app-pagination>
+                    </div>
+                </div>
+                <!--/ What is-->
             </div>
-            <app-pagination [showPagination]="totalPages > 1"
-                            [numberOfItems]="numberOfItems"
-                            [itemsPerPage]="itemsPerPage"
-                            [totalItems]="totalElements"
-                            [totalPages]="totalPages"
-                            (onpageChanged)="pageChanged($event)"></app-pagination>
-          </div>
         </div>
-        <!--/ What is-->
-      </div>
-    </div>
-  </section>
+    </section>
 </div>
 
 <ng-template #detailSubscription>
-  <div class="modal-header modal-radem">
-    <h4 class="modal-title pull-left">{{'CONTRACT_DETAILS' | translate}} N°: {{contract?.contractNo}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <tabset>
-      <tab heading="{{'INFORMATIONS' | translate}}">
-        <div class="card">
-          <div class="card-header"
-               [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
-            <h4>
-              <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
-            </h4>
-          </div>
-          <div class="card-content">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <p>
-                    <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.contractNo}}
-                  </p>
+    <div class="modal-header modal-radem">
+        <h4 class="modal-title pull-left">{{'CONTRACT_DETAILS' | translate}} N°: {{contract?.contractNo}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <tabset>
+            <tab heading="{{'INFORMATIONS' | translate}}">
+                <div class="card">
+                    <div class="card-header"
+                         [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
+                        <h4>
+                            <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
+                        </h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.contractNo}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>{{'STATUS' | translate }} : </b>{{contract?.status}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>{{'USAGE' | translate}} : </b>
+                                        <span class="text-muted">{{contract?.usage}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'PAYER' | translate}} : </b>{{contract?.payerName}}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>{{'HOLDER' | translate}} : </b>{{contract?.holderName}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.addressConsumption}}</p>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'SUBSCRIPTION_DATE' | translate}}
+                                        : </b>{{contract?.dateSubscription | date: 'dd-M-yyyy'}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6" *ngIf="contract?.dateEndSubscription">
+                                    <p><b>{{'SUBSCRIPTION_END_DATE' | translate}}
+                                        : </b>{{contract?.dateEndSubscription | date: 'dd-M-yyyy'}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="contract?.dateEffectSubscription">
+                                <div class="col-md-6">
+                                    <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}}
+                                        : </b>{{contract?.dateEffectSubscription | date: 'dd-M-yyyy'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <p><b>{{'STATUS' | translate }} : </b>{{contract?.status}}</p>
+            </tab>
+            <tab heading="{{'COUNTER' | translate}}" *ngIf="counter">
+                <div class="card">
+                    <div class="card-header"
+                         [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
+                        <h4>
+                            <i class="fa fa-tachometer"></i>&nbsp;Dossier compteur
+                        </h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <img src="assets/images/compteur.png" alt="Compteur" style="width: 80%">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mt-1">
+                                        <table>
+                                            <tr>
+                                                <th>{{'NUMBER_PHYSIC' | translate}} :</th>
+                                                <td>{{counter?.physiqueNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'STATUS' | translate}} :</th>
+                                                <td>{{counter?.status}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'COEFFICIENT' | translate}} :</th>
+                                                <td>{{counter?.coefficientReader}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'BRAND' | translate}} :</th>
+                                                <td>{{counter?.brand}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'NUMBER_WHEELS' | translate}} :</th>
+                                                <td>{{counter?.numberWheels}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'NUMBER_DIALS' | translate}} :</th>
+                                                <td>{{counter?.numberDial}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'DATE_FILING' | translate}} :</th>
+                                                <td>{{counter?.dateRemoval | date:'dd-MM-yyyy'}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <p>
-                    <b>{{'USAGE' | translate}} : </b>
-                    <span class="text-muted">{{contract?.usage}}</span>
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <p><b>{{'PAYER' | translate}} : </b>{{contract?.payerName}}</p>
-                </div>
-                <div class="col-md-6">
-                  <p>
-                    <b>{{'HOLDER' | translate}} : </b>{{contract?.holderName}}
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.addressConsumption}}</p>
-                </div>
-                <div class="col-md-6"></div>
-              </div>
-              <br/>
-              <div class="row">
-                <div class="col-md-6">
-                  <p><b>{{'SUBSCRIPTION_DATE' | translate}} : </b>{{contract?.dateSubscription | date: 'dd-M-yyyy'}}
-                  </p>
-                </div>
-                <div class="col-md-6" *ngIf="contract?.dateEndSubscription">
-                  <p><b>{{'SUBSCRIPTION_END_DATE' | translate}}
-                    : </b>{{contract?.dateEndSubscription | date: 'dd-M-yyyy'}}
-                  </p>
-                </div>
-              </div>
-              <div class="row" *ngIf="contract?.dateEffectSubscription">
-                <div class="col-md-6">
-                  <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}}
-                    : </b>{{contract?.dateEffectSubscription | date: 'dd-M-yyyy'}}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </tab>
-      <tab heading="{{'COUNTER' | translate}}" *ngIf="counter">
-        <div class="card">
-          <div class="card-header"
-               [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
-          <h4>
-              <i class="fa fa-tachometer"></i>&nbsp;Dossier compteur
-            </h4>
-          </div>
-          <div class="card-content">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="text-center">
-                    <img src="assets/images/compteur.png" alt="Compteur" style="width: 80%">
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="mt-1">
-                    <table>
-                      <tr>
-                        <th>{{'NUMBER_PHYSIC' | translate}} :</th>
-                        <td>{{counter?.physiqueNo}}</td>
-                      </tr>
-                      <tr>
-                        <th>{{'STATUS' | translate}} :</th>
-                        <td>{{counter?.status}}</td>
-                      </tr>
-                      <tr>
-                        <th>{{'COEFFICIENT' | translate}} :</th>
-                        <td>{{counter?.coefficientReader}}</td>
-                      </tr>
-                      <tr>
-                        <th>{{'BRAND' | translate}} :</th>
-                        <td>{{counter?.brand}}</td>
-                      </tr>
-                      <tr>
-                        <th>{{'NUMBER_WHEELS' | translate}} :</th>
-                        <td>{{counter?.numberWheels}}</td>
-                      </tr>
-                      <tr>
-                        <th>{{'NUMBER_DIALS' | translate}} :</th>
-                        <td>{{counter?.numberDial}}</td>
-                      </tr>
-                      <tr>
-                        <th>{{'DATE_FILING' | translate}} :</th>
-                        <td>{{counter?.dateRemoval | date:'dd-MM-yyyy'}}</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </tab>
-    </tabset>
-  </div>
+            </tab>
+        </tabset>
+    </div>
 </ng-template>
 
 <ng-template #linkContract>
-  <div class="modal-header bg-radem">
-    <h4 class="modal-title pull-left">
-      {{'LINK_CONTRACT' | translate}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
-      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form role="form" novalidate [formGroup]="formLinkContract">
-      <div class="form-group">
-        <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}<span
-          class="danger">*</span></label>
-        <input formControlName="numeroContrat" id="numeroContrat" class="form-control required"/>
-        <div class="text-danger"
-             *ngIf="!formLinkContract.controls['numeroContrat'].valid && formLinkContract.controls['numeroContrat'].touched">
-          <div *ngIf="formLinkContract.controls['numeroContrat'].errors.required">
-            {{'FIELD_REQUIRED' | translate}}
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="numeroFacture" class="control-label">{{'BILL_NUMBER' | translate}}<span
-              class="danger">*</span></label>
-            <input formControlName="numeroFacture" id="numeroFacture" class="form-control required"/>
-            <div class="text-danger"
-                 *ngIf="!formLinkContract.controls['numeroFacture'].valid && formLinkContract.controls['numeroFacture'].touched">
-              <div *ngIf="formLinkContract.controls['numeroFacture'].errors.required">
-                {{'FIELD_REQUIRED' | translate}}
-              </div>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">
+            {{'LINK_CONTRACT' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" novalidate [formGroup]="formLinkContract">
+            <div class="form-group">
+                <label for="numeroContrat" class="control-label">{{'CONTRACT_NUMBER' | translate}}<span
+                        class="danger">*</span></label>
+                <input formControlName="numeroContrat" id="numeroContrat" class="form-control required"/>
+                <div class="text-danger"
+                     *ngIf="!formLinkContract.controls['numeroContrat'].valid && formLinkContract.controls['numeroContrat'].touched">
+                    <div *ngIf="formLinkContract.controls['numeroContrat'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="monthNumber" class="control-label">{{'MONTH' | translate}}<span
-              class="danger">*</span></label>
-            <select id="monthNumber" formControlName="month" class="form-control" required>
-              <option value="" disabled selected>Choisir un mois</option>
-              <option class="month" *ngFor="let month of months; let i = index"
-                      [value]="i+1">{{month}}
-              </option>
-            </select>
-            <div class="text-danger"
-                 *ngIf="!formLinkContract.controls['month'].valid && formLinkContract.controls['month'].touched">
-              <div *ngIf="formLinkContract.controls['month'].errors.required">
-                {{'FIELD_REQUIRED' | translate}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="mt-3 mb-1" *ngIf="attachContractRequest?.status">
-        <div role="alert"
-             [class]="'alert alert-' + attachContractRequest?.status">
-          <b class="alert-link">{{attachContractRequest?.message}}</b>.
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn btn-outline-primary" (click)="linkMyContract(formLinkContract.value);"
-            [disabled]="formLinkContract.invalid"> {{'LINK_CONTRACT' | translate}}
-    </button>
-    <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
-    </button>
-  </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="numeroFacture" class="control-label">{{'BILL_NUMBER' | translate}}<span
+                                class="danger">*</span></label>
+                        <input formControlName="numeroFacture" id="numeroFacture" class="form-control required"/>
+                        <div class="text-danger"
+                             *ngIf="!formLinkContract.controls['numeroFacture'].valid && formLinkContract.controls['numeroFacture'].touched">
+                            <div *ngIf="formLinkContract.controls['numeroFacture'].errors.required">
+                                {{'FIELD_REQUIRED' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="monthNumber" class="control-label">{{'MONTH' | translate}}<span
+                                class="danger">*</span></label>
+                        <select id="monthNumber" formControlName="month" class="form-control" required>
+                            <option value="" disabled selected>Choisir un mois</option>
+                            <option class="month" *ngFor="let month of months; let i = index"
+                                    [value]="i+1">{{month}}
+                            </option>
+                        </select>
+                        <div class="text-danger"
+                             *ngIf="!formLinkContract.controls['month'].valid && formLinkContract.controls['month'].touched">
+                            <div *ngIf="formLinkContract.controls['month'].errors.required">
+                                {{'FIELD_REQUIRED' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 mb-1" *ngIf="attachContractRequest?.status">
+                <div role="alert"
+                     [class]="'alert alert-' + attachContractRequest?.status">
+                    <b class="alert-link">{{attachContractRequest?.message}}</b>.
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn btn-outline-primary" (click)="linkMyContract(formLinkContract.value);"
+                [disabled]="formLinkContract.invalid"> {{'LINK_CONTRACT' | translate}}
+        </button>
+        <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
+        </button>
+    </div>
 </ng-template>
 
 <ng-template #cancelContract>
-  <div class="modal-header bg-radem">
-    <h4 class="modal-title pull-left">
-      {{'CANCEL_CONTRACT' | translate}} {{modalRef.content}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
-      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form role="form" novalidate [formGroup]="formCancelContract">
-      <div class="form-group">
-        <label for="dateDepot" class="control-label">{{'DATE_DEPOT_COUNTER' | translate}}<span
-          class="danger">*</span></label>
-        <input [owlDateTime]="sd"
-               [owlDateTimeTrigger]="sd"
-               [min]="today"
-               formControlName="dateDepot"
-               class="form-control date-readonly"
-               id="dateDepot" readonly>
-        <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
-        <div class="text-danger position-absolute mb-1"
-             *ngIf="!formCancelContract.controls['dateDepot'].valid && formCancelContract.controls['dateDepot'].touched">
-          <div *ngIf="formCancelContract.controls['dateDepot'].errors.required">
-            {{'FIELD_REQUIRED' | translate}}
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn btn-outline-primary" (click)="cancelMyContract(formCancelContract.value);"
-            [disabled]="formLinkContract.invalid"> {{'CONFIRM' | translate}}
-    </button>
-    <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
-    </button>
-  </div>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">
+            {{'CANCEL_CONTRACT' | translate}} {{modalRef.content}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" novalidate [formGroup]="formCancelContract">
+            <div class="form-group">
+                <label for="dateDepot" class="control-label">{{'DATE_DEPOT_COUNTER' | translate}}<span
+                        class="danger">*</span></label>
+                <input [owlDateTime]="sd"
+                       [owlDateTimeTrigger]="sd"
+                       [min]="today"
+                       formControlName="dateDepot"
+                       class="form-control date-readonly"
+                       id="dateDepot" readonly>
+                <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
+                <div class="text-danger position-absolute mb-1"
+                     *ngIf="!formCancelContract.controls['dateDepot'].valid && formCancelContract.controls['dateDepot'].touched">
+                    <div *ngIf="formCancelContract.controls['dateDepot'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn btn-outline-primary" (click)="cancelMyContract(formCancelContract.value);"
+                [disabled]="formLinkContract.invalid"> {{'CONFIRM' | translate}}
+        </button>
+        <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
+        </button>
+    </div>
 </ng-template>
 
 <ng-template #refundContract>
-  <div class="modal-header bg-radem">
-    <h4 class="modal-title pull-left">
-      {{'REFUND_CONTRACT' | translate}} {{modalRef.content}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
-      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form role="form" novalidate [formGroup]="formRefundContract">
-      <div class="form-group">
-        <label for="solde" class="control-label">{{'SOLDE' | translate}}<span
-          class="danger">*</span></label>
-        <input formControlName="solde" id="solde" class="form-control required"/>
-        <div class="text-danger"
-             *ngIf="!formRefundContract.controls['solde'].valid && formRefundContract.controls['solde'].touched">
-          <div *ngIf="formRefundContract.controls['solde'].errors.required">
-            {{'FIELD_REQUIRED' | translate}}
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn btn-outline-primary" (click)="cancelMyContract(formRefundContract.value);"
-            [disabled]="formRefundContract.invalid"> {{'CONFIRM' | translate}}
-    </button>
-    <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
-    </button>
-  </div>
+    <div class="modal-header bg-radem">
+        <h4 class="modal-title pull-left">
+            {{'REFUND_CONTRACT' | translate}} {{modalRef.content}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" title="Fermer">
+            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" novalidate [formGroup]="formRefundContract">
+            <div class="form-group">
+                <label for="solde" class="control-label">{{'SOLDE' | translate}}<span
+                        class="danger">*</span></label>
+                <input formControlName="solde" id="solde" class="form-control required"/>
+                <div class="text-danger"
+                     *ngIf="!formRefundContract.controls['solde'].valid && formRefundContract.controls['solde'].touched">
+                    <div *ngIf="formRefundContract.controls['solde'].errors.required">
+                        {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn btn-outline-primary" (click)="cancelMyContract(formRefundContract.value);"
+                [disabled]="formRefundContract.invalid"> {{'CONFIRM' | translate}}
+        </button>
+        <button type="submit" class="btn btn btn-outline-danger" (click)="closeModal()"> {{'CLOSE' | translate}}
+        </button>
+    </div>
 </ng-template>
