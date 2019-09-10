@@ -51,61 +51,65 @@ export class RefundEditComponent implements OnInit {
     flagAttachments = false;
     curentTourNo: string;
 
-    constructor(private servicesService: ServicesService,
-                private commonService: CommonService,
-                private router: Router,
-                private authHelper: AuthHelper,
-                private formBuilder: FormBuilder,
-                private route: ActivatedRoute,
-                private toastrService: ToastrService,
-                private translate: TranslateService) {
-        this.settings = {
-            singleSelection: false,
-            text: 'Filtrer les contrats',
-            selectAllText: 'Select All',
-            unSelectAllText: 'UnSelect All',
-            searchPlaceholderText: 'Filtrer les contrats',
-            enableSearchFilter: true,
-            badgeShowLimit: 5,
-            groupBy: 'consumptionAddress',
-            enableCheckAll: false,
-        };
-        this.refundForm = this.formBuilder.group({
-            'firstName': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'contracts': [''],
-            'lastName': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'cellphone': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'homePhonenumber': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'email': ['', Validators.compose(
-                [
-                    Validators.required,
-                    Validators.email
-                ])],
-            'cin': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'mailingAddress': ['', Validators.compose(
-                [
-                    Validators.required
-                ])],
-            'ModeRemboursement': ['CHECK'],
-            'bank_file': [''],
-            'Procuration': ['']
-        });
-    }
+  constructor(private servicesService: ServicesService,
+              private commonService: CommonService,
+              private router: Router,
+              private authHelper: AuthHelper,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
+              private toastrService: ToastrService,
+              private translate: TranslateService) {
+    this.settings = {
+      singleSelection: false,
+      text: 'Filtrer les contrats',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      searchPlaceholderText: 'Filtrer les contrats',
+      enableSearchFilter: true,
+      badgeShowLimit: 5,
+      groupBy: 'consumptionAddress',
+      enableCheckAll: false,
+    };
+    this.refundForm = this.formBuilder.group({
+      'firstName': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'contracts': [''],
+      'lastName': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'cellphone': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'homePhonenumber': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'email': ['', Validators.compose(
+        [
+          Validators.required,
+          Validators.email
+        ])],
+      'cin': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'procuratorCin': ['', Validators.compose(
+          [
+            Validators.required
+          ])],
+      'mailingAddress': ['', Validators.compose(
+        [
+          Validators.required
+        ])],
+      'ModeRemboursement': ['CHECK'],
+      'bank_file': [''],
+      'Procuration': ['']
+    });
+  }
 
     ngOnInit() {
         this.requestNo = this.route.snapshot.paramMap.get('requestNo');
@@ -238,64 +242,65 @@ export class RefundEditComponent implements OnInit {
         });
     }
 
-    getClientAttachedContracts2(contractsNbr: Array<string>) {
-        this.servicesService.clientAttachedContracts().subscribe(response => {
-            this.clientContracts = response.data;
-            _.each(this.clientContracts, (element: any) => {
-                this.clientContractsNo.push(element.contractNo);
-            });
-            console.log(this.clientContractsNo);
-            this.getRefundedContracts2(contractsNbr);
-        }, err => {
-            console.log(err)
-        });
-    }
+  getClientAttachedContracts2(contractsNbr: Array<string>) {
+    this.servicesService.clientAttachedContracts().subscribe(response => {
+      this.clientContracts = response.data;
+      _.each(this.clientContracts, (element: any) => {
+        this.clientContractsNo.push(element.contractNo);
+      });
+      console.log(this.clientContractsNo);
+      this.getRefundedContracts2(contractsNbr);
+    }, err => {
+      console.log(err)
+    });
+  }
 
-    getRefundDetail() {
-        let requestNo: any = this.route.snapshot.paramMap.get('requestNo');
-        if (requestNo !== null) {
-            this.servicesService.getRefundDetails(requestNo).subscribe(response => {
-                if (response && response.data) {
-                    this.RefundDetails = response.data;
-                    this.refundForm.get('email').setValue(this.RefundDetails.mail);
-                    this.refundForm.get('cellphone').setValue(this.RefundDetails.phone);
-                    this.refundForm.get('mailingAddress').setValue(this.RefundDetails.mailingAddress);
-                    if (this.RefundDetails.procuratorLastname) {
-                        this.refundForm.get('firstName').setValue(this.RefundDetails.procuratorFirstname);
-                    }
-                    if (this.RefundDetails.procuratorFirstname) {
-                        this.refundForm.get('lastName').setValue(this.RefundDetails.procuratorLastname);
-                    }
-                    this.refundForm.get('homePhonenumber').setValue(this.RefundDetails.fixPhone);
-                    this.refundForm.get('cin').setValue(this.RefundDetails.procuratorCin);
-                    this.refundForm.get('ModeRemboursement').setValue(this.RefundDetails.requestPaymentMode);
-                    this.refundForm.get('Procuration').setValue(this.RefundDetails.procuration);
-                    this.flagModeRemboursement = this.RefundDetails.requestPaymentMode;
-                    this.attachments = this.RefundDetails.attachments;
-                    this.uploadattachments = this.attachments;
-                    _.each(this.attachments, (response: any) => {
-                        if (response !== null) {
-                            this.flagAttachments = true;
-                        }
-                    });
-                    this.requestId = this.RefundDetails.id;
-                    this.getClientAttachedContracts2(this.RefundDetails.contracts);
-                } else {
-                    this.router.navigate(['/services/refund-requests/request-not-found']);
-                }
-            }, error => {
-                console.log(error);
-            })
+  getRefundDetail() {
+    const requestNo: any = this.route.snapshot.paramMap.get('requestNo');
+    if (requestNo !== null) {
+      this.servicesService.getRefundDetails(requestNo).subscribe(response => {
+        if (response && response.data) {
+          this.RefundDetails = response.data;
+          this.refundForm.get('email').setValue(this.RefundDetails.mail);
+          this.refundForm.get('cellphone').setValue(this.RefundDetails.phone);
+          this.refundForm.get('cin').setValue(this.RefundDetails.cin);
+          this.refundForm.get('mailingAddress').setValue(this.RefundDetails.mailingAddress);
+          if (this.RefundDetails.procuratorLastname) {
+            this.refundForm.get('firstName').setValue(this.RefundDetails.procuratorFirstname);
+          }
+          if (this.RefundDetails.procuratorFirstname) {
+            this.refundForm.get('lastName').setValue(this.RefundDetails.procuratorLastname);
+          }
+          this.refundForm.get('homePhonenumber').setValue(this.RefundDetails.fixPhone);
+          this.refundForm.get('procuratorCin').setValue(this.RefundDetails.procuratorCin);
+          this.refundForm.get('ModeRemboursement').setValue(this.RefundDetails.requestPaymentMode);
+          this.refundForm.get('Procuration').setValue(this.RefundDetails.procuration);
+          this.flagModeRemboursement = this.RefundDetails.requestPaymentMode;
+          this.attachments = this.RefundDetails.attachments;
+          this.uploadattachments = this.attachments;
+          _.each(this.attachments, (response: any) => {
+            if (response !== null) {
+              this.flagAttachments = true;
+            }
+          });
+          this.requestId = this.RefundDetails.id;
+          this.getClientAttachedContracts2(this.RefundDetails.contracts);
         } else {
-            this.router.navigate(['/not-found']);
+          this.router.navigate(['/services/refund-requests/request-not-found']);
         }
+      }, error => {
+        console.log(error);
+      })
+    } else {
+      this.router.navigate(['/not-found']);
     }
+  }
 
     setProcurationValidators() {
 
-        const firstNameControl = this.refundForm.get('firstName');
-        const lastNameControl = this.refundForm.get('lastName');
-        const cinControl = this.refundForm.get('cin');
+    const firstNameControl = this.refundForm.get('firstName');
+    const lastNameControl = this.refundForm.get('lastName');
+    const cinControl = this.refundForm.get('procuratorCin');
 
         this.refundForm.get('Procuration').valueChanges
             .subscribe(userinfos => {
@@ -348,27 +353,28 @@ export class RefundEditComponent implements OnInit {
         });
     }
 
-    updateRequest(formData): void {
-        if (Array.isArray(this.selectedRefContrcats) && !this.selectedRefContrcats.length) {
-            this.toastrService.error('le champs contracts est obligatoire', '');
-            return;
-        }
+  updateRequest(formData): void {
+    if (Array.isArray(this.selectedRefContrcats) && !this.selectedRefContrcats.length) {
+      this.toastrService.error('le champs contracts est obligatoire', '');
+      return;
+    }
 
         const user: User = this.authHelper.getLoggedUserInfo();
 
         const newRefundrequest: NewRefundRequestModel = formData;
         newRefundrequest.id = this.requestId;
 
-        newRefundrequest.mail = formData.email;
-        newRefundrequest.mailingAddress = formData.mailingAddress;
-        newRefundrequest.cellphone = formData.cellphone;
-        newRefundrequest.fixphone = formData.homePhonenumber;
+    newRefundrequest.mail = formData.email;
+    newRefundrequest.mailingAddress = formData.mailingAddress;
+    newRefundrequest.cellphone = formData.cellphone;
+    newRefundrequest.cin = formData.cin;
+    newRefundrequest.fixphone = formData.homePhonenumber;
 
-        newRefundrequest.paymentMode = formData.ModeRemboursement;
-        newRefundrequest.procuration = Boolean(this.flagProcuration);
-        newRefundrequest.procuratorCin = formData.cin;
-        newRefundrequest.procuratorFirstname = formData.firstName;
-        newRefundrequest.procuratorLastname = formData.lastName;
+    newRefundrequest.paymentMode = formData.ModeRemboursement;
+    newRefundrequest.procuration = Boolean(this.flagProcuration);
+    newRefundrequest.procuratorCin = formData.procuratorCin;
+    newRefundrequest.procuratorFirstname = formData.firstName;
+    newRefundrequest.procuratorLastname = formData.lastName;
 
         this.attachmentIds = [];
         this.contractNbrs = [];
