@@ -97,6 +97,10 @@ export class RefundEditComponent implements OnInit {
         [
           Validators.required
         ])],
+      'procuratorCin': ['', Validators.compose(
+          [
+            Validators.required
+          ])],
       'mailingAddress': ['', Validators.compose(
         [
           Validators.required
@@ -259,6 +263,7 @@ export class RefundEditComponent implements OnInit {
           this.RefundDetails = response.data;
           this.refundForm.get('email').setValue(this.RefundDetails.mail);
           this.refundForm.get('cellphone').setValue(this.RefundDetails.phone);
+          this.refundForm.get('cin').setValue(this.RefundDetails.cin);
           this.refundForm.get('mailingAddress').setValue(this.RefundDetails.mailingAddress);
           if (this.RefundDetails.procuratorLastname) {
             this.refundForm.get('firstName').setValue(this.RefundDetails.procuratorFirstname);
@@ -267,7 +272,7 @@ export class RefundEditComponent implements OnInit {
             this.refundForm.get('lastName').setValue(this.RefundDetails.procuratorLastname);
           }
           this.refundForm.get('homePhonenumber').setValue(this.RefundDetails.fixPhone);
-          this.refundForm.get('cin').setValue(this.RefundDetails.procuratorCin);
+          this.refundForm.get('procuratorCin').setValue(this.RefundDetails.procuratorCin);
           this.refundForm.get('ModeRemboursement').setValue(this.RefundDetails.requestPaymentMode);
           this.refundForm.get('Procuration').setValue(this.RefundDetails.procuration);
           this.flagModeRemboursement = this.RefundDetails.requestPaymentMode;
@@ -295,7 +300,7 @@ export class RefundEditComponent implements OnInit {
 
     const firstNameControl = this.refundForm.get('firstName');
     const lastNameControl = this.refundForm.get('lastName');
-    const cinControl = this.refundForm.get('cin');
+    const cinControl = this.refundForm.get('procuratorCin');
 
     this.refundForm.get('Procuration').valueChanges
       .subscribe(userinfos => {
@@ -349,6 +354,7 @@ export class RefundEditComponent implements OnInit {
   }
 
   updateRequest(formData): void {
+    debugger;
     if (Array.isArray(this.selectedRefContrcats) && !this.selectedRefContrcats.length) {
       this.toastrService.error('le champs contracts est obligatoire', '');
       return;
@@ -362,11 +368,12 @@ export class RefundEditComponent implements OnInit {
     newRefundrequest.mail = formData.email;
     newRefundrequest.mailingAddress = formData.mailingAddress;
     newRefundrequest.cellphone = formData.cellphone;
+    newRefundrequest.cin = formData.cin;
     newRefundrequest.fixphone = formData.homePhonenumber;
 
     newRefundrequest.paymentMode = formData.ModeRemboursement;
     newRefundrequest.procuration = Boolean(this.flagProcuration);
-    newRefundrequest.procuratorCin = formData.cin;
+    newRefundrequest.procuratorCin = formData.procuratorCin;
     newRefundrequest.procuratorFirstname = formData.firstName;
     newRefundrequest.procuratorLastname = formData.lastName;
 

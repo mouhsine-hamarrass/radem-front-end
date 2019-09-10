@@ -6,6 +6,7 @@ export class NewRefundRequestModel {
   procuratorFirstname?: string;
   paymentMode?: string;
   cellphone?: string;
+  cin?: string;
   fixphone?: string;
   mail?: string;
   mailingAddress?: string;
