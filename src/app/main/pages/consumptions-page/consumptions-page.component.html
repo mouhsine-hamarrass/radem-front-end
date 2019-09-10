@@ -1,224 +1,424 @@
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-  <div class="row">
-    <div class="col-md-6 col-12">
-      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONSUMPTION' |
-        translate}}</h3>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'MY_CONSUMPTION' |
+                translate}}</h3>
+        </div>
     </div>
-  </div>
 </div>
 <div class="content-body">
-  <section>
-    <div class="mb-0">
-      <div class="card-content">
-        <div class="card-body">
-          <div class="col-12">
-            <div class="row">
-              <label class="col-form-label">{{'CONTRACT' | translate }} <span
-                class="danger">*</span>:</label>
-              <div class="col-auto">
-                <select type="text" class="custom-select" #s
-                        (change)="setReportContract(selectedContract)" [(ngModel)]="selectedContract">
-                  <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                  <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                    {{contract.contractNo}}
-                    ({{contract.type}})
-                  </option>
-                </select>
-              </div>
+    <section>
+        <div class="mb-0">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="col-12">
+                        <div class="card-header content-header back sub-header row marginVisual">
+                            <div class="col-12 content-header">
+                                <div class="row align-items-center">
 
-              <div class="alignRadio col col-lg-2">
-                <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="volume" name="consum"
-                         (click)="setRadio('volume')" checked>
-                  <label class="custom-control-label" for="volume">{{'Volume' | translate}}</label>
+                                    <!-- *T LISTE ******* -->
+                                    <div class="col-md-3 has-border">
+                                        &nbsp;
+                                        <label class="Cap">
+                                            <i class="fa fa-list-ul icon "></i>&nbsp;
+                                            {{"CONTRACT_LISTS" | translate}}
+                                        </label>
+                                        <select type="text" class="form-control contract-dropdown"
+                                                [(ngModel)]="selectedContract"
+                                                (ngModelChange)="setReportContract(selectedContract)">
+                                            <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}}...
+                                            </option>
+                                            <option *ngFor="let contract of clientContracts"
+                                                    value="{{contract.contractNo}}">
+                                                {{contract.contractNo}}
+                                                ({{contract.type}})
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!-- *T END LISTE ******* -->
+
+                                    <!-- *T RAISON ******* -->
+                                    <div class="col-md-2 has-border" [hidden]="!clientDetails">
+                                        <label class="Cap">
+                                            <i class="fa fa-user icon"></i>&nbsp;
+                                            {{"COMPANY_NAME" | translate}}
+                                        </label>
+                                        <h6 class="sub-title" tooltip="Nom">
+                                            {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
+                                        </h6>
+                                    </div>
+                                    <!-- *T END RAISON ******* -->
+
+                                    <!-- *T ADDRESS ******* -->
+                                    <div class="col-md-4 has-border" [hidden]="!clientDetails">
+                                        <label class="Cap">
+                                            <i class="fa fa-map-marker icon"></i>&nbsp;
+                                            {{"ADDRESS" | translate}}
+                                        </label>
+                                        <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+                                    </div>
+                                    <!-- *T END ADDRESS ******* -->
+
+                                    <!-- *T STATUS ******* -->
+                                    <div class="col-md-3 has-border" [hidden]="!clientDetails">
+                                        <!-- <div class="status text-left">
+
+                                           <i class="fa fa-circle icon"
+                                              [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
+                                          <span>{{clientDetails?.contractStatus}}</span>
+                                        </div> -->
+                                        <label class="Cap">
+                                            <i class="fa fa-circle-o-notch icon"></i>&nbsp;
+                                            {{"CONTRACT STATUS" | translate}}
+                                        </label>
+                                        <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+                                    </div>
+                                    <!-- *T END STATUS ******* -->
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="alignRadio col col-lg-2">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="volume" name="consum"
+                                           (click)="setRadio('volume')" checked>
+                                    <label class="custom-control-label" for="volume">{{'Volume' | translate}}</label>
+                                </div>
+                            </div>
+
+                            <div class="alignRadio col col-lg-2">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="facturation" name="consum"
+                                           (click)="setRadio('facturation')">
+                                    <label class="custom-control-label"
+                                           for="facturation">{{'Facturation_Consum' | translate}}</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-16">
+                        <div class="row">
+                            <div *ngIf="isSelected('volume')" class="col-sm-7">
+                                <canvas baseChart #chart1="base-chart" [chartType]="chartType"
+                                        [datasets]="chartDataSetsVolume"
+                                        [labels]="chartLabels"
+                                        [colors]="chartColorsEau"
+                                        [options]="chartOptionsEau" [legend]="true">
+                                </canvas>
+                            </div>
+                            <div *ngIf="isSelected('facturation')" class="col-sm-7">
+                                <canvas baseChart #chart2="base-chart" [chartType]="chartType"
+                                        [datasets]="chartDataSetsInvoice"
+                                        [labels]="chartLabels"
+                                        [colors]="chartColorsFact"
+                                        [options]="chartOptionsFact" [legend]="true">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col">{{'DATE_OF_REPORTS' | translate }}</th>
+                                    <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
+                                    <th scope="col">{{'INDEX' | translate }}</th>
+                                    <th scope="col">{{'Volume' | translate }}</th>
+                                    <th scope="col">{{'NOTATION_RELEVANCE' | translate }}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <app-data-not-available
+                                        *ngIf="!consumptionsHistoryCurrentYear || consumptionsHistoryCurrentYear.length == 0; else dataAvailable2"
+                                        [colSpan]="5"></app-data-not-available>
+                                <ng-template #dataAvailable2>
+                                    <tr *ngFor="let consumption of consumptionsHistoryCurrentYear" class="text-center">
+                                        <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{consumption.meterNo}}</td>
+                                        <td>{{consumption.index}}</td>
+                                        <td>{{consumption.volume}}</td>
+                                        <td>{{consumption.annotationReleve}}</td>
+                                        <td>
+                                            <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                                               tooltip="Détails"
+                                               (click)="openContractDetails(detailSubscription)"></i></td>
+                                    </tr>
+                                </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-              <div class="alignRadio col col-lg-2">
-                <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="facturation" name="consum"
-                         (click)="setRadio('facturation')">
-                  <label class="custom-control-label" for="facturation">{{'Facturation_Consum' | translate}}</label>
-                </div>
-              </div>
-
             </div>
-          </div>
-
-          <div class="col-16">
-            <div class="row">
-              <div *ngIf="isSelected('volume')" class="col-sm-7">
-                <canvas baseChart #chart1="base-chart" [chartType]="chartType" [datasets]="chartDataSetsVolume"
-                        [labels]="chartLabels"
-                        [colors]="chartColorsEau"
-                        [options]="chartOptionsEau" [legend]="true">
-                </canvas>
-              </div>
-              <div *ngIf="isSelected('facturation')" class="col-sm-7">
-                <canvas baseChart #chart2="base-chart" [chartType]="chartType" [datasets]="chartDataSetsInvoice"
-                        [labels]="chartLabels"
-                        [colors]="chartColorsFact"
-                        [options]="chartOptionsFact" [legend]="true">
-                </canvas>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 mt-3">
-            <div class="table-responsive">
-              <table class="table">
-                <thead class="table-light">
-                <tr>
-                  <th scope="col">{{'DATE_OF_REPORTS' | translate }}</th>
-                  <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
-                  <th scope="col">{{'INDEX' | translate }}</th>
-                  <th scope="col">{{'Volume' | translate }}</th>
-                  <th scope="col">{{'NOTATION_RELEVANCE' | translate }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <app-data-not-available
-                  *ngIf="!consumptionsHistoryCurrentYear || consumptionsHistoryCurrentYear.length == 0; else dataAvailable2"
-                  [colSpan]="5"></app-data-not-available>
-                <ng-template #dataAvailable2>
-                  <tr *ngFor="let consumption of consumptionsHistoryCurrentYear" class="text-center">
-                    <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>
-                    <td>{{consumption.meterNo}}</td>
-                    <td>{{consumption.index}}</td>
-                    <td>{{consumption.volume}}
-                    </td>
-                    <td>{{consumption.annotationReleve}}</td>
-                  </tr>
-                </ng-template>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="card mb-0">
-      <div class="card-header">
-        <h4 class="content-header-title">{{'CONSUMPTION_HISTORY' | translate }}</h4>
-      </div>
-      <div class="card-content">
-        <form role="form" [formGroup]="historyForm" novalidate>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-2">
-                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-              </div>
+        <div class="card mb-0">
+            <div class="card-header">
+                <h4 class="content-header-title">{{'CONSUMPTION_HISTORY' | translate }}</h4>
             </div>
-            <div class="row col-md-12 form-group">
-              <label class="col-form-label">{{'CONTRACT' | translate }} <span
-                class="danger">*</span>:</label>
-              <div class="col-3">
-                <select [(ngModel)]="selectedContract" formControlName="contract" type="text" class="custom-select"
-                        (change)="setHistoryContract()">
-                  <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                  <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                    {{contract.contractNo}}
-                    ({{contract.type}})
-                  </option>
-                </select>
-              </div>
-              <label class="col-form-label">{{'PERIOD_OF' | translate }} <span class="danger"> *</span>
-                :</label>
-              <div class="col-auto">
-                <input [owlDateTime]="sd"
-                       [owlDateTimeTrigger]="sd"
-                       [min]="minDate"
-                       [max]="today"
-                       formControlName="startDate"
-                       class="form-control date-readonly"
-                       id="startDate" readonly>
-                <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
-                <div class="text-danger position-absolute mb-1"
-                     *ngIf="!historyForm.controls['startDate'].valid && historyForm.controls['startDate'].touched">
-                  <div *ngIf="historyForm.controls['startDate'].errors.required">
-                    {{'FIELD_REQUIRED' | translate}}
-                  </div>
-                </div>
-              </div>
-              <label class="col-form-label">{{'AT' | translate }} <span
-                class="danger">*</span></label>
-              <div class="col-auto">
-                <input [owlDateTime]="ed"
-                       [owlDateTimeTrigger]="ed"
-                       [min]="minDate"
-                       [max]="today"
-                       formControlName="endDate"
-                       class="form-control date-readonly"
-                       id="endDate" readonly>
-                <owl-date-time #ed [pickerType]="'calendar'" [startAt]="sd.getValidDate"></owl-date-time>
-                <div class="text-danger position-absolute mb-1"
-                     *ngIf="!historyForm.controls['endDate'].valid && historyForm.controls['endDate'].touched">
-                  <div *ngIf="historyForm.controls['endDate'].errors.required">
-                    {{'FIELD_REQUIRED' | translate}}
-                  </div>
-                </div>
-              </div>
-              <div class="col-auto float-right row">
-                <button type="button" class="btn btn btn-outline-primary"
-                        (click)="getConsumptionHistory();" [disabled]="historyForm.invalid">
-                  <i class="fa fa-search"></i></button>
-                &nbsp;
-                <div class="btn-group" dropdown>
-                  <!--<button id="button-basic" dropdownToggle type="button"
-                          [disabled]="historyForm.invalid"
-                          class="btn btn btn-outline-primary dropdown-toggle download"
-                          aria-controls="dropdown-basic"><i class="fa fa-download"></i>
-                  </button>-->
-                  <div>
-                    <button class="btn btn btn-outline-primary" (click)="downloadPdfConsumptions()">
-                      <i class="fa fa-download "></i>{{'PDF_DOWNLOAD' | translate }}
-                    </button>
-                    <!--<a class="dropdown-item" (click)="downloadXlsConsumptions()">
-                      <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
-                    </a>-->
-                  </div>
-                </div>
+            <div class="card-content">
+                <form role="form" [formGroup]="historyForm" novalidate>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                            </div>
+                        </div>
+                        <div class="row col-md-12 form-group">
+                            <label class="col-form-label">{{'CONTRACT' | translate }} <span
+                                    class="danger">*</span>:</label>
+                            <div class="col-3">
+                                <select [(ngModel)]="selectedContract" formControlName="contract" type="text"
+                                        class="custom-select"
+                                        (change)="setHistoryContract()">
+                                    <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
+                                    <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
+                                        {{contract.contractNo}}
+                                        ({{contract.type}})
+                                    </option>
+                                </select>
+                            </div>
+                            <label class="col-form-label">{{'PERIOD_OF' | translate }} <span class="danger"> *</span>
+                                :</label>
+                            <div class="col-auto">
+                                <input [owlDateTime]="sd"
+                                       [owlDateTimeTrigger]="sd"
+                                       [min]="minDate"
+                                       [max]="today"
+                                       formControlName="startDate"
+                                       class="form-control date-readonly"
+                                       id="startDate" readonly>
+                                <owl-date-time #sd [pickerType]="'calendar'" [startAt]="today"></owl-date-time>
+                                <div class="text-danger position-absolute mb-1"
+                                     *ngIf="!historyForm.controls['startDate'].valid && historyForm.controls['startDate'].touched">
+                                    <div *ngIf="historyForm.controls['startDate'].errors.required">
+                                        {{'FIELD_REQUIRED' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="col-form-label">{{'AT' | translate }} <span
+                                    class="danger">*</span></label>
+                            <div class="col-auto">
+                                <input [owlDateTime]="ed"
+                                       [owlDateTimeTrigger]="ed"
+                                       [min]="minDate"
+                                       [max]="today"
+                                       formControlName="endDate"
+                                       class="form-control date-readonly"
+                                       id="endDate" readonly>
+                                <owl-date-time #ed [pickerType]="'calendar'"
+                                               [startAt]="sd.getValidDate"></owl-date-time>
+                                <div class="text-danger position-absolute mb-1"
+                                     *ngIf="!historyForm.controls['endDate'].valid && historyForm.controls['endDate'].touched">
+                                    <div *ngIf="historyForm.controls['endDate'].errors.required">
+                                        {{'FIELD_REQUIRED' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto float-right row">
+                                <button type="button" class="btn btn btn-outline-primary"
+                                        (click)="getConsumptionHistory();" [disabled]="historyForm.invalid">
+                                    <i class="fa fa-search"></i></button>
+                                &nbsp;
+                                <div class="btn-group" dropdown>
+                                    <!--<button id="button-basic" dropdownToggle type="button"
+                                            [disabled]="historyForm.invalid"
+                                            class="btn btn btn-outline-primary dropdown-toggle download"
+                                            aria-controls="dropdown-basic"><i class="fa fa-download"></i>
+                                    </button>-->
+                                    <div>
+                                        <button class="btn btn btn-outline-primary" (click)="downloadPdfConsumptions()">
+                                            <i class="fa fa-download "></i>{{'PDF_DOWNLOAD' | translate }}
+                                        </button>
+                                        <!--<a class="dropdown-item" (click)="downloadXlsConsumptions()">
+                                          <i class="fa fa-file-excel-o"></i> {{'EXCEL_FORMAT' | translate}}
+                                        </a>-->
+                                    </div>
+                                </div>
 
-              </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive mx-auto">
+                            <table class="table">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col">{{'DATE_OF_REPORTS' | translate }}</th>
+                                    <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
+                                    <th scope="col">{{'INDEX' | translate }}</th>
+                                    <th scope="col">{{'Volume' | translate }}</th>
+                                    <th scope="col">{{'NOTATION_RELEVANCE' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <app-data-not-available
+                                        *ngIf="!consumptionsHistory || consumptionsHistory.length == 0; else dataAvailable"
+                                        [colSpan]="5"></app-data-not-available>
+                                <ng-template #dataAvailable>
+                                    <tr *ngFor="let consumption of consumptionsHistory" class="text-center">
+                                        <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{consumption.meterNo}}</td>
+                                        <td>{{consumption.index}}</td>
+                                        <td>{{consumption.volume}}
+                                        </td>
+                                        <td>{{consumption.annotationReleve}}</td>
+                                    </tr>
+                                </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <app-pagination [showPagination]="totalPages > 1"
+                                        [numberOfItems]="numberOfItems"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalElements"
+                                        [totalPages]="totalPages"
+                                        (onpageChanged)="pageChanged($event)"></app-pagination>
+                    </div>
+                </form>
             </div>
-            <div class="table-responsive mx-auto">
-              <table class="table">
-                <thead class="table-light">
-                <tr>
-                  <th scope="col">{{'DATE_OF_REPORTS' | translate }}</th>
-                  <th scope="col">{{'COUNTER_NUMBER' | translate }}</th>
-                  <th scope="col">{{'INDEX' | translate }}</th>
-                  <th scope="col">{{'Volume' | translate }}</th>
-                  <th scope="col">{{'NOTATION_RELEVANCE' | translate }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <app-data-not-available
-                  *ngIf="!consumptionsHistory || consumptionsHistory.length == 0; else dataAvailable"
-                  [colSpan]="5"></app-data-not-available>
-                <ng-template #dataAvailable>
-                  <tr *ngFor="let consumption of consumptionsHistory" class="text-center">
-                    <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>
-                    <td>{{consumption.meterNo}}</td>
-                    <td>{{consumption.index}}</td>
-                    <td>{{consumption.volume}}
-                    </td>
-                    <td>{{consumption.annotationReleve}}</td>
-                  </tr>
-                </ng-template>
-                </tbody>
-              </table>
-            </div>
-            <app-pagination [showPagination]="totalPages > 1"
-                            [numberOfItems]="numberOfItems"
-                            [itemsPerPage]="itemsPerPage"
-                            [totalItems]="totalElements"
-                            [totalPages]="totalPages"
-                            (onpageChanged)="pageChanged($event)"></app-pagination>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
+        </div>
+    </section>
 </div>
+<ng-template #detailSubscription>
+    <div class="modal-header modal-radem">
+        <h4 class="modal-title pull-left">{{'CONTRACT_DETAILS' | translate}} N°: {{contract?.contractNo}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <tabset>
+            <tab heading="{{'INFORMATIONS' | translate}}">
+                <div class="card">
+                    <div class="card-header"
+                         [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
+                        <h4>
+                            <i class="fa fa-info-circle"></i>&nbsp;{{'INFORMATIONS' | translate }}
+                        </h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>{{'CONTRACT_NUMBER' | translate}} : </b> {{contract?.contractNo}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>{{'STATUS' | translate }} : </b>{{contract?.status}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>{{'USAGE' | translate}} : </b>
+                                        <span class="text-muted">{{contract?.usage}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'PAYER' | translate}} : </b>{{contract?.payerName}}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        <b>{{'HOLDER' | translate}} : </b>{{contract?.holderName}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'ADDRESS' | translate}}: </b> {{contract?.addressConsumption}}</p>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>{{'SUBSCRIPTION_DATE' | translate}}
+                                        : </b>{{contract?.dateSubscription | date: 'dd-M-yyyy'}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6" *ngIf="contract?.dateEndSubscription">
+                                    <p><b>{{'SUBSCRIPTION_END_DATE' | translate}}
+                                        : </b>{{contract?.dateEndSubscription | date: 'dd-M-yyyy'}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="contract?.dateEffectSubscription">
+                                <div class="col-md-6">
+                                    <p><b>{{'SUBSCRIPTION_EFFECT_DATE' | translate}}
+                                        : </b>{{contract?.dateEffectSubscription | date: 'dd-M-yyyy'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="{{'COUNTER' | translate}}" *ngIf="counter">
+                <div class="card">
+                    <div class="card-header"
+                         [ngClass]="counter?.typeNetwork?.toLowerCase().includes('eau') ? 'text-primary border-water' : 'text-warning border-electricity'">
+                        <h4>
+                            <i class="fa fa-tachometer"></i>&nbsp;Dossier compteur
+                        </h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <img src="assets/images/compteur.png" alt="Compteur" style="width: 80%">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mt-1">
+                                        <table>
+                                            <tr>
+                                                <th>{{'NUMBER_PHYSIC' | translate}} :</th>
+                                                <td>{{counter?.physiqueNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'STATUS' | translate}} :</th>
+                                                <td>{{counter?.status}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'COEFFICIENT' | translate}} :</th>
+                                                <td>{{counter?.coefficientReader}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'BRAND' | translate}} :</th>
+                                                <td>{{counter?.brand}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'NUMBER_WHEELS' | translate}} :</th>
+                                                <td>{{counter?.numberWheels}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'NUMBER_DIALS' | translate}} :</th>
+                                                <td>{{counter?.numberDial}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'DATE_FILING' | translate}} :</th>
+                                                <td>{{counter?.dateRemoval | date:'dd-MM-yyyy'}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</ng-template>

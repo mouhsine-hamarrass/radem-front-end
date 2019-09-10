@@ -63,6 +63,7 @@ export class InvoicesPageComponent implements OnInit {
 
   sort: any;
   filter: any;
+  private clientDetails: any;
 
   constructor(private contractServices: ContractsService,
               private modalService: BsModalService,
@@ -161,6 +162,12 @@ export class InvoicesPageComponent implements OnInit {
     this.pageSize = 0;
     this.contractId = id;
     this.getInvoices();
+    this.services.getClientDetailsByContractNo(id).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   downloadInvoicePdf(fileId: any) {

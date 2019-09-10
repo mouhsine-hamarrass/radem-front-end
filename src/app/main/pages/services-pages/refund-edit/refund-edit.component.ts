@@ -19,37 +19,37 @@ import {Attachment} from '../../../models/attachment.model';
 
 
 @Component({
-  selector: 'app-refund-edit',
-  templateUrl: './refund-edit.component.html',
-  styleUrls: ['./refund-edit.component.scss']
+    selector: 'app-refund-edit',
+    templateUrl: './refund-edit.component.html',
+    styleUrls: ['./refund-edit.component.scss']
 })
 export class RefundEditComponent implements OnInit {
 
-  refundForm: FormGroup;
-  clientContracts: Array<ContractAttachModel>;
-  contractNo: string;
-  public flagModeRemboursement = '';
-  public flagProcuration = '';
+    refundForm: FormGroup;
+    clientContracts: Array<ContractAttachModel>;
+    contractNo: string;
+    public flagModeRemboursement = '';
+    public flagProcuration = '';
 
-  RefundDetails: RefundRequestModel;
+    RefundDetails: RefundRequestModel;
 
-  contractRefunds: Array<ContractRefund> = [];
-  contractRefund: Array<ContractRefund> = [];
-  selectedRefContrcats: Array<ContractRefund> = [];
-  clientContractsNo: Array<string> = [];
-  settings = {};
-  selectedNumber = 0;
-  selectedFiles: FileList;
-  contractNbrs: Array<string> = [];
-  attachmentIds: Array<number> = [];
-  attachments: any = [];
-  tourn = 0;
-  requestNo: string;
-  attachedFileInfos: Attachment;
-  requestId: number;
-  uploadattachments: any = [];
-  flagAttachments = false;
-  curentTourNo: string;
+    contractRefunds: Array<ContractRefund> = [];
+    contractRefund: Array<ContractRefund> = [];
+    selectedRefContrcats: Array<ContractRefund> = [];
+    clientContractsNo: Array<string> = [];
+    settings = {};
+    selectedNumber = 0;
+    selectedFiles: FileList;
+    contractNbrs: Array<string> = [];
+    attachmentIds: Array<number> = [];
+    attachments: any = [];
+    tourn = 0;
+    requestNo: string;
+    attachedFileInfos: Attachment;
+    requestId: number;
+    uploadattachments: any = [];
+    flagAttachments = false;
+    curentTourNo: string;
 
   constructor(private servicesService: ServicesService,
               private commonService: CommonService,
@@ -111,136 +111,136 @@ export class RefundEditComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.requestNo = this.route.snapshot.paramMap.get('requestNo');
-    this.getRefundDetail();
-    this.setProcurationValidators();
+    ngOnInit() {
+        this.requestNo = this.route.snapshot.paramMap.get('requestNo');
+        this.getRefundDetail();
+        this.setProcurationValidators();
 
-    const user: User = this.authHelper.getLoggedUserInfo();
-    this.refundForm.get('firstName').setValue(user.firstname);
-    this.refundForm.get('lastName').setValue(user.lastname);
-  }
+        const user: User = this.authHelper.getLoggedUserInfo();
+        this.refundForm.get('firstName').setValue(user.firstname);
+        this.refundForm.get('lastName').setValue(user.lastname);
+    }
 
-  selectFile(event: any, input?: any) {
-    this.selectedFiles = event.target.files;
-    this.upload();
-  }
+    selectFile(event: any, input?: any) {
+        this.selectedFiles = event.target.files;
+        this.upload();
+    }
 
-  upload() {
-    _.each(this.selectedFiles, (file) => {
-      this.servicesService.pushFileToStorage(file).subscribe(event => {
-        if (event && event instanceof HttpHeaderResponse && event.status === 400) {
-          this.toastrService.error(this.translate.instant('file-not-uploaded'));
-          return;
-        }
-        if (event instanceof HttpResponse) {
-          if (event.body) {
-            const response = JSON.parse(<string>event.body);
-            this.uploadattachments = [];
-            this.uploadattachments.push({
-              id: response['data'][0],
-              size: file.size,
-              name: file.name
+    upload() {
+        _.each(this.selectedFiles, (file) => {
+            this.servicesService.pushFileToStorage(file).subscribe(event => {
+                if (event && event instanceof HttpHeaderResponse && event.status === 400) {
+                    this.toastrService.error(this.translate.instant('file-not-uploaded'));
+                    return;
+                }
+                if (event instanceof HttpResponse) {
+                    if (event.body) {
+                        const response = JSON.parse(<string>event.body);
+                        this.uploadattachments = [];
+                        this.uploadattachments.push({
+                            id: response['data'][0],
+                            size: file.size,
+                            name: file.name
+                        });
+                    }
+                }
+            }, (err) => {
+                if (err.status === 413) {
+                    this.toastrService.error(this.translate.instant('file-payload-too-large') + err.error, '');
+                }
             });
-          }
-        }
-      }, (err) => {
-        if (err.status === 413) {
-          this.toastrService.error(this.translate.instant('file-payload-too-large') + err.error, '');
-        }
-      });
-    });
-    this.selectedFiles = undefined;
-  }
-
-  download(event: any) {
-    event.preventDefault();
-    this.servicesService.getRefundRequestAttachedFileInfos(this.attachments).subscribe(response => {
-      if (response && response.data) {
-        this.attachedFileInfos = response.data;
-
-        this.servicesService.downloadAttachmentById(this.attachments[0]).subscribe(value => {
-          if (value && value['body']) {
-            let title = '';
-            if (response.data.extension && response.data.name) {
-              title = response.data.name.split('.', 1) + '.' + response.data.extension;
-            } else {
-              title = 'remboursement_radem';
-            }
-
-            const file = new FileModel(title, CommonUtil._arrayBufferToBase64(value['body']));
-
-            CommonUtil.downloadFile(file);
-          }
         });
-      }
-    });
+        this.selectedFiles = undefined;
+    }
 
-  }
+    download(event: any) {
+        event.preventDefault();
+        this.servicesService.getRefundRequestAttachedFileInfos(this.attachments).subscribe(response => {
+            if (response && response.data) {
+                this.attachedFileInfos = response.data;
 
-  onItemSelect(item: any) {
-    this.selectedNumber++;
-    const iii: Array<ContractRefund> = this.contractRefunds;
-    this.contractRefunds = [];
-    iii.forEach(value => {
-      if (value.tourNo === item.tourNo) {
-        this.contractRefunds.push(value);
-      }
-      if (this.selectedNumber === 0) {
-        this.getRefundedContracts();
-      }
-    });
-  }
+                this.servicesService.downloadAttachmentById(this.attachments[0]).subscribe(value => {
+                    if (value && value['body']) {
+                        let title = '';
+                        if (response.data.extension && response.data.name) {
+                            title = response.data.name.split('.', 1) + '.' + response.data.extension;
+                        } else {
+                            title = 'remboursement_radem';
+                        }
 
-  onItemDeSelect(item: any) {
-    this.selectedNumber--;
-    const iii: Array<ContractRefund> = this.contractRefunds;
-    this.contractRefunds = [];
-    iii.forEach(value => {
-      if (value.tourNo === item.tourNo) {
-        this.contractRefunds.push(value);
-      }
-      if (this.selectedNumber === 0) {
-        this.getRefundedContracts();
-      }
-    });
-  }
+                        const file = new FileModel(title, CommonUtil._arrayBufferToBase64(value['body']));
 
-  getRefundedContracts2(contractsNbr: Array<string>) {
-    this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
-      this.contractRefunds = response.data;
-      this.curentTourNo = this.contractRefunds.find(v =>
-        v.contractNo === contractsNbr[0]).tourNo;
-      const newContractRefunds: Array<ContractRefund> = [];
-      _.each(this.contractRefunds, (element: any) => {
-        _.each(contractsNbr, (value: any) => {
-          if (_.isEqual(value, element.contractNo)) {
-            _.extend(element, {
-              id: element.contractNo,
-              tourNo: element.tourNo,
-              itemName: `${element.contractNo} - (${element.consumptionAddress})`
-            });
-            this.tourn = element.tourNo;
-            this.selectedRefContrcats.push(element);
-            this.selectedNumber++;
-          }
-          if (_.isEqual(this.tourn, element.tourNo) || _.isEqual(this.curentTourNo, element.tourNo)) {
-            _.extend(element, {
-              id: element.contractNo,
-              tourNo: element.tourNo,
-              itemName: `${element.contractNo} - (${element.consumptionAddress})`
-            });
-            if (!newContractRefunds.includes(element)) {
-              newContractRefunds.push(element);
+                        CommonUtil.downloadFile(file);
+                    }
+                });
             }
-          }
         });
-        this.contractRefunds = newContractRefunds;
-      });
-    }, err => {
-      console.log(err)
-    });
-  }
+
+    }
+
+    onItemSelect(item: any) {
+        this.selectedNumber++;
+        const iii: Array<ContractRefund> = this.contractRefunds;
+        this.contractRefunds = [];
+        iii.forEach(value => {
+            if (value.tourNo === item.tourNo) {
+                this.contractRefunds.push(value);
+            }
+            if (this.selectedNumber === 0) {
+                this.getRefundedContracts();
+            }
+        });
+    }
+
+    onItemDeSelect(item: any) {
+        this.selectedNumber--;
+        const iii: Array<ContractRefund> = this.contractRefunds;
+        this.contractRefunds = [];
+        iii.forEach(value => {
+            if (value.tourNo === item.tourNo) {
+                this.contractRefunds.push(value);
+            }
+            if (this.selectedNumber === 0) {
+                this.getRefundedContracts();
+            }
+        });
+    }
+
+    getRefundedContracts2(contractsNbr: Array<string>) {
+        this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
+            this.contractRefunds = response.data;
+            this.curentTourNo = this.contractRefunds.find(v =>
+                v.contractNo === contractsNbr[0]).tourNo;
+            const newContractRefunds: Array<ContractRefund> = [];
+            _.each(this.contractRefunds, (element: any) => {
+                _.each(contractsNbr, (value: any) => {
+                    if (_.isEqual(value, element.contractNo)) {
+                        _.extend(element, {
+                            id: element.contractNo,
+                            tourNo: element.tourNo,
+                            itemName: `${element.contractNo} - (${element.consumptionAddress})`
+                        });
+                        this.tourn = element.tourNo;
+                        this.selectedRefContrcats.push(element);
+                        this.selectedNumber++;
+                    }
+                    if (_.isEqual(this.tourn, element.tourNo) || _.isEqual(this.curentTourNo, element.tourNo)) {
+                        _.extend(element, {
+                            id: element.contractNo,
+                            tourNo: element.tourNo,
+                            itemName: `${element.contractNo} - (${element.consumptionAddress})`
+                        });
+                        if (!newContractRefunds.includes(element)) {
+                            newContractRefunds.push(element);
+                        }
+                    }
+                });
+                this.contractRefunds = newContractRefunds;
+            });
+        }, err => {
+            console.log(err)
+        });
+    }
 
   getClientAttachedContracts2(contractsNbr: Array<string>) {
     this.servicesService.clientAttachedContracts().subscribe(response => {
@@ -256,7 +256,7 @@ export class RefundEditComponent implements OnInit {
   }
 
   getRefundDetail() {
-    let requestNo: any = this.route.snapshot.paramMap.get('requestNo');
+    const requestNo: any = this.route.snapshot.paramMap.get('requestNo');
     if (requestNo !== null) {
       this.servicesService.getRefundDetails(requestNo).subscribe(response => {
         if (response && response.data) {
@@ -296,74 +296,73 @@ export class RefundEditComponent implements OnInit {
     }
   }
 
-  setProcurationValidators() {
+    setProcurationValidators() {
 
     const firstNameControl = this.refundForm.get('firstName');
     const lastNameControl = this.refundForm.get('lastName');
     const cinControl = this.refundForm.get('procuratorCin');
 
-    this.refundForm.get('Procuration').valueChanges
-      .subscribe(userinfos => {
+        this.refundForm.get('Procuration').valueChanges
+            .subscribe(userinfos => {
 
-        if (userinfos) {
-          firstNameControl.setValidators([Validators.required]);
+                if (userinfos) {
+                    firstNameControl.setValidators([Validators.required]);
 
-          lastNameControl.setValidators([Validators.required]);
-          cinControl.setValidators([Validators.required]);
-        }
+                    lastNameControl.setValidators([Validators.required]);
+                    cinControl.setValidators([Validators.required]);
+                }
 
-        if (!userinfos) {
-          firstNameControl.setValidators(null);
-          lastNameControl.setValidators(null);
-          cinControl.setValidators(null);
-        }
+                if (!userinfos) {
+                    firstNameControl.setValidators(null);
+                    lastNameControl.setValidators(null);
+                    cinControl.setValidators(null);
+                }
 
-        firstNameControl.updateValueAndValidity();
-        lastNameControl.updateValueAndValidity();
-        cinControl.updateValueAndValidity();
-      });
+                firstNameControl.updateValueAndValidity();
+                lastNameControl.updateValueAndValidity();
+                cinControl.updateValueAndValidity();
+            });
 
-  }
+    }
 
-  getRefundedContracts() {
-    this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
-      this.contractRefunds = response.data;
-      _.each(this.contractRefunds, (element: any) => {
-        _.extend(element, {
-          id: element.contractNo,
-          tourNo: element.tourNo,
-          itemName: `${element.contractNo} - (${element.consumptionAddress})`
+    getRefundedContracts() {
+        this.servicesService.getRefundedContracts(this.clientContractsNo).subscribe(response => {
+            this.contractRefunds = response.data;
+            _.each(this.contractRefunds, (element: any) => {
+                _.extend(element, {
+                    id: element.contractNo,
+                    tourNo: element.tourNo,
+                    itemName: `${element.contractNo} - (${element.consumptionAddress})`
+                });
+            });
+        }, err => {
+            console.log(err)
         });
-      });
-    }, err => {
-      console.log(err)
-    });
-  }
+    }
 
-  getClientAttachedContracts() {
-    this.servicesService.clientAttachedContracts().subscribe(response => {
-      this.clientContracts = response.data;
-      _.each(this.clientContracts, (element: any) => {
-        this.clientContractsNo.push(element.contractNo);
-      });
-      console.log(this.clientContractsNo);
-      this.getRefundedContracts();
-    }, err => {
-      console.log(err)
-    });
-  }
+    getClientAttachedContracts() {
+        this.servicesService.clientAttachedContracts().subscribe(response => {
+            this.clientContracts = response.data;
+            _.each(this.clientContracts, (element: any) => {
+                this.clientContractsNo.push(element.contractNo);
+            });
+            console.log(this.clientContractsNo);
+            this.getRefundedContracts();
+        }, err => {
+            console.log(err)
+        });
+    }
 
   updateRequest(formData): void {
-    debugger;
     if (Array.isArray(this.selectedRefContrcats) && !this.selectedRefContrcats.length) {
       this.toastrService.error('le champs contracts est obligatoire', '');
       return;
     }
 
-    const user: User = this.authHelper.getLoggedUserInfo();
+        const user: User = this.authHelper.getLoggedUserInfo();
 
-    const newRefundrequest: NewRefundRequestModel = formData;
-    newRefundrequest.id = this.requestId;
+        const newRefundrequest: NewRefundRequestModel = formData;
+        newRefundrequest.id = this.requestId;
 
     newRefundrequest.mail = formData.email;
     newRefundrequest.mailingAddress = formData.mailingAddress;
@@ -377,43 +376,43 @@ export class RefundEditComponent implements OnInit {
     newRefundrequest.procuratorFirstname = formData.firstName;
     newRefundrequest.procuratorLastname = formData.lastName;
 
-    this.attachmentIds = [];
-    this.contractNbrs = [];
-    this.uploadattachments.forEach(value => {
-      if (value && value.id) {
-        this.attachmentIds.push(value.id);
-      } else {
-        this.attachmentIds.push(value);
-      }
-    });
+        this.attachmentIds = [];
+        this.contractNbrs = [];
+        this.uploadattachments.forEach(value => {
+            if (value && value.id) {
+                this.attachmentIds.push(value.id);
+            } else {
+                this.attachmentIds.push(value);
+            }
+        });
 
-    newRefundrequest.attachmentIds = this.attachmentIds;
+        newRefundrequest.attachmentIds = this.attachmentIds;
 
-    this.selectedRefContrcats.forEach(value => {
-      this.contractNbrs.push(value.contractNo);
-      newRefundrequest.tour = value.tourNo;
-    });
-    newRefundrequest.contractNbrs = this.contractNbrs;
+        this.selectedRefContrcats.forEach(value => {
+            this.contractNbrs.push(value.contractNo);
+            newRefundrequest.tour = value.tourNo;
+        });
+        newRefundrequest.contractNbrs = this.contractNbrs;
 
-    this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
+        this.servicesService.saveNewRefundRequest(newRefundrequest).subscribe(response => {
 
-      console.log(response);
+            console.log(response);
 
-      if (response && response.data) {
-        this.toastrService.success(this.translate.instant('refund-succes-edit'));
-        this.router.navigate(['/services/refund-requests/']);
+            if (response && response.data) {
+                this.toastrService.success(this.translate.instant('refund-succes-edit'));
+                this.router.navigate(['/services/refund-requests/']);
 
-      }
-    }, err => {
-      console.log(err);
-      this.toastrService.error(this.translate.instant('new-refund-error'));
+            }
+        }, err => {
+            console.log(err);
+            this.toastrService.error(this.translate.instant('new-refund-error'));
 
-    });
-    console.log(newRefundrequest);
-  }
+        });
+        console.log(newRefundrequest);
+    }
 
-  setContract(contractNo: string) {
-    this.contractNo = contractNo;
-  }
+    setContract(contractNo: string) {
+        this.contractNo = contractNo;
+    }
 
 }

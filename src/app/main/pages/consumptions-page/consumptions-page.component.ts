@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AdminService} from '../../services/admin.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CommonUtil} from '../../../core/helpers/common.util';
@@ -19,6 +19,8 @@ import {ConsumptionReportModel} from '../../models/consumptionReport.model';
 import {ToastrService} from 'ngx-toastr';
 import {HttpHeaderResponse, HttpResponse} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
+import {CounterModel} from '../../models/counter.model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-consumption-page',
@@ -135,6 +137,16 @@ export class ConsumptionsPageComponent implements OnInit {
     this.FactBar1,
     this.FactBar2
   ];
+  private clientDetails: any;
+  private contract: ContractModel;
+  private counter: CounterModel;
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: false,
+    class: 'modal-lg'
+  };
+
 
 
   constructor(
@@ -142,6 +154,7 @@ export class ConsumptionsPageComponent implements OnInit {
     private adminService: AdminService,
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
+    private modalService: BsModalService,
     private toastrService: ToastrService,
     private services: ServicesService,
     private translate: TranslateService) {
@@ -286,11 +299,36 @@ export class ConsumptionsPageComponent implements OnInit {
   setHistoryContract() {
     this.getConsumptionHistory();
   }
+  openContractDetails(template: TemplateRef<any>) {
+    if (localStorage.getItem('SELECTED_CONTRACT')) {
+      this.contractServices.getDetailsContract(localStorage.getItem('SELECTED_CONTRACT')).subscribe(responseContract => {
+        this.contractServices.getDetailCounterByContractNo(localStorage.getItem('SELECTED_CONTRACT')).subscribe(responseCounter => {
+          // this.contractsServices.getSoldeByNumContract(numContract).subscribe(responseSolde => {
+          this.contract = responseContract.data;
+          this.counter = responseCounter.data;
+          /*
+          this.solde = {
+              soldeExigible: responseSolde.data['soldeExigible'] || 0,
+              soldetot: responseSolde.data['soldetot'] || 0
+          };
+          */
+          this.modalRef = this.modalService.show(template, this.config);
+          // }, error => console.log(error));
+        }, err => console.log(err));
+      }, err => console.log(err));
+    }
+  }
 
   setReportContract(contractNo: string) {
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.getConsumptionHistoryCurrentYear(contractNo);
     this.getConsumptionReport(contractNo);
+    this.services.getClientDetailsByContractNo(contractNo).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   downloadXlsConsumptions() {

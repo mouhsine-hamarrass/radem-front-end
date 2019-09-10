@@ -25,6 +25,7 @@ export class EmbranchmentRequestsComponent implements OnInit {
   contractNo: string;
   dynamic: DynamicModel;
   selectedContract: string;
+  private clientDetails: any;
 
   constructor(private services: ServicesService,
               private adminService: AdminService) {
@@ -74,6 +75,12 @@ export class EmbranchmentRequestsComponent implements OnInit {
     localStorage.setItem('SELECTED_CONTRACT', contractNo);
     this.contractNo = contractNo;
     this.getEmbranchments(this.contractNo);
+    this.services.getClientDetailsByContractNo(contractNo).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   pageChanged(page: number): void {

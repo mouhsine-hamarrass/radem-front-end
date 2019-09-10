@@ -62,6 +62,7 @@ export class SettlementsPageComponent implements OnInit {
     ignoreBackdropClick: false,
     class: 'modal-lg'
   };
+  private clientDetails: any;
 
   constructor(private contractServices: ContractsService,
               private modalService: BsModalService,
@@ -179,6 +180,12 @@ export class SettlementsPageComponent implements OnInit {
 
     this.contractId = id;
     this.getSettlements();
+    this.services.getClientDetailsByContractNo(id).subscribe(response => {
+      this.clientDetails = response.data;
+      console.log(this.clientDetails);
+    }, err => {
+      console.log(err)
+    });
   }
 
   getConsumptionReport() {
