@@ -87,7 +87,10 @@
             <div class="title text-white">{{'UNPAID_BALANCE' | translate}}</div>
             <div style="margin-top: 70px">
               <span class="text-white">{{'VALUE' | translate}}</span>
-              <div class="value text-white">{{unpaidBalance || 0 | numeral}} DH</div>
+              <div class="row">
+                <div class="col-sm-7"><div class="value text-white">{{unpaidBalance || 0 | numeral}} DH</div></div>
+                <div *ngIf="unpaidBalance > 0" class="col-sm-5"><a class="myButton" (click)="navigateToUnpaid()">Régler mes impayés</a></div>
+              </div>
             </div>
           </div>
         </div>
