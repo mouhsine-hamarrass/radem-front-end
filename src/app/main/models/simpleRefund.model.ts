@@ -7,6 +7,7 @@ export class SimpleRefundModel {
     requestNo?: string;
     contractNbrs?: List<string>;
     mailingAddress?: string;
+    cin?: string;
     createdAt?: string;
     amount?: string;
     modePayment?: string;
@@ -18,6 +19,7 @@ export class SimpleRefundModel {
         requestNo?: string,
         contractNbrs?: List<string>,
         mailingAddress?: string,
+        cin?: string,
         createdAt?: string,
         amount?: string,
         modePayment?: string,
@@ -27,6 +29,7 @@ export class SimpleRefundModel {
         this.requestNo = requestNo;
         this.contractNbrs = contractNbrs;
         this.mailingAddress = mailingAddress;
+        this.cin = cin;
         this.createdAt = createdAt;
         this.amount = amount;
         this.modePayment = modePayment;

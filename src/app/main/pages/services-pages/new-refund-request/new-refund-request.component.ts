@@ -80,12 +80,16 @@ export class NewRefundRequestComponent implements OnInit {
         [
           Validators.required
         ])],
+      'cin': ['', Validators.compose(
+          [
+            Validators.required
+          ])],
       'email': ['', Validators.compose(
         [
           Validators.required,
           Validators.email
         ])],
-      'cin': ['', Validators.compose(
+      'procuratorCin': ['', Validators.compose(
         [
           Validators.required
         ])],
@@ -216,7 +220,7 @@ export class NewRefundRequestComponent implements OnInit {
 
     const firstNameControl = this.refundForm.get('firstName');
     const lastNameControl = this.refundForm.get('lastName');
-    const cinControl = this.refundForm.get('cin');
+    const cinControl = this.refundForm.get('procuratorCin');
 
     this.refundForm.get('Procuration').valueChanges
       .subscribe(userinfos => {
@@ -297,11 +301,12 @@ export class NewRefundRequestComponent implements OnInit {
       newRefundrequest.mail = formData.email;
       newRefundrequest.mailingAddress = formData.mailingAddress;
       newRefundrequest.cellphone = formData.cellphone;
+      newRefundrequest.cin = formData.cin;
       newRefundrequest.fixphone = formData.homePhonenumber;
 
       newRefundrequest.paymentMode = formData.ModeRemboursement;
       newRefundrequest.procuration = Boolean(this.flagProcuration);
-      newRefundrequest.procuratorCin = formData.cin;
+      newRefundrequest.procuratorCin = formData.procuratorCin;
       newRefundrequest.procuratorFirstname = formData.firstName;
       newRefundrequest.procuratorLastname = formData.lastName;
       this.attachments.forEach(value => {
@@ -338,6 +343,10 @@ export class NewRefundRequestComponent implements OnInit {
   setContract(contractNo: string) {
     this.contractNo = contractNo;
     // this.getRefunds(this.contractNo);
+  }
+
+  test(){
+    console.log(this.refundForm);
   }
 
 }

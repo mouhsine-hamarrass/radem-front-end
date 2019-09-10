@@ -68,6 +68,22 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
+                  <label for="cin">{{'CIN' | translate }} <span class="text-danger">*</span></label>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                  <input type="text" class="form-control" id="cin"
+                         formControlName="cin">
+                  <div class="text-danger"
+                       *ngIf="!refundForm.controls['cin'].valid && refundForm.controls['cin'].touched">
+                    <div *ngIf="refundForm.controls['cin'].errors.required">
+                      {{'FIELD_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div class="row">
                 <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
@@ -158,15 +174,15 @@
 
                 <div class="row">
                   <div class="form-group col-lg-3 col-md-12 col-sm-12" style="align-self: center">
-                    <label for="lastName">{{'PROCUROR_CIN' | translate }} <span class="text-danger">*</span></label>
+                    <label for="procuratorCin">{{'PROCUROR_CIN' | translate }} <span class="text-danger">*</span></label>
                   </div>
 
                   <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                    <input type="text" class="form-control" id="cin"
-                           formControlName="cin">
+                    <input type="text" class="form-control" id="procuratorCin"
+                           formControlName="procuratorCin">
                     <div class="text-danger"
-                         *ngIf="!refundForm.controls['cin'].valid && refundForm.controls['cin'].touched">
-                      <div *ngIf="refundForm.controls['cin'].errors.required">
+                         *ngIf="!refundForm.controls['procuratorCin'].valid && refundForm.controls['procuratorCin'].touched">
+                      <div *ngIf="refundForm.controls['procuratorCin'].errors.required">
                         {{'FIELD_REQUIRED' | translate}}
                       </div>
                     </div>
