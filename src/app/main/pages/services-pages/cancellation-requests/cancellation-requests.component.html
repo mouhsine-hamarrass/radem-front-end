@@ -106,8 +106,8 @@
                   <ng-template #dataAvailable>
                     <tr *ngFor="let request of cancellationtionRequests">
                       <td><b>{{request?.requestNo}}</b></td>
-                      <td>{{request?.createdAt | date:'dd-M-yyyy'}}</td>
-                      <td>{{request?.counterRemovalDate | date:'dd-M-yyyy'}}</td>
+                      <td>{{request?.createdAt | date:'dd-MM-yyyy'}}</td>
+                      <td>{{request?.counterRemovalDate | date:'dd-MM-yyyy'}}</td>
                       <td>
                          <app-badge [status]="request?.status?.status"></app-badge>
                       </td>

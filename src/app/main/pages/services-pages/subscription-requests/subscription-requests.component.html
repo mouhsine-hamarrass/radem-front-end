@@ -104,7 +104,7 @@
                   <ng-template #dataAvailable>
                     <tr *ngFor="let request of subscriptionRequests">
                       <td><b>{{request.requestNo}}</b></td>
-                      <td>{{request.createdAt | date:'dd-M-yyyy'}}</td>
+                      <td>{{request.createdAt | date:'dd-MM-yyyy'}}</td>
                       <td>{{request.subscriptionType | translate }}</td>
                       <td>
                         <app-badge [status]="request.status.status"></app-badge>

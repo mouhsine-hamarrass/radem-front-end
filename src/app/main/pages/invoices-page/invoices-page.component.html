@@ -116,7 +116,7 @@
                                             <td>{{inv?.invNo}}</td>
                                             <td>{{inv?.invType}}</td>
                                             <td>{{inv?.year}}-{{inv?.month}}</td>
-                                            <td>{{inv?.amount}}</td>
+                                            <td>{{inv?.amount | numeral}}</td>
                                             <td>{{inv?.invoicedVol}}</td>
                                             <td>{{inv?.invEmitDate | date:'dd-MM-yyyy'}}</td>
                                             <td>{{inv?.invExigDate | date:'dd-MM-yyyy'}}</td>
@@ -255,13 +255,13 @@
                                 <td>{{detail?.royalties}}</td>
                                 <td>{{detail?.royaltiesType}}</td>
                                 <td>{{detail?.tva}}</td>
-                                <td>{{detail?.htAmountProx}}</td>
+                                <td>{{detail?.htAmountProx  | numeral}}</td>
                                 <td>{{detail?.invEmitDate | date:'dd-MM-yyyy'}}</td>
                                 <td>{{detail?.invExigDate | date:'dd-MM-yyyy'}}</td>
-                                <td>{{detail?.htAmount}}</td>
-                                <td>{{detail?.tvaAmount}}</td>
-                                <td>{{detail?.ttcAmount}}</td>
-                                <td>{{detail?.quantity}}</td>
+                                <td>{{detail?.htAmount  | numeral}}</td>
+                                <td>{{detail?.tvaAmount  | numeral}}</td>
+                                <td>{{detail?.ttcAmount  | numeral}}</td>
+                                <td>{{detail?.quantity  | numeral}}</td>
 
                         </ng-template>
 

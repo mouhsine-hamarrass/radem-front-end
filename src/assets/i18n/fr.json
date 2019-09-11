@@ -572,6 +572,7 @@
   "PROCUROR_FIRSTNAME": "Nom procureur",
   "PROCUROR_LASTNAME": "Prénom procureur",
   "PROCUROR_CIN": "CIN procureur",
+  "HOLDER_CIN": "CIN titulaire",
   "REFUND_MODE": "Mode",
   "PLEASE_CONFIRM_THE_PASSWORD": "Veuillez confirmer le mot de passe",
   "BANK_TRANSFER": "Virement bancaire",
@@ -607,5 +608,8 @@
   "DYANMIC_CONTENT": "Contenu dynamique",
   "firstname": "Prénom",
   "lastname": "Nom",
+  "holderName": "nom du titulaire ",
+  "contractStatus": "statut du contrat ",
+  "addressConsumption": "adresse de consommation",
   "activer-le-compte-sinon-l-utilisateur-ne-sera-pas-en-mesure-d-acceder-a-son-compte": "Activer le compte sinon l'utilisateur ne sera pas en mesure d'accéder à son compte"
 }
