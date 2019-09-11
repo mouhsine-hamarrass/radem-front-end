@@ -139,7 +139,7 @@
                 <ng-container
                   *ngIf="lastPayment?.date; then lastPaymentWithDateOutput else lastPaymentWithoutDateOutput"></ng-container>
                 <ng-template #lastPaymentWithDateOutput>
-                  {{lastPayment?.date| date:'dd/MM/yyyy'}}
+                  {{lastPayment?.date| date:'dd-MM-yyyy'}}
                 </ng-template>
                 <ng-template #lastPaymentWithoutDateOutput>
                   {{ '--/--/--' }}
@@ -165,7 +165,7 @@
                 <ng-container
                   *ngIf="lastVisitLastIndexDetails?.dateLastIndex; then dateLastIndexWithDateOutput else dateLastIndexWithoutDateOutput"></ng-container>
                 <ng-template #dateLastIndexWithDateOutput>
-                  {{lastVisitLastIndexDetails?.dateLastIndex| date:'dd/MM/yyyy'}}
+                  {{lastVisitLastIndexDetails?.dateLastIndex| date:'dd-MM-yyyy'}}
                 </ng-template>
                 <ng-template #dateLastIndexWithoutDateOutput>
                   {{ '--/--/--' }}
@@ -177,7 +177,7 @@
                 <ng-container
                   *ngIf="lastVisitLastIndexDetails?.dateNextVisit; then dateNextVisitWithDateOutput else dateNextVisitWithoutDateOutput"></ng-container>
                 <ng-template #dateNextVisitWithDateOutput>
-                  {{lastVisitLastIndexDetails?.dateNextVisit| date:'dd/MM/yyyy'}}
+                  {{lastVisitLastIndexDetails?.dateNextVisit| date:'dd-MM-yyyy'}}
                 </ng-template>
                 <ng-template #dateNextVisitWithoutDateOutput>
                   {{ '--/--/--' }}

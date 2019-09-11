@@ -40,7 +40,7 @@
                             </tr>
                             <tr>
                               <td>{{'DATE_OF_REMOVAL_OF_THE_COUNTER' | translate }} :</td>
-                              <td>{{terminationDetails?.counterRemovalDate |  date:'dd-M-yyyy'}}</td>
+                              <td>{{terminationDetails?.counterRemovalDate |  date:'dd-MM-yyyy'}}</td>
                             </tr>
                           </table>
                         </div>
@@ -55,11 +55,11 @@
                       <table>
                         <tr>
                           <td>{{'DATE_OF-CREATION' | translate }} :</td>
-                          <td>{{terminationDetails?.createdAt | date:'dd-M-yyyy'}}</td>
+                          <td>{{terminationDetails?.createdAt | date:'dd-MM-yyyy'}}</td>
                         </tr>
                         <tr>
                           <td>{{'DATE_OF_MODIFICATION' | translate }} :</td>
-                          <td>{{terminationDetails?.modifiedAt | date:'dd-M-yyyy'}}</td>
+                          <td>{{terminationDetails?.modifiedAt | date:'dd-MM-yyyy'}}</td>
                         </tr>
                       </table>
                     </div>
@@ -103,7 +103,7 @@
                             <h6 class="mt-0 font-weight-bold">{{feedback.senderName}}</h6>
                             <p>{{feedback.message}}</p>
                             <div class="col-13 pull-right text-right" id="divDateComm">
-                              <i>le {{feedback.sendingDate | date:'dd-M-yyyy'}}.</i>
+                              <i>le {{feedback.sendingDate | date:'dd-MM-yyyy'}}.</i>
                             </div>
                           </div>
                         </div>

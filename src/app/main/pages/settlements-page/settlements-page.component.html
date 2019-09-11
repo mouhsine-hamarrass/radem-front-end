@@ -14,136 +14,139 @@
             <!-- What is-->
             <div id="what-is" class="mb-0">
                 <div class="card-content collapse show">
-                        <div class="card-body">
-                            <div class="card-header content-header back sub-header row marginVisual">
-                                <div class="col-12 content-header">
-                                    <div class="row align-items-center">
+                    <div class="card-body">
+                        <div class="card-header content-header back sub-header row marginVisual">
+                            <div class="col-12 content-header">
+                                <div class="row align-items-center">
 
-                                        <!-- *T LISTE ******* -->
-                                        <div class="col-md-3 has-border">
-                                            &nbsp;
-                                            <label class="Cap">
-                                                <i class="fa fa-list-ul icon "></i>&nbsp;
-                                                {{"CONTRACT_LISTS" | translate}}
-                                            </label>
-                                            <select type="text" class="form-control contract-dropdown" [(ngModel)]="selectedContract"
-                                                    (ngModelChange)="setContract(selectedContract)">
-                                                <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}} ...</option>
-                                                <option *ngFor="let contract of clientContracts" value="{{contract.contractNo}}">
-                                                    {{contract.contractNo}}
-                                                    ({{contract.type}})
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <!-- *T END LISTE ******* -->
-
-                                        <!-- *T RAISON ******* -->
-                                        <div class="col-md-2 has-border" [hidden]="!clientDetails">
-                                            <label class="Cap">
-                                                <i class="fa fa-user icon"></i>&nbsp;
-                                                {{"COMPANY_NAME" | translate}}
-                                            </label>
-                                            <h6 class="sub-title" tooltip="Nom">
-                                                {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
-                                            </h6>
-                                        </div>
-                                        <!-- *T END RAISON ******* -->
-
-                                        <!-- *T ADDRESS ******* -->
-                                        <div class="col-md-4 has-border" [hidden]="!clientDetails">
-                                            <label class="Cap">
-                                                <i class="fa fa-map-marker icon"></i>&nbsp;
-                                                {{"ADDRESS" | translate}}
-                                            </label>
-                                            <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
-                                        </div>
-                                        <!-- *T END ADDRESS ******* -->
-
-                                        <!-- *T STATUS ******* -->
-                                        <div class="col-md-3 has-border" [hidden]="!clientDetails">
-                                            <!-- <div class="status text-left">
-
-                                               <i class="fa fa-circle icon"
-                                                  [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
-                                              <span>{{clientDetails?.contractStatus}}</span>
-                                            </div> -->
-                                            <label class="Cap">
-                                                <i class="fa fa-circle-o-notch icon"></i>&nbsp;
-                                                {{"CONTRACT STATUS" | translate}}
-                                            </label>
-                                            <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
-                                        </div>
-                                        <!-- *T END STATUS ******* -->
-
-
+                                    <!-- *T LISTE ******* -->
+                                    <div class="col-md-3 has-border">
+                                        &nbsp;
+                                        <label class="Cap">
+                                            <i class="fa fa-list-ul icon "></i>&nbsp;
+                                            {{"CONTRACT_LISTS" | translate}}
+                                        </label>
+                                        <select type="text" class="form-control contract-dropdown"
+                                                [(ngModel)]="selectedContract"
+                                                (ngModelChange)="setContract(selectedContract)">
+                                            <option value="" disabled selected>{{'CHOOSE_A_CONTRACT' | translate}}...
+                                            </option>
+                                            <option *ngFor="let contract of clientContracts"
+                                                    value="{{contract.contractNo}}">
+                                                {{contract.contractNo}}
+                                                ({{contract.type}})
+                                            </option>
+                                        </select>
                                     </div>
+                                    <!-- *T END LISTE ******* -->
 
+                                    <!-- *T RAISON ******* -->
+                                    <div class="col-md-2 has-border" [hidden]="!clientDetails">
+                                        <label class="Cap">
+                                            <i class="fa fa-user icon"></i>&nbsp;
+                                            {{"COMPANY_NAME" | translate}}
+                                        </label>
+                                        <h6 class="sub-title" tooltip="Nom">
+                                            {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
+                                        </h6>
+                                    </div>
+                                    <!-- *T END RAISON ******* -->
+
+                                    <!-- *T ADDRESS ******* -->
+                                    <div class="col-md-4 has-border" [hidden]="!clientDetails">
+                                        <label class="Cap">
+                                            <i class="fa fa-map-marker icon"></i>&nbsp;
+                                            {{"ADDRESS" | translate}}
+                                        </label>
+                                        <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+                                    </div>
+                                    <!-- *T END ADDRESS ******* -->
+
+                                    <!-- *T STATUS ******* -->
+                                    <div class="col-md-3 has-border" [hidden]="!clientDetails">
+                                        <!-- <div class="status text-left">
+
+                                           <i class="fa fa-circle icon"
+                                              [ngClass]="clientDetails?.contractStatus === 'active' ? 'success' : 'danger' "></i>&nbsp;
+                                          <span>{{clientDetails?.contractStatus}}</span>
+                                        </div> -->
+                                        <label class="Cap">
+                                            <i class="fa fa-circle-o-notch icon"></i>&nbsp;
+                                            {{"CONTRACT STATUS" | translate}}
+                                        </label>
+                                        <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+                                    </div>
+                                    <!-- *T END STATUS ******* -->
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive mx-auto">
+                            <div class="row justify-content-between">
+                                <div class="col-12">
+                                    <div class="float-left">
+                                        <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="table-responsive mx-auto">
-                                <div class="row justify-content-between">
-                                    <div class="col-12">
-                                        <div class="float-left">
-                                            <app-filter (onfilterChanged)="pageFilter($event)"></app-filter>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table class="table"
-                                       sortable-table (sorted)="onSorted($event)"
-                                       filterable-table (filtred)="onFiltred($event)">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th scope="col" width="150">{{'BILL_RECU' | translate }}</th>
-                                        <th scope="col">{{'DATE_OF_RECEIPT' | translate }}</th>
-                                        <th scope="col">{{'TOTAL_AMOUNT' | translate }}</th>
-                                        <th scope="col">{{'NUMBER_OF_CONTRACT' | translate }}</th>
-                                        <th scope="col">{{'PAYMENT_MODE' | translate }}</th>
-                                        <th scope="col">{{'SETTLEMENT_ACTION' | translate }}</th>
+                            <table class="table"
+                                   sortable-table (sorted)="onSorted($event)"
+                                   filterable-table (filtred)="onFiltred($event)">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col" width="150">{{'BILL_RECU' | translate }}</th>
+                                    <th scope="col">{{'DATE_OF_RECEIPT' | translate }}</th>
+                                    <th scope="col">{{'TOTAL_AMOUNT' | translate }}</th>
+                                    <th scope="col">{{'NUMBER_OF_CONTRACT' | translate }}</th>
+                                    <th scope="col">{{'PAYMENT_MODE' | translate }}</th>
+                                    <th scope="col">{{'SETTLEMENT_ACTION' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+                                <app-data-not-available
+                                        *ngIf="!pieces || pieces.length == 0; else dataAvailable"
+                                        [colSpan]="6"></app-data-not-available>
+
+                                <ng-template #dataAvailable>
+                                    <tr *ngFor="let piece of pieces">
+
+                                        <td>{{piece?.receiptNo}}</td>
+                                        <td>{{piece?.receiptDate | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{piece?.totalAmount | numeral}}</td>
+                                        <td>{{piece?.numberOfContracts}}</td>
+                                        <td>{{piece?.paymentMode}}</td>
+                                        <td>
+                                            <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
+                                               tooltip="Détails"
+                                               (click)="openReceiptDetails(detailReceipt, piece?.receiptNo)"></i>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+
+                                </ng-template>
 
 
-                                    <app-data-not-available
-                                            *ngIf="!pieces || pieces.length == 0; else dataAvailable"
-                                            [colSpan]="6"></app-data-not-available>
-
-                                    <ng-template #dataAvailable>
-                                        <tr *ngFor="let piece of pieces">
-
-                                            <td>{{piece?.receiptNo}}</td>
-                                            <td>{{piece?.receiptDate | date:'dd-MM-yyyy'}}</td>
-                                            <td>{{piece?.totalAmount | numeral}}</td>
-                                            <td>{{piece?.numberOfContracts}}</td>
-                                            <td>{{piece?.paymentMode}}</td>
-                                            <td>
-                                                <i class="fa fa-list-alt cursor-pointer pl-1 text-info"
-                                                   tooltip="Détails"
-                                                   (click)="openReceiptDetails(detailReceipt, piece?.receiptNo)"></i>
-                                            </td>
-                                        </tr>
-
-                                    </ng-template>
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <br> <br>
-                            <app-pagination [showPagination]="totalPages > 1"
-                                            [numberOfItems]="numberOfItems"
-                                            [itemsPerPage]="itemsPerPage"
-                                            [totalItems]="totalElements"
-                                            [totalPages]="totalPages"
-                                            (onpageChanged)="pageChanged($event)"></app-pagination>
+                                </tbody>
+                            </table>
                         </div>
+                        <br> <br>
+                        <app-pagination [showPagination]="totalPages > 1"
+                                        [numberOfItems]="numberOfItems"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalElements"
+                                        [totalPages]="totalPages"
+                                        (onpageChanged)="pageChanged($event)"></app-pagination>
+                    </div>
 
-                        <div style="color: #B6D2B8; margin: 14px;" class="alert alert-info">
-                            <a style="color: #1976d2;" href="http://www.radem.ma/contact/nos-agences" target="_blank">
-                                <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                                Localiser en quelques clics votre agence RADEM la plus proche de chez vous
-                            </a>
-                        </div>
+                    <div style="color: #B6D2B8; margin: 14px;" class="alert alert-info">
+                        <a style="color: #1976d2;" href="http://www.radem.ma/contact/nos-agences" target="_blank">
+                            <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                            Localiser en quelques clics votre agence RADEM la plus proche de chez vous
+                        </a>
+                    </div>
 
                 </div>
 
@@ -177,9 +180,6 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body modal-radem">
-        <h3 class="Bold_txt modal-title pull-left">{{'INVOICE_LIST'| translate}}</h3>
-    </div>
     <div class="table-responsive mx-auto">
         <div class="row justify-content-between">
             <div class="col-12">
@@ -197,6 +197,9 @@
                 <th scope="col">{{'BILL_NUMBER' | translate }}</th>
                 <th scope="col">{{'BILLIN_PERIOD' | translate }}</th>
                 <th scope="col">{{'SETTLEMENT_AMOUNT' | translate }}</th>
+                <th scope="col">{{'holderName' | translate }}</th>
+                <th scope="col">{{'contractStatus' | translate }}</th>
+                <th scope="col">{{'addressConsumption' | translate }}</th>
 
             </tr>
             </thead>
@@ -209,10 +212,21 @@
             <ng-template #dataAvailable>
                 <tr *ngFor="let pieceDetail of piecesDetail">
 
-                    <td>{{pieceDetail?.contractNo}}</td>
+                    <td>
+                        <span *ngIf="pieceDetail?.networkType == 'EA'" class="network-icon water"><i
+                                    class="fa fa-2x text-white fa-tint"></i> &nbsp;</span>
+                        <span *ngIf="pieceDetail?.networkType == 'MT'" class="network-icon electricity"><i
+                                class="fa fa-2x text-white fa-bolt"></i> &nbsp;</span>
+                        <span *ngIf="pieceDetail?.networkType == 'BT'" class="network-icon water"><i
+                                class="fa fa-2x text-white fa-bolt"></i> &nbsp;</span>&nbsp;
+                        {{pieceDetail?.contractNo}}
+                    </td>
                     <td>{{pieceDetail?.invoiceNo}}</td>
                     <td>{{pieceDetail?.month}} - {{pieceDetail?.year}}</td>
-                    <td>{{pieceDetail?.amount}}</td>
+                    <td>{{pieceDetail?.amount | numeral}}</td>
+                    <td>{{pieceDetail?.holderName}}</td>
+                    <td>{{pieceDetail?.contractStatus}}</td>
+                    <td>{{pieceDetail?.addressConsumption}}</td>
 
 
             </ng-template>
@@ -231,7 +245,6 @@
         </app-pagination>
     </div>
     <div class="modal-footer modal-radem">
-
         <button type="button" class="btn btn-light pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">Fermer</span>
         </button>
@@ -239,3 +252,4 @@
 
 
 </ng-template>
+          
