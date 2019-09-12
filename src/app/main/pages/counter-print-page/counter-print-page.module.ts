@@ -6,10 +6,8 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {createTranslateLoader} from '../../../app.translate.factory';
 import {HttpClient} from '@angular/common/http';
 import {NgxPermissionsModule} from 'ngx-permissions';
-import {HelperService} from '../../services/helper.service';
 import {CounterPrintPageRoutingModule} from './counter-print-page-routing.module';
 import {CounterPrintPageComponent} from './counter-print-page.component';
-
 
 
 @NgModule({

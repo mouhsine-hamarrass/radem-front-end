@@ -21,6 +21,7 @@ import {ContractRefund} from '../models/contract-refund.model';
 import {NewRefundRequestModel} from '../models/new-refund-request.model';
 import {SimpleRefundModel} from '../models/simpleRefund.model';
 import {Attachment} from '../models/attachment.model';
+import {InvoicesToPayModel} from '../models/invoices-to-pay.model';
 
 let headers = new HttpHeaders();
 headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -301,8 +302,8 @@ export class ServicesService {
 
   //Mouhsine Transaction Salary
 
-  getTransactionSammury(amount: string): Observable<Response<LightTransactionSummary>> {
-    return this.httpClient.post<Response<LightTransactionSummary>>(`${this.urlApi}/payments/transactionSummary`, amount);
+  getTransactionSammury(invoicesToPay: InvoicesToPayModel): Observable<Response<LightTransactionSummary>> {
+    return this.httpClient.post<Response<LightTransactionSummary>>(`${this.urlApi}/payments/transactionSummary`, invoicesToPay);
 
   }
 
