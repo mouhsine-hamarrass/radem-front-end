@@ -75,7 +75,6 @@ export class UnpaidPageComponent implements OnInit {
     }
 
     getClientAttachedContracts() {
-        debugger;
         this.services.clientAttachedContractsPositive().subscribe(response => {
             this.clientContracts = response.data;
             if (this.clientContracts && this.clientContracts.length) {
@@ -88,7 +87,6 @@ export class UnpaidPageComponent implements OnInit {
                                 this.clientContracts.splice(i, 1);
                             }
                             _.each(this.clientContracts, (element: any) => {
-                                debugger;
                                 if (element.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
                                     this.clientContracts2 = element;
                                     this.selectedContract.push(this.clientContracts2);
