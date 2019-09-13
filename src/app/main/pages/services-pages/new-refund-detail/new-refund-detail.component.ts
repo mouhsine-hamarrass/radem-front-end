@@ -90,7 +90,6 @@ export class NewRefundDetailComponent implements OnInit {
       return;
     }
 
-    debugger;
 
     this.printService.print(printSection);
    /* const mywindow = window.open();

@@ -17,7 +17,7 @@
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <form class="form" [formGroup]="reportForm" (ngSubmit)="saveReleve()" novalidate>
-                                <div class="card-header content-header back sub-header row marginVisual">
+                                <div class="card-header content-header back sub-header row marginVisual tableTitle">
                                     <div class="col-12 content-header" style="border-top: 1px solid #d3d3d3;">
                                         <div class="row align-items-center">
 
@@ -28,7 +28,8 @@
                                                         class="danger">*</span></label>
                                                 <select formControlName="contract" id="comtract" type="text"
                                                         class="form-control contract-dropdown"
-                                                        #s (change)="setContract(s.value)" [(ngModel)]="contractId"
+                                                        #s (change)="hideErrorBigValue=true;indexDisable=1;setContract(s.value)"
+                                                        [(ngModel)]="contractId"
                                                         required="required">
                                                     <option value="" disabled
                                                             selected>{{'CHOOSE_A_CONTRACT' | translate}} ...
@@ -43,7 +44,7 @@
                                             <!-- *T END LISTE ******* -->
 
                                             <!-- *T RAISON ******* -->
-                                            <div class="col-md-2 has-border" >
+                                            <div class="col-md-2 has-border">
                                                 <label class="Cap">
                                                     <i class="fa fa-user icon"></i>&nbsp;
                                                     {{"COMPANY_NAME" | translate}}
@@ -55,17 +56,18 @@
                                             <!-- *T END RAISON ******* -->
 
                                             <!-- *T ADDRESS ******* -->
-                                            <div class="col-md-4 has-border" >
+                                            <div class="col-md-4 has-border">
                                                 <label class="Cap">
                                                     <i class="fa fa-map-marker icon"></i>&nbsp;
                                                     {{"ADDRESS" | translate}}
                                                 </label>
-                                                <h6 class="sub-title" [hidden]="!clientDetails">{{clientDetails?.consumptionAddress}}</h6>
+                                                <h6 class="sub-title"
+                                                    [hidden]="!clientDetails">{{clientDetails?.consumptionAddress}}</h6>
                                             </div>
                                             <!-- *T END ADDRESS ******* -->
 
                                             <!-- *T STATUS ******* -->
-                                            <div class="col-md-3 has-border" >
+                                            <div class="col-md-3 has-border">
                                                 <!-- <div class="status text-left">
 
                                                    <i class="fa fa-circle icon"
@@ -76,7 +78,8 @@
                                                     <i class="fa fa-circle-o-notch icon"></i>&nbsp;
                                                     {{"CONTRACT STATUS" | translate}}
                                                 </label>
-                                                <h6 class="sub-title" [hidden]="!clientDetails">{{clientDetails?.contractStatus}}</h6>
+                                                <h6 class="sub-title"
+                                                    [hidden]="!clientDetails">{{clientDetails?.contractStatus}}</h6>
                                             </div>
                                             <!-- *T END STATUS ******* -->
 
@@ -87,9 +90,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="alert">
-                                            {{'fill_form' | translate}}
-                                        </div>
                                         <div class="form-group">
                                             <div class="text-danger"
                                                  *ngIf="!reportForm.controls['contract'].valid && reportForm.controls['contract'].touched">
@@ -98,7 +98,9 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="alert" style="padding: 0">
+                                            {{'fill_form' | translate}}
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-form-label">{{'CHECK_DATE' | translate}} <span
                                                     class="danger">*</span> :</label>
@@ -124,7 +126,7 @@
                                             <label for="index">{{'INDEX' | translate}}<span
                                                     class="danger">*</span></label>
                                             <input class="form-control required" id="index" formControlName="index"
-                                                   type="number">
+                                                   type="number" (change)="hideErrorBigValue=false">
 
                                             <div class="text-danger"
                                                  *ngIf="!reportForm.controls['index'].valid && reportForm.controls['index'].touched">

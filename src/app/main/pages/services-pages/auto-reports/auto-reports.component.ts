@@ -28,6 +28,7 @@ export class AutoReportsComponent implements OnInit {
     private clientDetails: any;
     hideErrorBigValue = false;
     private indexConducteur: string;
+    private indexDisable: number;
 
     constructor(private adminService: AdminService,
                 private services: ServicesService,
@@ -55,6 +56,9 @@ export class AutoReportsComponent implements OnInit {
         this.getReleve();
         this.services.getClientDetailsByContractNo(id).subscribe(response => {
             this.clientDetails = response.data;
+            if (this.indexDisable === 1) {
+                this.hideErrorBigValue = true;
+            }
             console.log(this.clientDetails);
         }, err => {
             console.log(err)
@@ -128,20 +132,21 @@ export class AutoReportsComponent implements OnInit {
     }
 
     saveReleve() {
-        debugger;
-        this.releve = new ReleveModel(
-            this.reportForm.controls.id.value,
-            this.reportForm.controls.index.value,
-            this.reportForm.controls.checkDate.value,
-            this.reportForm.controls.contract.value);
-        if (this.releve.contractNo && this.releve.dateReading && this.releve.indexValue) {
-            this.services.autoMeterRead(this.releve).subscribe(response => {
-                this.toastrService.success(this.translate.instant('MODIFIED_RELEVE'), '');
-            }, error1 => {
-                console.log(error1)
-            });
-        } else {
-            this.toastrService.error(this.translate.instant('ERROR_FORM'), '');
+        if (Number(this.indexConducteur) < this.reportForm.controls.index.value) {
+            this.releve = new ReleveModel(
+                this.reportForm.controls.id.value,
+                this.reportForm.controls.index.value,
+                this.reportForm.controls.checkDate.value,
+                this.reportForm.controls.contract.value);
+            if (this.releve.contractNo && this.releve.dateReading && this.releve.indexValue) {
+                this.services.autoMeterRead(this.releve).subscribe(response => {
+                    this.toastrService.success(this.translate.instant('MODIFIED_RELEVE'), '');
+                }, error1 => {
+                    console.log(error1)
+                });
+            } else {
+                this.toastrService.error(this.translate.instant('ERROR_FORM'), '');
+            }
         }
     }
 
