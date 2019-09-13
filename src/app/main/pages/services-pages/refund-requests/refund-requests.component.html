@@ -43,29 +43,29 @@
                       <!-- *T END LISTE ******* -->
 
                       <!-- *T RAISON ******* -->
-                      <div class="col-md-2 has-border" [hidden]="!clientDetails">
+                      <div class="col-md-2 has-border">
                         <label class="Cap">
                           <i class="fa fa-user icon"></i>&nbsp;
                           {{"COMPANY_NAME" | translate}}
                         </label>
-                        <h6 class="sub-title" tooltip="Nom">
+                        <h6 class="sub-title" [hidden]="!clientDetails">
                           {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
                         </h6>
                       </div>
                       <!-- *T END RAISON ******* -->
 
                       <!-- *T ADDRESS ******* -->
-                      <div class="col-md-4 has-border" [hidden]="!clientDetails">
+                      <div class="col-md-4 has-border">
                         <label class="Cap">
                           <i class="fa fa-map-marker icon"></i>&nbsp;
                           {{"ADDRESS" | translate}}
                         </label>
-                        <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+                        <h6 class="sub-title" [hidden]="!clientDetails">{{clientDetails?.consumptionAddress}}</h6>
                       </div>
                       <!-- *T END ADDRESS ******* -->
 
                       <!-- *T STATUS ******* -->
-                      <div class="col-md-3 has-border" [hidden]="!clientDetails">
+                      <div class="col-md-3 has-border" >
                         <!-- <div class="status text-left">
 
                            <i class="fa fa-circle icon"
@@ -76,7 +76,7 @@
                           <i class="fa fa-circle-o-notch icon"></i>&nbsp;
                           {{"CONTRACT STATUS" | translate}}
                         </label>
-                        <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+                        <h6 class="sub-title" [hidden]="!clientDetails">{{clientDetails?.contractStatus}}</h6>
                       </div>
                       <!-- *T END STATUS ******* -->
 

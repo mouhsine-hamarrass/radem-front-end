@@ -18,11 +18,11 @@
                         <div class="card-body">
                             <form class="form" [formGroup]="reportForm" (ngSubmit)="saveReleve()" novalidate>
                                 <div class="card-header content-header back sub-header row marginVisual">
-                                    <div class="col-12 content-header">
+                                    <div class="col-12 content-header" style="border-top: 1px solid #d3d3d3;">
                                         <div class="row align-items-center">
 
                                             <!-- *T LISTE ******* -->
-                                            <div class="col-md-3 has-border borderDiv">
+                                            <div class="col-md-3 has-border">
                                                 &nbsp;
                                                 <label for="comtract">{{'CONTRACT_NUMBER' | translate}}<span
                                                         class="danger">*</span></label>
@@ -43,29 +43,29 @@
                                             <!-- *T END LISTE ******* -->
 
                                             <!-- *T RAISON ******* -->
-                                            <div class="col-md-2 has-border borderDiv" [hidden]="!clientDetails">
+                                            <div class="col-md-2 has-border" >
                                                 <label class="Cap">
                                                     <i class="fa fa-user icon"></i>&nbsp;
                                                     {{"COMPANY_NAME" | translate}}
                                                 </label>
-                                                <h6 class="sub-title" tooltip="Nom">
+                                                <h6 class="sub-title" [hidden]="!clientDetails">
                                                     {{clientDetails?.holderFirstname}} {{clientDetails?.holderLastname}}
                                                 </h6>
                                             </div>
                                             <!-- *T END RAISON ******* -->
 
                                             <!-- *T ADDRESS ******* -->
-                                            <div class="col-md-4 has-border borderDiv" [hidden]="!clientDetails">
+                                            <div class="col-md-4 has-border" >
                                                 <label class="Cap">
                                                     <i class="fa fa-map-marker icon"></i>&nbsp;
                                                     {{"ADDRESS" | translate}}
                                                 </label>
-                                                <h6 class="sub-title">{{clientDetails?.consumptionAddress}}</h6>
+                                                <h6 class="sub-title" [hidden]="!clientDetails">{{clientDetails?.consumptionAddress}}</h6>
                                             </div>
                                             <!-- *T END ADDRESS ******* -->
 
                                             <!-- *T STATUS ******* -->
-                                            <div class="col-md-3 has-border borderDiv" [hidden]="!clientDetails">
+                                            <div class="col-md-3 has-border" >
                                                 <!-- <div class="status text-left">
 
                                                    <i class="fa fa-circle icon"
@@ -76,7 +76,7 @@
                                                     <i class="fa fa-circle-o-notch icon"></i>&nbsp;
                                                     {{"CONTRACT STATUS" | translate}}
                                                 </label>
-                                                <h6 class="sub-title">{{clientDetails?.contractStatus}}</h6>
+                                                <h6 class="sub-title" [hidden]="!clientDetails">{{clientDetails?.contractStatus}}</h6>
                                             </div>
                                             <!-- *T END STATUS ******* -->
 
@@ -131,8 +131,8 @@
                                                 <div *ngIf="reportForm.controls['index'].errors.required">
                                                     {{'FIELD_REQUIRED' | translate}}
                                                 </div>
-                                                <div *ngIf="reportForm.controls['index'].errors">
-                                                    {{'BIG-VALUE' | translate}} {{reportForm.controls.index.value}}
+                                                <div *ngIf="reportForm.controls['index'].errors && hideErrorBigValue == false">
+                                                    {{'BIG-VALUE' | translate}} {{indexConducteur}}
                                                 </div>
                                             </div>
 
