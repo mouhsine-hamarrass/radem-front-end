@@ -13,10 +13,6 @@ export class HelperService {
     this.info = value;
   }
 
-    setInfo(value: any) {
-        this.info = value;
-    }
-
     getInfo() {
         return this.info;
     }

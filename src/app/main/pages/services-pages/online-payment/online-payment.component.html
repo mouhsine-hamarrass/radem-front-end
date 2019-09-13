@@ -1,59 +1,69 @@
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
-  <div class="row">
-    <div class="col-md-6 col-12">
-      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'PAYMENT' | translate }}
-      </h3>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="content-header-title"><i class="fa fa-bookmark"
+                                                style="color: #2c5599;"></i> {{'PAYMENT' | translate }}
+            </h3>
+        </div>
     </div>
-  </div>
 </div>
 <div class="content-body">
-  <section class="row">
-    <div class="col-sm-12">
-      <!-- What is-->
-      <div id="what-is" class="card mb-0">
-        <div class="card-header">
-          <h4 class="card-title">{{'TOTAL_AMOUNT' | translate }}: {{showTotalAmount}} DH</h4>
+    <section class="row">
+        <div class="col-sm-12">
+            <!-- What is-->
+            <div id="what-is" class="card mb-0">
+                <div class="card-header">
+                    <h4 class="card-title">{{'TOTAL_AMOUNT' | translate }}: {{showTotalAmount}} DH</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col">{{'CONTRACT_NO' | translate }}</th>
+                                <th scope="col">{{'BILL_NUMBER' | translate }}</th>
+                                <th scope="col">{{'AMOUNT' | translate }} (Dhs)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <app-data-not-available
+                                    *ngIf="!selectedBills || selectedBills.invoices.length == 0; else dataAvailable"
+                                    [colSpan]="4">
+                            </app-data-not-available>
+                            <ng-template #dataAvailable>
+                                <tr *ngFor="let invoice of selectedBills.invoices">
+                                    <td>{{invoice?.contractNo}}</td>
+                                    <td>{{invoice?.invoiceNo}}</td>
+                                    <td>{{invoice?.amount | numeral}}</td>
+                                </tr>
+                            </ng-template>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <!--/ What is-->
+
+                <div class="col-md-12 text-right">
+                    <div class="pull-right">
+                        <input class="btn btn btn-outline-secondary mb-2" type="button" (click)="submit()"
+                               value="Procéder au paiement">
+                    </div>
+                    <div class="pull-right">
+                        <img src="../../../../../assets/payment/logo_cmi.png" height="22" width="50" style="margin-right: 28px; margin-top: 7px"/>
+                    </div>
+                    <div class="pull-right">
+                        <img src="../../../../../assets/payment/secure_code_logo_petit.gif" height="22" width="50" style="margin-right: 28px; margin-top: 7px"/>
+                    </div>
+                    <div class="pull-right">
+                        <img src="../../../../../assets/payment/tn_verified_by_visa_petit.gif" height="22" width="50" style="margin-right: 28px; margin-top: 7px"/>
+                    </div>
+
+
+                </div>
+
+            </div>
         </div>
-        <div class="card-content">
-          <div class="card-body">
-            <table class="table">
-              <thead class="table-light">
-              <tr>
-                <th scope="col">{{'CONTRACT_NO' | translate }}</th>
-                <th scope="col">{{'BILL_NUMBER' | translate }}</th>
-                <th scope="col">{{'AMOUNT' | translate }} (Dhs)</th>
-              </tr>
-              </thead>
-              <tbody>
-              <app-data-not-available
-                *ngIf="!selectedBills || selectedBills.invoices.length == 0; else dataAvailable"
-                [colSpan]="4">
-              </app-data-not-available>
-              <ng-template #dataAvailable>
-                <tr *ngFor="let invoice of selectedBills.invoices">
-                  <td>{{invoice?.contractNo}}</td>
-                  <td>{{invoice?.invoiceNo}}</td>
-                  <td>{{invoice?.amount | numeral}}</td>
-                </tr>
-              </ng-template>
-              </tbody>
-            </table>
-
-          </div>
-        </div>
-        <!--/ What is-->
-
-        <div class="col-md-12 text-right">
-
-          <div class="pull-right">
-            <input class="btn btn btn-outline-secondary mb-2" type="button" (click)="submit()"
-                   value="Procéder au paiement">
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
+    </section>
 </div>
