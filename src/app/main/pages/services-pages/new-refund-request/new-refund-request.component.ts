@@ -294,7 +294,6 @@ export class NewRefundRequestComponent implements OnInit {
 
   saveRequest(form): void {
     const user: User = this.authHelper.getLoggedUserInfo();
-    debugger;
     if (form && form.valid && form.value) {
       const formData = form.value;
       const newRefundrequest: NewRefundRequestModel = form.value;

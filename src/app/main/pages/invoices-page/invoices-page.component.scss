@@ -73,7 +73,6 @@ table {
       overflow: hidden;
 
       label {
-        text-transform: uppercase;
       }
 
       h6 {
@@ -118,7 +117,9 @@ table {
     }
   }
 }
-
+.tableTitle{
+  padding: 0px !important;
+}
 .card-header{
   padding: 9px;
   margin-bottom: 0;

@@ -46,7 +46,6 @@
       overflow: hidden;
 
       label {
-        text-transform: uppercase;
       }
 
       h6 {
@@ -123,7 +122,9 @@ table {
 .container-btn-actions{
   margin-top: 40px;
 }
-
+.tableTitle{
+  padding: 0px !important;
+}
 .card-header{
   padding: 9px;
   margin-bottom: 0;

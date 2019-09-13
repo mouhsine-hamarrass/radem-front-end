@@ -54,7 +54,6 @@ img {
       overflow: hidden;
 
       label {
-        text-transform: uppercase;
       }
 
       h6 {
@@ -120,9 +119,11 @@ img {
 .min-height {
   min-height: 216px;
 }
-
+.tableTitle{
+  padding: 0px !important;
+}
 .card-header{
-  padding: inherit;
+  padding: 9px;
   margin-bottom: 0;
   background-color: #eef0f3;
   border-bottom: 1px solid rgba(44, 85, 153, 0.23) !important;

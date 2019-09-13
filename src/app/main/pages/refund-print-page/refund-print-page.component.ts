@@ -15,7 +15,6 @@ export class RefundPrintPageComponent implements OnInit {
     public date = new Date();
 
     constructor(private router: Router, private helper: HelperService) {
-        debugger;
         if (!this.helper.getInfo()) {
             this.router.navigate(['/service-approach/refund-request-page']);
         } else {
