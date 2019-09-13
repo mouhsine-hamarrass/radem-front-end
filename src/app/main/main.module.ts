@@ -32,62 +32,65 @@ import {TaxPrintPageModule} from './pages/tax-print-page/tax-print-page.module';
 import {TerminationPageModule} from './pages/termination-page/termination-page.module';
 import {TerminationPrintPageModule} from './pages/termination-print-page/termination-print-page.module';
 import {HelperService} from './services/helper.service';
+import {PaymentHelperService} from './services/payment-helper.service';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        AdminPagesModule,
-        BrowserAnimationsModule,
-        ConsumptionsPageModule,
-        ContractsPageModule,
-        TooltipModule,
-        HomePageModule,
-        ServicesPagesModule,
-        SettlementsPageModule,
-        UnpaidPageModule,
-        DirectivesModule,
-        AdvicePageModule,
-        AlertNotificationsPageModule,
-        DynamicContentPagesModule,
-        ServiceApproachPageModule,
-        RefundRequestPageModule,
-        RefundPrintPageModule,
-        ProvisionalCounterPageModule,
-        CounterPrintPageModule,
-        TaxPageModule,
-        TaxPrintPageModule,
-        TerminationPageModule,
-        TerminationPrintPageModule,
+  imports: [
+    CommonModule,
+    AdminPagesModule,
+    BrowserAnimationsModule,
+    ConsumptionsPageModule,
+    ContractsPageModule,
+    TooltipModule,
+    HomePageModule,
+    ServicesPagesModule,
+    SettlementsPageModule,
+    UnpaidPageModule,
+    DirectivesModule,
+    AdvicePageModule,
+    AlertNotificationsPageModule,
+    DynamicContentPagesModule,
+    ServiceApproachPageModule,
+    RefundRequestPageModule,
+    RefundPrintPageModule,
+    ProvisionalCounterPageModule,
+    CounterPrintPageModule,
+    TaxPageModule,
+    TaxPrintPageModule,
+    TerminationPageModule,
+    TerminationPrintPageModule,
 
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-    ],
-    providers: [
-        ServicesService,
-        UtilsService,
-        HelperService,
-        ComplaintService,
-        CommonService,
-        {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
-    ],
-    declarations: [],
-    exports: [
-        AdminPagesModule,
-        ConsumptionsPageModule,
-        ContractsPageModule,
-        HomePageModule,
-        ServicesPagesModule,
-        SettlementsPageModule,
-        UnpaidPageModule,
-        AdvicePageModule,
-        AlertNotificationsPageModule,
-        DynamicContentPagesModule
-    ]
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+  ],
+  providers: [
+    ServicesService,
+    UtilsService,
+    HelperService,
+    HelperService,
+    PaymentHelperService,
+    ComplaintService,
+    CommonService,
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
+  ],
+  declarations: [],
+  exports: [
+    AdminPagesModule,
+    ConsumptionsPageModule,
+    ContractsPageModule,
+    HomePageModule,
+    ServicesPagesModule,
+    SettlementsPageModule,
+    UnpaidPageModule,
+    AdvicePageModule,
+    AlertNotificationsPageModule,
+    DynamicContentPagesModule
+  ]
 })
 export class MainModule {
 }

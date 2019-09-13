@@ -4,26 +4,24 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class HelperService {
-    private info: any = null;
+  private info: any = null;
 
-   // private info: Subject<any> = new Subject<any>();
+  constructor() {
+  }
 
-    constructor() {
-    }
+  setInfo(value: any) {
+    this.info = value;
+  }
 
-    setInfo(value: any) {debugger;
-        this.info = value;
-    }
+  getInfo() {
+    return this.info;
+  }
 
-    getInfo() {debugger;
-        return this.info;
-    }
-
-/*    public sharedInfo(value: any) {debugger
-        this.info.next(value);
-    }
-    public getInfos(){debugger
-        return this.info.asObservable();
-    }*/
+  /*    public sharedInfo(value: any) {debugger
+          this.info.next(value);
+      }
+      public getInfos(){debugger
+          return this.info.asObservable();
+      }*/
 }
 

@@ -197,24 +197,23 @@ export class InvoicesPageComponent implements OnInit {
   openInvoiceDetails(template: TemplateRef<any>, invoice: InvoiceModel) {
     this.invoice = invoice;
     if (invoice) {
-
       this.adminService.getInvoiceHistory(this.selectedContract, invoice.month, invoice.year)
         .subscribe(response => {
           this.historyInvoice = response.data;
         }, err => console.log(err));
 
-      this.adminService.getInvoiceDetails(invoice.ctrNo, invoice.invNo, this.pageDetails, this.pageSizeDetails).subscribe(response => {
-        if (response && response.data) {
-          this.detailsInvoice = response.data['content'];
-          this.totalElementsDetails = response.data['totalElements'];
-          this.totalPagesDetails = response.data['totalPages'];
-          this.itemsPerPageDetails = response.data['size'];
-          this.numberOfItemsDetails = response.data['numberOfElements'];
-          this.pageDetails = 1;
-        }
-      }, err => console.log(err));
+      this.adminService.getInvoiceDetails(this.selectedContract, invoice.invNo, this.pageDetails, this.pageSizeDetails)
+        .subscribe(response => {
+          if (response && response.data) {
+            this.detailsInvoice = response.data['content'];
+            this.totalElementsDetails = response.data['totalElements'];
+            this.totalPagesDetails = response.data['totalPages'];
+            this.itemsPerPageDetails = response.data['size'];
+            this.numberOfItemsDetails = response.data['numberOfElements'];
+            this.pageDetails = 1;
+          }
+        }, err => console.log(err));
       this.modalRef = this.modalService.show(template, this.config);
     }
-
   }
 }

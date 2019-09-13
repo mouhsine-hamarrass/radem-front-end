@@ -279,7 +279,7 @@
   "CONTRACT_ATTACHABLE": "Contrat attaché avec succès.",
   "CONTRACT_UNATTACHABLE": "Votre ne pouvez pas attacher cet contrat",
   "contractserp": {
-    "erp_contract_not_found": "Cet contrat n'exisit pas",
+    "erp_contract_not_found": "Cet contrat n'existe pas/plus",
     "contract_not_attachable": "Votre ne pouvez pas attacher cet contrat"
   },
   "contracts": {
@@ -421,7 +421,7 @@
   "AUTO_RELIEVING": "Auto relève",
   "YOUR_ACCOUNT_HAS_BEEN_ACTIVATED_SUCCESSFULLY!": "Votre compte a été activé avec succès !",
   "contract already affected to this client": "Cet contrat il est déjà affecter à ce client",
-  "contract not found": "Cet contrat n'exisit pas",
+  "contract not found": "Cet contrat n'existe pas/plus",
   "cannot attach contract": "Vous ne pouvez pas attacher cet contrat",
   "LOG_IN": "Se connecter",
   "LOG_IN2": "Connexion",
@@ -537,8 +537,8 @@
     "trying-edit-another-entity": "Vous essayez de modifier une autre entité",
     "missing-key": "Absence de la clé"
   },
-  "users.duplicate_username": "Ce nom d'utisateur existe déjà",
-  "Email_duplicate_username": "Cet Email existe déjà",
+  "users_duplicate_username": "Cet email est déjà utilisé. merci d'en saisir un nouveau",
+  "email_duplicate_username": "Cet email est déjà utilisé. merci d'en saisir un nouveau",
   "CMI_REJECTED": "Rejetée par CMI",
   "WATERP_REJECTED": "Rejetée par WATERP",
   "AEL_REJECTED": "Rejetée par l'agence",
