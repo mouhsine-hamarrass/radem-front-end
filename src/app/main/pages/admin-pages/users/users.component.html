@@ -47,20 +47,20 @@
               <thead class="table-light">
               <tr>
                 <th scope="col">{{'FIRST_NAME' | translate }}
-                  <span sortable-column="firstName"></span>
+                  <span sortable-column="firstname"></span>
                   <span filterable-column="firstName" filter-type="text"
                         filter-placeholder="{{'FIRST_NAME' | translate }}"></span>
                 </th>
                 <th scope="col">{{'LAST_NAME' | translate }}
-                  <span sortable-column="lastName"></span>
+                  <span sortable-column="lastname"></span>
                   <span filterable-column="lastName" filter-type="text"
                         filter-placeholder="{{'LAST_NAME' | translate }}"></span>
                 </th>
-                <th scope="col">{{'USERNAME' | translate }}
+  <!--              <th scope="col">{{'USERNAME' | translate }}
                   <span sortable-column="username"></span>
                   <span filterable-column="username" filter-type="text"
                         filter-placeholder="{{'USERNAME' | translate }}"></span>
-                </th>
+                </th>-->
                 <!--
                 <th scope="col">{{'SERVICE' | translate }}
                   <span sortable-column="service"></span>
@@ -97,13 +97,13 @@
                     [ngClass]="{'table-secondary': !user.enabled}">
                   <td scope="row">{{user.firstname}}</td>
                   <td>{{user.lastname}}</td>
-                  <td>{{user.username}}</td>
+                 <!-- <td>{{user.username}}</td>-->
                   <!--<td>{{user.service}}</td>-->
                   <td><p>{{user.email}}</p></td>
                   <td>{{user.profile}}</td>
                   <td>{{user.createdDate}}</td>
                   <td>
-                    <ngx-toggle
+                   <ngx-toggle
                       onColor="primary"
                       onText="{{'ACTIVATED' | translate}}"
                       offColor="secondary"
