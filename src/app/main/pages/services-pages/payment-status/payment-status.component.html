@@ -1,9 +1,9 @@
+
 <!--Tooltip Starts-->
 <div class="card-header content-header back col-12">
   <div class="row">
     <div class="col-md-6 col-12">
-      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'PAYMENT' | translate }}
-      </h3>
+      <h3 class="content-header-title"><i class="fa fa-bookmark" style="color: #2c5599;"></i> {{'PAYMENT' | translate }}</h3>
     </div>
   </div>
 </div>
@@ -14,9 +14,8 @@
         <!-- What is-->
         <div id="what-is" class="card mb-0 content-body">
           <div class="card-header">
-            {{'STATUS_CMI' | translate }}
+            {{'STATUS_CMI' | translate }} {{oid}}
           </div>
-
 
           <ng-container *ngIf="!transaction?.status; then TransNotExisted else TransError"></ng-container>
 
@@ -85,11 +84,6 @@
 
 
           </ng-template>
-
-
-
-
-
 
           <!--/ What is-->
         </div>

@@ -13,15 +13,15 @@ export class HelperService {
     this.info = value;
   }
 
-    getInfo() {
-        return this.info;
-    }
+  getInfo() {
+    return this.info;
+  }
 
-/*    public sharedInfo(value: any) {debugger
-        this.info.next(value);
-    }
-    public getInfos(){debugger
-        return this.info.asObservable();
-    }*/
+  /*    public sharedInfo(value: any) {debugger
+          this.info.next(value);
+      }
+      public getInfos(){debugger
+          return this.info.asObservable();
+      }*/
 }
 

@@ -12,6 +12,15 @@
     "not-found": "Configuration non trouvé",
     "edit-error": "Une erreur rencontrée lors de la modification"
   },
+  "payments": {
+    "no-selected-invoice": "Aucune facture sélectionnée",
+    "payments.invoices-total-null": "Le total est nul",
+    "payments.invalid-amount": "Format du montant Invalide",
+    "amounts-not-identical": "Les montants invalides",
+    "config-not-found": "Configuration non trouvée",
+    "hash-not-generated": "Erreur lors de la génération de la facture",
+    "transaction-error-save": ""
+  },
   "users": {
     "permission_not_granted": "Permission non accordée",
     "your-account-is-disabled": "Votre compte est désactivé, merci de l'activer",
@@ -19,7 +28,8 @@
     "no_user_with_given_token": "Le jeton d'authentifaction est invalid",
     "email-is-missing": "L'email est obligatoire",
     "cannot-change-email": "Ne peut pas changer l'email",
-    "expired_token": "Le jeton d'authentification a expiré"
+    "expired_token": "Le jeton d'authentification a expiré",
+    "no-client-found-by-username": "Utilisateur non trouvé"
   },
   "validations": {
     "required": {
@@ -526,12 +536,11 @@
   "DISPLAYED": "Affichés",
   "ENTRIES": "entrées",
   "PAYMENT_FAIL": "Paiement échoué",
-  "STATUS_CMI": "Etat de votre paiement CMI",
-  "EMAIL_TEXT_INFO": "pour toute question ou information aditionnelle, prière de prendre contact avec notre département commercial par email",
+  "STATUS_CMI": "Résultat du paiement N° ",
+  "EMAIL_TEXT_INFO": "Pour toute question ou information aditionnelle, prière de prendre contact avec notre département commercial par email",
   "OR_TEL": "ou par téléphone",
   "MSG_SENT": "Un mail de récupération de mot de passe vous a été envoyé",
   "ACCOUNT_UPDATED": "Votre compte a été mis à jour",
-
   "commons": {
     "entity_in_use": "Cette alerte est déjà utilisée",
     "trying-edit-another-entity": "Vous essayez de modifier une autre entité",
@@ -551,7 +560,7 @@
   "CHECK_DATE": "Date relève",
   "fill_form": "Veuillez remplir l'indice de votre compteur !",
   "PAYMENT-FAIL": "Votre paiement a échoué",
-  "PAYMENT-NOT-EXISTED": "cette transaction n'existe pas",
+  "PAYMENT-NOT-EXISTED": "Cette transaction n'existe pas",
   "BIG-VALUE": "Le nouveau indice doit être plus grand que ",
   "PAYMENT_SUCCEED": "Paiement Effectué",
   "PAYMENT_HAS_BEEN_SUCCEED": "Le paiement s'est bien déroulé votre numéro de transaction est ",
