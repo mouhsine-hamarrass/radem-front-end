@@ -108,7 +108,7 @@
 
                                     <app-data-not-available
                                             *ngIf="!invoices || invoices.length == 0; else dataAvailable"
-                                            [colSpan]="6"></app-data-not-available>
+                                            [colSpan]="10"></app-data-not-available>
 
                                     <ng-template #dataAvailable>
                                         <tr *ngFor="let inv of invoices">

@@ -4,6 +4,7 @@ import {RecoverPasswordService} from '../main/services/recover-password.service'
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-recover-password',
@@ -19,6 +20,8 @@ export class RecoverPasswordComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private renderer: Renderer2,
+    private toastrService: ToastrService,
+    private translateService: TranslateService,
     private recoverPasswordServices: RecoverPasswordService
   ) {
     this.recoverPasswordForm = this.formBuilder.group({
@@ -34,8 +37,11 @@ export class RecoverPasswordComponent implements OnInit {
 
   reset() {
     this.recoverPasswordServices.sendToken(this.recoverPasswordForm.controls.email.value).subscribe(response => {
-        this.message = 'MSG_SENT';
-
+        if (response && response.data) {
+          this.toastrService.success(this.translateService.instant('MSG_SENT'));
+        } else {
+          this.toastrService.error(this.translateService.instant('MSG_NOT_SENT'));
+        }
       },
       err => {
         console.log(err);

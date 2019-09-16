@@ -50,8 +50,13 @@ export class ServicesService {
       month
     })
   }
+
   testUserName(userName: any): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(`${this.urlApi}/auth/testUserName`, userName)
+  }
+
+  redirectToCmi2(dto: any): Observable<Response<any>> {
+    return this.httpClient.get<Response<any>>(`${this.urlApi}/payments/redirect-to-cmi`)
   }
 
   detachContract(contractNo: string): Observable<Response<ContractAttachModel>> {
@@ -99,6 +104,7 @@ export class ServicesService {
     return Observable.of(mockData);
     */
   }
+
   clientAttachedContractsPositive(): Observable<Response<Array<ContractAttachModel>>> {
     return this.httpClient.get<Response<Array<ContractAttachModel>>>(`${this.urlApi}/clients/attached-contracts-positive`);
   }

@@ -102,7 +102,7 @@
 
                   <app-data-not-available
                     *ngIf="!refundRequests || refundRequests.length == 0; else dataAvailable"
-                    [colSpan]="4"></app-data-not-available>
+                    [colSpan]="6"></app-data-not-available>
                   <ng-template #dataAvailable>
                     <tr *ngFor="let request of refundRequests">
                       <td><b>{{request.requestNo}}</b></td>

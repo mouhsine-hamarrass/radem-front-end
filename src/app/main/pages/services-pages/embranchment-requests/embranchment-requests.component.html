@@ -100,7 +100,7 @@
                   <tbody>
                   <app-data-not-available
                     *ngIf="!embranchmentRequests || embranchmentRequests.length == 0; else dataAvailable"
-                    [colSpan]="4"></app-data-not-available>
+                    [colSpan]="6"></app-data-not-available>
                   <ng-template #dataAvailable>
                     <tr *ngFor="let request of embranchmentRequests">
                       <td><b>{{request?.requestNo}}</b></td>

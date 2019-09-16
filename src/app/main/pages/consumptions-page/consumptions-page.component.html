@@ -140,7 +140,7 @@
                                 <tbody>
                                 <app-data-not-available
                                         *ngIf="!consumptionsHistoryCurrentYear || consumptionsHistoryCurrentYear.length == 0; else dataAvailable2"
-                                        [colSpan]="5"></app-data-not-available>
+                                        [colSpan]="6"></app-data-not-available>
                                 <ng-template #dataAvailable2>
                                     <tr *ngFor="let consumption of consumptionsHistoryCurrentYear" class="text-center">
                                         <td>{{consumption.releveDate | date:'dd-MM-yyyy'}}</td>

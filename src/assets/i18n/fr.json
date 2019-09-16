@@ -6,7 +6,8 @@
     "admin": "Admin"
   },
   "clients": {
-    "not-found": "Utilisateur non trouvé"
+    "not-found": "Utilisateur non trouvé",
+    "user-doesnt-have-client-profile": "Vous avez besoin d'un profil client"
   },
   "configurations": {
     "not-found": "Configuration non trouvé",
@@ -14,12 +15,15 @@
   },
   "payments": {
     "no-selected-invoice": "Aucune facture sélectionnée",
-    "payments.invoices-total-null": "Le total est nul",
-    "payments.invalid-amount": "Format du montant Invalide",
+    "invoices-total-null": "Le total est nul",
+    "invalid-amount": "Format du montant Invalide",
     "amounts-not-identical": "Les montants invalides",
     "config-not-found": "Configuration non trouvée",
     "hash-not-generated": "Erreur lors de la génération de la facture",
-    "transaction-error-save": ""
+    "transaction-error-save": "Erreur lors de la sauvegarde de la transaction",
+    "no-transaction-with-th-given-id": "Transaction non trouvé",
+    "used-trx-number": "Numéro de transaction déjà utilisé",
+    "required-trx-number": "Numéro de transaction est obligatoire"
   },
   "users": {
     "permission_not_granted": "Permission non accordée",
@@ -307,7 +311,7 @@
   "BALANCE": "Solde",
   "DATE_OF_REMOVAL_OF_THE_COUNTER": "Date dépose du compteur",
   "SUBSCRIPTION_POLICIES": "Polices d'abonnement",
-  "CREATED_ON": "Créée le",
+  "CREATED_ON": "Créé le",
   "SUPPORTED": "Prise en charge",
   "ANALYSIS": "Analyse",
   "COMPLEMENT": "Complément",
@@ -442,7 +446,7 @@
   "PLEASE_COME_BACK_SOON": "S'il vous plaît revenez bientôt",
   "WE_APOLOGIZE_FOR_ANY_INCONVENIENCE": "Nous nous excusons pour tout inconvénient",
   "REFRESH": "Acutaliser",
-  "FIELD_REQUIRED": "Ce champs obligatoire",
+  "FIELD_REQUIRED": "Ce champ est obligatoire",
   "USAGE": "Usage",
   "CREATED_AT": "Fait le",
   "DELETE": "Supprimer",
@@ -451,6 +455,7 @@
   "la-taille-du-fichier-ne-doit-pas-depasser": "La taille du fichier ne doit pas dépasser ",
   "ACCOUNT_RECOVERY": "Récupération de compte",
   "YOUR_EMAIL_ADDRESS": "Votre adresse email",
+  "INTERNAL_SERVER_ERROR": "Erreur interne du serveur, le serveur est incapable d'exécuter votre requête",
   "NEW_CLIENT": "Nouveau client",
   "REGISTRATION": "Inscription",
   "PLEASE_CHOOSE_ONE_OF_THE_FOLLOWING_OPTIONS_AND_FILL_IN_THE_FIELDS_THAT_APPEAR": "Merci de bien vouloir choisir une des options suivantes et renseigner les champs qui s'affichent",
@@ -540,6 +545,7 @@
   "EMAIL_TEXT_INFO": "Pour toute question ou information aditionnelle, prière de prendre contact avec notre département commercial par email",
   "OR_TEL": "ou par téléphone",
   "MSG_SENT": "Un mail de récupération de mot de passe vous a été envoyé",
+  "MSG_NOT_SENT": "Mail de récupération de mot de passe non envoyé",
   "ACCOUNT_UPDATED": "Votre compte a été mis à jour",
   "commons": {
     "entity_in_use": "Cette alerte est déjà utilisée",
@@ -617,8 +623,8 @@
   "DYANMIC_CONTENT": "Contenu dynamique",
   "firstname": "Prénom",
   "lastname": "Nom",
-  "holderName": "nom du titulaire ",
-  "contractStatus": "statut du contrat ",
-  "addressConsumption": "adresse de consommation",
+  "holderName": "Nom du titulaire ",
+  "contractStatus": "Statut du contrat ",
+  "addressConsumption": "Adresse de consommation",
   "activer-le-compte-sinon-l-utilisateur-ne-sera-pas-en-mesure-d-acceder-a-son-compte": "Activer le compte sinon l'utilisateur ne sera pas en mesure d'accéder à son compte"
 }

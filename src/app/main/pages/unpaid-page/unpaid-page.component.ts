@@ -29,7 +29,6 @@ export class UnpaidPageComponent implements OnInit {
     invoices: []
   };
 
-  unpaidBalance = 0;
   invoicesToPay: InvoicesToPayModel;
   transactionSummary: LightTransactionSummary;
   totalAmount: string;
@@ -46,7 +45,6 @@ export class UnpaidPageComponent implements OnInit {
 
   user: User;
   clientContracts: Array<ContractAttachModel> = [];
-  clientContracts2: ContractAttachModel;
   page = 1;
   pageSize = 0;
   totalElements: number;
@@ -55,7 +53,7 @@ export class UnpaidPageComponent implements OnInit {
   itemsPerPage: number;
 
   dropdownSettings: any = {};
-  selectedContract: any = [];
+  selectedContracts: any = [];
 
   @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
 
@@ -86,28 +84,14 @@ export class UnpaidPageComponent implements OnInit {
     this.services.clientAttachedContractsPositive().subscribe(response => {
       this.clientContracts = response.data;
       if (this.clientContracts && this.clientContracts.length) {
-        for (let i = 0; i < this.clientContracts.length; i++) {
-          const contractNo = this.clientContracts[i].contractNo;
-          this.services.getUnpaidBalanceByContractNo(contractNo).subscribe(res => {
-            this.unpaidBalance = res.data;
-            if (response && response.data) {
-              if (res.data <= 0) {
-                this.clientContracts.splice(i, 1);
-              }
-              _.each(this.clientContracts, (element: any) => {
-                if (element.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
-                  this.clientContracts2 = element;
-                  this.selectedContract.push(this.clientContracts2);
-                }
-                _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
-              });
-              this.getAllUnpaidBills();
-            }
-          }, err => {
-          });
-        }
+        _.each(this.clientContracts, (element: any) => {
+          if (element.contractNo === localStorage.getItem('SELECTED_CONTRACT')) {
+            this.selectedContracts.push(element);
+          }
+          _.extend(element, {id: element.contractNo, itemName: `${element.contractNo} - (${element.typeNetwork})`});
+        });
         setTimeout(() => {
-
+          this.getAllUnpaidBills();
         }, 200);
       }
 
@@ -117,30 +101,37 @@ export class UnpaidPageComponent implements OnInit {
   }
 
   getAllUnpaidBills() {
+    debugger
     this.selectedBills.invoices = [];
     this.total = 0.0;
     this.totalUnpaid = 0;
-    const contracts = _.pluck(this.selectedContract, 'contractNo');
-    this.contractServices.getPageableUnpaidBills(this.page, this.pageSize, contracts)
-      .subscribe(response => {
-        this.contractsBills = response.data['content'];
-        _.each(this.contractsBills, (contract) => {
-          if (contract.invoices) {
-            _.each(contract.invoices, (invoice) => {
-              if (invoice.exigible || invoice.balance <= 0) {
-                this.addBill(contract, invoice, true);
+    const contracts = _.pluck(this.selectedContracts, 'contractNo');
+    if (contracts && contracts.length) {
+      this.contractServices.getPageableUnpaidBills(this.page, this.pageSize, contracts)
+        .subscribe(response => {
+          if (response && response.data) {
+            this.contractsBills = response.data['content'];
+            _.each(this.contractsBills, (contract) => {
+              if (contract.invoices) {
+                _.each(contract.invoices, (invoice) => {
+                  if (invoice.exigible || invoice.balance <= 0) {
+                    this.addBill(contract, invoice, true);
+                  }
+                });
               }
             });
+            this.calcUnpaidBills();
+            this.totalElements = response.data['totalElements'];
+            this.totalPages = response.data['totalPages'];
+            this.itemsPerPage = response.data['size'];
+            this.numberOfItems = response.data['numberOfElements'];
           }
+        }, err => {
         });
-        this.calcUnpaidBills();
-        this.totalElements = response.data['totalElements'];
-        this.totalPages = response.data['totalPages'];
-        this.itemsPerPage = response.data['size'];
-        this.numberOfItems = response.data['numberOfElements'];
-      }, err => {
-      });
 
+    } else {
+      this.contractsBills = [];
+    }
   }
 
   calcUnpaidBills(): void {
@@ -306,5 +297,15 @@ export class UnpaidPageComponent implements OnInit {
     }, err => {
       console.log(err)
     });
+  }
+
+  pushToArray(arr, obj) {
+    const index = arr.findIndex((e) => e.id === obj.id);
+
+    if (index === -1) {
+      arr.push(obj);
+    } else {
+      arr[index] = obj;
+    }
   }
 }

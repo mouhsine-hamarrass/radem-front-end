@@ -23,8 +23,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(authReq)
       .catch((response, caught) => {
         if (response && response.error) {
-          console.log('error Occurred ------');
-          if (response.error.data) {
+          if (response.status === 500) {
+            this.translate.get('INTERNAL_SERVER_ERROR').subscribe(msg => {
+              this.toastr.error(msg, '', {
+                timeOut: 3000,
+              });
+            });
+          } else if (response.error.data) {
             if (typeof response.error.data === 'string') {
               this.translate.get(response.error.data).subscribe(msg => {
                 this.toastr.error(msg, '', {
@@ -70,11 +75,11 @@ export class ErrorInterceptor implements HttpInterceptor {
               // TODO only the backend api
               // must handel when the response comes from cmi gateway : do not throw server_down
               this.router.navigate(['/maintenance']);
-             /* this.translate.get('SERVER_DOWN').subscribe(msgError => {
-                this.toastr.error(msgError, '', {
-                  timeOut: 3000,
-                });
-              });*/
+              /* this.translate.get('SERVER_DOWN').subscribe(msgError => {
+                 this.toastr.error(msgError, '', {
+                   timeOut: 3000,
+                 });
+               });*/
               /*
               setTimeout(() => {
                 this.router.navigate(['/maintenance']);

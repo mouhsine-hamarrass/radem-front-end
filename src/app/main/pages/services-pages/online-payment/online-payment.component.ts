@@ -17,6 +17,7 @@ export class OnlinePaymentComponent implements OnInit {
 
   selectedBills;
   transactionSummary: LightTransactionSummary;
+  transx;
   user: User;
   hash: string;
   transactionSummaryModel: TransactionSummaryModel;
@@ -42,7 +43,6 @@ export class OnlinePaymentComponent implements OnInit {
       return;
     }
   }
-
 
   submit() {
     this.transactionSummaryModel = new TransactionSummaryModel(

@@ -60,7 +60,7 @@ export class SettlementsPageComponent implements OnInit {
   config = {
     backdrop: true,
     ignoreBackdropClick: false,
-    class: 'modal-lg'
+    class: 'modal-xl'
   };
   private clientDetails: any;
 
