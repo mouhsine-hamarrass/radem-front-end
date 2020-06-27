@@ -234,16 +234,7 @@ export class ConsumptionsPageComponent implements OnInit {
   getConsumptionHistoryCurrentYear(contractNo) {
     this.adminService.getPageableHistoryConsumptionsCurrentYear(contractNo)
       .subscribe(response => {
-
         this.consumptionsHistoryCurrentYear = response.data;
-        console.log('mosibastart   ');
-        console.log(contractNo);
-        console.log(this.consumptionsHistoryCurrentYear.length);
-        console.log(this.chart1);
-        console.log(this.chart2);
-        console.log(this.consumptionsHistoryCurrentYear.length !== 0);
-        console.log('mosibaEnd');
-
       }, err => console.log(err));
   }
 
@@ -345,7 +336,6 @@ export class ConsumptionsPageComponent implements OnInit {
   }
 
   downloadPdfConsumptions() {
-
     const contract = this.historyForm.controls['contract'].value;
     const startDate = moment(new Date(this.historyForm.controls['startDate'].value));
     const endDate = moment(new Date(this.historyForm.controls['endDate'].value));
